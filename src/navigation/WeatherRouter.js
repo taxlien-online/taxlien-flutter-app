@@ -15,7 +15,7 @@ const WeatherRouter = () => (
       name="Weather"
       component={WeatherScreen}
       options={{
-        title: '✨ Vedic Games',
+        title: '✨ Quickex',
       }}
     />
   </Stack.Navigator>

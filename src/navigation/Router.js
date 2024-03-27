@@ -8,11 +8,21 @@ import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import TabNavigator from './TabNavigator';
-import PaywallScreen from '../screens/PaywallScreen';
+//import PaywallScreen from '../screens/PaywallScreen';
 import VedicGamesScreen from '../screens/VedicGamesScreen';
 
 
 const Stack = createStackNavigator();
+
+/*
+        <Stack.Screen
+          name="Paywall"
+          component={PaywallScreen}
+          options={{
+            title: '✨Gita Game Premium',
+          }}
+        />
+*/
 
 const Router = () => {
   return (
@@ -23,13 +33,6 @@ const Router = () => {
           component={TabNavigator}
           options={{
             headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Paywall"
-          component={PaywallScreen}
-          options={{
-            title: '✨Gita Game Premium',
           }}
         />
         <Stack.Screen

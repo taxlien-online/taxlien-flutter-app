@@ -10,9 +10,9 @@
 import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import 'react-native-gesture-handler';
-import Purchases from 'react-native-purchases';
+//import Purchases from 'react-native-purchases';
 import Router from './src/navigation/Router';
-import { API_KEY } from './src/constants';
+//import { API_KEY } from './src/constants';
 import SplashScreen from "react-native-splash-screen"; 
 import SpInAppUpdates, {
   NeedsUpdateResponse,
@@ -42,8 +42,9 @@ const App: () => React$Node = () => {
         inAppUpdates.startUpdate(updateOptions); // https://github.com/SudoPlz/sp-react-native-in-app-updates/blob/master/src/types.ts#L78
       }
     });
+
     /* Enable debug logs before calling `setup`. */
-    Purchases.setDebugLogsEnabled(true);
+    //Purchases.setDebugLogsEnabled(true);
 
     /*
       Initialize the RevenueCat Purchases SDK.
@@ -54,7 +55,7 @@ const App: () => React$Node = () => {
 
       - useAmazon is false, so it will use the Play Store in Android and App Store in iOS by default.
       */
-    Purchases.configure({ apiKey: API_KEY, appUserID: null, observerMode: false, useAmazon: false });
+    //Purchases.configure({ apiKey: API_KEY, appUserID: null, observerMode: false, useAmazon: false });
   }, []);
 
   return (

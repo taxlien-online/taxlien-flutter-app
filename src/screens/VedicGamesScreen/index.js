@@ -10,7 +10,7 @@ var referer = "-";
 */
 export default function VedicGamesScreen() {
   const webViewRef= useRef()
-  const uri = 'http://cp.vedicgames.club/games/gita/';
+  const uri = 'https://quickex.io/';
   const [canGoBack, setCanGoBack] =useState(false);
   const [canGoForward, setCanGoForward] =useState(false);
   const handleBackPress =() => {
