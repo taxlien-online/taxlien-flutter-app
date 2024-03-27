@@ -23,7 +23,6 @@
     "react-native-android-log": "^1.1.0",
     "react-native-device-info": "^10.4.0",
     "react-native-gesture-handler": "^2.9.0",
-    "react-native-purchases": "^5.9.0",
     "react-native-push-notification": "^8.1.1",
     "react-native-reanimated": "^2.13.0",
     "react-native-safe-area-context": "^4.4.1",
