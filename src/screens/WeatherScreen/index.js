@@ -9,7 +9,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { testCold, generateSampleData, Environment } from '../../helpers/SampleData';
 import styles from './styles.js';
-import Purchases from 'react-native-purchases';
+//import Purchases from 'react-native-purchases';
 import { ENTITLEMENT_ID } from '../../constants';
 
 /*
@@ -28,8 +28,9 @@ const WeatherScreen = () => {
      */
 
     try {
+      return;
       // access latest customerInfo
-      const customerInfo = await Purchases.getCustomerInfo();
+      //const customerInfo = await Purchases.getCustomerInfo();
 
       if (typeof customerInfo.entitlements.active[ENTITLEMENT_ID] !== 'undefined') {
         navigation.navigate('VedicGames');

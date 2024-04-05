@@ -7,7 +7,8 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import WeatherRouter from './WeatherRouter';
+import VedicGamesRouter from './VedicGamesRouter';
+//import WeatherRouter from './WeatherRouter';
 import CarouselRouter from './CarouselRouter';
 import { View } from 'react-native';
 
@@ -32,7 +33,7 @@ const TabNavigator = () => {
     <Tab.Navigator ref={bottomTabNavigatorRef}>
       <Tab.Screen
         name="Home"
-        component={WeatherRouter}
+        component={VedicGamesRouter}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (

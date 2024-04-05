@@ -69,7 +69,10 @@ Before starting with `nativemind_reactnative`, you should have the following ins
    ```
 
 Your React Native app should now load the content of your PWA within a WebView, blending web and native app functionalities! 🌍
+---
 
+Assets generator
+https://www.appicon.co/
 ---
 
 If you have suggestions or improvements, feel free to open an issue or submit a pull request. Dive into developing a hybrid app experience with React Native! 🎉
