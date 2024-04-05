@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Gita Game",
-    "slug": "Gita Game",
+    "name": "Quickex Exchange",
+    "slug": "Quickex Exchange",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ]
   },
-  "name": "Gita Game"
+  "name": "Quickex Exchange"
 }

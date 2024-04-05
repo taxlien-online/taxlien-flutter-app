@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
           name="Paywall"
           component={PaywallScreen}
           options={{
-            title: '✨Gita Game Premium',
+            title: '✨Quickex Exchange Premium',
           }}
         />
 */
