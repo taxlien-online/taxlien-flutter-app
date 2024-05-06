@@ -10,7 +10,7 @@ const VedicGamesRouter = () => (
       name="Weather"
       component={VedicGamesScreen}
       options={{
-        title: '✨ EEVEE',
+        title: '✨ Quickex',
       }}
     />
   </Stack.Navigator>
