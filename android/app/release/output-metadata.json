@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.quickex.app",
+  "applicationId": "com.eevee.app",
   "variantName": "release",
   "elements": [
     {
@@ -13,7 +13,7 @@
       "attributes": [],
       "versionCode": 10,
       "versionName": "1.6.3",
-      "outputFile": "app-release-quickex.apk"
+      "outputFile": "app-release-eevee.apk"
     }
   ],
   "elementType": "File"

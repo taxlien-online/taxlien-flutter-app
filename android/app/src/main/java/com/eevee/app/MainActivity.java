@@ -1,4 +1,4 @@
-package com.quickex.app;
+package com.eevee.app;
 
 import android.os.Build;
 import android.os.Bundle;
