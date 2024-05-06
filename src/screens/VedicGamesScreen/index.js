@@ -29,6 +29,7 @@ export default function VedicGamesScreen() {
         scalesPageToFit={true}
         originWhitelist={['*','tel:+972547474151']}
         source={{uri}}
+        style={{ flex: 1 }}
         startInLoadingState={true}
         bounces={false}
         domStorageEnabled={true}
