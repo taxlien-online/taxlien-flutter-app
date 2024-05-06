@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
           name="Paywall"
           component={PaywallScreen}
           options={{
-            title: '✨Quickex Exchange Premium',
+            title: '✨EEVEE.MARKET Premium',
           }}
         />
 */

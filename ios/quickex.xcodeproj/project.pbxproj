@@ -338,7 +338,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NTJL94DX5J;
 				INFOPLIST_FILE = GitaGame/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Quickex Exchange";
+				INFOPLIST_KEY_CFBundleDisplayName = "EEVEE.MARKET";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

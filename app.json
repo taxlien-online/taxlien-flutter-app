@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Quickex Exchange",
-    "slug": "Quickex Exchange",
+    "name": "EEVEE.MARKET",
+    "slug": "EEVEE.MARKET",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ]
   },
-  "name": "Quickex Exchange"
+  "name": "EEVEE.MARKET"
 }
