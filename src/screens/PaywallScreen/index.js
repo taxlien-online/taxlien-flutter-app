@@ -36,7 +36,7 @@ const PaywallScreen = () => {
     getPackages();
   }, []);
 
-  const header = () => <Text style={styles.text}>eevee.market</Text>;
+  const header = () => <Text style={styles.text}>TaxLien.online</Text>;
 
   const PrivacyClick = () => {
     Linking.openURL('https://www.privacypolicies.com/live/064296a8-e682-4587-807e-845b695f0af1');

@@ -15,7 +15,7 @@ const WeatherRouter = () => (
       name="Weather"
       component={WeatherScreen}
       options={{
-        title: '✨ eevee.market',
+        title: '✨ TaxLien.online',
       }}
     />
   </Stack.Navigator>

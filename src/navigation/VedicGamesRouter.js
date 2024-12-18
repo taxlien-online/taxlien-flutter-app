@@ -10,7 +10,7 @@ const VedicGamesRouter = () => (
       name="Weather"
       component={VedicGamesScreen}
       options={{
-        title: '✨ eevee.market',
+        title: '✨ TaxLien.online',
       }}
     />
   </Stack.Navigator>

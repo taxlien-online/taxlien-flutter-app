@@ -1,4 +1,4 @@
-package com.eevee.app.newarchitecture;
+package online.taxlien.app.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -20,9 +20,9 @@ import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.eevee.app.BuildConfig;
-import com.eevee.app.newarchitecture.components.MainComponentsRegistry;
-import com.eevee.app.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import online.taxlien.app.BuildConfig;
+import online.taxlien.app.newarchitecture.components.MainComponentsRegistry;
+import online.taxlien.app.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

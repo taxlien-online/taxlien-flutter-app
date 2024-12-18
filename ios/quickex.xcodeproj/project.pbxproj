@@ -321,7 +321,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eevee.app;
+				PRODUCT_BUNDLE_IDENTIFIER = online.taxlien.app;
 				PRODUCT_NAME = GitaGame;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -338,7 +338,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NTJL94DX5J;
 				INFOPLIST_FILE = GitaGame/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "EEVEE.MARKET";
+				INFOPLIST_KEY_CFBundleDisplayName = "TaxLien.online";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -347,7 +347,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.eevee.app;
+				PRODUCT_BUNDLE_IDENTIFIER = online.taxlien.app;
 				PRODUCT_NAME = GitaGame;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

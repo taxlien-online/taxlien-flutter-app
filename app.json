@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "EEVEE.MARKET",
-    "slug": "EEVEE.MARKET",
+    "name": "TaxLien.online",
+    "slug": "TaxLien.online",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ]
   },
-  "name": "EEVEE.MARKET"
+  "name": "TaxLien.online"
 }

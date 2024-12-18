@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
           name="Paywall"
           component={PaywallScreen}
           options={{
-            title: 'eevee.market Premium',
+            title: 'TaxLien.online Premium',
           }}
         />
 */
