@@ -3,22 +3,12 @@ name: CI
 on:
   push:
     branches:
-<<<<<<< HEAD
       - master
-=======
-      - '**'
-  pull_request:
-  release:
-    types:
-      - published
-  workflow_dispatch:
->>>>>>> 49ff34d7e108a31fd4f6d363ce2313659fdfdffd
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-<<<<<<< HEAD
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -33,18 +23,6 @@ jobs:
 
 #      - name: Run tests
 #        run: npm test
-=======
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18.19.0
-      - name: Install dependencies
-        run: npm install
-
->>>>>>> 49ff34d7e108a31fd4f6d363ce2313659fdfdffd
 
   build_android:
     runs-on: ubuntu-latest
@@ -95,16 +73,8 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/dist
           cp $GITHUB_WORKSPACE/android/app/build/outputs/bundle/release/app-release.aab $GITHUB_WORKSPACE/dist
 
-<<<<<<< HEAD
       - name: Archive Bundle
         uses: actions/upload-artifact@v2
         with:
           name: android-bundle
           path: $GITHUB_WORKSPACE/dist
-=======
-      - name: Archive Bundle
-        uses: actions/upload-artifact@v2
-        with:
-          name: android-bundle
-          path: $GITHUB_WORKSPACE/dist
->>>>>>> 49ff34d7e108a31fd4f6d363ce2313659fdfdffd
