@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "GitaGame.app"
-               BlueprintName = "GitaGame"
-               ReferencedContainer = "container:GitaGame.xcodeproj">
+               BuildableName = "TaxLien.app"
+               BlueprintName = "TaxLien"
+               ReferencedContainer = "container:TaxLien.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "GitaGameTests.xctest"
-               BlueprintName = "GitaGameTests"
-               ReferencedContainer = "container:GitaGame.xcodeproj">
+               BuildableName = "TaxLienTests.xctest"
+               BlueprintName = "TaxLienTests"
+               ReferencedContainer = "container:TaxLien.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "GitaGame.app"
-            BlueprintName = "GitaGame"
-            ReferencedContainer = "container:GitaGame.xcodeproj">
+            BuildableName = "TaxLien.app"
+            BlueprintName = "TaxLien"
+            ReferencedContainer = "container:TaxLien.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "GitaGame.app"
-            BlueprintName = "GitaGame"
-            ReferencedContainer = "container:GitaGame.xcodeproj">
+            BuildableName = "TaxLien.app"
+            BlueprintName = "TaxLien"
+            ReferencedContainer = "container:TaxLien.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
