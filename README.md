@@ -80,3 +80,19 @@ https://www.appicon.co/
 ---
 
 If you have suggestions or improvements, feel free to open an issue or submit a pull request. Dive into developing a hybrid app experience with React Native! 🎉
+
+
+  Run instructions for Android:
+    • Have an Android emulator running (quickest way to get started), or a device connected.
+    • cd "/Users/anton/proj/taxlien.new/111/TaxLien" && npx react-native run-android
+  
+  Run instructions for iOS:
+    • cd "/Users/anton/proj/taxlien.new/111/TaxLien"
+    
+    • npx react-native run-ios
+    - or -
+    • Open TaxLien/ios/TaxLien.xcworkspace in Xcode or run "xed -b ios"
+    • Hit the Run button
+    
+  Run instructions for macOS:
+    • See https://aka.ms/ReactNativeGuideMacOS for the latest up-to-date instructions.
