@@ -1,80 +1,80 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - master
+  push:
+    branches:
+      - master
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18.19.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.19.0
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install dependencies
+        run: npm install
 
-#      - name: Run tests
-#        run: npm test
+#      - name: Run tests
+#        run: npm test
 
-  build_android:
-    runs-on: ubuntu-latest
+  build_android:
+    runs-on: ubuntu-latest
 
-    needs: build
+    needs: build
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      - name: Setup Java 17
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+      - name: Setup Java 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18.19.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18.19.0
 
-      - name: Navigate to Project Root
-        run: cd $GITHUB_WORKSPACE
+      - name: Navigate to Project Root
+        run: cd $GITHUB_WORKSPACE
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-      - name: Build Android App Bundle
-        run: |
-          mkdir -p android/app/build/intermediates/assets/release/
-          npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/build/intermediates/assets/release/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release
+      - name: Build Android App Bundle
+        run: |
+          mkdir -p android/app/build/intermediates/assets/release/
+          npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/build/intermediates/assets/release/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release
 
-      - name: Build Android Release
-        run: |
-          cd android
-          chmod +x gradlew 
-          ./gradlew clean
-          ./gradlew bundleRelease -Pkeystore.password=${{ secrets.KEYSTORE_PASSWORD }}
+      - name: Build Android Release
+        run: |
+          cd android
+          chmod +x gradlew 
+          ./gradlew clean
+          ./gradlew bundleRelease -Pkeystore.password=${{ secrets.KEYSTORE_PASSWORD }}
 
-  download_bundle:
-    runs-on: ubuntu-latest
+  download_bundle:
+    runs-on: ubuntu-latest
 
-    needs: build_android
+    needs: build_android
 
-    steps:
-      - name: Download Android App Bundle
-        run: |
-          mkdir -p $GITHUB_WORKSPACE/dist
-          cp $GITHUB_WORKSPACE/android/app/build/outputs/bundle/release/app-release.aab $GITHUB_WORKSPACE/dist
+    steps:
+      - name: Download Android App Bundle
+        run: |
+          mkdir -p $GITHUB_WORKSPACE/dist
+          cp $GITHUB_WORKSPACE/android/app/build/outputs/bundle/release/app-release.aab $GITHUB_WORKSPACE/dist
 
-      - name: Archive Bundle
-        uses: actions/upload-artifact@v2
-        with:
-          name: android-bundle
-          path: $GITHUB_WORKSPACE/dist
+      - name: Archive Bundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: android-bundle
+          path: $GITHUB_WORKSPACE/dist
