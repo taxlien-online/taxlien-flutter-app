@@ -2,6 +2,10 @@
 
 Welcome to `nativemind_reactnative`! This React Native application is designed to display the content of a primary PWA application within a WebView, offering a seamless integration of web content into a native app experience. 🚀
 
+```
+npx @react-native-community/cli@latest init TaxLien --package-name online.taxlien
+```
+
 ## Prerequisites
 
 Before starting with `nativemind_reactnative`, you should have the following installed:
