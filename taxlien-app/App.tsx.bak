@@ -5,24 +5,18 @@
  * @format
  */
 
-import React,{useState, useRef} from 'react';
-
+import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
-/*
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
-  View,*/
+  View,
 } from 'react-native';
 
-import { WebView } from 'react-native-webview';
-
-/*
 import {
   Colors,
   DebugInstructions,
@@ -30,9 +24,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-*/
 
-/*
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -124,61 +116,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-*/
-
-
-
-
-
-var referer = "-";
-/*
-        ref={(ref) => { this.webview = ref; }}
-*/
-export default function MainScreen() {
-  //const webViewRef= useRef()
-  const uri = 'https://taxlien.online/';
-  const [canGoBack, setCanGoBack] =useState(false);
-  const [canGoForward, setCanGoForward] =useState(false);
-  /*
-  const handleBackPress =() => {
-    webViewRef.current.goBack()
-  }
-  const handleForwardPress =() => {
-    webViewRef.current.goForward()
-  }
-  */
-
-  return (
-    
-    <SafeAreaView style={{flex:1}}>
-      <WebView 
-        //ref={webViewRef}
-        allowFileAccess={true}
-        scalesPageToFit={true}
-        originWhitelist={['*','tel:+972547474151']}
-        source={{uri}}
-        style={{ flex: 1 }}
-        startInLoadingState={true}
-        bounces={false}
-        domStorageEnabled={true}
-        javaScriptEnabled={true}
-        geolocationEnabled={true}
-        saveFormDataDisabled={true}
-        allowFileAccessFromFileURLS={true}
-        allowUniversalAccessFromFileURLs={true}
-        onNavigationStateChange={state =>{
-          
-        }}/>
-         
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
