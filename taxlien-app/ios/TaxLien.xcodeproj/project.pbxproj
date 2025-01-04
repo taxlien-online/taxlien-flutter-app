@@ -12,6 +12,8 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3A89A0DA2D294E8A007C4E99 /* taxlien_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A89A0D92D294E8A007C4E99 /* taxlien_logo.png */; };
+		3A89A0DB2D294E8A007C4E99 /* taxlien_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A89A0D92D294E8A007C4E99 /* taxlien_logo.png */; };
 		3AF158152D29493C00877C1D /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		3AF158162D29493C00877C1D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3AF158182D29493C00877C1D /* libPods-TaxLien.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-TaxLien.a */; };
@@ -45,6 +47,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TaxLien/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = TaxLien/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-TaxLien-TaxLienTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TaxLien-TaxLienTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A89A0D92D294E8A007C4E99 /* taxlien_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taxlien_logo.png; sourceTree = "<group>"; };
 		3AF158232D29493C00877C1D /* TaxLien Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TaxLien Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AF158242D29493D00877C1D /* TaxLien copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TaxLien copy-Info.plist"; path = "/Users/anton/proj/taxlien.new/taxlien-mobile/taxlien-app/ios/TaxLien copy-Info.plist"; sourceTree = "<absolute>"; };
 		3B4392A12AC88292D35C810B /* Pods-TaxLien.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxLien.debug.xcconfig"; path = "Target Support Files/Pods-TaxLien/Pods-TaxLien.debug.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +112,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
+				3A89A0D92D294E8A007C4E99 /* taxlien_logo.png */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 			);
@@ -284,6 +288,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A89A0DA2D294E8A007C4E99 /* taxlien_logo.png in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				516C4A13028114F2EAD7FF74 /* PrivacyInfo.xcprivacy in Resources */,
@@ -294,6 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A89A0DB2D294E8A007C4E99 /* taxlien_logo.png in Resources */,
 				3AF1581A2D29493C00877C1D /* LaunchScreen.storyboard in Resources */,
 				3AF1581B2D29493C00877C1D /* Images.xcassets in Resources */,
 				3AF1581C2D29493C00877C1D /* PrivacyInfo.xcprivacy in Resources */,
@@ -671,7 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -701,7 +707,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
