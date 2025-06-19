@@ -16,13 +16,13 @@
 		3A89A0DB2D294E8A007C4E99 /* taxlien_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A89A0D92D294E8A007C4E99 /* taxlien_logo.png */; };
 		3AF158152D29493C00877C1D /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		3AF158162D29493C00877C1D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		3AF158182D29493C00877C1D /* libPods-TaxLien.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-TaxLien.a */; };
 		3AF1581A2D29493C00877C1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		3AF1581B2D29493C00877C1D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		3AF1581C2D29493C00877C1D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		516C4A13028114F2EAD7FF74 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		7699B88040F8A987B510C191 /* libPods-TaxLien-TaxLienTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-TaxLien-TaxLienTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		C9FEFADCEE31827E73548BCC /* libPods-TaxLien.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-TaxLien.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +39,7 @@
 		00E356EE1AD99517003FC87E /* TaxLienTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxLienTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* TaxLienTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaxLienTests.m; sourceTree = "<group>"; };
+		111847EF0EB73914D902D4D5 /* Pods-TaxLien.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxLien.debug.xcconfig"; path = "Target Support Files/Pods-TaxLien/Pods-TaxLien.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* TaxLien.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaxLien.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TaxLien/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = TaxLien/AppDelegate.mm; sourceTree = "<group>"; };
@@ -50,8 +51,7 @@
 		3A89A0D92D294E8A007C4E99 /* taxlien_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taxlien_logo.png; sourceTree = "<group>"; };
 		3AF158232D29493C00877C1D /* TaxLien Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TaxLien Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AF158242D29493D00877C1D /* TaxLien copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TaxLien copy-Info.plist"; path = "/Users/anton/proj/taxlien.new/taxlien-mobile/taxlien-app/ios/TaxLien copy-Info.plist"; sourceTree = "<absolute>"; };
-		3B4392A12AC88292D35C810B /* Pods-TaxLien.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxLien.debug.xcconfig"; path = "Target Support Files/Pods-TaxLien/Pods-TaxLien.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-TaxLien.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxLien.release.xcconfig"; path = "Target Support Files/Pods-TaxLien/Pods-TaxLien.release.xcconfig"; sourceTree = "<group>"; };
+		48DE5E3BA0BA1C33DCD8D33E /* Pods-TaxLien.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxLien.release.xcconfig"; path = "Target Support Files/Pods-TaxLien/Pods-TaxLien.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-TaxLien-TaxLienTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaxLien-TaxLienTests.debug.xcconfig"; path = "Target Support Files/Pods-TaxLien-TaxLienTests/Pods-TaxLien-TaxLienTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-TaxLien.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TaxLien.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = TaxLien/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -73,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C80B921A6F3F58F76C31292 /* libPods-TaxLien.a in Frameworks */,
+				C9FEFADCEE31827E73548BCC /* libPods-TaxLien.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +81,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AF158182D29493C00877C1D /* libPods-TaxLien.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,10 +165,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-TaxLien.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-TaxLien.release.xcconfig */,
 				5B7EB9410499542E8C5724F5 /* Pods-TaxLien-TaxLienTests.debug.xcconfig */,
 				89C6BE57DB24E9ADA2F236DE /* Pods-TaxLien-TaxLienTests.release.xcconfig */,
+				111847EF0EB73914D902D4D5 /* Pods-TaxLien.debug.xcconfig */,
+				48DE5E3BA0BA1C33DCD8D33E /* Pods-TaxLien.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -222,13 +222,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3AF158202D29493C00877C1D /* Build configuration list for PBXNativeTarget "TaxLien Dev" */;
 			buildPhases = (
-				3AF158132D29493C00877C1D /* [CP] Check Pods Manifest.lock */,
 				3AF158142D29493C00877C1D /* Sources */,
 				3AF158172D29493C00877C1D /* Frameworks */,
 				3AF158192D29493C00877C1D /* Resources */,
 				3AF1581D2D29493C00877C1D /* Bundle React Native code and images */,
-				3AF1581E2D29493C00877C1D /* [CP] Embed Pods Frameworks */,
-				3AF1581F2D29493C00877C1D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -342,28 +339,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TaxLien/Pods-TaxLien-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3AF158132D29493C00877C1D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TaxLien-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3AF1581D2D29493C00877C1D /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -379,40 +354,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
-		};
-		3AF1581E2D29493C00877C1D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TaxLien/Pods-TaxLien-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TaxLien/Pods-TaxLien-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TaxLien/Pods-TaxLien-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3AF1581F2D29493C00877C1D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TaxLien/Pods-TaxLien-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TaxLien/Pods-TaxLien-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TaxLien/Pods-TaxLien-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -602,11 +543,13 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-TaxLien.debug.xcconfig */;
+			baseConfigurationReference = 111847EF0EB73914D902D4D5 /* Pods-TaxLien.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 6XT4R7V83F;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TaxLien/Info.plist;
@@ -617,7 +560,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -625,6 +568,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = online.taxlien;
 				PRODUCT_NAME = TaxLien;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -633,11 +577,11 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-TaxLien.release.xcconfig */;
+			baseConfigurationReference = 48DE5E3BA0BA1C33DCD8D33E /* Pods-TaxLien.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 6XT4R7V83F;
 				INFOPLIST_FILE = TaxLien/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TaxLien.online;
@@ -647,7 +591,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -662,11 +606,10 @@
 		};
 		3AF158212D29493C00877C1D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-TaxLien.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 6XT4R7V83F;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "TaxLien copy-Info.plist";
@@ -677,7 +620,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -693,11 +636,10 @@
 		};
 		3AF158222D29493C00877C1D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-TaxLien.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 6XT4R7V83F;
 				INFOPLIST_FILE = "TaxLien copy-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "TaxLien.online Dev";
@@ -707,7 +649,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
