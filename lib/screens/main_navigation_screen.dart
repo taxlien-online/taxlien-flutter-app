@@ -6,6 +6,7 @@ import '../services/onboarding_service.dart';
 import '../services/tax_lien_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
+import '../services/user_preferences_service.dart';
 import '../theme/app_theme_export.dart';
 import 'marketplace_screen.dart';
 import 'my_investments_screen.dart';
@@ -19,6 +20,7 @@ class MainNavigationScreen extends StatefulWidget {
   final TaxLienService taxLienService;
   final AuthService authService;
   final DatabaseService databaseService;
+  final UserPreferencesService userPreferencesService;
 
   const MainNavigationScreen({
     super.key,
@@ -28,6 +30,7 @@ class MainNavigationScreen extends StatefulWidget {
     required this.taxLienService,
     required this.authService,
     required this.databaseService,
+    required this.userPreferencesService,
   });
 
   @override

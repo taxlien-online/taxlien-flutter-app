@@ -7,7 +7,8 @@ import 'services/onboarding_service.dart';
 import 'services/tax_lien_service.dart';
 import 'services/auth_service.dart';
 import 'services/database_service.dart';
-import 'screens/onboarding_screen.dart';
+import 'services/user_preferences_service.dart';
+import 'screens/interactive_onboarding_screen.dart';
 import 'screens/main_navigation_screen.dart';
 import 'theme/app_theme_export.dart';
 
@@ -21,6 +22,7 @@ void main() async {
   final taxLienService = TaxLienService();
   final authService = AuthService();
   final databaseService = DatabaseService();
+  final userPreferencesService = UserPreferencesService();
   
   await localizationService.initialize();
   await themeService.initialize();
@@ -28,6 +30,7 @@ void main() async {
   await taxLienService.initialize();
   await authService.initialize();
   await databaseService.initialize();
+  await userPreferencesService.initialize();
   
   runApp(TaxLienApp(
     localizationService: localizationService,
@@ -36,6 +39,7 @@ void main() async {
     taxLienService: taxLienService,
     authService: authService,
     databaseService: databaseService,
+    userPreferencesService: userPreferencesService,
   ));
 }
 
@@ -46,6 +50,7 @@ class TaxLienApp extends StatelessWidget {
   final TaxLienService taxLienService;
   final AuthService authService;
   final DatabaseService databaseService;
+  final UserPreferencesService userPreferencesService;
   
   const TaxLienApp({
     super.key, 
@@ -55,6 +60,7 @@ class TaxLienApp extends StatelessWidget {
     required this.taxLienService,
     required this.authService,
     required this.databaseService,
+    required this.userPreferencesService,
   });
 
   @override
@@ -79,13 +85,14 @@ class TaxLienApp extends StatelessWidget {
               darkTheme: AppTheme.darkTheme,
               themeMode: themeService.themeMode,
               home: onboardingService.shouldShowOnboarding()
-                  ? OnboardingScreen(
+                  ? InteractiveOnboardingScreen(
                       onboardingService: onboardingService,
                       localizationService: localizationService,
                       themeService: themeService,
                       taxLienService: taxLienService,
                       authService: authService,
                       databaseService: databaseService,
+                      userPreferencesService: userPreferencesService,
                     )
                   : MainNavigationScreen(
                       localizationService: localizationService,
@@ -94,6 +101,7 @@ class TaxLienApp extends StatelessWidget {
                       taxLienService: taxLienService,
                       authService: authService,
                       databaseService: databaseService,
+                      userPreferencesService: userPreferencesService,
                     ),
             );
           },
