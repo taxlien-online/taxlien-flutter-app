@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = freedome_manager
+PRODUCT_NAME = taxlien.online
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = freedomemanager.nativemind.ru.freedomeManager
+PRODUCT_BUNDLE_IDENTIFIER = taxlien.online
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2025 freedomemanager.nativemind.ru. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2025 taxlien.online. All rights reserved.

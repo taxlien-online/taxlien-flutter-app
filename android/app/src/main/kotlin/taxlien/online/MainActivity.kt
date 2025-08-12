@@ -1,4 +1,4 @@
-package freedomemanager.nativemind.ru.freedome_manager
+package taxlien.online
 
 import io.flutter.embedding.android.FlutterActivity
 
