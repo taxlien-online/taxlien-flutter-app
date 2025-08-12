@@ -1,0 +1,253 @@
+{
+  "@@locale": "zh",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "应用程序标题"
+  },
+  "systemStatus": "系统状态",
+  "@systemStatus": {
+    "description": "系统状态部分标题"
+  },
+  "playback": "播放",
+  "@playback": {
+    "description": "播放状态"
+  },
+  "stopped": "已停止",
+  "@stopped": {
+    "description": "停止状态"
+  },
+  "file": "文件",
+  "@file": {
+    "description": "文件标签"
+  },
+  "position": "位置",
+  "@position": {
+    "description": "播放位置标签"
+  },
+  "seconds": "秒",
+  "@seconds": {
+    "description": "秒的缩写"
+  },
+  "playbackControls": "播放控制",
+  "@playbackControls": {
+    "description": "播放控制部分标题"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "播放按钮"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "暂停按钮"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "停止按钮"
+  },
+  "volume": "音量",
+  "@volume": {
+    "description": "音量标签"
+  },
+  "projectionSettings": "投影设置",
+  "@projectionSettings": {
+    "description": "投影设置部分标题"
+  },
+  "brightness": "亮度",
+  "@brightness": {
+    "description": "亮度标签"
+  },
+  "rotation": "旋转",
+  "@rotation": {
+    "description": "旋转标签"
+  },
+  "mediaFiles": "媒体文件",
+  "@mediaFiles": {
+    "description": "媒体文件部分标题"
+  },
+  "image": "图像",
+  "@image": {
+    "description": "文件类型 - 图像"
+  },
+  "calibration": "校准",
+  "@calibration": {
+    "description": "校准按钮"
+  },
+  "calibrationTitle": "投影校准",
+  "@calibrationTitle": {
+    "description": "校准屏幕标题"
+  },
+  "preview": "预览",
+  "@preview": {
+    "description": "预览部分标题"
+  },
+  "offset": "偏移",
+  "@offset": {
+    "description": "偏移部分标题"
+  },
+  "xOffset": "X 偏移",
+  "@xOffset": {
+    "description": "X 偏移标签"
+  },
+  "yOffset": "Y 偏移",
+  "@yOffset": {
+    "description": "Y 偏移标签"
+  },
+  "scaleRotation": "缩放和旋转",
+  "@scaleRotation": {
+    "description": "缩放和旋转部分标题"
+  },
+  "scale": "缩放",
+  "@scale": {
+    "description": "缩放标签"
+  },
+  "apply": "应用",
+  "@apply": {
+    "description": "应用按钮"
+  },
+  "reset": "重置",
+  "@reset": {
+    "description": "重置按钮"
+  },
+  "calibrationApplied": "校准已应用",
+  "@calibrationApplied": {
+    "description": "校准应用成功消息"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "连接状态 - 在线"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "连接状态 - 离线"
+  },
+  "languageSettings": "语言设置",
+  "@languageSettings": {
+    "description": "Language settings screen title"
+  },
+  "languageChanged": "语言已更改",
+  "@languageChanged": {
+    "description": "Language change notification"
+  },
+  "onboardingWelcomeTitle": "欢迎使用 FreeDome Manager",
+  "@onboardingWelcomeTitle": {
+    "description": "引导欢迎屏幕标题"
+  },
+  "onboardingWelcomeDescription": "通往数字自由和精神连接的入口",
+  "@onboardingWelcomeDescription": {
+    "description": "引导欢迎屏幕描述"
+  },
+  "onboardingConnectionTitle": "连接到 FreeDome",
+  "@onboardingConnectionTitle": {
+    "description": "引导连接屏幕标题"
+  },
+  "onboardingConnectionDescription": "建立到 FreeDome 网络的安全连接",
+  "@onboardingConnectionDescription": {
+    "description": "引导连接屏幕描述"
+  },
+  "onboardingDomeControlTitle": "穹顶控制",
+  "@onboardingDomeControlTitle": {
+    "description": "引导穹顶控制屏幕标题"
+  },
+  "onboardingDomeControlDescription": "控制您的穹顶设置和配置",
+  "@onboardingDomeControlDescription": {
+    "description": "引导穹顶控制屏幕描述"
+  },
+  "onboardingCalibrationTitle": "校准",
+  "@onboardingCalibrationTitle": {
+    "description": "引导校准屏幕标题"
+  },
+  "onboardingCalibrationDescription": "为最佳性能校准您的穹顶",
+  "@onboardingCalibrationDescription": {
+    "description": "引导校准屏幕描述"
+  },
+  "onboardingMediaTitle": "媒体管理",
+  "@onboardingMediaTitle": {
+    "description": "引导媒体管理屏幕标题"
+  },
+  "onboardingMediaDescription": "上传和管理您的媒体文件",
+  "@onboardingMediaDescription": {
+    "description": "引导媒体管理屏幕描述"
+  },
+  "onboardingReadyTitle": "您已准备就绪！",
+  "@onboardingReadyTitle": {
+    "description": "引导就绪屏幕标题"
+  },
+  "onboardingReadyDescription": "开始您的数字自由之旅",
+  "@onboardingReadyDescription": {
+    "description": "引导就绪屏幕描述"
+  },
+  "next": "下一步",
+  "@next": {
+    "description": "引导中的下一步按钮"
+  },
+  "back": "返回",
+  "@back": {
+    "description": "引导中的返回按钮"
+  },
+  "skip": "跳过",
+  "@skip": {
+    "description": "引导中的跳过按钮"
+  },
+  "getStarted": "开始",
+  "@getStarted": {
+    "description": "引导中的开始按钮"
+  },
+  "skipConfirmationTitle": "跳过引导？",
+  "@skipConfirmationTitle": {
+    "description": "跳过引导确认对话框标题"
+  },
+  "skipConfirmationMessage": "您确定要跳过引导吗？您以后可以随时从设置中访问教程。",
+  "@skipConfirmationMessage": {
+    "description": "跳过引导确认对话框消息"
+  },
+  "cancel": "取消",
+  "@cancel": {
+    "description": "取消按钮"
+  },
+  "connectingToFreedome": "正在连接到 FreeDome...",
+  "@connectingToFreedome": {
+    "description": "连接状态消息"
+  },
+  "domeStatusActive": "穹顶状态：活跃",
+  "@domeStatusActive": {
+    "description": "穹顶状态消息"
+  },
+  "open": "打开",
+  "@open": {
+    "description": "打开按钮"
+  },
+  "close": "关闭",
+  "@close": {
+    "description": "关闭按钮"
+  },
+  "calibrationProgress": "校准进度",
+  "@calibrationProgress": {
+    "description": "校准进度消息"
+  },
+  "mediaFilesCount": "媒体文件：{count} 项",
+  "@mediaFilesCount": {
+    "description": "媒体文件计数消息",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "上传",
+  "@upload": {
+    "description": "上传按钮"
+  },
+  "manage": "管理",
+  "@manage": {
+    "description": "管理按钮"
+  },
+  "serverSettings": "服务器设置",
+  "@serverSettings": {
+    "description": "服务器设置屏幕标题"
+  },
+  "connectionStatus": "连接状态",
+  "@connectionStatus": {
+    "description": "连接状态屏幕标题"
+  }
+} 

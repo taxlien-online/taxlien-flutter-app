@@ -1,0 +1,253 @@
+{
+  "@@locale": "lo",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "ຊື່ແອັບພລິເຄຊັນ"
+  },
+  "systemStatus": "ສະຖານະລະບົບ",
+  "@systemStatus": {
+    "description": "ຫົວຂໍ້ສ່ວນສະຖານະລະບົບ"
+  },
+  "playback": "ການຫຼິ້ນ",
+  "@playback": {
+    "description": "ສະຖານະການຫຼິ້ນ"
+  },
+  "stopped": "ຢຸດແລ້ວ",
+  "@stopped": {
+    "description": "ສະຖານະການຢຸດ"
+  },
+  "file": "ໄຟລ໌",
+  "@file": {
+    "description": "ປ້າຍສຳລັບໄຟລ໌"
+  },
+  "position": "ຕຳແໜ່ງ",
+  "@position": {
+    "description": "ປ້າຍສຳລັບຕຳແໜ່ງການຫຼິ້ນ"
+  },
+  "seconds": "ວິນາທີ",
+  "@seconds": {
+    "description": "ຄຳຫຍໍ້ສຳລັບວິນາທີ"
+  },
+  "playbackControls": "ການຄວບຄຸມການຫຼິ້ນ",
+  "@playbackControls": {
+    "description": "ຫົວຂໍ້ສ່ວນການຄວບຄຸມການຫຼິ້ນ"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "ປຸ່ມຫຼິ້ນ"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "ປຸ່ມຢຸດຊົ່ວຄາວ"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "ປຸ່ມຢຸດ"
+  },
+  "volume": "ລະດັບສຽງ",
+  "@volume": {
+    "description": "ປ້າຍສຳລັບລະດັບສຽງ"
+  },
+  "projectionSettings": "ການຕັ້ງຄ່າການສະແດງ",
+  "@projectionSettings": {
+    "description": "ຫົວຂໍ້ສ່ວນການຕັ້ງຄ່າການສະແດງ"
+  },
+  "brightness": "ຄວາມສະຫວ່າງ",
+  "@brightness": {
+    "description": "ປ້າຍສຳລັບຄວາມສະຫວ່າງ"
+  },
+  "rotation": "ການໝຸນ",
+  "@rotation": {
+    "description": "ປ້າຍສຳລັບການໝຸນ"
+  },
+  "mediaFiles": "ໄຟລ໌ມີເດຍ",
+  "@mediaFiles": {
+    "description": "ຫົວຂໍ້ສ່ວນໄຟລ໌ມີເດຍ"
+  },
+  "image": "ຮູບພາບ",
+  "@image": {
+    "description": "ປະເພດໄຟລ໌ - ຮູບພາບ"
+  },
+  "calibration": "ການປັບແຕ່ງ",
+  "@calibration": {
+    "description": "ປຸ່ມການປັບແຕ່ງ"
+  },
+  "calibrationTitle": "ການປັບແຕ່ງການສະແດງ",
+  "@calibrationTitle": {
+    "description": "ຫົວຂໍ້ຈໍການປັບແຕ່ງ"
+  },
+  "preview": "ການຕົວຢ່າງ",
+  "@preview": {
+    "description": "ຫົວຂໍ້ສ່ວນການຕົວຢ່າງ"
+  },
+  "offset": "ການຊົດເຊີຍ",
+  "@offset": {
+    "description": "ຫົວຂໍ້ສ່ວນການຊົດເຊີຍ"
+  },
+  "xOffset": "ການຊົດເຊີຍ X",
+  "@xOffset": {
+    "description": "ປ້າຍສຳລັບການຊົດເຊີຍ X"
+  },
+  "yOffset": "ການຊົດເຊີຍ Y",
+  "@yOffset": {
+    "description": "ປ້າຍສຳລັບການຊົດເຊີຍ Y"
+  },
+  "scaleRotation": "ຂະໜາດແລະການໝຸນ",
+  "@scaleRotation": {
+    "description": "ຫົວຂໍ້ສ່ວນຂະໜາດແລະການໝຸນ"
+  },
+  "scale": "ຂະໜາດ",
+  "@scale": {
+    "description": "ປ້າຍສຳລັບຂະໜາດ"
+  },
+  "apply": "ໃຊ້",
+  "@apply": {
+    "description": "ປຸ່ມໃຊ້"
+  },
+  "reset": "ຣີເຊັດ",
+  "@reset": {
+    "description": "ປຸ່ມຣີເຊັດ"
+  },
+  "calibrationApplied": "ການປັບແຕ່ງໄດ້ໃຊ້ແລ້ວ",
+  "@calibrationApplied": {
+    "description": "ຂໍ້ຄວາມການປັບແຕ່ງສຳເລັດ"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "ສະຖານະການເຊື່ອມຕໍ່ - ອອນລາຍ"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "ສະຖານະການເຊື່ອມຕໍ່ - ອອບລາຍ"
+  },
+  "languageSettings": "ການຕັ້ງຄ່າພາສາ",
+  "@languageSettings": {
+    "description": "ຫົວຂໍ້ຈໍການຕັ້ງຄ່າພາສາ"
+  },
+  "languageChanged": "ພາສາໄດ້ປ່ຽນແລ້ວ",
+  "@languageChanged": {
+    "description": "ການແຈ້ງເຕືອນການປ່ຽນພາສາ"
+  },
+  "onboardingWelcomeTitle": "ຍິນດີຕ້ອນຮັບສູ່ FreeDome Manager",
+  "@onboardingWelcomeTitle": {
+    "description": "ຫົວຂໍ້ຈໍຕ້ອນຮັບການສອນ"
+  },
+  "onboardingWelcomeDescription": "ປະຕູຂອງທ່ານສູ່ອິດສະຫຼະພາບດິຈິຕອນແລະການເຊື່ອມຕໍ່ທາງຈິດວິນຍານ",
+  "@onboardingWelcomeDescription": {
+    "description": "ຄຳອະທິບາຍຈໍຕ້ອນຮັບການສອນ"
+  },
+  "onboardingConnectionTitle": "ເຊື່ອມຕໍ່ກັບ FreeDome",
+  "@onboardingConnectionTitle": {
+    "description": "ຫົວຂໍ້ຈໍການເຊື່ອມຕໍ່ການສອນ"
+  },
+  "onboardingConnectionDescription": "ສ້າງການເຊື່ອມຕໍ່ທີ່ປອດໄພກັບເຄືອຂ່າຍ FreeDome ຂອງທ່ານ",
+  "@onboardingConnectionDescription": {
+    "description": "ຄຳອະທິບາຍຈໍການເຊື່ອມຕໍ່ການສອນ"
+  },
+  "onboardingDomeControlTitle": "ການຄວບຄຸມໂຄງ",
+  "@onboardingDomeControlTitle": {
+    "description": "ຫົວຂໍ້ຈໍການຄວບຄຸມໂຄງການສອນ"
+  },
+  "onboardingDomeControlDescription": "ຄວບຄຸມການຕັ້ງຄ່າແລະການກຳນົດຂອງໂຄງຂອງທ່ານ",
+  "@onboardingDomeControlDescription": {
+    "description": "ຄຳອະທິບາຍຈໍການຄວບຄຸມໂຄງການສອນ"
+  },
+  "onboardingCalibrationTitle": "ການປັບແຕ່ງ",
+  "@onboardingCalibrationTitle": {
+    "description": "ຫົວຂໍ້ຈໍການປັບແຕ່ງການສອນ"
+  },
+  "onboardingCalibrationDescription": "ປັບແຕ່ງໂຄງຂອງທ່ານສຳລັບການເຮັດວຽກທີ່ດີທີ່ສຸດ",
+  "@onboardingCalibrationDescription": {
+    "description": "ຄຳອະທິບາຍຈໍການປັບແຕ່ງການສອນ"
+  },
+  "onboardingMediaTitle": "ການຄວບຄຸມມີເດຍ",
+  "@onboardingMediaTitle": {
+    "description": "ຫົວຂໍ້ຈໍການຄວບຄຸມມີເດຍການສອນ"
+  },
+  "onboardingMediaDescription": "ອັບໂຫລດແລະຄວບຄຸມໄຟລ໌ມີເດຍຂອງທ່ານ",
+  "@onboardingMediaDescription": {
+    "description": "ຄຳອະທິບາຍຈໍການຄວບຄຸມມີເດຍການສອນ"
+  },
+  "onboardingReadyTitle": "ທ່ານພ້ອມແລ້ວ!",
+  "@onboardingReadyTitle": {
+    "description": "ຫົວຂໍ້ຈໍພ້ອມການສອນ"
+  },
+  "onboardingReadyDescription": "ເລີ່ມການເດີນທາງຂອງທ່ານສູ່ອິດສະຫຼະພາບດິຈິຕອນ",
+  "@onboardingReadyDescription": {
+    "description": "ຄຳອະທິບາຍຈໍພ້ອມການສອນ"
+  },
+  "next": "ຕໍ່ໄປ",
+  "@next": {
+    "description": "ປຸ່ມຕໍ່ໄປໃນການສອນ"
+  },
+  "back": "ກັບ",
+  "@back": {
+    "description": "ປຸ່ມກັບໃນການສອນ"
+  },
+  "skip": "ຂ້າມ",
+  "@skip": {
+    "description": "ປຸ່ມຂ້າມໃນການສອນ"
+  },
+  "getStarted": "ເລີ່ມ",
+  "@getStarted": {
+    "description": "ປຸ່ມເລີ່ມໃນການສອນ"
+  },
+  "skipConfirmationTitle": "ຂ້າມການສອນ?",
+  "@skipConfirmationTitle": {
+    "description": "ຫົວຂໍ້ກ່ອງຢືນຢັນການຂ້າມການສອນ"
+  },
+  "skipConfirmationMessage": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການຂ້າມການສອນ? ທ່ານສາມາດເຂົ້າເຖິງຄູ່ມືໄດ້ຕໍ່ມາຈາກການຕັ້ງຄ່າ.",
+  "@skipConfirmationMessage": {
+    "description": "ຂໍ້ຄວາມກ່ອງຢືນຢັນການຂ້າມການສອນ"
+  },
+  "cancel": "ຍົກເລີກ",
+  "@cancel": {
+    "description": "ປຸ່ມຍົກເລີກ"
+  },
+  "connectingToFreedome": "ກຳລັງເຊື່ອມຕໍ່ກັບ FreeDome...",
+  "@connectingToFreedome": {
+    "description": "ຂໍ້ຄວາມສະຖານະການເຊື່ອມຕໍ່"
+  },
+  "domeStatusActive": "ສະຖານະໂຄງ: ເປີດໃຊ້ງານ",
+  "@domeStatusActive": {
+    "description": "ຂໍ້ຄວາມສະຖານະໂຄງ"
+  },
+  "open": "ເປີດ",
+  "@open": {
+    "description": "ປຸ່ມເປີດ"
+  },
+  "close": "ປິດ",
+  "@close": {
+    "description": "ປຸ່ມປິດ"
+  },
+  "calibrationProgress": "ຄວາມຄືບໜ້າການປັບແຕ່ງ",
+  "@calibrationProgress": {
+    "description": "ຂໍ້ຄວາມຄວາມຄືບໜ້າການປັບແຕ່ງ"
+  },
+  "mediaFilesCount": "ໄຟລ໌ມີເດຍ: {count} ລາຍການ",
+  "@mediaFilesCount": {
+    "description": "ຂໍ້ຄວາມການນັບໄຟລ໌ມີເດຍ",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "ອັບໂຫລດ",
+  "@upload": {
+    "description": "ປຸ່ມອັບໂຫລດ"
+  },
+  "manage": "ຄວບຄຸມ",
+  "@manage": {
+    "description": "ປຸ່ມຄວບຄຸມ"
+  },
+  "serverSettings": "ການຕັ້ງຄ່າເຊີເວີ",
+  "@serverSettings": {
+    "description": "ຫົວຂໍ້ຈໍການຕັ້ງຄ່າເຊີເວີ"
+  },
+  "connectionStatus": "ສະຖານະການເຊື່ອມຕໍ່",
+  "@connectionStatus": {
+    "description": "ຫົວຂໍ້ຈໍສະຖານະການເຊື່ອມຕໍ່"
+  }
+} 

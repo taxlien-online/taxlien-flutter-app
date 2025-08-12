@@ -1,0 +1,253 @@
+{
+  "@@locale": "de",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "Anwendungstitel"
+  },
+  "systemStatus": "Systemstatus",
+  "@systemStatus": {
+    "description": "Systemstatus-Abschnittstitel"
+  },
+  "playback": "Wiedergabe",
+  "@playback": {
+    "description": "Wiedergabestatus"
+  },
+  "stopped": "Gestoppt",
+  "@stopped": {
+    "description": "Stoppstatus"
+  },
+  "file": "Datei",
+  "@file": {
+    "description": "Bezeichnung für Datei"
+  },
+  "position": "Position",
+  "@position": {
+    "description": "Bezeichnung für Wiedergabeposition"
+  },
+  "seconds": "Sek",
+  "@seconds": {
+    "description": "Abkürzung für Sekunden"
+  },
+  "playbackControls": "Wiedergabesteuerung",
+  "@playbackControls": {
+    "description": "Wiedergabesteuerung-Abschnittstitel"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "Wiedergabe-Button"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "Pause-Button"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "Stopp-Button"
+  },
+  "volume": "Lautstärke",
+  "@volume": {
+    "description": "Bezeichnung für Lautstärke"
+  },
+  "projectionSettings": "Projektionseinstellungen",
+  "@projectionSettings": {
+    "description": "Projektionseinstellungen-Abschnittstitel"
+  },
+  "brightness": "Helligkeit",
+  "@brightness": {
+    "description": "Bezeichnung für Helligkeit"
+  },
+  "rotation": "Rotation",
+  "@rotation": {
+    "description": "Bezeichnung für Rotation"
+  },
+  "mediaFiles": "Mediendateien",
+  "@mediaFiles": {
+    "description": "Mediendateien-Abschnittstitel"
+  },
+  "image": "Bild",
+  "@image": {
+    "description": "Dateityp - Bild"
+  },
+  "calibration": "Kalibrierung",
+  "@calibration": {
+    "description": "Kalibrierung-Button"
+  },
+  "calibrationTitle": "Projektionskalibrierung",
+  "@calibrationTitle": {
+    "description": "Kalibrierung-Bildschirmtitel"
+  },
+  "preview": "Vorschau",
+  "@preview": {
+    "description": "Vorschau-Abschnittstitel"
+  },
+  "offset": "Versatz",
+  "@offset": {
+    "description": "Versatz-Abschnittstitel"
+  },
+  "xOffset": "X-Versatz",
+  "@xOffset": {
+    "description": "Bezeichnung für X-Versatz"
+  },
+  "yOffset": "Y-Versatz",
+  "@yOffset": {
+    "description": "Bezeichnung für Y-Versatz"
+  },
+  "scaleRotation": "Skalierung und Rotation",
+  "@scaleRotation": {
+    "description": "Skalierung und Rotation-Abschnittstitel"
+  },
+  "scale": "Skalierung",
+  "@scale": {
+    "description": "Bezeichnung für Skalierung"
+  },
+  "apply": "Anwenden",
+  "@apply": {
+    "description": "Anwenden-Button"
+  },
+  "reset": "Zurücksetzen",
+  "@reset": {
+    "description": "Zurücksetzen-Button"
+  },
+  "calibrationApplied": "Kalibrierung angewendet",
+  "@calibrationApplied": {
+    "description": "Kalibrierung erfolgreich angewendet Nachricht"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "Verbindungsstatus - Online"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "Verbindungsstatus - Offline"
+  },
+  "languageSettings": "Spracheinstellungen",
+  "@languageSettings": {
+    "description": "Spracheinstellungen-Bildschirmtitel"
+  },
+  "languageChanged": "Sprache geändert",
+  "@languageChanged": {
+    "description": "Sprachänderungsbenachrichtigung"
+  },
+  "onboardingWelcomeTitle": "Willkommen bei FreeDome Manager",
+  "@onboardingWelcomeTitle": {
+    "description": "Onboarding-Willkommensbildschirmtitel"
+  },
+  "onboardingWelcomeDescription": "Ihr Tor zur digitalen Freiheit und spirituellen Verbindung",
+  "@onboardingWelcomeDescription": {
+    "description": "Onboarding-Willkommensbildschirmbeschreibung"
+  },
+  "onboardingConnectionTitle": "Verbinden mit FreeDome",
+  "@onboardingConnectionTitle": {
+    "description": "Onboarding-Verbindungsbildschirmtitel"
+  },
+  "onboardingConnectionDescription": "Stellen Sie eine sichere Verbindung zu Ihrem FreeDome-Netzwerk her",
+  "@onboardingConnectionDescription": {
+    "description": "Onboarding-Verbindungsbildschirmbeschreibung"
+  },
+  "onboardingDomeControlTitle": "Kuppelsteuerung",
+  "@onboardingDomeControlTitle": {
+    "description": "Onboarding-Kuppelsteuerungsbildschirmtitel"
+  },
+  "onboardingDomeControlDescription": "Steuern Sie Ihre Kuppeleinstellungen und -konfigurationen",
+  "@onboardingDomeControlDescription": {
+    "description": "Onboarding-Kuppelsteuerungsbildschirmbeschreibung"
+  },
+  "onboardingCalibrationTitle": "Kalibrierung",
+  "@onboardingCalibrationTitle": {
+    "description": "Onboarding-Kalibrierungsbildschirmtitel"
+  },
+  "onboardingCalibrationDescription": "Kalibrieren Sie Ihre Kuppel für optimale Leistung",
+  "@onboardingCalibrationDescription": {
+    "description": "Onboarding-Kalibrierungsbildschirmbeschreibung"
+  },
+  "onboardingMediaTitle": "Medienverwaltung",
+  "@onboardingMediaTitle": {
+    "description": "Onboarding-Medienverwaltungsbildschirmtitel"
+  },
+  "onboardingMediaDescription": "Laden Sie Ihre Mediendateien hoch und verwalten Sie sie",
+  "@onboardingMediaDescription": {
+    "description": "Onboarding-Medienverwaltungsbildschirmbeschreibung"
+  },
+  "onboardingReadyTitle": "Sie sind bereit!",
+  "@onboardingReadyTitle": {
+    "description": "Onboarding-Bereitschaftsbildschirmtitel"
+  },
+  "onboardingReadyDescription": "Starten Sie Ihre Reise zur digitalen Freiheit",
+  "@onboardingReadyDescription": {
+    "description": "Onboarding-Bereitschaftsbildschirmbeschreibung"
+  },
+  "next": "Weiter",
+  "@next": {
+    "description": "Weiter-Button im Onboarding"
+  },
+  "back": "Zurück",
+  "@back": {
+    "description": "Zurück-Button im Onboarding"
+  },
+  "skip": "Überspringen",
+  "@skip": {
+    "description": "Überspringen-Button im Onboarding"
+  },
+  "getStarted": "Loslegen",
+  "@getStarted": {
+    "description": "Loslegen-Button im Onboarding"
+  },
+  "skipConfirmationTitle": "Onboarding überspringen?",
+  "@skipConfirmationTitle": {
+    "description": "Onboarding-Überspringen-Bestätigungsdialogtitel"
+  },
+  "skipConfirmationMessage": "Sind Sie sicher, dass Sie das Onboarding überspringen möchten? Sie können das Tutorial später immer über die Einstellungen aufrufen.",
+  "@skipConfirmationMessage": {
+    "description": "Onboarding-Überspringen-Bestätigungsdialognachricht"
+  },
+  "cancel": "Abbrechen",
+  "@cancel": {
+    "description": "Abbrechen-Button"
+  },
+  "connectingToFreedome": "Verbinde mit FreeDome...",
+  "@connectingToFreedome": {
+    "description": "Verbindungsstatusnachricht"
+  },
+  "domeStatusActive": "Kuppelstatus: Aktiv",
+  "@domeStatusActive": {
+    "description": "Kuppelstatusnachricht"
+  },
+  "open": "Öffnen",
+  "@open": {
+    "description": "Öffnen-Button"
+  },
+  "close": "Schließen",
+  "@close": {
+    "description": "Schließen-Button"
+  },
+  "calibrationProgress": "Kalibrierungsfortschritt",
+  "@calibrationProgress": {
+    "description": "Kalibrierungsfortschrittsnachricht"
+  },
+  "mediaFilesCount": "Mediendateien: {count} Elemente",
+  "@mediaFilesCount": {
+    "description": "Mediendateien-Anzahlnachricht",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "Hochladen",
+  "@upload": {
+    "description": "Hochladen-Button"
+  },
+  "manage": "Verwalten",
+  "@manage": {
+    "description": "Verwalten-Button"
+  },
+  "serverSettings": "Servereinstellungen",
+  "@serverSettings": {
+    "description": "Servereinstellungen-Bildschirmtitel"
+  },
+  "connectionStatus": "Verbindungsstatus",
+  "@connectionStatus": {
+    "description": "Verbindungsstatus-Bildschirmtitel"
+  }
+} 

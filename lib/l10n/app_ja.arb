@@ -1,0 +1,253 @@
+{
+  "@@locale": "ja",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "アプリケーションタイトル"
+  },
+  "systemStatus": "システムステータス",
+  "@systemStatus": {
+    "description": "システムステータスセクションのタイトル"
+  },
+  "playback": "再生",
+  "@playback": {
+    "description": "再生状態"
+  },
+  "stopped": "停止",
+  "@stopped": {
+    "description": "停止状態"
+  },
+  "file": "ファイル",
+  "@file": {
+    "description": "ファイルラベル"
+  },
+  "position": "位置",
+  "@position": {
+    "description": "再生位置ラベル"
+  },
+  "seconds": "秒",
+  "@seconds": {
+    "description": "秒の略語"
+  },
+  "playbackControls": "再生制御",
+  "@playbackControls": {
+    "description": "再生制御セクションのタイトル"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "再生ボタン"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "一時停止ボタン"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "停止ボタン"
+  },
+  "volume": "音量",
+  "@volume": {
+    "description": "音量ラベル"
+  },
+  "projectionSettings": "投影設定",
+  "@projectionSettings": {
+    "description": "投影設定セクションのタイトル"
+  },
+  "brightness": "明度",
+  "@brightness": {
+    "description": "明度ラベル"
+  },
+  "rotation": "回転",
+  "@rotation": {
+    "description": "回転ラベル"
+  },
+  "mediaFiles": "メディアファイル",
+  "@mediaFiles": {
+    "description": "メディアファイルセクションのタイトル"
+  },
+  "image": "画像",
+  "@image": {
+    "description": "ファイルタイプ - 画像"
+  },
+  "calibration": "キャリブレーション",
+  "@calibration": {
+    "description": "キャリブレーションボタン"
+  },
+  "calibrationTitle": "投影キャリブレーション",
+  "@calibrationTitle": {
+    "description": "キャリブレーション画面のタイトル"
+  },
+  "preview": "プレビュー",
+  "@preview": {
+    "description": "プレビューセクションのタイトル"
+  },
+  "offset": "オフセット",
+  "@offset": {
+    "description": "オフセットセクションのタイトル"
+  },
+  "xOffset": "X オフセット",
+  "@xOffset": {
+    "description": "X オフセットラベル"
+  },
+  "yOffset": "Y オフセット",
+  "@yOffset": {
+    "description": "Y オフセットラベル"
+  },
+  "scaleRotation": "スケールと回転",
+  "@scaleRotation": {
+    "description": "スケールと回転セクションのタイトル"
+  },
+  "scale": "スケール",
+  "@scale": {
+    "description": "スケールラベル"
+  },
+  "apply": "適用",
+  "@apply": {
+    "description": "適用ボタン"
+  },
+  "reset": "リセット",
+  "@reset": {
+    "description": "リセットボタン"
+  },
+  "calibrationApplied": "キャリブレーションが適用されました",
+  "@calibrationApplied": {
+    "description": "キャリブレーション適用成功メッセージ"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "接続状態 - オンライン"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "接続状態 - オフライン"
+  },
+  "languageSettings": "言語設定",
+  "@languageSettings": {
+    "description": "Language settings screen title"
+  },
+  "languageChanged": "言語が変更されました",
+  "@languageChanged": {
+    "description": "Language change notification"
+  },
+  "onboardingWelcomeTitle": "FreeDome Managerへようこそ",
+  "@onboardingWelcomeTitle": {
+    "description": "オンボーディング歓迎画面のタイトル"
+  },
+  "onboardingWelcomeDescription": "デジタル自由とスピリチュアルなつながりへのあなたの入り口",
+  "@onboardingWelcomeDescription": {
+    "description": "オンボーディング歓迎画面の説明"
+  },
+  "onboardingConnectionTitle": "FreeDomeに接続",
+  "@onboardingConnectionTitle": {
+    "description": "オンボーディング接続画面のタイトル"
+  },
+  "onboardingConnectionDescription": "FreeDomeネットワークへの安全な接続を確立",
+  "@onboardingConnectionDescription": {
+    "description": "オンボーディング接続画面の説明"
+  },
+  "onboardingDomeControlTitle": "ドーム制御",
+  "@onboardingDomeControlTitle": {
+    "description": "オンボーディングドーム制御画面のタイトル"
+  },
+  "onboardingDomeControlDescription": "ドームの設定と構成を制御",
+  "@onboardingDomeControlDescription": {
+    "description": "オンボーディングドーム制御画面の説明"
+  },
+  "onboardingCalibrationTitle": "キャリブレーション",
+  "@onboardingCalibrationTitle": {
+    "description": "オンボーディングキャリブレーション画面のタイトル"
+  },
+  "onboardingCalibrationDescription": "最適なパフォーマンスのためにドームをキャリブレーション",
+  "@onboardingCalibrationDescription": {
+    "description": "オンボーディングキャリブレーション画面の説明"
+  },
+  "onboardingMediaTitle": "メディア管理",
+  "@onboardingMediaTitle": {
+    "description": "オンボーディングメディア管理画面のタイトル"
+  },
+  "onboardingMediaDescription": "メディアファイルをアップロードして管理",
+  "@onboardingMediaDescription": {
+    "description": "オンボーディングメディア管理画面の説明"
+  },
+  "onboardingReadyTitle": "準備完了です！",
+  "@onboardingReadyTitle": {
+    "description": "オンボーディング準備完了画面のタイトル"
+  },
+  "onboardingReadyDescription": "デジタル自由への旅を始めましょう",
+  "@onboardingReadyDescription": {
+    "description": "オンボーディング準備完了画面の説明"
+  },
+  "next": "次へ",
+  "@next": {
+    "description": "オンボーディングの次へボタン"
+  },
+  "back": "戻る",
+  "@back": {
+    "description": "オンボーディングの戻るボタン"
+  },
+  "skip": "スキップ",
+  "@skip": {
+    "description": "オンボーディングのスキップボタン"
+  },
+  "getStarted": "開始",
+  "@getStarted": {
+    "description": "オンボーディングの開始ボタン"
+  },
+  "skipConfirmationTitle": "オンボーディングをスキップしますか？",
+  "@skipConfirmationTitle": {
+    "description": "オンボーディングスキップ確認ダイアログのタイトル"
+  },
+  "skipConfirmationMessage": "オンボーディングをスキップしてもよろしいですか？後で設定からチュートリアルにアクセスできます。",
+  "@skipConfirmationMessage": {
+    "description": "オンボーディングスキップ確認ダイアログのメッセージ"
+  },
+  "cancel": "キャンセル",
+  "@cancel": {
+    "description": "キャンセルボタン"
+  },
+  "connectingToFreedome": "FreeDomeに接続中...",
+  "@connectingToFreedome": {
+    "description": "接続状態メッセージ"
+  },
+  "domeStatusActive": "ドーム状態: アクティブ",
+  "@domeStatusActive": {
+    "description": "ドーム状態メッセージ"
+  },
+  "open": "開く",
+  "@open": {
+    "description": "開くボタン"
+  },
+  "close": "閉じる",
+  "@close": {
+    "description": "閉じるボタン"
+  },
+  "calibrationProgress": "キャリブレーション進行状況",
+  "@calibrationProgress": {
+    "description": "キャリブレーション進行状況メッセージ"
+  },
+  "mediaFilesCount": "メディアファイル: {count}項目",
+  "@mediaFilesCount": {
+    "description": "メディアファイル数メッセージ",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "アップロード",
+  "@upload": {
+    "description": "アップロードボタン"
+  },
+  "manage": "管理",
+  "@manage": {
+    "description": "管理ボタン"
+  },
+  "serverSettings": "サーバー設定",
+  "@serverSettings": {
+    "description": "サーバー設定画面のタイトル"
+  },
+  "connectionStatus": "接続状態",
+  "@connectionStatus": {
+    "description": "接続状態画面のタイトル"
+  }
+} 

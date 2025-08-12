@@ -1,0 +1,253 @@
+{
+  "@@locale": "fi",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "systemStatus": "Järjestelmän Tila",
+  "@systemStatus": {
+    "description": "System status section header"
+  },
+  "playback": "Toisto",
+  "@playback": {
+    "description": "Playback status"
+  },
+  "stopped": "Pysähtynyt",
+  "@stopped": {
+    "description": "Stopped status"
+  },
+  "file": "Tiedosto",
+  "@file": {
+    "description": "File label"
+  },
+  "position": "Sijainti",
+  "@position": {
+    "description": "Playback position label"
+  },
+  "seconds": "sek",
+  "@seconds": {
+    "description": "Seconds abbreviation"
+  },
+  "playbackControls": "Toistokontrollit",
+  "@playbackControls": {
+    "description": "Playback controls section header"
+  },
+  "play": "Toista",
+  "@play": {
+    "description": "Play button"
+  },
+  "pause": "Tauko",
+  "@pause": {
+    "description": "Pause button"
+  },
+  "stop": "Pysäytä",
+  "@stop": {
+    "description": "Stop button"
+  },
+  "volume": "Äänenvoimakkuus",
+  "@volume": {
+    "description": "Volume label"
+  },
+  "projectionSettings": "Projektioasetukset",
+  "@projectionSettings": {
+    "description": "Projection settings section header"
+  },
+  "brightness": "Kirkkaus",
+  "@brightness": {
+    "description": "Brightness label"
+  },
+  "rotation": "Kierto",
+  "@rotation": {
+    "description": "Rotation label"
+  },
+  "mediaFiles": "Mediatiedostot",
+  "@mediaFiles": {
+    "description": "Media files section header"
+  },
+  "image": "Kuva",
+  "@image": {
+    "description": "File type - image"
+  },
+  "calibration": "Kalibrointi",
+  "@calibration": {
+    "description": "Calibration button"
+  },
+  "calibrationTitle": "Projektion Kalibrointi",
+  "@calibrationTitle": {
+    "description": "Calibration screen title"
+  },
+  "preview": "Esikatselu",
+  "@preview": {
+    "description": "Preview section header"
+  },
+  "offset": "Siirtymä",
+  "@offset": {
+    "description": "Offset section header"
+  },
+  "xOffset": "X Siirtymä",
+  "@xOffset": {
+    "description": "X offset label"
+  },
+  "yOffset": "Y Siirtymä",
+  "@yOffset": {
+    "description": "Y offset label"
+  },
+  "scaleRotation": "Skaala ja Kierto",
+  "@scaleRotation": {
+    "description": "Scale and rotation section header"
+  },
+  "scale": "Skaala",
+  "@scale": {
+    "description": "Scale label"
+  },
+  "apply": "Käytä",
+  "@apply": {
+    "description": "Apply button"
+  },
+  "reset": "Nollaa",
+  "@reset": {
+    "description": "Reset button"
+  },
+  "calibrationApplied": "Kalibrointi käytetty",
+  "@calibrationApplied": {
+    "description": "Calibration applied successfully message"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "Connection status - online"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "Connection status - offline"
+  },
+  "languageSettings": "Kieliasetukset",
+  "@languageSettings": {
+    "description": "Language settings screen title"
+  },
+  "languageChanged": "Kieli vaihdettu",
+  "@languageChanged": {
+    "description": "Language change notification"
+  },
+  "onboardingWelcomeTitle": "Tervetuloa FreeDome Manageriin",
+  "@onboardingWelcomeTitle": {
+    "description": "Onboarding welcome screen title"
+  },
+  "onboardingWelcomeDescription": "Porttisi digitaaliseen vapauteen ja henkiseen yhteyteen",
+  "@onboardingWelcomeDescription": {
+    "description": "Onboarding welcome screen description"
+  },
+  "onboardingConnectionTitle": "Yhdistä FreeDomeen",
+  "@onboardingConnectionTitle": {
+    "description": "Onboarding connection screen title"
+  },
+  "onboardingConnectionDescription": "Muodosta turvallinen yhteys FreeDome-verkkoosi",
+  "@onboardingConnectionDescription": {
+    "description": "Onboarding connection screen description"
+  },
+  "onboardingDomeControlTitle": "Kupolin Ohjaus",
+  "@onboardingDomeControlTitle": {
+    "description": "Onboarding dome control screen title"
+  },
+  "onboardingDomeControlDescription": "Hallitse kupolin asetuksia ja konfiguraatioita",
+  "@onboardingDomeControlDescription": {
+    "description": "Onboarding dome control screen description"
+  },
+  "onboardingCalibrationTitle": "Kalibrointi",
+  "@onboardingCalibrationTitle": {
+    "description": "Onboarding calibration screen title"
+  },
+  "onboardingCalibrationDescription": "Kalibroi kupolisi optimaalista suorituskykyä varten",
+  "@onboardingCalibrationDescription": {
+    "description": "Onboarding calibration screen description"
+  },
+  "onboardingMediaTitle": "Median Hallinta",
+  "@onboardingMediaTitle": {
+    "description": "Onboarding media management screen title"
+  },
+  "onboardingMediaDescription": "Lataa ja hallitse mediatiedostojasi",
+  "@onboardingMediaDescription": {
+    "description": "Onboarding media management screen description"
+  },
+  "onboardingReadyTitle": "Olet Valmis!",
+  "@onboardingReadyTitle": {
+    "description": "Onboarding ready screen title"
+  },
+  "onboardingReadyDescription": "Aloita matkasi digitaaliseen vapauteen",
+  "@onboardingReadyDescription": {
+    "description": "Onboarding ready screen description"
+  },
+  "next": "Seuraava",
+  "@next": {
+    "description": "Next button in onboarding"
+  },
+  "back": "Takaisin",
+  "@back": {
+    "description": "Back button in onboarding"
+  },
+  "skip": "Ohita",
+  "@skip": {
+    "description": "Skip button in onboarding"
+  },
+  "getStarted": "Aloita",
+  "@getStarted": {
+    "description": "Get started button in onboarding"
+  },
+  "skipConfirmationTitle": "Ohita Onboarding?",
+  "@skipConfirmationTitle": {
+    "description": "Skip onboarding confirmation dialog title"
+  },
+  "skipConfirmationMessage": "Oletko varma, että haluat ohittaa onboardingin? Voit aina käyttää opastusta myöhemmin asetuksista.",
+  "@skipConfirmationMessage": {
+    "description": "Skip onboarding confirmation dialog message"
+  },
+  "cancel": "Peruuta",
+  "@cancel": {
+    "description": "Cancel button"
+  },
+  "connectingToFreedome": "Yhdistetään FreeDomeen...",
+  "@connectingToFreedome": {
+    "description": "Connection status message"
+  },
+  "domeStatusActive": "Kupolin Tila: Aktiivinen",
+  "@domeStatusActive": {
+    "description": "Dome status message"
+  },
+  "open": "Avaa",
+  "@open": {
+    "description": "Open button"
+  },
+  "close": "Sulje",
+  "@close": {
+    "description": "Close button"
+  },
+  "calibrationProgress": "Kalibroinnin Edistyminen",
+  "@calibrationProgress": {
+    "description": "Calibration progress message"
+  },
+  "mediaFilesCount": "Mediatiedostot: {count} kohdetta",
+  "@mediaFilesCount": {
+    "description": "Media files count message",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "Lataa",
+  "@upload": {
+    "description": "Upload button"
+  },
+  "manage": "Hallitse",
+  "@manage": {
+    "description": "Manage button"
+  },
+  "serverSettings": "Palvelinasetukset",
+  "@serverSettings": {
+    "description": "Server settings screen title"
+  },
+  "connectionStatus": "Yhteystila",
+  "@connectionStatus": {
+    "description": "Connection status screen title"
+  }
+} 

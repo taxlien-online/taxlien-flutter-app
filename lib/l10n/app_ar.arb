@@ -1,0 +1,253 @@
+{
+  "@@locale": "ar",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "عنوان التطبيق"
+  },
+  "systemStatus": "حالة النظام",
+  "@systemStatus": {
+    "description": "عنوان قسم حالة النظام"
+  },
+  "playback": "التشغيل",
+  "@playback": {
+    "description": "حالة التشغيل"
+  },
+  "stopped": "متوقف",
+  "@stopped": {
+    "description": "حالة التوقف"
+  },
+  "file": "الملف",
+  "@file": {
+    "description": "تسمية للملف"
+  },
+  "position": "الموضع",
+  "@position": {
+    "description": "تسمية لموضع التشغيل"
+  },
+  "seconds": "ثانية",
+  "@seconds": {
+    "description": "اختصار للثانية"
+  },
+  "playbackControls": "أدوات التحكم في التشغيل",
+  "@playbackControls": {
+    "description": "عنوان قسم أدوات التحكم في التشغيل"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "زر التشغيل"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "زر الإيقاف المؤقت"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "زر الإيقاف"
+  },
+  "volume": "مستوى الصوت",
+  "@volume": {
+    "description": "تسمية لمستوى الصوت"
+  },
+  "projectionSettings": "إعدادات الإسقاط",
+  "@projectionSettings": {
+    "description": "عنوان قسم إعدادات الإسقاط"
+  },
+  "brightness": "السطوع",
+  "@brightness": {
+    "description": "تسمية للسطوع"
+  },
+  "rotation": "الدوران",
+  "@rotation": {
+    "description": "تسمية للدوران"
+  },
+  "mediaFiles": "ملفات الوسائط",
+  "@mediaFiles": {
+    "description": "عنوان قسم ملفات الوسائط"
+  },
+  "image": "الصورة",
+  "@image": {
+    "description": "نوع الملف - صورة"
+  },
+  "calibration": "المعايرة",
+  "@calibration": {
+    "description": "زر المعايرة"
+  },
+  "calibrationTitle": "معايرة الإسقاط",
+  "@calibrationTitle": {
+    "description": "عنوان شاشة المعايرة"
+  },
+  "preview": "المعاينة",
+  "@preview": {
+    "description": "عنوان قسم المعاينة"
+  },
+  "offset": "الإزاحة",
+  "@offset": {
+    "description": "عنوان قسم الإزاحة"
+  },
+  "xOffset": "إزاحة X",
+  "@xOffset": {
+    "description": "تسمية لإزاحة X"
+  },
+  "yOffset": "إزاحة Y",
+  "@yOffset": {
+    "description": "تسمية لإزاحة Y"
+  },
+  "scaleRotation": "المقياس والدوران",
+  "@scaleRotation": {
+    "description": "عنوان قسم المقياس والدوران"
+  },
+  "scale": "المقياس",
+  "@scale": {
+    "description": "تسمية للمقياس"
+  },
+  "apply": "تطبيق",
+  "@apply": {
+    "description": "زر التطبيق"
+  },
+  "reset": "إعادة تعيين",
+  "@reset": {
+    "description": "زر إعادة التعيين"
+  },
+  "calibrationApplied": "تم تطبيق المعايرة",
+  "@calibrationApplied": {
+    "description": "رسالة نجاح تطبيق المعايرة"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "حالة الاتصال - متصل"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "حالة الاتصال - غير متصل"
+  },
+  "languageSettings": "إعدادات اللغة",
+  "@languageSettings": {
+    "description": "عنوان شاشة إعدادات اللغة"
+  },
+  "languageChanged": "تم تغيير اللغة",
+  "@languageChanged": {
+    "description": "إشعار تغيير اللغة"
+  },
+  "onboardingWelcomeTitle": "مرحباً بك في FreeDome Manager",
+  "@onboardingWelcomeTitle": {
+    "description": "عنوان شاشة الترحيب في التمهيد"
+  },
+  "onboardingWelcomeDescription": "بوابتك إلى الحرية الرقمية والاتصال الروحي",
+  "@onboardingWelcomeDescription": {
+    "description": "وصف شاشة الترحيب في التمهيد"
+  },
+  "onboardingConnectionTitle": "الاتصال بـ FreeDome",
+  "@onboardingConnectionTitle": {
+    "description": "عنوان شاشة الاتصال في التمهيد"
+  },
+  "onboardingConnectionDescription": "إنشاء اتصال آمن بشبكة FreeDome الخاصة بك",
+  "@onboardingConnectionDescription": {
+    "description": "وصف شاشة الاتصال في التمهيد"
+  },
+  "onboardingDomeControlTitle": "تحكم القبة",
+  "@onboardingDomeControlTitle": {
+    "description": "عنوان شاشة تحكم القبة في التمهيد"
+  },
+  "onboardingDomeControlDescription": "تحكم في إعدادات وتكوينات قبتك",
+  "@onboardingDomeControlDescription": {
+    "description": "وصف شاشة تحكم القبة في التمهيد"
+  },
+  "onboardingCalibrationTitle": "المعايرة",
+  "@onboardingCalibrationTitle": {
+    "description": "عنوان شاشة المعايرة في التمهيد"
+  },
+  "onboardingCalibrationDescription": "عاير قبتك للحصول على أداء مثالي",
+  "@onboardingCalibrationDescription": {
+    "description": "وصف شاشة المعايرة في التمهيد"
+  },
+  "onboardingMediaTitle": "إدارة الوسائط",
+  "@onboardingMediaTitle": {
+    "description": "عنوان شاشة إدارة الوسائط في التمهيد"
+  },
+  "onboardingMediaDescription": "رفع وإدارة ملفات الوسائط الخاصة بك",
+  "@onboardingMediaDescription": {
+    "description": "وصف شاشة إدارة الوسائط في التمهيد"
+  },
+  "onboardingReadyTitle": "أنت جاهز!",
+  "@onboardingReadyTitle": {
+    "description": "عنوان شاشة الجاهزية في التمهيد"
+  },
+  "onboardingReadyDescription": "ابدأ رحلتك إلى الحرية الرقمية",
+  "@onboardingReadyDescription": {
+    "description": "وصف شاشة الجاهزية في التمهيد"
+  },
+  "next": "التالي",
+  "@next": {
+    "description": "زر التالي في التمهيد"
+  },
+  "back": "رجوع",
+  "@back": {
+    "description": "زر الرجوع في التمهيد"
+  },
+  "skip": "تخطي",
+  "@skip": {
+    "description": "زر التخطي في التمهيد"
+  },
+  "getStarted": "ابدأ",
+  "@getStarted": {
+    "description": "زر البدء في التمهيد"
+  },
+  "skipConfirmationTitle": "تخطي التمهيد؟",
+  "@skipConfirmationTitle": {
+    "description": "عنوان حوار تأكيد تخطي التمهيد"
+  },
+  "skipConfirmationMessage": "هل أنت متأكد من أنك تريد تخطي التمهيد؟ يمكنك دائماً الوصول إلى الدليل لاحقاً من الإعدادات.",
+  "@skipConfirmationMessage": {
+    "description": "رسالة حوار تأكيد تخطي التمهيد"
+  },
+  "cancel": "إلغاء",
+  "@cancel": {
+    "description": "زر الإلغاء"
+  },
+  "connectingToFreedome": "الاتصال بـ FreeDome...",
+  "@connectingToFreedome": {
+    "description": "رسالة حالة الاتصال"
+  },
+  "domeStatusActive": "حالة القبة: نشط",
+  "@domeStatusActive": {
+    "description": "رسالة حالة القبة"
+  },
+  "open": "فتح",
+  "@open": {
+    "description": "زر الفتح"
+  },
+  "close": "إغلاق",
+  "@close": {
+    "description": "زر الإغلاق"
+  },
+  "calibrationProgress": "تقدم المعايرة",
+  "@calibrationProgress": {
+    "description": "رسالة تقدم المعايرة"
+  },
+  "mediaFilesCount": "ملفات الوسائط: {count} عنصر",
+  "@mediaFilesCount": {
+    "description": "رسالة عدد ملفات الوسائط",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "رفع",
+  "@upload": {
+    "description": "زر الرفع"
+  },
+  "manage": "إدارة",
+  "@manage": {
+    "description": "زر الإدارة"
+  },
+  "serverSettings": "إعدادات الخادم",
+  "@serverSettings": {
+    "description": "عنوان شاشة إعدادات الخادم"
+  },
+  "connectionStatus": "حالة الاتصال",
+  "@connectionStatus": {
+    "description": "عنوان شاشة حالة الاتصال"
+  }
+} 

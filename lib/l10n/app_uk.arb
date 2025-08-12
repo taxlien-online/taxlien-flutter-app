@@ -1,0 +1,253 @@
+{
+  "@@locale": "uk",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "Назва додатку"
+  },
+  "systemStatus": "Статус системи",
+  "@systemStatus": {
+    "description": "Заголовок секції статусу системи"
+  },
+  "playback": "Відтворення",
+  "@playback": {
+    "description": "Статус відтворення"
+  },
+  "stopped": "Зупинено",
+  "@stopped": {
+    "description": "Статус зупинки"
+  },
+  "file": "Файл",
+  "@file": {
+    "description": "Мітка для файлу"
+  },
+  "position": "Позиція",
+  "@position": {
+    "description": "Мітка для позиції відтворення"
+  },
+  "seconds": "сек",
+  "@seconds": {
+    "description": "Скорочення для секунд"
+  },
+  "playbackControls": "Управління відтворенням",
+  "@playbackControls": {
+    "description": "Заголовок секції управління відтворенням"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "Кнопка відтворення"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "Кнопка паузи"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "Кнопка зупинки"
+  },
+  "volume": "Гучність",
+  "@volume": {
+    "description": "Мітка для гучності"
+  },
+  "projectionSettings": "Налаштування проекції",
+  "@projectionSettings": {
+    "description": "Заголовок секції налаштувань проекції"
+  },
+  "brightness": "Яскравість",
+  "@brightness": {
+    "description": "Мітка для яскравості"
+  },
+  "rotation": "Поворот",
+  "@rotation": {
+    "description": "Мітка для повороту"
+  },
+  "mediaFiles": "Медіафайли",
+  "@mediaFiles": {
+    "description": "Заголовок секції медіафайлів"
+  },
+  "image": "Зображення",
+  "@image": {
+    "description": "Тип файлу - зображення"
+  },
+  "calibration": "Калібрування",
+  "@calibration": {
+    "description": "Кнопка калібрування"
+  },
+  "calibrationTitle": "Калібрування проекції",
+  "@calibrationTitle": {
+    "description": "Заголовок екрану калібрування"
+  },
+  "preview": "Попередній перегляд",
+  "@preview": {
+    "description": "Заголовок секції попереднього перегляду"
+  },
+  "offset": "Зміщення",
+  "@offset": {
+    "description": "Заголовок секції зміщення"
+  },
+  "xOffset": "X зміщення",
+  "@xOffset": {
+    "description": "Мітка для X зміщення"
+  },
+  "yOffset": "Y зміщення",
+  "@yOffset": {
+    "description": "Мітка для Y зміщення"
+  },
+  "scaleRotation": "Масштаб і поворот",
+  "@scaleRotation": {
+    "description": "Заголовок секції масштабу і повороту"
+  },
+  "scale": "Масштаб",
+  "@scale": {
+    "description": "Мітка для масштабу"
+  },
+  "apply": "Застосувати",
+  "@apply": {
+    "description": "Кнопка застосування"
+  },
+  "reset": "Скинути",
+  "@reset": {
+    "description": "Кнопка скидання"
+  },
+  "calibrationApplied": "Калібрування застосовано",
+  "@calibrationApplied": {
+    "description": "Повідомлення про успішне застосування калібрування"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "Статус підключення - онлайн"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "Статус підключення - офлайн"
+  },
+  "languageSettings": "Налаштування мови",
+  "@languageSettings": {
+    "description": "Заголовок екрану налаштувань мови"
+  },
+  "languageChanged": "Мову змінено",
+  "@languageChanged": {
+    "description": "Повідомлення про зміну мови"
+  },
+  "onboardingWelcomeTitle": "Ласкаво просимо до FreeDome Manager",
+  "@onboardingWelcomeTitle": {
+    "description": "Заголовок екрану привітання онбордингу"
+  },
+  "onboardingWelcomeDescription": "Ваш шлях до цифрової свободи та духовного зв'язку",
+  "@onboardingWelcomeDescription": {
+    "description": "Опис екрану привітання онбордингу"
+  },
+  "onboardingConnectionTitle": "Підключення до FreeDome",
+  "@onboardingConnectionTitle": {
+    "description": "Заголовок екрану підключення онбордингу"
+  },
+  "onboardingConnectionDescription": "Встановіть безпечне підключення до вашої мережі FreeDome",
+  "@onboardingConnectionDescription": {
+    "description": "Опис екрану підключення онбордингу"
+  },
+  "onboardingDomeControlTitle": "Управління куполом",
+  "@onboardingDomeControlTitle": {
+    "description": "Заголовок екрану управління куполом онбордингу"
+  },
+  "onboardingDomeControlDescription": "Керуйте налаштуваннями та конфігураціями вашого купола",
+  "@onboardingDomeControlDescription": {
+    "description": "Опис екрану управління куполом онбордингу"
+  },
+  "onboardingCalibrationTitle": "Калібрування",
+  "@onboardingCalibrationTitle": {
+    "description": "Заголовок екрану калібрування онбордингу"
+  },
+  "onboardingCalibrationDescription": "Відкалібруйте ваш купол для оптимальної продуктивності",
+  "@onboardingCalibrationDescription": {
+    "description": "Опис екрану калібрування онбордингу"
+  },
+  "onboardingMediaTitle": "Управління медіа",
+  "@onboardingMediaTitle": {
+    "description": "Заголовок екрану управління медіа онбордингу"
+  },
+  "onboardingMediaDescription": "Завантажуйте та керуйте вашими медіафайлами",
+  "@onboardingMediaDescription": {
+    "description": "Опис екрану управління медіа онбордингу"
+  },
+  "onboardingReadyTitle": "Ви готові!",
+  "@onboardingReadyTitle": {
+    "description": "Заголовок екрану готовності онбордингу"
+  },
+  "onboardingReadyDescription": "Почніть свою подорож до цифрової свободи",
+  "@onboardingReadyDescription": {
+    "description": "Опис екрану готовності онбордингу"
+  },
+  "next": "Далі",
+  "@next": {
+    "description": "Кнопка далі в онбордингу"
+  },
+  "back": "Назад",
+  "@back": {
+    "description": "Кнопка назад в онбордингу"
+  },
+  "skip": "Пропустити",
+  "@skip": {
+    "description": "Кнопка пропуску в онбордингу"
+  },
+  "getStarted": "Почати",
+  "@getStarted": {
+    "description": "Кнопка початку в онбордингу"
+  },
+  "skipConfirmationTitle": "Пропустити онбординг?",
+  "@skipConfirmationTitle": {
+    "description": "Заголовок діалогу підтвердження пропуску онбордингу"
+  },
+  "skipConfirmationMessage": "Ви впевнені, що хочете пропустити онбординг? Ви завжди можете отримати доступ до підручника пізніше з налаштувань.",
+  "@skipConfirmationMessage": {
+    "description": "Повідомлення діалогу підтвердження пропуску онбордингу"
+  },
+  "cancel": "Скасувати",
+  "@cancel": {
+    "description": "Кнопка скасування"
+  },
+  "connectingToFreedome": "Підключення до FreeDome...",
+  "@connectingToFreedome": {
+    "description": "Повідомлення про статус підключення"
+  },
+  "domeStatusActive": "Статус купола: Активний",
+  "@domeStatusActive": {
+    "description": "Повідомлення про статус купола"
+  },
+  "open": "Відкрити",
+  "@open": {
+    "description": "Кнопка відкриття"
+  },
+  "close": "Закрити",
+  "@close": {
+    "description": "Кнопка закриття"
+  },
+  "calibrationProgress": "Прогрес калібрування",
+  "@calibrationProgress": {
+    "description": "Повідомлення про прогрес калібрування"
+  },
+  "mediaFilesCount": "Медіафайли: {count} елементів",
+  "@mediaFilesCount": {
+    "description": "Повідомлення про кількість медіафайлів",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "Завантажити",
+  "@upload": {
+    "description": "Кнопка завантаження"
+  },
+  "manage": "Управління",
+  "@manage": {
+    "description": "Кнопка управління"
+  },
+  "serverSettings": "Налаштування сервера",
+  "@serverSettings": {
+    "description": "Заголовок екрану налаштувань сервера"
+  },
+  "connectionStatus": "Статус підключення",
+  "@connectionStatus": {
+    "description": "Заголовок екрану статусу підключення"
+  }
+} 

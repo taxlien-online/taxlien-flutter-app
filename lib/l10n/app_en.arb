@@ -1,0 +1,253 @@
+{
+  "@@locale": "en",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "systemStatus": "System Status",
+  "@systemStatus": {
+    "description": "System status section header"
+  },
+  "playback": "Playback",
+  "@playback": {
+    "description": "Playback status"
+  },
+  "stopped": "Stopped",
+  "@stopped": {
+    "description": "Stopped status"
+  },
+  "file": "File",
+  "@file": {
+    "description": "File label"
+  },
+  "position": "Position",
+  "@position": {
+    "description": "Playback position label"
+  },
+  "seconds": "sec",
+  "@seconds": {
+    "description": "Seconds abbreviation"
+  },
+  "playbackControls": "Playback Controls",
+  "@playbackControls": {
+    "description": "Playback controls section header"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "Play button"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "Pause button"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "Stop button"
+  },
+  "volume": "Volume",
+  "@volume": {
+    "description": "Volume label"
+  },
+  "projectionSettings": "Projection Settings",
+  "@projectionSettings": {
+    "description": "Projection settings section header"
+  },
+  "brightness": "Brightness",
+  "@brightness": {
+    "description": "Brightness label"
+  },
+  "rotation": "Rotation",
+  "@rotation": {
+    "description": "Rotation label"
+  },
+  "mediaFiles": "Media Files",
+  "@mediaFiles": {
+    "description": "Media files section header"
+  },
+  "image": "Image",
+  "@image": {
+    "description": "File type - image"
+  },
+  "calibration": "Calibration",
+  "@calibration": {
+    "description": "Calibration button"
+  },
+  "calibrationTitle": "Projection Calibration",
+  "@calibrationTitle": {
+    "description": "Calibration screen title"
+  },
+  "preview": "Preview",
+  "@preview": {
+    "description": "Preview section header"
+  },
+  "offset": "Offset",
+  "@offset": {
+    "description": "Offset section header"
+  },
+  "xOffset": "X Offset",
+  "@xOffset": {
+    "description": "X offset label"
+  },
+  "yOffset": "Y Offset",
+  "@yOffset": {
+    "description": "Y offset label"
+  },
+  "scaleRotation": "Scale and Rotation",
+  "@scaleRotation": {
+    "description": "Scale and rotation section header"
+  },
+  "scale": "Scale",
+  "@scale": {
+    "description": "Scale label"
+  },
+  "apply": "Apply",
+  "@apply": {
+    "description": "Apply button"
+  },
+  "reset": "Reset",
+  "@reset": {
+    "description": "Reset button"
+  },
+  "calibrationApplied": "Calibration applied",
+  "@calibrationApplied": {
+    "description": "Calibration applied successfully message"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "Connection status - online"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "Connection status - offline"
+  },
+  "languageSettings": "Language Settings",
+  "@languageSettings": {
+    "description": "Language settings screen title"
+  },
+  "languageChanged": "Language changed",
+  "@languageChanged": {
+    "description": "Language change notification"
+  },
+  "onboardingWelcomeTitle": "Welcome to FreeDome Manager",
+  "@onboardingWelcomeTitle": {
+    "description": "Onboarding welcome screen title"
+  },
+  "onboardingWelcomeDescription": "Your gateway to digital freedom and spiritual connection",
+  "@onboardingWelcomeDescription": {
+    "description": "Onboarding welcome screen description"
+  },
+  "onboardingConnectionTitle": "Connect to FreeDome",
+  "@onboardingConnectionTitle": {
+    "description": "Onboarding connection screen title"
+  },
+  "onboardingConnectionDescription": "Establish a secure connection to your FreeDome network",
+  "@onboardingConnectionDescription": {
+    "description": "Onboarding connection screen description"
+  },
+  "onboardingDomeControlTitle": "Dome Control",
+  "@onboardingDomeControlTitle": {
+    "description": "Onboarding dome control screen title"
+  },
+  "onboardingDomeControlDescription": "Control your dome settings and configurations",
+  "@onboardingDomeControlDescription": {
+    "description": "Onboarding dome control screen description"
+  },
+  "onboardingCalibrationTitle": "Calibration",
+  "@onboardingCalibrationTitle": {
+    "description": "Onboarding calibration screen title"
+  },
+  "onboardingCalibrationDescription": "Calibrate your dome for optimal performance",
+  "@onboardingCalibrationDescription": {
+    "description": "Onboarding calibration screen description"
+  },
+  "onboardingMediaTitle": "Media Management",
+  "@onboardingMediaTitle": {
+    "description": "Onboarding media management screen title"
+  },
+  "onboardingMediaDescription": "Upload and manage your media files",
+  "@onboardingMediaDescription": {
+    "description": "Onboarding media management screen description"
+  },
+  "onboardingReadyTitle": "You're Ready!",
+  "@onboardingReadyTitle": {
+    "description": "Onboarding ready screen title"
+  },
+  "onboardingReadyDescription": "Start your journey to digital freedom",
+  "@onboardingReadyDescription": {
+    "description": "Onboarding ready screen description"
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Next button in onboarding"
+  },
+  "back": "Back",
+  "@back": {
+    "description": "Back button in onboarding"
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "Skip button in onboarding"
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Get started button in onboarding"
+  },
+  "skipConfirmationTitle": "Skip Onboarding?",
+  "@skipConfirmationTitle": {
+    "description": "Skip onboarding confirmation dialog title"
+  },
+  "skipConfirmationMessage": "Are you sure you want to skip the onboarding? You can always access the tutorial later from settings.",
+  "@skipConfirmationMessage": {
+    "description": "Skip onboarding confirmation dialog message"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button"
+  },
+  "connectingToFreedome": "Connecting to FreeDome...",
+  "@connectingToFreedome": {
+    "description": "Connection status message"
+  },
+  "domeStatusActive": "Dome Status: Active",
+  "@domeStatusActive": {
+    "description": "Dome status message"
+  },
+  "open": "Open",
+  "@open": {
+    "description": "Open button"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Close button"
+  },
+  "calibrationProgress": "Calibration Progress",
+  "@calibrationProgress": {
+    "description": "Calibration progress message"
+  },
+  "mediaFilesCount": "Media Files: {count} items",
+  "@mediaFilesCount": {
+    "description": "Media files count message",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "Upload",
+  "@upload": {
+    "description": "Upload button"
+  },
+  "manage": "Manage",
+  "@manage": {
+    "description": "Manage button"
+  },
+  "serverSettings": "Server Settings",
+  "@serverSettings": {
+    "description": "Server settings screen title"
+  },
+  "connectionStatus": "Connection Status",
+  "@connectionStatus": {
+    "description": "Connection status screen title"
+  }
+} 

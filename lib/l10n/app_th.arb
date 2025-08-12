@@ -1,0 +1,253 @@
+{
+  "@@locale": "th",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "ชื่อแอปพลิเคชัน"
+  },
+  "systemStatus": "สถานะระบบ",
+  "@systemStatus": {
+    "description": "หัวข้อส่วนสถานะระบบ"
+  },
+  "playback": "การเล่น",
+  "@playback": {
+    "description": "สถานะการเล่น"
+  },
+  "stopped": "หยุดแล้ว",
+  "@stopped": {
+    "description": "สถานะหยุด"
+  },
+  "file": "ไฟล์",
+  "@file": {
+    "description": "ป้ายสำหรับไฟล์"
+  },
+  "position": "ตำแหน่ง",
+  "@position": {
+    "description": "ป้ายสำหรับตำแหน่งการเล่น"
+  },
+  "seconds": "วินาที",
+  "@seconds": {
+    "description": "คำย่อสำหรับวินาที"
+  },
+  "playbackControls": "ควบคุมการเล่น",
+  "@playbackControls": {
+    "description": "หัวข้อส่วนควบคุมการเล่น"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "ปุ่มเล่น"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "ปุ่มหยุดชั่วคราว"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "ปุ่มหยุด"
+  },
+  "volume": "ระดับเสียง",
+  "@volume": {
+    "description": "ป้ายสำหรับระดับเสียง"
+  },
+  "projectionSettings": "การตั้งค่าการฉาย",
+  "@projectionSettings": {
+    "description": "หัวข้อส่วนการตั้งค่าการฉาย"
+  },
+  "brightness": "ความสว่าง",
+  "@brightness": {
+    "description": "ป้ายสำหรับความสว่าง"
+  },
+  "rotation": "การหมุน",
+  "@rotation": {
+    "description": "ป้ายสำหรับการหมุน"
+  },
+  "mediaFiles": "ไฟล์มีเดีย",
+  "@mediaFiles": {
+    "description": "หัวข้อส่วนไฟล์มีเดีย"
+  },
+  "image": "ภาพ",
+  "@image": {
+    "description": "ประเภทไฟล์ - ภาพ"
+  },
+  "calibration": "การปรับเทียบ",
+  "@calibration": {
+    "description": "ปุ่มการปรับเทียบ"
+  },
+  "calibrationTitle": "การปรับเทียบการฉาย",
+  "@calibrationTitle": {
+    "description": "หัวข้อหน้าจอการปรับเทียบ"
+  },
+  "preview": "ตัวอย่าง",
+  "@preview": {
+    "description": "หัวข้อส่วนตัวอย่าง"
+  },
+  "offset": "การชดเชย",
+  "@offset": {
+    "description": "หัวข้อส่วนการชดเชย"
+  },
+  "xOffset": "การชดเชย X",
+  "@xOffset": {
+    "description": "ป้ายสำหรับการชดเชย X"
+  },
+  "yOffset": "การชดเชย Y",
+  "@yOffset": {
+    "description": "ป้ายสำหรับการชดเชย Y"
+  },
+  "scaleRotation": "ขนาดและการหมุน",
+  "@scaleRotation": {
+    "description": "หัวข้อส่วนขนาดและการหมุน"
+  },
+  "scale": "ขนาด",
+  "@scale": {
+    "description": "ป้ายสำหรับขนาด"
+  },
+  "apply": "ใช้",
+  "@apply": {
+    "description": "ปุ่มใช้"
+  },
+  "reset": "รีเซ็ต",
+  "@reset": {
+    "description": "ปุ่มรีเซ็ต"
+  },
+  "calibrationApplied": "การปรับเทียบถูกใช้แล้ว",
+  "@calibrationApplied": {
+    "description": "ข้อความการปรับเทียบสำเร็จ"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "สถานะการเชื่อมต่อ - ออนไลน์"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "สถานะการเชื่อมต่อ - ออฟไลน์"
+  },
+  "languageSettings": "การตั้งค่าภาษา",
+  "@languageSettings": {
+    "description": "หัวข้อหน้าจอการตั้งค่าภาษา"
+  },
+  "languageChanged": "ภาษาเปลี่ยนแล้ว",
+  "@languageChanged": {
+    "description": "การแจ้งเตือนการเปลี่ยนภาษา"
+  },
+  "onboardingWelcomeTitle": "ยินดีต้อนรับสู่ FreeDome Manager",
+  "@onboardingWelcomeTitle": {
+    "description": "หัวข้อหน้าจอต้อนรับการแนะนำ"
+  },
+  "onboardingWelcomeDescription": "ประตูสู่เสรีภาพดิจิทัลและการเชื่อมต่อทางจิตวิญญาณของคุณ",
+  "@onboardingWelcomeDescription": {
+    "description": "คำอธิบายหน้าจอต้อนรับการแนะนำ"
+  },
+  "onboardingConnectionTitle": "เชื่อมต่อกับ FreeDome",
+  "@onboardingConnectionTitle": {
+    "description": "หัวข้อหน้าจอการเชื่อมต่อการแนะนำ"
+  },
+  "onboardingConnectionDescription": "สร้างการเชื่อมต่อที่ปลอดภัยกับเครือข่าย FreeDome ของคุณ",
+  "@onboardingConnectionDescription": {
+    "description": "คำอธิบายหน้าจอการเชื่อมต่อการแนะนำ"
+  },
+  "onboardingDomeControlTitle": "การควบคุมโดม",
+  "@onboardingDomeControlTitle": {
+    "description": "หัวข้อหน้าจอการควบคุมโดมการแนะนำ"
+  },
+  "onboardingDomeControlDescription": "ควบคุมการตั้งค่าและการกำหนดค่าของโดมของคุณ",
+  "@onboardingDomeControlDescription": {
+    "description": "คำอธิบายหน้าจอการควบคุมโดมการแนะนำ"
+  },
+  "onboardingCalibrationTitle": "การปรับเทียบ",
+  "@onboardingCalibrationTitle": {
+    "description": "หัวข้อหน้าจอการปรับเทียบการแนะนำ"
+  },
+  "onboardingCalibrationDescription": "ปรับเทียบโดมของคุณเพื่อประสิทธิภาพที่ดีที่สุด",
+  "@onboardingCalibrationDescription": {
+    "description": "คำอธิบายหน้าจอการปรับเทียบการแนะนำ"
+  },
+  "onboardingMediaTitle": "การจัดการมีเดีย",
+  "@onboardingMediaTitle": {
+    "description": "หัวข้อหน้าจอการจัดการมีเดียการแนะนำ"
+  },
+  "onboardingMediaDescription": "อัปโหลดและจัดการไฟล์มีเดียของคุณ",
+  "@onboardingMediaDescription": {
+    "description": "คำอธิบายหน้าจอการจัดการมีเดียการแนะนำ"
+  },
+  "onboardingReadyTitle": "คุณพร้อมแล้ว!",
+  "@onboardingReadyTitle": {
+    "description": "หัวข้อหน้าจอพร้อมการแนะนำ"
+  },
+  "onboardingReadyDescription": "เริ่มต้นการเดินทางสู่เสรีภาพดิจิทัลของคุณ",
+  "@onboardingReadyDescription": {
+    "description": "คำอธิบายหน้าจอพร้อมการแนะนำ"
+  },
+  "next": "ถัดไป",
+  "@next": {
+    "description": "ปุ่มถัดไปในการแนะนำ"
+  },
+  "back": "กลับ",
+  "@back": {
+    "description": "ปุ่มกลับในการแนะนำ"
+  },
+  "skip": "ข้าม",
+  "@skip": {
+    "description": "ปุ่มข้ามในการแนะนำ"
+  },
+  "getStarted": "เริ่มต้น",
+  "@getStarted": {
+    "description": "ปุ่มเริ่มต้นในการแนะนำ"
+  },
+  "skipConfirmationTitle": "ข้ามการแนะนำ?",
+  "@skipConfirmationTitle": {
+    "description": "หัวข้อไดอะล็อกยืนยันการข้ามการแนะนำ"
+  },
+  "skipConfirmationMessage": "คุณแน่ใจหรือไม่ว่าต้องการข้ามการแนะนำ? คุณสามารถเข้าถึงบทเรียนได้ในภายหลังจากการตั้งค่า",
+  "@skipConfirmationMessage": {
+    "description": "ข้อความไดอะล็อกยืนยันการข้ามการแนะนำ"
+  },
+  "cancel": "ยกเลิก",
+  "@cancel": {
+    "description": "ปุ่มยกเลิก"
+  },
+  "connectingToFreedome": "กำลังเชื่อมต่อกับ FreeDome...",
+  "@connectingToFreedome": {
+    "description": "ข้อความสถานะการเชื่อมต่อ"
+  },
+  "domeStatusActive": "สถานะโดม: ใช้งาน",
+  "@domeStatusActive": {
+    "description": "ข้อความสถานะโดม"
+  },
+  "open": "เปิด",
+  "@open": {
+    "description": "ปุ่มเปิด"
+  },
+  "close": "ปิด",
+  "@close": {
+    "description": "ปุ่มปิด"
+  },
+  "calibrationProgress": "ความคืบหน้าการปรับเทียบ",
+  "@calibrationProgress": {
+    "description": "ข้อความความคืบหน้าการปรับเทียบ"
+  },
+  "mediaFilesCount": "ไฟล์มีเดีย: {count} รายการ",
+  "@mediaFilesCount": {
+    "description": "ข้อความจำนวนไฟล์มีเดีย",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "อัปโหลด",
+  "@upload": {
+    "description": "ปุ่มอัปโหลด"
+  },
+  "manage": "จัดการ",
+  "@manage": {
+    "description": "ปุ่มจัดการ"
+  },
+  "serverSettings": "การตั้งค่าเซิร์ฟเวอร์",
+  "@serverSettings": {
+    "description": "หัวข้อหน้าจอการตั้งค่าเซิร์ฟเวอร์"
+  },
+  "connectionStatus": "สถานะการเชื่อมต่อ",
+  "@connectionStatus": {
+    "description": "หัวข้อหน้าจอสถานะการเชื่อมต่อ"
+  }
+} 

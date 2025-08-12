@@ -1,0 +1,253 @@
+{
+  "@@locale": "hi",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "एप्लिकेशन शीर्षक"
+  },
+  "systemStatus": "सिस्टम स्थिति",
+  "@systemStatus": {
+    "description": "सिस्टम स्थिति अनुभाग शीर्षक"
+  },
+  "playback": "प्लेबैक",
+  "@playback": {
+    "description": "प्लेबैक स्थिति"
+  },
+  "stopped": "रुका हुआ",
+  "@stopped": {
+    "description": "रुकने की स्थिति"
+  },
+  "file": "फ़ाइल",
+  "@file": {
+    "description": "फ़ाइल के लिए लेबल"
+  },
+  "position": "स्थिति",
+  "@position": {
+    "description": "प्लेबैक स्थिति के लिए लेबल"
+  },
+  "seconds": "सेकंड",
+  "@seconds": {
+    "description": "सेकंड के लिए संक्षिप्त"
+  },
+  "playbackControls": "प्लेबैक नियंत्रण",
+  "@playbackControls": {
+    "description": "प्लेबैक नियंत्रण अनुभाग शीर्षक"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "प्ले बटन"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "पॉज़ बटन"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "स्टॉप बटन"
+  },
+  "volume": "आवाज़",
+  "@volume": {
+    "description": "आवाज़ के लिए लेबल"
+  },
+  "projectionSettings": "प्रोजेक्शन सेटिंग्स",
+  "@projectionSettings": {
+    "description": "प्रोजेक्शन सेटिंग्स अनुभाग शीर्षक"
+  },
+  "brightness": "चमक",
+  "@brightness": {
+    "description": "चमक के लिए लेबल"
+  },
+  "rotation": "घूर्णन",
+  "@rotation": {
+    "description": "घूर्णन के लिए लेबल"
+  },
+  "mediaFiles": "मीडिया फ़ाइलें",
+  "@mediaFiles": {
+    "description": "मीडिया फ़ाइलें अनुभाग शीर्षक"
+  },
+  "image": "छवि",
+  "@image": {
+    "description": "फ़ाइल प्रकार - छवि"
+  },
+  "calibration": "कैलिब्रेशन",
+  "@calibration": {
+    "description": "कैलिब्रेशन बटन"
+  },
+  "calibrationTitle": "प्रोजेक्शन कैलिब्रेशन",
+  "@calibrationTitle": {
+    "description": "कैलिब्रेशन स्क्रीन शीर्षक"
+  },
+  "preview": "पूर्वावलोकन",
+  "@preview": {
+    "description": "पूर्वावलोकन अनुभाग शीर्षक"
+  },
+  "offset": "ऑफ़सेट",
+  "@offset": {
+    "description": "ऑफ़सेट अनुभाग शीर्षक"
+  },
+  "xOffset": "X ऑफ़सेट",
+  "@xOffset": {
+    "description": "X ऑफ़सेट के लिए लेबल"
+  },
+  "yOffset": "Y ऑफ़सेट",
+  "@yOffset": {
+    "description": "Y ऑफ़सेट के लिए लेबल"
+  },
+  "scaleRotation": "स्केल और घूर्णन",
+  "@scaleRotation": {
+    "description": "स्केल और घूर्णन अनुभाग शीर्षक"
+  },
+  "scale": "स्केल",
+  "@scale": {
+    "description": "स्केल के लिए लेबल"
+  },
+  "apply": "लागू करें",
+  "@apply": {
+    "description": "लागू करें बटन"
+  },
+  "reset": "रीसेट",
+  "@reset": {
+    "description": "रीसेट बटन"
+  },
+  "calibrationApplied": "कैलिब्रेशन लागू किया गया",
+  "@calibrationApplied": {
+    "description": "कैलिब्रेशन सफलतापूर्वक लागू संदेश"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "कनेक्शन स्थिति - ऑनलाइन"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "कनेक्शन स्थिति - ऑफ़लाइन"
+  },
+  "languageSettings": "भाषा सेटिंग्स",
+  "@languageSettings": {
+    "description": "भाषा सेटिंग्स स्क्रीन शीर्षक"
+  },
+  "languageChanged": "भाषा बदली गई",
+  "@languageChanged": {
+    "description": "भाषा परिवर्तन सूचना"
+  },
+  "onboardingWelcomeTitle": "FreeDome Manager में आपका स्वागत है",
+  "@onboardingWelcomeTitle": {
+    "description": "ऑनबोर्डिंग स्वागत स्क्रीन शीर्षक"
+  },
+  "onboardingWelcomeDescription": "डिजिटल स्वतंत्रता और आध्यात्मिक संबंध के लिए आपका प्रवेश द्वार",
+  "@onboardingWelcomeDescription": {
+    "description": "ऑनबोर्डिंग स्वागत स्क्रीन विवरण"
+  },
+  "onboardingConnectionTitle": "FreeDome से कनेक्ट करें",
+  "@onboardingConnectionTitle": {
+    "description": "ऑनबोर्डिंग कनेक्शन स्क्रीन शीर्षक"
+  },
+  "onboardingConnectionDescription": "अपने FreeDome नेटवर्क से सुरक्षित कनेक्शन स्थापित करें",
+  "@onboardingConnectionDescription": {
+    "description": "ऑनबोर्डिंग कनेक्शन स्क्रीन विवरण"
+  },
+  "onboardingDomeControlTitle": "डोम नियंत्रण",
+  "@onboardingDomeControlTitle": {
+    "description": "ऑनबोर्डिंग डोम नियंत्रण स्क्रीन शीर्षक"
+  },
+  "onboardingDomeControlDescription": "अपनी डोम की सेटिंग्स और कॉन्फ़िगरेशन को नियंत्रित करें",
+  "@onboardingDomeControlDescription": {
+    "description": "ऑनबोर्डिंग डोम नियंत्रण स्क्रीन विवरण"
+  },
+  "onboardingCalibrationTitle": "कैलिब्रेशन",
+  "@onboardingCalibrationTitle": {
+    "description": "ऑनबोर्डिंग कैलिब्रेशन स्क्रीन शीर्षक"
+  },
+  "onboardingCalibrationDescription": "इष्टतम प्रदर्शन के लिए अपनी डोम को कैलिब्रेट करें",
+  "@onboardingCalibrationDescription": {
+    "description": "ऑनबोर्डिंग कैलिब्रेशन स्क्रीन विवरण"
+  },
+  "onboardingMediaTitle": "मीडिया प्रबंधन",
+  "@onboardingMediaTitle": {
+    "description": "ऑनबोर्डिंग मीडिया प्रबंधन स्क्रीन शीर्षक"
+  },
+  "onboardingMediaDescription": "अपनी मीडिया फ़ाइलें अपलोड और प्रबंधित करें",
+  "@onboardingMediaDescription": {
+    "description": "ऑनबोर्डिंग मीडिया प्रबंधन स्क्रीन विवरण"
+  },
+  "onboardingReadyTitle": "आप तैयार हैं!",
+  "@onboardingReadyTitle": {
+    "description": "ऑनबोर्डिंग तैयार स्क्रीन शीर्षक"
+  },
+  "onboardingReadyDescription": "डिजिटल स्वतंत्रता की अपनी यात्रा शुरू करें",
+  "@onboardingReadyDescription": {
+    "description": "ऑनबोर्डिंग तैयार स्क्रीन विवरण"
+  },
+  "next": "अगला",
+  "@next": {
+    "description": "ऑनबोर्डिंग में अगला बटन"
+  },
+  "back": "वापस",
+  "@back": {
+    "description": "ऑनबोर्डिंग में वापस बटन"
+  },
+  "skip": "छोड़ें",
+  "@skip": {
+    "description": "ऑनबोर्डिंग में छोड़ें बटन"
+  },
+  "getStarted": "शुरू करें",
+  "@getStarted": {
+    "description": "ऑनबोर्डिंग में शुरू करें बटन"
+  },
+  "skipConfirmationTitle": "ऑनबोर्डिंग छोड़ें?",
+  "@skipConfirmationTitle": {
+    "description": "ऑनबोर्डिंग छोड़ने की पुष्टि संवाद शीर्षक"
+  },
+  "skipConfirmationMessage": "क्या आप वाकई ऑनबोर्डिंग छोड़ना चाहते हैं? आप बाद में सेटिंग्स से ट्यूटोरियल तक पहुंच सकते हैं।",
+  "@skipConfirmationMessage": {
+    "description": "ऑनबोर्डिंग छोड़ने की पुष्टि संवाद संदेश"
+  },
+  "cancel": "रद्द करें",
+  "@cancel": {
+    "description": "रद्द करें बटन"
+  },
+  "connectingToFreedome": "FreeDome से कनेक्ट हो रहा है...",
+  "@connectingToFreedome": {
+    "description": "कनेक्शन स्थिति संदेश"
+  },
+  "domeStatusActive": "डोम स्थिति: सक्रिय",
+  "@domeStatusActive": {
+    "description": "डोम स्थिति संदेश"
+  },
+  "open": "खोलें",
+  "@open": {
+    "description": "खोलें बटन"
+  },
+  "close": "बंद करें",
+  "@close": {
+    "description": "बंद करें बटन"
+  },
+  "calibrationProgress": "कैलिब्रेशन प्रगति",
+  "@calibrationProgress": {
+    "description": "कैलिब्रेशन प्रगति संदेश"
+  },
+  "mediaFilesCount": "मीडिया फ़ाइलें: {count} आइटम",
+  "@mediaFilesCount": {
+    "description": "मीडिया फ़ाइलें गणना संदेश",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "अपलोड",
+  "@upload": {
+    "description": "अपलोड बटन"
+  },
+  "manage": "प्रबंधित करें",
+  "@manage": {
+    "description": "प्रबंधित करें बटन"
+  },
+  "serverSettings": "सर्वर सेटिंग्स",
+  "@serverSettings": {
+    "description": "सर्वर सेटिंग्स स्क्रीन शीर्षक"
+  },
+  "connectionStatus": "कनेक्शन स्थिति",
+  "@connectionStatus": {
+    "description": "कनेक्शन स्थिति स्क्रीन शीर्षक"
+  }
+} 

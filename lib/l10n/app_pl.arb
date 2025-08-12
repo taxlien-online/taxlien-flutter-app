@@ -1,0 +1,253 @@
+{
+  "@@locale": "pl",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "Tytuł aplikacji"
+  },
+  "systemStatus": "Status systemu",
+  "@systemStatus": {
+    "description": "Tytuł sekcji statusu systemu"
+  },
+  "playback": "Odtwarzanie",
+  "@playback": {
+    "description": "Status odtwarzania"
+  },
+  "stopped": "Zatrzymane",
+  "@stopped": {
+    "description": "Status zatrzymania"
+  },
+  "file": "Plik",
+  "@file": {
+    "description": "Etykieta dla pliku"
+  },
+  "position": "Pozycja",
+  "@position": {
+    "description": "Etykieta dla pozycji odtwarzania"
+  },
+  "seconds": "sek",
+  "@seconds": {
+    "description": "Skrót dla sekund"
+  },
+  "playbackControls": "Sterowanie odtwarzaniem",
+  "@playbackControls": {
+    "description": "Tytuł sekcji sterowania odtwarzaniem"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "Przycisk odtwarzania"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "Przycisk pauzy"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "Przycisk zatrzymania"
+  },
+  "volume": "Głośność",
+  "@volume": {
+    "description": "Etykieta dla głośności"
+  },
+  "projectionSettings": "Ustawienia projekcji",
+  "@projectionSettings": {
+    "description": "Tytuł sekcji ustawień projekcji"
+  },
+  "brightness": "Jasność",
+  "@brightness": {
+    "description": "Etykieta dla jasności"
+  },
+  "rotation": "Obrót",
+  "@rotation": {
+    "description": "Etykieta dla obrotu"
+  },
+  "mediaFiles": "Pliki multimedialne",
+  "@mediaFiles": {
+    "description": "Tytuł sekcji plików multimedialnych"
+  },
+  "image": "Obraz",
+  "@image": {
+    "description": "Typ pliku - obraz"
+  },
+  "calibration": "Kalibracja",
+  "@calibration": {
+    "description": "Przycisk kalibracji"
+  },
+  "calibrationTitle": "Kalibracja projekcji",
+  "@calibrationTitle": {
+    "description": "Tytuł ekranu kalibracji"
+  },
+  "preview": "Podgląd",
+  "@preview": {
+    "description": "Tytuł sekcji podglądu"
+  },
+  "offset": "Przesunięcie",
+  "@offset": {
+    "description": "Tytuł sekcji przesunięcia"
+  },
+  "xOffset": "Przesunięcie X",
+  "@xOffset": {
+    "description": "Etykieta dla przesunięcia X"
+  },
+  "yOffset": "Przesunięcie Y",
+  "@yOffset": {
+    "description": "Etykieta dla przesunięcia Y"
+  },
+  "scaleRotation": "Skala i obrót",
+  "@scaleRotation": {
+    "description": "Tytuł sekcji skali i obrotu"
+  },
+  "scale": "Skala",
+  "@scale": {
+    "description": "Etykieta dla skali"
+  },
+  "apply": "Zastosuj",
+  "@apply": {
+    "description": "Przycisk zastosowania"
+  },
+  "reset": "Resetuj",
+  "@reset": {
+    "description": "Przycisk resetowania"
+  },
+  "calibrationApplied": "Kalibracja zastosowana",
+  "@calibrationApplied": {
+    "description": "Komunikat o pomyślnym zastosowaniu kalibracji"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "Status połączenia - online"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "Status połączenia - offline"
+  },
+  "languageSettings": "Ustawienia języka",
+  "@languageSettings": {
+    "description": "Language settings screen title"
+  },
+  "languageChanged": "Język zmieniony",
+  "@languageChanged": {
+    "description": "Language change notification"
+  },
+  "onboardingWelcomeTitle": "Witamy w FreeDome Manager",
+  "@onboardingWelcomeTitle": {
+    "description": "Tytuł ekranu powitalnego onboarding"
+  },
+  "onboardingWelcomeDescription": "Twoja brama do cyfrowej wolności i duchowego połączenia",
+  "@onboardingWelcomeDescription": {
+    "description": "Opis ekranu powitalnego onboarding"
+  },
+  "onboardingConnectionTitle": "Połącz z FreeDome",
+  "@onboardingConnectionTitle": {
+    "description": "Tytuł ekranu połączenia onboarding"
+  },
+  "onboardingConnectionDescription": "Nawiąż bezpieczne połączenie z siecią FreeDome",
+  "@onboardingConnectionDescription": {
+    "description": "Opis ekranu połączenia onboarding"
+  },
+  "onboardingDomeControlTitle": "Sterowanie kopułą",
+  "@onboardingDomeControlTitle": {
+    "description": "Tytuł ekranu sterowania kopułą onboarding"
+  },
+  "onboardingDomeControlDescription": "Steruj ustawieniami i konfiguracjami swojej kopuły",
+  "@onboardingDomeControlDescription": {
+    "description": "Opis ekranu sterowania kopułą onboarding"
+  },
+  "onboardingCalibrationTitle": "Kalibracja",
+  "@onboardingCalibrationTitle": {
+    "description": "Tytuł ekranu kalibracji onboarding"
+  },
+  "onboardingCalibrationDescription": "Skalibruj swoją kopułę dla optymalnej wydajności",
+  "@onboardingCalibrationDescription": {
+    "description": "Opis ekranu kalibracji onboarding"
+  },
+  "onboardingMediaTitle": "Zarządzanie mediami",
+  "@onboardingMediaTitle": {
+    "description": "Tytuł ekranu zarządzania mediami onboarding"
+  },
+  "onboardingMediaDescription": "Prześlij i zarządzaj plikami multimedialnymi",
+  "@onboardingMediaDescription": {
+    "description": "Opis ekranu zarządzania mediami onboarding"
+  },
+  "onboardingReadyTitle": "Jesteś gotowy!",
+  "@onboardingReadyTitle": {
+    "description": "Tytuł ekranu gotowości onboarding"
+  },
+  "onboardingReadyDescription": "Rozpocznij swoją podróż do cyfrowej wolności",
+  "@onboardingReadyDescription": {
+    "description": "Opis ekranu gotowości onboarding"
+  },
+  "next": "Dalej",
+  "@next": {
+    "description": "Przycisk dalej w onboarding"
+  },
+  "back": "Wstecz",
+  "@back": {
+    "description": "Przycisk wstecz w onboarding"
+  },
+  "skip": "Pomiń",
+  "@skip": {
+    "description": "Przycisk pomijania w onboarding"
+  },
+  "getStarted": "Rozpocznij",
+  "@getStarted": {
+    "description": "Przycisk rozpoczęcia w onboarding"
+  },
+  "skipConfirmationTitle": "Pomiń onboarding?",
+  "@skipConfirmationTitle": {
+    "description": "Tytuł okna potwierdzenia pominięcia onboarding"
+  },
+  "skipConfirmationMessage": "Czy na pewno chcesz pominąć onboarding? Zawsze możesz uzyskać dostęp do samouczka później z ustawień.",
+  "@skipConfirmationMessage": {
+    "description": "Wiadomość okna potwierdzenia pominięcia onboarding"
+  },
+  "cancel": "Anuluj",
+  "@cancel": {
+    "description": "Przycisk anulowania"
+  },
+  "connectingToFreedome": "Łączenie z FreeDome...",
+  "@connectingToFreedome": {
+    "description": "Wiadomość o statusie połączenia"
+  },
+  "domeStatusActive": "Status kopuły: Aktywna",
+  "@domeStatusActive": {
+    "description": "Wiadomość o statusie kopuły"
+  },
+  "open": "Otwórz",
+  "@open": {
+    "description": "Przycisk otwierania"
+  },
+  "close": "Zamknij",
+  "@close": {
+    "description": "Przycisk zamykania"
+  },
+  "calibrationProgress": "Postęp kalibracji",
+  "@calibrationProgress": {
+    "description": "Wiadomość o postępie kalibracji"
+  },
+  "mediaFilesCount": "Pliki multimedialne: {count} elementów",
+  "@mediaFilesCount": {
+    "description": "Wiadomość o liczbie plików multimedialnych",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "Prześlij",
+  "@upload": {
+    "description": "Przycisk przesyłania"
+  },
+  "manage": "Zarządzaj",
+  "@manage": {
+    "description": "Przycisk zarządzania"
+  },
+  "serverSettings": "Ustawienia serwera",
+  "@serverSettings": {
+    "description": "Tytuł ekranu ustawień serwera"
+  },
+  "connectionStatus": "Status połączenia",
+  "@connectionStatus": {
+    "description": "Tytuł ekranu statusu połączenia"
+  }
+} 

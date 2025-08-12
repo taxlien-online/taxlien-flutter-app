@@ -1,0 +1,253 @@
+{
+  "@@locale": "km",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "ឈ្មោះកម្មវិធី"
+  },
+  "systemStatus": "ស្ថានភាពប្រព័ន្ធ",
+  "@systemStatus": {
+    "description": "ចំណងជើងផ្នែកស្ថានភាពប្រព័ន្ធ"
+  },
+  "playback": "ការចាក់",
+  "@playback": {
+    "description": "ស្ថានភាពការចាក់"
+  },
+  "stopped": "បានឈប់",
+  "@stopped": {
+    "description": "ស្ថានភាពការឈប់"
+  },
+  "file": "ឯកសារ",
+  "@file": {
+    "description": "ស្លាកសម្រាប់ឯកសារ"
+  },
+  "position": "ទីតាំង",
+  "@position": {
+    "description": "ស្លាកសម្រាប់ទីតាំងការចាក់"
+  },
+  "seconds": "វិនាទី",
+  "@seconds": {
+    "description": "អក្សរកាត់សម្រាប់វិនាទី"
+  },
+  "playbackControls": "ការគ្រប់គ្រងការចាក់",
+  "@playbackControls": {
+    "description": "ចំណងជើងផ្នែកការគ្រប់គ្រងការចាក់"
+  },
+  "play": "Play",
+  "@play": {
+    "description": "ប៊ូតុងចាក់"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "ប៊ូតុងផ្អាក"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "ប៊ូតុងឈប់"
+  },
+  "volume": "កម្រិតសំឡេង",
+  "@volume": {
+    "description": "ស្លាកសម្រាប់កម្រិតសំឡេង"
+  },
+  "projectionSettings": "ការកំណត់ការបង្ហាញ",
+  "@projectionSettings": {
+    "description": "ចំណងជើងផ្នែកការកំណត់ការបង្ហាញ"
+  },
+  "brightness": "ពន្លឺ",
+  "@brightness": {
+    "description": "ស្លាកសម្រាប់ពន្លឺ"
+  },
+  "rotation": "ការបង្វិល",
+  "@rotation": {
+    "description": "ស្លាកសម្រាប់ការបង្វិល"
+  },
+  "mediaFiles": "ឯកសារមេឌៀ",
+  "@mediaFiles": {
+    "description": "ចំណងជើងផ្នែកឯកសារមេឌៀ"
+  },
+  "image": "រូបភាព",
+  "@image": {
+    "description": "ប្រភេទឯកសារ - រូបភាព"
+  },
+  "calibration": "ការកែតម្រូវ",
+  "@calibration": {
+    "description": "ប៊ូតុងការកែតម្រូវ"
+  },
+  "calibrationTitle": "ការកែតម្រូវការបង្ហាញ",
+  "@calibrationTitle": {
+    "description": "ចំណងជើងអេក្រង់ការកែតម្រូវ"
+  },
+  "preview": "ការមើលជាមុន",
+  "@preview": {
+    "description": "ចំណងជើងផ្នែកការមើលជាមុន"
+  },
+  "offset": "ការផ្លាស់ទី",
+  "@offset": {
+    "description": "ចំណងជើងផ្នែកការផ្លាស់ទី"
+  },
+  "xOffset": "ការផ្លាស់ទី X",
+  "@xOffset": {
+    "description": "ស្លាកសម្រាប់ការផ្លាស់ទី X"
+  },
+  "yOffset": "ការផ្លាស់ទី Y",
+  "@yOffset": {
+    "description": "ស្លាកសម្រាប់ការផ្លាស់ទី Y"
+  },
+  "scaleRotation": "ទំហំនិងការបង្វិល",
+  "@scaleRotation": {
+    "description": "ចំណងជើងផ្នែកទំហំនិងការបង្វិល"
+  },
+  "scale": "ទំហំ",
+  "@scale": {
+    "description": "ស្លាកសម្រាប់ទំហំ"
+  },
+  "apply": "អនុវត្ត",
+  "@apply": {
+    "description": "ប៊ូតុងអនុវត្ត"
+  },
+  "reset": "កំណត់ឡើងវិញ",
+  "@reset": {
+    "description": "ប៊ូតុងកំណត់ឡើងវិញ"
+  },
+  "calibrationApplied": "ការកែតម្រូវបានអនុវត្ត",
+  "@calibrationApplied": {
+    "description": "សារការកែតម្រូវជោគជ័យ"
+  },
+  "online": "ONLINE",
+  "@online": {
+    "description": "ស្ថានភាពការតភ្ជាប់ - អនឡាញ"
+  },
+  "offline": "OFFLINE",
+  "@offline": {
+    "description": "ស្ថានភាពការតភ្ជាប់ - អ៊ហ្វឡាញ"
+  },
+  "languageSettings": "ការកំណត់ភាសា",
+  "@languageSettings": {
+    "description": "ចំណងជើងអេក្រង់ការកំណត់ភាសា"
+  },
+  "languageChanged": "ភាសាបានផ្លាស់ប្តូរ",
+  "@languageChanged": {
+    "description": "ការជូនដំណឹងផ្លាស់ប្តូរភាសា"
+  },
+  "onboardingWelcomeTitle": "សូមស្វាគមន៍មកកាន់ FreeDome Manager",
+  "@onboardingWelcomeTitle": {
+    "description": "ចំណងជើងអេក្រង់ស្វាគមន៍អន្តរកម្ម"
+  },
+  "onboardingWelcomeDescription": "ច្រកចូលរបស់អ្នកទៅកាន់សេរីភាពឌីជីថលនិងការតភ្ជាប់ខាងវិញ្ញាបន៍",
+  "@onboardingWelcomeDescription": {
+    "description": "ការពិពណ៌នាអេក្រង់ស្វាគមន៍អន្តរកម្ម"
+  },
+  "onboardingConnectionTitle": "ភ្ជាប់ទៅ FreeDome",
+  "@onboardingConnectionTitle": {
+    "description": "ចំណងជើងអេក្រង់ការតភ្ជាប់អន្តរកម្ម"
+  },
+  "onboardingConnectionDescription": "បង្កើតការតភ្ជាប់ដែលមានសុវត្ថិភាពទៅកាន់បណ្តាញ FreeDome របស់អ្នក",
+  "@onboardingConnectionDescription": {
+    "description": "ការពិពណ៌នាអេក្រង់ការតភ្ជាប់អន្តរកម្ម"
+  },
+  "onboardingDomeControlTitle": "ការគ្រប់គ្រងដំបូល",
+  "@onboardingDomeControlTitle": {
+    "description": "ចំណងជើងអេក្រង់ការគ្រប់គ្រងដំបូលអន្តរកម្ម"
+  },
+  "onboardingDomeControlDescription": "គ្រប់គ្រងការកំណត់និងការកំណត់រចនាសម្ព័ន្ធដំបូលរបស់អ្នក",
+  "@onboardingDomeControlDescription": {
+    "description": "ការពិពណ៌នាអេក្រង់ការគ្រប់គ្រងដំបូលអន្តរកម្ម"
+  },
+  "onboardingCalibrationTitle": "ការកែតម្រូវ",
+  "@onboardingCalibrationTitle": {
+    "description": "ចំណងជើងអេក្រង់ការកែតម្រូវអន្តរកម្ម"
+  },
+  "onboardingCalibrationDescription": "កែតម្រូវដំបូលរបស់អ្នកសម្រាប់ដំណើរការល្អបំផុត",
+  "@onboardingCalibrationDescription": {
+    "description": "ការពិពណ៌នាអេក្រង់ការកែតម្រូវអន្តរកម្ម"
+  },
+  "onboardingMediaTitle": "ការគ្រប់គ្រងមេឌៀ",
+  "@onboardingMediaTitle": {
+    "description": "ចំណងជើងអេក្រង់ការគ្រប់គ្រងមេឌៀអន្តរកម្ម"
+  },
+  "onboardingMediaDescription": "ផ្ទុកឡើងនិងគ្រប់គ្រងឯកសារមេឌៀរបស់អ្នក",
+  "@onboardingMediaDescription": {
+    "description": "ការពិពណ៌នាអេក្រង់ការគ្រប់គ្រងមេឌៀអន្តរកម្ម"
+  },
+  "onboardingReadyTitle": "អ្នករួចរាល់!",
+  "@onboardingReadyTitle": {
+    "description": "ចំណងជើងអេក្រង់រួចរាល់អន្តរកម្ម"
+  },
+  "onboardingReadyDescription": "ចាប់ផ្តើមដំណើរការរបស់អ្នកទៅកាន់សេរីភាពឌីជីថល",
+  "@onboardingReadyDescription": {
+    "description": "ការពិពណ៌នាអេក្រង់រួចរាល់អន្តរកម្ម"
+  },
+  "next": "បន្ទាប់",
+  "@next": {
+    "description": "ប៊ូតុងបន្ទាប់ក្នុងអន្តរកម្ម"
+  },
+  "back": "ត្រឡប់",
+  "@back": {
+    "description": "ប៊ូតុងត្រឡប់ក្នុងអន្តរកម្ម"
+  },
+  "skip": "រំលង",
+  "@skip": {
+    "description": "ប៊ូតុងរំលងក្នុងអន្តរកម្ម"
+  },
+  "getStarted": "ចាប់ផ្តើម",
+  "@getStarted": {
+    "description": "ប៊ូតុងចាប់ផ្តើមក្នុងអន្តរកម្ម"
+  },
+  "skipConfirmationTitle": "រំលងអន្តរកម្ម?",
+  "@skipConfirmationTitle": {
+    "description": "ចំណងជើងវិនិច្ឆ័យការបញ្ជាក់រំលងអន្តរកម្ម"
+  },
+  "skipConfirmationMessage": "តើអ្នកប្រាកដជាចង់រំលងអន្តរកម្មទេ? អ្នកអាចចូលប្រើការណែនាំនៅពេលក្រោយពីការកំណត់។",
+  "@skipConfirmationMessage": {
+    "description": "សារវិនិច្ឆ័យការបញ្ជាក់រំលងអន្តរកម្ម"
+  },
+  "cancel": "បោះបង់",
+  "@cancel": {
+    "description": "ប៊ូតុងបោះបង់"
+  },
+  "connectingToFreedome": "កំពុងភ្ជាប់ទៅ FreeDome...",
+  "@connectingToFreedome": {
+    "description": "សារស្ថានភាពការតភ្ជាប់"
+  },
+  "domeStatusActive": "ស្ថានភាពដំបូល: សកម្ម",
+  "@domeStatusActive": {
+    "description": "សារស្ថានភាពដំបូល"
+  },
+  "open": "បើក",
+  "@open": {
+    "description": "ប៊ូតុងបើក"
+  },
+  "close": "បិទ",
+  "@close": {
+    "description": "ប៊ូតុងបិទ"
+  },
+  "calibrationProgress": "ការវិវត្តន៍ការកែតម្រូវ",
+  "@calibrationProgress": {
+    "description": "សារការវិវត្តន៍ការកែតម្រូវ"
+  },
+  "mediaFilesCount": "ឯកសារមេឌៀ: {count} ធាតុ",
+  "@mediaFilesCount": {
+    "description": "សារការរាប់ឯកសារមេឌៀ",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "ផ្ទុកឡើង",
+  "@upload": {
+    "description": "ប៊ូតុងផ្ទុកឡើង"
+  },
+  "manage": "គ្រប់គ្រង",
+  "@manage": {
+    "description": "ប៊ូតុងគ្រប់គ្រង"
+  },
+  "serverSettings": "ការកំណត់ម៉ាស៊ីនមេ",
+  "@serverSettings": {
+    "description": "ចំណងជើងអេក្រង់ការកំណត់ម៉ាស៊ីនមេ"
+  },
+  "connectionStatus": "ស្ថានភាពការតភ្ជាប់",
+  "@connectionStatus": {
+    "description": "ចំណងជើងអេក្រង់ស្ថានភាពការតភ្ជាប់"
+  }
+} 
