@@ -329,7 +329,7 @@ class _StreamingManagementScreenState extends State<StreamingManagementScreen> {
             source.isLive 
                 ? Icons.live_tv 
                 : source.isInteractive 
-                    ? Icons.interactive
+                    ? Icons.touch_app
                     : Icons.data_usage,
             color: source.isActive 
                 ? Colors.green

@@ -463,7 +463,7 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
   }
 }
 
-class TaxLienDetailScreen extends StatelessWidget {
+class TaxLienDetailScreen extends StatefulWidget {
   final TaxLien lien;
   final TaxLienService taxLienService;
   final AuthService authService;
@@ -478,10 +478,15 @@ class TaxLienDetailScreen extends StatelessWidget {
   });
 
   @override
+  State<TaxLienDetailScreen> createState() => _TaxLienDetailScreenState();
+}
+
+class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Закладная #${lien.parcelId}'),
+        title: Text('Закладная #${widget.lien.parcelId}'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -496,12 +501,12 @@ class TaxLienDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      lien.address,
+                      widget.lien.address,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Владелец: ${lien.owner}',
+                      'Владелец: ${widget.lien.owner}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 16),
@@ -510,14 +515,14 @@ class TaxLienDetailScreen extends StatelessWidget {
                         Expanded(
                           child: _buildInfoItem(
                             'Сумма налога',
-                            '\$${lien.taxAmount.toStringAsFixed(2)}',
+                            '\$${widget.lien.taxAmount.toStringAsFixed(2)}',
                             Icons.attach_money,
                           ),
                         ),
                         Expanded(
                           child: _buildInfoItem(
                             'Процентная ставка',
-                            '${lien.interestRate.toStringAsFixed(1)}%',
+                            '${widget.lien.interestRate.toStringAsFixed(1)}%',
                             Icons.percent,
                           ),
                         ),
@@ -531,7 +536,7 @@ class TaxLienDetailScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             // Информация об инвестиции
-            if (lien.status == 'sold' || lien.status == 'redeemed')
+            if (widget.lien.status == 'sold' || widget.lien.status == 'redeemed')
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
@@ -543,16 +548,16 @@ class TaxLienDetailScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(height: 16),
-                      _buildDetailRow('Дата покупки', _formatDate(lien.auctionDate)),
-                      _buildDetailRow('Сумма покупки', '\$${(lien.salePrice ?? lien.taxAmount).toStringAsFixed(2)}'),
-                      if (lien.status == 'sold') ...[
+                      _buildDetailRow('Дата покупки', _formatDate(widget.lien.auctionDate)),
+                      _buildDetailRow('Сумма покупки', '\$${(widget.lien.salePrice ?? widget.lien.taxAmount).toStringAsFixed(2)}'),
+                      if (widget.lien.status == 'sold') ...[
                         _buildDetailRow('Дней в инвестиции', 
-                            DateTime.now().difference(lien.auctionDate).inDays.toString()),
+                            DateTime.now().difference(widget.lien.auctionDate).inDays.toString()),
                         _buildDetailRow('Заработанные проценты', 
-                            _calculateInterestEarned(lien).toStringAsFixed(2)),
+                            _calculateInterestEarned(widget.lien).toStringAsFixed(2)),
                       ],
-                      if (lien.status == 'redeemed')
-                        _buildDetailRow('Дата погашения', _formatDate(lien.redemptionDeadline)),
+                      if (widget.lien.status == 'redeemed')
+                        _buildDetailRow('Дата погашения', _formatDate(widget.lien.redemptionDeadline)),
                     ],
                   ),
                 ),

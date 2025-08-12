@@ -439,7 +439,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Закладная #${lien.parcelId}'),
+        title: Text('Закладная #${widget.lien.parcelId}'),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
@@ -527,11 +527,11 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
-                    _buildDetailRow('ID участка', lien.parcelId),
-                    _buildDetailRow('Округ', lien.county),
-                    _buildDetailRow('Штат', lien.state),
-                    _buildDetailRow('Срок погашения', _formatDate(lien.redemptionDeadline)),
-                    _buildDetailRow('Статус', _getStatusLabel(lien.status)),
+                    _buildDetailRow('ID участка', widget.lien.parcelId),
+                    _buildDetailRow('Округ', widget.lien.county),
+                    _buildDetailRow('Штат', widget.lien.state),
+                    _buildDetailRow('Срок погашения', _formatDate(widget.lien.redemptionDeadline)),
+                    _buildDetailRow('Статус', _getStatusLabel(widget.lien.status)),
                   ],
                 ),
               ),
@@ -540,7 +540,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
             const SizedBox(height: 16),
 
             // Кнопка покупки
-            if (lien.status == 'available' && authService.isAuthenticated)
+            if (widget.lien.status == 'available' && widget.authService.isAuthenticated)
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(

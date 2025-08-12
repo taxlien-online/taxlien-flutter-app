@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:file_picker/file_picker.dart';
 import '../services/server_connection_service.dart';
 import '../services/media_library_service.dart';
 import '../theme/app_colors.dart';
@@ -169,51 +168,20 @@ class _MediaLibraryScreenState extends State<MediaLibraryScreen> with TickerProv
   }
 
   Future<void> _uploadMediaFile() async {
-    try {
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['mp4', 'avi', 'mov', 'mkv', 'jpg', 'jpeg', 'png', 'gif'],
-        allowMultiple: false,
-      );
-
-      if (result != null && result.files.isNotEmpty) {
-        final file = File(result.files.first.path!);
-        
-        setState(() {
-          _isLoading = true;
-        });
-
-        try {
-          await _mediaLibraryService.uploadMediaFile(file);
-          await _loadMediaFiles();
-          
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('File uploaded successfully'),
-              backgroundColor: Colors.green,
-            ),
-          );
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Upload failed: $e'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        } finally {
-          setState(() {
-            _isLoading = false;
-          });
-        }
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error selecting file: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
+    // Показываем диалог с информацией о том, что загрузка файлов временно недоступна
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Загрузка файлов'),
+        content: const Text('Функция загрузки файлов временно недоступна. Пожалуйста, используйте веб-интерфейс сервера для загрузки медиафайлов.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<void> _deleteMediaFile(MediaFile file) async {
