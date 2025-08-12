@@ -7,6 +7,7 @@ import '../services/tax_lien_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import '../theme/app_theme_export.dart';
+import 'main_navigation_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final LocalizationService localizationService;

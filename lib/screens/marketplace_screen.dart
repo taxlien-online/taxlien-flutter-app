@@ -416,7 +416,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
   }
 }
 
-class TaxLienDetailScreen extends StatelessWidget {
+class TaxLienDetailScreen extends StatefulWidget {
   final TaxLien lien;
   final TaxLienService taxLienService;
   final AuthService authService;
@@ -430,6 +430,11 @@ class TaxLienDetailScreen extends StatelessWidget {
     required this.databaseService,
   });
 
+  @override
+  State<TaxLienDetailScreen> createState() => _TaxLienDetailScreenState();
+}
+
+class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -457,12 +462,12 @@ class TaxLienDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      lien.address,
+                      widget.lien.address,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Владелец: ${lien.owner}',
+                      'Владелец: ${widget.lien.owner}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 16),
@@ -471,14 +476,14 @@ class TaxLienDetailScreen extends StatelessWidget {
                         Expanded(
                           child: _buildInfoItem(
                             'Сумма налога',
-                            '\$${lien.taxAmount.toStringAsFixed(2)}',
+                            '\$${widget.lien.taxAmount.toStringAsFixed(2)}',
                             Icons.attach_money,
                           ),
                         ),
                         Expanded(
                           child: _buildInfoItem(
                             'Процентная ставка',
-                            '${lien.interestRate.toStringAsFixed(1)}%',
+                            '${widget.lien.interestRate.toStringAsFixed(1)}%',
                             Icons.percent,
                           ),
                         ),
@@ -490,14 +495,14 @@ class TaxLienDetailScreen extends StatelessWidget {
                         Expanded(
                           child: _buildInfoItem(
                             'Оценочная стоимость',
-                            '\$${lien.assessedValue.toStringAsFixed(2)}',
+                            '\$${widget.lien.assessedValue.toStringAsFixed(2)}',
                             Icons.assessment,
                           ),
                         ),
                         Expanded(
                           child: _buildInfoItem(
                             'Дата аукциона',
-                            _formatDate(lien.auctionDate),
+                            _formatDate(widget.lien.auctionDate),
                             Icons.event,
                           ),
                         ),
@@ -620,7 +625,7 @@ class TaxLienDetailScreen extends StatelessWidget {
   }
 
   void _showPurchaseDialog(BuildContext context) {
-    final bidController = TextEditingController(text: lien.taxAmount.toString());
+    final bidController = TextEditingController(text: widget.lien.taxAmount.toString());
     
     showDialog(
       context: context,
@@ -629,7 +634,7 @@ class TaxLienDetailScreen extends StatelessWidget {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Введите сумму ставки (минимум \$${lien.taxAmount.toStringAsFixed(2)}):'),
+            Text('Введите сумму ставки (минимум \$${widget.lien.taxAmount.toStringAsFixed(2)}):'),
             const SizedBox(height: 16),
             TextField(
               controller: bidController,
@@ -649,9 +654,9 @@ class TaxLienDetailScreen extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
               final bidAmount = double.tryParse(bidController.text);
-              if (bidAmount != null && bidAmount >= lien.taxAmount) {
+              if (bidAmount != null && bidAmount >= widget.lien.taxAmount) {
                 Navigator.pop(context);
-                final success = await taxLienService.purchaseLien(lien.id, bidAmount);
+                final success = await widget.taxLienService.purchaseLien(widget.lien.id, bidAmount);
                 if (success && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Закладная успешно куплена!')),
@@ -660,7 +665,7 @@ class TaxLienDetailScreen extends StatelessWidget {
                 } else if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(taxLienService.error ?? 'Ошибка при покупке'),
+                      content: Text(widget.taxLienService.error ?? 'Ошибка при покупке'),
                     ),
                   );
                 }
