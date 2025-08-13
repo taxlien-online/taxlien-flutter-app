@@ -11,7 +11,7 @@ class DatabaseService extends ChangeNotifier {
   static const String _databaseName = 'taxlien_app.db';
   static const int _databaseVersion = 1;
 
-  // Таблицы
+  // Tables
   static const String _tableTaxLiens = 'tax_liens';
   static const String _tableUserProfile = 'user_profile';
   static const String _tableTransactions = 'transactions';
@@ -31,7 +31,7 @@ class DatabaseService extends ChangeNotifier {
   }
 
   Future<void> _onCreate(Database db, int version) async {
-    // Таблица налоговых закладных
+    // Tax liens table
     await db.execute('''
       CREATE TABLE $_tableTaxLiens (
         id TEXT PRIMARY KEY,
@@ -53,7 +53,7 @@ class DatabaseService extends ChangeNotifier {
       )
     ''');
 
-    // Таблица профиля пользователя
+    // User profile table
     await db.execute('''
       CREATE TABLE $_tableUserProfile (
         id TEXT PRIMARY KEY,
@@ -72,7 +72,7 @@ class DatabaseService extends ChangeNotifier {
       )
     ''');
 
-    // Таблица транзакций
+    // Transactions table
     await db.execute('''
       CREATE TABLE $_tableTransactions (
         id TEXT PRIMARY KEY,
@@ -86,7 +86,7 @@ class DatabaseService extends ChangeNotifier {
       )
     ''');
 
-    // Таблица избранных закладных
+    // Favorites table
     await db.execute('''
       CREATE TABLE $_tableFavorites (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -96,7 +96,7 @@ class DatabaseService extends ChangeNotifier {
       )
     ''');
 
-    // Таблица истории поиска
+    // Search history table
     await db.execute('''
       CREATE TABLE $_tableSearchHistory (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -107,7 +107,7 @@ class DatabaseService extends ChangeNotifier {
     ''');
   }
 
-  // Методы для работы с налоговыми закладными
+  // Methods for working with tax liens
   Future<void> saveTaxLiens(List<TaxLien> liens) async {
     if (_database == null) return;
 
@@ -171,7 +171,7 @@ class DatabaseService extends ChangeNotifier {
     return TaxLien.fromJson(maps.first);
   }
 
-  // Методы для работы с профилем пользователя
+  // Methods for working with user profile
   Future<void> saveUserProfile(User user) async {
     if (_database == null) return;
 
@@ -210,7 +210,7 @@ class DatabaseService extends ChangeNotifier {
     return User.fromJson(maps.first);
   }
 
-  // Методы для работы с транзакциями
+  // Methods for working with transactions
   Future<void> saveTransaction({
     required String id,
     required String lienId,
@@ -250,7 +250,7 @@ class DatabaseService extends ChangeNotifier {
     );
   }
 
-  // Методы для работы с избранными
+  // Methods for working with favorites
   Future<void> addToFavorites(String lienId) async {
     if (_database == null) return;
 
@@ -299,7 +299,7 @@ class DatabaseService extends ChangeNotifier {
     return maps.isNotEmpty;
   }
 
-  // Методы для работы с историей поиска
+  // Methods for working with search history
   Future<void> saveSearchHistory({
     required String query,
     Map<String, dynamic>? filters,
@@ -332,7 +332,7 @@ class DatabaseService extends ChangeNotifier {
     await _database!.delete(_tableSearchHistory);
   }
 
-  // Методы для очистки данных
+  // Methods for clearing data
   Future<void> clearAllData() async {
     if (_database == null) return;
 

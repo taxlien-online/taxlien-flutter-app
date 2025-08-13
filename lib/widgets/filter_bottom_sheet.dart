@@ -39,7 +39,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
   final TextEditingController _maxAmountController = TextEditingController();
   final TextEditingController _minInterestRateController = TextEditingController();
 
-  // Список штатов (можно расширить)
+  // List of states (can be expanded)
   final List<String> _states = [
     'Florida',
     'Texas',
@@ -53,7 +53,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
     'Michigan',
   ];
 
-  // Список округов (можно расширить)
+  // List of counties (can be expanded)
   final List<String> _counties = [
     'Miami-Dade County',
     'Broward County',
@@ -140,7 +140,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             ),
             child: Column(
               children: [
-                // Заголовок
+                // Header
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -155,7 +155,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                       const Icon(Icons.filter_list),
                       const SizedBox(width: 8),
                       const Text(
-                        'Фильтры и сортировка',
+                        'Filters and Sorting',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -164,31 +164,31 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                       const Spacer(),
                       TextButton(
                         onPressed: _clearFilters,
-                        child: const Text('Очистить'),
+                        child: const Text('Clear'),
                       ),
                     ],
                   ),
                 ),
 
-                // Содержимое
+                // Content
                 Expanded(
                   child: ListView(
                     controller: scrollController,
                     padding: const EdgeInsets.all(16),
                     children: [
-                      // Штат
+                      // State
                       _buildSection(
-                        'Штат',
+                        'State',
                         DropdownButtonFormField<String>(
                           value: _selectedState,
                           decoration: const InputDecoration(
-                            labelText: 'Выберите штат',
+                            labelText: 'Select state',
                             border: OutlineInputBorder(),
                           ),
                           items: [
                             const DropdownMenuItem<String>(
                               value: null,
-                              child: Text('Все штаты'),
+                              child: Text('All states'),
                             ),
                             ..._states.map((state) => DropdownMenuItem<String>(
                               value: state,
@@ -206,19 +206,19 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                         ),
                       ),
 
-                      // Округ
+                      // County
                       _buildSection(
-                        'Округ',
+                        'County',
                         DropdownButtonFormField<String>(
                           value: _selectedCounty,
                           decoration: const InputDecoration(
-                            labelText: 'Выберите округ',
+                            labelText: 'Select county',
                             border: OutlineInputBorder(),
                           ),
                           items: [
                             const DropdownMenuItem<String>(
                               value: null,
-                              child: Text('Все округа'),
+                              child: Text('All counties'),
                             ),
                             ..._counties.map((county) => DropdownMenuItem<String>(
                               value: county,
@@ -233,9 +233,9 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                         ),
                       ),
 
-                      // Сумма налога
+                      // Tax amount
                       _buildSection(
-                        'Сумма налога',
+                        'Tax Amount',
                         Row(
                           children: [
                             Expanded(
@@ -243,7 +243,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                                 controller: _minAmountController,
                                 keyboardType: TextInputType.number,
                                 decoration: const InputDecoration(
-                                  labelText: 'От',
+                                  labelText: 'From',
                                   prefixText: '\$',
                                   border: OutlineInputBorder(),
                                 ),
@@ -260,7 +260,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                                 controller: _maxAmountController,
                                 keyboardType: TextInputType.number,
                                 decoration: const InputDecoration(
-                                  labelText: 'До',
+                                  labelText: 'To',
                                   prefixText: '\$',
                                   border: OutlineInputBorder(),
                                 ),
@@ -275,14 +275,14 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                         ),
                       ),
 
-                      // Процентная ставка
+                      // Interest rate
                       _buildSection(
-                        'Процентная ставка',
+                        'Interest Rate',
                         TextField(
                           controller: _minInterestRateController,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
-                            labelText: 'Минимальная ставка',
+                            labelText: 'Minimum rate',
                             suffixText: '%',
                             border: OutlineInputBorder(),
                           ),
@@ -294,37 +294,37 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                         ),
                       ),
 
-                      // Сортировка
+                      // Sorting
                       _buildSection(
-                        'Сортировка',
+                        'Sorting',
                         Column(
                           children: [
                             DropdownButtonFormField<String>(
                               value: _sortBy,
                               decoration: const InputDecoration(
-                                labelText: 'Сортировать по',
+                                labelText: 'Sort by',
                                 border: OutlineInputBorder(),
                               ),
                               items: const [
                                 DropdownMenuItem<String>(
                                   value: 'auctionDate',
-                                  child: Text('Дата аукциона'),
+                                  child: Text('Auction date'),
                                 ),
                                 DropdownMenuItem<String>(
                                   value: 'taxAmount',
-                                  child: Text('Сумма налога'),
+                                  child: Text('Tax amount'),
                                 ),
                                 DropdownMenuItem<String>(
                                   value: 'interestRate',
-                                  child: Text('Процентная ставка'),
+                                  child: Text('Interest rate'),
                                 ),
                                 DropdownMenuItem<String>(
                                   value: 'assessedValue',
-                                  child: Text('Оценочная стоимость'),
+                                  child: Text('Assessed value'),
                                 ),
                                 DropdownMenuItem<String>(
                                   value: 'redemptionDeadline',
-                                  child: Text('Срок погашения'),
+                                  child: Text('Redemption deadline'),
                                 ),
                               ],
                               onChanged: (value) {
@@ -338,7 +338,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                               children: [
                                 Expanded(
                                   child: RadioListTile<bool>(
-                                    title: const Text('По возрастанию'),
+                                    title: const Text('Ascending'),
                                     value: true,
                                     groupValue: _sortAscending,
                                     onChanged: (value) {
@@ -350,7 +350,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                                 ),
                                 Expanded(
                                   child: RadioListTile<bool>(
-                                    title: const Text('По убыванию'),
+                                    title: const Text('Descending'),
                                     value: false,
                                     groupValue: _sortAscending,
                                     onChanged: (value) {
@@ -369,7 +369,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   ),
                 ),
 
-                // Кнопки
+                // Buttons
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -384,14 +384,14 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                       Expanded(
                         child: OutlinedButton(
                           onPressed: () => Navigator.pop(context),
-                          child: const Text('Отмена'),
+                          child: const Text('Cancel'),
                         ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: ElevatedButton(
                           onPressed: _applyFilters,
-                          child: const Text('Применить'),
+                          child: const Text('Apply'),
                         ),
                       ),
                     ],

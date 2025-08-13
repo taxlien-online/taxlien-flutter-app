@@ -29,8 +29,8 @@ class _TaxLienCardState extends State<TaxLienCard> {
   }
 
   Future<void> _loadFavoriteStatus() async {
-    // Здесь нужно получить доступ к DatabaseService
-    // Пока что используем заглушку
+    // Here we need to get access to DatabaseService
+    // For now, using a placeholder
     setState(() {
       _isFavorite = false;
       _isLoadingFavorite = false;
@@ -52,7 +52,7 @@ class _TaxLienCardState extends State<TaxLienCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Заголовок с адресом и кнопкой избранного
+              // Header with address and favorite button
               Row(
                 children: [
                   Expanded(
@@ -83,16 +83,16 @@ class _TaxLienCardState extends State<TaxLienCard> {
                       });
                       widget.onFavoriteToggle();
                     },
-                    tooltip: _isFavorite ? 'Удалить из избранного' : 'Добавить в избранное',
+                    tooltip: _isFavorite ? 'Remove from favorites' : 'Add to favorites',
                   ),
                 ],
               ),
 
               const SizedBox(height: 8),
 
-              // Владелец
+              // Owner
               Text(
-                'Владелец: ${widget.lien.owner}',
+                'Owner: ${widget.lien.owner}',
                 style: Theme.of(context).textTheme.bodyMedium,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -100,12 +100,12 @@ class _TaxLienCardState extends State<TaxLienCard> {
 
               const SizedBox(height: 12),
 
-              // Основные параметры
+              // Main parameters
               Row(
                 children: [
                   Expanded(
                     child: _buildInfoChip(
-                      'Сумма налога',
+                      'Tax Amount',
                       '\$${widget.lien.taxAmount.toStringAsFixed(2)}',
                       Icons.attach_money,
                       Colors.green,
@@ -114,7 +114,7 @@ class _TaxLienCardState extends State<TaxLienCard> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: _buildInfoChip(
-                      'Ставка',
+                      'Interest Rate',
                       '${widget.lien.interestRate.toStringAsFixed(1)}%',
                       Icons.percent,
                       Colors.blue,
@@ -129,7 +129,7 @@ class _TaxLienCardState extends State<TaxLienCard> {
                 children: [
                   Expanded(
                     child: _buildInfoChip(
-                      'Оценка',
+                      'Assessed Value',
                       '\$${widget.lien.assessedValue.toStringAsFixed(0)}',
                       Icons.assessment,
                       Colors.orange,
@@ -138,7 +138,7 @@ class _TaxLienCardState extends State<TaxLienCard> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: _buildInfoChip(
-                      'Аукцион',
+                      'Auction Date',
                       _formatDate(widget.lien.auctionDate),
                       Icons.event,
                       Colors.purple,
@@ -149,10 +149,10 @@ class _TaxLienCardState extends State<TaxLienCard> {
 
               const SizedBox(height: 12),
 
-              // Нижняя часть с дополнительной информацией
+              // Bottom section with additional information
               Row(
                 children: [
-                  // ID участка
+                  // Parcel ID
                   Expanded(
                     child: Text(
                       'ID: ${widget.lien.parcelId}',
@@ -162,7 +162,7 @@ class _TaxLienCardState extends State<TaxLienCard> {
                     ),
                   ),
                   
-                  // Статус
+                  // Status
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
@@ -183,7 +183,7 @@ class _TaxLienCardState extends State<TaxLienCard> {
                 ],
               ),
 
-              // Срок погашения
+              // Redemption deadline
               if (widget.lien.redemptionDeadline.isAfter(DateTime.now()))
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
@@ -196,7 +196,7 @@ class _TaxLienCardState extends State<TaxLienCard> {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        'Срок погашения: ${_formatDate(widget.lien.redemptionDeadline)}',
+                        'Redemption deadline: ${_formatDate(widget.lien.redemptionDeadline)}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
@@ -250,13 +250,13 @@ class _TaxLienCardState extends State<TaxLienCard> {
   String _getStatusLabel(String status) {
     switch (status) {
       case 'available':
-        return 'Доступна';
+        return 'Available';
       case 'sold':
-        return 'Продана';
+        return 'Sold';
       case 'redeemed':
-        return 'Погашена';
+        return 'Redeemed';
       case 'foreclosed':
-        return 'Обращена';
+        return 'Foreclosed';
       default:
         return status;
     }

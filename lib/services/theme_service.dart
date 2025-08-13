@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Сервис для управления темой приложения FreeDome Manager
-/// Позволяет переключаться между светлой и темной темой
+/// Service for managing the FreeDome Manager application theme
+/// Allows switching between light and dark themes
 class ThemeService extends ChangeNotifier {
   static const String _themeKey = 'freedome_theme';
   
   ThemeMode _themeMode = ThemeMode.system;
   
-  /// Текущий режим темы
+  /// Current theme mode
   ThemeMode get themeMode => _themeMode;
   
-  /// Является ли тема темной
+  /// Whether the theme is dark
   bool get isDarkMode {
     if (_themeMode == ThemeMode.system) {
       return WidgetsBinding.instance.platformDispatcher.platformBrightness == Brightness.dark;
@@ -19,7 +19,7 @@ class ThemeService extends ChangeNotifier {
     return _themeMode == ThemeMode.dark;
   }
   
-  /// Является ли тема светлой
+  /// Whether the theme is light
   bool get isLightMode {
     if (_themeMode == ThemeMode.system) {
       return WidgetsBinding.instance.platformDispatcher.platformBrightness == Brightness.light;
@@ -27,12 +27,12 @@ class ThemeService extends ChangeNotifier {
     return _themeMode == ThemeMode.light;
   }
   
-  /// Инициализация сервиса
+  /// Initialize the service
   Future<void> initialize() async {
     await _loadThemeMode();
   }
   
-  /// Загрузка сохраненного режима темы
+  /// Load saved theme mode
   Future<void> _loadThemeMode() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -40,22 +40,22 @@ class ThemeService extends ChangeNotifier {
       _themeMode = ThemeMode.values[themeIndex];
       notifyListeners();
     } catch (e) {
-      // В случае ошибки используем системную тему
+      // In case of error, use system theme
       _themeMode = ThemeMode.system;
     }
   }
   
-  /// Сохранение режима темы
+  /// Save theme mode
   Future<void> _saveThemeMode() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setInt(_themeKey, _themeMode.index);
     } catch (e) {
-      // Игнорируем ошибки сохранения
+      // Ignore save errors
     }
   }
   
-  /// Установка светлой темы
+  /// Set light theme
   Future<void> setLightTheme() async {
     if (_themeMode != ThemeMode.light) {
       _themeMode = ThemeMode.light;
@@ -64,7 +64,7 @@ class ThemeService extends ChangeNotifier {
     }
   }
   
-  /// Установка темной темы
+  /// Set dark theme
   Future<void> setDarkTheme() async {
     if (_themeMode != ThemeMode.dark) {
       _themeMode = ThemeMode.dark;
@@ -73,7 +73,7 @@ class ThemeService extends ChangeNotifier {
     }
   }
   
-  /// Установка системной темы
+  /// Set system theme
   Future<void> setSystemTheme() async {
     if (_themeMode != ThemeMode.system) {
       _themeMode = ThemeMode.system;
@@ -82,7 +82,7 @@ class ThemeService extends ChangeNotifier {
     }
   }
   
-  /// Переключение темы
+  /// Toggle theme
   Future<void> toggleTheme() async {
     if (_themeMode == ThemeMode.light) {
       await setDarkTheme();
@@ -93,7 +93,7 @@ class ThemeService extends ChangeNotifier {
     }
   }
   
-  /// Получить название текущей темы
+  /// Get current theme name
   String getThemeName() {
     switch (_themeMode) {
       case ThemeMode.light:
@@ -105,7 +105,7 @@ class ThemeService extends ChangeNotifier {
     }
   }
   
-  /// Получить описание текущей темы
+  /// Get current theme description
   String getThemeDescription() {
     switch (_themeMode) {
       case ThemeMode.light:
@@ -117,7 +117,7 @@ class ThemeService extends ChangeNotifier {
     }
   }
   
-  /// Получить иконку текущей темы
+  /// Get current theme icon
   IconData getThemeIcon() {
     switch (_themeMode) {
       case ThemeMode.light:
@@ -129,7 +129,7 @@ class ThemeService extends ChangeNotifier {
     }
   }
   
-  /// Получить список доступных тем
+  /// Get list of available themes
   List<ThemeOption> getAvailableThemes() {
     return [
       ThemeOption(
@@ -154,7 +154,7 @@ class ThemeService extends ChangeNotifier {
   }
 }
 
-/// Опция темы для выбора
+/// Theme option for selection
 class ThemeOption {
   final ThemeMode mode;
   final String name;

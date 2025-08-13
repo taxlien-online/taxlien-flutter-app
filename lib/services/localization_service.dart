@@ -11,30 +11,30 @@ class LocalizationService extends ChangeNotifier {
   Locale? get currentLocale => _currentLocale;
   bool get isSystemLanguage => _isSystemLanguage;
   
-  // Проверка, является ли текущий язык английским
+  // Check if current language is English
   bool get isEnglish => getCurrentLanguageCode() == 'en';
   
-  // Поддерживаемые языки
+  // Supported languages
   static const List<Locale> supportedLocales = [
-    Locale('ru', 'RU'), // Русский
-    Locale('uk', 'UA'), // Украинский
-    Locale('en', 'US'), // Английский
-    Locale('my', 'MM'), // Бирманский
-    Locale('zh', 'CN'), // Китайский
-    Locale('th', 'TH'), // Тайский
-    Locale('hi', 'IN'), // Хинди
-    Locale('ar', 'SA'), // Арабский
-    Locale('de', 'DE'), // Немецкий
-    Locale('km', 'KH'), // Кхмерский
-    Locale('pl', 'PL'), // Польский
-    Locale('ja', 'JP'), // Японский
-    Locale('lo', 'LA'), // Лаосский
-    Locale('he', 'IL'), // Иврит
-    Locale('fi', 'FI'), // Финский
-    Locale('et', 'EE'), // Эстонский
+    Locale('ru', 'RU'), // Russian
+    Locale('uk', 'UA'), // Ukrainian
+    Locale('en', 'US'), // English
+    Locale('my', 'MM'), // Burmese
+    Locale('zh', 'CN'), // Chinese
+    Locale('th', 'TH'), // Thai
+    Locale('hi', 'IN'), // Hindi
+    Locale('ar', 'SA'), // Arabic
+    Locale('de', 'DE'), // German
+    Locale('km', 'KH'), // Khmer
+    Locale('pl', 'PL'), // Polish
+    Locale('ja', 'JP'), // Japanese
+    Locale('lo', 'LA'), // Lao
+    Locale('he', 'IL'), // Hebrew
+    Locale('fi', 'FI'), // Finnish
+    Locale('et', 'EE'), // Estonian
   ];
   
-  // Получить системную локаль
+  // Get system locale
   static Locale getSystemLocale() {
     try {
       final String systemLocale = WidgetsBinding.instance.platformDispatcher.locale.languageCode;
@@ -43,13 +43,13 @@ class LocalizationService extends ChangeNotifier {
         orElse: () => const Locale('en', 'US'),
       );
     } catch (e) {
-      // Fallback в случае ошибки
+      // Fallback in case of error
       print('Error getting system locale: $e');
       return const Locale('en', 'US');
     }
   }
   
-  // Инициализация сервиса
+  // Initialize service
   Future<void> initialize() async {
     final prefs = await SharedPreferences.getInstance();
     final savedLanguage = prefs.getString(_languageKey);
@@ -65,7 +65,7 @@ class LocalizationService extends ChangeNotifier {
     notifyListeners();
   }
   
-  // Установить язык
+  // Set language
   Future<void> setLanguage(String languageCode) async {
     final prefs = await SharedPreferences.getInstance();
     
@@ -82,15 +82,15 @@ class LocalizationService extends ChangeNotifier {
     notifyListeners();
   }
   
-  // Получить текущий язык
+  // Get current language
   String getCurrentLanguageCode() {
     if (_currentLocale == null) {
-      return 'en'; // Fallback значение
+      return 'en'; // Fallback value
     }
     return _currentLocale!.languageCode;
   }
   
-  // Получить название языка
+  // Get language name
   String getLanguageName(String languageCode) {
     switch (languageCode) {
       case 'ru':
@@ -132,7 +132,7 @@ class LocalizationService extends ChangeNotifier {
     }
   }
   
-  // Получить список доступных языков
+  // Get list of available languages
   List<Map<String, String>> getAvailableLanguages() {
     return [
       {'code': _systemLanguage, 'name': getLanguageName(_systemLanguage)},
@@ -155,11 +155,11 @@ class LocalizationService extends ChangeNotifier {
     ];
   }
   
-  // Быстрое переключение языка между основными языками
+  // Quick language toggle between main languages
   Future<void> toggleLanguage() async {
     final currentCode = getCurrentLanguageCode();
     
-    // Циклическое переключение между основными языками
+    // Cyclical switching between main languages
     switch (currentCode) {
       case 'en':
         await setLanguage('ru');
