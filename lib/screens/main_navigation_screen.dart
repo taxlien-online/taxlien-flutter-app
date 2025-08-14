@@ -43,24 +43,24 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   final List<NavigationItem> _navigationItems = [
     NavigationItem(
-      title: 'Рынок',
+      title: 'Marketplace',
       icon: Icons.store,
-      screen: null, // Будет установлен в initState
+      screen: null, // Will be set in initState
     ),
     NavigationItem(
-      title: 'Мои инвестиции',
+      title: 'My Investments',
       icon: Icons.trending_up,
-      screen: null, // Будет установлен в initState
+      screen: null, // Will be set in initState
     ),
     NavigationItem(
-      title: 'Поиск',
+      title: 'Search',
       icon: Icons.search,
-      screen: null, // Будет установлен в initState
+      screen: null, // Will be set in initState
     ),
     NavigationItem(
-      title: 'Профиль',
+      title: 'Profile',
       icon: Icons.person,
-      screen: null, // Будет установлен в initState
+      screen: null, // Will be set in initState
     ),
   ];
 
@@ -69,7 +69,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     super.initState();
     _pageController = PageController();
     
-    // Инициализация экранов
+    // Initialize screens
     _navigationItems[0].screen = MarketplaceScreen(
       taxLienService: widget.taxLienService,
       authService: widget.authService,

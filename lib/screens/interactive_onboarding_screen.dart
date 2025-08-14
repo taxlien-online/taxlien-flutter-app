@@ -9,6 +9,7 @@ import '../services/database_service.dart';
 import '../services/user_preferences_service.dart';
 import '../theme/app_theme_export.dart';
 import 'main_navigation_screen.dart';
+import 'nft_onboarding_screen.dart';
 
 class InteractiveOnboardingScreen extends StatefulWidget {
   final LocalizationService localizationService;
@@ -45,26 +46,52 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
   bool _isLoading = false;
 
   // User preferences
-  String? _selectedInvestmentType; // 'lien' or 'deed'
+  List<String> _selectedInvestmentTypes = []; // 'lien' and/or 'deed'
   String? _selectedProfitType; // 'guaranteed' or 'collateral'
   List<String> _selectedCounties = [];
+  List<String> _selectedStates = []; // New: for state-level selection
   double _investmentAmount = 1000.0;
   String _experienceLevel = 'beginner'; // 'beginner', 'intermediate', 'expert'
   bool _wantsNotifications = true;
   bool _wantsAutoBidding = false;
 
-  // Available counties data
-  final List<CountyData> _availableCounties = [
-    CountyData('fl_dixie', 'Dixie County', 'FL', 'High interest rates, rural properties'),
-    CountyData('fl_columbia', 'Columbia County', 'FL', 'Mixed urban/rural, good returns'),
-    CountyData('fl_lafayette', 'Lafayette County', 'FL', 'Agricultural land, stable values'),
-    CountyData('fl_bradford', 'Bradford County', 'FL', 'Small county, high competition'),
-    CountyData('fl_okeechobee', 'Okeechobee County', 'FL', 'Lake area, tourism potential'),
-    CountyData('fl_suwannee', 'Suwannee County', 'FL', 'River properties, natural beauty'),
-    CountyData('fl_union', 'Union County', 'FL', 'Forest land, hunting properties'),
-    CountyData('fl_clay', 'Clay County', 'FL', 'Suburban growth, family homes'),
-    CountyData('fl_alachua', 'Alachua County', 'FL', 'University town, student housing'),
-    CountyData('fl_polk', 'Polk County', 'FL', 'Central location, diverse properties'),
+  // Hierarchical data structure for states and counties
+  final List<StateData> _availableStates = [
+    StateData(
+      'FL',
+      'Florida',
+      [
+        CountyData('fl_dixie', 'Dixie County', 'FL', 'High interest rates, rural properties'),
+        CountyData('fl_columbia', 'Columbia County', 'FL', 'Mixed urban/rural, good returns'),
+        CountyData('fl_lafayette', 'Lafayette County', 'FL', 'Agricultural land, stable values'),
+        CountyData('fl_bradford', 'Bradford County', 'FL', 'Small county, high competition'),
+        CountyData('fl_okeechobee', 'Okeechobee County', 'FL', 'Lake area, tourism potential'),
+        CountyData('fl_suwannee', 'Suwannee County', 'FL', 'River properties, natural beauty'),
+        CountyData('fl_union', 'Union County', 'FL', 'Forest land, hunting properties'),
+        CountyData('fl_clay', 'Clay County', 'FL', 'Suburban growth, family homes'),
+        CountyData('fl_alachua', 'Alachua County', 'FL', 'University town, student housing'),
+        CountyData('fl_polk', 'Polk County', 'FL', 'Central location, diverse properties'),
+      ],
+    ),
+    StateData(
+      'TX',
+      'Texas',
+      [
+        CountyData('tx_harris', 'Harris County', 'TX', 'Houston metro area, diverse opportunities'),
+        CountyData('tx_dallas', 'Dallas County', 'TX', 'Dallas metro area, commercial properties'),
+        CountyData('tx_travis', 'Travis County', 'TX', 'Austin area, tech boom properties'),
+        CountyData('tx_bexar', 'Bexar County', 'TX', 'San Antonio area, historic properties'),
+      ],
+    ),
+    StateData(
+      'CA',
+      'California',
+      [
+        CountyData('ca_los_angeles', 'Los Angeles County', 'CA', 'LA metro area, high-value properties'),
+        CountyData('ca_san_diego', 'San Diego County', 'CA', 'Coastal properties, tourism potential'),
+        CountyData('ca_orange', 'Orange County', 'CA', 'Suburban growth, family homes'),
+      ],
+    ),
   ];
 
   final List<OnboardingStep> _steps = [
@@ -76,8 +103,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
     ),
     OnboardingStep(
       id: 'investment_type',
-      title: 'What interests you more?',
-      subtitle: 'Choose your primary investment focus',
+      title: 'What interests you?',
+      subtitle: 'Choose your investment focus (select one or both)',
       type: OnboardingStepType.investmentType,
     ),
     OnboardingStep(
@@ -88,8 +115,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
     ),
     OnboardingStep(
       id: 'county_selection',
-      title: 'Select your preferred counties',
-      subtitle: 'Choose up to 5 counties to focus on',
+      title: 'Select your preferred locations',
+      subtitle: 'Choose states and/or specific counties',
       type: OnboardingStepType.countySelection,
     ),
     OnboardingStep(
@@ -109,6 +136,12 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
       title: 'Additional preferences',
       subtitle: 'Customize your investment experience',
       type: OnboardingStepType.preferences,
+    ),
+    OnboardingStep(
+      id: 'nft_tokenization',
+      title: 'NFT Tokenization',
+      subtitle: 'Transform your investments into digital assets',
+      type: OnboardingStepType.nftTokenization,
     ),
     OnboardingStep(
       id: 'summary',
@@ -259,6 +292,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         return _buildExperienceLevelStep();
       case OnboardingStepType.preferences:
         return _buildPreferencesStep();
+      case OnboardingStepType.nftTokenization:
+        return _buildNFTTokenizationStep();
       case OnboardingStepType.summary:
         return _buildSummaryStep();
     }
@@ -310,8 +345,16 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
           subtitle: 'Earn guaranteed interest rates',
           description: 'Invest in unpaid property taxes and earn high interest rates (up to 18%) with government backing.',
           icon: Icons.receipt_long,
-          isSelected: _selectedInvestmentType == 'lien',
-          onTap: () => setState(() => _selectedInvestmentType = 'lien'),
+          isSelected: _selectedInvestmentTypes.contains('lien'),
+          onTap: () {
+            setState(() {
+              if (_selectedInvestmentTypes.contains('lien')) {
+                _selectedInvestmentTypes.remove('lien');
+              } else {
+                _selectedInvestmentTypes.add('lien');
+              }
+            });
+          },
         ),
         const SizedBox(height: 16),
         _buildOptionCard(
@@ -319,9 +362,45 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
           subtitle: 'Own the property',
           description: 'Purchase properties at auction for pennies on the dollar when owners don\'t redeem their liens.',
           icon: Icons.home,
-          isSelected: _selectedInvestmentType == 'deed',
-          onTap: () => setState(() => _selectedInvestmentType = 'deed'),
+          isSelected: _selectedInvestmentTypes.contains('deed'),
+          onTap: () {
+            setState(() {
+              if (_selectedInvestmentTypes.contains('deed')) {
+                _selectedInvestmentTypes.remove('deed');
+              } else {
+                _selectedInvestmentTypes.add('deed');
+              }
+            });
+          },
         ),
+        if (_selectedInvestmentTypes.isNotEmpty) ...[
+          const SizedBox(height: 16),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.info_outline,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 20,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    'You can select both investment types to diversify your portfolio',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ],
     );
   }
@@ -355,47 +434,148 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Select up to 5 counties:',
+          'Select states and/or specific counties:',
           style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'You can select entire states or specific counties within states',
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
         const SizedBox(height: 16),
         Expanded(
           child: ListView.builder(
-            itemCount: _availableCounties.length,
-            itemBuilder: (context, index) {
-              final county = _availableCounties[index];
-              final isSelected = _selectedCounties.contains(county.id);
+            itemCount: _availableStates.length,
+            itemBuilder: (context, stateIndex) {
+              final state = _availableStates[stateIndex];
+              final isStateSelected = _selectedStates.contains(state.code);
+              final selectedCountiesInState = _selectedCounties
+                  .where((countyId) => countyId.startsWith(state.code.toLowerCase()))
+                  .length;
+              final totalCountiesInState = state.counties.length;
               
               return Card(
-                margin: const EdgeInsets.only(bottom: 8),
-                child: CheckboxListTile(
-                  title: Text('${county.name}, ${county.state}'),
-                  subtitle: Text(county.description),
-                  value: isSelected,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      if (value == true && _selectedCounties.length < 5) {
-                        _selectedCounties.add(county.id);
-                      } else if (value == false) {
-                        _selectedCounties.remove(county.id);
-                      }
-                    });
-                  },
-                  secondary: Icon(
-                    isSelected ? Icons.check_circle : Icons.radio_button_unchecked,
-                    color: isSelected ? Theme.of(context).colorScheme.primary : null,
+                margin: const EdgeInsets.only(bottom: 16),
+                child: ExpansionTile(
+                  title: Row(
+                    children: [
+                      Checkbox(
+                        value: isStateSelected,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            if (value == true) {
+                              // Select entire state
+                              _selectedStates.add(state.code);
+                              // Remove individual counties from this state
+                              _selectedCounties.removeWhere((countyId) => 
+                                  countyId.startsWith(state.code.toLowerCase()));
+                            } else {
+                              // Deselect entire state
+                              _selectedStates.remove(state.code);
+                            }
+                          });
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${state.name} (${state.code})',
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            if (isStateSelected)
+                              Text(
+                                'All ${totalCountiesInState} counties selected',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              )
+                            else if (selectedCountiesInState > 0)
+                              Text(
+                                '$selectedCountiesInState of $totalCountiesInState counties selected',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
+                  children: [
+                    if (!isStateSelected) ...[
+                      const Divider(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          children: state.counties.map((county) {
+                            final isCountySelected = _selectedCounties.contains(county.id);
+                            
+                            return CheckboxListTile(
+                              title: Text(county.name),
+                              subtitle: Text(county.description),
+                              value: isCountySelected,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  if (value == true) {
+                                    _selectedCounties.add(county.id);
+                                  } else {
+                                    _selectedCounties.remove(county.id);
+                                  }
+                                });
+                              },
+                              dense: true,
+                              contentPadding: EdgeInsets.zero,
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               );
             },
           ),
         ),
-        if (_selectedCounties.isNotEmpty) ...[
+        if (_selectedStates.isNotEmpty || _selectedCounties.isNotEmpty) ...[
           const SizedBox(height: 16),
-          Text(
-            'Selected: ${_selectedCounties.length}/5',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.primary,
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Selected Locations:',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                if (_selectedStates.isNotEmpty) ...[
+                  Text(
+                    'States: ${_selectedStates.map((stateCode) => _availableStates.firstWhere((s) => s.code == stateCode).name).join(', ')}',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
+                if (_selectedCounties.isNotEmpty) ...[
+                  if (_selectedStates.isNotEmpty) const SizedBox(height: 4),
+                  Text(
+                    'Counties: ${_selectedCounties.length} selected',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
+              ],
             ),
           ),
         ],
@@ -501,6 +681,190 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
     );
   }
 
+  Widget _buildNFTTokenizationStep() {
+    return Column(
+      children: [
+        Container(
+          width: 80,
+          height: 80,
+          decoration: BoxDecoration(
+            color: Colors.blue.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: const Icon(
+            Icons.token,
+            size: 40,
+            color: Colors.blue,
+          ),
+        ),
+        const SizedBox(height: 24),
+        Text(
+          'NFT Tokenization',
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'Transform your tax lien investments into digital assets on the blockchain for enhanced liquidity and transparency.',
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+            height: 1.5,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 32),
+        _buildNFTFeatureCard(
+          title: 'ICP Blockchain',
+          subtitle: 'Recommended for Tax Liens',
+          description: 'Fast, secure, and cost-effective blockchain',
+          icon: Icons.cloud,
+          color: Colors.blue,
+          isSelected: true,
+        ),
+        const SizedBox(height: 16),
+        _buildNFTFeatureCard(
+          title: 'Fractional Ownership',
+          subtitle: 'Split large liens into tokens',
+          description: 'Invest in expensive properties with smaller amounts',
+          icon: Icons.pie_chart,
+          color: Colors.green,
+          isSelected: true,
+        ),
+        const SizedBox(height: 16),
+        _buildNFTFeatureCard(
+          title: 'Liquidity Pool',
+          subtitle: 'Instant trading',
+          description: 'Buy and sell tokens instantly',
+          icon: Icons.water_drop,
+          color: Colors.orange,
+          isSelected: true,
+        ),
+        const SizedBox(height: 32),
+        Text(
+          'Would you like to explore NFT tokenization options?',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton(
+                onPressed: () {
+                  // Skip NFT setup
+                },
+                child: const Text('Skip for Now'),
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {
+                  // Navigate to detailed NFT screen
+                  _showNFTOnboardingScreen();
+                },
+                child: const Text('Learn More'),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNFTFeatureCard({
+    required String title,
+    required String subtitle,
+    required String description,
+    required IconData icon,
+    required Color color,
+    required bool isSelected,
+  }) {
+    return Card(
+      elevation: isSelected ? 2 : 1,
+      color: isSelected ? color.withOpacity(0.1) : null,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: isSelected ? color : color.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: Icon(
+                icon,
+                color: isSelected ? Colors.white : color,
+                size: 24,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: isSelected ? color : null,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: isSelected ? color : Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    description,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (isSelected)
+              Icon(
+                Icons.check_circle,
+                color: color,
+                size: 24,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showNFTOnboardingScreen() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => NFTOnboardingScreen(
+          preferencesService: widget.userPreferencesService,
+          taxLienService: widget.taxLienService,
+          onComplete: () {
+            Navigator.of(context).pop();
+            // Continue to next step
+            _pageController.nextPage(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
+          },
+        ),
+      ),
+    );
+  }
+
   Widget _buildSummaryStep() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -512,13 +876,18 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
           ),
         ),
         const SizedBox(height: 24),
-        _buildSummaryItem('Investment Type', _selectedInvestmentType == 'lien' ? 'Tax Liens' : 'Tax Deeds'),
+        _buildSummaryItem('Investment Type', _selectedInvestmentTypes.length > 0 ? _selectedInvestmentTypes.map((type) => type == 'lien' ? 'Tax Liens' : 'Tax Deeds').join(', ') : 'None selected'),
         _buildSummaryItem('Profit Focus', _selectedProfitType == 'guaranteed' ? 'Guaranteed Interest' : 'Property Ownership'),
-        _buildSummaryItem('Counties', _selectedCounties.length > 0 ? '${_selectedCounties.length} selected' : 'None selected'),
+        _buildSummaryItem('Locations', _buildLocationSummary()),
         _buildSummaryItem('Investment Amount', '\$${_investmentAmount.toInt()}'),
         _buildSummaryItem('Experience Level', _experienceLevel.capitalize()),
         _buildSummaryItem('Notifications', _wantsNotifications ? 'Enabled' : 'Disabled'),
         _buildSummaryItem('Auto-Bidding', _wantsAutoBidding ? 'Enabled' : 'Disabled'),
+        _buildSummaryItem('NFT Tokenization', widget.userPreferencesService.wantsNFTTokenization ? 'Enabled' : 'Disabled'),
+        if (widget.userPreferencesService.wantsNFTTokenization) ...[
+          _buildSummaryItem('Blockchain', widget.userPreferencesService.wantsICPNFT ? 'ICP' : 'Traditional'),
+          _buildSummaryItem('NFT Allocation', '${widget.userPreferencesService.nftInvestmentPercentage.toInt()}%'),
+        ],
         const SizedBox(height: 32),
         Container(
           padding: const EdgeInsets.all(16),
@@ -735,6 +1104,26 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
     );
   }
 
+  String _buildLocationSummary() {
+    final List<String> parts = [];
+    
+    if (_selectedStates.isNotEmpty) {
+      final stateNames = _selectedStates.map((stateCode) => 
+          _availableStates.firstWhere((s) => s.code == stateCode).name).join(', ');
+      parts.add('States: $stateNames');
+    }
+    
+    if (_selectedCounties.isNotEmpty) {
+      parts.add('Counties: ${_selectedCounties.length} selected');
+    }
+    
+    if (parts.isEmpty) {
+      return 'None selected';
+    }
+    
+    return parts.join('; ');
+  }
+
   Widget _buildBottomSection() {
     return Container(
       padding: const EdgeInsets.all(24.0),
@@ -769,16 +1158,18 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
       case OnboardingStepType.welcome:
         return true;
       case OnboardingStepType.investmentType:
-        return _selectedInvestmentType != null;
+        return _selectedInvestmentTypes.isNotEmpty;
       case OnboardingStepType.profitPreference:
         return _selectedProfitType != null;
-      case OnboardingStepType.countySelection:
-        return _selectedCounties.isNotEmpty;
+              case OnboardingStepType.countySelection:
+        return _selectedStates.isNotEmpty || _selectedCounties.isNotEmpty;
       case OnboardingStepType.investmentAmount:
         return _investmentAmount >= 100;
       case OnboardingStepType.experienceLevel:
         return _experienceLevel.isNotEmpty;
       case OnboardingStepType.preferences:
+        return true;
+      case OnboardingStepType.nftTokenization:
         return true;
       case OnboardingStepType.summary:
         return true;
@@ -803,13 +1194,20 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
 
     // Save user preferences
     final preferences = UserPreferences(
-      investmentType: _selectedInvestmentType,
+      investmentType: _selectedInvestmentTypes.join(','),
       profitType: _selectedProfitType,
       selectedCounties: _selectedCounties,
+      selectedStates: _selectedStates,
       investmentAmount: _investmentAmount,
       experienceLevel: _experienceLevel,
       notifications: _wantsNotifications,
       autoBidding: _wantsAutoBidding,
+      wantsNFTTokenization: true, // Default to true for now
+      wantsICPNFT: true,
+      wantsTraditionalNFT: false,
+      wantsFractionalOwnership: true,
+      wantsLiquidityPool: true,
+      nftInvestmentPercentage: 25.0,
       createdAt: DateTime.now(),
     );
     
@@ -857,6 +1255,7 @@ enum OnboardingStepType {
   investmentAmount,
   experienceLevel,
   preferences,
+  nftTokenization,
   summary,
 }
 
@@ -867,6 +1266,14 @@ class CountyData {
   final String description;
 
   CountyData(this.id, this.name, this.state, this.description);
+}
+
+class StateData {
+  final String code;
+  final String name;
+  final List<CountyData> counties;
+
+  StateData(this.code, this.name, this.counties);
 }
 
 extension StringExtension on String {

@@ -15,7 +15,7 @@ import 'theme/app_theme_export.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Инициализация сервисов
+  // Initialize services
   final localizationService = LocalizationService();
   final themeService = ThemeService();
   final onboardingService = OnboardingService();

@@ -48,7 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
         _searchHistory = history;
       });
     } catch (e) {
-      // Игнорируем ошибки загрузки истории
+      // Ignore history loading errors
     }
   }
 
@@ -63,14 +63,14 @@ class _SearchScreenState extends State<SearchScreen> {
     });
 
     try {
-      // Сохраняем поисковый запрос в историю
+      // Save search query to history
       await widget.databaseService.saveSearchHistory(query: query);
       await _loadSearchHistory();
 
-      // Выполняем поиск
+      // Perform search
       final results = await widget.taxLienService.searchLiens();
       
-      // Фильтруем результаты по поисковому запросу
+      // Filter results by search query
       final filteredResults = results.where((lien) {
         final searchTerm = query.toLowerCase();
         return lien.address.toLowerCase().contains(searchTerm) ||
@@ -87,7 +87,7 @@ class _SearchScreenState extends State<SearchScreen> {
       });
     } catch (e) {
       setState(() {
-        _error = 'Ошибка поиска: $e';
+        _error = 'Search error: $e';
         _isSearching = false;
         _isLoading = false;
       });
@@ -119,25 +119,25 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Поиск закладных'),
+        title: const Text('Lien Search'),
         actions: [
           if (_searchResults.isNotEmpty)
             IconButton(
               icon: const Icon(Icons.clear),
               onPressed: _clearSearch,
-              tooltip: 'Очистить результаты',
+              tooltip: 'Clear results',
             ),
         ],
       ),
       body: Column(
         children: [
-          // Поисковая строка
+          // Search bar
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Поиск по адресу, владельцу, ID участка...',
+                hintText: 'Search by address, owner, parcel ID...',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
@@ -161,7 +161,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
 
-          // Результаты поиска или история
+          // Search results or history
           Expanded(
             child: _buildContent(),
           ),
@@ -196,7 +196,7 @@ class _SearchScreenState extends State<SearchScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _performSearch,
-              child: const Text('Повторить'),
+              child: const Text('Retry'),
             ),
           ],
         ),
@@ -210,7 +210,7 @@ class _SearchScreenState extends State<SearchScreen> {
           children: [
             CircularProgressIndicator(),
             SizedBox(height: 16),
-            Text('Выполняется поиск...'),
+            Text('Searching...'),
           ],
         ),
       );
@@ -232,12 +232,12 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Ничего не найдено',
+              'Nothing found',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             Text(
-              'Попробуйте изменить поисковый запрос',
+              'Try changing your search query',
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -252,25 +252,25 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget _buildSearchResults() {
     return Column(
       children: [
-        // Заголовок с количеством результатов
+        // Results count header
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Row(
             children: [
               Text(
-                'Найдено: ${_searchResults.length} закладных',
+                'Found: ${_searchResults.length} liens',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
               TextButton(
                 onPressed: _clearSearch,
-                child: const Text('Очистить'),
+                child: const Text('Clear'),
               ),
             ],
           ),
         ),
 
-        // Список результатов
+        // Results list
         Expanded(
           child: ListView.builder(
             controller: _scrollController,
@@ -314,12 +314,12 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'История поиска пуста',
+              'Search history is empty',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             Text(
-              'Ваши поисковые запросы будут отображаться здесь',
+              'Your search queries will appear here',
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -330,7 +330,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
     return Column(
       children: [
-        // Заголовок истории
+        // History header
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
@@ -338,19 +338,19 @@ class _SearchScreenState extends State<SearchScreen> {
               const Icon(Icons.history),
               const SizedBox(width: 8),
               Text(
-                'История поиска',
+                'Search History',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const Spacer(),
               TextButton(
                 onPressed: _clearSearchHistory,
-                child: const Text('Очистить'),
+                child: const Text('Clear'),
               ),
             ],
           ),
         ),
 
-        // Список истории
+        // History list
         Expanded(
           child: ListView.builder(
             itemCount: _searchHistory.length,
@@ -378,13 +378,13 @@ class _SearchScreenState extends State<SearchScreen> {
     final difference = now.difference(timestamp);
 
     if (difference.inDays > 0) {
-      return '${difference.inDays} дн. назад';
+      return '${difference.inDays} days ago';
     } else if (difference.inHours > 0) {
-      return '${difference.inHours} ч. назад';
+      return '${difference.inHours} hours ago';
     } else if (difference.inMinutes > 0) {
-      return '${difference.inMinutes} мин. назад';
+      return '${difference.inMinutes} minutes ago';
     } else {
-      return 'Только что';
+      return 'Just now';
     }
   }
 
@@ -395,7 +395,7 @@ class _SearchScreenState extends State<SearchScreen> {
         builder: (context) => TaxLienDetailScreen(
           lien: lien,
           taxLienService: widget.taxLienService,
-          authService: null, // Не нужен для поиска
+          authService: null, // Not needed for search
           databaseService: widget.databaseService,
         ),
       ),
@@ -426,12 +426,12 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Закладная #${widget.lien.parcelId}'),
+        title: Text('Lien #${widget.lien.parcelId}'),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
             onPressed: () {
-              // Поделиться информацией о закладной
+              // Share lien information
             },
           ),
         ],
@@ -441,7 +441,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Основная информация
+            // Main information
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -454,7 +454,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Владелец: ${widget.lien.owner}',
+                      'Owner: ${widget.lien.owner}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 16),
@@ -462,14 +462,14 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                       children: [
                         Expanded(
                           child: _buildInfoItem(
-                            'Сумма налога',
+                            'Tax Amount',
                             '\$${widget.lien.taxAmount.toStringAsFixed(2)}',
                             Icons.attach_money,
                           ),
                         ),
                         Expanded(
                           child: _buildInfoItem(
-                            'Процентная ставка',
+                            'Interest Rate',
                             '${widget.lien.interestRate.toStringAsFixed(1)}%',
                             Icons.percent,
                           ),
@@ -481,14 +481,14 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                       children: [
                         Expanded(
                           child: _buildInfoItem(
-                            'Оценочная стоимость',
+                            'Assessed Value',
                             '\$${widget.lien.assessedValue.toStringAsFixed(2)}',
                             Icons.assessment,
                           ),
                         ),
                         Expanded(
                           child: _buildInfoItem(
-                            'Дата аукциона',
+                            'Auction Date',
                             _formatDate(widget.lien.auctionDate),
                             Icons.event,
                           ),
@@ -502,7 +502,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
 
             const SizedBox(height: 16),
 
-            // Дополнительная информация
+            // Additional information
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -510,15 +510,15 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Дополнительная информация',
+                      'Additional Information',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
-                    _buildDetailRow('ID участка', widget.lien.parcelId),
-                    _buildDetailRow('Округ', widget.lien.county),
-                    _buildDetailRow('Штат', widget.lien.state),
-                    _buildDetailRow('Срок погашения', _formatDate(widget.lien.redemptionDeadline)),
-                    _buildDetailRow('Статус', _getStatusLabel(widget.lien.status)),
+                    _buildDetailRow('Parcel ID', widget.lien.parcelId),
+                    _buildDetailRow('County', widget.lien.county),
+                    _buildDetailRow('State', widget.lien.state),
+                    _buildDetailRow('Redemption Deadline', _formatDate(widget.lien.redemptionDeadline)),
+                    _buildDetailRow('Status', _getStatusLabel(widget.lien.status)),
                   ],
                 ),
               ),
@@ -526,7 +526,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
 
             const SizedBox(height: 16),
 
-            // Кнопка покупки (если пользователь авторизован)
+            // Purchase button (if user is authenticated)
             if (widget.lien.status == 'available' && widget.authService?.isAuthenticated == true)
               SizedBox(
                 width: double.infinity,
@@ -536,7 +536,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   child: const Text(
-                    'Купить закладную',
+                    'Purchase Lien',
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
@@ -599,13 +599,13 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
   String _getStatusLabel(String status) {
     switch (status) {
       case 'available':
-        return 'Доступна для покупки';
+        return 'Available for purchase';
       case 'sold':
-        return 'Продана';
+        return 'Sold';
       case 'redeemed':
-        return 'Погашена';
+        return 'Redeemed';
       case 'foreclosed':
-        return 'Обращена в собственность';
+        return 'Foreclosed';
       default:
         return status;
     }
@@ -617,17 +617,17 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Покупка закладной'),
+        title: const Text('Purchase Lien'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Введите сумму ставки (минимум \$${widget.lien.taxAmount.toStringAsFixed(2)}):'),
+            Text('Enter bid amount (minimum \$${widget.lien.taxAmount.toStringAsFixed(2)}):'),
             const SizedBox(height: 16),
             TextField(
               controller: bidController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
-                labelText: 'Сумма ставки',
+                labelText: 'Bid Amount',
                 prefixText: '\$',
               ),
             ),
@@ -636,7 +636,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Отмена'),
+            child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -646,23 +646,23 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                 final success = await widget.taxLienService.purchaseLien(widget.lien.id, bidAmount);
                 if (success && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Закладная успешно куплена!')),
+                    const SnackBar(content: Text('Lien purchased successfully!')),
                   );
                   Navigator.pop(context);
                 } else if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(widget.taxLienService.error ?? 'Ошибка при покупке'),
+                      content: Text(widget.taxLienService.error ?? 'Purchase error'),
                     ),
                   );
                 }
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Неверная сумма ставки')),
+                  const SnackBar(content: Text('Invalid bid amount')),
                 );
               }
             },
-            child: const Text('Купить'),
+            child: const Text('Purchase'),
           ),
         ],
       ),
