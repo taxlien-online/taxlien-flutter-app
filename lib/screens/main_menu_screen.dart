@@ -10,7 +10,7 @@ import 'connection_status_screen.dart';
 import 'language_settings_screen.dart';
 import 'settings_screen.dart';
 import 'server_settings_screen.dart';
-import '../calibration_screen.dart';
+import 'tax_lien_content_manager_screen.dart';
 
 class MainMenuScreen extends StatefulWidget {
   final LocalizationService localizationService;
@@ -91,7 +91,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
       curve: Curves.elasticOut,
     ));
     
-    // Запускаем анимации с задержкой
+    // Start animations with delay
     Future.delayed(const Duration(milliseconds: 300), () {
       if (mounted) {
         _fadeController.forward();
@@ -122,11 +122,11 @@ class _MainMenuScreenState extends State<MainMenuScreen>
   }
 
   Future<void> _loadInitialData() async {
-    // Загружаем начальные данные
+    // Load initial data
     try {
-      // Здесь можно загрузить начальные данные
+      // Here you can load initial data
     } catch (e) {
-      print('Ошибка загрузки начальных данных: $e');
+      print('Error loading initial data: $e');
     }
   }
 
@@ -169,15 +169,15 @@ class _MainMenuScreenState extends State<MainMenuScreen>
   Widget _buildMainContent(AppLocalizations? l10n) {
     return Column(
       children: [
-        // Заголовок и статус
+        // Header and status
         _buildHeader(l10n),
         
-        // Основное меню
+        // Main menu
         Expanded(
           child: _buildMenuGrid(l10n),
         ),
         
-        // Нижняя панель
+        // Bottom panel
         _buildBottomPanel(l10n),
       ],
     );
@@ -188,7 +188,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
       padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          // Заголовок
+          // Header
           Row(
             children: [
               Container(
@@ -225,7 +225,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
                   ],
                 ),
               ),
-              // Статус подключения
+              // Connection status
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
@@ -274,7 +274,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
           
           const SizedBox(height: 24),
           
-          // Статус системы
+          // System status
           _buildSystemStatus(l10n),
         ],
       ),
@@ -350,13 +350,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
         color: AppColors.primary,
         onTap: () => _navigateToDomeControl(),
       ),
-      MenuItem(
-        title: 'Media Library',
-        subtitle: 'Manage Files',
-        icon: Icons.folder,
-        color: AppColors.accent,
-        onTap: () => _navigateToMediaLibrary(),
-      ),
+
       MenuItem(
         title: 'Calibration',
         subtitle: 'Adjust Settings',
@@ -465,7 +459,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
       padding: const EdgeInsets.all(24),
       child: Row(
         children: [
-          // Кнопка настроек
+          // Settings button
           Expanded(
             child: OutlinedButton.icon(
               onPressed: () => _navigateToSettings(),
@@ -477,7 +471,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
             ),
           ),
           const SizedBox(width: 12),
-          // Кнопка статуса подключения
+          // Connection status button
           Expanded(
             child: OutlinedButton.icon(
               onPressed: () => _navigateToConnectionStatus(),
@@ -493,7 +487,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
     );
   }
 
-  // Методы навигации
+  // Navigation methods
   void _navigateToPlayback() {
     Navigator.push(
       context,
@@ -509,18 +503,14 @@ class _MainMenuScreenState extends State<MainMenuScreen>
   }
 
   void _navigateToCalibration() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CalibrationScreen(
-          serverConnectionService: widget.serverConnectionService,
-        ),
-      ),
+    // TODO: Implement calibration screen
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Calibration screen coming soon')),
     );
   }
 
   void _navigateToMedia() {
-    // TODO: Создать экран управления медиа
+    // TODO: Create media management screen
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Media management coming soon')),
     );
@@ -571,7 +561,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
     );
   }
 
-  // Методы навигации для основных функций
+  // Navigation methods for main functions
   void _navigateToDomeControl() {
     Navigator.push(
       context,
@@ -586,12 +576,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
     );
   }
 
-  void _navigateToMediaLibrary() {
-    // TODO: Создать экран управления медиа
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Media library coming soon')),
-    );
-  }
+
 }
 
 class MenuItem {
@@ -610,7 +595,7 @@ class MenuItem {
   });
 }
 
-// Импортируем DomeControlScreen из main.dart
+// Import DomeControlScreen from main.dart
 class DomeControlScreen extends StatefulWidget {
   final LocalizationService localizationService;
   final ThemeService themeService;
@@ -631,7 +616,7 @@ class DomeControlScreen extends StatefulWidget {
 
 class _DomeControlScreenState extends State<DomeControlScreen> {
   Map<String, dynamic> domeState = {};
-  List<Map<String, dynamic>> mediaFiles = [];
+
   StreamSubscription? _stateSubscription;
   StreamSubscription? _connectionSubscription;
 
@@ -639,7 +624,7 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
   void initState() {
     super.initState();
     _setupStreams();
-    _loadMediaFiles();
+
   }
 
   void _setupStreams() {
@@ -658,14 +643,7 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
     );
   }
 
-  Future<void> _loadMediaFiles() async {
-    try {
-      mediaFiles = await widget.serverConnectionService.getMediaFiles();
-      setState(() {});
-    } catch (e) {
-      print('Ошибка загрузки медиафайлов: $e');
-    }
-  }
+
 
   void _playMedia(String fileName) {
     widget.serverConnectionService.play();
@@ -759,13 +737,9 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CalibrationScreen(
-                    serverConnectionService: widget.serverConnectionService,
-                  ),
-                ),
+              // TODO: Implement calibration screen
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Calibration screen coming soon')),
               );
             },
             icon: const Icon(Icons.tune),
@@ -807,20 +781,19 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Статус системы
+            // System status
             _buildStatusCard(),
             const SizedBox(height: 16),
             
-            // Управление воспроизведением
+            // Playback controls
             _buildPlaybackControls(),
             const SizedBox(height: 16),
             
-            // Настройки проекции
+            // Projection settings
             _buildProjectionSettings(),
             const SizedBox(height: 16),
             
-            // Медиафайлы
-            _buildMediaLibrary(),
+
           ],
         ),
       ),
@@ -914,7 +887,7 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
             ),
             const SizedBox(height: 16),
             
-            // Ползунок позиции воспроизведения
+            // Playback position slider
             Row(
               children: [
                 const Icon(Icons.timeline),
@@ -934,7 +907,7 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
             
             const SizedBox(height: 16),
             
-            // Ползунок громкости
+            // Volume slider
             Row(
               children: [
                 const Icon(Icons.volume_up),
@@ -971,7 +944,7 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
             ),
             const SizedBox(height: 16),
             
-            // Яркость
+            // Brightness
             Row(
               children: [
                 const Icon(Icons.brightness_6),
@@ -991,7 +964,7 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
             
             const SizedBox(height: 16),
             
-            // Поворот
+            // Rotation
             Row(
               children: [
                 const Icon(Icons.rotate_right),
@@ -1014,54 +987,5 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
     );
   }
 
-  Widget _buildMediaLibrary() {
-    final l10n = AppLocalizations.of(context)!;
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  l10n.mediaFiles,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const Spacer(),
-                IconButton(
-                  onPressed: _loadMediaFiles,
-                  icon: const Icon(Icons.refresh),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 200,
-              child: ListView.builder(
-                itemCount: mediaFiles.length,
-                itemBuilder: (context, index) {
-                  final file = mediaFiles[index];
-                  return ListTile(
-                    leading: Icon(
-                      file['type'] == 'video' ? Icons.video_file : Icons.image,
-                      color: Colors.blue,
-                    ),
-                    title: Text(file['name']),
-                    subtitle: file['type'] == 'video' 
-                        ? Text('${file['duration']} ${l10n.seconds}')
-                        : Text(l10n.image),
-                    trailing: IconButton(
-                      onPressed: () => _playMedia(file['name']),
-                      icon: const Icon(Icons.play_arrow),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+
 } 
