@@ -14,39 +14,39 @@
   },
   "stopped": "Остановлено",
   "@stopped": {
-    "description": "Статус остановки"
+    "description": "Статус остановлено"
   },
   "file": "Файл",
   "@file": {
-    "description": "Метка для файла"
+    "description": "Метка файла"
   },
   "position": "Позиция",
   "@position": {
-    "description": "Метка для позиции воспроизведения"
+    "description": "Метка позиции воспроизведения"
   },
   "seconds": "сек",
   "@seconds": {
-    "description": "Сокращение для секунд"
+    "description": "Сокращение секунд"
   },
   "playbackControls": "Управление воспроизведением",
   "@playbackControls": {
     "description": "Заголовок секции управления воспроизведением"
   },
-  "play": "Play",
+  "play": "Воспроизвести",
   "@play": {
     "description": "Кнопка воспроизведения"
   },
-  "pause": "Pause",
+  "pause": "Пауза",
   "@pause": {
     "description": "Кнопка паузы"
   },
-  "stop": "Stop",
+  "stop": "Стоп",
   "@stop": {
     "description": "Кнопка остановки"
   },
   "volume": "Громкость",
   "@volume": {
-    "description": "Метка для громкости"
+    "description": "Метка громкости"
   },
   "projectionSettings": "Настройки проекции",
   "@projectionSettings": {
@@ -54,11 +54,11 @@
   },
   "brightness": "Яркость",
   "@brightness": {
-    "description": "Метка для яркости"
+    "description": "Метка яркости"
   },
   "rotation": "Поворот",
   "@rotation": {
-    "description": "Метка для поворота"
+    "description": "Метка поворота"
   },
   "mediaFiles": "Медиафайлы",
   "@mediaFiles": {
@@ -84,13 +84,13 @@
   "@offset": {
     "description": "Заголовок секции смещения"
   },
-  "xOffset": "X смещение",
+  "xOffset": "Смещение по X",
   "@xOffset": {
-    "description": "Метка для X смещения"
+    "description": "Метка смещения по X"
   },
-  "yOffset": "Y смещение",
+  "yOffset": "Смещение по Y",
   "@yOffset": {
-    "description": "Метка для Y смещения"
+    "description": "Метка смещения по Y"
   },
   "scaleRotation": "Масштаб и поворот",
   "@scaleRotation": {
@@ -98,13 +98,13 @@
   },
   "scale": "Масштаб",
   "@scale": {
-    "description": "Метка для масштаба"
+    "description": "Метка масштаба"
   },
   "apply": "Применить",
   "@apply": {
     "description": "Кнопка применения"
   },
-  "reset": "Сбросить",
+  "reset": "Сброс",
   "@reset": {
     "description": "Кнопка сброса"
   },
@@ -112,13 +112,13 @@
   "@calibrationApplied": {
     "description": "Сообщение об успешном применении калибровки"
   },
-  "online": "ONLINE",
+  "online": "ПОДКЛЮЧЕНО",
   "@online": {
     "description": "Статус подключения - онлайн"
   },
-  "offline": "OFFLINE",
+  "offline": "ОТКЛЮЧЕНО",
   "@offline": {
-    "description": "Статус подключения - оффлайн"
+    "description": "Статус подключения - офлайн"
   },
   "languageSettings": "Настройки языка",
   "@languageSettings": {
@@ -172,7 +172,7 @@
   "@onboardingReadyTitle": {
     "description": "Заголовок экрана готовности онбординга"
   },
-  "onboardingReadyDescription": "Начните свой путь к цифровой свободе",
+  "onboardingReadyDescription": "Начните ваш путь к цифровой свободе",
   "@onboardingReadyDescription": {
     "description": "Описание экрана готовности онбординга"
   },
@@ -206,11 +206,11 @@
   },
   "connectingToFreedome": "Подключение к FreeDome...",
   "@connectingToFreedome": {
-    "description": "Сообщение о статусе подключения"
+    "description": "Сообщение статуса подключения"
   },
   "domeStatusActive": "Статус купола: Активен",
   "@domeStatusActive": {
-    "description": "Сообщение о статусе купола"
+    "description": "Сообщение статуса купола"
   },
   "open": "Открыть",
   "@open": {
@@ -222,11 +222,11 @@
   },
   "calibrationProgress": "Прогресс калибровки",
   "@calibrationProgress": {
-    "description": "Сообщение о прогрессе калибровки"
+    "description": "Сообщение прогресса калибровки"
   },
   "mediaFilesCount": "Медиафайлы: {count} элементов",
   "@mediaFilesCount": {
-    "description": "Сообщение о количестве медиафайлов",
+    "description": "Сообщение количества медиафайлов",
     "placeholders": {
       "count": {
         "type": "int",
@@ -238,7 +238,7 @@
   "@upload": {
     "description": "Кнопка загрузки"
   },
-  "manage": "Управление",
+  "manage": "Управлять",
   "@manage": {
     "description": "Кнопка управления"
   },
@@ -249,25 +249,5 @@
   "connectionStatus": "Статус подключения",
   "@connectionStatus": {
     "description": "Заголовок экрана статуса подключения"
-  },
-  "playGame": "Играть",
-  "@playGame": {
-    "description": "Кнопка начала игры"
-  },
-  "cards": "Карточки",
-  "@cards": {
-    "description": "Кнопка управления карточками"
-  },
-  "gameRules": "Правила игры",
-  "@gameRules": {
-    "description": "Кнопка просмотра правил игры"
-  },
-  "gameHelp": "Помощь",
-  "@gameHelp": {
-    "description": "Кнопка помощи в игре"
-  },
-  "gameSettings": "Настройки игры",
-  "@gameSettings": {
-    "description": "Кнопка настроек игры"
   }
 } 

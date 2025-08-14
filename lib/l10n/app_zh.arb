@@ -32,15 +32,15 @@
   "@playbackControls": {
     "description": "播放控制部分标题"
   },
-  "play": "Play",
+  "play": "播放",
   "@play": {
     "description": "播放按钮"
   },
-  "pause": "Pause",
+  "pause": "暂停",
   "@pause": {
     "description": "暂停按钮"
   },
-  "stop": "Stop",
+  "stop": "停止",
   "@stop": {
     "description": "停止按钮"
   },
@@ -110,29 +110,29 @@
   },
   "calibrationApplied": "校准已应用",
   "@calibrationApplied": {
-    "description": "校准应用成功消息"
+    "description": "校准成功应用消息"
   },
-  "online": "ONLINE",
+  "online": "在线",
   "@online": {
     "description": "连接状态 - 在线"
   },
-  "offline": "OFFLINE",
+  "offline": "离线",
   "@offline": {
     "description": "连接状态 - 离线"
   },
   "languageSettings": "语言设置",
   "@languageSettings": {
-    "description": "Language settings screen title"
+    "description": "语言设置屏幕标题"
   },
   "languageChanged": "语言已更改",
   "@languageChanged": {
-    "description": "Language change notification"
+    "description": "语言更改通知"
   },
   "onboardingWelcomeTitle": "欢迎使用 FreeDome Manager",
   "@onboardingWelcomeTitle": {
     "description": "引导欢迎屏幕标题"
   },
-  "onboardingWelcomeDescription": "通往数字自由和精神连接的入口",
+  "onboardingWelcomeDescription": "通往数字自由和精神连接的网关",
   "@onboardingWelcomeDescription": {
     "description": "引导欢迎屏幕描述"
   },
@@ -140,7 +140,7 @@
   "@onboardingConnectionTitle": {
     "description": "引导连接屏幕标题"
   },
-  "onboardingConnectionDescription": "建立到 FreeDome 网络的安全连接",
+  "onboardingConnectionDescription": "建立与您的 FreeDome 网络的安全连接",
   "@onboardingConnectionDescription": {
     "description": "引导连接屏幕描述"
   },
@@ -156,7 +156,7 @@
   "@onboardingCalibrationTitle": {
     "description": "引导校准屏幕标题"
   },
-  "onboardingCalibrationDescription": "为最佳性能校准您的穹顶",
+  "onboardingCalibrationDescription": "校准您的穹顶以获得最佳性能",
   "@onboardingCalibrationDescription": {
     "description": "引导校准屏幕描述"
   },
@@ -172,7 +172,7 @@
   "@onboardingReadyTitle": {
     "description": "引导就绪屏幕标题"
   },
-  "onboardingReadyDescription": "开始您的数字自由之旅",
+  "onboardingReadyDescription": "开始您通往数字自由的旅程",
   "@onboardingReadyDescription": {
     "description": "引导就绪屏幕描述"
   },
@@ -188,15 +188,15 @@
   "@skip": {
     "description": "引导中的跳过按钮"
   },
-  "getStarted": "开始",
+  "getStarted": "开始使用",
   "@getStarted": {
-    "description": "引导中的开始按钮"
+    "description": "引导中的开始使用按钮"
   },
   "skipConfirmationTitle": "跳过引导？",
   "@skipConfirmationTitle": {
     "description": "跳过引导确认对话框标题"
   },
-  "skipConfirmationMessage": "您确定要跳过引导吗？您以后可以随时从设置中访问教程。",
+  "skipConfirmationMessage": "您确定要跳过引导吗？您随时可以从设置中访问教程。",
   "@skipConfirmationMessage": {
     "description": "跳过引导确认对话框消息"
   },

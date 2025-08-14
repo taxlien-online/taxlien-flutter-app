@@ -6,15 +6,15 @@
   },
   "systemStatus": "システムステータス",
   "@systemStatus": {
-    "description": "システムステータスセクションのタイトル"
+    "description": "システムステータスセクションのヘッダー"
   },
   "playback": "再生",
   "@playback": {
-    "description": "再生状態"
+    "description": "再生ステータス"
   },
   "stopped": "停止",
   "@stopped": {
-    "description": "停止状態"
+    "description": "停止ステータス"
   },
   "file": "ファイル",
   "@file": {
@@ -28,19 +28,19 @@
   "@seconds": {
     "description": "秒の略語"
   },
-  "playbackControls": "再生制御",
+  "playbackControls": "再生コントロール",
   "@playbackControls": {
-    "description": "再生制御セクションのタイトル"
+    "description": "再生コントロールセクションのヘッダー"
   },
-  "play": "Play",
+  "play": "再生",
   "@play": {
     "description": "再生ボタン"
   },
-  "pause": "Pause",
+  "pause": "一時停止",
   "@pause": {
     "description": "一時停止ボタン"
   },
-  "stop": "Stop",
+  "stop": "停止",
   "@stop": {
     "description": "停止ボタン"
   },
@@ -50,7 +50,7 @@
   },
   "projectionSettings": "投影設定",
   "@projectionSettings": {
-    "description": "投影設定セクションのタイトル"
+    "description": "投影設定セクションのヘッダー"
   },
   "brightness": "明度",
   "@brightness": {
@@ -62,7 +62,7 @@
   },
   "mediaFiles": "メディアファイル",
   "@mediaFiles": {
-    "description": "メディアファイルセクションのタイトル"
+    "description": "メディアファイルセクションのヘッダー"
   },
   "image": "画像",
   "@image": {
@@ -78,11 +78,11 @@
   },
   "preview": "プレビュー",
   "@preview": {
-    "description": "プレビューセクションのタイトル"
+    "description": "プレビューセクションのヘッダー"
   },
   "offset": "オフセット",
   "@offset": {
-    "description": "オフセットセクションのタイトル"
+    "description": "オフセットセクションのヘッダー"
   },
   "xOffset": "X オフセット",
   "@xOffset": {
@@ -94,7 +94,7 @@
   },
   "scaleRotation": "スケールと回転",
   "@scaleRotation": {
-    "description": "スケールと回転セクションのタイトル"
+    "description": "スケールと回転セクションのヘッダー"
   },
   "scale": "スケール",
   "@scale": {
@@ -110,47 +110,47 @@
   },
   "calibrationApplied": "キャリブレーションが適用されました",
   "@calibrationApplied": {
-    "description": "キャリブレーション適用成功メッセージ"
+    "description": "キャリブレーション成功適用メッセージ"
   },
-  "online": "ONLINE",
+  "online": "オンライン",
   "@online": {
-    "description": "接続状態 - オンライン"
+    "description": "接続ステータス - オンライン"
   },
-  "offline": "OFFLINE",
+  "offline": "オフライン",
   "@offline": {
-    "description": "接続状態 - オフライン"
+    "description": "接続ステータス - オフライン"
   },
   "languageSettings": "言語設定",
   "@languageSettings": {
-    "description": "Language settings screen title"
+    "description": "言語設定画面のタイトル"
   },
   "languageChanged": "言語が変更されました",
   "@languageChanged": {
-    "description": "Language change notification"
+    "description": "言語変更通知"
   },
-  "onboardingWelcomeTitle": "FreeDome Managerへようこそ",
+  "onboardingWelcomeTitle": "FreeDome Manager へようこそ",
   "@onboardingWelcomeTitle": {
     "description": "オンボーディング歓迎画面のタイトル"
   },
-  "onboardingWelcomeDescription": "デジタル自由とスピリチュアルなつながりへのあなたの入り口",
+  "onboardingWelcomeDescription": "デジタル自由とスピリチュアルなつながりへのゲートウェイ",
   "@onboardingWelcomeDescription": {
     "description": "オンボーディング歓迎画面の説明"
   },
-  "onboardingConnectionTitle": "FreeDomeに接続",
+  "onboardingConnectionTitle": "FreeDome に接続",
   "@onboardingConnectionTitle": {
     "description": "オンボーディング接続画面のタイトル"
   },
-  "onboardingConnectionDescription": "FreeDomeネットワークへの安全な接続を確立",
+  "onboardingConnectionDescription": "FreeDome ネットワークへの安全な接続を確立",
   "@onboardingConnectionDescription": {
     "description": "オンボーディング接続画面の説明"
   },
-  "onboardingDomeControlTitle": "ドーム制御",
+  "onboardingDomeControlTitle": "ドームコントロール",
   "@onboardingDomeControlTitle": {
-    "description": "オンボーディングドーム制御画面のタイトル"
+    "description": "オンボーディングドームコントロール画面のタイトル"
   },
   "onboardingDomeControlDescription": "ドームの設定と構成を制御",
   "@onboardingDomeControlDescription": {
-    "description": "オンボーディングドーム制御画面の説明"
+    "description": "オンボーディングドームコントロール画面の説明"
   },
   "onboardingCalibrationTitle": "キャリブレーション",
   "@onboardingCalibrationTitle": {
@@ -168,7 +168,7 @@
   "@onboardingMediaDescription": {
     "description": "オンボーディングメディア管理画面の説明"
   },
-  "onboardingReadyTitle": "準備完了です！",
+  "onboardingReadyTitle": "準備完了！",
   "@onboardingReadyTitle": {
     "description": "オンボーディング準備完了画面のタイトル"
   },
@@ -196,7 +196,7 @@
   "@skipConfirmationTitle": {
     "description": "オンボーディングスキップ確認ダイアログのタイトル"
   },
-  "skipConfirmationMessage": "オンボーディングをスキップしてもよろしいですか？後で設定からチュートリアルにアクセスできます。",
+  "skipConfirmationMessage": "オンボーディングをスキップしてもよろしいですか？設定からいつでもチュートリアルにアクセスできます。",
   "@skipConfirmationMessage": {
     "description": "オンボーディングスキップ確認ダイアログのメッセージ"
   },
@@ -204,13 +204,13 @@
   "@cancel": {
     "description": "キャンセルボタン"
   },
-  "connectingToFreedome": "FreeDomeに接続中...",
+  "connectingToFreedome": "FreeDome に接続中...",
   "@connectingToFreedome": {
-    "description": "接続状態メッセージ"
+    "description": "接続ステータスメッセージ"
   },
-  "domeStatusActive": "ドーム状態: アクティブ",
+  "domeStatusActive": "ドームステータス：アクティブ",
   "@domeStatusActive": {
-    "description": "ドーム状態メッセージ"
+    "description": "ドームステータスメッセージ"
   },
   "open": "開く",
   "@open": {
@@ -220,11 +220,11 @@
   "@close": {
     "description": "閉じるボタン"
   },
-  "calibrationProgress": "キャリブレーション進行状況",
+  "calibrationProgress": "キャリブレーション進捗",
   "@calibrationProgress": {
-    "description": "キャリブレーション進行状況メッセージ"
+    "description": "キャリブレーション進捗メッセージ"
   },
-  "mediaFilesCount": "メディアファイル: {count}項目",
+  "mediaFilesCount": "メディアファイル：{count} 項目",
   "@mediaFilesCount": {
     "description": "メディアファイル数メッセージ",
     "placeholders": {
@@ -246,8 +246,8 @@
   "@serverSettings": {
     "description": "サーバー設定画面のタイトル"
   },
-  "connectionStatus": "接続状態",
+  "connectionStatus": "接続ステータス",
   "@connectionStatus": {
-    "description": "接続状態画面のタイトル"
+    "description": "接続ステータス画面のタイトル"
   }
 } 

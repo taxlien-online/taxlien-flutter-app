@@ -1,0 +1,253 @@
+{
+  "@@locale": "it",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "Titolo dell'applicazione"
+  },
+  "systemStatus": "Stato del Sistema",
+  "@systemStatus": {
+    "description": "Intestazione della sezione stato del sistema"
+  },
+  "playback": "Riproduzione",
+  "@playback": {
+    "description": "Stato di riproduzione"
+  },
+  "stopped": "Fermato",
+  "@stopped": {
+    "description": "Stato fermato"
+  },
+  "file": "File",
+  "@file": {
+    "description": "Etichetta file"
+  },
+  "position": "Posizione",
+  "@position": {
+    "description": "Etichetta posizione di riproduzione"
+  },
+  "seconds": "sec",
+  "@seconds": {
+    "description": "Abbreviazione secondi"
+  },
+  "playbackControls": "Controlli di Riproduzione",
+  "@playbackControls": {
+    "description": "Intestazione della sezione controlli di riproduzione"
+  },
+  "play": "Riproduci",
+  "@play": {
+    "description": "Pulsante riproduzione"
+  },
+  "pause": "Pausa",
+  "@pause": {
+    "description": "Pulsante pausa"
+  },
+  "stop": "Ferma",
+  "@stop": {
+    "description": "Pulsante ferma"
+  },
+  "volume": "Volume",
+  "@volume": {
+    "description": "Etichetta volume"
+  },
+  "projectionSettings": "Impostazioni di Proiezione",
+  "@projectionSettings": {
+    "description": "Intestazione della sezione impostazioni di proiezione"
+  },
+  "brightness": "Luminosità",
+  "@brightness": {
+    "description": "Etichetta luminosità"
+  },
+  "rotation": "Rotazione",
+  "@rotation": {
+    "description": "Etichetta rotazione"
+  },
+  "mediaFiles": "File Multimediali",
+  "@mediaFiles": {
+    "description": "Intestazione della sezione file multimediali"
+  },
+  "image": "Immagine",
+  "@image": {
+    "description": "Tipo di file - immagine"
+  },
+  "calibration": "Calibrazione",
+  "@calibration": {
+    "description": "Pulsante calibrazione"
+  },
+  "calibrationTitle": "Calibrazione di Proiezione",
+  "@calibrationTitle": {
+    "description": "Titolo della schermata di calibrazione"
+  },
+  "preview": "Anteprima",
+  "@preview": {
+    "description": "Intestazione della sezione anteprima"
+  },
+  "offset": "Offset",
+  "@offset": {
+    "description": "Intestazione della sezione offset"
+  },
+  "xOffset": "Offset X",
+  "@xOffset": {
+    "description": "Etichetta offset X"
+  },
+  "yOffset": "Offset Y",
+  "@yOffset": {
+    "description": "Etichetta offset Y"
+  },
+  "scaleRotation": "Scala e Rotazione",
+  "@scaleRotation": {
+    "description": "Intestazione della sezione scala e rotazione"
+  },
+  "scale": "Scala",
+  "@scale": {
+    "description": "Etichetta scala"
+  },
+  "apply": "Applica",
+  "@apply": {
+    "description": "Pulsante applica"
+  },
+  "reset": "Ripristina",
+  "@reset": {
+    "description": "Pulsante ripristina"
+  },
+  "calibrationApplied": "Calibrazione applicata",
+  "@calibrationApplied": {
+    "description": "Messaggio di calibrazione applicata con successo"
+  },
+  "online": "CONNESSO",
+  "@online": {
+    "description": "Stato connessione - online"
+  },
+  "offline": "DISCONNESSO",
+  "@offline": {
+    "description": "Stato connessione - offline"
+  },
+  "languageSettings": "Impostazioni Lingua",
+  "@languageSettings": {
+    "description": "Titolo della schermata impostazioni lingua"
+  },
+  "languageChanged": "Lingua modificata",
+  "@languageChanged": {
+    "description": "Notifica cambio lingua"
+  },
+  "onboardingWelcomeTitle": "Benvenuto in FreeDome Manager",
+  "@onboardingWelcomeTitle": {
+    "description": "Titolo della schermata di benvenuto dell'onboarding"
+  },
+  "onboardingWelcomeDescription": "La tua porta verso la libertà digitale e la connessione spirituale",
+  "@onboardingWelcomeDescription": {
+    "description": "Descrizione della schermata di benvenuto dell'onboarding"
+  },
+  "onboardingConnectionTitle": "Connetti a FreeDome",
+  "@onboardingConnectionTitle": {
+    "description": "Titolo della schermata di connessione dell'onboarding"
+  },
+  "onboardingConnectionDescription": "Stabilisci una connessione sicura alla tua rete FreeDome",
+  "@onboardingConnectionDescription": {
+    "description": "Descrizione della schermata di connessione dell'onboarding"
+  },
+  "onboardingDomeControlTitle": "Controllo Cupola",
+  "@onboardingDomeControlTitle": {
+    "description": "Titolo della schermata di controllo cupola dell'onboarding"
+  },
+  "onboardingDomeControlDescription": "Controlla le impostazioni e configurazioni della tua cupola",
+  "@onboardingDomeControlDescription": {
+    "description": "Descrizione della schermata di controllo cupola dell'onboarding"
+  },
+  "onboardingCalibrationTitle": "Calibrazione",
+  "@onboardingCalibrationTitle": {
+    "description": "Titolo della schermata di calibrazione dell'onboarding"
+  },
+  "onboardingCalibrationDescription": "Calibra la tua cupola per prestazioni ottimali",
+  "@onboardingCalibrationDescription": {
+    "description": "Descrizione della schermata di calibrazione dell'onboarding"
+  },
+  "onboardingMediaTitle": "Gestione Media",
+  "@onboardingMediaTitle": {
+    "description": "Titolo della schermata di gestione media dell'onboarding"
+  },
+  "onboardingMediaDescription": "Carica e gestisci i tuoi file multimediali",
+  "@onboardingMediaDescription": {
+    "description": "Descrizione della schermata di gestione media dell'onboarding"
+  },
+  "onboardingReadyTitle": "Sei Pronto!",
+  "@onboardingReadyTitle": {
+    "description": "Titolo della schermata pronto dell'onboarding"
+  },
+  "onboardingReadyDescription": "Inizia il tuo viaggio verso la libertà digitale",
+  "@onboardingReadyDescription": {
+    "description": "Descrizione della schermata pronto dell'onboarding"
+  },
+  "next": "Avanti",
+  "@next": {
+    "description": "Pulsante avanti nell'onboarding"
+  },
+  "back": "Indietro",
+  "@back": {
+    "description": "Pulsante indietro nell'onboarding"
+  },
+  "skip": "Salta",
+  "@skip": {
+    "description": "Pulsante salta nell'onboarding"
+  },
+  "getStarted": "Inizia",
+  "@getStarted": {
+    "description": "Pulsante inizia nell'onboarding"
+  },
+  "skipConfirmationTitle": "Saltare l'Onboarding?",
+  "@skipConfirmationTitle": {
+    "description": "Titolo del dialogo di conferma per saltare l'onboarding"
+  },
+  "skipConfirmationMessage": "Sei sicuro di voler saltare l'onboarding? Puoi sempre accedere al tutorial più tardi dalle impostazioni.",
+  "@skipConfirmationMessage": {
+    "description": "Messaggio del dialogo di conferma per saltare l'onboarding"
+  },
+  "cancel": "Annulla",
+  "@cancel": {
+    "description": "Pulsante annulla"
+  },
+  "connectingToFreedome": "Connessione a FreeDome...",
+  "@connectingToFreedome": {
+    "description": "Messaggio stato connessione"
+  },
+  "domeStatusActive": "Stato Cupola: Attivo",
+  "@domeStatusActive": {
+    "description": "Messaggio stato cupola"
+  },
+  "open": "Apri",
+  "@open": {
+    "description": "Pulsante apri"
+  },
+  "close": "Chiudi",
+  "@close": {
+    "description": "Pulsante chiudi"
+  },
+  "calibrationProgress": "Progresso Calibrazione",
+  "@calibrationProgress": {
+    "description": "Messaggio progresso calibrazione"
+  },
+  "mediaFilesCount": "File Multimediali: {count} elementi",
+  "@mediaFilesCount": {
+    "description": "Messaggio conteggio file multimediali",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "Carica",
+  "@upload": {
+    "description": "Pulsante carica"
+  },
+  "manage": "Gestisci",
+  "@manage": {
+    "description": "Pulsante gestisci"
+  },
+  "serverSettings": "Impostazioni Server",
+  "@serverSettings": {
+    "description": "Titolo della schermata impostazioni server"
+  },
+  "connectionStatus": "Stato Connessione",
+  "@connectionStatus": {
+    "description": "Titolo della schermata stato connessione"
+  }
+}

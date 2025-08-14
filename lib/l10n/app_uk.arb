@@ -14,39 +14,39 @@
   },
   "stopped": "Зупинено",
   "@stopped": {
-    "description": "Статус зупинки"
+    "description": "Статус зупинено"
   },
   "file": "Файл",
   "@file": {
-    "description": "Мітка для файлу"
+    "description": "Мітка файлу"
   },
   "position": "Позиція",
   "@position": {
-    "description": "Мітка для позиції відтворення"
+    "description": "Мітка позиції відтворення"
   },
   "seconds": "сек",
   "@seconds": {
-    "description": "Скорочення для секунд"
+    "description": "Скорочення секунд"
   },
   "playbackControls": "Управління відтворенням",
   "@playbackControls": {
     "description": "Заголовок секції управління відтворенням"
   },
-  "play": "Play",
+  "play": "Відтворити",
   "@play": {
     "description": "Кнопка відтворення"
   },
-  "pause": "Pause",
+  "pause": "Пауза",
   "@pause": {
     "description": "Кнопка паузи"
   },
-  "stop": "Stop",
+  "stop": "Стоп",
   "@stop": {
     "description": "Кнопка зупинки"
   },
   "volume": "Гучність",
   "@volume": {
-    "description": "Мітка для гучності"
+    "description": "Мітка гучності"
   },
   "projectionSettings": "Налаштування проекції",
   "@projectionSettings": {
@@ -54,11 +54,11 @@
   },
   "brightness": "Яскравість",
   "@brightness": {
-    "description": "Мітка для яскравості"
+    "description": "Мітка яскравості"
   },
   "rotation": "Поворот",
   "@rotation": {
-    "description": "Мітка для повороту"
+    "description": "Мітка повороту"
   },
   "mediaFiles": "Медіафайли",
   "@mediaFiles": {
@@ -84,13 +84,13 @@
   "@offset": {
     "description": "Заголовок секції зміщення"
   },
-  "xOffset": "X зміщення",
+  "xOffset": "Зміщення по X",
   "@xOffset": {
-    "description": "Мітка для X зміщення"
+    "description": "Мітка зміщення по X"
   },
-  "yOffset": "Y зміщення",
+  "yOffset": "Зміщення по Y",
   "@yOffset": {
-    "description": "Мітка для Y зміщення"
+    "description": "Мітка зміщення по Y"
   },
   "scaleRotation": "Масштаб і поворот",
   "@scaleRotation": {
@@ -98,7 +98,7 @@
   },
   "scale": "Масштаб",
   "@scale": {
-    "description": "Мітка для масштабу"
+    "description": "Мітка масштабу"
   },
   "apply": "Застосувати",
   "@apply": {
@@ -112,11 +112,11 @@
   "@calibrationApplied": {
     "description": "Повідомлення про успішне застосування калібрування"
   },
-  "online": "ONLINE",
+  "online": "ПІДКЛЮЧЕНО",
   "@online": {
     "description": "Статус підключення - онлайн"
   },
-  "offline": "OFFLINE",
+  "offline": "ВІДКЛЮЧЕНО",
   "@offline": {
     "description": "Статус підключення - офлайн"
   },
@@ -148,7 +148,7 @@
   "@onboardingDomeControlTitle": {
     "description": "Заголовок екрану управління куполом онбордингу"
   },
-  "onboardingDomeControlDescription": "Керуйте налаштуваннями та конфігураціями вашого купола",
+  "onboardingDomeControlDescription": "Управляйте налаштуваннями та конфігураціями вашого купола",
   "@onboardingDomeControlDescription": {
     "description": "Опис екрану управління куполом онбордингу"
   },
@@ -164,7 +164,7 @@
   "@onboardingMediaTitle": {
     "description": "Заголовок екрану управління медіа онбордингу"
   },
-  "onboardingMediaDescription": "Завантажуйте та керуйте вашими медіафайлами",
+  "onboardingMediaDescription": "Завантажуйте та управляйте вашими медіафайлами",
   "@onboardingMediaDescription": {
     "description": "Опис екрану управління медіа онбордингу"
   },
@@ -172,7 +172,7 @@
   "@onboardingReadyTitle": {
     "description": "Заголовок екрану готовності онбордингу"
   },
-  "onboardingReadyDescription": "Почніть свою подорож до цифрової свободи",
+  "onboardingReadyDescription": "Почніть ваш шлях до цифрової свободи",
   "@onboardingReadyDescription": {
     "description": "Опис екрану готовності онбордингу"
   },
@@ -196,7 +196,7 @@
   "@skipConfirmationTitle": {
     "description": "Заголовок діалогу підтвердження пропуску онбордингу"
   },
-  "skipConfirmationMessage": "Ви впевнені, що хочете пропустити онбординг? Ви завжди можете отримати доступ до підручника пізніше з налаштувань.",
+  "skipConfirmationMessage": "Ви впевнені, що хочете пропустити онбординг? Ви завжди можете отримати доступ до посібника пізніше з налаштувань.",
   "@skipConfirmationMessage": {
     "description": "Повідомлення діалогу підтвердження пропуску онбордингу"
   },
@@ -206,11 +206,11 @@
   },
   "connectingToFreedome": "Підключення до FreeDome...",
   "@connectingToFreedome": {
-    "description": "Повідомлення про статус підключення"
+    "description": "Повідомлення статусу підключення"
   },
   "domeStatusActive": "Статус купола: Активний",
   "@domeStatusActive": {
-    "description": "Повідомлення про статус купола"
+    "description": "Повідомлення статусу купола"
   },
   "open": "Відкрити",
   "@open": {
@@ -222,11 +222,11 @@
   },
   "calibrationProgress": "Прогрес калібрування",
   "@calibrationProgress": {
-    "description": "Повідомлення про прогрес калібрування"
+    "description": "Повідомлення прогресу калібрування"
   },
   "mediaFilesCount": "Медіафайли: {count} елементів",
   "@mediaFilesCount": {
-    "description": "Повідомлення про кількість медіафайлів",
+    "description": "Повідомлення кількості медіафайлів",
     "placeholders": {
       "count": {
         "type": "int",
@@ -238,9 +238,9 @@
   "@upload": {
     "description": "Кнопка завантаження"
   },
-  "manage": "Управління",
+  "manage": "Керувати",
   "@manage": {
-    "description": "Кнопка управління"
+    "description": "Кнопка керування"
   },
   "serverSettings": "Налаштування сервера",
   "@serverSettings": {

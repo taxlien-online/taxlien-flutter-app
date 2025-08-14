@@ -1,0 +1,253 @@
+{
+  "@@locale": "ko",
+  "appTitle": "FreeDome Manager",
+  "@appTitle": {
+    "description": "애플리케이션 제목"
+  },
+  "systemStatus": "시스템 상태",
+  "@systemStatus": {
+    "description": "시스템 상태 섹션 헤더"
+  },
+  "playback": "재생",
+  "@playback": {
+    "description": "재생 상태"
+  },
+  "stopped": "중지됨",
+  "@stopped": {
+    "description": "중지 상태"
+  },
+  "file": "파일",
+  "@file": {
+    "description": "파일 라벨"
+  },
+  "position": "위치",
+  "@position": {
+    "description": "재생 위치 라벨"
+  },
+  "seconds": "초",
+  "@seconds": {
+    "description": "초의 약어"
+  },
+  "playbackControls": "재생 제어",
+  "@playbackControls": {
+    "description": "재생 제어 섹션 헤더"
+  },
+  "play": "재생",
+  "@play": {
+    "description": "재생 버튼"
+  },
+  "pause": "일시정지",
+  "@pause": {
+    "description": "일시정지 버튼"
+  },
+  "stop": "중지",
+  "@stop": {
+    "description": "중지 버튼"
+  },
+  "volume": "볼륨",
+  "@volume": {
+    "description": "볼륨 라벨"
+  },
+  "projectionSettings": "투영 설정",
+  "@projectionSettings": {
+    "description": "투영 설정 섹션 헤더"
+  },
+  "brightness": "밝기",
+  "@brightness": {
+    "description": "밝기 라벨"
+  },
+  "rotation": "회전",
+  "@rotation": {
+    "description": "회전 라벨"
+  },
+  "mediaFiles": "미디어 파일",
+  "@mediaFiles": {
+    "description": "미디어 파일 섹션 헤더"
+  },
+  "image": "이미지",
+  "@image": {
+    "description": "파일 유형 - 이미지"
+  },
+  "calibration": "보정",
+  "@calibration": {
+    "description": "보정 버튼"
+  },
+  "calibrationTitle": "투영 보정",
+  "@calibrationTitle": {
+    "description": "보정 화면 제목"
+  },
+  "preview": "미리보기",
+  "@preview": {
+    "description": "미리보기 섹션 헤더"
+  },
+  "offset": "오프셋",
+  "@offset": {
+    "description": "오프셋 섹션 헤더"
+  },
+  "xOffset": "X 오프셋",
+  "@xOffset": {
+    "description": "X 오프셋 라벨"
+  },
+  "yOffset": "Y 오프셋",
+  "@yOffset": {
+    "description": "Y 오프셋 라벨"
+  },
+  "scaleRotation": "스케일 및 회전",
+  "@scaleRotation": {
+    "description": "스케일 및 회전 섹션 헤더"
+  },
+  "scale": "스케일",
+  "@scale": {
+    "description": "스케일 라벨"
+  },
+  "apply": "적용",
+  "@apply": {
+    "description": "적용 버튼"
+  },
+  "reset": "재설정",
+  "@reset": {
+    "description": "재설정 버튼"
+  },
+  "calibrationApplied": "보정이 적용되었습니다",
+  "@calibrationApplied": {
+    "description": "보정 성공 적용 메시지"
+  },
+  "online": "온라인",
+  "@online": {
+    "description": "연결 상태 - 온라인"
+  },
+  "offline": "오프라인",
+  "@offline": {
+    "description": "연결 상태 - 오프라인"
+  },
+  "languageSettings": "언어 설정",
+  "@languageSettings": {
+    "description": "언어 설정 화면 제목"
+  },
+  "languageChanged": "언어가 변경되었습니다",
+  "@languageChanged": {
+    "description": "언어 변경 알림"
+  },
+  "onboardingWelcomeTitle": "FreeDome Manager에 오신 것을 환영합니다",
+  "@onboardingWelcomeTitle": {
+    "description": "온보딩 환영 화면 제목"
+  },
+  "onboardingWelcomeDescription": "디지털 자유와 영적 연결로의 관문",
+  "@onboardingWelcomeDescription": {
+    "description": "온보딩 환영 화면 설명"
+  },
+  "onboardingConnectionTitle": "FreeDome에 연결",
+  "@onboardingConnectionTitle": {
+    "description": "온보딩 연결 화면 제목"
+  },
+  "onboardingConnectionDescription": "FreeDome 네트워크에 안전한 연결을 설정하세요",
+  "@onboardingConnectionDescription": {
+    "description": "온보딩 연결 화면 설명"
+  },
+  "onboardingDomeControlTitle": "돔 제어",
+  "@onboardingDomeControlTitle": {
+    "description": "온보딩 돔 제어 화면 제목"
+  },
+  "onboardingDomeControlDescription": "돔의 설정과 구성을 제어하세요",
+  "@onboardingDomeControlDescription": {
+    "description": "온보딩 돔 제어 화면 설명"
+  },
+  "onboardingCalibrationTitle": "보정",
+  "@onboardingCalibrationTitle": {
+    "description": "온보딩 보정 화면 제목"
+  },
+  "onboardingCalibrationDescription": "최적의 성능을 위해 돔을 보정하세요",
+  "@onboardingCalibrationDescription": {
+    "description": "온보딩 보정 화면 설명"
+  },
+  "onboardingMediaTitle": "미디어 관리",
+  "@onboardingMediaTitle": {
+    "description": "온보딩 미디어 관리 화면 제목"
+  },
+  "onboardingMediaDescription": "미디어 파일을 업로드하고 관리하세요",
+  "@onboardingMediaDescription": {
+    "description": "온보딩 미디어 관리 화면 설명"
+  },
+  "onboardingReadyTitle": "준비 완료!",
+  "@onboardingReadyTitle": {
+    "description": "온보딩 준비 완료 화면 제목"
+  },
+  "onboardingReadyDescription": "디지털 자유로의 여정을 시작하세요",
+  "@onboardingReadyDescription": {
+    "description": "온보딩 준비 완료 화면 설명"
+  },
+  "next": "다음",
+  "@next": {
+    "description": "온보딩의 다음 버튼"
+  },
+  "back": "뒤로",
+  "@back": {
+    "description": "온보딩의 뒤로 버튼"
+  },
+  "skip": "건너뛰기",
+  "@skip": {
+    "description": "온보딩의 건너뛰기 버튼"
+  },
+  "getStarted": "시작하기",
+  "@getStarted": {
+    "description": "온보딩의 시작하기 버튼"
+  },
+  "skipConfirmationTitle": "온보딩을 건너뛰시겠습니까?",
+  "@skipConfirmationTitle": {
+    "description": "온보딩 건너뛰기 확인 대화상자 제목"
+  },
+  "skipConfirmationMessage": "온보딩을 건너뛰시겠습니까? 설정에서 언제든지 튜토리얼에 접근할 수 있습니다.",
+  "@skipConfirmationMessage": {
+    "description": "온보딩 건너뛰기 확인 대화상자 메시지"
+  },
+  "cancel": "취소",
+  "@cancel": {
+    "description": "취소 버튼"
+  },
+  "connectingToFreedome": "FreeDome에 연결 중...",
+  "@connectingToFreedome": {
+    "description": "연결 상태 메시지"
+  },
+  "domeStatusActive": "돔 상태: 활성",
+  "@domeStatusActive": {
+    "description": "돔 상태 메시지"
+  },
+  "open": "열기",
+  "@open": {
+    "description": "열기 버튼"
+  },
+  "close": "닫기",
+  "@close": {
+    "description": "닫기 버튼"
+  },
+  "calibrationProgress": "보정 진행률",
+  "@calibrationProgress": {
+    "description": "보정 진행률 메시지"
+  },
+  "mediaFilesCount": "미디어 파일: {count}개 항목",
+  "@mediaFilesCount": {
+    "description": "미디어 파일 수 메시지",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "12"
+      }
+    }
+  },
+  "upload": "업로드",
+  "@upload": {
+    "description": "업로드 버튼"
+  },
+  "manage": "관리",
+  "@manage": {
+    "description": "관리 버튼"
+  },
+  "serverSettings": "서버 설정",
+  "@serverSettings": {
+    "description": "서버 설정 화면 제목"
+  },
+  "connectionStatus": "연결 상태",
+  "@connectionStatus": {
+    "description": "연결 상태 화면 제목"
+  }
+}
