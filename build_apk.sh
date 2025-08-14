@@ -1,49 +1,49 @@
 #!/bin/bash
 
 # HolySpots APK Build Script
-# Скрипт для сборки APK файла Flutter приложения
+# Script for building Flutter application APK file
 
-echo "🚀 Начинаем сборку APK для HolySpots..."
+echo "🚀 Starting APK build for HolySpots..."
 
-# Проверяем, что мы в правильной директории
+# Check that we are in the correct directory
 if [ ! -f "pubspec.yaml" ]; then
-    echo "❌ Ошибка: pubspec.yaml не найден. Убедитесь, что вы находитесь в корневой папке Flutter проекта."
+    echo "❌ Error: pubspec.yaml not found. Make sure you are in the Flutter project root directory."
     exit 1
 fi
 
-# Очищаем предыдущие сборки
-echo "🧹 Очищаем предыдущие сборки..."
+# Clean previous builds
+echo "🧹 Cleaning previous builds..."
 flutter clean
 
-# Получаем зависимости
-echo "📦 Получаем зависимости..."
+# Get dependencies
+echo "📦 Getting dependencies..."
 flutter pub get
 
-# Генерируем файлы локализации
-echo "🌐 Генерируем файлы локализации..."
+# Generate localization files
+echo "🌐 Generating localization files..."
 flutter gen-l10n
 
-# Проверяем Flutter
-echo "🔍 Проверяем Flutter..."
+# Check Flutter
+echo "🔍 Checking Flutter..."
 flutter doctor
 
-# Собираем APK в режиме release
-echo "🔨 Собираем APK в режиме release..."
+# Build APK in release mode
+echo "🔨 Building APK in release mode..."
 flutter build apk --release
 
-# Проверяем, что сборка прошла успешно
+# Check if build was successful
 if [ $? -eq 0 ]; then
-    echo "✅ APK успешно собран!"
-    echo "📱 APK файл находится в: build/app/outputs/flutter-apk/app-release.apk"
+    echo "✅ APK built successfully!"
+    echo "📱 APK file is located at: build/app/outputs/flutter-apk/app-release.apk"
     
-    # Показываем размер файла
+    # Show file size
     if [ -f "build/app/outputs/flutter-apk/app-release.apk" ]; then
         APK_SIZE=$(du -h build/app/outputs/flutter-apk/app-release.apk | cut -f1)
-        echo "📏 Размер APK: $APK_SIZE"
+        echo "📏 APK size: $APK_SIZE"
     fi
     
-    echo "🎉 Сборка завершена успешно!"
+    echo "🎉 Build completed successfully!"
 else
-    echo "❌ Ошибка при сборке APK"
+    echo "❌ Error building APK"
     exit 1
 fi 
