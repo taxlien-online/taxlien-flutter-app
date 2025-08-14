@@ -1,11 +1,11 @@
-/// Размеры и отступы приложения FreeDome Manager
-/// Обеспечивает консистентность дизайна
-/// Основан на глубоких синих тонах с акцентами свободы и духовности
+/// Dimensions and spacing for FreeDome Manager application
+/// Ensures design consistency
+/// Based on deep blue tones with accents of freedom and spirituality
 class AppDimensions {
-  // Приватный конструктор для предотвращения создания экземпляров
+  // Private constructor to prevent instantiation
   AppDimensions._();
 
-  // Отступы
+  // Padding
   static const double paddingXS = 4.0;
   static const double paddingS = 8.0;
   static const double paddingM = 12.0;
@@ -14,16 +14,16 @@ class AppDimensions {
   static const double paddingXXL = 24.0;
   static const double paddingXXXL = 32.0;
 
-  // Радиусы скругления
+  // Border radius
   static const double radiusXS = 4.0;
   static const double radiusS = 8.0;
   static const double radiusM = 12.0;
   static const double radiusL = 16.0;
   static const double radiusXL = 20.0;
   static const double radiusXXL = 24.0;
-  static const double borderRadius = radiusM; // Алиас для совместимости
+  static const double borderRadius = radiusM; // Alias for compatibility
 
-  // Размеры иконок
+  // Icon sizes
   static const double iconSizeXS = 12.0;
   static const double iconSizeS = 16.0;
   static const double iconSizeM = 24.0;
@@ -31,7 +31,7 @@ class AppDimensions {
   static const double iconSizeXL = 48.0;
   static const double iconSizeXXL = 64.0;
 
-  // Высоты элементов
+  // Element heights
   static const double buttonHeightS = 32.0;
   static const double buttonHeightM = 40.0;
   static const double buttonHeightL = 48.0;
@@ -44,63 +44,63 @@ class AppDimensions {
   static const double appBarHeight = 56.0;
   static const double bottomNavigationHeight = 80.0;
 
-  // Размеры карточек
+  // Card dimensions
   static const double cardPadding = paddingL;
   static const double cardRadius = radiusL;
   static const double cardElevation = 2.0;
 
-  // Размеры диалогов
+  // Dialog dimensions
   static const double dialogRadius = radiusL;
   static const double dialogPadding = paddingXL;
 
-  // Размеры прогресс-баров
+  // Progress bar dimensions
   static const double progressBarHeight = 8.0;
   static const double progressBarRadius = radiusXS;
 
-  // Размеры чипов
+  // Chip dimensions
   static const double chipHeight = 32.0;
   static const double chipRadius = radiusXL;
 
-  // Размеры аватаров
+  // Avatar sizes
   static const double avatarSizeS = 32.0;
   static const double avatarSizeM = 48.0;
   static const double avatarSizeL = 64.0;
   static const double avatarSizeXL = 80.0;
   static const double avatarSizeXXL = 100.0;
 
-  // Размеры изображений
+  // Image sizes
   static const double imageSizeS = 64.0;
   static const double imageSizeM = 96.0;
   static const double imageSizeL = 128.0;
   static const double imageSizeXL = 192.0;
 
-  // Размеры сетки
+  // Grid dimensions
   static const int gridCrossAxisCount = 2;
   static const double gridSpacing = paddingL;
   static const double gridChildAspectRatio = 1.0;
 
-  // Размеры списков
+  // List dimensions
   static const double listItemHeight = 56.0;
   static const double listItemPadding = paddingL;
 
-  // Размеры навигации
+  // Navigation dimensions
   static const double navigationItemHeight = 48.0;
   static const double navigationItemPadding = paddingL;
 
-  // Размеры для мобильных устройств
+  // Mobile device dimensions
   static const double mobileMaxWidth = 600.0;
   static const double tabletMaxWidth = 1200.0;
 
-  // Размеры для камеры
+  // Camera dimensions
   static const double cameraAspectRatio = 4.0 / 3.0;
   static const double cameraOverlayOpacity = 0.7;
 
-  // Размеры для анимаций
+  // Animation durations
   static const Duration animationDurationFast = Duration(milliseconds: 200);
   static const Duration animationDurationNormal = Duration(milliseconds: 300);
   static const Duration animationDurationSlow = Duration(milliseconds: 500);
   
-  // Дополнительные отступы для совместимости
+  // Additional spacing for compatibility
   static const double paddingSmall = paddingS;
   static const double paddingMedium = paddingM;
   static const double paddingLarge = paddingL;
@@ -111,43 +111,43 @@ class AppDimensions {
   static const double radiusMedium = radiusM;
   static const double radiusLarge = radiusL;
 
-  // Размеры для загрузки
+  // Loading dimensions
   static const double loadingIndicatorSize = 24.0;
   static const double loadingIndicatorStrokeWidth = 2.0;
 
-  // Размеры для уведомлений
+  // Notification dimensions
   static const double snackBarHeight = 48.0;
   static const double snackBarPadding = paddingL;
 
-  // Размеры для модальных окон
+  // Modal dimensions
   static const double modalMaxWidth = 400.0;
   static const double modalMaxHeight = 600.0;
 
-  // Размеры для калибровки
+  // Calibration dimensions
   static const double calibrationCardHeight = 120.0;
   static const double calibrationProgressHeight = 8.0;
 
-  // Размеры для сканера
+  // Scanner dimensions
   static const double scannerOverlaySize = 200.0;
   static const double scannerIndicatorSize = 24.0;
 
-  // Размеры для управления
+  // Control dimensions
   static const double controlCardHeight = 160.0;
   static const double controlInteractiveSize = 80.0;
 
-  // Размеры для мониторинга
+  // Monitoring dimensions
   static const double monitoringModeCardHeight = 120.0;
   static const double monitoringItemChipHeight = 32.0;
 
-  // Размеры для профиля
+  // Profile dimensions
   static const double profileAvatarSize = 100.0;
   static const double profileMetricCardHeight = 80.0;
 
-  // Размеры для подключения
+  // Connection dimensions
   static const double connectionOptionCardHeight = 120.0;
   static const double connectionPreviewSize = 200.0;
 
-  // Размеры для FreeDome специфичные
+  // FreeDome specific dimensions
   static const double freedomeControlPanelHeight = 200.0;
   static const double freedomeStatusIndicatorSize = 32.0;
   static const double freedomeConnectionCardHeight = 140.0;

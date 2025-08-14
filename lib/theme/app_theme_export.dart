@@ -1,5 +1,5 @@
-/// Экспорт всех компонентов темы приложения FreeDome Manager
-/// Упрощает импорт в других файлах
+/// Export of all theme components for FreeDome Manager application
+/// Simplifies imports in other files
 
 export 'app_colors.dart';
 export 'app_dimensions.dart';

@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
-/// Тема приложения FreeDome Manager
-/// Основана на глубоких синих тонах с акцентами свободы и духовности
+/// FreeDome Manager application theme
+/// Based on deep blue tones with accents of freedom and spirituality
 class AppTheme {
-  // Приватный конструктор
+  // Private constructor
   AppTheme._();
 
-  /// Светлая тема приложения
+  /// Light theme for the application
   static ThemeData get lightTheme {
     return ThemeData(
-      // Основные настройки
+      // Main settings
       brightness: Brightness.light,
       useMaterial3: true,
       colorScheme: AppColors.light,
       
-      // Фон приложения
+      // Application background
       scaffoldBackgroundColor: AppColors.lightBackgroundPrimary,
 
-      // AppBar тема
+      // AppBar theme
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.lightNavigationBackground,
         foregroundColor: AppColors.lightNavigationText,
@@ -34,7 +34,7 @@ class AppTheme {
         ),
       ),
 
-      // Карточки
+      // Cards
       cardTheme: CardThemeData(
         color: AppColors.lightCardBackground,
         elevation: 2,
@@ -44,7 +44,7 @@ class AppTheme {
         ),
       ),
 
-      // Кнопки
+      // Buttons
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.buttonPrimary,
@@ -61,7 +61,7 @@ class AppTheme {
         ),
       ),
 
-      // Текстовые кнопки
+      // Text buttons
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primary,
@@ -71,7 +71,7 @@ class AppTheme {
         ),
       ),
 
-      // Поля ввода
+      // Input fields
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.lightInputBackground,
@@ -90,7 +90,7 @@ class AppTheme {
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
 
-      // Переключатели
+      // Switches
       switchTheme: SwitchThemeData(
         thumbColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.selected)) {
@@ -106,7 +106,7 @@ class AppTheme {
         }),
       ),
 
-      // Слайдеры
+      // Sliders
       sliderTheme: SliderThemeData(
         activeTrackColor: AppColors.primary,
         inactiveTrackColor: AppColors.lightBorder,
@@ -114,7 +114,7 @@ class AppTheme {
         overlayColor: AppColors.primary.withOpacity(0.2),
       ),
 
-      // Диалоги
+      // Dialogs
       dialogTheme: DialogThemeData(
         backgroundColor: AppColors.lightCardBackground,
         elevation: 8,
@@ -132,13 +132,13 @@ class AppTheme {
         ),
       ),
 
-      // Прогресс-бары
+      // Progress bars
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppColors.progressFill,
         linearTrackColor: AppColors.progressBackground,
       ),
 
-      // Чипы
+      // Chips
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.primary.withOpacity(0.1),
         selectedColor: AppColors.primary,
@@ -148,7 +148,7 @@ class AppTheme {
         ),
       ),
 
-      // Боттомшиты
+      // Bottom sheets
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: AppColors.lightCardBackground,
         elevation: 8,
@@ -159,18 +159,18 @@ class AppTheme {
     );
   }
 
-  /// Темная тема приложения
+  /// Dark theme for the application
   static ThemeData get darkTheme {
     return ThemeData(
-      // Основные настройки
+      // Main settings
       brightness: Brightness.dark,
       useMaterial3: true,
       colorScheme: AppColors.dark,
       
-      // Фон приложения
+      // Application background
       scaffoldBackgroundColor: AppColors.darkBackgroundPrimary,
 
-      // AppBar тема
+      // AppBar theme
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.darkNavigationBackground,
         foregroundColor: AppColors.darkNavigationText,
@@ -186,7 +186,7 @@ class AppTheme {
         ),
       ),
 
-      // Карточки
+      // Cards
       cardTheme: CardThemeData(
         color: AppColors.darkCardBackground,
         elevation: 2,
@@ -196,7 +196,7 @@ class AppTheme {
         ),
       ),
 
-      // Кнопки
+      // Buttons
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.buttonPrimary,
@@ -213,7 +213,7 @@ class AppTheme {
         ),
       ),
 
-      // Текстовые кнопки
+      // Text buttons
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primaryLight,
@@ -223,7 +223,7 @@ class AppTheme {
         ),
       ),
 
-      // Поля ввода
+      // Input fields
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.darkInputBackground,
@@ -242,7 +242,7 @@ class AppTheme {
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
 
-      // Переключатели
+      // Switches
       switchTheme: SwitchThemeData(
         thumbColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.selected)) {
@@ -258,7 +258,7 @@ class AppTheme {
         }),
       ),
 
-      // Слайдеры
+      // Sliders
       sliderTheme: SliderThemeData(
         activeTrackColor: AppColors.primaryLight,
         inactiveTrackColor: AppColors.darkBorder,
@@ -266,7 +266,7 @@ class AppTheme {
         overlayColor: AppColors.primaryLight.withOpacity(0.2),
       ),
 
-      // Диалоги
+      // Dialogs
       dialogTheme: DialogThemeData(
         backgroundColor: AppColors.darkCardBackground,
         elevation: 8,
@@ -284,13 +284,13 @@ class AppTheme {
         ),
       ),
 
-      // Прогресс-бары
+      // Progress bars
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppColors.progressFill,
         linearTrackColor: AppColors.progressBackground,
       ),
 
-      // Чипы
+      // Chips
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.primary.withOpacity(0.1),
         selectedColor: AppColors.primary,
@@ -300,7 +300,7 @@ class AppTheme {
         ),
       ),
 
-      // Боттомшиты
+      // Bottom sheets
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: AppColors.darkCardBackground,
         elevation: 8,
@@ -311,7 +311,7 @@ class AppTheme {
     );
   }
 
-  /// Получить тему в зависимости от яркости
+  /// Get theme based on brightness
   static ThemeData getTheme(Brightness brightness) {
     return brightness == Brightness.light ? lightTheme : darkTheme;
   }

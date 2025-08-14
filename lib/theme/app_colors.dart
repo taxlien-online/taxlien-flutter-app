@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
-/// Цветовая палитра для FreeDome Manager
-/// Основана на глубоких синих тонах с акцентами свободы и духовности
+/// Color palette for FreeDome Manager
+/// Based on deep blue tones with accents of freedom and spirituality
 class AppColors {
-  // Приватный конструктор
+  // Private constructor
   AppColors._();
 
-  // Основные цвета бренда
-  static const Color primary = Color(0xFF1E3A8A); // Глубокий синий
-  static const Color primaryLight = Color(0xFF3B82F6); // Светло-синий
-  static const Color primaryDark = Color(0xFF1E40AF); // Темно-синий
+  // Main brand colors
+  static const Color primary = Color(0xFF1E3A8A); // Deep blue
+  static const Color primaryLight = Color(0xFF3B82F6); // Light blue
+  static const Color primaryDark = Color(0xFF1E40AF); // Dark blue
   
-  // Акцентные цвета
-  static const Color accent = Color(0xFF10B981); // Зеленый свободы
-  static const Color accentLight = Color(0xFF34D399); // Светло-зеленый
-  static const Color accentDark = Color(0xFF059669); // Темно-зеленый
+  // Accent colors
+  static const Color accent = Color(0xFF10B981); // Freedom green
+  static const Color accentLight = Color(0xFF34D399); // Light green
+  static const Color accentDark = Color(0xFF059669); // Dark green
   
-  // Духовные цвета (вдохновлены HolySpots)
-  static const Color spiritual = Color(0xFF8B5CF6); // Фиолетовый
-  static const Color spiritualLight = Color(0xFFA78BFA); // Светло-фиолетовый
-  static const Color spiritualDark = Color(0xFF7C3AED); // Темно-фиолетовый
+  // Spiritual colors (inspired by HolySpots)
+  static const Color spiritual = Color(0xFF8B5CF6); // Purple
+  static const Color spiritualLight = Color(0xFFA78BFA); // Light purple
+  static const Color spiritualDark = Color(0xFF7C3AED); // Dark purple
   
-  // Светлая тема
+  // Light theme
   static const ColorScheme light = ColorScheme(
     brightness: Brightness.light,
     primary: primary,
@@ -48,7 +48,7 @@ class AppColors {
     surfaceTint: primary,
   );
 
-  // Темная тема
+  // Dark theme
   static const ColorScheme dark = ColorScheme(
     brightness: Brightness.dark,
     primary: primaryLight,
@@ -75,7 +75,7 @@ class AppColors {
     surfaceTint: primaryLight,
   );
 
-  // Светлая тема - фоны
+  // Light theme - backgrounds
   static const Color lightBackgroundPrimary = Color(0xFFFAFAFA);
   static const Color lightBackgroundSecondary = Color(0xFFF5F5F5);
   static const Color lightCardBackground = Colors.white;
@@ -83,13 +83,13 @@ class AppColors {
   static const Color lightNavigationBackground = Colors.white;
   static const Color lightInputBackground = Color(0xFFF8F9FA);
 
-  // Светлая тема - тексты
+  // Light theme - texts
   static const Color lightTextPrimary = Color(0xFF1F2937);
   static const Color lightTextSecondary = Color(0xFF6B7280);
   static const Color lightTextTertiary = Color(0xFF9CA3AF);
   static const Color lightNavigationText = Color(0xFF1F2937);
 
-  // Светлая тема - границы и тени
+  // Light theme - borders and shadows
   static const Color lightBorder = Color(0xFFE5E7EB);
   static const Color lightBorderSecondary = Color(0xFFF3F4F6);
   static const Color lightBorderFocused = primary;
@@ -98,7 +98,7 @@ class AppColors {
   static const Color lightShadow = Color(0x1A000000);
   static const Color lightCardShadow = Color(0x0A000000);
 
-  // Темная тема - фоны
+  // Dark theme - backgrounds
   static const Color darkBackgroundPrimary = Color(0xFF0F172A);
   static const Color darkBackgroundSecondary = Color(0xFF1E293B);
   static const Color darkCardBackground = Color(0xFF1E293B);
@@ -106,13 +106,13 @@ class AppColors {
   static const Color darkNavigationBackground = Color(0xFF1E293B);
   static const Color darkInputBackground = Color(0xFF334155);
 
-  // Темная тема - тексты
+  // Dark theme - texts
   static const Color darkTextPrimary = Color(0xFFF8FAFC);
   static const Color darkTextSecondary = Color(0xFFCBD5E1);
   static const Color darkTextTertiary = Color(0xFF94A3B8);
   static const Color darkNavigationText = Color(0xFFF8FAFC);
 
-  // Темная тема - границы и тени
+  // Dark theme - borders and shadows
   static const Color darkBorder = Color(0xFF334155);
   static const Color darkBorderSecondary = Color(0xFF475569);
   static const Color darkBorderFocused = primaryLight;
@@ -121,25 +121,25 @@ class AppColors {
   static const Color darkShadow = Color(0x40000000);
   static const Color darkCardShadow = Color(0x20000000);
 
-  // Статусные цвета
+  // Status colors
   static const Color success = Color(0xFF10B981);
   static const Color warning = Color(0xFFF59E0B);
   static const Color error = Color(0xFFEF4444);
   static const Color info = Color(0xFF3B82F6);
 
-  // Кнопки
+  // Buttons
   static const Color buttonPrimary = primary;
   static const Color buttonSecondary = accent;
   static const Color buttonText = Colors.white;
   static const Color buttonDisabled = Color(0xFF9CA3AF);
 
-  // Переключатели
+  // Switches
   static const Color switchActive = accent;
   static const Color switchInactive = Color(0xFFD1D5DB);
   static const Color switchActiveDark = accentLight;
   static const Color switchInactiveDark = Color(0xFF475569);
 
-  // Градиенты
+  // Gradients
   static const LinearGradient primaryGradient = LinearGradient(
     colors: [primary, primaryLight],
     begin: Alignment.topLeft,
@@ -164,13 +164,13 @@ class AppColors {
     end: Alignment.bottomRight,
   );
 
-  // Специальные цвета для FreeDome
+  // Special colors for FreeDome
   static const Color freedomeConnected = success;
   static const Color freedomeDisconnected = error;
   static const Color freedomeConnecting = warning;
   static const Color freedomeCalibrating = info;
 
-  // Методы для получения цветов в зависимости от темы
+  // Methods for getting colors based on theme
   static Color getBackgroundPrimary(Brightness brightness) {
     return brightness == Brightness.light ? lightBackgroundPrimary : darkBackgroundPrimary;
   }
@@ -261,7 +261,7 @@ class AppColors {
         : [darkCardBackground, darkCardBackgroundSecondary];
   }
 
-  // Цвета для прогресс-баров
+  // Colors for progress bars
   static const Color progressBackground = Color(0xFFE5E7EB);
   static const Color progressFill = accent;
 } 

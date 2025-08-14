@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
-/// Градиенты приложения FreeDome Manager
-/// Основаны на глубоких синих тонах с акцентами свободы и духовности
-/// Поддерживают светлую и темную темы
+/// Gradients for FreeDome Manager application
+/// Based on deep blue tones with accents of freedom and spirituality
+/// Support light and dark themes
 class AppGradients {
-  // Приватный конструктор для предотвращения создания экземпляров
+  // Private constructor to prevent instantiation
   AppGradients._();
 
-  /// Основной фоновый градиент (светлая тема)
+  /// Main background gradient (light theme)
   static const LinearGradient lightBackground = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -18,7 +18,7 @@ class AppGradients {
     ],
   );
 
-  /// Основной фоновый градиент (темная тема)
+  /// Main background gradient (dark theme)
   static const LinearGradient darkBackground = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -28,7 +28,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для карточек (светлая тема)
+  /// Card gradient (light theme)
   static const LinearGradient lightCard = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -38,7 +38,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для карточек (темная тема)
+  /// Card gradient (dark theme)
   static const LinearGradient darkCard = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -48,7 +48,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для кнопок
+  /// Button gradient
   static const LinearGradient button = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -58,7 +58,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для прогресс-баров
+  /// Progress bar gradient
   static const LinearGradient progress = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -68,7 +68,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для калибровки
+  /// Calibration gradient
   static const LinearGradient calibration = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -78,7 +78,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для сканера
+  /// Scanner gradient
   static const LinearGradient scanner = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -88,7 +88,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для управления
+  /// Control gradient
   static const LinearGradient control = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -98,7 +98,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для мониторинга
+  /// Monitoring gradient
   static const LinearGradient monitoring = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -108,7 +108,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для профиля
+  /// Profile gradient
   static const LinearGradient profile = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -118,7 +118,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для подключения
+  /// Connection gradient
   static const LinearGradient connection = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -128,7 +128,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для статуса FreeDome
+  /// FreeDome status gradient
   static const LinearGradient freedomeStatus = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -138,7 +138,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для свободы
+  /// Freedom gradient
   static const LinearGradient freedom = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -148,7 +148,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для духовности
+  /// Spiritual gradient
   static const LinearGradient spiritual = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -158,7 +158,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для успеха
+  /// Success gradient
   static const LinearGradient success = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -168,7 +168,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для предупреждений
+  /// Warning gradient
   static const LinearGradient warning = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -178,7 +178,7 @@ class AppGradients {
     ],
   );
 
-  /// Градиент для ошибок
+  /// Error gradient
   static const LinearGradient error = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -188,7 +188,7 @@ class AppGradients {
     ],
   );
 
-  /// Методы для получения градиентов в зависимости от темы
+  /// Methods for getting gradients based on theme
   static LinearGradient getBackground(Brightness brightness) {
     return brightness == Brightness.light ? lightBackground : darkBackground;
   }
@@ -197,7 +197,7 @@ class AppGradients {
     return brightness == Brightness.light ? lightCard : darkCard;
   }
 
-  /// Метод для создания кастомного градиента
+  /// Method for creating custom gradient
   static LinearGradient custom({
     required List<Color> colors,
     AlignmentGeometry begin = Alignment.topLeft,
@@ -216,7 +216,7 @@ class AppGradients {
     );
   }
 
-  /// Метод для создания радиального градиента
+  /// Method for creating radial gradient
   static RadialGradient radial({
     required List<Color> colors,
     AlignmentGeometry center = Alignment.center,

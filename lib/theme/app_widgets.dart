@@ -3,15 +3,15 @@ import 'app_colors.dart';
 import 'app_dimensions.dart';
 import 'app_gradients.dart';
 
-/// Общие виджеты приложения FreeDome Manager
-/// Обеспечивает консистентность UI компонентов
-/// Поддерживает светлую и темную темы
-/// Основан на глубоких синих тонах с акцентами свободы и духовности
+/// Common widgets for FreeDome Manager application
+/// Ensures UI component consistency
+/// Supports light and dark themes
+/// Based on deep blue tones with accents of freedom and spirituality
 class AppWidgets {
-  // Приватный конструктор для предотвращения создания экземпляров
+  // Private constructor to prevent instantiation
   AppWidgets._();
 
-  /// Карточка с градиентным фоном
+  /// Card with gradient background
   static Widget gradientCard({
     required Widget child,
     EdgeInsetsGeometry? padding,
@@ -38,7 +38,7 @@ class AppWidgets {
     );
   }
 
-  /// Кнопка с градиентом
+  /// Button with gradient
   static Widget gradientButton({
     required String text,
     required VoidCallback onPressed,
@@ -99,7 +99,7 @@ class AppWidgets {
     );
   }
 
-  /// Прогресс-бар с градиентом
+  /// Progress bar with gradient
   static Widget gradientProgressBar({
     required double value,
     double? height,
@@ -129,7 +129,7 @@ class AppWidgets {
     );
   }
 
-  /// Чип с градиентом
+  /// Chip with gradient
   static Widget gradientChip({
     required String label,
     VoidCallback? onDeleted,
@@ -167,7 +167,7 @@ class AppWidgets {
     );
   }
 
-  /// Аватар с градиентом
+  /// Avatar with gradient
   static Widget gradientAvatar({
     required String text,
     double? size,
@@ -197,7 +197,7 @@ class AppWidgets {
     );
   }
 
-  /// Индикатор загрузки с градиентом
+  /// Loading indicator with gradient
   static Widget gradientLoadingIndicator({
     double? size,
     double? strokeWidth,
@@ -215,7 +215,7 @@ class AppWidgets {
     );
   }
 
-  /// Карточка с информацией
+  /// Info card
   static Widget infoCard({
     required String title,
     required String subtitle,
@@ -279,7 +279,7 @@ class AppWidgets {
     );
   }
 
-  /// Разделитель с градиентом
+  /// Divider with gradient
   static Widget gradientDivider({
     double? height,
     List<Color>? colors,
@@ -298,7 +298,7 @@ class AppWidgets {
     );
   }
 
-  /// Текст с градиентом
+  /// Text with gradient
   static Widget gradientText({
     required String text,
     TextStyle? style,
@@ -324,7 +324,7 @@ class AppWidgets {
     );
   }
 
-  /// Статус индикатор FreeDome
+  /// FreeDome status indicator
   static Widget freedomeStatusIndicator({
     required bool isConnected,
     required bool isCalibrating,
@@ -359,7 +359,7 @@ class AppWidgets {
     );
   }
 
-  /// Карточка подключения FreeDome
+  /// FreeDome connection card
   static Widget freedomeConnectionCard({
     required String title,
     required String status,
@@ -413,7 +413,7 @@ class AppWidgets {
                                   if (isConnected)
                     Expanded(
                       child: gradientButton(
-                        text: 'Отключить',
+                        text: 'Disconnect',
                         onPressed: onDisconnect ?? () {},
                         icon: Icons.power_settings_new,
                         colors: [AppColors.error, AppColors.primary],
@@ -422,7 +422,7 @@ class AppWidgets {
                   else
                     Expanded(
                       child: gradientButton(
-                        text: 'Подключить',
+                        text: 'Connect',
                         onPressed: onConnect ?? () {},
                         icon: Icons.power_settings_new,
                       ),
@@ -435,7 +435,7 @@ class AppWidgets {
     );
   }
 
-  /// Карточка калибровки
+  /// Calibration card
   static Widget calibrationCard({
     required String title,
     required double progress,
@@ -481,7 +481,7 @@ class AppWidgets {
                 if (isCalibrating)
                   Expanded(
                     child: gradientButton(
-                      text: 'Остановить',
+                      text: 'Stop',
                       onPressed: onStop ?? () {},
                       icon: Icons.stop,
                       colors: [AppColors.warning, AppColors.error],
@@ -490,7 +490,7 @@ class AppWidgets {
                 else
                   Expanded(
                     child: gradientButton(
-                      text: 'Начать',
+                      text: 'Start',
                       onPressed: onStart ?? () {},
                       icon: Icons.play_arrow,
                       colors: [AppColors.primary, AppColors.spiritual],
