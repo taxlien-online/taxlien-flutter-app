@@ -7,6 +7,7 @@ import '../services/tax_lien_service.dart';
 import '../services/nft_service.dart';
 import '../services/wallet_service.dart';
 import '../services/yuku_service.dart';
+import '../services/plug_wallet_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import '../services/user_preferences_service.dart';
