@@ -210,7 +210,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      l10n?.appTitle ?? 'FreeDome Manager',
+                      l10n?.appTitle ?? 'TaxLien.online',
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onBackground,
