@@ -41,8 +41,8 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      // Проверяем, что заголовок приложения отображается на русском
-      expect(find.text('FreeDome Manager'), findsOneWidget);
+      // Check that app title is displayed in Russian
+      expect(find.text('TaxLien.online'), findsOneWidget);
     });
 
     testWidgets('App should display localized strings in English', (WidgetTester tester) async {
@@ -77,8 +77,8 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      // Проверяем, что заголовок приложения отображается на английском
-      expect(find.text('FreeDome Manager'), findsOneWidget);
+      // Check that app title is displayed in English
+      expect(find.text('TaxLien.online'), findsOneWidget);
     });
   });
 } 

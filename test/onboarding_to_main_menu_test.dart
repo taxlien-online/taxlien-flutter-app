@@ -27,7 +27,7 @@ void main() {
     });
 
     testWidgets('should show onboarding when not completed', (WidgetTester tester) async {
-      // Сбрасываем онбординг для тестирования
+      // Reset onboarding for testing
       await onboardingService.resetOnboarding();
 
       await tester.pumpWidget(
@@ -41,13 +41,13 @@ void main() {
         ),
       );
 
-      // Проверяем, что отображается экран онбординга
+      // Check that onboarding screen is displayed
       expect(find.byType(OnboardingScreen), findsOneWidget);
-      expect(find.text('Welcome to FreeDome Manager'), findsOneWidget);
+      expect(find.text('Welcome to TaxLien.online'), findsOneWidget);
     });
 
     testWidgets('should show main menu when onboarding completed', (WidgetTester tester) async {
-      // Завершаем онбординг
+      // Complete onboarding
       await onboardingService.completeOnboarding();
 
       await tester.pumpWidget(
@@ -68,13 +68,13 @@ void main() {
         ),
       );
 
-      // Проверяем, что отображается главное меню
+      // Check that main menu is displayed
       expect(find.byType(MainMenuScreen), findsOneWidget);
-      expect(find.text('FreeDome Manager'), findsOneWidget);
+      expect(find.text('TaxLien.online'), findsOneWidget);
     });
 
     testWidgets('should complete onboarding and navigate to main menu', (WidgetTester tester) async {
-      // Сбрасываем онбординг для тестирования
+      // Reset onboarding for testing
       await onboardingService.resetOnboarding();
 
       await tester.pumpWidget(
@@ -88,28 +88,28 @@ void main() {
         ),
       );
 
-      // Проверяем, что отображается экран онбординга
+      // Check that onboarding screen is displayed
       expect(find.byType(OnboardingScreen), findsOneWidget);
 
-      // Переходим к последнему шагу
+      // Go to last step
       for (int i = 0; i < onboardingService.totalSteps - 1; i++) {
         await onboardingService.nextStep();
         await tester.pump();
       }
 
-      // Нажимаем кнопку "Get Started"
+      // Press "Get Started" button
       final getStartedButton = find.text('Get Started');
       expect(getStartedButton, findsOneWidget);
       
       await tester.tap(getStartedButton);
       await tester.pumpAndSettle();
 
-      // Проверяем, что онбординг завершен
+      // Check that onboarding is completed
       expect(onboardingService.isOnboardingCompleted, isTrue);
     });
 
     testWidgets('should skip onboarding and navigate to main menu', (WidgetTester tester) async {
-      // Сбрасываем онбординг для тестирования
+      // Reset onboarding for testing
       await onboardingService.resetOnboarding();
 
       await tester.pumpWidget(
@@ -123,29 +123,29 @@ void main() {
         ),
       );
 
-      // Проверяем, что отображается экран онбординга
+      // Check that onboarding screen is displayed
       expect(find.byType(OnboardingScreen), findsOneWidget);
 
-      // Нажимаем кнопку "Skip"
+      // Press "Skip" button
       final skipButton = find.text('Skip');
       expect(skipButton, findsOneWidget);
       
       await tester.tap(skipButton);
       await tester.pumpAndSettle();
 
-      // Подтверждаем пропуск
+      // Confirm skip
       final confirmSkipButton = find.text('Skip');
       expect(confirmSkipButton, findsOneWidget);
       
       await tester.tap(confirmSkipButton);
       await tester.pumpAndSettle();
 
-      // Проверяем, что онбординг пропущен
+      // Check that onboarding is skipped
       expect(onboardingService.isOnboardingSkipped, isTrue);
     });
 
     testWidgets('should show correct onboarding steps', (WidgetTester tester) async {
-      // Сбрасываем онбординг для тестирования
+      // Reset onboarding for testing
       await onboardingService.resetOnboarding();
 
       await tester.pumpWidget(
@@ -159,29 +159,29 @@ void main() {
         ),
       );
 
-      // Проверяем первый шаг
-      expect(find.text('Welcome to FreeDome Manager'), findsOneWidget);
+      // Check first step
+      expect(find.text('Welcome to TaxLien.online'), findsOneWidget);
       expect(find.text('Your gateway to digital freedom and spiritual connection'), findsOneWidget);
 
-      // Переходим к следующему шагу
+      // Go to next step
       await onboardingService.nextStep();
       await tester.pump();
 
-      // Проверяем второй шаг
+      // Check second step
       expect(find.text('Connect to FreeDome'), findsOneWidget);
       expect(find.text('Establish a secure connection to your FreeDome network'), findsOneWidget);
 
-      // Переходим к следующему шагу
+      // Go to next step
       await onboardingService.nextStep();
       await tester.pump();
 
-      // Проверяем третий шаг
+      // Check third step
       expect(find.text('Dome Control'), findsOneWidget);
       expect(find.text('Control your dome settings and configurations'), findsOneWidget);
     });
 
     testWidgets('should show main menu with correct navigation options', (WidgetTester tester) async {
-      // Завершаем онбординг
+      // Complete onboarding
       await onboardingService.completeOnboarding();
 
       await tester.pumpWidget(
@@ -195,8 +195,8 @@ void main() {
         ),
       );
 
-      // Проверяем наличие основных элементов меню
-      expect(find.text('FreeDome Manager'), findsOneWidget);
+      // Check for main menu elements
+      expect(find.text('TaxLien.online'), findsOneWidget);
       expect(find.text('Playback Controls'), findsOneWidget);
       expect(find.text('Calibration'), findsOneWidget);
       expect(find.text('Media Files'), findsOneWidget);

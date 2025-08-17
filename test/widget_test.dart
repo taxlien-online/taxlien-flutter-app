@@ -30,6 +30,6 @@ void main() {
     ));
 
     // Verify that the app title is displayed
-    expect(find.text('FreeDome Manager'), findsOneWidget);
+    expect(find.text('TaxLien.online'), findsOneWidget);
   });
 }
