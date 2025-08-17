@@ -249,5 +249,473 @@
   "connectionStatus": "Ühenduse Olek",
   "@connectionStatus": {
     "description": "Connection status screen title"
+  },
+  "russian": "Vene",
+  "@russian": {
+    "description": "Vene keele nimi"
+  },
+  "ukrainian": "Ukraina",
+  "@ukrainian": {
+    "description": "Ukraina keele nimi"
+  },
+  "dataLoadError": "Andmete laadimise viga: {error}",
+  "@dataLoadError": {
+    "description": "Andmete laadimise veateade",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Võrgu viga"
+      }
+    }
+  },
+  "taxLienMarketplace": "Maksu Lienside Turg",
+  "@taxLienMarketplace": {
+    "description": "Maksu lienside turu ekraani pealkiri"
+  },
+  "filters": "Filtrid",
+  "@filters": {
+    "description": "Filtrite nupu vihje"
+  },
+  "refresh": "Värskenda",
+  "@refresh": {
+    "description": "Värskendamise nupu vihje"
+  },
+  "searchHint": "Otsi aadressi, omaniku või krundi ID järgi...",
+  "@searchHint": {
+    "description": "Otsingu välja vihjetekst"
+  },
+  "clear": "Tühjenda",
+  "@clear": {
+    "description": "Tühjendamise nupp"
+  },
+  "foundLiens": "Leitud: {count} liensi",
+  "@foundLiens": {
+    "description": "Leitud lienside arvu teade",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "Sorteeri: {sortLabel}",
+  "@sortBy": {
+    "description": "Sorteerimise silt",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "Oksjoni kuupäev ↑"
+      }
+    }
+  },
+  "retry": "Proovi uuesti",
+  "@retry": {
+    "description": "Uuesti proovimise nupp"
+  },
+  "noLiensFound": "Maksu liensi ei leitud",
+  "@noLiensFound": {
+    "description": "Lienside puudumise teade"
+  },
+  "tryChangingSearch": "Proovi muuta otsingu parameetreid või filtreid",
+  "@tryChangingSearch": {
+    "description": "Soovitus otsingu parameetrite muutmiseks"
+  },
+  "stateFilter": "Osariik: {state}",
+  "@stateFilter": {
+    "description": "Osariigi filtri silt",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "California"
+      }
+    }
+  },
+  "countyFilter": "Maakond: {county}",
+  "@countyFilter": {
+    "description": "Maakonna filtri silt",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "Los Angeles"
+      }
+    }
+  },
+  "amountFrom": "Alates: {amount}",
+  "@amountFrom": {
+    "description": "Minimaalse summa filter",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "Kuni: {amount}",
+  "@amountTo": {
+    "description": "Maksimaalse summa filter",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "Intressimäär alates: {rate}%",
+  "@interestRateFrom": {
+    "description": "Minimaalse intressimäära filter",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "Oksjoni kuupäev {direction}",
+  "@auctionDateSort": {
+    "description": "Oksjoni kuupäeva sorteerimise silt",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "Maksu summa {direction}",
+  "@taxAmountSort": {
+    "description": "Maksu summa sorteerimise silt",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "Intressimäär {direction}",
+  "@interestRateSort": {
+    "description": "Intressimäära sorteerimise silt",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "Hinnatud väärtus {direction}",
+  "@assessedValueSort": {
+    "description": "Hinnatud väärtuse sorteerimise silt",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "Lunastamise tähtaeg {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "Lunastamise tähtaja sorteerimise silt",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "Liens #{parcelId}",
+  "@lienNumber": {
+    "description": "Liensi number krundi ID-ga",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "Omanik: {owner}",
+  "@owner": {
+    "description": "Omaniku teave",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
+  "taxAmount": "Maksu summa",
+  "@taxAmount": {
+    "description": "Maksu summa silt"
+  },
+  "interestRate": "Intressimäär",
+  "@interestRate": {
+    "description": "Intressimäära silt"
+  },
+  "assessedValue": "Hinnatud väärtus",
+  "@assessedValue": {
+    "description": "Hinnatud väärtuse silt"
+  },
+  "auctionDate": "Oksjoni kuupäev",
+  "@auctionDate": {
+    "description": "Oksjoni kuupäeva silt"
+  },
+  "additionalInfo": "Lisaandmed",
+  "@additionalInfo": {
+    "description": "Lisaandmete sektsiooni pealkiri"
+  },
+  "county": "Maakond",
+  "@county": {
+    "description": "Maakonna silt"
+  },
+  "state": "Osariik",
+  "@state": {
+    "description": "Osariigi silt"
+  },
+  "redemptionDeadline": "Lunastamise tähtaeg",
+  "@redemptionDeadline": {
+    "description": "Lunastamise tähtaja silt"
+  },
+  "status": "Olek",
+  "@status": {
+    "description": "Oleku silt"
+  },
+  "buyLien": "Osta Liens",
+  "@buyLien": {
+    "description": "Liensi ostmise nupp"
+  },
+  "availableForPurchase": "Ostmiseks saadaval",
+  "@availableForPurchase": {
+    "description": "Ostmiseks saadaval olek"
+  },
+  "sold": "Müüdud",
+  "@sold": {
+    "description": "Müüdud olek"
+  },
+  "redeemed": "Lunastatud",
+  "@redeemed": {
+    "description": "Lunastatud olek"
+  },
+  "foreclosed": "Konfiskeeritud",
+  "@foreclosed": {
+    "description": "Konfiskeeritud olek"
+  },
+  "purchaseLien": "Liensi ostmine",
+  "@purchaseLien": {
+    "description": "Liensi ostmise dialoogi pealkiri"
+  },
+  "enterBidAmount": "Sisesta pakkumise summa (miinimum {amount}):",
+  "@enterBidAmount": {
+    "description": "Pakkumise summa sisestamise viide",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "Pakkumise summa",
+  "@bidAmount": {
+    "description": "Pakkumise summa välja silt"
+  },
+  "lienPurchasedSuccessfully": "Liens ostetud edukalt!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Liensi edukalt ostmise teade"
+  },
+  "purchaseError": "Ostmise viga",
+  "@purchaseError": {
+    "description": "Ostmise veateade"
+  },
+  "invalidBidAmount": "Vigane pakkumise summa",
+  "@invalidBidAmount": {
+    "description": "Vigase pakkumise summa teade"
+  },
+  "buy": "Osta",
+  "@buy": {
+    "description": "Ostmise nupp"
+  },
+  "profile": "Profiil",
+  "@profile": {
+    "description": "Profiili ekraani pealkiri"
+  },
+  "settings": "Seaded",
+  "@settings": {
+    "description": "Seadete nupu vihje"
+  },
+  "notAuthorized": "Pole autoriseeritud",
+  "@notAuthorized": {
+    "description": "Autoriseerimata teade"
+  },
+  "loginForAccess": "Logi sisse funktsioonidele ligipääsu saamiseks",
+  "@loginForAccess": {
+    "description": "Sisselogimise viide"
+  },
+  "login": "Logi sisse",
+  "@login": {
+    "description": "Sisselogimise nupp"
+  },
+  "register": "Registreeri",
+  "@register": {
+    "description": "Registreerimise nupp"
+  },
+  "edit": "Redigeeri",
+  "@edit": {
+    "description": "Redigeerimise nupp"
+  },
+  "logout": "Logi välja",
+  "@logout": {
+    "description": "Väljalogimise nupp"
+  },
+  "balance": "Saldo",
+  "@balance": {
+    "description": "Saldo silt"
+  },
+  "available": "Saadaval",
+  "@available": {
+    "description": "Saadaval saldo silt"
+  },
+  "topUp": "Täienda",
+  "@topUp": {
+    "description": "Täiendamise nupp"
+  },
+  "quickActions": "Kiirtegevused",
+  "@quickActions": {
+    "description": "Kiirtegevuste sektsiooni pealkiri"
+  },
+  "transactionHistory": "Tehingute ajalugu",
+  "@transactionHistory": {
+    "description": "Tehingute ajaloo menüü element"
+  },
+  "viewAllTransactions": "Vaata kõiki tehinguid",
+  "@viewAllTransactions": {
+    "description": "Tehingute ajaloo alapealkiri"
+  },
+  "favoriteLiens": "Lemmik Liensid",
+  "@favoriteLiens": {
+    "description": "Lemmik lienside menüü element"
+  },
+  "savedLiens": "Teie salvestatud liensid",
+  "@savedLiens": {
+    "description": "Lemmik lienside alapealkiri"
+  },
+  "notifications": "Teated",
+  "@notifications": {
+    "description": "Teatete menüü element"
+  },
+  "notificationSettings": "Teatete seaded",
+  "@notificationSettings": {
+    "description": "Teatete alapealkiri"
+  },
+  "help": "Abi",
+  "@help": {
+    "description": "Abi menüü element"
+  },
+  "appSettings": "Rakenduse seaded",
+  "@appSettings": {
+    "description": "Rakenduse seadete sektsiooni pealkiri"
+  },
+  "language": "Keel",
+  "@language": {
+    "description": "Keele menüü element"
+  },
+  "theme": "Teema",
+  "@theme": {
+    "description": "Teema menüü element"
+  },
+  "dark": "Tume",
+  "@dark": {
+    "description": "Tume teema silt"
+  },
+  "light": "Hele",
+  "@light": {
+    "description": "Hele teema silt"
+  },
+  "security": "Turvalisus",
+  "@security": {
+    "description": "Turvalisuse menüü element"
+  },
+  "securitySettings": "Turvalisuse seaded",
+  "@securitySettings": {
+    "description": "Turvalisuse alapealkiri"
+  },
+  "privacy": "Privaatsus",
+  "@privacy": {
+    "description": "Privaatsuse menüü element"
+  },
+  "privacySettings": "Privaatsuse seaded",
+  "@privacySettings": {
+    "description": "Privaatsuse alapealkiri"
+  },
+  "aboutApp": "Rakenduse kohta",
+  "@aboutApp": {
+    "description": "Rakenduse kohta sektsiooni pealkiri"
+  },
+  "version": "Versioon",
+  "@version": {
+    "description": "Versiooni menüü element"
+  },
+  "license": "Litsents",
+  "@license": {
+    "description": "Litsentsi menüü element"
+  },
+  "termsOfService": "Kasutustingimused",
+  "@termsOfService": {
+    "description": "Kasutustingimuste menüü element"
+  },
+  "userAgreement": "Kasutajaleping",
+  "@userAgreement": {
+    "description": "Kasutustingimuste alapealkiri"
+  },
+  "privacyPolicy": "Privaatsuspoliitika",
+  "@privacyPolicy": {
+    "description": "Privaatsuspoliitika menüü element"
+  },
+  "dataProcessing": "Isiklike andmete töötlemine",
+  "@dataProcessing": {
+    "description": "Privaatsuspoliitika alapealkiri"
+  },
+  "loginToAccount": "Logi kontole sisse",
+  "@loginToAccount": {
+    "description": "Sisselogimise dialoogi pealkiri"
+  },
+  "password": "Parool",
+  "@password": {
+    "description": "Parooli välja silt"
+  },
+  "loginSuccessful": "Sisselogimine õnnestus!",
+  "@loginSuccessful": {
+    "description": "Eduka sisselogimise teade"
+  },
+  "loginError": "Sisselogimise viga",
+  "@loginError": {
+    "description": "Sisselogimise veateade"
+  },
+  "registration": "Registreerimine",
+  "@registration": {
+    "description": "Registreerimise dialoogi pealkiri"
+  },
+  "firstName": "Eesnimi",
+  "@firstName": {
+    "description": "Eesnime välja silt"
+  },
+  "lastName": "Perekonnanimi",
+  "@lastName": {
+    "description": "Perekonnanime välja silt"
+  },
+  "registrationSuccessful": "Registreerimine õnnestus!",
+  "@registrationSuccessful": {
+    "description": "Eduka registreerimise teade"
+  },
+  "registrationError": "Registreerimise viga",
+  "@registrationError": {
+    "description": "Registreerimise veateade"
+  },
+  "registerAccount": "Registreeri",
+  "@registerAccount": {
+    "description": "Registreerimise dialoogis olev registreerimise nupp"
+  },
+  "logoutConfirmation": "Väljalogimise kinnitamine",
+  "@logoutConfirmation": {
+    "description": "Väljalogimise kinnituse dialoogi pealkiri"
+  },
+  "logoutConfirmationMessage": "Oled kindel, et soovid välja logida?",
+  "@logoutConfirmationMessage": {
+    "description": "Väljalogimise kinnituse teade"
   }
 }

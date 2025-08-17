@@ -249,5 +249,473 @@
   "connectionStatus": "Status da Conexão",
   "@connectionStatus": {
     "description": "Título da tela de status da conexão"
+  },
+  "russian": "Russo",
+  "@russian": {
+    "description": "Nome do idioma russo"
+  },
+  "ukrainian": "Ucraniano",
+  "@ukrainian": {
+    "description": "Nome do idioma ucraniano"
+  },
+  "dataLoadError": "Erro ao carregar dados: {error}",
+  "@dataLoadError": {
+    "description": "Mensagem de erro ao carregar dados",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Erro de rede"
+      }
+    }
+  },
+  "taxLienMarketplace": "Mercado de Gravames Fiscais",
+  "@taxLienMarketplace": {
+    "description": "Título da tela do mercado de gravames fiscais"
+  },
+  "filters": "Filtros",
+  "@filters": {
+    "description": "Tooltip do botão de filtros"
+  },
+  "refresh": "Atualizar",
+  "@refresh": {
+    "description": "Tooltip do botão de atualizar"
+  },
+  "searchHint": "Pesquisar por endereço, proprietário ou ID do lote...",
+  "@searchHint": {
+    "description": "Texto de sugestão do campo de pesquisa"
+  },
+  "clear": "Limpar",
+  "@clear": {
+    "description": "Botão limpar"
+  },
+  "foundLiens": "Encontrados: {count} gravames",
+  "@foundLiens": {
+    "description": "Mensagem de contagem de gravames encontrados",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "Ordenar por: {sortLabel}",
+  "@sortBy": {
+    "description": "Rótulo de ordenação",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "Data do Leilão ↑"
+      }
+    }
+  },
+  "retry": "Tentar Novamente",
+  "@retry": {
+    "description": "Botão tentar novamente"
+  },
+  "noLiensFound": "Nenhum gravame fiscal encontrado",
+  "@noLiensFound": {
+    "description": "Mensagem de que nenhum gravame foi encontrado"
+  },
+  "tryChangingSearch": "Tente alterar os parâmetros de pesquisa ou filtros",
+  "@tryChangingSearch": {
+    "description": "Sugestão para alterar parâmetros de pesquisa"
+  },
+  "stateFilter": "Estado: {state}",
+  "@stateFilter": {
+    "description": "Rótulo de filtro por estado",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "Califórnia"
+      }
+    }
+  },
+  "countyFilter": "Condado: {county}",
+  "@countyFilter": {
+    "description": "Rótulo de filtro por condado",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "Los Angeles"
+      }
+    }
+  },
+  "amountFrom": "De: {amount}",
+  "@amountFrom": {
+    "description": "Filtro de valor mínimo",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "Até: {amount}",
+  "@amountTo": {
+    "description": "Filtro de valor máximo",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "Taxa a partir de: {rate}%",
+  "@interestRateFrom": {
+    "description": "Filtro de taxa de juros mínima",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "Data do Leilão {direction}",
+  "@auctionDateSort": {
+    "description": "Rótulo de ordenação por data do leilão",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "Valor do Imposto {direction}",
+  "@taxAmountSort": {
+    "description": "Rótulo de ordenação por valor do imposto",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "Taxa de Juros {direction}",
+  "@interestRateSort": {
+    "description": "Rótulo de ordenação por taxa de juros",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "Valor Avaliado {direction}",
+  "@assessedValueSort": {
+    "description": "Rótulo de ordenação por valor avaliado",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "Prazo de Resgate {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "Rótulo de ordenação por prazo de resgate",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "Gravame #{parcelId}",
+  "@lienNumber": {
+    "description": "Número do gravame com ID do lote",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "Proprietário: {owner}",
+  "@owner": {
+    "description": "Informações do proprietário",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "João Silva"
+      }
+    }
+  },
+  "taxAmount": "Valor do Imposto",
+  "@taxAmount": {
+    "description": "Rótulo de valor do imposto"
+  },
+  "interestRate": "Taxa de Juros",
+  "@interestRate": {
+    "description": "Rótulo de taxa de juros"
+  },
+  "assessedValue": "Valor Avaliado",
+  "@assessedValue": {
+    "description": "Rótulo de valor avaliado"
+  },
+  "auctionDate": "Data do Leilão",
+  "@auctionDate": {
+    "description": "Rótulo de data do leilão"
+  },
+  "additionalInfo": "Informações Adicionais",
+  "@additionalInfo": {
+    "description": "Cabeçalho da seção de informações adicionais"
+  },
+  "county": "Condado",
+  "@county": {
+    "description": "Rótulo de condado"
+  },
+  "state": "Estado",
+  "@state": {
+    "description": "Rótulo de estado"
+  },
+  "redemptionDeadline": "Prazo de Resgate",
+  "@redemptionDeadline": {
+    "description": "Rótulo de prazo de resgate"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Rótulo de status"
+  },
+  "buyLien": "Comprar Gravame",
+  "@buyLien": {
+    "description": "Botão comprar gravame"
+  },
+  "availableForPurchase": "Disponível para compra",
+  "@availableForPurchase": {
+    "description": "Status disponível para compra"
+  },
+  "sold": "Vendido",
+  "@sold": {
+    "description": "Status vendido"
+  },
+  "redeemed": "Resgatado",
+  "@redeemed": {
+    "description": "Status resgatado"
+  },
+  "foreclosed": "Executado",
+  "@foreclosed": {
+    "description": "Status executado"
+  },
+  "purchaseLien": "Comprar Gravame",
+  "@purchaseLien": {
+    "description": "Título do diálogo de compra de gravame"
+  },
+  "enterBidAmount": "Digite o valor do lance (mínimo {amount}):",
+  "@enterBidAmount": {
+    "description": "Solicitação de entrada do valor do lance",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "Valor do Lance",
+  "@bidAmount": {
+    "description": "Rótulo do campo de valor do lance"
+  },
+  "lienPurchasedSuccessfully": "Gravame comprado com sucesso!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Mensagem de compra bem-sucedida de gravame"
+  },
+  "purchaseError": "Erro na compra",
+  "@purchaseError": {
+    "description": "Mensagem de erro na compra"
+  },
+  "invalidBidAmount": "Valor do lance inválido",
+  "@invalidBidAmount": {
+    "description": "Mensagem de valor do lance inválido"
+  },
+  "buy": "Comprar",
+  "@buy": {
+    "description": "Botão comprar"
+  },
+  "profile": "Perfil",
+  "@profile": {
+    "description": "Título da tela de perfil"
+  },
+  "settings": "Configurações",
+  "@settings": {
+    "description": "Tooltip do botão de configurações"
+  },
+  "notAuthorized": "Não autorizado",
+  "@notAuthorized": {
+    "description": "Mensagem de usuário não autorizado"
+  },
+  "loginForAccess": "Faça login para acessar os recursos",
+  "@loginForAccess": {
+    "description": "Mensagem com sugestão de login"
+  },
+  "login": "Entrar",
+  "@login": {
+    "description": "Botão de login"
+  },
+  "register": "Registrar",
+  "@register": {
+    "description": "Botão de registro"
+  },
+  "edit": "Editar",
+  "@edit": {
+    "description": "Botão editar"
+  },
+  "logout": "Sair",
+  "@logout": {
+    "description": "Botão de logout"
+  },
+  "balance": "Saldo",
+  "@balance": {
+    "description": "Rótulo de saldo"
+  },
+  "available": "Disponível",
+  "@available": {
+    "description": "Rótulo de saldo disponível"
+  },
+  "topUp": "Recarregar",
+  "@topUp": {
+    "description": "Botão recarregar"
+  },
+  "quickActions": "Ações Rápidas",
+  "@quickActions": {
+    "description": "Cabeçalho da seção de ações rápidas"
+  },
+  "transactionHistory": "Histórico de Transações",
+  "@transactionHistory": {
+    "description": "Item do menu de histórico de transações"
+  },
+  "viewAllTransactions": "Ver todas as transações",
+  "@viewAllTransactions": {
+    "description": "Subtítulo do histórico de transações"
+  },
+  "favoriteLiens": "Gravames Favoritos",
+  "@favoriteLiens": {
+    "description": "Item do menu de gravames favoritos"
+  },
+  "savedLiens": "Seus gravames salvos",
+  "@savedLiens": {
+    "description": "Subtítulo de gravames favoritos"
+  },
+  "notifications": "Notificações",
+  "@notifications": {
+    "description": "Item do menu de notificações"
+  },
+  "notificationSettings": "Configurações de notificação",
+  "@notificationSettings": {
+    "description": "Subtítulo de notificações"
+  },
+  "help": "Ajuda",
+  "@help": {
+    "description": "Item do menu de ajuda"
+  },
+  "appSettings": "Configurações do Aplicativo",
+  "@appSettings": {
+    "description": "Cabeçalho da seção de configurações do aplicativo"
+  },
+  "language": "Idioma",
+  "@language": {
+    "description": "Item do menu de idioma"
+  },
+  "theme": "Tema",
+  "@theme": {
+    "description": "Item do menu de tema"
+  },
+  "dark": "Escuro",
+  "@dark": {
+    "description": "Rótulo de tema escuro"
+  },
+  "light": "Claro",
+  "@light": {
+    "description": "Rótulo de tema claro"
+  },
+  "security": "Segurança",
+  "@security": {
+    "description": "Item do menu de segurança"
+  },
+  "securitySettings": "Configurações de segurança",
+  "@securitySettings": {
+    "description": "Subtítulo de segurança"
+  },
+  "privacy": "Privacidade",
+  "@privacy": {
+    "description": "Item do menu de privacidade"
+  },
+  "privacySettings": "Configurações de privacidade",
+  "@privacySettings": {
+    "description": "Subtítulo de privacidade"
+  },
+  "aboutApp": "Sobre o Aplicativo",
+  "@aboutApp": {
+    "description": "Cabeçalho da seção sobre o aplicativo"
+  },
+  "version": "Versão",
+  "@version": {
+    "description": "Item do menu de versão"
+  },
+  "license": "Licença",
+  "@license": {
+    "description": "Item do menu de licença"
+  },
+  "termsOfService": "Termos de Serviço",
+  "@termsOfService": {
+    "description": "Item do menu de termos de serviço"
+  },
+  "userAgreement": "Acordo do Usuário",
+  "@userAgreement": {
+    "description": "Subtítulo de termos de serviço"
+  },
+  "privacyPolicy": "Política de Privacidade",
+  "@privacyPolicy": {
+    "description": "Item do menu de política de privacidade"
+  },
+  "dataProcessing": "Processamento de dados pessoais",
+  "@dataProcessing": {
+    "description": "Subtítulo de política de privacidade"
+  },
+  "loginToAccount": "Entrar na Conta",
+  "@loginToAccount": {
+    "description": "Título do diálogo de login"
+  },
+  "password": "Senha",
+  "@password": {
+    "description": "Rótulo do campo de senha"
+  },
+  "loginSuccessful": "Login bem-sucedido!",
+  "@loginSuccessful": {
+    "description": "Mensagem de login bem-sucedido"
+  },
+  "loginError": "Erro de login",
+  "@loginError": {
+    "description": "Mensagem de erro de login"
+  },
+  "registration": "Registro",
+  "@registration": {
+    "description": "Título do diálogo de registro"
+  },
+  "firstName": "Nome",
+  "@firstName": {
+    "description": "Rótulo do campo de nome"
+  },
+  "lastName": "Sobrenome",
+  "@lastName": {
+    "description": "Rótulo do campo de sobrenome"
+  },
+  "registrationSuccessful": "Registro bem-sucedido!",
+  "@registrationSuccessful": {
+    "description": "Mensagem de registro bem-sucedido"
+  },
+  "registrationError": "Erro de registro",
+  "@registrationError": {
+    "description": "Mensagem de erro de registro"
+  },
+  "registerAccount": "Registrar",
+  "@registerAccount": {
+    "description": "Botão de registro no diálogo de registro"
+  },
+  "logoutConfirmation": "Confirmação de Logout",
+  "@logoutConfirmation": {
+    "description": "Título do diálogo de confirmação de logout"
+  },
+  "logoutConfirmationMessage": "Tem certeza de que deseja sair?",
+  "@logoutConfirmationMessage": {
+    "description": "Mensagem de confirmação de logout"
   }
 }

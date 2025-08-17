@@ -249,5 +249,473 @@
   "connectionStatus": "Yhteystila",
   "@connectionStatus": {
     "description": "Connection status screen title"
+  },
+  "russian": "Venäjä",
+  "@russian": {
+    "description": "Venäjän kielen nimi"
+  },
+  "ukrainian": "Ukraina",
+  "@ukrainian": {
+    "description": "Ukrainan kielen nimi"
+  },
+  "dataLoadError": "Tietojen latausvirhe: {error}",
+  "@dataLoadError": {
+    "description": "Tietojen latausvirheviesti",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Verkkovirhe"
+      }
+    }
+  },
+  "taxLienMarketplace": "Veropanttien Markkinapaikka",
+  "@taxLienMarketplace": {
+    "description": "Veropanttien markkinapaikan näytön otsikko"
+  },
+  "filters": "Suodattimet",
+  "@filters": {
+    "description": "Suodattimien painikkeen vihje"
+  },
+  "refresh": "Päivitä",
+  "@refresh": {
+    "description": "Päivityspainikkeen vihje"
+  },
+  "searchHint": "Etsi osoitteen, omistajan tai tontin ID:n perusteella...",
+  "@searchHint": {
+    "description": "Hakutason vihjeteksti"
+  },
+  "clear": "Tyhjennä",
+  "@clear": {
+    "description": "Tyhjennyspainike"
+  },
+  "foundLiens": "Löydetty: {count} panttia",
+  "@foundLiens": {
+    "description": "Löydettyjen panttien määräviesti",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "Järjestä: {sortLabel}",
+  "@sortBy": {
+    "description": "Järjestyksen tunniste",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "Huutokauppapäivä ↑"
+      }
+    }
+  },
+  "retry": "Yritä uudelleen",
+  "@retry": {
+    "description": "Uudelleenyrityspainike"
+  },
+  "noLiensFound": "Veropantteja ei löytynyt",
+  "@noLiensFound": {
+    "description": "Panttien puuttumisviesti"
+  },
+  "tryChangingSearch": "Kokeile muuttaa haun parametreja tai suodattimia",
+  "@tryChangingSearch": {
+    "description": "Ehdotus haun parametrien muuttamiseksi"
+  },
+  "stateFilter": "Osavaltio: {state}",
+  "@stateFilter": {
+    "description": "Osavaltion suodattimen tunniste",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "Kalifornia"
+      }
+    }
+  },
+  "countyFilter": "Piirikunta: {county}",
+  "@countyFilter": {
+    "description": "Piirikunnan suodattimen tunniste",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "Los Angeles"
+      }
+    }
+  },
+  "amountFrom": "Alkaen: {amount}",
+  "@amountFrom": {
+    "description": "Vähimmäissumman suodatin",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "Asti: {amount}",
+  "@amountTo": {
+    "description": "Enimmäissumman suodatin",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "Korko alkaen: {rate}%",
+  "@interestRateFrom": {
+    "description": "Vähimmäiskoron suodatin",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "Huutokauppapäivä {direction}",
+  "@auctionDateSort": {
+    "description": "Huutokauppapäivän järjestyksen tunniste",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "Verosumma {direction}",
+  "@taxAmountSort": {
+    "description": "Verosuman järjestyksen tunniste",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "Korko {direction}",
+  "@interestRateSort": {
+    "description": "Koron järjestyksen tunniste",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "Arvioitu arvo {direction}",
+  "@assessedValueSort": {
+    "description": "Arvioidun arvon järjestyksen tunniste",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "Lunastusmääräaika {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "Lunastusmääräajan järjestyksen tunniste",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "Pantti #{parcelId}",
+  "@lienNumber": {
+    "description": "Pantin numero tontin ID:llä",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "Omistaja: {owner}",
+  "@owner": {
+    "description": "Omistajan tiedot",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
+  "taxAmount": "Verosumma",
+  "@taxAmount": {
+    "description": "Verosuman tunniste"
+  },
+  "interestRate": "Korko",
+  "@interestRate": {
+    "description": "Koron tunniste"
+  },
+  "assessedValue": "Arvioitu arvo",
+  "@assessedValue": {
+    "description": "Arvioidun arvon tunniste"
+  },
+  "auctionDate": "Huutokauppapäivä",
+  "@auctionDate": {
+    "description": "Huutokauppapäivän tunniste"
+  },
+  "additionalInfo": "Lisätiedot",
+  "@additionalInfo": {
+    "description": "Lisätietojen osion otsikko"
+  },
+  "county": "Piirikunta",
+  "@county": {
+    "description": "Piirikunnan tunniste"
+  },
+  "state": "Osavaltio",
+  "@state": {
+    "description": "Osavaltion tunniste"
+  },
+  "redemptionDeadline": "Lunastusmääräaika",
+  "@redemptionDeadline": {
+    "description": "Lunastusmääräajan tunniste"
+  },
+  "status": "Tila",
+  "@status": {
+    "description": "Tilan tunniste"
+  },
+  "buyLien": "Osta Pantti",
+  "@buyLien": {
+    "description": "Pantin ostopainike"
+  },
+  "availableForPurchase": "Ostettavissa",
+  "@availableForPurchase": {
+    "description": "Ostettavissa oleva tila"
+  },
+  "sold": "Myyty",
+  "@sold": {
+    "description": "Myyty tila"
+  },
+  "redeemed": "Lunastettu",
+  "@redeemed": {
+    "description": "Lunastettu tila"
+  },
+  "foreclosed": "Ulosmitattu",
+  "@foreclosed": {
+    "description": "Ulosmitattu tila"
+  },
+  "purchaseLien": "Pantin ostaminen",
+  "@purchaseLien": {
+    "description": "Pantin ostodialogin otsikko"
+  },
+  "enterBidAmount": "Syötä tarjoussumma (vähintään {amount}):",
+  "@enterBidAmount": {
+    "description": "Tarjoussumman syöttöviittaus",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "Tarjoussumma",
+  "@bidAmount": {
+    "description": "Tarjoussumman kentän tunniste"
+  },
+  "lienPurchasedSuccessfully": "Pantti ostettu onnistuneesti!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Pantin onnistuneen ostamisen viesti"
+  },
+  "purchaseError": "Ostovirhe",
+  "@purchaseError": {
+    "description": "Ostovirheviesti"
+  },
+  "invalidBidAmount": "Virheellinen tarjoussumma",
+  "@invalidBidAmount": {
+    "description": "Virheellisen tarjoussumman viesti"
+  },
+  "buy": "Osta",
+  "@buy": {
+    "description": "Ostopainike"
+  },
+  "profile": "Profiili",
+  "@profile": {
+    "description": "Profiilin näytön otsikko"
+  },
+  "settings": "Asetukset",
+  "@settings": {
+    "description": "Asetusten painikkeen vihje"
+  },
+  "notAuthorized": "Ei valtuutettu",
+  "@notAuthorized": {
+    "description": "Valtuuttamaton viesti"
+  },
+  "loginForAccess": "Kirjaudu sisään saadaksesi pääsy toimintoihin",
+  "@loginForAccess": {
+    "description": "Sisäänkirjautumisviittaus"
+  },
+  "login": "Kirjaudu sisään",
+  "@login": {
+    "description": "Sisäänkirjautumispainike"
+  },
+  "register": "Rekisteröidy",
+  "@register": {
+    "description": "Rekisteröitymispainike"
+  },
+  "edit": "Muokkaa",
+  "@edit": {
+    "description": "Muokkauspainike"
+  },
+  "logout": "Kirjaudu ulos",
+  "@logout": {
+    "description": "Uloskirjautumispainike"
+  },
+  "balance": "Saldo",
+  "@balance": {
+    "description": "Saldon tunniste"
+  },
+  "available": "Saatavilla",
+  "@available": {
+    "description": "Saatavilla olevan saldon tunniste"
+  },
+  "topUp": "Täytä",
+  "@topUp": {
+    "description": "Täyttöpainike"
+  },
+  "quickActions": "Pikatoiminnot",
+  "@quickActions": {
+    "description": "Pikatoimintojen osion otsikko"
+  },
+  "transactionHistory": "Tapahtumahistoria",
+  "@transactionHistory": {
+    "description": "Tapahtumahistorian valikkokohde"
+  },
+  "viewAllTransactions": "Katso kaikki tapahtumat",
+  "@viewAllTransactions": {
+    "description": "Tapahtumahistorian alaotsikko"
+  },
+  "favoriteLiens": "Suosikki Pantit",
+  "@favoriteLiens": {
+    "description": "Suosikki panttien valikkokohde"
+  },
+  "savedLiens": "Tallennetut panttisi",
+  "@savedLiens": {
+    "description": "Suosikki panttien alaotsikko"
+  },
+  "notifications": "Ilmoitukset",
+  "@notifications": {
+    "description": "Ilmoitusten valikkokohde"
+  },
+  "notificationSettings": "Ilmoitusasetukset",
+  "@notificationSettings": {
+    "description": "Ilmoitusten alaotsikko"
+  },
+  "help": "Ohje",
+  "@help": {
+    "description": "Ohjeen valikkokohde"
+  },
+  "appSettings": "Sovelluksen asetukset",
+  "@appSettings": {
+    "description": "Sovelluksen asetusten osion otsikko"
+  },
+  "language": "Kieli",
+  "@language": {
+    "description": "Kielen valikkokohde"
+  },
+  "theme": "Teema",
+  "@theme": {
+    "description": "Teeman valikkokohde"
+  },
+  "dark": "Tumma",
+  "@dark": {
+    "description": "Tumman teeman tunniste"
+  },
+  "light": "Vaalea",
+  "@light": {
+    "description": "Vaalean teeman tunniste"
+  },
+  "security": "Turvallisuus",
+  "@security": {
+    "description": "Turvallisuuden valikkokohde"
+  },
+  "securitySettings": "Turvallisuusasetukset",
+  "@securitySettings": {
+    "description": "Turvallisuuden alaotsikko"
+  },
+  "privacy": "Yksityisyys",
+  "@privacy": {
+    "description": "Yksityisyyden valikkokohde"
+  },
+  "privacySettings": "Yksityisyysasetukset",
+  "@privacySettings": {
+    "description": "Yksityisyyden alaotsikko"
+  },
+  "aboutApp": "Sovelluksesta",
+  "@aboutApp": {
+    "description": "Sovelluksesta osion otsikko"
+  },
+  "version": "Versio",
+  "@version": {
+    "description": "Version valikkokohde"
+  },
+  "license": "Lisenssi",
+  "@license": {
+    "description": "Lisenssin valikkokohde"
+  },
+  "termsOfService": "Käyttöehdot",
+  "@termsOfService": {
+    "description": "Käyttöehtojen valikkokohde"
+  },
+  "userAgreement": "Käyttäjäsopimus",
+  "@userAgreement": {
+    "description": "Käyttöehtojen alaotsikko"
+  },
+  "privacyPolicy": "Tietosuojakäytäntö",
+  "@privacyPolicy": {
+    "description": "Tietosuojakäytännön valikkokohde"
+  },
+  "dataProcessing": "Henkilötietojen käsittely",
+  "@dataProcessing": {
+    "description": "Tietosuojakäytännön alaotsikko"
+  },
+  "loginToAccount": "Kirjaudu tilille",
+  "@loginToAccount": {
+    "description": "Sisäänkirjautumisdialogin otsikko"
+  },
+  "password": "Salasana",
+  "@password": {
+    "description": "Salasanan kentän tunniste"
+  },
+  "loginSuccessful": "Sisäänkirjautuminen onnistui!",
+  "@loginSuccessful": {
+    "description": "Onnistuneen sisäänkirjautumisen viesti"
+  },
+  "loginError": "Sisäänkirjautumisvirhe",
+  "@loginError": {
+    "description": "Sisäänkirjautumisvirheviesti"
+  },
+  "registration": "Rekisteröityminen",
+  "@registration": {
+    "description": "Rekisteröitymisdialogin otsikko"
+  },
+  "firstName": "Etunimi",
+  "@firstName": {
+    "description": "Etunimen kentän tunniste"
+  },
+  "lastName": "Sukunimi",
+  "@lastName": {
+    "description": "Sukunimen kentän tunniste"
+  },
+  "registrationSuccessful": "Rekisteröityminen onnistui!",
+  "@registrationSuccessful": {
+    "description": "Onnistuneen rekisteröitymisen viesti"
+  },
+  "registrationError": "Rekisteröitymisvirhe",
+  "@registrationError": {
+    "description": "Rekisteröitymisvirheviesti"
+  },
+  "registerAccount": "Rekisteröidy",
+  "@registerAccount": {
+    "description": "Rekisteröitymisdialogin rekisteröitymispainike"
+  },
+  "logoutConfirmation": "Uloskirjautumisen vahvistus",
+  "@logoutConfirmation": {
+    "description": "Uloskirjautumisen vahvistusdialogin otsikko"
+  },
+  "logoutConfirmationMessage": "Oletko varma, että haluat kirjautua ulos?",
+  "@logoutConfirmationMessage": {
+    "description": "Uloskirjautumisen vahvistusviesti"
   }
 } 

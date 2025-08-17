@@ -1,6 +1,6 @@
 {
   "@@locale": "he",
-  "appTitle": "מנהל FreeDome",
+  "appTitle": "TaxLien.online",
   "@appTitle": {
     "description": "Application title"
   },
@@ -128,7 +128,7 @@
   "@languageChanged": {
     "description": "Language change notification"
   },
-  "onboardingWelcomeTitle": "ברוכים הבאים למנהל FreeDome",
+  "onboardingWelcomeTitle": "ברוכים הבאים ל-TaxLien.online",
   "@onboardingWelcomeTitle": {
     "description": "Onboarding welcome screen title"
   },
@@ -249,5 +249,473 @@
   "connectionStatus": "סטטוס חיבור",
   "@connectionStatus": {
     "description": "Connection status screen title"
+  },
+  "russian": "רוסית",
+  "@russian": {
+    "description": "Name of Russian language"
+  },
+  "ukrainian": "אוקראינית",
+  "@ukrainian": {
+    "description": "Name of Ukrainian language"
+  },
+  "dataLoadError": "שגיאה בטעינת נתונים: {error}",
+  "@dataLoadError": {
+    "description": "Data loading error message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "שגיאת רשת"
+      }
+    }
+  },
+  "taxLienMarketplace": "שוק שעבוד מס",
+  "@taxLienMarketplace": {
+    "description": "Tax lien marketplace screen title"
+  },
+  "filters": "מסננים",
+  "@filters": {
+    "description": "Filters button tooltip"
+  },
+  "refresh": "רענן",
+  "@refresh": {
+    "description": "Refresh button tooltip"
+  },
+  "searchHint": "חפש לפי כתובת, בעלים או מזהה חלקה...",
+  "@searchHint": {
+    "description": "Search field hint text"
+  },
+  "clear": "נקה",
+  "@clear": {
+    "description": "Clear button"
+  },
+  "foundLiens": "נמצאו: {count} שעבודים",
+  "@foundLiens": {
+    "description": "Found liens count message",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "מיין לפי: {sortLabel}",
+  "@sortBy": {
+    "description": "Sort by label",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "תאריך מכירה פומבית ↑"
+      }
+    }
+  },
+  "retry": "נסה שוב",
+  "@retry": {
+    "description": "Retry button"
+  },
+  "noLiensFound": "לא נמצאו שעבודי מס",
+  "@noLiensFound": {
+    "description": "No liens found message"
+  },
+  "tryChangingSearch": "נסה לשנות פרמטרי חיפוש או מסננים",
+  "@tryChangingSearch": {
+    "description": "Suggestion to change search parameters"
+  },
+  "stateFilter": "מדינה: {state}",
+  "@stateFilter": {
+    "description": "State filter label",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "קליפורניה"
+      }
+    }
+  },
+  "countyFilter": "מחוז: {county}",
+  "@countyFilter": {
+    "description": "County filter label",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "לוס אנג'לס"
+      }
+    }
+  },
+  "amountFrom": "מ: {amount}",
+  "@amountFrom": {
+    "description": "Minimum amount filter",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "עד: {amount}",
+  "@amountTo": {
+    "description": "Maximum amount filter",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "ריבית מ: {rate}%",
+  "@interestRateFrom": {
+    "description": "Minimum interest rate filter",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "תאריך מכירה פומבית {direction}",
+  "@auctionDateSort": {
+    "description": "Auction date sort label",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "סכום מס {direction}",
+  "@taxAmountSort": {
+    "description": "Tax amount sort label",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "ריבית {direction}",
+  "@interestRateSort": {
+    "description": "Interest rate sort label",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "ערך מוערך {direction}",
+  "@assessedValueSort": {
+    "description": "Assessed value sort label",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "תאריך יעד לפדיון {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "Redemption deadline sort label",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "שעבוד #{parcelId}",
+  "@lienNumber": {
+    "description": "Lien number with parcel ID",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "בעלים: {owner}",
+  "@owner": {
+    "description": "Owner information",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "יוסי כהן"
+      }
+    }
+  },
+  "taxAmount": "סכום מס",
+  "@taxAmount": {
+    "description": "Tax amount label"
+  },
+  "interestRate": "ריבית",
+  "@interestRate": {
+    "description": "Interest rate label"
+  },
+  "assessedValue": "ערך מוערך",
+  "@assessedValue": {
+    "description": "Assessed value label"
+  },
+  "auctionDate": "תאריך מכירה פומבית",
+  "@auctionDate": {
+    "description": "Auction date label"
+  },
+  "additionalInfo": "מידע נוסף",
+  "@additionalInfo": {
+    "description": "Additional information section header"
+  },
+  "county": "מחוז",
+  "@county": {
+    "description": "County label"
+  },
+  "state": "מדינה",
+  "@state": {
+    "description": "State label"
+  },
+  "redemptionDeadline": "תאריך יעד לפדיון",
+  "@redemptionDeadline": {
+    "description": "Redemption deadline label"
+  },
+  "status": "סטטוס",
+  "@status": {
+    "description": "Status label"
+  },
+  "buyLien": "קנה שעבוד",
+  "@buyLien": {
+    "description": "Buy lien button"
+  },
+  "availableForPurchase": "זמין לרכישה",
+  "@availableForPurchase": {
+    "description": "Available for purchase status"
+  },
+  "sold": "נמכר",
+  "@sold": {
+    "description": "Sold status"
+  },
+  "redeemed": "נפדה",
+  "@redeemed": {
+    "description": "Redeemed status"
+  },
+  "foreclosed": "הוחרם",
+  "@foreclosed": {
+    "description": "Foreclosed status"
+  },
+  "purchaseLien": "רכישת שעבוד",
+  "@purchaseLien": {
+    "description": "Purchase lien dialog title"
+  },
+  "enterBidAmount": "הזן סכום הצעה (מינימום {amount}):",
+  "@enterBidAmount": {
+    "description": "Enter bid amount prompt",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "סכום הצעה",
+  "@bidAmount": {
+    "description": "Bid amount field label"
+  },
+  "lienPurchasedSuccessfully": "השעבוד נרכש בהצלחה!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Lien purchased success message"
+  },
+  "purchaseError": "שגיאה ברכישה",
+  "@purchaseError": {
+    "description": "Purchase error message"
+  },
+  "invalidBidAmount": "סכום הצעה לא חוקי",
+  "@invalidBidAmount": {
+    "description": "Invalid bid amount message"
+  },
+  "buy": "קנה",
+  "@buy": {
+    "description": "Buy button"
+  },
+  "profile": "פרופיל",
+  "@profile": {
+    "description": "Profile screen title"
+  },
+  "settings": "הגדרות",
+  "@settings": {
+    "description": "Settings button tooltip"
+  },
+  "notAuthorized": "לא מורשה",
+  "@notAuthorized": {
+    "description": "Not authorized message"
+  },
+  "loginForAccess": "התחבר כדי לגשת לתכונות",
+  "@loginForAccess": {
+    "description": "Login prompt message"
+  },
+  "login": "התחבר",
+  "@login": {
+    "description": "Login button"
+  },
+  "register": "הרשמה",
+  "@register": {
+    "description": "Register button"
+  },
+  "edit": "ערוך",
+  "@edit": {
+    "description": "Edit button"
+  },
+  "logout": "התנתק",
+  "@logout": {
+    "description": "Logout button"
+  },
+  "balance": "יתרה",
+  "@balance": {
+    "description": "Balance label"
+  },
+  "available": "זמין",
+  "@available": {
+    "description": "Available balance label"
+  },
+  "topUp": "טען",
+  "@topUp": {
+    "description": "Top up button"
+  },
+  "quickActions": "פעולות מהירות",
+  "@quickActions": {
+    "description": "Quick actions section header"
+  },
+  "transactionHistory": "היסטוריית עסקאות",
+  "@transactionHistory": {
+    "description": "Transaction history menu item"
+  },
+  "viewAllTransactions": "צפה בכל העסקאות",
+  "@viewAllTransactions": {
+    "description": "Transaction history subtitle"
+  },
+  "favoriteLiens": "שעבודים מועדפים",
+  "@favoriteLiens": {
+    "description": "Favorite liens menu item"
+  },
+  "savedLiens": "השעבודים השמורים שלך",
+  "@savedLiens": {
+    "description": "Favorite liens subtitle"
+  },
+  "notifications": "התראות",
+  "@notifications": {
+    "description": "Notifications menu item"
+  },
+  "notificationSettings": "הגדרות התראות",
+  "@notificationSettings": {
+    "description": "Notifications subtitle"
+  },
+  "help": "עזרה",
+  "@help": {
+    "description": "Help menu item"
+  },
+  "appSettings": "הגדרות אפליקציה",
+  "@appSettings": {
+    "description": "App settings section header"
+  },
+  "language": "שפה",
+  "@language": {
+    "description": "Language menu item"
+  },
+  "theme": "ערכת נושא",
+  "@theme": {
+    "description": "Theme menu item"
+  },
+  "dark": "כהה",
+  "@dark": {
+    "description": "Dark theme label"
+  },
+  "light": "בהיר",
+  "@light": {
+    "description": "Light theme label"
+  },
+  "security": "אבטחה",
+  "@security": {
+    "description": "Security menu item"
+  },
+  "securitySettings": "הגדרות אבטחה",
+  "@securitySettings": {
+    "description": "Security subtitle"
+  },
+  "privacy": "פרטיות",
+  "@privacy": {
+    "description": "Privacy menu item"
+  },
+  "privacySettings": "הגדרות פרטיות",
+  "@privacySettings": {
+    "description": "Privacy subtitle"
+  },
+  "aboutApp": "אודות האפליקציה",
+  "@aboutApp": {
+    "description": "About app section header"
+  },
+  "version": "גרסה",
+  "@version": {
+    "description": "Version menu item"
+  },
+  "license": "רישיון",
+  "@license": {
+    "description": "License menu item"
+  },
+  "termsOfService": "תנאי שירות",
+  "@termsOfService": {
+    "description": "Terms of service menu item"
+  },
+  "userAgreement": "הסכם משתמש",
+  "@userAgreement": {
+    "description": "Terms of service subtitle"
+  },
+  "privacyPolicy": "מדיניות פרטיות",
+  "@privacyPolicy": {
+    "description": "Privacy policy menu item"
+  },
+  "dataProcessing": "עיבוד נתונים אישיים",
+  "@dataProcessing": {
+    "description": "Privacy policy subtitle"
+  },
+  "loginToAccount": "התחבר לחשבון",
+  "@loginToAccount": {
+    "description": "Login dialog title"
+  },
+  "password": "סיסמה",
+  "@password": {
+    "description": "Password field label"
+  },
+  "loginSuccessful": "ההתחברות הצליחה!",
+  "@loginSuccessful": {
+    "description": "Login success message"
+  },
+  "loginError": "שגיאת התחברות",
+  "@loginError": {
+    "description": "Login error message"
+  },
+  "registration": "הרשמה",
+  "@registration": {
+    "description": "Registration dialog title"
+  },
+  "firstName": "שם פרטי",
+  "@firstName": {
+    "description": "First name field label"
+  },
+  "lastName": "שם משפחה",
+  "@lastName": {
+    "description": "Last name field label"
+  },
+  "registrationSuccessful": "ההרשמה הצליחה!",
+  "@registrationSuccessful": {
+    "description": "Registration success message"
+  },
+  "registrationError": "שגיאת הרשמה",
+  "@registrationError": {
+    "description": "Registration error message"
+  },
+  "registerAccount": "הרשם",
+  "@registerAccount": {
+    "description": "Register button in registration dialog"
+  },
+  "logoutConfirmation": "אישור התנתקות",
+  "@logoutConfirmation": {
+    "description": "Logout confirmation dialog title"
+  },
+  "logoutConfirmationMessage": "האם אתה בטוח שברצונך להתנתק?",
+  "@logoutConfirmationMessage": {
+    "description": "Logout confirmation message"
   }
 } 

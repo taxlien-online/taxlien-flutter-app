@@ -249,5 +249,473 @@
   "connectionStatus": "연결 상태",
   "@connectionStatus": {
     "description": "연결 상태 화면 제목"
+  },
+  "russian": "러시아어",
+  "@russian": {
+    "description": "러시아어 언어명"
+  },
+  "ukrainian": "우크라이나어",
+  "@ukrainian": {
+    "description": "우크라이나어 언어명"
+  },
+  "dataLoadError": "데이터 로드 오류: {error}",
+  "@dataLoadError": {
+    "description": "데이터 로드 오류 메시지",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "네트워크 오류"
+      }
+    }
+  },
+  "taxLienMarketplace": "세금 압류 마켓플레이스",
+  "@taxLienMarketplace": {
+    "description": "세금 압류 마켓플레이스 화면 제목"
+  },
+  "filters": "필터",
+  "@filters": {
+    "description": "필터 버튼 툴팁"
+  },
+  "refresh": "새로고침",
+  "@refresh": {
+    "description": "새로고침 버튼 툴팁"
+  },
+  "searchHint": "주소, 소유자 또는 부지 ID로 검색...",
+  "@searchHint": {
+    "description": "검색 필드 힌트 텍스트"
+  },
+  "clear": "지우기",
+  "@clear": {
+    "description": "지우기 버튼"
+  },
+  "foundLiens": "발견됨: {count}개 압류",
+  "@foundLiens": {
+    "description": "발견된 압류 수 메시지",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "정렬 기준: {sortLabel}",
+  "@sortBy": {
+    "description": "정렬 라벨",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "경매 날짜 ↑"
+      }
+    }
+  },
+  "retry": "다시 시도",
+  "@retry": {
+    "description": "다시 시도 버튼"
+  },
+  "noLiensFound": "세금 압류를 찾을 수 없습니다",
+  "@noLiensFound": {
+    "description": "압류를 찾을 수 없음 메시지"
+  },
+  "tryChangingSearch": "검색 매개변수나 필터를 변경해 보세요",
+  "@tryChangingSearch": {
+    "description": "검색 매개변수 변경 제안"
+  },
+  "stateFilter": "주: {state}",
+  "@stateFilter": {
+    "description": "주 필터 라벨",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "캘리포니아"
+      }
+    }
+  },
+  "countyFilter": "카운티: {county}",
+  "@countyFilter": {
+    "description": "카운티 필터 라벨",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "로스앤젤레스"
+      }
+    }
+  },
+  "amountFrom": "금액: {amount}부터",
+  "@amountFrom": {
+    "description": "최소 금액 필터",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "금액: {amount}까지",
+  "@amountTo": {
+    "description": "최대 금액 필터",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "이자율: {rate}%부터",
+  "@interestRateFrom": {
+    "description": "최소 이자율 필터",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "경매 날짜 {direction}",
+  "@auctionDateSort": {
+    "description": "경매 날짜 정렬 라벨",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "세금 금액 {direction}",
+  "@taxAmountSort": {
+    "description": "세금 금액 정렬 라벨",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "이자율 {direction}",
+  "@interestRateSort": {
+    "description": "이자율 정렬 라벨",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "평가 가치 {direction}",
+  "@assessedValueSort": {
+    "description": "평가 가치 정렬 라벨",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "상환 기한 {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "상환 기한 정렬 라벨",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "압류 #{parcelId}",
+  "@lienNumber": {
+    "description": "부지 ID가 포함된 압류 번호",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "소유자: {owner}",
+  "@owner": {
+    "description": "소유자 정보",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "김철수"
+      }
+    }
+  },
+  "taxAmount": "세금 금액",
+  "@taxAmount": {
+    "description": "세금 금액 라벨"
+  },
+  "interestRate": "이자율",
+  "@interestRate": {
+    "description": "이자율 라벨"
+  },
+  "assessedValue": "평가 가치",
+  "@assessedValue": {
+    "description": "평가 가치 라벨"
+  },
+  "auctionDate": "경매 날짜",
+  "@auctionDate": {
+    "description": "경매 날짜 라벨"
+  },
+  "additionalInfo": "추가 정보",
+  "@additionalInfo": {
+    "description": "추가 정보 섹션 헤더"
+  },
+  "county": "카운티",
+  "@county": {
+    "description": "카운티 라벨"
+  },
+  "state": "주",
+  "@state": {
+    "description": "주 라벨"
+  },
+  "redemptionDeadline": "상환 기한",
+  "@redemptionDeadline": {
+    "description": "상환 기한 라벨"
+  },
+  "status": "상태",
+  "@status": {
+    "description": "상태 라벨"
+  },
+  "buyLien": "압류 구매",
+  "@buyLien": {
+    "description": "압류 구매 버튼"
+  },
+  "availableForPurchase": "구매 가능",
+  "@availableForPurchase": {
+    "description": "구매 가능 상태"
+  },
+  "sold": "판매됨",
+  "@sold": {
+    "description": "판매됨 상태"
+  },
+  "redeemed": "상환됨",
+  "@redeemed": {
+    "description": "상환됨 상태"
+  },
+  "foreclosed": "압류됨",
+  "@foreclosed": {
+    "description": "압류됨 상태"
+  },
+  "purchaseLien": "압류 구매",
+  "@purchaseLien": {
+    "description": "압류 구매 대화상자 제목"
+  },
+  "enterBidAmount": "입찰 금액을 입력하세요 (최소 {amount}):",
+  "@enterBidAmount": {
+    "description": "입찰 금액 입력 요청",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "입찰 금액",
+  "@bidAmount": {
+    "description": "입찰 금액 필드 라벨"
+  },
+  "lienPurchasedSuccessfully": "압류가 성공적으로 구매되었습니다!",
+  "@lienPurchasedSuccessfully": {
+    "description": "압류 구매 성공 메시지"
+  },
+  "purchaseError": "구매 오류",
+  "@purchaseError": {
+    "description": "구매 오류 메시지"
+  },
+  "invalidBidAmount": "잘못된 입찰 금액",
+  "@invalidBidAmount": {
+    "description": "잘못된 입찰 금액 메시지"
+  },
+  "buy": "구매",
+  "@buy": {
+    "description": "구매 버튼"
+  },
+  "profile": "프로필",
+  "@profile": {
+    "description": "프로필 화면 제목"
+  },
+  "settings": "설정",
+  "@settings": {
+    "description": "설정 버튼 툴팁"
+  },
+  "notAuthorized": "인증되지 않음",
+  "@notAuthorized": {
+    "description": "인증되지 않은 사용자 메시지"
+  },
+  "loginForAccess": "기능에 액세스하려면 로그인하세요",
+  "@loginForAccess": {
+    "description": "로그인 제안 메시지"
+  },
+  "login": "로그인",
+  "@login": {
+    "description": "로그인 버튼"
+  },
+  "register": "등록",
+  "@register": {
+    "description": "등록 버튼"
+  },
+  "edit": "편집",
+  "@edit": {
+    "description": "편집 버튼"
+  },
+  "logout": "로그아웃",
+  "@logout": {
+    "description": "로그아웃 버튼"
+  },
+  "balance": "잔액",
+  "@balance": {
+    "description": "잔액 라벨"
+  },
+  "available": "사용 가능",
+  "@available": {
+    "description": "사용 가능한 잔액 라벨"
+  },
+  "topUp": "충전",
+  "@topUp": {
+    "description": "충전 버튼"
+  },
+  "quickActions": "빠른 작업",
+  "@quickActions": {
+    "description": "빠른 작업 섹션 헤더"
+  },
+  "transactionHistory": "거래 내역",
+  "@transactionHistory": {
+    "description": "거래 내역 메뉴 항목"
+  },
+  "viewAllTransactions": "모든 거래 보기",
+  "@viewAllTransactions": {
+    "description": "거래 내역 부제목"
+  },
+  "favoriteLiens": "즐겨찾기 압류",
+  "@favoriteLiens": {
+    "description": "즐겨찾기 압류 메뉴 항목"
+  },
+  "savedLiens": "저장된 압류",
+  "@savedLiens": {
+    "description": "즐겨찾기 압류 부제목"
+  },
+  "notifications": "알림",
+  "@notifications": {
+    "description": "알림 메뉴 항목"
+  },
+  "notificationSettings": "알림 설정",
+  "@notificationSettings": {
+    "description": "알림 부제목"
+  },
+  "help": "도움말",
+  "@help": {
+    "description": "도움말 메뉴 항목"
+  },
+  "appSettings": "앱 설정",
+  "@appSettings": {
+    "description": "앱 설정 섹션 헤더"
+  },
+  "language": "언어",
+  "@language": {
+    "description": "언어 메뉴 항목"
+  },
+  "theme": "테마",
+  "@theme": {
+    "description": "테마 메뉴 항목"
+  },
+  "dark": "어두운",
+  "@dark": {
+    "description": "어두운 테마 라벨"
+  },
+  "light": "밝은",
+  "@light": {
+    "description": "밝은 테마 라벨"
+  },
+  "security": "보안",
+  "@security": {
+    "description": "보안 메뉴 항목"
+  },
+  "securitySettings": "보안 설정",
+  "@securitySettings": {
+    "description": "보안 부제목"
+  },
+  "privacy": "개인정보",
+  "@privacy": {
+    "description": "개인정보 메뉴 항목"
+  },
+  "privacySettings": "개인정보 설정",
+  "@privacySettings": {
+    "description": "개인정보 부제목"
+  },
+  "aboutApp": "앱 정보",
+  "@aboutApp": {
+    "description": "앱 정보 섹션 헤더"
+  },
+  "version": "버전",
+  "@version": {
+    "description": "버전 메뉴 항목"
+  },
+  "license": "라이선스",
+  "@license": {
+    "description": "라이선스 메뉴 항목"
+  },
+  "termsOfService": "서비스 약관",
+  "@termsOfService": {
+    "description": "서비스 약관 메뉴 항목"
+  },
+  "userAgreement": "사용자 계약",
+  "@userAgreement": {
+    "description": "서비스 약관 부제목"
+  },
+  "privacyPolicy": "개인정보 처리방침",
+  "@privacyPolicy": {
+    "description": "개인정보 처리방침 메뉴 항목"
+  },
+  "dataProcessing": "개인정보 처리",
+  "@dataProcessing": {
+    "description": "개인정보 처리방침 부제목"
+  },
+  "loginToAccount": "계정에 로그인",
+  "@loginToAccount": {
+    "description": "로그인 대화상자 제목"
+  },
+  "password": "비밀번호",
+  "@password": {
+    "description": "비밀번호 필드 라벨"
+  },
+  "loginSuccessful": "로그인이 성공했습니다!",
+  "@loginSuccessful": {
+    "description": "로그인 성공 메시지"
+  },
+  "loginError": "로그인 오류",
+  "@loginError": {
+    "description": "로그인 오류 메시지"
+  },
+  "registration": "등록",
+  "@registration": {
+    "description": "등록 대화상자 제목"
+  },
+  "firstName": "이름",
+  "@firstName": {
+    "description": "이름 필드 라벨"
+  },
+  "lastName": "성",
+  "@lastName": {
+    "description": "성 필드 라벨"
+  },
+  "registrationSuccessful": "등록이 성공했습니다!",
+  "@registrationSuccessful": {
+    "description": "등록 성공 메시지"
+  },
+  "registrationError": "등록 오류",
+  "@registrationError": {
+    "description": "등록 오류 메시지"
+  },
+  "registerAccount": "등록",
+  "@registerAccount": {
+    "description": "등록 대화상자의 등록 버튼"
+  },
+  "logoutConfirmation": "로그아웃 확인",
+  "@logoutConfirmation": {
+    "description": "로그아웃 확인 대화상자 제목"
+  },
+  "logoutConfirmationMessage": "로그아웃하시겠습니까?",
+  "@logoutConfirmationMessage": {
+    "description": "로그아웃 확인 메시지"
   }
 }

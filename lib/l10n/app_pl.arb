@@ -249,5 +249,473 @@
   "connectionStatus": "Status połączenia",
   "@connectionStatus": {
     "description": "Tytuł ekranu statusu połączenia"
+  },
+  "russian": "Rosyjski",
+  "@russian": {
+    "description": "Nazwa języka rosyjskiego"
+  },
+  "ukrainian": "Ukraiński",
+  "@ukrainian": {
+    "description": "Nazwa języka ukraińskiego"
+  },
+  "dataLoadError": "Błąd ładowania danych: {error}",
+  "@dataLoadError": {
+    "description": "Komunikat o błędzie ładowania danych",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Błąd sieci"
+      }
+    }
+  },
+  "taxLienMarketplace": "Rynek zastawów podatkowych",
+  "@taxLienMarketplace": {
+    "description": "Tytuł ekranu rynku zastawów podatkowych"
+  },
+  "filters": "Filtry",
+  "@filters": {
+    "description": "Podpowiedź przycisku filtrów"
+  },
+  "refresh": "Odśwież",
+  "@refresh": {
+    "description": "Podpowiedź przycisku odświeżania"
+  },
+  "searchHint": "Szukaj według adresu, właściciela lub ID działki...",
+  "@searchHint": {
+    "description": "Tekst podpowiedzi pola wyszukiwania"
+  },
+  "clear": "Wyczyść",
+  "@clear": {
+    "description": "Przycisk czyszczenia"
+  },
+  "foundLiens": "Znaleziono: {count} zastawów",
+  "@foundLiens": {
+    "description": "Komunikat o liczbie znalezionych zastawów",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "Sortuj według: {sortLabel}",
+  "@sortBy": {
+    "description": "Etykieta sortowania",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "Data aukcji ↑"
+      }
+    }
+  },
+  "retry": "Ponów",
+  "@retry": {
+    "description": "Przycisk ponowienia"
+  },
+  "noLiensFound": "Nie znaleziono zastawów podatkowych",
+  "@noLiensFound": {
+    "description": "Komunikat o braku znalezionych zastawów"
+  },
+  "tryChangingSearch": "Spróbuj zmienić parametry wyszukiwania lub filtry",
+  "@tryChangingSearch": {
+    "description": "Sugestia zmiany parametrów wyszukiwania"
+  },
+  "stateFilter": "Stan: {state}",
+  "@stateFilter": {
+    "description": "Etykieta filtra stanu",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "Kalifornia"
+      }
+    }
+  },
+  "countyFilter": "Hrabstwo: {county}",
+  "@countyFilter": {
+    "description": "Etykieta filtra hrabstwa",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "Los Angeles"
+      }
+    }
+  },
+  "amountFrom": "Od: {amount}",
+  "@amountFrom": {
+    "description": "Filtr minimalnej kwoty",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "Do: {amount}",
+  "@amountTo": {
+    "description": "Filtr maksymalnej kwoty",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "Stawka od: {rate}%",
+  "@interestRateFrom": {
+    "description": "Filtr minimalnej stawki procentowej",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "Data aukcji {direction}",
+  "@auctionDateSort": {
+    "description": "Etykieta sortowania daty aukcji",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "Kwota podatku {direction}",
+  "@taxAmountSort": {
+    "description": "Etykieta sortowania kwoty podatku",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "Stawka procentowa {direction}",
+  "@interestRateSort": {
+    "description": "Etykieta sortowania stawki procentowej",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "Wartość szacunkowa {direction}",
+  "@assessedValueSort": {
+    "description": "Etykieta sortowania wartości szacunkowej",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "Termin wykupu {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "Etykieta sortowania terminu wykupu",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "Zastaw #{parcelId}",
+  "@lienNumber": {
+    "description": "Numer zastawu z ID działki",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "Właściciel: {owner}",
+  "@owner": {
+    "description": "Informacje o właścicielu",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "Jan Kowalski"
+      }
+    }
+  },
+  "taxAmount": "Kwota podatku",
+  "@taxAmount": {
+    "description": "Etykieta kwoty podatku"
+  },
+  "interestRate": "Stawka procentowa",
+  "@interestRate": {
+    "description": "Etykieta stawki procentowej"
+  },
+  "assessedValue": "Wartość szacunkowa",
+  "@assessedValue": {
+    "description": "Etykieta wartości szacunkowej"
+  },
+  "auctionDate": "Data aukcji",
+  "@auctionDate": {
+    "description": "Etykieta daty aukcji"
+  },
+  "additionalInfo": "Dodatkowe informacje",
+  "@additionalInfo": {
+    "description": "Nagłówek sekcji dodatkowych informacji"
+  },
+  "county": "Hrabstwo",
+  "@county": {
+    "description": "Etykieta hrabstwa"
+  },
+  "state": "Stan",
+  "@state": {
+    "description": "Etykieta stanu"
+  },
+  "redemptionDeadline": "Termin wykupu",
+  "@redemptionDeadline": {
+    "description": "Etykieta terminu wykupu"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Etykieta statusu"
+  },
+  "buyLien": "Kup zastaw",
+  "@buyLien": {
+    "description": "Przycisk kupowania zastawu"
+  },
+  "availableForPurchase": "Dostępny do zakupu",
+  "@availableForPurchase": {
+    "description": "Status dostępny do zakupu"
+  },
+  "sold": "Sprzedany",
+  "@sold": {
+    "description": "Status sprzedany"
+  },
+  "redeemed": "Wykupiony",
+  "@redeemed": {
+    "description": "Status wykupiony"
+  },
+  "foreclosed": "Przejęty",
+  "@foreclosed": {
+    "description": "Status przejęty"
+  },
+  "purchaseLien": "Kup zastaw",
+  "@purchaseLien": {
+    "description": "Tytuł okna kupowania zastawu"
+  },
+  "enterBidAmount": "Wprowadź kwotę oferty (minimum {amount}):",
+  "@enterBidAmount": {
+    "description": "Monit o wprowadzenie kwoty oferty",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "Kwota oferty",
+  "@bidAmount": {
+    "description": "Etykieta pola kwoty oferty"
+  },
+  "lienPurchasedSuccessfully": "Zastaw kupiony pomyślnie!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Komunikat o pomyślnym kupieniu zastawu"
+  },
+  "purchaseError": "Błąd zakupu",
+  "@purchaseError": {
+    "description": "Komunikat o błędzie zakupu"
+  },
+  "invalidBidAmount": "Nieprawidłowa kwota oferty",
+  "@invalidBidAmount": {
+    "description": "Komunikat o nieprawidłowej kwocie oferty"
+  },
+  "buy": "Kup",
+  "@buy": {
+    "description": "Przycisk kupowania"
+  },
+  "profile": "Profil",
+  "@profile": {
+    "description": "Tytuł ekranu profilu"
+  },
+  "settings": "Ustawienia",
+  "@settings": {
+    "description": "Podpowiedź przycisku ustawień"
+  },
+  "notAuthorized": "Nieautoryzowany",
+  "@notAuthorized": {
+    "description": "Komunikat o braku autoryzacji"
+  },
+  "loginForAccess": "Zaloguj się, aby uzyskać dostęp do funkcji",
+  "@loginForAccess": {
+    "description": "Komunikat monitu o logowanie"
+  },
+  "login": "Zaloguj",
+  "@login": {
+    "description": "Przycisk logowania"
+  },
+  "register": "Zarejestruj",
+  "@register": {
+    "description": "Przycisk rejestracji"
+  },
+  "edit": "Edytuj",
+  "@edit": {
+    "description": "Przycisk edycji"
+  },
+  "logout": "Wyloguj",
+  "@logout": {
+    "description": "Przycisk wylogowania"
+  },
+  "balance": "Saldo",
+  "@balance": {
+    "description": "Etykieta salda"
+  },
+  "available": "Dostępne",
+  "@available": {
+    "description": "Etykieta dostępnego salda"
+  },
+  "topUp": "Doładuj",
+  "@topUp": {
+    "description": "Przycisk doładowania"
+  },
+  "quickActions": "Szybkie akcje",
+  "@quickActions": {
+    "description": "Nagłówek sekcji szybkich akcji"
+  },
+  "transactionHistory": "Historia transakcji",
+  "@transactionHistory": {
+    "description": "Element menu historii transakcji"
+  },
+  "viewAllTransactions": "Zobacz wszystkie transakcje",
+  "@viewAllTransactions": {
+    "description": "Podtytuł historii transakcji"
+  },
+  "favoriteLiens": "Ulubione zastawy",
+  "@favoriteLiens": {
+    "description": "Element menu ulubionych zastawów"
+  },
+  "savedLiens": "Twoje zapisane zastawy",
+  "@savedLiens": {
+    "description": "Podtytuł ulubionych zastawów"
+  },
+  "notifications": "Powiadomienia",
+  "@notifications": {
+    "description": "Element menu powiadomień"
+  },
+  "notificationSettings": "Ustawienia powiadomień",
+  "@notificationSettings": {
+    "description": "Podtytuł powiadomień"
+  },
+  "help": "Pomoc",
+  "@help": {
+    "description": "Element menu pomocy"
+  },
+  "appSettings": "Ustawienia aplikacji",
+  "@appSettings": {
+    "description": "Nagłówek sekcji ustawień aplikacji"
+  },
+  "language": "Język",
+  "@language": {
+    "description": "Element menu języka"
+  },
+  "theme": "Motyw",
+  "@theme": {
+    "description": "Element menu motywu"
+  },
+  "dark": "Ciemny",
+  "@dark": {
+    "description": "Etykieta ciemnego motywu"
+  },
+  "light": "Jasny",
+  "@light": {
+    "description": "Etykieta jasnego motywu"
+  },
+  "security": "Bezpieczeństwo",
+  "@security": {
+    "description": "Element menu bezpieczeństwa"
+  },
+  "securitySettings": "Ustawienia bezpieczeństwa",
+  "@securitySettings": {
+    "description": "Podtytuł bezpieczeństwa"
+  },
+  "privacy": "Prywatność",
+  "@privacy": {
+    "description": "Element menu prywatności"
+  },
+  "privacySettings": "Ustawienia prywatności",
+  "@privacySettings": {
+    "description": "Podtytuł prywatności"
+  },
+  "aboutApp": "O aplikacji",
+  "@aboutApp": {
+    "description": "Nagłówek sekcji o aplikacji"
+  },
+  "version": "Wersja",
+  "@version": {
+    "description": "Element menu wersji"
+  },
+  "license": "Licencja",
+  "@license": {
+    "description": "Element menu licencji"
+  },
+  "termsOfService": "Warunki korzystania",
+  "@termsOfService": {
+    "description": "Element menu warunków korzystania"
+  },
+  "userAgreement": "Umowa użytkownika",
+  "@userAgreement": {
+    "description": "Podtytuł warunków korzystania"
+  },
+  "privacyPolicy": "Polityka prywatności",
+  "@privacyPolicy": {
+    "description": "Element menu polityki prywatności"
+  },
+  "dataProcessing": "Przetwarzanie danych osobowych",
+  "@dataProcessing": {
+    "description": "Podtytuł polityki prywatności"
+  },
+  "loginToAccount": "Zaloguj do konta",
+  "@loginToAccount": {
+    "description": "Tytuł okna logowania"
+  },
+  "password": "Hasło",
+  "@password": {
+    "description": "Etykieta pola hasła"
+  },
+  "loginSuccessful": "Logowanie pomyślne!",
+  "@loginSuccessful": {
+    "description": "Komunikat o pomyślnym logowaniu"
+  },
+  "loginError": "Błąd logowania",
+  "@loginError": {
+    "description": "Komunikat o błędzie logowania"
+  },
+  "registration": "Rejestracja",
+  "@registration": {
+    "description": "Tytuł okna rejestracji"
+  },
+  "firstName": "Imię",
+  "@firstName": {
+    "description": "Etykieta pola imienia"
+  },
+  "lastName": "Nazwisko",
+  "@lastName": {
+    "description": "Etykieta pola nazwiska"
+  },
+  "registrationSuccessful": "Rejestracja pomyślna!",
+  "@registrationSuccessful": {
+    "description": "Komunikat o pomyślnej rejestracji"
+  },
+  "registrationError": "Błąd rejestracji",
+  "@registrationError": {
+    "description": "Komunikat o błędzie rejestracji"
+  },
+  "registerAccount": "Zarejestruj",
+  "@registerAccount": {
+    "description": "Przycisk rejestracji w oknie rejestracji"
+  },
+  "logoutConfirmation": "Potwierdzenie wylogowania",
+  "@logoutConfirmation": {
+    "description": "Tytuł okna potwierdzenia wylogowania"
+  },
+  "logoutConfirmationMessage": "Czy na pewno chcesz się wylogować?",
+  "@logoutConfirmationMessage": {
+    "description": "Komunikat potwierdzenia wylogowania"
   }
 } 

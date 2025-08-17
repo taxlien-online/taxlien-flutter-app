@@ -32,15 +32,15 @@
   "@playbackControls": {
     "description": "عنوان قسم أدوات التحكم في التشغيل"
   },
-  "play": "Play",
+  "play": "تشغيل",
   "@play": {
     "description": "زر التشغيل"
   },
-  "pause": "Pause",
+  "pause": "إيقاف مؤقت",
   "@pause": {
     "description": "زر الإيقاف المؤقت"
   },
-  "stop": "Stop",
+  "stop": "إيقاف",
   "@stop": {
     "description": "زر الإيقاف"
   },
@@ -112,11 +112,11 @@
   "@calibrationApplied": {
     "description": "رسالة نجاح تطبيق المعايرة"
   },
-  "online": "ONLINE",
+  "online": "متصل",
   "@online": {
     "description": "حالة الاتصال - متصل"
   },
-  "offline": "OFFLINE",
+  "offline": "غير متصل",
   "@offline": {
     "description": "حالة الاتصال - غير متصل"
   },
@@ -249,5 +249,473 @@
   "connectionStatus": "حالة الاتصال",
   "@connectionStatus": {
     "description": "عنوان شاشة حالة الاتصال"
+  },
+  "russian": "الروسية",
+  "@russian": {
+    "description": "اسم اللغة الروسية"
+  },
+  "ukrainian": "الأوكرانية",
+  "@ukrainian": {
+    "description": "اسم اللغة الأوكرانية"
+  },
+  "dataLoadError": "خطأ في تحميل البيانات: {error}",
+  "@dataLoadError": {
+    "description": "رسالة خطأ تحميل البيانات",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "خطأ في الشبكة"
+      }
+    }
+  },
+  "taxLienMarketplace": "سوق الرهن الضريبي",
+  "@taxLienMarketplace": {
+    "description": "عنوان شاشة سوق الرهن الضريبي"
+  },
+  "filters": "المرشحات",
+  "@filters": {
+    "description": "تلميح زر المرشحات"
+  },
+  "refresh": "تحديث",
+  "@refresh": {
+    "description": "تلميح زر التحديث"
+  },
+  "searchHint": "البحث بالعنوان أو المالك أو معرف القطعة...",
+  "@searchHint": {
+    "description": "نص تلميح حقل البحث"
+  },
+  "clear": "مسح",
+  "@clear": {
+    "description": "زر المسح"
+  },
+  "foundLiens": "تم العثور على: {count} رهن",
+  "@foundLiens": {
+    "description": "رسالة عدد الرهونات الموجودة",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "ترتيب حسب: {sortLabel}",
+  "@sortBy": {
+    "description": "تسمية الترتيب",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "تاريخ المزاد ↑"
+      }
+    }
+  },
+  "retry": "إعادة المحاولة",
+  "@retry": {
+    "description": "زر إعادة المحاولة"
+  },
+  "noLiensFound": "لم يتم العثور على رهونات ضريبية",
+  "@noLiensFound": {
+    "description": "رسالة عدم العثور على رهونات"
+  },
+  "tryChangingSearch": "حاول تغيير معاملات البحث أو المرشحات",
+  "@tryChangingSearch": {
+    "description": "اقتراح لتغيير معاملات البحث"
+  },
+  "stateFilter": "الولاية: {state}",
+  "@stateFilter": {
+    "description": "تسمية مرشح الولاية",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "كاليفورنيا"
+      }
+    }
+  },
+  "countyFilter": "المقاطعة: {county}",
+  "@countyFilter": {
+    "description": "تسمية مرشح المقاطعة",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "لوس أنجلوس"
+      }
+    }
+  },
+  "amountFrom": "من: {amount}",
+  "@amountFrom": {
+    "description": "مرشح الحد الأدنى للمبلغ",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "إلى: {amount}",
+  "@amountTo": {
+    "description": "مرشح الحد الأقصى للمبلغ",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "معدل الفائدة من: {rate}%",
+  "@interestRateFrom": {
+    "description": "مرشح الحد الأدنى لمعدل الفائدة",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "تاريخ المزاد {direction}",
+  "@auctionDateSort": {
+    "description": "تسمية ترتيب تاريخ المزاد",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "مبلغ الضريبة {direction}",
+  "@taxAmountSort": {
+    "description": "تسمية ترتيب مبلغ الضريبة",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "معدل الفائدة {direction}",
+  "@interestRateSort": {
+    "description": "تسمية ترتيب معدل الفائدة",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "القيمة المقدرة {direction}",
+  "@assessedValueSort": {
+    "description": "تسمية ترتيب القيمة المقدرة",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "موعد الاسترداد {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "تسمية ترتيب موعد الاسترداد",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "الرهن #{parcelId}",
+  "@lienNumber": {
+    "description": "رقم الرهن مع معرف القطعة",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "المالك: {owner}",
+  "@owner": {
+    "description": "معلومات المالك",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "أحمد محمد"
+      }
+    }
+  },
+  "taxAmount": "مبلغ الضريبة",
+  "@taxAmount": {
+    "description": "تسمية مبلغ الضريبة"
+  },
+  "interestRate": "معدل الفائدة",
+  "@interestRate": {
+    "description": "تسمية معدل الفائدة"
+  },
+  "assessedValue": "القيمة المقدرة",
+  "@assessedValue": {
+    "description": "تسمية القيمة المقدرة"
+  },
+  "auctionDate": "تاريخ المزاد",
+  "@auctionDate": {
+    "description": "تسمية تاريخ المزاد"
+  },
+  "additionalInfo": "معلومات إضافية",
+  "@additionalInfo": {
+    "description": "عنوان قسم المعلومات الإضافية"
+  },
+  "county": "المقاطعة",
+  "@county": {
+    "description": "تسمية المقاطعة"
+  },
+  "state": "الولاية",
+  "@state": {
+    "description": "تسمية الولاية"
+  },
+  "redemptionDeadline": "موعد الاسترداد",
+  "@redemptionDeadline": {
+    "description": "تسمية موعد الاسترداد"
+  },
+  "status": "الحالة",
+  "@status": {
+    "description": "تسمية الحالة"
+  },
+  "buyLien": "شراء الرهن",
+  "@buyLien": {
+    "description": "زر شراء الرهن"
+  },
+  "availableForPurchase": "متاح للشراء",
+  "@availableForPurchase": {
+    "description": "حالة متاح للشراء"
+  },
+  "sold": "مباع",
+  "@sold": {
+    "description": "حالة مباع"
+  },
+  "redeemed": "مسترد",
+  "@redeemed": {
+    "description": "حالة مسترد"
+  },
+  "foreclosed": "مصادر",
+  "@foreclosed": {
+    "description": "حالة مصادر"
+  },
+  "purchaseLien": "شراء الرهن",
+  "@purchaseLien": {
+    "description": "عنوان حوار شراء الرهن"
+  },
+  "enterBidAmount": "أدخل مبلغ المزايدة (الحد الأدنى {amount}):",
+  "@enterBidAmount": {
+    "description": "طلب إدخال مبلغ المزايدة",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "مبلغ المزايدة",
+  "@bidAmount": {
+    "description": "تسمية حقل مبلغ المزايدة"
+  },
+  "lienPurchasedSuccessfully": "تم شراء الرهن بنجاح!",
+  "@lienPurchasedSuccessfully": {
+    "description": "رسالة نجاح شراء الرهن"
+  },
+  "purchaseError": "خطأ في الشراء",
+  "@purchaseError": {
+    "description": "رسالة خطأ الشراء"
+  },
+  "invalidBidAmount": "مبلغ مزايدة غير صحيح",
+  "@invalidBidAmount": {
+    "description": "رسالة مبلغ مزايدة غير صحيح"
+  },
+  "buy": "شراء",
+  "@buy": {
+    "description": "زر الشراء"
+  },
+  "profile": "الملف الشخصي",
+  "@profile": {
+    "description": "عنوان شاشة الملف الشخصي"
+  },
+  "settings": "الإعدادات",
+  "@settings": {
+    "description": "تلميح زر الإعدادات"
+  },
+  "notAuthorized": "غير مصرح",
+  "@notAuthorized": {
+    "description": "رسالة مستخدم غير مصرح"
+  },
+  "loginForAccess": "سجل الدخول للوصول إلى الميزات",
+  "@loginForAccess": {
+    "description": "رسالة اقتراح تسجيل الدخول"
+  },
+  "login": "تسجيل الدخول",
+  "@login": {
+    "description": "زر تسجيل الدخول"
+  },
+  "register": "التسجيل",
+  "@register": {
+    "description": "زر التسجيل"
+  },
+  "edit": "تعديل",
+  "@edit": {
+    "description": "زر التعديل"
+  },
+  "logout": "تسجيل الخروج",
+  "@logout": {
+    "description": "زر تسجيل الخروج"
+  },
+  "balance": "الرصيد",
+  "@balance": {
+    "description": "تسمية الرصيد"
+  },
+  "available": "متاح",
+  "@available": {
+    "description": "تسمية الرصيد المتاح"
+  },
+  "topUp": "شحن",
+  "@topUp": {
+    "description": "زر الشحن"
+  },
+  "quickActions": "الإجراءات السريعة",
+  "@quickActions": {
+    "description": "عنوان قسم الإجراءات السريعة"
+  },
+  "transactionHistory": "سجل المعاملات",
+  "@transactionHistory": {
+    "description": "عنصر قائمة سجل المعاملات"
+  },
+  "viewAllTransactions": "عرض جميع المعاملات",
+  "@viewAllTransactions": {
+    "description": "عنوان فرعي لسجل المعاملات"
+  },
+  "favoriteLiens": "الرهونات المفضلة",
+  "@favoriteLiens": {
+    "description": "عنصر قائمة الرهونات المفضلة"
+  },
+  "savedLiens": "رهوناتك المحفوظة",
+  "@savedLiens": {
+    "description": "عنوان فرعي للرهونات المفضلة"
+  },
+  "notifications": "الإشعارات",
+  "@notifications": {
+    "description": "عنصر قائمة الإشعارات"
+  },
+  "notificationSettings": "إعدادات الإشعارات",
+  "@notificationSettings": {
+    "description": "عنوان فرعي للإشعارات"
+  },
+  "help": "المساعدة",
+  "@help": {
+    "description": "عنصر قائمة المساعدة"
+  },
+  "appSettings": "إعدادات التطبيق",
+  "@appSettings": {
+    "description": "عنوان قسم إعدادات التطبيق"
+  },
+  "language": "اللغة",
+  "@language": {
+    "description": "عنصر قائمة اللغة"
+  },
+  "theme": "المظهر",
+  "@theme": {
+    "description": "عنصر قائمة المظهر"
+  },
+  "dark": "داكن",
+  "@dark": {
+    "description": "تسمية المظهر الداكن"
+  },
+  "light": "فاتح",
+  "@light": {
+    "description": "تسمية المظهر الفاتح"
+  },
+  "security": "الأمان",
+  "@security": {
+    "description": "عنصر قائمة الأمان"
+  },
+  "securitySettings": "إعدادات الأمان",
+  "@securitySettings": {
+    "description": "عنوان فرعي للأمان"
+  },
+  "privacy": "الخصوصية",
+  "@privacy": {
+    "description": "عنصر قائمة الخصوصية"
+  },
+  "privacySettings": "إعدادات الخصوصية",
+  "@privacySettings": {
+    "description": "عنوان فرعي للخصوصية"
+  },
+  "aboutApp": "حول التطبيق",
+  "@aboutApp": {
+    "description": "عنوان قسم حول التطبيق"
+  },
+  "version": "الإصدار",
+  "@version": {
+    "description": "عنصر قائمة الإصدار"
+  },
+  "license": "الترخيص",
+  "@license": {
+    "description": "عنصر قائمة الترخيص"
+  },
+  "termsOfService": "شروط الخدمة",
+  "@termsOfService": {
+    "description": "عنصر قائمة شروط الخدمة"
+  },
+  "userAgreement": "اتفاقية المستخدم",
+  "@userAgreement": {
+    "description": "عنوان فرعي لشروط الخدمة"
+  },
+  "privacyPolicy": "سياسة الخصوصية",
+  "@privacyPolicy": {
+    "description": "عنصر قائمة سياسة الخصوصية"
+  },
+  "dataProcessing": "معالجة البيانات الشخصية",
+  "@dataProcessing": {
+    "description": "عنوان فرعي لسياسة الخصوصية"
+  },
+  "loginToAccount": "تسجيل الدخول إلى الحساب",
+  "@loginToAccount": {
+    "description": "عنوان حوار تسجيل الدخول"
+  },
+  "password": "كلمة المرور",
+  "@password": {
+    "description": "تسمية حقل كلمة المرور"
+  },
+  "loginSuccessful": "تم تسجيل الدخول بنجاح!",
+  "@loginSuccessful": {
+    "description": "رسالة نجاح تسجيل الدخول"
+  },
+  "loginError": "خطأ في تسجيل الدخول",
+  "@loginError": {
+    "description": "رسالة خطأ تسجيل الدخول"
+  },
+  "registration": "التسجيل",
+  "@registration": {
+    "description": "عنوان حوار التسجيل"
+  },
+  "firstName": "الاسم الأول",
+  "@firstName": {
+    "description": "تسمية حقل الاسم الأول"
+  },
+  "lastName": "اسم العائلة",
+  "@lastName": {
+    "description": "تسمية حقل اسم العائلة"
+  },
+  "registrationSuccessful": "تم التسجيل بنجاح!",
+  "@registrationSuccessful": {
+    "description": "رسالة نجاح التسجيل"
+  },
+  "registrationError": "خطأ في التسجيل",
+  "@registrationError": {
+    "description": "رسالة خطأ التسجيل"
+  },
+  "registerAccount": "تسجيل",
+  "@registerAccount": {
+    "description": "زر التسجيل في حوار التسجيل"
+  },
+  "logoutConfirmation": "تأكيد تسجيل الخروج",
+  "@logoutConfirmation": {
+    "description": "عنوان حوار تأكيد تسجيل الخروج"
+  },
+  "logoutConfirmationMessage": "هل أنت متأكد من أنك تريد تسجيل الخروج؟",
+  "@logoutConfirmationMessage": {
+    "description": "رسالة تأكيد تسجيل الخروج"
   }
 } 

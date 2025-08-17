@@ -249,5 +249,473 @@
   "connectionStatus": "连接状态",
   "@connectionStatus": {
     "description": "连接状态屏幕标题"
+  },
+  "russian": "俄语",
+  "@russian": {
+    "description": "俄语语言名称"
+  },
+  "ukrainian": "乌克兰语",
+  "@ukrainian": {
+    "description": "乌克兰语语言名称"
+  },
+  "dataLoadError": "数据加载错误：{error}",
+  "@dataLoadError": {
+    "description": "数据加载错误消息",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "网络错误"
+      }
+    }
+  },
+  "taxLienMarketplace": "税务留置权市场",
+  "@taxLienMarketplace": {
+    "description": "税务留置权市场屏幕标题"
+  },
+  "filters": "筛选",
+  "@filters": {
+    "description": "筛选按钮提示"
+  },
+  "refresh": "刷新",
+  "@refresh": {
+    "description": "刷新按钮提示"
+  },
+  "searchHint": "按地址、所有者或地块ID搜索...",
+  "@searchHint": {
+    "description": "搜索字段提示文本"
+  },
+  "clear": "清除",
+  "@clear": {
+    "description": "清除按钮"
+  },
+  "foundLiens": "找到：{count} 个留置权",
+  "@foundLiens": {
+    "description": "找到的留置权数量消息",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "排序方式：{sortLabel}",
+  "@sortBy": {
+    "description": "排序标签",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "拍卖日期 ↑"
+      }
+    }
+  },
+  "retry": "重试",
+  "@retry": {
+    "description": "重试按钮"
+  },
+  "noLiensFound": "未找到税务留置权",
+  "@noLiensFound": {
+    "description": "未找到留置权消息"
+  },
+  "tryChangingSearch": "尝试更改搜索参数或筛选条件",
+  "@tryChangingSearch": {
+    "description": "建议更改搜索参数"
+  },
+  "stateFilter": "州：{state}",
+  "@stateFilter": {
+    "description": "州筛选标签",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "加利福尼亚"
+      }
+    }
+  },
+  "countyFilter": "县：{county}",
+  "@countyFilter": {
+    "description": "县筛选标签",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "洛杉矶"
+      }
+    }
+  },
+  "amountFrom": "从：{amount}",
+  "@amountFrom": {
+    "description": "最低金额筛选",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "至：{amount}",
+  "@amountTo": {
+    "description": "最高金额筛选",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "利率从：{rate}%",
+  "@interestRateFrom": {
+    "description": "最低利率筛选",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "拍卖日期 {direction}",
+  "@auctionDateSort": {
+    "description": "拍卖日期排序标签",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "税额 {direction}",
+  "@taxAmountSort": {
+    "description": "税额排序标签",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "利率 {direction}",
+  "@interestRateSort": {
+    "description": "利率排序标签",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "评估价值 {direction}",
+  "@assessedValueSort": {
+    "description": "评估价值排序标签",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "赎回截止日期 {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "赎回截止日期排序标签",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "留置权 #{parcelId}",
+  "@lienNumber": {
+    "description": "带地块ID的留置权编号",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "所有者：{owner}",
+  "@owner": {
+    "description": "所有者信息",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "约翰·多伊"
+      }
+    }
+  },
+  "taxAmount": "税额",
+  "@taxAmount": {
+    "description": "税额标签"
+  },
+  "interestRate": "利率",
+  "@interestRate": {
+    "description": "利率标签"
+  },
+  "assessedValue": "评估价值",
+  "@assessedValue": {
+    "description": "评估价值标签"
+  },
+  "auctionDate": "拍卖日期",
+  "@auctionDate": {
+    "description": "拍卖日期标签"
+  },
+  "additionalInfo": "附加信息",
+  "@additionalInfo": {
+    "description": "附加信息部分标题"
+  },
+  "county": "县",
+  "@county": {
+    "description": "县标签"
+  },
+  "state": "州",
+  "@state": {
+    "description": "州标签"
+  },
+  "redemptionDeadline": "赎回截止日期",
+  "@redemptionDeadline": {
+    "description": "赎回截止日期标签"
+  },
+  "status": "状态",
+  "@status": {
+    "description": "状态标签"
+  },
+  "buyLien": "购买留置权",
+  "@buyLien": {
+    "description": "购买留置权按钮"
+  },
+  "availableForPurchase": "可购买",
+  "@availableForPurchase": {
+    "description": "可购买状态"
+  },
+  "sold": "已售出",
+  "@sold": {
+    "description": "已售出状态"
+  },
+  "redeemed": "已赎回",
+  "@redeemed": {
+    "description": "已赎回状态"
+  },
+  "foreclosed": "已止赎",
+  "@foreclosed": {
+    "description": "已止赎状态"
+  },
+  "purchaseLien": "购买留置权",
+  "@purchaseLien": {
+    "description": "购买留置权对话框标题"
+  },
+  "enterBidAmount": "输入投标金额（最低 {amount}）：",
+  "@enterBidAmount": {
+    "description": "输入投标金额提示",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "投标金额",
+  "@bidAmount": {
+    "description": "投标金额字段标签"
+  },
+  "lienPurchasedSuccessfully": "留置权购买成功！",
+  "@lienPurchasedSuccessfully": {
+    "description": "留置权购买成功消息"
+  },
+  "purchaseError": "购买错误",
+  "@purchaseError": {
+    "description": "购买错误消息"
+  },
+  "invalidBidAmount": "无效的投标金额",
+  "@invalidBidAmount": {
+    "description": "无效投标金额消息"
+  },
+  "buy": "购买",
+  "@buy": {
+    "description": "购买按钮"
+  },
+  "profile": "个人资料",
+  "@profile": {
+    "description": "个人资料屏幕标题"
+  },
+  "settings": "设置",
+  "@settings": {
+    "description": "设置按钮提示"
+  },
+  "notAuthorized": "未授权",
+  "@notAuthorized": {
+    "description": "未授权消息"
+  },
+  "loginForAccess": "登录以访问功能",
+  "@loginForAccess": {
+    "description": "登录提示消息"
+  },
+  "login": "登录",
+  "@login": {
+    "description": "登录按钮"
+  },
+  "register": "注册",
+  "@register": {
+    "description": "注册按钮"
+  },
+  "edit": "编辑",
+  "@edit": {
+    "description": "编辑按钮"
+  },
+  "logout": "登出",
+  "@logout": {
+    "description": "登出按钮"
+  },
+  "balance": "余额",
+  "@balance": {
+    "description": "余额标签"
+  },
+  "available": "可用",
+  "@available": {
+    "description": "可用余额标签"
+  },
+  "topUp": "充值",
+  "@topUp": {
+    "description": "充值按钮"
+  },
+  "quickActions": "快速操作",
+  "@quickActions": {
+    "description": "快速操作部分标题"
+  },
+  "transactionHistory": "交易历史",
+  "@transactionHistory": {
+    "description": "交易历史菜单项"
+  },
+  "viewAllTransactions": "查看所有交易",
+  "@viewAllTransactions": {
+    "description": "交易历史副标题"
+  },
+  "favoriteLiens": "收藏留置权",
+  "@favoriteLiens": {
+    "description": "收藏留置权菜单项"
+  },
+  "savedLiens": "您保存的留置权",
+  "@savedLiens": {
+    "description": "收藏留置权副标题"
+  },
+  "notifications": "通知",
+  "@notifications": {
+    "description": "通知菜单项"
+  },
+  "notificationSettings": "通知设置",
+  "@notificationSettings": {
+    "description": "通知副标题"
+  },
+  "help": "帮助",
+  "@help": {
+    "description": "帮助菜单项"
+  },
+  "appSettings": "应用设置",
+  "@appSettings": {
+    "description": "应用设置部分标题"
+  },
+  "language": "语言",
+  "@language": {
+    "description": "语言菜单项"
+  },
+  "theme": "主题",
+  "@theme": {
+    "description": "主题菜单项"
+  },
+  "dark": "深色",
+  "@dark": {
+    "description": "深色主题标签"
+  },
+  "light": "浅色",
+  "@light": {
+    "description": "浅色主题标签"
+  },
+  "security": "安全",
+  "@security": {
+    "description": "安全菜单项"
+  },
+  "securitySettings": "安全设置",
+  "@securitySettings": {
+    "description": "安全副标题"
+  },
+  "privacy": "隐私",
+  "@privacy": {
+    "description": "隐私菜单项"
+  },
+  "privacySettings": "隐私设置",
+  "@privacySettings": {
+    "description": "隐私副标题"
+  },
+  "aboutApp": "关于应用",
+  "@aboutApp": {
+    "description": "关于应用部分标题"
+  },
+  "version": "版本",
+  "@version": {
+    "description": "版本菜单项"
+  },
+  "license": "许可证",
+  "@license": {
+    "description": "许可证菜单项"
+  },
+  "termsOfService": "服务条款",
+  "@termsOfService": {
+    "description": "服务条款菜单项"
+  },
+  "userAgreement": "用户协议",
+  "@userAgreement": {
+    "description": "服务条款副标题"
+  },
+  "privacyPolicy": "隐私政策",
+  "@privacyPolicy": {
+    "description": "隐私政策菜单项"
+  },
+  "dataProcessing": "个人数据处理",
+  "@dataProcessing": {
+    "description": "隐私政策副标题"
+  },
+  "loginToAccount": "登录账户",
+  "@loginToAccount": {
+    "description": "登录对话框标题"
+  },
+  "password": "密码",
+  "@password": {
+    "description": "密码字段标签"
+  },
+  "loginSuccessful": "登录成功！",
+  "@loginSuccessful": {
+    "description": "登录成功消息"
+  },
+  "loginError": "登录错误",
+  "@loginError": {
+    "description": "登录错误消息"
+  },
+  "registration": "注册",
+  "@registration": {
+    "description": "注册对话框标题"
+  },
+  "firstName": "名字",
+  "@firstName": {
+    "description": "名字字段标签"
+  },
+  "lastName": "姓氏",
+  "@lastName": {
+    "description": "姓氏字段标签"
+  },
+  "registrationSuccessful": "注册成功！",
+  "@registrationSuccessful": {
+    "description": "注册成功消息"
+  },
+  "registrationError": "注册错误",
+  "@registrationError": {
+    "description": "注册错误消息"
+  },
+  "registerAccount": "注册",
+  "@registerAccount": {
+    "description": "注册对话框中的注册按钮"
+  },
+  "logoutConfirmation": "登出确认",
+  "@logoutConfirmation": {
+    "description": "登出确认对话框标题"
+  },
+  "logoutConfirmationMessage": "您确定要登出吗？",
+  "@logoutConfirmationMessage": {
+    "description": "登出确认消息"
   }
 } 
