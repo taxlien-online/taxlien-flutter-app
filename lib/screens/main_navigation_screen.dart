@@ -4,12 +4,14 @@ import '../services/localization_service.dart';
 import '../services/theme_service.dart';
 import '../services/onboarding_service.dart';
 import '../services/tax_lien_service.dart';
+import '../services/nft_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import '../services/user_preferences_service.dart';
 import '../theme/app_theme_export.dart';
 import 'marketplace_screen.dart';
 import 'my_investments_screen.dart';
+import 'nft_dashboard_screen.dart';
 import 'profile_screen.dart';
 import 'search_screen.dart';
 
@@ -18,6 +20,7 @@ class MainNavigationScreen extends StatefulWidget {
   final ThemeService themeService;
   final OnboardingService onboardingService;
   final TaxLienService taxLienService;
+  final NFTService nftService;
   final AuthService authService;
   final DatabaseService databaseService;
   final UserPreferencesService userPreferencesService;
@@ -28,6 +31,7 @@ class MainNavigationScreen extends StatefulWidget {
     required this.themeService,
     required this.onboardingService,
     required this.taxLienService,
+    required this.nftService,
     required this.authService,
     required this.databaseService,
     required this.userPreferencesService,
@@ -50,6 +54,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     NavigationItem(
       title: 'My Investments',
       icon: Icons.trending_up,
+      screen: null, // Will be set in initState
+    ),
+    NavigationItem(
+      title: 'NFTs',
+      icon: Icons.collections,
       screen: null, // Will be set in initState
     ),
     NavigationItem(
@@ -82,12 +91,17 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       databaseService: widget.databaseService,
     );
     
-    _navigationItems[2].screen = SearchScreen(
+    _navigationItems[2].screen = NFTDashboardScreen(
+      nftService: widget.nftService,
+      taxLienService: widget.taxLienService,
+    );
+    
+    _navigationItems[3].screen = SearchScreen(
       taxLienService: widget.taxLienService,
       databaseService: widget.databaseService,
     );
     
-    _navigationItems[3].screen = ProfileScreen(
+    _navigationItems[4].screen = ProfileScreen(
       authService: widget.authService,
       themeService: widget.themeService,
       localizationService: widget.localizationService,
