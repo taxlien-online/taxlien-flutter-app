@@ -1,6 +1,6 @@
 {
   "@@locale": "ja",
-  "appTitle": "FreeDome Manager",
+  "appTitle": "TaxLien.online",
   "@appTitle": {
     "description": "アプリケーションタイトル"
   },
@@ -128,7 +128,7 @@
   "@languageChanged": {
     "description": "言語変更通知"
   },
-  "onboardingWelcomeTitle": "FreeDome Manager へようこそ",
+  "onboardingWelcomeTitle": "TaxLien.online へようこそ",
   "@onboardingWelcomeTitle": {
     "description": "オンボーディング歓迎画面のタイトル"
   },

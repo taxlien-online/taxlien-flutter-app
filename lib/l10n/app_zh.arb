@@ -1,6 +1,6 @@
 {
   "@@locale": "zh",
-  "appTitle": "FreeDome Manager",
+  "appTitle": "TaxLien.online",
   "@appTitle": {
     "description": "应用程序标题"
   },
@@ -128,7 +128,7 @@
   "@languageChanged": {
     "description": "语言更改通知"
   },
-  "onboardingWelcomeTitle": "欢迎使用 FreeDome Manager",
+  "onboardingWelcomeTitle": "欢迎使用 TaxLien.online",
   "@onboardingWelcomeTitle": {
     "description": "引导欢迎屏幕标题"
   },

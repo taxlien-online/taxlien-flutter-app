@@ -1,6 +1,6 @@
 {
   "@@locale": "et",
-  "appTitle": "FreeDome Manager",
+  "appTitle": "TaxLien.online",
   "@appTitle": {
     "description": "Application title"
   },
@@ -128,7 +128,7 @@
   "@languageChanged": {
     "description": "Language change notification"
   },
-  "onboardingWelcomeTitle": "Tere tulemast FreeDome Manageri",
+  "onboardingWelcomeTitle": "Tere tulemast TaxLien.online",
   "@onboardingWelcomeTitle": {
     "description": "Onboarding welcome screen title"
   },

@@ -1,6 +1,6 @@
 {
   "@@locale": "de",
-  "appTitle": "FreeDome Manager",
+  "appTitle": "TaxLien.online",
   "@appTitle": {
     "description": "Anwendungstitel"
   },
@@ -128,7 +128,7 @@
   "@languageChanged": {
     "description": "Sprachänderungsbenachrichtigung"
   },
-  "onboardingWelcomeTitle": "Willkommen bei FreeDome Manager",
+  "onboardingWelcomeTitle": "Willkommen bei TaxLien.online",
   "@onboardingWelcomeTitle": {
     "description": "Onboarding-Willkommensbildschirmtitel"
   },
@@ -249,5 +249,473 @@
   "connectionStatus": "Verbindungsstatus",
   "@connectionStatus": {
     "description": "Verbindungsstatus-Bildschirmtitel"
+  },
+  "russian": "Russisch",
+  "@russian": {
+    "description": "Name der russischen Sprache"
+  },
+  "ukrainian": "Ukrainisch",
+  "@ukrainian": {
+    "description": "Name der ukrainischen Sprache"
+  },
+  "dataLoadError": "Datenladefehler: {error}",
+  "@dataLoadError": {
+    "description": "Datenladefehler-Nachricht",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Netzwerkfehler"
+      }
+    }
+  },
+  "taxLienMarketplace": "Steuerpfandrecht-Marktplatz",
+  "@taxLienMarketplace": {
+    "description": "Steuerpfandrecht-Marktplatz-Bildschirmtitel"
+  },
+  "filters": "Filter",
+  "@filters": {
+    "description": "Filter-Button-Tooltip"
+  },
+  "refresh": "Aktualisieren",
+  "@refresh": {
+    "description": "Aktualisieren-Button-Tooltip"
+  },
+  "searchHint": "Suche nach Adresse, Eigentümer oder Grundstücks-ID...",
+  "@searchHint": {
+    "description": "Suchfeld-Hinweistext"
+  },
+  "clear": "Löschen",
+  "@clear": {
+    "description": "Löschen-Button"
+  },
+  "foundLiens": "Gefunden: {count} Pfandrechte",
+  "@foundLiens": {
+    "description": "Gefundene Pfandrechte-Anzahlnachricht",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "Sortieren nach: {sortLabel}",
+  "@sortBy": {
+    "description": "Sortierbezeichnung",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "Auktionsdatum ↑"
+      }
+    }
+  },
+  "retry": "Wiederholen",
+  "@retry": {
+    "description": "Wiederholen-Button"
+  },
+  "noLiensFound": "Keine Steuerpfandrechte gefunden",
+  "@noLiensFound": {
+    "description": "Keine Pfandrechte gefunden-Nachricht"
+  },
+  "tryChangingSearch": "Versuchen Sie, Suchparameter oder Filter zu ändern",
+  "@tryChangingSearch": {
+    "description": "Vorschlag, Suchparameter zu ändern"
+  },
+  "stateFilter": "Bundesstaat: {state}",
+  "@stateFilter": {
+    "description": "Bundesstaat-Filter-Bezeichnung",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "Kalifornien"
+      }
+    }
+  },
+  "countyFilter": "Bezirk: {county}",
+  "@countyFilter": {
+    "description": "Bezirk-Filter-Bezeichnung",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "Los Angeles"
+      }
+    }
+  },
+  "amountFrom": "Von: {amount}",
+  "@amountFrom": {
+    "description": "Mindestbetrag-Filter",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "Bis: {amount}",
+  "@amountTo": {
+    "description": "Höchstbetrag-Filter",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "Zinssatz von: {rate}%",
+  "@interestRateFrom": {
+    "description": "Mindestzinssatz-Filter",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "Auktionsdatum {direction}",
+  "@auctionDateSort": {
+    "description": "Auktionsdatum-Sortierbezeichnung",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "Steuerbetrag {direction}",
+  "@taxAmountSort": {
+    "description": "Steuerbetrag-Sortierbezeichnung",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "Zinssatz {direction}",
+  "@interestRateSort": {
+    "description": "Zinssatz-Sortierbezeichnung",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "Bewerteter Wert {direction}",
+  "@assessedValueSort": {
+    "description": "Bewerteter Wert-Sortierbezeichnung",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "Einlösungsfrist {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "Einlösungsfrist-Sortierbezeichnung",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "Pfandrecht #{parcelId}",
+  "@lienNumber": {
+    "description": "Pfandrecht-Nummer mit Grundstücks-ID",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "Eigentümer: {owner}",
+  "@owner": {
+    "description": "Eigentümer-Information",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "Max Mustermann"
+      }
+    }
+  },
+  "taxAmount": "Steuerbetrag",
+  "@taxAmount": {
+    "description": "Steuerbetrag-Bezeichnung"
+  },
+  "interestRate": "Zinssatz",
+  "@interestRate": {
+    "description": "Zinssatz-Bezeichnung"
+  },
+  "assessedValue": "Bewerteter Wert",
+  "@assessedValue": {
+    "description": "Bewerteter Wert-Bezeichnung"
+  },
+  "auctionDate": "Auktionsdatum",
+  "@auctionDate": {
+    "description": "Auktionsdatum-Bezeichnung"
+  },
+  "additionalInfo": "Zusätzliche Informationen",
+  "@additionalInfo": {
+    "description": "Zusätzliche Informationen-Abschnittstitel"
+  },
+  "county": "Bezirk",
+  "@county": {
+    "description": "Bezirk-Bezeichnung"
+  },
+  "state": "Bundesstaat",
+  "@state": {
+    "description": "Bundesstaat-Bezeichnung"
+  },
+  "redemptionDeadline": "Einlösungsfrist",
+  "@redemptionDeadline": {
+    "description": "Einlösungsfrist-Bezeichnung"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Status-Bezeichnung"
+  },
+  "buyLien": "Pfandrecht kaufen",
+  "@buyLien": {
+    "description": "Pfandrecht kaufen-Button"
+  },
+  "availableForPurchase": "Zum Kauf verfügbar",
+  "@availableForPurchase": {
+    "description": "Zum Kauf verfügbar-Status"
+  },
+  "sold": "Verkauft",
+  "@sold": {
+    "description": "Verkauft-Status"
+  },
+  "redeemed": "Eingelöst",
+  "@redeemed": {
+    "description": "Eingelöst-Status"
+  },
+  "foreclosed": "Zwangsversteigert",
+  "@foreclosed": {
+    "description": "Zwangsversteigert-Status"
+  },
+  "purchaseLien": "Pfandrecht kaufen",
+  "@purchaseLien": {
+    "description": "Pfandrecht kaufen-Dialogtitel"
+  },
+  "enterBidAmount": "Gebotsbetrag eingeben (Mindestbetrag {amount}):",
+  "@enterBidAmount": {
+    "description": "Gebotsbetrag-Eingabeaufforderung",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "Gebotsbetrag",
+  "@bidAmount": {
+    "description": "Gebotsbetrag-Feldbezeichnung"
+  },
+  "lienPurchasedSuccessfully": "Pfandrecht erfolgreich gekauft!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Pfandrecht erfolgreich gekauft-Nachricht"
+  },
+  "purchaseError": "Kauf-Fehler",
+  "@purchaseError": {
+    "description": "Kauf-Fehlernachricht"
+  },
+  "invalidBidAmount": "Ungültiger Gebotsbetrag",
+  "@invalidBidAmount": {
+    "description": "Ungültiger Gebotsbetrag-Nachricht"
+  },
+  "buy": "Kaufen",
+  "@buy": {
+    "description": "Kaufen-Button"
+  },
+  "profile": "Profil",
+  "@profile": {
+    "description": "Profil-Bildschirmtitel"
+  },
+  "settings": "Einstellungen",
+  "@settings": {
+    "description": "Einstellungen-Button-Tooltip"
+  },
+  "notAuthorized": "Nicht autorisiert",
+  "@notAuthorized": {
+    "description": "Nicht autorisiert-Nachricht"
+  },
+  "loginForAccess": "Melden Sie sich an, um auf Funktionen zuzugreifen",
+  "@loginForAccess": {
+    "description": "Anmeldung-Vorschlagsnachricht"
+  },
+  "login": "Anmelden",
+  "@login": {
+    "description": "Anmelden-Button"
+  },
+  "register": "Registrieren",
+  "@register": {
+    "description": "Registrieren-Button"
+  },
+  "edit": "Bearbeiten",
+  "@edit": {
+    "description": "Bearbeiten-Button"
+  },
+  "logout": "Abmelden",
+  "@logout": {
+    "description": "Abmelden-Button"
+  },
+  "balance": "Kontostand",
+  "@balance": {
+    "description": "Kontostand-Bezeichnung"
+  },
+  "available": "Verfügbar",
+  "@available": {
+    "description": "Verfügbarer Kontostand-Bezeichnung"
+  },
+  "topUp": "Aufladen",
+  "@topUp": {
+    "description": "Aufladen-Button"
+  },
+  "quickActions": "Schnellaktionen",
+  "@quickActions": {
+    "description": "Schnellaktionen-Abschnittstitel"
+  },
+  "transactionHistory": "Transaktionsverlauf",
+  "@transactionHistory": {
+    "description": "Transaktionsverlauf-Menüelement"
+  },
+  "viewAllTransactions": "Alle Transaktionen anzeigen",
+  "@viewAllTransactions": {
+    "description": "Transaktionsverlauf-Untertitel"
+  },
+  "favoriteLiens": "Favorisierte Pfandrechte",
+  "@favoriteLiens": {
+    "description": "Favorisierte Pfandrechte-Menüelement"
+  },
+  "savedLiens": "Ihre gespeicherten Pfandrechte",
+  "@savedLiens": {
+    "description": "Favorisierte Pfandrechte-Untertitel"
+  },
+  "notifications": "Benachrichtigungen",
+  "@notifications": {
+    "description": "Benachrichtigungen-Menüelement"
+  },
+  "notificationSettings": "Benachrichtigungseinstellungen",
+  "@notificationSettings": {
+    "description": "Benachrichtigungen-Untertitel"
+  },
+  "help": "Hilfe",
+  "@help": {
+    "description": "Hilfe-Menüelement"
+  },
+  "appSettings": "App-Einstellungen",
+  "@appSettings": {
+    "description": "App-Einstellungen-Abschnittstitel"
+  },
+  "language": "Sprache",
+  "@language": {
+    "description": "Sprache-Menüelement"
+  },
+  "theme": "Design",
+  "@theme": {
+    "description": "Design-Menüelement"
+  },
+  "dark": "Dunkel",
+  "@dark": {
+    "description": "Dunkles Design-Bezeichnung"
+  },
+  "light": "Hell",
+  "@light": {
+    "description": "Helles Design-Bezeichnung"
+  },
+  "security": "Sicherheit",
+  "@security": {
+    "description": "Sicherheit-Menüelement"
+  },
+  "securitySettings": "Sicherheitseinstellungen",
+  "@securitySettings": {
+    "description": "Sicherheit-Untertitel"
+  },
+  "privacy": "Datenschutz",
+  "@privacy": {
+    "description": "Datenschutz-Menüelement"
+  },
+  "privacySettings": "Datenschutzeinstellungen",
+  "@privacySettings": {
+    "description": "Datenschutz-Untertitel"
+  },
+  "aboutApp": "Über die App",
+  "@aboutApp": {
+    "description": "Über die App-Abschnittstitel"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version-Menüelement"
+  },
+  "license": "Lizenz",
+  "@license": {
+    "description": "Lizenz-Menüelement"
+  },
+  "termsOfService": "Nutzungsbedingungen",
+  "@termsOfService": {
+    "description": "Nutzungsbedingungen-Menüelement"
+  },
+  "userAgreement": "Benutzervereinbarung",
+  "@userAgreement": {
+    "description": "Nutzungsbedingungen-Untertitel"
+  },
+  "privacyPolicy": "Datenschutzrichtlinie",
+  "@privacyPolicy": {
+    "description": "Datenschutzrichtlinie-Menüelement"
+  },
+  "dataProcessing": "Verarbeitung personenbezogener Daten",
+  "@dataProcessing": {
+    "description": "Datenschutzrichtlinie-Untertitel"
+  },
+  "loginToAccount": "In Konto anmelden",
+  "@loginToAccount": {
+    "description": "Anmelden-Dialogtitel"
+  },
+  "password": "Passwort",
+  "@password": {
+    "description": "Passwort-Feldbezeichnung"
+  },
+  "loginSuccessful": "Anmeldung erfolgreich!",
+  "@loginSuccessful": {
+    "description": "Erfolgreiche Anmeldung-Nachricht"
+  },
+  "loginError": "Anmeldefehler",
+  "@loginError": {
+    "description": "Anmeldefehler-Nachricht"
+  },
+  "registration": "Registrierung",
+  "@registration": {
+    "description": "Registrierung-Dialogtitel"
+  },
+  "firstName": "Vorname",
+  "@firstName": {
+    "description": "Vorname-Feldbezeichnung"
+  },
+  "lastName": "Nachname",
+  "@lastName": {
+    "description": "Nachname-Feldbezeichnung"
+  },
+  "registrationSuccessful": "Registrierung erfolgreich!",
+  "@registrationSuccessful": {
+    "description": "Erfolgreiche Registrierung-Nachricht"
+  },
+  "registrationError": "Registrierungsfehler",
+  "@registrationError": {
+    "description": "Registrierungsfehler-Nachricht"
+  },
+  "registerAccount": "Registrieren",
+  "@registerAccount": {
+    "description": "Registrieren-Button im Registrierungsdialog"
+  },
+  "logoutConfirmation": "Abmeldung bestätigen",
+  "@logoutConfirmation": {
+    "description": "Abmeldung-Bestätigungsdialogtitel"
+  },
+  "logoutConfirmationMessage": "Sind Sie sicher, dass Sie sich abmelden möchten?",
+  "@logoutConfirmationMessage": {
+    "description": "Abmeldung-Bestätigungsnachricht"
   }
 } 

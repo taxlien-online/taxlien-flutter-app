@@ -249,5 +249,473 @@
   "connectionStatus": "Stato Connessione",
   "@connectionStatus": {
     "description": "Titolo della schermata stato connessione"
+  },
+  "russian": "Russo",
+  "@russian": {
+    "description": "Nome della lingua russa"
+  },
+  "ukrainian": "Ucraino",
+  "@ukrainian": {
+    "description": "Nome della lingua ucraina"
+  },
+  "dataLoadError": "Errore caricamento dati: {error}",
+  "@dataLoadError": {
+    "description": "Messaggio errore caricamento dati",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Errore di rete"
+      }
+    }
+  },
+  "taxLienMarketplace": "Mercato Privilegi Fiscali",
+  "@taxLienMarketplace": {
+    "description": "Titolo della schermata mercato privilegi fiscali"
+  },
+  "filters": "Filtri",
+  "@filters": {
+    "description": "Tooltip pulsante filtri"
+  },
+  "refresh": "Aggiorna",
+  "@refresh": {
+    "description": "Tooltip pulsante aggiorna"
+  },
+  "searchHint": "Cerca per indirizzo, proprietario o ID lotto...",
+  "@searchHint": {
+    "description": "Testo suggerimento campo ricerca"
+  },
+  "clear": "Cancella",
+  "@clear": {
+    "description": "Pulsante cancella"
+  },
+  "foundLiens": "Trovati: {count} privilegi",
+  "@foundLiens": {
+    "description": "Messaggio conteggio privilegi trovati",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "Ordina per: {sortLabel}",
+  "@sortBy": {
+    "description": "Etichetta ordinamento",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "Data Asta ↑"
+      }
+    }
+  },
+  "retry": "Riprova",
+  "@retry": {
+    "description": "Pulsante riprova"
+  },
+  "noLiensFound": "Nessun privilegio fiscale trovato",
+  "@noLiensFound": {
+    "description": "Messaggio che nessun privilegio è stato trovato"
+  },
+  "tryChangingSearch": "Prova a modificare i parametri di ricerca o i filtri",
+  "@tryChangingSearch": {
+    "description": "Suggerimento di modificare i parametri di ricerca"
+  },
+  "stateFilter": "Stato: {state}",
+  "@stateFilter": {
+    "description": "Etichetta filtro per stato",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "California"
+      }
+    }
+  },
+  "countyFilter": "Contea: {county}",
+  "@countyFilter": {
+    "description": "Etichetta filtro per contea",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "Los Angeles"
+      }
+    }
+  },
+  "amountFrom": "Da: {amount}",
+  "@amountFrom": {
+    "description": "Filtro importo minimo",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "A: {amount}",
+  "@amountTo": {
+    "description": "Filtro importo massimo",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "Tasso da: {rate}%",
+  "@interestRateFrom": {
+    "description": "Filtro tasso di interesse minimo",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "Data Asta {direction}",
+  "@auctionDateSort": {
+    "description": "Etichetta ordinamento per data asta",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "Importo Tassa {direction}",
+  "@taxAmountSort": {
+    "description": "Etichetta ordinamento per importo tassa",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "Tasso di Interesse {direction}",
+  "@interestRateSort": {
+    "description": "Etichetta ordinamento per tasso di interesse",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "Valore Stimato {direction}",
+  "@assessedValueSort": {
+    "description": "Etichetta ordinamento per valore stimato",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "Scadenza Riscatto {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "Etichetta ordinamento per scadenza riscatto",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "Privilegio #{parcelId}",
+  "@lienNumber": {
+    "description": "Numero privilegio con ID lotto",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "Proprietario: {owner}",
+  "@owner": {
+    "description": "Informazioni proprietario",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "Mario Rossi"
+      }
+    }
+  },
+  "taxAmount": "Importo Tassa",
+  "@taxAmount": {
+    "description": "Etichetta importo tassa"
+  },
+  "interestRate": "Tasso di Interesse",
+  "@interestRate": {
+    "description": "Etichetta tasso di interesse"
+  },
+  "assessedValue": "Valore Stimato",
+  "@assessedValue": {
+    "description": "Etichetta valore stimato"
+  },
+  "auctionDate": "Data Asta",
+  "@auctionDate": {
+    "description": "Etichetta data asta"
+  },
+  "additionalInfo": "Informazioni Aggiuntive",
+  "@additionalInfo": {
+    "description": "Intestazione della sezione informazioni aggiuntive"
+  },
+  "county": "Contea",
+  "@county": {
+    "description": "Etichetta contea"
+  },
+  "state": "Stato",
+  "@state": {
+    "description": "Etichetta stato"
+  },
+  "redemptionDeadline": "Scadenza Riscatto",
+  "@redemptionDeadline": {
+    "description": "Etichetta scadenza riscatto"
+  },
+  "status": "Stato",
+  "@status": {
+    "description": "Etichetta stato"
+  },
+  "buyLien": "Acquista Privilegio",
+  "@buyLien": {
+    "description": "Pulsante acquista privilegio"
+  },
+  "availableForPurchase": "Disponibile per l'acquisto",
+  "@availableForPurchase": {
+    "description": "Stato disponibile per l'acquisto"
+  },
+  "sold": "Venduto",
+  "@sold": {
+    "description": "Stato venduto"
+  },
+  "redeemed": "Riscattato",
+  "@redeemed": {
+    "description": "Stato riscattato"
+  },
+  "foreclosed": "Pignorato",
+  "@foreclosed": {
+    "description": "Stato pignorato"
+  },
+  "purchaseLien": "Acquista Privilegio",
+  "@purchaseLien": {
+    "description": "Titolo del dialogo acquisto privilegio"
+  },
+  "enterBidAmount": "Inserisci l'importo dell'offerta (minimo {amount}):",
+  "@enterBidAmount": {
+    "description": "Richiesta inserimento importo offerta",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "Importo Offerta",
+  "@bidAmount": {
+    "description": "Etichetta campo importo offerta"
+  },
+  "lienPurchasedSuccessfully": "Privilegio acquistato con successo!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Messaggio acquisto privilegio riuscito"
+  },
+  "purchaseError": "Errore acquisto",
+  "@purchaseError": {
+    "description": "Messaggio errore acquisto"
+  },
+  "invalidBidAmount": "Importo offerta non valido",
+  "@invalidBidAmount": {
+    "description": "Messaggio importo offerta non valido"
+  },
+  "buy": "Acquista",
+  "@buy": {
+    "description": "Pulsante acquista"
+  },
+  "profile": "Profilo",
+  "@profile": {
+    "description": "Titolo della schermata profilo"
+  },
+  "settings": "Impostazioni",
+  "@settings": {
+    "description": "Tooltip pulsante impostazioni"
+  },
+  "notAuthorized": "Non autorizzato",
+  "@notAuthorized": {
+    "description": "Messaggio utente non autorizzato"
+  },
+  "loginForAccess": "Accedi per utilizzare le funzionalità",
+  "@loginForAccess": {
+    "description": "Messaggio con suggerimento di accesso"
+  },
+  "login": "Accedi",
+  "@login": {
+    "description": "Pulsante accedi"
+  },
+  "register": "Registrati",
+  "@register": {
+    "description": "Pulsante registrati"
+  },
+  "edit": "Modifica",
+  "@edit": {
+    "description": "Pulsante modifica"
+  },
+  "logout": "Esci",
+  "@logout": {
+    "description": "Pulsante esci"
+  },
+  "balance": "Saldo",
+  "@balance": {
+    "description": "Etichetta saldo"
+  },
+  "available": "Disponibile",
+  "@available": {
+    "description": "Etichetta saldo disponibile"
+  },
+  "topUp": "Ricarica",
+  "@topUp": {
+    "description": "Pulsante ricarica"
+  },
+  "quickActions": "Azioni Rapide",
+  "@quickActions": {
+    "description": "Intestazione della sezione azioni rapide"
+  },
+  "transactionHistory": "Cronologia Transazioni",
+  "@transactionHistory": {
+    "description": "Elemento menu cronologia transazioni"
+  },
+  "viewAllTransactions": "Visualizza tutte le transazioni",
+  "@viewAllTransactions": {
+    "description": "Sottotitolo cronologia transazioni"
+  },
+  "favoriteLiens": "Privilegi Preferiti",
+  "@favoriteLiens": {
+    "description": "Elemento menu privilegi preferiti"
+  },
+  "savedLiens": "I tuoi privilegi salvati",
+  "@savedLiens": {
+    "description": "Sottotitolo privilegi preferiti"
+  },
+  "notifications": "Notifiche",
+  "@notifications": {
+    "description": "Elemento menu notifiche"
+  },
+  "notificationSettings": "Impostazioni notifiche",
+  "@notificationSettings": {
+    "description": "Sottotitolo notifiche"
+  },
+  "help": "Aiuto",
+  "@help": {
+    "description": "Elemento menu aiuto"
+  },
+  "appSettings": "Impostazioni App",
+  "@appSettings": {
+    "description": "Intestazione della sezione impostazioni app"
+  },
+  "language": "Lingua",
+  "@language": {
+    "description": "Elemento menu lingua"
+  },
+  "theme": "Tema",
+  "@theme": {
+    "description": "Elemento menu tema"
+  },
+  "dark": "Scuro",
+  "@dark": {
+    "description": "Etichetta tema scuro"
+  },
+  "light": "Chiaro",
+  "@light": {
+    "description": "Etichetta tema chiaro"
+  },
+  "security": "Sicurezza",
+  "@security": {
+    "description": "Elemento menu sicurezza"
+  },
+  "securitySettings": "Impostazioni sicurezza",
+  "@securitySettings": {
+    "description": "Sottotitolo sicurezza"
+  },
+  "privacy": "Privacy",
+  "@privacy": {
+    "description": "Elemento menu privacy"
+  },
+  "privacySettings": "Impostazioni privacy",
+  "@privacySettings": {
+    "description": "Sottotitolo privacy"
+  },
+  "aboutApp": "Informazioni App",
+  "@aboutApp": {
+    "description": "Intestazione della sezione informazioni app"
+  },
+  "version": "Versione",
+  "@version": {
+    "description": "Elemento menu versione"
+  },
+  "license": "Licenza",
+  "@license": {
+    "description": "Elemento menu licenza"
+  },
+  "termsOfService": "Termini di Servizio",
+  "@termsOfService": {
+    "description": "Elemento menu termini di servizio"
+  },
+  "userAgreement": "Accordo Utente",
+  "@userAgreement": {
+    "description": "Sottotitolo termini di servizio"
+  },
+  "privacyPolicy": "Informativa Privacy",
+  "@privacyPolicy": {
+    "description": "Elemento menu informativa privacy"
+  },
+  "dataProcessing": "Trattamento dati personali",
+  "@dataProcessing": {
+    "description": "Sottotitolo informativa privacy"
+  },
+  "loginToAccount": "Accedi all'Account",
+  "@loginToAccount": {
+    "description": "Titolo del dialogo di accesso"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Etichetta campo password"
+  },
+  "loginSuccessful": "Accesso riuscito!",
+  "@loginSuccessful": {
+    "description": "Messaggio accesso riuscito"
+  },
+  "loginError": "Errore accesso",
+  "@loginError": {
+    "description": "Messaggio errore accesso"
+  },
+  "registration": "Registrazione",
+  "@registration": {
+    "description": "Titolo del dialogo di registrazione"
+  },
+  "firstName": "Nome",
+  "@firstName": {
+    "description": "Etichetta campo nome"
+  },
+  "lastName": "Cognome",
+  "@lastName": {
+    "description": "Etichetta campo cognome"
+  },
+  "registrationSuccessful": "Registrazione riuscita!",
+  "@registrationSuccessful": {
+    "description": "Messaggio registrazione riuscita"
+  },
+  "registrationError": "Errore registrazione",
+  "@registrationError": {
+    "description": "Messaggio errore registrazione"
+  },
+  "registerAccount": "Registrati",
+  "@registerAccount": {
+    "description": "Pulsante registrati nel dialogo di registrazione"
+  },
+  "logoutConfirmation": "Conferma Uscita",
+  "@logoutConfirmation": {
+    "description": "Titolo del dialogo di conferma uscita"
+  },
+  "logoutConfirmationMessage": "Sei sicuro di voler uscire?",
+  "@logoutConfirmationMessage": {
+    "description": "Messaggio conferma uscita"
   }
 }

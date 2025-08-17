@@ -249,5 +249,473 @@
   "connectionStatus": "État de Connexion",
   "@connectionStatus": {
     "description": "Titre de l'écran d'état de connexion"
+  },
+  "russian": "Russe",
+  "@russian": {
+    "description": "Nom de la langue russe"
+  },
+  "ukrainian": "Ukrainien",
+  "@ukrainian": {
+    "description": "Nom de la langue ukrainienne"
+  },
+  "dataLoadError": "Erreur de chargement des données : {error}",
+  "@dataLoadError": {
+    "description": "Message d'erreur de chargement des données",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Erreur réseau"
+      }
+    }
+  },
+  "taxLienMarketplace": "Marché des Privilèges Fiscaux",
+  "@taxLienMarketplace": {
+    "description": "Titre de l'écran du marché des privilèges fiscaux"
+  },
+  "filters": "Filtres",
+  "@filters": {
+    "description": "Info-bulle du bouton filtres"
+  },
+  "refresh": "Actualiser",
+  "@refresh": {
+    "description": "Info-bulle du bouton actualiser"
+  },
+  "searchHint": "Rechercher par adresse, propriétaire ou ID de parcelle...",
+  "@searchHint": {
+    "description": "Texte d'indication du champ de recherche"
+  },
+  "clear": "Effacer",
+  "@clear": {
+    "description": "Bouton effacer"
+  },
+  "foundLiens": "Trouvé : {count} privilèges",
+  "@foundLiens": {
+    "description": "Message de comptage des privilèges trouvés",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "Trier par : {sortLabel}",
+  "@sortBy": {
+    "description": "Étiquette de tri",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "Date d'Enchère ↑"
+      }
+    }
+  },
+  "retry": "Réessayer",
+  "@retry": {
+    "description": "Bouton réessayer"
+  },
+  "noLiensFound": "Aucun privilège fiscal trouvé",
+  "@noLiensFound": {
+    "description": "Message qu'aucun privilège n'a été trouvé"
+  },
+  "tryChangingSearch": "Essayez de modifier les paramètres de recherche ou les filtres",
+  "@tryChangingSearch": {
+    "description": "Suggestion de modifier les paramètres de recherche"
+  },
+  "stateFilter": "État : {state}",
+  "@stateFilter": {
+    "description": "Étiquette de filtre par état",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "Californie"
+      }
+    }
+  },
+  "countyFilter": "Comté : {county}",
+  "@countyFilter": {
+    "description": "Étiquette de filtre par comté",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "Los Angeles"
+      }
+    }
+  },
+  "amountFrom": "De : {amount}",
+  "@amountFrom": {
+    "description": "Filtre de montant minimum",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "À : {amount}",
+  "@amountTo": {
+    "description": "Filtre de montant maximum",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "Taux à partir de : {rate}%",
+  "@interestRateFrom": {
+    "description": "Filtre de taux d'intérêt minimum",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "Date d'Enchère {direction}",
+  "@auctionDateSort": {
+    "description": "Étiquette de tri par date d'enchère",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "Montant d'Impôt {direction}",
+  "@taxAmountSort": {
+    "description": "Étiquette de tri par montant d'impôt",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "Taux d'Intérêt {direction}",
+  "@interestRateSort": {
+    "description": "Étiquette de tri par taux d'intérêt",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "Valeur Évaluée {direction}",
+  "@assessedValueSort": {
+    "description": "Étiquette de tri par valeur évaluée",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "Date Limite de Rédemption {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "Étiquette de tri par date limite de rédemption",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "Privilège #{parcelId}",
+  "@lienNumber": {
+    "description": "Numéro de privilège avec ID de parcelle",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "Propriétaire : {owner}",
+  "@owner": {
+    "description": "Informations du propriétaire",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "Jean Dupont"
+      }
+    }
+  },
+  "taxAmount": "Montant d'Impôt",
+  "@taxAmount": {
+    "description": "Étiquette de montant d'impôt"
+  },
+  "interestRate": "Taux d'Intérêt",
+  "@interestRate": {
+    "description": "Étiquette de taux d'intérêt"
+  },
+  "assessedValue": "Valeur Évaluée",
+  "@assessedValue": {
+    "description": "Étiquette de valeur évaluée"
+  },
+  "auctionDate": "Date d'Enchère",
+  "@auctionDate": {
+    "description": "Étiquette de date d'enchère"
+  },
+  "additionalInfo": "Informations Supplémentaires",
+  "@additionalInfo": {
+    "description": "En-tête de la section informations supplémentaires"
+  },
+  "county": "Comté",
+  "@county": {
+    "description": "Étiquette de comté"
+  },
+  "state": "État",
+  "@state": {
+    "description": "Étiquette d'état"
+  },
+  "redemptionDeadline": "Date Limite de Rédemption",
+  "@redemptionDeadline": {
+    "description": "Étiquette de date limite de rédemption"
+  },
+  "status": "Statut",
+  "@status": {
+    "description": "Étiquette de statut"
+  },
+  "buyLien": "Acheter le Privilège",
+  "@buyLien": {
+    "description": "Bouton acheter privilège"
+  },
+  "availableForPurchase": "Disponible à l'achat",
+  "@availableForPurchase": {
+    "description": "Statut disponible à l'achat"
+  },
+  "sold": "Vendu",
+  "@sold": {
+    "description": "Statut vendu"
+  },
+  "redeemed": "Racheté",
+  "@redeemed": {
+    "description": "Statut racheté"
+  },
+  "foreclosed": "Saisi",
+  "@foreclosed": {
+    "description": "Statut saisi"
+  },
+  "purchaseLien": "Acheter le Privilège",
+  "@purchaseLien": {
+    "description": "Titre du dialogue d'achat de privilège"
+  },
+  "enterBidAmount": "Entrez le montant de l'enchère (minimum {amount}) :",
+  "@enterBidAmount": {
+    "description": "Demande de saisie du montant d'enchère",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "Montant de l'Enchère",
+  "@bidAmount": {
+    "description": "Étiquette du champ montant d'enchère"
+  },
+  "lienPurchasedSuccessfully": "Privilège acheté avec succès !",
+  "@lienPurchasedSuccessfully": {
+    "description": "Message d'achat réussi de privilège"
+  },
+  "purchaseError": "Erreur d'achat",
+  "@purchaseError": {
+    "description": "Message d'erreur d'achat"
+  },
+  "invalidBidAmount": "Montant d'enchère invalide",
+  "@invalidBidAmount": {
+    "description": "Message de montant d'enchère invalide"
+  },
+  "buy": "Acheter",
+  "@buy": {
+    "description": "Bouton acheter"
+  },
+  "profile": "Profil",
+  "@profile": {
+    "description": "Titre de l'écran de profil"
+  },
+  "settings": "Paramètres",
+  "@settings": {
+    "description": "Info-bulle du bouton paramètres"
+  },
+  "notAuthorized": "Non autorisé",
+  "@notAuthorized": {
+    "description": "Message d'utilisateur non autorisé"
+  },
+  "loginForAccess": "Connectez-vous pour accéder aux fonctionnalités",
+  "@loginForAccess": {
+    "description": "Message avec suggestion de connexion"
+  },
+  "login": "Se Connecter",
+  "@login": {
+    "description": "Bouton de connexion"
+  },
+  "register": "S'Inscrire",
+  "@register": {
+    "description": "Bouton d'inscription"
+  },
+  "edit": "Modifier",
+  "@edit": {
+    "description": "Bouton modifier"
+  },
+  "logout": "Se Déconnecter",
+  "@logout": {
+    "description": "Bouton de déconnexion"
+  },
+  "balance": "Solde",
+  "@balance": {
+    "description": "Étiquette de solde"
+  },
+  "available": "Disponible",
+  "@available": {
+    "description": "Étiquette de solde disponible"
+  },
+  "topUp": "Recharger",
+  "@topUp": {
+    "description": "Bouton recharger"
+  },
+  "quickActions": "Actions Rapides",
+  "@quickActions": {
+    "description": "En-tête de la section actions rapides"
+  },
+  "transactionHistory": "Historique des Transactions",
+  "@transactionHistory": {
+    "description": "Élément du menu historique des transactions"
+  },
+  "viewAllTransactions": "Voir toutes les transactions",
+  "@viewAllTransactions": {
+    "description": "Sous-titre de l'historique des transactions"
+  },
+  "favoriteLiens": "Privilèges Favoris",
+  "@favoriteLiens": {
+    "description": "Élément du menu privilèges favoris"
+  },
+  "savedLiens": "Vos privilèges sauvegardés",
+  "@savedLiens": {
+    "description": "Sous-titre des privilèges favoris"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Élément du menu notifications"
+  },
+  "notificationSettings": "Paramètres de notification",
+  "@notificationSettings": {
+    "description": "Sous-titre des notifications"
+  },
+  "help": "Aide",
+  "@help": {
+    "description": "Élément du menu aide"
+  },
+  "appSettings": "Paramètres de l'Application",
+  "@appSettings": {
+    "description": "En-tête de la section paramètres de l'application"
+  },
+  "language": "Langue",
+  "@language": {
+    "description": "Élément du menu langue"
+  },
+  "theme": "Thème",
+  "@theme": {
+    "description": "Élément du menu thème"
+  },
+  "dark": "Sombre",
+  "@dark": {
+    "description": "Étiquette de thème sombre"
+  },
+  "light": "Clair",
+  "@light": {
+    "description": "Étiquette de thème clair"
+  },
+  "security": "Sécurité",
+  "@security": {
+    "description": "Élément du menu sécurité"
+  },
+  "securitySettings": "Paramètres de sécurité",
+  "@securitySettings": {
+    "description": "Sous-titre de sécurité"
+  },
+  "privacy": "Confidentialité",
+  "@privacy": {
+    "description": "Élément du menu confidentialité"
+  },
+  "privacySettings": "Paramètres de confidentialité",
+  "@privacySettings": {
+    "description": "Sous-titre de confidentialité"
+  },
+  "aboutApp": "À Propos de l'Application",
+  "@aboutApp": {
+    "description": "En-tête de la section à propos de l'application"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Élément du menu version"
+  },
+  "license": "Licence",
+  "@license": {
+    "description": "Élément du menu licence"
+  },
+  "termsOfService": "Conditions d'Utilisation",
+  "@termsOfService": {
+    "description": "Élément du menu conditions d'utilisation"
+  },
+  "userAgreement": "Accord Utilisateur",
+  "@userAgreement": {
+    "description": "Sous-titre des conditions d'utilisation"
+  },
+  "privacyPolicy": "Politique de Confidentialité",
+  "@privacyPolicy": {
+    "description": "Élément du menu politique de confidentialité"
+  },
+  "dataProcessing": "Traitement des données personnelles",
+  "@dataProcessing": {
+    "description": "Sous-titre de la politique de confidentialité"
+  },
+  "loginToAccount": "Se Connecter au Compte",
+  "@loginToAccount": {
+    "description": "Titre du dialogue de connexion"
+  },
+  "password": "Mot de Passe",
+  "@password": {
+    "description": "Étiquette du champ mot de passe"
+  },
+  "loginSuccessful": "Connexion réussie !",
+  "@loginSuccessful": {
+    "description": "Message de connexion réussie"
+  },
+  "loginError": "Erreur de connexion",
+  "@loginError": {
+    "description": "Message d'erreur de connexion"
+  },
+  "registration": "Inscription",
+  "@registration": {
+    "description": "Titre du dialogue d'inscription"
+  },
+  "firstName": "Prénom",
+  "@firstName": {
+    "description": "Étiquette du champ prénom"
+  },
+  "lastName": "Nom",
+  "@lastName": {
+    "description": "Étiquette du champ nom"
+  },
+  "registrationSuccessful": "Inscription réussie !",
+  "@registrationSuccessful": {
+    "description": "Message d'inscription réussie"
+  },
+  "registrationError": "Erreur d'inscription",
+  "@registrationError": {
+    "description": "Message d'erreur d'inscription"
+  },
+  "registerAccount": "S'Inscrire",
+  "@registerAccount": {
+    "description": "Bouton d'inscription dans le dialogue d'inscription"
+  },
+  "logoutConfirmation": "Confirmation de Déconnexion",
+  "@logoutConfirmation": {
+    "description": "Titre du dialogue de confirmation de déconnexion"
+  },
+  "logoutConfirmationMessage": "Êtes-vous sûr de vouloir vous déconnecter ?",
+  "@logoutConfirmationMessage": {
+    "description": "Message de confirmation de déconnexion"
   }
 }

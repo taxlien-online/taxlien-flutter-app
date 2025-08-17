@@ -1,6 +1,6 @@
 {
   "@@locale": "es",
-  "appTitle": "FreeDome Manager",
+  "appTitle": "TaxLien.online",
   "@appTitle": {
     "description": "Título de la aplicación"
   },
@@ -128,7 +128,7 @@
   "@languageChanged": {
     "description": "Notificación de cambio de idioma"
   },
-  "onboardingWelcomeTitle": "Bienvenido a FreeDome Manager",
+  "onboardingWelcomeTitle": "Bienvenido a TaxLien.online",
   "@onboardingWelcomeTitle": {
     "description": "Título de la pantalla de bienvenida del onboarding"
   },
@@ -249,5 +249,473 @@
   "connectionStatus": "Estado de Conexión",
   "@connectionStatus": {
     "description": "Título de la pantalla de estado de conexión"
+  },
+  "russian": "Ruso",
+  "@russian": {
+    "description": "Nombre del idioma ruso"
+  },
+  "ukrainian": "Ucraniano",
+  "@ukrainian": {
+    "description": "Nombre del idioma ucraniano"
+  },
+  "dataLoadError": "Error al cargar datos: {error}",
+  "@dataLoadError": {
+    "description": "Mensaje de error al cargar datos",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Error de red"
+      }
+    }
+  },
+  "taxLienMarketplace": "Mercado de Gravamen Fiscal",
+  "@taxLienMarketplace": {
+    "description": "Título de la pantalla del mercado de gravamen fiscal"
+  },
+  "filters": "Filtros",
+  "@filters": {
+    "description": "Tooltip del botón de filtros"
+  },
+  "refresh": "Actualizar",
+  "@refresh": {
+    "description": "Tooltip del botón de actualizar"
+  },
+  "searchHint": "Buscar por dirección, propietario o ID de parcela...",
+  "@searchHint": {
+    "description": "Texto de sugerencia del campo de búsqueda"
+  },
+  "clear": "Limpiar",
+  "@clear": {
+    "description": "Botón limpiar"
+  },
+  "foundLiens": "Encontrados: {count} gravámenes",
+  "@foundLiens": {
+    "description": "Mensaje de conteo de gravámenes encontrados",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "Ordenar por: {sortLabel}",
+  "@sortBy": {
+    "description": "Etiqueta de ordenamiento",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "Fecha de Subasta ↑"
+      }
+    }
+  },
+  "retry": "Reintentar",
+  "@retry": {
+    "description": "Botón reintentar"
+  },
+  "noLiensFound": "No se encontraron gravámenes fiscales",
+  "@noLiensFound": {
+    "description": "Mensaje de que no se encontraron gravámenes"
+  },
+  "tryChangingSearch": "Intenta cambiar los parámetros de búsqueda o filtros",
+  "@tryChangingSearch": {
+    "description": "Sugerencia para cambiar parámetros de búsqueda"
+  },
+  "stateFilter": "Estado: {state}",
+  "@stateFilter": {
+    "description": "Etiqueta de filtro por estado",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "California"
+      }
+    }
+  },
+  "countyFilter": "Condado: {county}",
+  "@countyFilter": {
+    "description": "Etiqueta de filtro por condado",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "Los Ángeles"
+      }
+    }
+  },
+  "amountFrom": "Desde: {amount}",
+  "@amountFrom": {
+    "description": "Filtro de cantidad mínima",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "Hasta: {amount}",
+  "@amountTo": {
+    "description": "Filtro de cantidad máxima",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "Tasa desde: {rate}%",
+  "@interestRateFrom": {
+    "description": "Filtro de tasa de interés mínima",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "Fecha de Subasta {direction}",
+  "@auctionDateSort": {
+    "description": "Etiqueta de ordenamiento por fecha de subasta",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "Cantidad de Impuesto {direction}",
+  "@taxAmountSort": {
+    "description": "Etiqueta de ordenamiento por cantidad de impuesto",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "Tasa de Interés {direction}",
+  "@interestRateSort": {
+    "description": "Etiqueta de ordenamiento por tasa de interés",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "Valor Evaluado {direction}",
+  "@assessedValueSort": {
+    "description": "Etiqueta de ordenamiento por valor evaluado",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "Fecha Límite de Redención {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "Etiqueta de ordenamiento por fecha límite de redención",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "Gravamen #{parcelId}",
+  "@lienNumber": {
+    "description": "Número de gravamen con ID de parcela",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "Propietario: {owner}",
+  "@owner": {
+    "description": "Información del propietario",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "Juan Pérez"
+      }
+    }
+  },
+  "taxAmount": "Cantidad de Impuesto",
+  "@taxAmount": {
+    "description": "Etiqueta de cantidad de impuesto"
+  },
+  "interestRate": "Tasa de Interés",
+  "@interestRate": {
+    "description": "Etiqueta de tasa de interés"
+  },
+  "assessedValue": "Valor Evaluado",
+  "@assessedValue": {
+    "description": "Etiqueta de valor evaluado"
+  },
+  "auctionDate": "Fecha de Subasta",
+  "@auctionDate": {
+    "description": "Etiqueta de fecha de subasta"
+  },
+  "additionalInfo": "Información Adicional",
+  "@additionalInfo": {
+    "description": "Encabezado de la sección de información adicional"
+  },
+  "county": "Condado",
+  "@county": {
+    "description": "Etiqueta de condado"
+  },
+  "state": "Estado",
+  "@state": {
+    "description": "Etiqueta de estado"
+  },
+  "redemptionDeadline": "Fecha Límite de Redención",
+  "@redemptionDeadline": {
+    "description": "Etiqueta de fecha límite de redención"
+  },
+  "status": "Estado",
+  "@status": {
+    "description": "Etiqueta de estado"
+  },
+  "buyLien": "Comprar Gravamen",
+  "@buyLien": {
+    "description": "Botón comprar gravamen"
+  },
+  "availableForPurchase": "Disponible para compra",
+  "@availableForPurchase": {
+    "description": "Estado disponible para compra"
+  },
+  "sold": "Vendido",
+  "@sold": {
+    "description": "Estado vendido"
+  },
+  "redeemed": "Redimido",
+  "@redeemed": {
+    "description": "Estado redimido"
+  },
+  "foreclosed": "Embargado",
+  "@foreclosed": {
+    "description": "Estado embargado"
+  },
+  "purchaseLien": "Comprar Gravamen",
+  "@purchaseLien": {
+    "description": "Título del diálogo de compra de gravamen"
+  },
+  "enterBidAmount": "Ingresa el monto de la oferta (mínimo {amount}):",
+  "@enterBidAmount": {
+    "description": "Solicitud de ingreso de monto de oferta",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "Monto de Oferta",
+  "@bidAmount": {
+    "description": "Etiqueta del campo de monto de oferta"
+  },
+  "lienPurchasedSuccessfully": "¡Gravamen comprado exitosamente!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Mensaje de compra exitosa de gravamen"
+  },
+  "purchaseError": "Error en la compra",
+  "@purchaseError": {
+    "description": "Mensaje de error en la compra"
+  },
+  "invalidBidAmount": "Monto de oferta inválido",
+  "@invalidBidAmount": {
+    "description": "Mensaje de monto de oferta inválido"
+  },
+  "buy": "Comprar",
+  "@buy": {
+    "description": "Botón comprar"
+  },
+  "profile": "Perfil",
+  "@profile": {
+    "description": "Título de la pantalla de perfil"
+  },
+  "settings": "Configuración",
+  "@settings": {
+    "description": "Tooltip del botón de configuración"
+  },
+  "notAuthorized": "No autorizado",
+  "@notAuthorized": {
+    "description": "Mensaje de usuario no autorizado"
+  },
+  "loginForAccess": "Inicia sesión para acceder a las funciones",
+  "@loginForAccess": {
+    "description": "Mensaje con sugerencia de inicio de sesión"
+  },
+  "login": "Iniciar Sesión",
+  "@login": {
+    "description": "Botón de inicio de sesión"
+  },
+  "register": "Registrarse",
+  "@register": {
+    "description": "Botón de registro"
+  },
+  "edit": "Editar",
+  "@edit": {
+    "description": "Botón editar"
+  },
+  "logout": "Cerrar Sesión",
+  "@logout": {
+    "description": "Botón cerrar sesión"
+  },
+  "balance": "Saldo",
+  "@balance": {
+    "description": "Etiqueta de saldo"
+  },
+  "available": "Disponible",
+  "@available": {
+    "description": "Etiqueta de saldo disponible"
+  },
+  "topUp": "Recargar",
+  "@topUp": {
+    "description": "Botón recargar"
+  },
+  "quickActions": "Acciones Rápidas",
+  "@quickActions": {
+    "description": "Encabezado de la sección de acciones rápidas"
+  },
+  "transactionHistory": "Historial de Transacciones",
+  "@transactionHistory": {
+    "description": "Elemento del menú de historial de transacciones"
+  },
+  "viewAllTransactions": "Ver todas las transacciones",
+  "@viewAllTransactions": {
+    "description": "Subtítulo del historial de transacciones"
+  },
+  "favoriteLiens": "Gravámenes Favoritos",
+  "@favoriteLiens": {
+    "description": "Elemento del menú de gravámenes favoritos"
+  },
+  "savedLiens": "Tus gravámenes guardados",
+  "@savedLiens": {
+    "description": "Subtítulo de gravámenes favoritos"
+  },
+  "notifications": "Notificaciones",
+  "@notifications": {
+    "description": "Elemento del menú de notificaciones"
+  },
+  "notificationSettings": "Configuración de notificaciones",
+  "@notificationSettings": {
+    "description": "Subtítulo de notificaciones"
+  },
+  "help": "Ayuda",
+  "@help": {
+    "description": "Elemento del menú de ayuda"
+  },
+  "appSettings": "Configuración de la Aplicación",
+  "@appSettings": {
+    "description": "Encabezado de la sección de configuración de la aplicación"
+  },
+  "language": "Idioma",
+  "@language": {
+    "description": "Elemento del menú de idioma"
+  },
+  "theme": "Tema",
+  "@theme": {
+    "description": "Elemento del menú de tema"
+  },
+  "dark": "Oscuro",
+  "@dark": {
+    "description": "Etiqueta de tema oscuro"
+  },
+  "light": "Claro",
+  "@light": {
+    "description": "Etiqueta de tema claro"
+  },
+  "security": "Seguridad",
+  "@security": {
+    "description": "Elemento del menú de seguridad"
+  },
+  "securitySettings": "Configuración de seguridad",
+  "@securitySettings": {
+    "description": "Subtítulo de seguridad"
+  },
+  "privacy": "Privacidad",
+  "@privacy": {
+    "description": "Elemento del menú de privacidad"
+  },
+  "privacySettings": "Configuración de privacidad",
+  "@privacySettings": {
+    "description": "Subtítulo de privacidad"
+  },
+  "aboutApp": "Acerca de la Aplicación",
+  "@aboutApp": {
+    "description": "Encabezado de la sección acerca de la aplicación"
+  },
+  "version": "Versión",
+  "@version": {
+    "description": "Elemento del menú de versión"
+  },
+  "license": "Licencia",
+  "@license": {
+    "description": "Elemento del menú de licencia"
+  },
+  "termsOfService": "Términos de Servicio",
+  "@termsOfService": {
+    "description": "Elemento del menú de términos de servicio"
+  },
+  "userAgreement": "Acuerdo de Usuario",
+  "@userAgreement": {
+    "description": "Subtítulo de términos de servicio"
+  },
+  "privacyPolicy": "Política de Privacidad",
+  "@privacyPolicy": {
+    "description": "Elemento del menú de política de privacidad"
+  },
+  "dataProcessing": "Procesamiento de datos personales",
+  "@dataProcessing": {
+    "description": "Subtítulo de política de privacidad"
+  },
+  "loginToAccount": "Iniciar Sesión en la Cuenta",
+  "@loginToAccount": {
+    "description": "Título del diálogo de inicio de sesión"
+  },
+  "password": "Contraseña",
+  "@password": {
+    "description": "Etiqueta del campo de contraseña"
+  },
+  "loginSuccessful": "¡Inicio de sesión exitoso!",
+  "@loginSuccessful": {
+    "description": "Mensaje de inicio de sesión exitoso"
+  },
+  "loginError": "Error de inicio de sesión",
+  "@loginError": {
+    "description": "Mensaje de error de inicio de sesión"
+  },
+  "registration": "Registro",
+  "@registration": {
+    "description": "Título del diálogo de registro"
+  },
+  "firstName": "Nombre",
+  "@firstName": {
+    "description": "Etiqueta del campo de nombre"
+  },
+  "lastName": "Apellido",
+  "@lastName": {
+    "description": "Etiqueta del campo de apellido"
+  },
+  "registrationSuccessful": "¡Registro exitoso!",
+  "@registrationSuccessful": {
+    "description": "Mensaje de registro exitoso"
+  },
+  "registrationError": "Error de registro",
+  "@registrationError": {
+    "description": "Mensaje de error de registro"
+  },
+  "registerAccount": "Registrarse",
+  "@registerAccount": {
+    "description": "Botón de registro en el diálogo de registro"
+  },
+  "logoutConfirmation": "Confirmación de Cierre de Sesión",
+  "@logoutConfirmation": {
+    "description": "Título del diálogo de confirmación de cierre de sesión"
+  },
+  "logoutConfirmationMessage": "¿Estás seguro de que quieres cerrar sesión?",
+  "@logoutConfirmationMessage": {
+    "description": "Mensaje de confirmación de cierre de sesión"
   }
 }
