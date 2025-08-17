@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LocalizationService extends ChangeNotifier {
   static const String _languageKey = 'selected_language';
   static const String _systemLanguage = 'system';
+  
+  // Global navigator key for accessing context
+  static final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+  static GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
   
   Locale? _currentLocale;
   bool _isSystemLanguage = true;
@@ -94,9 +99,9 @@ class LocalizationService extends ChangeNotifier {
   String getLanguageName(String languageCode) {
     switch (languageCode) {
       case 'ru':
-        return 'Русский';
+        return AppLocalizations.of(_navigatorKey.currentContext!)?.russian ?? 'Russian';
       case 'uk':
-        return 'Українська';
+        return AppLocalizations.of(_navigatorKey.currentContext!)?.ukrainian ?? 'Ukrainian';
       case 'en':
         return 'English';
       case 'my':

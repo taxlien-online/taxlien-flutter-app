@@ -249,5 +249,473 @@
   "connectionStatus": "Статус подключения",
   "@connectionStatus": {
     "description": "Заголовок экрана статуса подключения"
+  },
+  "russian": "Русский",
+  "@russian": {
+    "description": "Название русского языка"
+  },
+  "ukrainian": "Українська",
+  "@ukrainian": {
+    "description": "Название украинского языка"
+  },
+  "dataLoadError": "Ошибка загрузки данных: {error}",
+  "@dataLoadError": {
+    "description": "Сообщение об ошибке загрузки данных",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Ошибка сети"
+      }
+    }
+  },
+  "taxLienMarketplace": "Рынок налоговых закладных",
+  "@taxLienMarketplace": {
+    "description": "Заголовок экрана рынка налоговых закладных"
+  },
+  "filters": "Фильтры",
+  "@filters": {
+    "description": "Подсказка кнопки фильтров"
+  },
+  "refresh": "Обновить",
+  "@refresh": {
+    "description": "Подсказка кнопки обновления"
+  },
+  "searchHint": "Поиск по адресу, владельцу или ID участка...",
+  "@searchHint": {
+    "description": "Подсказка поля поиска"
+  },
+  "clear": "Очистить",
+  "@clear": {
+    "description": "Кнопка очистки"
+  },
+  "foundLiens": "Найдено: {count} закладных",
+  "@foundLiens": {
+    "description": "Сообщение о количестве найденных закладных",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "Сортировка: {sortLabel}",
+  "@sortBy": {
+    "description": "Метка сортировки",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "Дата аукциона ↑"
+      }
+    }
+  },
+  "retry": "Повторить",
+  "@retry": {
+    "description": "Кнопка повтора"
+  },
+  "noLiensFound": "Налоговые закладные не найдены",
+  "@noLiensFound": {
+    "description": "Сообщение о том, что закладные не найдены"
+  },
+  "tryChangingSearch": "Попробуйте изменить параметры поиска или фильтры",
+  "@tryChangingSearch": {
+    "description": "Предложение изменить параметры поиска"
+  },
+  "stateFilter": "Штат: {state}",
+  "@stateFilter": {
+    "description": "Метка фильтра по штату",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "Калифорния"
+      }
+    }
+  },
+  "countyFilter": "Округ: {county}",
+  "@countyFilter": {
+    "description": "Метка фильтра по округу",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "Лос-Анджелес"
+      }
+    }
+  },
+  "amountFrom": "От: {amount}",
+  "@amountFrom": {
+    "description": "Фильтр минимальной суммы",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "До: {amount}",
+  "@amountTo": {
+    "description": "Фильтр максимальной суммы",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "Ставка от: {rate}%",
+  "@interestRateFrom": {
+    "description": "Фильтр минимальной процентной ставки",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "Дата аукциона {direction}",
+  "@auctionDateSort": {
+    "description": "Метка сортировки по дате аукциона",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "Сумма налога {direction}",
+  "@taxAmountSort": {
+    "description": "Метка сортировки по сумме налога",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "Процентная ставка {direction}",
+  "@interestRateSort": {
+    "description": "Метка сортировки по процентной ставке",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "Оценочная стоимость {direction}",
+  "@assessedValueSort": {
+    "description": "Метка сортировки по оценочной стоимости",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "Срок погашения {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "Метка сортировки по сроку погашения",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "Закладная #{parcelId}",
+  "@lienNumber": {
+    "description": "Номер закладной с ID участка",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "Владелец: {owner}",
+  "@owner": {
+    "description": "Информация о владельце",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "Иван Иванов"
+      }
+    }
+  },
+  "taxAmount": "Сумма налога",
+  "@taxAmount": {
+    "description": "Метка суммы налога"
+  },
+  "interestRate": "Процентная ставка",
+  "@interestRate": {
+    "description": "Метка процентной ставки"
+  },
+  "assessedValue": "Оценочная стоимость",
+  "@assessedValue": {
+    "description": "Метка оценочной стоимости"
+  },
+  "auctionDate": "Дата аукциона",
+  "@auctionDate": {
+    "description": "Метка даты аукциона"
+  },
+  "additionalInfo": "Дополнительная информация",
+  "@additionalInfo": {
+    "description": "Заголовок секции дополнительной информации"
+  },
+  "county": "Округ",
+  "@county": {
+    "description": "Метка округа"
+  },
+  "state": "Штат",
+  "@state": {
+    "description": "Метка штата"
+  },
+  "redemptionDeadline": "Срок погашения",
+  "@redemptionDeadline": {
+    "description": "Метка срока погашения"
+  },
+  "status": "Статус",
+  "@status": {
+    "description": "Метка статуса"
+  },
+  "buyLien": "Купить закладную",
+  "@buyLien": {
+    "description": "Кнопка покупки закладной"
+  },
+  "availableForPurchase": "Доступна для покупки",
+  "@availableForPurchase": {
+    "description": "Статус доступности для покупки"
+  },
+  "sold": "Продана",
+  "@sold": {
+    "description": "Статус продана"
+  },
+  "redeemed": "Погашена",
+  "@redeemed": {
+    "description": "Статус погашена"
+  },
+  "foreclosed": "Обращена в собственность",
+  "@foreclosed": {
+    "description": "Статус обращена в собственность"
+  },
+  "purchaseLien": "Покупка закладной",
+  "@purchaseLien": {
+    "description": "Заголовок диалога покупки закладной"
+  },
+  "enterBidAmount": "Введите сумму ставки (минимум {amount}):",
+  "@enterBidAmount": {
+    "description": "Запрос ввода суммы ставки",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "Сумма ставки",
+  "@bidAmount": {
+    "description": "Метка поля суммы ставки"
+  },
+  "lienPurchasedSuccessfully": "Закладная успешно куплена!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Сообщение об успешной покупке закладной"
+  },
+  "purchaseError": "Ошибка при покупке",
+  "@purchaseError": {
+    "description": "Сообщение об ошибке покупки"
+  },
+  "invalidBidAmount": "Неверная сумма ставки",
+  "@invalidBidAmount": {
+    "description": "Сообщение о неверной сумме ставки"
+  },
+  "buy": "Купить",
+  "@buy": {
+    "description": "Кнопка покупки"
+  },
+  "profile": "Профиль",
+  "@profile": {
+    "description": "Заголовок экрана профиля"
+  },
+  "settings": "Настройки",
+  "@settings": {
+    "description": "Подсказка кнопки настроек"
+  },
+  "notAuthorized": "Не авторизован",
+  "@notAuthorized": {
+    "description": "Сообщение о неавторизованном пользователе"
+  },
+  "loginForAccess": "Войдите в аккаунт для доступа к функциям",
+  "@loginForAccess": {
+    "description": "Сообщение с предложением войти"
+  },
+  "login": "Войти",
+  "@login": {
+    "description": "Кнопка входа"
+  },
+  "register": "Регистрация",
+  "@register": {
+    "description": "Кнопка регистрации"
+  },
+  "edit": "Редактировать",
+  "@edit": {
+    "description": "Кнопка редактирования"
+  },
+  "logout": "Выйти",
+  "@logout": {
+    "description": "Кнопка выхода"
+  },
+  "balance": "Баланс",
+  "@balance": {
+    "description": "Метка баланса"
+  },
+  "available": "Доступно",
+  "@available": {
+    "description": "Метка доступного баланса"
+  },
+  "topUp": "Пополнить",
+  "@topUp": {
+    "description": "Кнопка пополнения"
+  },
+  "quickActions": "Быстрые действия",
+  "@quickActions": {
+    "description": "Заголовок секции быстрых действий"
+  },
+  "transactionHistory": "История транзакций",
+  "@transactionHistory": {
+    "description": "Пункт меню истории транзакций"
+  },
+  "viewAllTransactions": "Просмотр всех операций",
+  "@viewAllTransactions": {
+    "description": "Подзаголовок истории транзакций"
+  },
+  "favoriteLiens": "Избранные закладные",
+  "@favoriteLiens": {
+    "description": "Пункт меню избранных закладных"
+  },
+  "savedLiens": "Ваши сохраненные закладные",
+  "@savedLiens": {
+    "description": "Подзаголовок избранных закладных"
+  },
+  "notifications": "Уведомления",
+  "@notifications": {
+    "description": "Пункт меню уведомлений"
+  },
+  "notificationSettings": "Настройка уведомлений",
+  "@notificationSettings": {
+    "description": "Подзаголовок уведомлений"
+  },
+  "help": "Помощь",
+  "@help": {
+    "description": "Пункт меню помощи"
+  },
+  "appSettings": "Настройки приложения",
+  "@appSettings": {
+    "description": "Заголовок секции настроек приложения"
+  },
+  "language": "Язык",
+  "@language": {
+    "description": "Пункт меню языка"
+  },
+  "theme": "Тема",
+  "@theme": {
+    "description": "Пункт меню темы"
+  },
+  "dark": "Темная",
+  "@dark": {
+    "description": "Метка темной темы"
+  },
+  "light": "Светлая",
+  "@light": {
+    "description": "Метка светлой темы"
+  },
+  "security": "Безопасность",
+  "@security": {
+    "description": "Пункт меню безопасности"
+  },
+  "securitySettings": "Настройки безопасности",
+  "@securitySettings": {
+    "description": "Подзаголовок безопасности"
+  },
+  "privacy": "Конфиденциальность",
+  "@privacy": {
+    "description": "Пункт меню конфиденциальности"
+  },
+  "privacySettings": "Настройки приватности",
+  "@privacySettings": {
+    "description": "Подзаголовок конфиденциальности"
+  },
+  "aboutApp": "О приложении",
+  "@aboutApp": {
+    "description": "Заголовок секции о приложении"
+  },
+  "version": "Версия",
+  "@version": {
+    "description": "Пункт меню версии"
+  },
+  "license": "Лицензия",
+  "@license": {
+    "description": "Пункт меню лицензии"
+  },
+  "termsOfService": "Условия использования",
+  "@termsOfService": {
+    "description": "Пункт меню условий использования"
+  },
+  "userAgreement": "Пользовательское соглашение",
+  "@userAgreement": {
+    "description": "Подзаголовок условий использования"
+  },
+  "privacyPolicy": "Политика конфиденциальности",
+  "@privacyPolicy": {
+    "description": "Пункт меню политики конфиденциальности"
+  },
+  "dataProcessing": "Обработка персональных данных",
+  "@dataProcessing": {
+    "description": "Подзаголовок политики конфиденциальности"
+  },
+  "loginToAccount": "Вход в аккаунт",
+  "@loginToAccount": {
+    "description": "Заголовок диалога входа"
+  },
+  "password": "Пароль",
+  "@password": {
+    "description": "Метка поля пароля"
+  },
+  "loginSuccessful": "Успешный вход!",
+  "@loginSuccessful": {
+    "description": "Сообщение об успешном входе"
+  },
+  "loginError": "Ошибка входа",
+  "@loginError": {
+    "description": "Сообщение об ошибке входа"
+  },
+  "registration": "Регистрация",
+  "@registration": {
+    "description": "Заголовок диалога регистрации"
+  },
+  "firstName": "Имя",
+  "@firstName": {
+    "description": "Метка поля имени"
+  },
+  "lastName": "Фамилия",
+  "@lastName": {
+    "description": "Метка поля фамилии"
+  },
+  "registrationSuccessful": "Регистрация успешна!",
+  "@registrationSuccessful": {
+    "description": "Сообщение об успешной регистрации"
+  },
+  "registrationError": "Ошибка регистрации",
+  "@registrationError": {
+    "description": "Сообщение об ошибке регистрации"
+  },
+  "registerAccount": "Зарегистрироваться",
+  "@registerAccount": {
+    "description": "Кнопка регистрации в диалоге регистрации"
+  },
+  "logoutConfirmation": "Выход из аккаунта",
+  "@logoutConfirmation": {
+    "description": "Заголовок диалога подтверждения выхода"
+  },
+  "logoutConfirmationMessage": "Вы уверены, что хотите выйти из аккаунта?",
+  "@logoutConfirmationMessage": {
+    "description": "Сообщение подтверждения выхода"
   }
 } 

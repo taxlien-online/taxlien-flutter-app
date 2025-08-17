@@ -249,5 +249,473 @@
   "connectionStatus": "Connection Status",
   "@connectionStatus": {
     "description": "Connection status screen title"
+  },
+  "russian": "Russian",
+  "@russian": {
+    "description": "Russian language name"
+  },
+  "ukrainian": "Ukrainian",
+  "@ukrainian": {
+    "description": "Ukrainian language name"
+  },
+  "dataLoadError": "Data loading error: {error}",
+  "@dataLoadError": {
+    "description": "Data loading error message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+  "taxLienMarketplace": "Tax Lien Marketplace",
+  "@taxLienMarketplace": {
+    "description": "Tax lien marketplace screen title"
+  },
+  "filters": "Filters",
+  "@filters": {
+    "description": "Filters button tooltip"
+  },
+  "refresh": "Refresh",
+  "@refresh": {
+    "description": "Refresh button tooltip"
+  },
+  "searchHint": "Search by address, owner or parcel ID...",
+  "@searchHint": {
+    "description": "Search field hint text"
+  },
+  "clear": "Clear",
+  "@clear": {
+    "description": "Clear button"
+  },
+  "foundLiens": "Found: {count} liens",
+  "@foundLiens": {
+    "description": "Found liens count message",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "Sort by: {sortLabel}",
+  "@sortBy": {
+    "description": "Sort by label",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "Auction Date ↑"
+      }
+    }
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry button"
+  },
+  "noLiensFound": "No tax liens found",
+  "@noLiensFound": {
+    "description": "No liens found message"
+  },
+  "tryChangingSearch": "Try changing search parameters or filters",
+  "@tryChangingSearch": {
+    "description": "Suggestion to change search parameters"
+  },
+  "stateFilter": "State: {state}",
+  "@stateFilter": {
+    "description": "State filter label",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "California"
+      }
+    }
+  },
+  "countyFilter": "County: {county}",
+  "@countyFilter": {
+    "description": "County filter label",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "Los Angeles"
+      }
+    }
+  },
+  "amountFrom": "From: {amount}",
+  "@amountFrom": {
+    "description": "Minimum amount filter",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "To: {amount}",
+  "@amountTo": {
+    "description": "Maximum amount filter",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "Rate from: {rate}%",
+  "@interestRateFrom": {
+    "description": "Minimum interest rate filter",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "Auction Date {direction}",
+  "@auctionDateSort": {
+    "description": "Auction date sort label",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "Tax Amount {direction}",
+  "@taxAmountSort": {
+    "description": "Tax amount sort label",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "Interest Rate {direction}",
+  "@interestRateSort": {
+    "description": "Interest rate sort label",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "Assessed Value {direction}",
+  "@assessedValueSort": {
+    "description": "Assessed value sort label",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "Redemption Deadline {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "Redemption deadline sort label",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "Lien #{parcelId}",
+  "@lienNumber": {
+    "description": "Lien number with parcel ID",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "Owner: {owner}",
+  "@owner": {
+    "description": "Owner information",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
+  "taxAmount": "Tax Amount",
+  "@taxAmount": {
+    "description": "Tax amount label"
+  },
+  "interestRate": "Interest Rate",
+  "@interestRate": {
+    "description": "Interest rate label"
+  },
+  "assessedValue": "Assessed Value",
+  "@assessedValue": {
+    "description": "Assessed value label"
+  },
+  "auctionDate": "Auction Date",
+  "@auctionDate": {
+    "description": "Auction date label"
+  },
+  "additionalInfo": "Additional Information",
+  "@additionalInfo": {
+    "description": "Additional information section header"
+  },
+  "county": "County",
+  "@county": {
+    "description": "County label"
+  },
+  "state": "State",
+  "@state": {
+    "description": "State label"
+  },
+  "redemptionDeadline": "Redemption Deadline",
+  "@redemptionDeadline": {
+    "description": "Redemption deadline label"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Status label"
+  },
+  "buyLien": "Buy Lien",
+  "@buyLien": {
+    "description": "Buy lien button"
+  },
+  "availableForPurchase": "Available for purchase",
+  "@availableForPurchase": {
+    "description": "Available for purchase status"
+  },
+  "sold": "Sold",
+  "@sold": {
+    "description": "Sold status"
+  },
+  "redeemed": "Redeemed",
+  "@redeemed": {
+    "description": "Redeemed status"
+  },
+  "foreclosed": "Foreclosed",
+  "@foreclosed": {
+    "description": "Foreclosed status"
+  },
+  "purchaseLien": "Purchase Lien",
+  "@purchaseLien": {
+    "description": "Purchase lien dialog title"
+  },
+  "enterBidAmount": "Enter bid amount (minimum {amount}):",
+  "@enterBidAmount": {
+    "description": "Enter bid amount prompt",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "Bid Amount",
+  "@bidAmount": {
+    "description": "Bid amount field label"
+  },
+  "lienPurchasedSuccessfully": "Lien purchased successfully!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Lien purchased success message"
+  },
+  "purchaseError": "Purchase error",
+  "@purchaseError": {
+    "description": "Purchase error message"
+  },
+  "invalidBidAmount": "Invalid bid amount",
+  "@invalidBidAmount": {
+    "description": "Invalid bid amount message"
+  },
+  "buy": "Buy",
+  "@buy": {
+    "description": "Buy button"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Profile screen title"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings button tooltip"
+  },
+  "notAuthorized": "Not authorized",
+  "@notAuthorized": {
+    "description": "Not authorized message"
+  },
+  "loginForAccess": "Log in to access features",
+  "@loginForAccess": {
+    "description": "Login prompt message"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Login button"
+  },
+  "register": "Register",
+  "@register": {
+    "description": "Register button"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit button"
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout button"
+  },
+  "balance": "Balance",
+  "@balance": {
+    "description": "Balance label"
+  },
+  "available": "Available",
+  "@available": {
+    "description": "Available balance label"
+  },
+  "topUp": "Top Up",
+  "@topUp": {
+    "description": "Top up button"
+  },
+  "quickActions": "Quick Actions",
+  "@quickActions": {
+    "description": "Quick actions section header"
+  },
+  "transactionHistory": "Transaction History",
+  "@transactionHistory": {
+    "description": "Transaction history menu item"
+  },
+  "viewAllTransactions": "View all transactions",
+  "@viewAllTransactions": {
+    "description": "Transaction history subtitle"
+  },
+  "favoriteLiens": "Favorite Liens",
+  "@favoriteLiens": {
+    "description": "Favorite liens menu item"
+  },
+  "savedLiens": "Your saved liens",
+  "@savedLiens": {
+    "description": "Favorite liens subtitle"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notifications menu item"
+  },
+  "notificationSettings": "Notification settings",
+  "@notificationSettings": {
+    "description": "Notifications subtitle"
+  },
+  "help": "Help",
+  "@help": {
+    "description": "Help menu item"
+  },
+  "appSettings": "App Settings",
+  "@appSettings": {
+    "description": "App settings section header"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language menu item"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme menu item"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark theme label"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light theme label"
+  },
+  "security": "Security",
+  "@security": {
+    "description": "Security menu item"
+  },
+  "securitySettings": "Security settings",
+  "@securitySettings": {
+    "description": "Security subtitle"
+  },
+  "privacy": "Privacy",
+  "@privacy": {
+    "description": "Privacy menu item"
+  },
+  "privacySettings": "Privacy settings",
+  "@privacySettings": {
+    "description": "Privacy subtitle"
+  },
+  "aboutApp": "About App",
+  "@aboutApp": {
+    "description": "About app section header"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version menu item"
+  },
+  "license": "License",
+  "@license": {
+    "description": "License menu item"
+  },
+  "termsOfService": "Terms of Service",
+  "@termsOfService": {
+    "description": "Terms of service menu item"
+  },
+  "userAgreement": "User Agreement",
+  "@userAgreement": {
+    "description": "Terms of service subtitle"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "Privacy policy menu item"
+  },
+  "dataProcessing": "Personal data processing",
+  "@dataProcessing": {
+    "description": "Privacy policy subtitle"
+  },
+  "loginToAccount": "Login to Account",
+  "@loginToAccount": {
+    "description": "Login dialog title"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+  "loginSuccessful": "Login successful!",
+  "@loginSuccessful": {
+    "description": "Login success message"
+  },
+  "loginError": "Login error",
+  "@loginError": {
+    "description": "Login error message"
+  },
+  "registration": "Registration",
+  "@registration": {
+    "description": "Registration dialog title"
+  },
+  "firstName": "First Name",
+  "@firstName": {
+    "description": "First name field label"
+  },
+  "lastName": "Last Name",
+  "@lastName": {
+    "description": "Last name field label"
+  },
+  "registrationSuccessful": "Registration successful!",
+  "@registrationSuccessful": {
+    "description": "Registration success message"
+  },
+  "registrationError": "Registration error",
+  "@registrationError": {
+    "description": "Registration error message"
+  },
+  "registerAccount": "Register",
+  "@registerAccount": {
+    "description": "Register button in registration dialog"
+  },
+  "logoutConfirmation": "Logout Confirmation",
+  "@logoutConfirmation": {
+    "description": "Logout confirmation dialog title"
+  },
+  "logoutConfirmationMessage": "Are you sure you want to logout?",
+  "@logoutConfirmationMessage": {
+    "description": "Logout confirmation message"
   }
 } 

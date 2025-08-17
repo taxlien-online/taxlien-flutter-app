@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../services/tax_lien_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
@@ -57,10 +58,8 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
 
   void _onTaxLienServiceChanged() {
     if (mounted) {
-      setState(() {
-        _allLiens = widget.taxLienService.availableLiens;
-        _applyFilters();
-      });
+      _allLiens = widget.taxLienService.availableLiens;
+      _applyFilters();
     }
   }
 
@@ -72,16 +71,22 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
 
     try {
       await widget.taxLienService.loadAvailableLiens();
-      _allLiens = widget.taxLienService.availableLiens;
-      _applyFilters();
+      if (mounted) {
+        _allLiens = widget.taxLienService.availableLiens;
+        _applyFilters();
+      }
     } catch (e) {
-      setState(() {
-        _error = 'Ошибка загрузки данных: $e';
-      });
+      if (mounted) {
+        setState(() {
+          _error = AppLocalizations.of(context)?.dataLoadError(e.toString()) ?? 'Data loading error: $e';
+        });
+      }
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -196,17 +201,17 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Рынок налоговых закладных'),
+        title: Text(AppLocalizations.of(context)?.taxLienMarketplace ?? 'Tax Lien Marketplace'),
         actions: [
           IconButton(
             icon: const Icon(Icons.filter_list),
             onPressed: _showFilterBottomSheet,
-            tooltip: 'Фильтры',
+            tooltip: AppLocalizations.of(context)?.filters ?? 'Filters',
           ),
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadLiens,
-            tooltip: 'Обновить',
+            tooltip: AppLocalizations.of(context)?.refresh ?? 'Refresh',
           ),
         ],
       ),
@@ -218,7 +223,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Поиск по адресу, владельцу или ID участка...',
+                hintText: AppLocalizations.of(context)?.searchHint ?? 'Search by address, owner or parcel ID...',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
@@ -264,7 +269,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                       });
                       _applyFilters();
                     },
-                    child: const Text('Очистить'),
+                    child: Text(AppLocalizations.of(context)?.clear ?? 'Clear'),
                   ),
                 ],
               ),
@@ -276,13 +281,13 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
             child: Row(
               children: [
                 Text(
-                  'Найдено: ${_filteredLiens.length} закладных',
+                  AppLocalizations.of(context)?.foundLiens(_filteredLiens.length) ?? 'Found: ${_filteredLiens.length} liens',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const Spacer(),
                 if (_filteredLiens.isNotEmpty)
                   Text(
-                    'Сортировка: ${_getSortLabel()}',
+                    AppLocalizations.of(context)?.sortBy(_getSortLabel()) ?? 'Sort by: ${_getSortLabel()}',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
               ],
@@ -326,7 +331,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _loadLiens,
-              child: const Text('Повторить'),
+              child: Text(AppLocalizations.of(context)?.retry ?? 'Retry'),
             ),
           ],
         ),
@@ -345,12 +350,12 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Налоговые закладные не найдены',
+              AppLocalizations.of(context)?.noLiensFound ?? 'No tax liens found',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             Text(
-              'Попробуйте изменить параметры поиска или фильтры',
+              AppLocalizations.of(context)?.tryChangingSearch ?? 'Try changing search parameters or filters',
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -390,26 +395,27 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
 
   String _buildFilterSummary() {
     final filters = <String>[];
-    if (_selectedState != null) filters.add('Штат: $_selectedState');
-    if (_selectedCounty != null) filters.add('Округ: $_selectedCounty');
-    if (_minAmount != null) filters.add('От: \$${_minAmount!.toStringAsFixed(2)}');
-    if (_maxAmount != null) filters.add('До: \$${_maxAmount!.toStringAsFixed(2)}');
-    if (_minInterestRate != null) filters.add('Ставка от: ${_minInterestRate!.toStringAsFixed(1)}%');
+    if (_selectedState != null) filters.add(AppLocalizations.of(context)?.stateFilter(_selectedState!) ?? 'State: $_selectedState');
+    if (_selectedCounty != null) filters.add(AppLocalizations.of(context)?.countyFilter(_selectedCounty!) ?? 'County: $_selectedCounty');
+    if (_minAmount != null) filters.add(AppLocalizations.of(context)?.amountFrom(_minAmount!.toStringAsFixed(2)) ?? 'From: \$${_minAmount!.toStringAsFixed(2)}');
+    if (_maxAmount != null) filters.add(AppLocalizations.of(context)?.amountTo(_maxAmount!.toStringAsFixed(2)) ?? 'To: \$${_maxAmount!.toStringAsFixed(2)}');
+    if (_minInterestRate != null) filters.add(AppLocalizations.of(context)?.interestRateFrom(_minInterestRate!.toStringAsFixed(1)) ?? 'Rate from: ${_minInterestRate!.toStringAsFixed(1)}%');
     return filters.join(', ');
   }
 
   String _getSortLabel() {
+    final direction = _sortAscending ? '↑' : '↓';
     switch (_sortBy) {
       case 'auctionDate':
-        return 'Дата аукциона ${_sortAscending ? '↑' : '↓'}';
+        return AppLocalizations.of(context)?.auctionDateSort(direction) ?? 'Auction Date $direction';
       case 'taxAmount':
-        return 'Сумма налога ${_sortAscending ? '↑' : '↓'}';
+        return AppLocalizations.of(context)?.taxAmountSort(direction) ?? 'Tax Amount $direction';
       case 'interestRate':
-        return 'Процентная ставка ${_sortAscending ? '↑' : '↓'}';
+        return AppLocalizations.of(context)?.interestRateSort(direction) ?? 'Interest Rate $direction';
       case 'assessedValue':
-        return 'Оценочная стоимость ${_sortAscending ? '↑' : '↓'}';
+        return AppLocalizations.of(context)?.assessedValueSort(direction) ?? 'Assessed Value $direction';
       case 'redemptionDeadline':
-        return 'Срок погашения ${_sortAscending ? '↑' : '↓'}';
+        return AppLocalizations.of(context)?.redemptionDeadlineSort(direction) ?? 'Redemption Deadline $direction';
       default:
         return '';
     }
@@ -439,7 +445,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Закладная #${widget.lien.parcelId}'),
+        title: Text(AppLocalizations.of(context)?.lienNumber(widget.lien.parcelId) ?? 'Lien #${widget.lien.parcelId}'),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
@@ -467,7 +473,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Владелец: ${widget.lien.owner}',
+                      AppLocalizations.of(context)?.owner(widget.lien.owner) ?? 'Owner: ${widget.lien.owner}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 16),
@@ -475,14 +481,14 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                       children: [
                         Expanded(
                           child: _buildInfoItem(
-                            'Сумма налога',
+                            AppLocalizations.of(context)?.taxAmount ?? 'Tax Amount',
                             '\$${widget.lien.taxAmount.toStringAsFixed(2)}',
                             Icons.attach_money,
                           ),
                         ),
                         Expanded(
                           child: _buildInfoItem(
-                            'Процентная ставка',
+                            AppLocalizations.of(context)?.interestRate ?? 'Interest Rate',
                             '${widget.lien.interestRate.toStringAsFixed(1)}%',
                             Icons.percent,
                           ),
@@ -494,14 +500,14 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                       children: [
                         Expanded(
                           child: _buildInfoItem(
-                            'Оценочная стоимость',
+                            AppLocalizations.of(context)?.assessedValue ?? 'Assessed Value',
                             '\$${widget.lien.assessedValue.toStringAsFixed(2)}',
                             Icons.assessment,
                           ),
                         ),
                         Expanded(
                           child: _buildInfoItem(
-                            'Дата аукциона',
+                            AppLocalizations.of(context)?.auctionDate ?? 'Auction Date',
                             _formatDate(widget.lien.auctionDate),
                             Icons.event,
                           ),
@@ -523,15 +529,15 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Дополнительная информация',
+                      AppLocalizations.of(context)?.additionalInfo ?? 'Additional Information',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
-                    _buildDetailRow('ID участка', widget.lien.parcelId),
-                    _buildDetailRow('Округ', widget.lien.county),
-                    _buildDetailRow('Штат', widget.lien.state),
-                    _buildDetailRow('Срок погашения', _formatDate(widget.lien.redemptionDeadline)),
-                    _buildDetailRow('Статус', _getStatusLabel(widget.lien.status)),
+                    _buildDetailRow('Parcel ID', widget.lien.parcelId),
+                    _buildDetailRow(AppLocalizations.of(context)?.county ?? 'County', widget.lien.county),
+                    _buildDetailRow(AppLocalizations.of(context)?.state ?? 'State', widget.lien.state),
+                    _buildDetailRow(AppLocalizations.of(context)?.redemptionDeadline ?? 'Redemption Deadline', _formatDate(widget.lien.redemptionDeadline)),
+                    _buildDetailRow(AppLocalizations.of(context)?.status ?? 'Status', _getStatusLabel(widget.lien.status)),
                   ],
                 ),
               ),
@@ -548,9 +554,9 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text(
-                    'Купить закладную',
-                    style: TextStyle(fontSize: 18),
+                  child: Text(
+                    AppLocalizations.of(context)?.buyLien ?? 'Buy Lien',
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ),
               ),
@@ -612,13 +618,13 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
   String _getStatusLabel(String status) {
     switch (status) {
       case 'available':
-        return 'Доступна для покупки';
+        return AppLocalizations.of(context)?.availableForPurchase ?? 'Available for purchase';
       case 'sold':
-        return 'Продана';
+        return AppLocalizations.of(context)?.sold ?? 'Sold';
       case 'redeemed':
-        return 'Погашена';
+        return AppLocalizations.of(context)?.redeemed ?? 'Redeemed';
       case 'foreclosed':
-        return 'Обращена в собственность';
+        return AppLocalizations.of(context)?.foreclosed ?? 'Foreclosed';
       default:
         return status;
     }
@@ -630,17 +636,17 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Покупка закладной'),
+        title: Text(AppLocalizations.of(context)?.purchaseLien ?? 'Purchase Lien'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Введите сумму ставки (минимум \$${widget.lien.taxAmount.toStringAsFixed(2)}):'),
+            Text(AppLocalizations.of(context)?.enterBidAmount(widget.lien.taxAmount.toStringAsFixed(2)) ?? 'Enter bid amount (minimum \$${widget.lien.taxAmount.toStringAsFixed(2)}):'),
             const SizedBox(height: 16),
             TextField(
               controller: bidController,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Сумма ставки',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)?.bidAmount ?? 'Bid Amount',
                 prefixText: '\$',
               ),
             ),
@@ -649,7 +655,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Отмена'),
+            child: Text(AppLocalizations.of(context)?.cancel ?? 'Cancel'),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -659,23 +665,23 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                 final success = await widget.taxLienService.purchaseLien(widget.lien.id, bidAmount);
                 if (success && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Закладная успешно куплена!')),
+                    SnackBar(content: Text(AppLocalizations.of(context)?.lienPurchasedSuccessfully ?? 'Lien purchased successfully!')),
                   );
                   Navigator.pop(context);
                 } else if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(widget.taxLienService.error ?? 'Ошибка при покупке'),
+                      content: Text(widget.taxLienService.error ?? (AppLocalizations.of(context)?.purchaseError ?? 'Purchase error')),
                     ),
                   );
                 }
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Неверная сумма ставки')),
+                  SnackBar(content: Text(AppLocalizations.of(context)?.invalidBidAmount ?? 'Invalid bid amount')),
                 );
               }
             },
-            child: const Text('Купить'),
+            child: Text(AppLocalizations.of(context)?.buy ?? 'Buy'),
           ),
         ],
       ),

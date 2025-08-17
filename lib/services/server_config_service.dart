@@ -44,17 +44,17 @@ class ServerConfigService {
   List<ServerConfig> _savedServers = [];
   ServerConfig? _currentServer;
   
-  // Геттеры
+  // Getters
   List<ServerConfig> get savedServers => List.unmodifiable(_savedServers);
   ServerConfig? get currentServer => _currentServer;
   
-  // Инициализация
+  // Initialization
   Future<void> initialize() async {
     await _loadSavedServers();
     await _loadCurrentServer();
   }
   
-  // Загрузка сохраненных серверов
+  // Load saved servers
   Future<void> _loadSavedServers() async {
     final prefs = await SharedPreferences.getInstance();
     final serversJson = prefs.getStringList(_serversKey) ?? [];
@@ -63,11 +63,11 @@ class ServerConfigService {
         .map((json) => ServerConfig.fromJson(jsonDecode(json)))
         .toList();
     
-    // Сортировка по времени последнего использования
+    // Sort by last used time
     _savedServers.sort((a, b) => b.lastUsed.compareTo(a.lastUsed));
   }
   
-  // Загрузка текущего сервера
+  // Load current server
   Future<void> _loadCurrentServer() async {
     final prefs = await SharedPreferences.getInstance();
     final currentServerJson = prefs.getString(_currentServerKey);
@@ -77,7 +77,7 @@ class ServerConfigService {
     }
   }
   
-  // Сохранение серверов
+  // Save servers
   Future<void> _saveServers() async {
     final prefs = await SharedPreferences.getInstance();
     final serversJson = _savedServers
@@ -87,7 +87,7 @@ class ServerConfigService {
     await prefs.setStringList(_serversKey, serversJson);
   }
   
-  // Сохранение текущего сервера
+  // Save current server
   Future<void> _saveCurrentServer() async {
     final prefs = await SharedPreferences.getInstance();
     
@@ -98,7 +98,7 @@ class ServerConfigService {
     }
   }
   
-  // Добавление нового сервера
+  // Add new server
   Future<void> addServer(String host, int port, {String? name}) async {
     final server = ServerConfig(
       host: host,
@@ -107,13 +107,13 @@ class ServerConfigService {
       lastUsed: DateTime.now(),
     );
     
-    // Удаляем существующий сервер с таким же адресом
+    // Remove existing server with same address
     _savedServers.removeWhere((s) => s.host == host && s.port == port);
     
-    // Добавляем новый сервер в начало списка
+    // Add new server to the beginning of the list
     _savedServers.insert(0, server);
     
-    // Ограничиваем количество сохраненных серверов
+    // Limit number of saved servers
     if (_savedServers.length > 10) {
       _savedServers = _savedServers.take(10).toList();
     }
@@ -121,11 +121,11 @@ class ServerConfigService {
     await _saveServers();
   }
   
-  // Установка текущего сервера
+  // Set current server
   Future<void> setCurrentServer(ServerConfig server) async {
     _currentServer = server;
     
-    // Обновляем время последнего использования
+    // Update last used time
     final updatedServer = ServerConfig(
       host: server.host,
       port: server.port,
@@ -133,7 +133,7 @@ class ServerConfigService {
       lastUsed: DateTime.now(),
     );
     
-    // Обновляем в списке сохраненных серверов
+    // Update in saved servers list
     final index = _savedServers.indexWhere((s) => s.host == server.host && s.port == server.port);
     if (index != -1) {
       _savedServers[index] = updatedServer;
@@ -141,18 +141,18 @@ class ServerConfigService {
       _savedServers.insert(0, updatedServer);
     }
     
-    // Сортируем по времени использования
+    // Sort by usage time
     _savedServers.sort((a, b) => b.lastUsed.compareTo(a.lastUsed));
     
     await _saveServers();
     await _saveCurrentServer();
   }
   
-  // Удаление сервера
+  // Remove server
   Future<void> removeServer(ServerConfig server) async {
     _savedServers.removeWhere((s) => s.host == server.host && s.port == server.port);
     
-    // Если удаляем текущий сервер, очищаем его
+    // If removing current server, clear it
     if (_currentServer?.host == server.host && _currentServer?.port == server.port) {
       _currentServer = null;
       await _saveCurrentServer();
@@ -161,13 +161,13 @@ class ServerConfigService {
     await _saveServers();
   }
   
-  // Очистка текущего сервера
+  // Clear current server
   Future<void> clearCurrentServer() async {
     _currentServer = null;
     await _saveCurrentServer();
   }
   
-  // Проверка доступности сервера
+  // Test server availability
   Future<bool> testServerConnection(String host, int port) async {
     try {
       final response = await http
@@ -180,12 +180,12 @@ class ServerConfigService {
     }
   }
   
-  // Автоматическое обнаружение серверов в локальной сети
+  // Auto-discovery of servers in local network
   Future<List<ServerConfig>> discoverServers() async {
     final discoveredServers = <ServerConfig>[];
     final commonPorts = [3000, 8080, 8000, 5000];
     
-    // Генерируем IP адреса для локальной сети (192.168.x.x)
+    // Generate IP addresses for local network (192.168.x.x)
     for (int i = 1; i <= 254; i++) {
       final host = '192.168.1.$i';
       
@@ -201,7 +201,7 @@ class ServerConfigService {
             ));
           }
         } catch (e) {
-          // Игнорируем ошибки при сканировании
+          // Ignore errors during scanning
         }
       }
     }
@@ -209,7 +209,7 @@ class ServerConfigService {
     return discoveredServers;
   }
   
-  // Получение информации о сервере
+  // Get server information
   Future<Map<String, dynamic>?> getServerInfo(String host, int port) async {
     try {
       final response = await http
@@ -220,7 +220,7 @@ class ServerConfigService {
         return jsonDecode(response.body);
       }
     } catch (e) {
-      // Игнорируем ошибки
+      // Ignore errors
     }
     
     return null;
