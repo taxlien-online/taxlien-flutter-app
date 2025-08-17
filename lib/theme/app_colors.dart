@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Color palette for FreeDome Manager
+/// Color palette for TaxLien.online
 /// Based on deep blue tones with accents of freedom and spirituality
 class AppColors {
   // Private constructor

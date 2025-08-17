@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
-/// FreeDome Manager application theme
+/// TaxLien.online application theme
 /// Based on deep blue tones with accents of freedom and spirituality
 class AppTheme {
   // Private constructor

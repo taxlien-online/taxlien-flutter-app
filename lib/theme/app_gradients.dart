@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
-/// Gradients for FreeDome Manager application
+/// Gradients for TaxLien.online application
 /// Based on deep blue tones with accents of freedom and spirituality
 /// Support light and dark themes
 class AppGradients {

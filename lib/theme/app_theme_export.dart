@@ -1,4 +1,4 @@
-/// Export of all theme components for FreeDome Manager application
+/// Export of all theme components for TaxLien.online application
 /// Simplifies imports in other files
 
 export 'app_colors.dart';

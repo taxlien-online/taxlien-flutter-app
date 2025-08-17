@@ -3,7 +3,7 @@ import 'app_colors.dart';
 import 'app_dimensions.dart';
 import 'app_gradients.dart';
 
-/// Common widgets for FreeDome Manager application
+/// Common widgets for TaxLien.online application
 /// Ensures UI component consistency
 /// Supports light and dark themes
 /// Based on deep blue tones with accents of freedom and spirituality

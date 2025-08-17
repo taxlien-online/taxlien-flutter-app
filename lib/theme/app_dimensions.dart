@@ -1,4 +1,4 @@
-/// Dimensions and spacing for FreeDome Manager application
+/// Dimensions and spacing for TaxLien.online application
 /// Ensures design consistency
 /// Based on deep blue tones with accents of freedom and spirituality
 class AppDimensions {
