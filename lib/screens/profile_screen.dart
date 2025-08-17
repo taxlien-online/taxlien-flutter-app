@@ -5,7 +5,11 @@ import '../services/theme_service.dart';
 import '../services/localization_service.dart';
 import '../services/onboarding_service.dart';
 import '../services/wallet_service.dart';
+import '../services/yuku_service.dart';
+import '../services/nft_service.dart';
 import 'wallet_settings_screen.dart';
+import 'yuku_marketplace_screen.dart';
+import 'yuku_integration_demo_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   final AuthService authService;
@@ -13,6 +17,8 @@ class ProfileScreen extends StatefulWidget {
   final LocalizationService localizationService;
   final OnboardingService onboardingService;
   final WalletService walletService;
+  final YukuService yukuService;
+  final NFTService nftService;
 
   const ProfileScreen({
     super.key,
@@ -21,6 +27,8 @@ class ProfileScreen extends StatefulWidget {
     required this.localizationService,
     required this.onboardingService,
     required this.walletService,
+    required this.yukuService,
+    required this.nftService,
   });
 
   @override
@@ -256,6 +264,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 16),
+            _buildActionTile(
+              icon: Icons.store,
+              title: 'Yuku Marketplace',
+              subtitle: 'Buy and sell NFT tax liens',
+              onTap: () => _showYukuMarketplace(context),
+            ),
+            _buildActionTile(
+              icon: Icons.play_circle_outline,
+              title: 'Yuku Demo',
+              subtitle: 'See integration features',
+              onTap: () => _showYukuDemo(context),
+            ),
             _buildActionTile(
               icon: Icons.history,
               title: AppLocalizations.of(context)?.transactionHistory ?? 'Transaction History',
@@ -723,6 +743,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _showSettings(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Настройки в разработке')),
+    );
+  }
+
+  void _showYukuMarketplace(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => YukuMarketplaceScreen(
+          yukuService: widget.yukuService,
+          nftService: widget.nftService,
+        ),
+      ),
+    );
+  }
+
+  void _showYukuDemo(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => YukuIntegrationDemoScreen(
+          yukuService: widget.yukuService,
+          nftService: widget.nftService,
+        ),
+      ),
     );
   }
 

@@ -6,6 +6,7 @@ import '../services/onboarding_service.dart';
 import '../services/tax_lien_service.dart';
 import '../services/nft_service.dart';
 import '../services/wallet_service.dart';
+import '../services/yuku_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import '../services/user_preferences_service.dart';
@@ -23,6 +24,7 @@ class MainNavigationScreen extends StatefulWidget {
   final TaxLienService taxLienService;
   final NFTService nftService;
   final WalletService walletService;
+  final YukuService yukuService;
   final AuthService authService;
   final DatabaseService databaseService;
   final UserPreferencesService userPreferencesService;
@@ -35,6 +37,7 @@ class MainNavigationScreen extends StatefulWidget {
     required this.taxLienService,
     required this.nftService,
     required this.walletService,
+    required this.yukuService,
     required this.authService,
     required this.databaseService,
     required this.userPreferencesService,
@@ -110,6 +113,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       localizationService: widget.localizationService,
       onboardingService: widget.onboardingService,
       walletService: widget.walletService,
+      yukuService: widget.yukuService,
+      nftService: widget.nftService,
     );
   }
 

@@ -6,6 +6,7 @@ import '../services/onboarding_service.dart';
 import '../services/tax_lien_service.dart';
 import '../services/nft_service.dart';
 import '../services/wallet_service.dart';
+import '../services/yuku_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import '../services/user_preferences_service.dart';
@@ -21,6 +22,7 @@ class InteractiveOnboardingScreen extends StatefulWidget {
   final TaxLienService taxLienService;
   final NFTService nftService;
   final WalletService walletService;
+  final YukuService yukuService;
   final AuthService authService;
   final DatabaseService databaseService;
   final UserPreferencesService userPreferencesService;
@@ -33,6 +35,7 @@ class InteractiveOnboardingScreen extends StatefulWidget {
     required this.taxLienService,
     required this.nftService,
     required this.walletService,
+    required this.yukuService,
     required this.authService,
     required this.databaseService,
     required this.userPreferencesService,
@@ -1362,6 +1365,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         return true;
       case OnboardingStepType.nftTokenization:
         return true;
+      case OnboardingStepType.walletConnection:
+        return true;
       case OnboardingStepType.summary:
         return true;
     }
@@ -1409,16 +1414,18 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
     if (mounted) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => MainNavigationScreen(
-            localizationService: widget.localizationService,
-            themeService: widget.themeService,
-            onboardingService: widget.onboardingService,
-            taxLienService: widget.taxLienService,
-            nftService: widget.nftService,
-            authService: widget.authService,
-            databaseService: widget.databaseService,
-            userPreferencesService: widget.userPreferencesService,
-          ),
+                      builder: (context) => MainNavigationScreen(
+              localizationService: widget.localizationService,
+              themeService: widget.themeService,
+              onboardingService: widget.onboardingService,
+              taxLienService: widget.taxLienService,
+              nftService: widget.nftService,
+              walletService: widget.walletService,
+              yukuService: widget.yukuService,
+              authService: widget.authService,
+              databaseService: widget.databaseService,
+              userPreferencesService: widget.userPreferencesService,
+            ),
         ),
       );
     }
