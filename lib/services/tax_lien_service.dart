@@ -85,6 +85,105 @@ class TaxLienService extends ChangeNotifier {
   bool _isLoading = false;
   String? _error;
 
+  // Mock data for prototype
+  final List<Map<String, dynamic>> _mockAvailableLiens = [
+    {
+      'id': 'TL005',
+      'parcelId': 'R00061-000',
+      'owner': 'David Brown',
+      'address': '555 Maple Dr, Columbia, FL 32025',
+      'county': 'Columbia',
+      'state': 'FL',
+      'assessedValue': 75000.0,
+      'taxAmount': 1100.0,
+      'interestRate': 18.0,
+      'auctionDate': '2024-05-15',
+      'redemptionDeadline': '2025-05-15',
+      'status': 'available',
+    },
+    {
+      'id': 'TL006',
+      'parcelId': '340913449600000050',
+      'owner': 'Lisa Anderson',
+      'address': '777 Cedar Ln, Dixie, FL 32329',
+      'county': 'Dixie',
+      'state': 'FL',
+      'assessedValue': 180000.0,
+      'taxAmount': 2700.0,
+      'interestRate': 18.0,
+      'auctionDate': '2024-06-20',
+      'redemptionDeadline': '2025-06-20',
+      'status': 'available',
+    },
+  ];
+
+  final List<Map<String, dynamic>> _mockMyLiens = [
+    {
+      'id': 'TL001',
+      'parcelId': 'R00051-000',
+      'owner': 'John Smith',
+      'address': '123 Main St, Columbia, FL 32025',
+      'county': 'Columbia',
+      'state': 'FL',
+      'assessedValue': 85000.0,
+      'taxAmount': 1250.0,
+      'interestRate': 18.0,
+      'auctionDate': '2024-01-15',
+      'redemptionDeadline': '2025-01-15',
+      'status': 'sold',
+      'salePrice': 1250.0,
+      'buyerId': 'user123',
+    },
+    {
+      'id': 'TL002',
+      'parcelId': '340913449600000040',
+      'owner': 'Mary Johnson',
+      'address': '456 Oak Ave, Dixie, FL 32329',
+      'county': 'Dixie',
+      'state': 'FL',
+      'assessedValue': 120000.0,
+      'taxAmount': 1800.0,
+      'interestRate': 18.0,
+      'auctionDate': '2024-02-20',
+      'redemptionDeadline': '2025-02-20',
+      'status': 'sold',
+      'salePrice': 1800.0,
+      'buyerId': 'user123',
+    },
+    {
+      'id': 'TL003',
+      'parcelId': 'L00001-000',
+      'owner': 'Robert Wilson',
+      'address': '789 Pine Rd, Lafayette, FL 32060',
+      'county': 'Lafayette',
+      'state': 'FL',
+      'assessedValue': 95000.0,
+      'taxAmount': 1425.0,
+      'interestRate': 18.0,
+      'auctionDate': '2024-03-10',
+      'redemptionDeadline': '2025-03-10',
+      'status': 'sold',
+      'salePrice': 1425.0,
+      'buyerId': 'user123',
+    },
+    {
+      'id': 'TL004',
+      'parcelId': 'P00001-000',
+      'owner': 'Sarah Davis',
+      'address': '321 Elm St, Polk, FL 33801',
+      'county': 'Polk',
+      'state': 'FL',
+      'assessedValue': 150000.0,
+      'taxAmount': 2250.0,
+      'interestRate': 18.0,
+      'auctionDate': '2024-04-05',
+      'redemptionDeadline': '2025-04-05',
+      'status': 'sold',
+      'salePrice': 2250.0,
+      'buyerId': 'user123',
+    },
+  ];
+
   List<TaxLien> get availableLiens => _availableLiens;
   List<TaxLien> get myLiens => _myLiens;
   bool get isLoading => _isLoading;
@@ -98,20 +197,13 @@ class TaxLienService extends ChangeNotifier {
   Future<void> loadAvailableLiens() async {
     _setLoading(true);
     try {
-      final response = await http.get(
-        Uri.parse('$_baseUrl/api/tax-liens/available'),
-        headers: {'Content-Type': 'application/json'},
-      );
-
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
-        _availableLiens = data.map((json) => TaxLien.fromJson(json)).toList();
-        _error = null;
-      } else {
-        _error = 'Failed to load available liens';
-      }
+      // For prototype, we'll use mock data
+      await Future.delayed(Duration(milliseconds: 500)); // Simulate network delay
+      
+      _availableLiens = _mockAvailableLiens.map((json) => TaxLien.fromJson(json)).toList();
+      _error = null;
     } catch (e) {
-      _error = 'Network error: $e';
+      _error = 'Failed to load available liens: $e';
     } finally {
       _setLoading(false);
     }
@@ -120,20 +212,13 @@ class TaxLienService extends ChangeNotifier {
   Future<void> loadMyLiens() async {
     _setLoading(true);
     try {
-      final response = await http.get(
-        Uri.parse('$_baseUrl/api/tax-liens/my-liens'),
-        headers: {'Content-Type': 'application/json'},
-      );
-
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
-        _myLiens = data.map((json) => TaxLien.fromJson(json)).toList();
-        _error = null;
-      } else {
-        _error = 'Failed to load my liens';
-      }
+      // For prototype, we'll use mock data
+      await Future.delayed(Duration(milliseconds: 500)); // Simulate network delay
+      
+      _myLiens = _mockMyLiens.map((json) => TaxLien.fromJson(json)).toList();
+      _error = null;
     } catch (e) {
-      _error = 'Network error: $e';
+      _error = 'Failed to load my liens: $e';
     } finally {
       _setLoading(false);
     }

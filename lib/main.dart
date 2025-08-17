@@ -5,6 +5,8 @@ import 'services/localization_service.dart';
 import 'services/theme_service.dart';
 import 'services/onboarding_service.dart';
 import 'services/tax_lien_service.dart';
+import 'services/nft_service.dart';
+import 'services/wallet_service.dart';
 import 'services/auth_service.dart';
 import 'services/database_service.dart';
 import 'services/user_preferences_service.dart';
@@ -20,6 +22,8 @@ void main() async {
   final themeService = ThemeService();
   final onboardingService = OnboardingService();
   final taxLienService = TaxLienService();
+  final nftService = NFTService();
+  final walletService = WalletService();
   final authService = AuthService();
   final databaseService = DatabaseService();
   final userPreferencesService = UserPreferencesService();
@@ -28,6 +32,8 @@ void main() async {
   await themeService.initialize();
   await onboardingService.initialize();
   await taxLienService.initialize();
+  await nftService.initialize();
+  await walletService.initialize();
   await authService.initialize();
   await databaseService.initialize();
   await userPreferencesService.initialize();
@@ -35,11 +41,12 @@ void main() async {
   runApp(TaxLienApp(
     localizationService: localizationService,
     themeService: themeService,
-    onboardingService: onboardingService,
-    taxLienService: taxLienService,
-    authService: authService,
-    databaseService: databaseService,
-    userPreferencesService: userPreferencesService,
+                          onboardingService: onboardingService,
+                      taxLienService: taxLienService,
+                      nftService: nftService,
+                      authService: authService,
+                      databaseService: databaseService,
+                      userPreferencesService: userPreferencesService,
   ));
 }
 
@@ -48,6 +55,8 @@ class TaxLienApp extends StatelessWidget {
   final ThemeService themeService;
   final OnboardingService onboardingService;
   final TaxLienService taxLienService;
+  final NFTService nftService;
+  final WalletService walletService;
   final AuthService authService;
   final DatabaseService databaseService;
   final UserPreferencesService userPreferencesService;
@@ -58,6 +67,8 @@ class TaxLienApp extends StatelessWidget {
     required this.themeService,
     required this.onboardingService,
     required this.taxLienService,
+    required this.nftService,
+    required this.walletService,
     required this.authService,
     required this.databaseService,
     required this.userPreferencesService,
@@ -90,6 +101,8 @@ class TaxLienApp extends StatelessWidget {
                       localizationService: localizationService,
                       themeService: themeService,
                       taxLienService: taxLienService,
+                      nftService: nftService,
+                      walletService: walletService,
                       authService: authService,
                       databaseService: databaseService,
                       userPreferencesService: userPreferencesService,
@@ -99,6 +112,8 @@ class TaxLienApp extends StatelessWidget {
                       themeService: themeService,
                       onboardingService: onboardingService,
                       taxLienService: taxLienService,
+                      nftService: nftService,
+                      walletService: walletService,
                       authService: authService,
                       databaseService: databaseService,
                       userPreferencesService: userPreferencesService,

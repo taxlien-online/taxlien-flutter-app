@@ -4,18 +4,23 @@ import '../services/localization_service.dart';
 import '../services/theme_service.dart';
 import '../services/onboarding_service.dart';
 import '../services/tax_lien_service.dart';
+import '../services/nft_service.dart';
+import '../services/wallet_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import '../services/user_preferences_service.dart';
 import '../theme/app_theme_export.dart';
 import 'main_navigation_screen.dart';
 import 'nft_onboarding_screen.dart';
+import 'wallet_connection_screen.dart';
 
 class InteractiveOnboardingScreen extends StatefulWidget {
   final LocalizationService localizationService;
   final ThemeService themeService;
   final OnboardingService onboardingService;
   final TaxLienService taxLienService;
+  final NFTService nftService;
+  final WalletService walletService;
   final AuthService authService;
   final DatabaseService databaseService;
   final UserPreferencesService userPreferencesService;
@@ -26,6 +31,8 @@ class InteractiveOnboardingScreen extends StatefulWidget {
     required this.themeService,
     required this.onboardingService,
     required this.taxLienService,
+    required this.nftService,
+    required this.walletService,
     required this.authService,
     required this.databaseService,
     required this.userPreferencesService,
@@ -142,6 +149,12 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
       title: 'NFT Tokenization',
       subtitle: 'Transform your investments into digital assets',
       type: OnboardingStepType.nftTokenization,
+    ),
+    OnboardingStep(
+      id: 'wallet_connection',
+      title: 'Connect Wallet',
+      subtitle: 'Connect your crypto wallet for NFT management',
+      type: OnboardingStepType.walletConnection,
     ),
     OnboardingStep(
       id: 'summary',
@@ -294,6 +307,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         return _buildPreferencesStep();
       case OnboardingStepType.nftTokenization:
         return _buildNFTTokenizationStep();
+      case OnboardingStepType.walletConnection:
+        return _buildWalletConnectionStep();
       case OnboardingStepType.summary:
         return _buildSummaryStep();
     }
@@ -776,6 +791,164 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
     );
   }
 
+  Widget _buildWalletConnectionStep() {
+    return Column(
+      children: [
+        Container(
+          width: 80,
+          height: 80,
+          decoration: BoxDecoration(
+            color: Colors.purple.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(40),
+          ),
+          child: const Icon(
+            Icons.account_balance_wallet,
+            size: 40,
+            color: Colors.purple,
+          ),
+        ),
+        const SizedBox(height: 24),
+        Text(
+          'Connect Your Wallet',
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'Connect your crypto wallet to manage NFT tax liens, participate in trading, and access DeFi features.',
+          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+            height: 1.5,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 32),
+        _buildWalletFeatureCard(
+          title: 'MetaMask',
+          subtitle: 'Most Popular',
+          description: 'Browser extension wallet with wide support',
+          icon: Icons.account_balance_wallet,
+          color: Colors.orange,
+        ),
+        const SizedBox(height: 16),
+        _buildWalletFeatureCard(
+          title: 'WalletConnect',
+          subtitle: 'Universal Connection',
+          description: 'Connect any wallet via QR code',
+          icon: Icons.wifi,
+          color: Colors.blue,
+        ),
+        const SizedBox(height: 16),
+        _buildWalletFeatureCard(
+          title: 'Coinbase Wallet',
+          subtitle: 'User Friendly',
+          description: 'Easy-to-use wallet from Coinbase',
+          icon: Icons.account_circle,
+          color: Colors.blue,
+        ),
+        const SizedBox(height: 32),
+        Text(
+          'Would you like to connect a wallet now?',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton(
+                onPressed: () {
+                  // Skip wallet connection
+                },
+                child: const Text('Skip for Now'),
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {
+                  // Navigate to wallet connection screen
+                  _showWalletConnectionScreen();
+                },
+                child: const Text('Connect Wallet'),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildWalletFeatureCard({
+    required String title,
+    required String subtitle,
+    required String description,
+    required IconData icon,
+    required Color color,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: color.withOpacity(0.3),
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(12),
+        color: color.withOpacity(0.05),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: Icon(
+              icon,
+              color: color,
+              size: 24,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: color,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  description,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildNFTFeatureCard({
     required String title,
     required String subtitle,
@@ -853,6 +1026,24 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
           preferencesService: widget.userPreferencesService,
           taxLienService: widget.taxLienService,
           onComplete: () {
+            Navigator.of(context).pop();
+            // Continue to next step
+            _pageController.nextPage(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  void _showWalletConnectionScreen() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => WalletConnectionScreen(
+          walletService: widget.walletService,
+          onWalletConnected: () {
             Navigator.of(context).pop();
             // Continue to next step
             _pageController.nextPage(
@@ -1223,6 +1414,7 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
             themeService: widget.themeService,
             onboardingService: widget.onboardingService,
             taxLienService: widget.taxLienService,
+            nftService: widget.nftService,
             authService: widget.authService,
             databaseService: widget.databaseService,
             userPreferencesService: widget.userPreferencesService,
@@ -1256,6 +1448,7 @@ enum OnboardingStepType {
   experienceLevel,
   preferences,
   nftTokenization,
+  walletConnection,
   summary,
 }
 

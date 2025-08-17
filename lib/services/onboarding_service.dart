@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Service for managing onboarding in FreeDome Manager
+/// Service for managing onboarding in TaxLien.online
 /// Allows showing an introductory screen for new users
 class OnboardingService extends ChangeNotifier {
   static const String _onboardingCompletedKey = 'freedome_onboarding_completed';

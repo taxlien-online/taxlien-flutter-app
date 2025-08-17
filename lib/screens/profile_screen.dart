@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../services/auth_service.dart';
 import '../services/theme_service.dart';
 import '../services/localization_service.dart';
 import '../services/onboarding_service.dart';
+import '../services/wallet_service.dart';
+import 'wallet_settings_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   final AuthService authService;
   final ThemeService themeService;
   final LocalizationService localizationService;
   final OnboardingService onboardingService;
+  final WalletService walletService;
 
   const ProfileScreen({
     super.key,
@@ -16,6 +20,7 @@ class ProfileScreen extends StatefulWidget {
     required this.themeService,
     required this.localizationService,
     required this.onboardingService,
+    required this.walletService,
   });
 
   @override
@@ -27,12 +32,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Профиль'),
+        title: Text(AppLocalizations.of(context)?.profile ?? 'Profile'),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () => _showSettings(context),
-            tooltip: 'Настройки',
+            tooltip: AppLocalizations.of(context)?.settings ?? 'Settings',
           ),
         ],
       ),
@@ -84,12 +89,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 16),
               Text(
-                'Не авторизован',
+                AppLocalizations.of(context)?.notAuthorized ?? 'Not authorized',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 8),
               Text(
-                'Войдите в аккаунт для доступа к функциям',
+                AppLocalizations.of(context)?.loginForAccess ?? 'Log in to access features',
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
@@ -99,14 +104,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () => _showLoginDialog(context),
-                      child: const Text('Войти'),
+                      child: Text(AppLocalizations.of(context)?.login ?? 'Login'),
                     ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () => _showRegisterDialog(context),
-                      child: const Text('Регистрация'),
+                      child: Text(AppLocalizations.of(context)?.register ?? 'Register'),
                     ),
                   ),
                 ],
@@ -161,7 +166,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () => _showEditProfileDialog(context),
-                    child: const Text('Редактировать'),
+                    child: Text(AppLocalizations.of(context)?.edit ?? 'Edit'),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -172,7 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
                     ),
-                    child: const Text('Выйти'),
+                    child: Text(AppLocalizations.of(context)?.logout ?? 'Logout'),
                   ),
                 ),
               ],
@@ -201,7 +206,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const Icon(Icons.account_balance_wallet),
                 const SizedBox(width: 8),
                 Text(
-                  'Баланс',
+                  AppLocalizations.of(context)?.balance ?? 'Balance',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
@@ -214,7 +219,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Доступно',
+                        AppLocalizations.of(context)?.available ?? 'Available',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       Text(
@@ -229,7 +234,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () => _showAddFundsDialog(context),
-                  child: const Text('Пополнить'),
+                  child: Text(AppLocalizations.of(context)?.topUp ?? 'Top Up'),
                 ),
               ],
             ),
@@ -247,32 +252,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Быстрые действия',
+              AppLocalizations.of(context)?.quickActions ?? 'Quick Actions',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 16),
             _buildActionTile(
               icon: Icons.history,
-              title: 'История транзакций',
-              subtitle: 'Просмотр всех операций',
+              title: AppLocalizations.of(context)?.transactionHistory ?? 'Transaction History',
+              subtitle: AppLocalizations.of(context)?.viewAllTransactions ?? 'View all transactions',
               onTap: () => _showTransactionHistory(context),
             ),
             _buildActionTile(
               icon: Icons.favorite,
-              title: 'Избранные закладные',
-              subtitle: 'Ваши сохраненные закладные',
+              title: AppLocalizations.of(context)?.favoriteLiens ?? 'Favorite Liens',
+              subtitle: AppLocalizations.of(context)?.savedLiens ?? 'Your saved liens',
               onTap: () => _showFavorites(context),
             ),
             _buildActionTile(
               icon: Icons.notifications,
-              title: 'Уведомления',
-              subtitle: 'Настройка уведомлений',
+              title: AppLocalizations.of(context)?.notifications ?? 'Notifications',
+              subtitle: AppLocalizations.of(context)?.notificationSettings ?? 'Notification settings',
               onTap: () => _showNotificationsSettings(context),
             ),
             _buildActionTile(
               icon: Icons.help_outline,
-              title: 'Помощь',
-              subtitle: 'FAQ и поддержка',
+              title: AppLocalizations.of(context)?.help ?? 'Help',
+              subtitle: 'FAQ and support',
               onTap: () => _showHelp(context),
             ),
           ],
@@ -289,20 +294,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Настройки приложения',
+              AppLocalizations.of(context)?.appSettings ?? 'App Settings',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 16),
             _buildSettingTile(
               icon: Icons.language,
-              title: 'Язык',
-              subtitle: 'Русский',
+              title: AppLocalizations.of(context)?.language ?? 'Language',
+              subtitle: AppLocalizations.of(context)?.russian ?? 'Russian',
               onTap: () => _showLanguageSettings(context),
             ),
             _buildSettingTile(
               icon: Icons.dark_mode,
-              title: 'Тема',
-              subtitle: widget.themeService.isDarkMode ? 'Темная' : 'Светлая',
+              title: AppLocalizations.of(context)?.theme ?? 'Theme',
+              subtitle: widget.themeService.isDarkMode ? (AppLocalizations.of(context)?.dark ?? 'Dark') : (AppLocalizations.of(context)?.light ?? 'Light'),
               onTap: () {
                 widget.themeService.toggleTheme();
                 setState(() {});
@@ -310,15 +315,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             _buildSettingTile(
               icon: Icons.security,
-              title: 'Безопасность',
-              subtitle: 'Настройки безопасности',
+              title: AppLocalizations.of(context)?.security ?? 'Security',
+              subtitle: AppLocalizations.of(context)?.securitySettings ?? 'Security settings',
               onTap: () => _showSecuritySettings(context),
             ),
             _buildSettingTile(
               icon: Icons.privacy_tip,
-              title: 'Конфиденциальность',
-              subtitle: 'Настройки приватности',
+              title: AppLocalizations.of(context)?.privacy ?? 'Privacy',
+              subtitle: AppLocalizations.of(context)?.privacySettings ?? 'Privacy settings',
               onTap: () => _showPrivacySettings(context),
+            ),
+            _buildSettingTile(
+              icon: Icons.account_balance_wallet,
+              title: 'Wallet Settings',
+              subtitle: widget.walletService.isWalletConnected 
+                  ? 'Connected: ${widget.walletService.connectedWallet?.name ?? "Unknown"}'
+                  : 'Not connected',
+              onTap: () => _showWalletSettings(context),
             ),
           ],
         ),
@@ -334,31 +347,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'О приложении',
+              AppLocalizations.of(context)?.aboutApp ?? 'About App',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 16),
             _buildInfoTile(
               icon: Icons.info_outline,
-              title: 'Версия',
+              title: AppLocalizations.of(context)?.version ?? 'Version',
               subtitle: '1.0.0',
             ),
             _buildInfoTile(
               icon: Icons.description,
-              title: 'Лицензия',
+              title: AppLocalizations.of(context)?.license ?? 'License',
               subtitle: 'MIT License',
               onTap: () => _showLicense(context),
             ),
             _buildInfoTile(
               icon: Icons.description,
-              title: 'Условия использования',
-              subtitle: 'Пользовательское соглашение',
+              title: AppLocalizations.of(context)?.termsOfService ?? 'Terms of Service',
+              subtitle: AppLocalizations.of(context)?.userAgreement ?? 'User Agreement',
               onTap: () => _showTermsOfService(context),
             ),
             _buildInfoTile(
               icon: Icons.description,
-              title: 'Политика конфиденциальности',
-              subtitle: 'Обработка персональных данных',
+              title: AppLocalizations.of(context)?.privacyPolicy ?? 'Privacy Policy',
+              subtitle: AppLocalizations.of(context)?.dataProcessing ?? 'Personal data processing',
               onTap: () => _showPrivacyPolicy(context),
             ),
           ],
@@ -420,7 +433,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Вход в аккаунт'),
+        title: Text(AppLocalizations.of(context)?.loginToAccount ?? 'Login to Account'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -435,9 +448,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 16),
             TextField(
               controller: passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Пароль',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)?.password ?? 'Password',
+                border: const OutlineInputBorder(),
               ),
               obscureText: true,
             ),
@@ -446,7 +459,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Отмена'),
+            child: Text(AppLocalizations.of(context)?.cancel ?? 'Cancel'),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -458,17 +471,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.pop(context);
                 setState(() {});
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Успешный вход!')),
+                  SnackBar(content: Text(AppLocalizations.of(context)?.loginSuccessful ?? 'Login successful!')),
                 );
               } else if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(widget.authService.error ?? 'Ошибка входа'),
+                    content: Text(widget.authService.error ?? (AppLocalizations.of(context)?.loginError ?? 'Login error')),
                   ),
                 );
               }
             },
-            child: const Text('Войти'),
+            child: Text(AppLocalizations.of(context)?.login ?? 'Login'),
           ),
         ],
       ),
@@ -484,24 +497,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Регистрация'),
+        title: Text(AppLocalizations.of(context)?.registration ?? 'Registration'),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: firstNameController,
-                decoration: const InputDecoration(
-                  labelText: 'Имя',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.firstName ?? 'First Name',
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
               TextField(
                 controller: lastNameController,
-                decoration: const InputDecoration(
-                  labelText: 'Фамилия',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.lastName ?? 'Last Name',
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16),
@@ -516,9 +529,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: 16),
               TextField(
                 controller: passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'Пароль',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context)?.password ?? 'Password',
+                  border: const OutlineInputBorder(),
                 ),
                 obscureText: true,
               ),
@@ -542,17 +555,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.pop(context);
                 setState(() {});
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Регистрация успешна!')),
+                  SnackBar(content: Text(AppLocalizations.of(context)?.registrationSuccessful ?? 'Registration successful!')),
                 );
               } else if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(widget.authService.error ?? 'Ошибка регистрации'),
+                    content: Text(widget.authService.error ?? (AppLocalizations.of(context)?.registrationError ?? 'Registration error')),
                   ),
                 );
               }
             },
-            child: const Text('Зарегистрироваться'),
+            child: Text(AppLocalizations.of(context)?.registerAccount ?? 'Register'),
           ),
         ],
       ),
@@ -563,8 +576,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Выход из аккаунта'),
-        content: const Text('Вы уверены, что хотите выйти из аккаунта?'),
+        title: Text(AppLocalizations.of(context)?.logoutConfirmation ?? 'Logout Confirmation'),
+        content: Text(AppLocalizations.of(context)?.logoutConfirmationMessage ?? 'Are you sure you want to logout?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -770,6 +783,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _showPrivacyPolicy(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Политика конфиденциальности в разработке')),
+    );
+  }
+
+  void _showWalletSettings(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => WalletSettingsScreen(
+          walletService: widget.walletService,
+        ),
+      ),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Service for managing the FreeDome Manager application theme
+/// Service for managing the TaxLien.online application theme
 /// Allows switching between light and dark themes
 class ThemeService extends ChangeNotifier {
   static const String _themeKey = 'freedome_theme';
