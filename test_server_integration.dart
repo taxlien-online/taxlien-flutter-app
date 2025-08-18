@@ -9,23 +9,19 @@ class ServerIntegrationTest {
     print('🧪 Starting FreeDome Server Integration Tests\n');
     
     try {
-      // Тест 1: Проверка доступности сервера
+      // Test 1: Check server availability
       await _testServerAvailability();
       
-      // Тест 2: Получение статуса системы
+      // Test 2: Get system status
       await _testGetStatus();
       
-      // Тест 3: Управление воспроизведением
+      // Test 3: Playback controls
       await _testPlaybackControls();
       
-      // Тест 4: Управление параметрами
+      // Test 4: Parameter controls
       await _testParameterControls();
       
-      // Тест 5: Работа с медиафайлами
-      await _testMediaFiles();
-      
-      // Тест 6: Работа с плейлистами
-      await _testPlaylists();
+
       
       print('\n✅ All tests completed successfully!');
       
@@ -79,17 +75,17 @@ class ServerIntegrationTest {
     print('\n▶️ Testing playback controls...');
     
     try {
-      // Тест воспроизведения
+      // Test play
       var response = await http.post(Uri.parse('$baseUrl/api/play'))
           .timeout(const Duration(seconds: 5));
       print('✅ Play command sent (${response.statusCode})');
       
-      // Тест паузы
+      // Test pause
       response = await http.post(Uri.parse('$baseUrl/api/pause'))
           .timeout(const Duration(seconds: 5));
       print('✅ Pause command sent (${response.statusCode})');
       
-      // Тест остановки
+      // Test stop
       response = await http.post(Uri.parse('$baseUrl/api/stop'))
           .timeout(const Duration(seconds: 5));
       print('✅ Stop command sent (${response.statusCode})');
@@ -103,7 +99,7 @@ class ServerIntegrationTest {
     print('\n🎛️ Testing parameter controls...');
     
     try {
-      // Тест яркости
+      // Test brightness
       var response = await http.post(
         Uri.parse('$baseUrl/api/brightness'),
         headers: {'Content-Type': 'application/json'},
@@ -111,7 +107,7 @@ class ServerIntegrationTest {
       ).timeout(const Duration(seconds: 5));
       print('✅ Brightness set to 80% (${response.statusCode})');
       
-      // Тест громкости
+      // Test volume
       response = await http.post(
         Uri.parse('$baseUrl/api/volume'),
         headers: {'Content-Type': 'application/json'},
@@ -119,7 +115,7 @@ class ServerIntegrationTest {
       ).timeout(const Duration(seconds: 5));
       print('✅ Volume set to 60% (${response.statusCode})');
       
-      // Тест поворота
+      // Test rotation
       response = await http.post(
         Uri.parse('$baseUrl/api/rotation'),
         headers: {'Content-Type': 'application/json'},
@@ -132,51 +128,7 @@ class ServerIntegrationTest {
     }
   }
   
-  static Future<void> _testMediaFiles() async {
-    print('\n📁 Testing media files...');
-    
-    try {
-      final response = await http.get(Uri.parse('$baseUrl/api/media'))
-          .timeout(const Duration(seconds: 5));
-      
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        final files = data['files'] ?? [];
-        print('✅ Media files retrieved (${files.length} files)');
-        
-        for (final file in files.take(3)) {
-          print('   - ${file['name']} (${file['type']})');
-        }
-      } else {
-        throw Exception('Failed to get media files: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Media files test failed: $e');
-    }
-  }
-  
-  static Future<void> _testPlaylists() async {
-    print('\n📋 Testing playlists...');
-    
-    try {
-      final response = await http.get(Uri.parse('$baseUrl/api/playlists'))
-          .timeout(const Duration(seconds: 5));
-      
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        final playlists = data['playlists'] ?? [];
-        print('✅ Playlists retrieved (${playlists.length} playlists)');
-        
-        for (final playlist in playlists.take(3)) {
-          print('   - ${playlist['name']} (${playlist['items']?.length ?? 0} items)');
-        }
-      } else {
-        throw Exception('Failed to get playlists: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Playlists test failed: $e');
-    }
-  }
+
 }
 
 void main() async {

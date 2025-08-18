@@ -717,5 +717,251 @@
   "logoutConfirmationMessage": "Are you sure you want to logout?",
   "@logoutConfirmationMessage": {
     "description": "Logout confirmation message"
+  },
+  "myInvestments": "My Investments",
+  "@myInvestments": {
+    "description": "My investments screen title"
+  },
+  "myLiens": "My Liens",
+  "@myLiens": {
+    "description": "My liens tab title"
+  },
+  "favorites": "Favorites",
+  "@favorites": {
+    "description": "Favorites tab title"
+  },
+  "statistics": "Statistics",
+  "@statistics": {
+    "description": "Statistics tab title"
+  },
+  "noInvestmentsYet": "You don't have any investments yet",
+  "@noInvestmentsYet": {
+    "description": "No investments message"
+  },
+  "goToMarketplace": "Go to marketplace to buy tax liens",
+  "@goToMarketplace": {
+    "description": "Suggestion to go to marketplace"
+  },
+  "goToMarketplaceButton": "Go to Marketplace",
+  "@goToMarketplaceButton": {
+    "description": "Go to marketplace button"
+  },
+  "noFavoriteLiens": "No favorite liens",
+  "@noFavoriteLiens": {
+    "description": "No favorite liens message"
+  },
+  "addToFavoritesHint": "Add liens to favorites for quick access",
+  "@addToFavoritesHint": {
+    "description": "Hint to add liens to favorites"
+  },
+  "overallStatistics": "Overall Statistics",
+  "@overallStatistics": {
+    "description": "Overall statistics section title"
+  },
+  "totalInvested": "Total Invested",
+  "@totalInvested": {
+    "description": "Total invested amount label"
+  },
+  "currentValue": "Current Value",
+  "@currentValue": {
+    "description": "Current value label"
+  },
+  "profitLoss": "Profit/Loss",
+  "@profitLoss": {
+    "description": "Profit/loss label"
+  },
+  "roi": "ROI",
+  "@roi": {
+    "description": "ROI label"
+  },
+  "statusStatistics": "Status Statistics",
+  "@statusStatistics": {
+    "description": "Status statistics section title"
+  },
+  "activeLiens": "Active Liens",
+  "@activeLiens": {
+    "description": "Active liens label"
+  },
+  "redeemedLiens": "Redeemed Liens",
+  "@redeemedLiens": {
+    "description": "Redeemed liens label"
+  },
+  "foreclosedLiens": "Foreclosed Liens",
+  "@foreclosedLiens": {
+    "description": "Foreclosed liens label"
+  },
+  "totalLiens": "Total Liens",
+  "@totalLiens": {
+    "description": "Total liens label"
+  },
+  "monthlyReturns": "Monthly Returns",
+  "@monthlyReturns": {
+    "description": "Monthly returns chart title"
+  },
+  "profitChartInDevelopment": "Profit Chart\n(in development)",
+  "@profitChartInDevelopment": {
+    "description": "Profit chart development message"
+  },
+  "topPerformingLiens": "Top Performing Liens",
+  "@topPerformingLiens": {
+    "description": "Top performing liens section title"
+  },
+  "investmentInfo": "Investment Information",
+  "@investmentInfo": {
+    "description": "Investment information section title"
+  },
+  "purchaseDate": "Purchase Date",
+  "@purchaseDate": {
+    "description": "Purchase date label"
+  },
+  "purchaseAmount": "Purchase Amount",
+  "@purchaseAmount": {
+    "description": "Purchase amount label"
+  },
+  "daysInInvestment": "Days in Investment",
+  "@daysInInvestment": {
+    "description": "Days in investment label"
+  },
+  "interestEarned": "Interest Earned",
+  "@interestEarned": {
+    "description": "Interest earned label"
+  },
+  "redemptionDate": "Redemption Date",
+  "@redemptionDate": {
+    "description": "Redemption date label"
+  },
+  "digitalFreedomGateway": "Digital Freedom Gateway",
+  "@digitalFreedomGateway": {
+    "description": "App subtitle"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings button label"
+  },
+  "connection": "Connection",
+  "@connection": {
+    "description": "Connection button label"
+  },
+  "calibrationScreenComingSoon": "Calibration screen coming soon",
+  "@calibrationScreenComingSoon": {
+    "description": "Calibration screen coming soon message"
+  },
+  "mediaManagementComingSoon": "Media management coming soon",
+  "@mediaManagementComingSoon": {
+    "description": "Media management coming soon message"
+  },
+  "lienSearch": "Lien Search",
+  "@lienSearch": {
+    "description": "Lien search screen title"
+  },
+  "searching": "Searching...",
+  "@searching": {
+    "description": "Searching message"
+  },
+  "noSearchHistory": "No search history",
+  "@noSearchHistory": {
+    "description": "No search history message"
+  },
+  "clearSearchHistory": "Clear search history",
+  "@clearSearchHistory": {
+    "description": "Clear search history message"
+  },
+  "searchHistory": "Search History",
+  "@searchHistory": {
+    "description": "Search history section title"
+  },
+  "recentSearches": "Recent Searches",
+  "@recentSearches": {
+    "description": "Recent searches section title"
+  },
+  "purchaseLien": "Purchase Lien",
+  "@purchaseLien": {
+    "description": "Purchase lien dialog title"
+  },
+  "enterBidAmount": "Enter bid amount (minimum {amount}):",
+  "@enterBidAmount": {
+    "description": "Enter bid amount prompt",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "$1000.00"
+      }
+    }
+  },
+  "purchase": "Purchase",
+  "@purchase": {
+    "description": "Purchase button"
+  },
+  "lienPurchasedSuccessfully": "Lien purchased successfully!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Lien purchased success message"
+  },
+  "purchaseError": "Purchase error",
+  "@purchaseError": {
+    "description": "Purchase error message"
+  },
+  "invalidBidAmount": "Invalid bid amount",
+  "@invalidBidAmount": {
+    "description": "Invalid bid amount message"
+  },
+  "searchHistoryEmpty": "Search history is empty",
+  "@searchHistoryEmpty": {
+    "description": "Search history empty message"
+  },
+  "searchQueriesWillAppearHere": "Your search queries will appear here",
+  "@searchQueriesWillAppearHere": {
+    "description": "Search queries will appear here message"
+  },
+  "nothingFound": "Nothing found",
+  "@nothingFound": {
+    "description": "Nothing found message"
+  },
+  "tryChangingSearchQuery": "Try changing your search query",
+  "@tryChangingSearchQuery": {
+    "description": "Try changing search query message"
+  },
+  "foundLiensCount": "Found: {count} liens",
+  "@foundLiensCount": {
+    "description": "Found liens count message",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "daysAgo": "{days} days ago",
+  "@daysAgo": {
+    "description": "Days ago format",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": "{hours} hours ago",
+  "@hoursAgo": {
+    "description": "Hours ago format",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "minutesAgo": "{minutes} minutes ago",
+  "@minutesAgo": {
+    "description": "Minutes ago format",
+    "placeholders": {
+      "minutes": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "justNow": "Just now",
+  "@justNow": {
+    "description": "Just now format"
   }
 } 

@@ -1,131 +1,131 @@
-# Руководство по интернационализации FreeDome Manager
+# TaxLien.online Internationalization Guide
 
-## Обзор
+## Overview
 
-FreeDome Manager поддерживает интернационализацию с автоматическим определением языка системы. Приложение использует Flutter Localizations для управления переводами.
+TaxLien.online supports internationalization with automatic system language detection. The application uses Flutter Localizations for translation management.
 
-## Поддерживаемые языки
+## Supported Languages
 
-- **Русский (ru)** - основной язык
-- **Английский (en)** - язык по умолчанию
+- **English (en)** - default language
+- **Russian (ru)** - additional language
 
-## Структура файлов
+## File Structure
 
 ```
 lib/
 ├── l10n/
-│   ├── app_en.arb    # Английские переводы
-│   └── app_ru.arb    # Русские переводы
-└── main.dart         # Настройка локализации
+│   ├── app_en.arb    # English translations
+│   └── app_ru.arb    # Russian translations
+└── main.dart         # Localization setup
 ```
 
-## Добавление нового языка
+## Adding a New Language
 
-### Шаг 1: Создание файла переводов
+### Step 1: Creating Translation File
 
-Создайте новый файл `lib/l10n/app_[код_языка].arb`. Например, для немецкого языка:
+Create a new file `lib/l10n/app_[language_code].arb`. For example, for German:
 
 ```json
 {
   "@@locale": "de",
-  "appTitle": "FreeDome Manager",
+  "appTitle": "TaxLien.online",
   "@appTitle": {
-    "description": "Anwendungstitel"
+    "description": "Application title"
   },
-  "systemStatus": "Systemstatus",
+  "systemStatus": "System Status",
   "@systemStatus": {
-    "description": "Systemstatus-Abschnittsüberschrift"
+    "description": "System status section header"
   }
-  // ... остальные переводы
+  // ... other translations
 }
 ```
 
-### Шаг 2: Добавление поддержки в main.dart
+### Step 2: Adding Support in main.dart
 
-Добавьте новый Locale в список поддерживаемых языков:
+Add the new Locale to the list of supported languages:
 
 ```dart
 supportedLocales: const [
   Locale('en'), // English
   Locale('ru'), // Russian
-  Locale('de'), // German (новый язык)
+  Locale('de'), // German (new language)
 ],
 ```
 
-### Шаг 3: Генерация файлов
+### Step 3: Generating Files
 
-Запустите команду для генерации файлов локализации:
+Run the command to generate localization files:
 
 ```bash
 flutter gen-l10n
 ```
 
-## Использование переводов в коде
+## Using Translations in Code
 
-### Получение экземпляра локализации
+### Getting Localization Instance
 
 ```dart
 final l10n = AppLocalizations.of(context)!;
 ```
 
-### Использование переводов
+### Using Translations
 
 ```dart
-// Простой текст
+// Simple text
 Text(l10n.appTitle)
 
-// Текст с параметрами (если есть)
+// Text with parameters (if available)
 Text(l10n.welcomeMessage('John'))
 
-// В кнопках
+// In buttons
 ElevatedButton(
   onPressed: () {},
   child: Text(l10n.play),
 )
 ```
 
-## Формат файлов ARB
+## ARB File Format
 
-### Основная структура
+### Basic Structure
 
 ```json
 {
-  "@@locale": "ru",
-  "key": "перевод",
+  "@@locale": "en",
+  "key": "translation",
   "@key": {
-    "description": "описание ключа"
+    "description": "key description"
   }
 }
 ```
 
-### Поддерживаемые типы
+### Supported Types
 
-- **Строки**: `"key": "перевод"`
-- **Параметры**: `"key": "Привет, {name}"`
-- **Множественное число**: `"key": "{count, plural, =0{нет} =1{один} other{много}}"`
-- **Пол**: `"key": "{gender, select, male{он} female{она} other{оно}}"`
+- **Strings**: `"key": "translation"`
+- **Parameters**: `"key": "Hello, {name}"`
+- **Plural**: `"key": "{count, plural, =0{none} =1{one} other{many}}"`
+- **Gender**: `"key": "{gender, select, male{he} female{she} other{it}}"`
 
-### Примеры
+### Examples
 
 ```json
 {
-  "@@locale": "ru",
-  "welcome": "Добро пожаловать",
+  "@@locale": "en",
+  "welcome": "Welcome",
   "@welcome": {
-    "description": "Приветственное сообщение"
+    "description": "Welcome message"
   },
-  "greeting": "Привет, {name}",
+  "greeting": "Hello, {name}",
   "@greeting": {
-    "description": "Приветствие с именем",
+    "description": "Greeting with name",
     "placeholders": {
       "name": {
         "type": "String"
       }
     }
   },
-  "itemsCount": "{count, plural, =0{нет элементов} =1{один элемент} other{{count} элементов}}",
+  "itemsCount": "{count, plural, =0{no items} =1{one item} other{{count} items}}",
   "@itemsCount": {
-    "description": "Количество элементов",
+    "description": "Number of items",
     "placeholders": {
       "count": {
         "type": "int"
@@ -135,63 +135,63 @@ ElevatedButton(
 }
 ```
 
-## Автоматическое определение языка
+## Automatic Language Detection
 
-Приложение автоматически определяет язык системы и использует соответствующие переводы. Если язык системы не поддерживается, используется английский язык по умолчанию.
+The application automatically detects the system language and uses appropriate translations. If the system language is not supported, English is used as the default language.
 
-### Логика определения
+### Detection Logic
 
-1. Проверяется язык системы устройства
-2. Если язык поддерживается - используется он
-3. Если язык не поддерживается - используется английский
-4. Если английский недоступен - используется первый доступный язык
+1. Check the device system language
+2. If the language is supported - use it
+3. If the language is not supported - use English
+4. If English is not available - use the first available language
 
-## Тестирование
+## Testing
 
-### Запуск тестов локализации
+### Running Localization Tests
 
 ```bash
 flutter test test/localization_test.dart
 ```
 
-### Ручное тестирование
+### Manual Testing
 
-Для тестирования разных языков можно временно изменить locale в main.dart:
+To test different languages, you can temporarily change the locale in main.dart:
 
 ```dart
-locale: const Locale('ru'), // Принудительно русский
+locale: const Locale('ru'), // Force Russian
 ```
 
-## Лучшие практики
+## Best Practices
 
-### 1. Именование ключей
+### 1. Key Naming
 
-Используйте описательные имена ключей:
+Use descriptive key names:
 
 ```json
-// Хорошо
-"playbackControls": "Управление воспроизведением"
+// Good
+"playbackControls": "Playback Controls"
 
-// Плохо
-"pc": "Управление воспроизведением"
+// Bad
+"pc": "Playback Controls"
 ```
 
-### 2. Описания
+### 2. Descriptions
 
-Всегда добавляйте описания для ключей:
+Always add descriptions for keys:
 
 ```json
 "@key": {
-  "description": "Описание назначения ключа"
+  "description": "Description of the key's purpose"
 }
 ```
 
-### 3. Параметры
+### 3. Parameters
 
-Используйте параметры для динамического контента:
+Use parameters for dynamic content:
 
 ```json
-"fileInfo": "Файл: {fileName}, размер: {size}",
+"fileInfo": "File: {fileName}, size: {size}",
 "@fileInfo": {
   "placeholders": {
     "fileName": {
@@ -204,34 +204,34 @@ locale: const Locale('ru'), // Принудительно русский
 }
 ```
 
-### 4. Множественное число
+### 4. Plural Forms
 
-Используйте множественное число для корректных переводов:
+Use plural forms for correct translations:
 
 ```json
-"itemsCount": "{count, plural, =0{нет элементов} =1{один элемент} other{{count} элементов}}"
+"itemsCount": "{count, plural, =0{no items} =1{one item} other{{count} items}}"
 ```
 
-## Отладка
+## Debugging
 
-### Проверка доступных переводов
+### Checking Available Translations
 
 ```dart
 print('Available locales: ${AppLocalizations.supportedLocales}');
 print('Current locale: ${Localizations.localeOf(context)}');
 ```
 
-### Проверка отсутствующих переводов
+### Checking Missing Translations
 
-Если перевод отсутствует, Flutter покажет ключ в угловых скобках: `<key>`
+If a translation is missing, Flutter will show the key in angle brackets: `<key>`
 
-## Обновление переводов
+## Updating Translations
 
-1. Отредактируйте файлы `.arb`
-2. Запустите `flutter gen-l10n`
-3. Перезапустите приложение
+1. Edit the `.arb` files
+2. Run `flutter gen-l10n`
+3. Restart the application
 
-## Совместимость
+## Compatibility
 
 - Flutter 3.2.3+
 - Dart 3.0+

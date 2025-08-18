@@ -1,21 +1,21 @@
 #!/bin/bash
 
-echo "📱 Запуск FreeDome Manager..."
+echo "📱 Starting TaxLien.online..."
 
-# Проверяем наличие Flutter
+# Check if Flutter is installed
 if ! command -v flutter &> /dev/null; then
-    echo "❌ Flutter не установлен. Установите Flutter SDK."
+    echo "❌ Flutter is not installed. Please install Flutter SDK."
     exit 1
 fi
 
-# Устанавливаем зависимости
-echo "📦 Установка зависимостей..."
+# Install dependencies
+echo "📦 Installing dependencies..."
 flutter pub get
 
-# Генерируем файлы локализации
-echo "🌐 Генерируем файлы локализации..."
+# Generate localization files
+echo "🌐 Generating localization files..."
 flutter gen-l10n
 
-# Запускаем приложение
-echo "🚀 Запуск приложения..."
+# Run the application
+echo "🚀 Starting the application..."
 flutter run 

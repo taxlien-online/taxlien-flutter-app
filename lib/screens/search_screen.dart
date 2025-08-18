@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../services/tax_lien_service.dart';
 import '../services/database_service.dart';
 import '../services/auth_service.dart';
@@ -117,9 +118,10 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lien Search'),
+        title: Text(l10n.lienSearch),
         actions: [
           if (_searchResults.isNotEmpty)
             IconButton(
@@ -196,7 +198,7 @@ class _SearchScreenState extends State<SearchScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _performSearch,
-              child: const Text('Retry'),
+              child: Text(l10n.retry),
             ),
           ],
         ),
@@ -204,13 +206,13 @@ class _SearchScreenState extends State<SearchScreen> {
     }
 
     if (_isSearching) {
-      return const Center(
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(),
-            SizedBox(height: 16),
-            Text('Searching...'),
+            const CircularProgressIndicator(),
+            const SizedBox(height: 16),
+            Text(l10n.searching),
           ],
         ),
       );
@@ -232,12 +234,12 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Nothing found',
+              l10n.nothingFound,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             Text(
-              'Try changing your search query',
+              l10n.tryChangingSearchQuery,
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -258,7 +260,7 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Row(
             children: [
               Text(
-                'Found: ${_searchResults.length} liens',
+                l10n.foundLiensCount.replaceAll('{count}', _searchResults.length.toString()),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
@@ -314,12 +316,12 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Search history is empty',
+              l10n.searchHistoryEmpty,
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             Text(
-              'Your search queries will appear here',
+              l10n.searchQueriesWillAppearHere,
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -338,7 +340,7 @@ class _SearchScreenState extends State<SearchScreen> {
               const Icon(Icons.history),
               const SizedBox(width: 8),
               Text(
-                'Search History',
+                l10n.searchHistory,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const Spacer(),
@@ -374,17 +376,18 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   String _formatTimestamp(DateTime timestamp) {
+    final l10n = AppLocalizations.of(context)!;
     final now = DateTime.now();
     final difference = now.difference(timestamp);
 
     if (difference.inDays > 0) {
-      return '${difference.inDays} days ago';
+      return l10n.daysAgo.replaceAll('{days}', difference.inDays.toString());
     } else if (difference.inHours > 0) {
-      return '${difference.inHours} hours ago';
+      return l10n.hoursAgo.replaceAll('{hours}', difference.inHours.toString());
     } else if (difference.inMinutes > 0) {
-      return '${difference.inMinutes} minutes ago';
+      return l10n.minutesAgo.replaceAll('{minutes}', difference.inMinutes.toString());
     } else {
-      return 'Just now';
+      return l10n.justNow;
     }
   }
 
@@ -597,31 +600,33 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
   }
 
   String _getStatusLabel(String status) {
+    final l10n = AppLocalizations.of(context)!;
     switch (status) {
       case 'available':
-        return 'Available for purchase';
+        return l10n.availableForPurchase;
       case 'sold':
-        return 'Sold';
+        return l10n.sold;
       case 'redeemed':
-        return 'Redeemed';
+        return l10n.redeemed;
       case 'foreclosed':
-        return 'Foreclosed';
+        return l10n.foreclosed;
       default:
         return status;
     }
   }
 
   void _showPurchaseDialog(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final bidController = TextEditingController(text: widget.lien.taxAmount.toString());
     
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Purchase Lien'),
+        title: Text(l10n.purchaseLien),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Enter bid amount (minimum \$${widget.lien.taxAmount.toStringAsFixed(2)}):'),
+            Text(l10n.enterBidAmount.replaceAll('{amount}', '\$${widget.lien.taxAmount.toStringAsFixed(2)}')),
             const SizedBox(height: 16),
             TextField(
               controller: bidController,
@@ -636,7 +641,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -646,23 +651,23 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                 final success = await widget.taxLienService.purchaseLien(widget.lien.id, bidAmount);
                 if (success && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Lien purchased successfully!')),
+                    SnackBar(content: Text(l10n.lienPurchasedSuccessfully)),
                   );
                   Navigator.pop(context);
                 } else if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(widget.taxLienService.error ?? 'Purchase error'),
+                      content: Text(widget.taxLienService.error ?? l10n.purchaseError),
                     ),
                   );
                 }
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Invalid bid amount')),
+                  SnackBar(content: Text(l10n.invalidBidAmount)),
                 );
               }
             },
-            child: const Text('Purchase'),
+            child: Text(l10n.purchase),
           ),
         ],
       ),

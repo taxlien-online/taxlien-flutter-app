@@ -1,174 +1,185 @@
-# FreeDome Manager
+# TaxLien Marketplace
 
-Мобильное приложение для управления купольным кинотеатром (кроссплатформа + веб версия)
+Mobile application for investing in tax liens, developed with Flutter.
 
-## Возможности
+## Description
 
-- 🎬 Управление воспроизведением медиафайлов
-- 🔊 Регулировка громкости в реальном времени
-- 💡 Управление яркостью проекции
-- 🔄 Поворот проекции
-- 📱 Современный Material Design 3 интерфейс
-- 🔗 Real-time подключение к серверу через WebSocket
-- 📚 Библиотека медиафайлов
-- 🌙 Темная тема
+TaxLien Marketplace is a modern mobile application that allows investors to buy, track, and manage tax liens. The application provides a convenient interface for searching, analyzing, and investing in tax liens from various auctions.
 
-## Скриншоты
+## Main Features
 
-Приложение включает следующие экраны:
-- **Главный экран** - управление воспроизведением и настройками
-- **Статус системы** - отображение текущего состояния
-- **Настройки проекции** - регулировка яркости, громкости и поворота
-- **Медиабиблиотека** - список доступных файлов
+### 🏠 Lien Marketplace
+- View available tax liens
+- Search by address, owner, parcel ID
+- Filter by state, county, tax amount, interest rate
+- Sort by various parameters
+- Detailed information about each lien
 
-## Установка
+### 💰 My Investments
+- Track purchased liens
+- Profitability statistics
+- Transaction history
+- Favorite liens
 
-### Предварительные требования
+### 🔍 Search
+- Keyword search
+- Search query history
+- Quick access to results
 
-- Flutter SDK 3.2.3 или выше
-- Dart SDK
+### 👤 User Profile
+- Registration and authentication
+- Profile management
+- Balance and finances
+- Application settings
+
+## Technical Features
+
+### Architecture
+- **Flutter** - cross-platform development
+- **MVC Pattern** - architectural pattern
+- **Provider** - state management
+- **SQLite** - local database
+- **HTTP** - network communication
+
+### Services
+- `TaxLienService` - work with tax liens
+- `AuthService` - authentication and authorization
+- `DatabaseService` - local data storage
+- `ThemeService` - application theme management
+- `LocalizationService` - localization
+
+### Database
+- Tax liens table
+- Users table
+- Transactions table
+- Favorites table
+- Search history table
+
+## Installation and Setup
+
+### Requirements
+- Flutter SDK 3.2.3 or higher
+- Dart SDK 3.0.0 or higher
 - Android Studio / VS Code
-- Подключенное устройство или эмулятор
+- Android SDK / Xcode (for emulators)
 
-### Установка зависимостей
-
+### Install Dependencies
 ```bash
 flutter pub get
 ```
 
-### Запуск приложения
-
+### Run Application
 ```bash
 flutter run
 ```
 
-## Конфигурация
+### Build Release Version
+```bash
+# Android
+flutter build apk --release
 
-### Подключение к серверу
+# iOS
+flutter build ios --release
+```
 
-По умолчанию приложение подключается к `http://localhost:3000`. 
-Для изменения адреса сервера отредактируйте переменную `serverUrl` в файле `lib/main.dart`.
-
-### WebSocket соединение
-
-Приложение автоматически подключается к серверу через WebSocket и отображает статус соединения в правом верхнем углу.
-
-## Структура проекта
+## Project Structure
 
 ```
 lib/
-├── main.dart              # Основной файл приложения
-└── widgets/               # Пользовательские виджеты (будущее расширение)
+├── main.dart                 # Application entry point
+├── services/                 # Application services
+│   ├── auth_service.dart     # Authentication
+│   ├── tax_lien_service.dart # Work with liens
+│   ├── database_service.dart # Database
+│   ├── theme_service.dart    # Application theme
+│   └── localization_service.dart # Localization
+├── screens/                  # Application screens
+│   ├── onboarding_screen.dart    # Onboarding
+│   ├── main_navigation_screen.dart # Main navigation
+│   ├── marketplace_screen.dart   # Lien marketplace
+│   ├── my_investments_screen.dart # My investments
+│   ├── search_screen.dart        # Search
+│   └── profile_screen.dart       # Profile
+├── widgets/                  # Widgets
+│   ├── tax_lien_card.dart   # Lien card
+│   └── filter_bottom_sheet.dart # Filters
+└── theme/                   # Application theme
+    └── app_theme_export.dart
 ```
 
-## Функциональность
+## API Endpoints
 
-### Управление воспроизведением
+The application uses REST API for server communication:
 
-- **Play** - запуск воспроизведения выбранного файла
-- **Pause** - приостановка воспроизведения
-- **Stop** - полная остановка и сброс позиции
+### Authentication
+- `POST /api/auth/register` - registration
+- `POST /api/auth/login` - login
+- `PUT /api/auth/profile` - update profile
+- `PUT /api/auth/password` - change password
 
-### Настройки проекции
+### Tax Liens
+- `GET /api/tax-liens/available` - available liens
+- `GET /api/tax-liens/my-liens` - my liens
+- `POST /api/tax-liens/{id}/purchase` - purchase lien
+- `GET /api/tax-liens/search` - search liens
 
-- **Яркость** - регулировка от 0% до 100%
-- **Громкость** - регулировка от 0% до 100%
-- **Поворот** - поворот проекции от -180° до +180°
+## Security
 
-### Медиабиблиотека
+- JWT tokens for authentication
+- Password encryption
+- Secure data storage
+- Input validation
 
-- Отображение списка доступных файлов
-- Различение видео и изображений
-- Отображение длительности для видеофайлов
-- Быстрый запуск воспроизведения
+## Localization
 
-## API интеграция
+The application supports multilingualism:
+- English (primary)
+- Russian
+- Ability to add other languages
 
-Приложение использует следующие API endpoints:
+## Themes
 
-- `GET /api/media` - получение списка медиафайлов
-- WebSocket события для real-time управления
+Light and dark themes are supported:
+- Automatic switching
+- Manual control
+- Save user choice
 
-## WebSocket события
+## License
 
-### Отправляемые события
-- `play` - запуск воспроизведения
-- `pause` - пауза
-- `stop` - остановка
-- `brightness` - установка яркости
-- `volume` - установка громкости
-- `rotation` - установка поворота
+MIT License - see LICENSE file for details.
 
-### Получаемые события
-- `dome-state` - обновление состояния купола
+## Support
 
-## Разработка
+For support or bug reports:
+- Create an Issue in the repository
+- Refer to documentation
+- Contact the development team
 
-### Добавление новых функций
+## Contributing
 
-1. Создайте новый виджет в папке `widgets/`
-2. Добавьте необходимые методы в `_DomeControlScreenState`
-3. Обновите UI в методе `build()`
+We welcome contributions to project development:
+1. Fork the repository
+2. Create a branch for new feature
+3. Make changes
+4. Create Pull Request
 
-### Стилизация
+## Roadmap
 
-Приложение использует Material Design 3 с темной темой. Основные цвета:
-- Primary: `Color(0xFF1E3A8A)` (синий)
-- Background: темная тема
-- Cards: автоматически адаптируются к теме
+### Version 1.1
+- [ ] Notifications about new liens
+- [ ] Extended analytics
+- [ ] Data export
+- [ ] Payment system integration
 
-## Отладка
+### Version 1.2
+- [ ] Web application version
+- [ ] API for third-party developers
+- [ ] Machine learning for risk analysis
+- [ ] Social features
 
-### Логирование
-
-Приложение выводит логи в консоль для:
-- Подключения/отключения от сервера
-- Ошибок загрузки медиафайлов
-- WebSocket событий
-
-### Тестирование
-
-```bash
-flutter test
-```
-
-## Сборка
-
-### Android APK
-```bash
-flutter build apk
-```
-
-### iOS
-```bash
-flutter build ios
-```
-
-### Web
-```bash
-flutter build web
-```
-
-## 🌍 Поддерживаемые языки
-- 🇷🇺 Русский  
-- 🇺🇦 Украинский  
-- 🇺🇸 Английский  
-- 🇹🇭 Тайский  
-- 🇲🇲 Бирманский  
-- 🇱🇦 Лаосский
-- 🇰🇭 Кхмерский (Камбоджа)  
-- 🇨🇳 Китайский  
-- 🇯🇵 Японский  
-- 🇮🇳 Хинди  
-- 🇸🇦 Арабский  
-- 🇩🇪 Немецкий  
-- 🇵🇱 Польский  
-
-## Лицензия
-
-NativeMind non-commercial use only
-
-## Поддержка
-
-Для получения поддержки обращайтесь к команде разработки FreeDome.
+### Version 2.0
+- [ ] Blockchain integration
+- [ ] NFT tokens for liens
+- [ ] Decentralized marketplace
+- [ ] International expansion
 

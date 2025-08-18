@@ -11,6 +11,7 @@ import '../services/nft_service.dart';
 import 'wallet_settings_screen.dart';
 import 'yuku_marketplace_screen.dart';
 import 'yuku_integration_demo_screen.dart';
+import 'plug_wallet_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   final AuthService authService;
@@ -19,6 +20,7 @@ class ProfileScreen extends StatefulWidget {
   final OnboardingService onboardingService;
   final WalletService walletService;
   final YukuService yukuService;
+  final PlugWalletService plugWalletService;
   final NFTService nftService;
 
   const ProfileScreen({
@@ -29,6 +31,7 @@ class ProfileScreen extends StatefulWidget {
     required this.onboardingService,
     required this.walletService,
     required this.yukuService,
+    required this.plugWalletService,
     required this.nftService,
   });
 
@@ -294,6 +297,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: AppLocalizations.of(context)?.notifications ?? 'Notifications',
               subtitle: AppLocalizations.of(context)?.notificationSettings ?? 'Notification settings',
               onTap: () => _showNotificationsSettings(context),
+            ),
+            _buildActionTile(
+              icon: Icons.account_balance_wallet,
+              title: 'Plug Wallet',
+              subtitle: 'Manage ICP tokens and NFTs',
+              onTap: () => _showPlugWallet(context),
             ),
             _buildActionTile(
               icon: Icons.help_outline,
@@ -836,6 +845,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
       MaterialPageRoute(
         builder: (context) => WalletSettingsScreen(
           walletService: widget.walletService,
+        ),
+      ),
+    );
+  }
+
+  void _showPlugWallet(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => PlugWalletScreen(
+          plugWalletService: widget.plugWalletService,
         ),
       ),
     );

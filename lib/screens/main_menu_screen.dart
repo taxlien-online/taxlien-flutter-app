@@ -217,7 +217,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
                       ),
                     ),
                     Text(
-                      'Digital Freedom Gateway',
+                      l10n?.digitalFreedomGateway ?? 'Digital Freedom Gateway',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
                       ),
@@ -464,7 +464,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
             child: OutlinedButton.icon(
               onPressed: () => _navigateToSettings(),
               icon: const Icon(Icons.settings),
-              label: const Text('Settings'),
+              label: Text(l10n?.settings ?? 'Settings'),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 12),
               ),
@@ -476,7 +476,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
             child: OutlinedButton.icon(
               onPressed: () => _navigateToConnectionStatus(),
               icon: const Icon(Icons.wifi),
-              label: const Text('Connection'),
+              label: Text(l10n?.connection ?? 'Connection'),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 12),
               ),
@@ -505,14 +505,14 @@ class _MainMenuScreenState extends State<MainMenuScreen>
   void _navigateToCalibration() {
     // TODO: Implement calibration screen
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Calibration screen coming soon')),
+      SnackBar(content: Text(l10n?.calibrationScreenComingSoon ?? 'Calibration screen coming soon')),
     );
   }
 
   void _navigateToMedia() {
     // TODO: Create media management screen
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Media management coming soon')),
+      SnackBar(content: Text(l10n?.mediaManagementComingSoon ?? 'Media management coming soon')),
     );
   }
 

@@ -249,5 +249,473 @@
   "connectionStatus": "สถานะการเชื่อมต่อ",
   "@connectionStatus": {
     "description": "หัวข้อหน้าจอสถานะการเชื่อมต่อ"
+  },
+  "russian": "รัสเซีย",
+  "@russian": {
+    "description": "ชื่อภาษารัสเซีย"
+  },
+  "ukrainian": "ยูเครน",
+  "@ukrainian": {
+    "description": "ชื่อภาษายูเครน"
+  },
+  "dataLoadError": "ข้อผิดพลาดในการโหลดข้อมูล: {error}",
+  "@dataLoadError": {
+    "description": "ข้อความข้อผิดพลาดในการโหลดข้อมูล",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "ข้อผิดพลาดเครือข่าย"
+      }
+    }
+  },
+  "taxLienMarketplace": "ตลาดจำนองภาษี",
+  "@taxLienMarketplace": {
+    "description": "หัวข้อหน้าจอตลาดจำนองภาษี"
+  },
+  "filters": "ตัวกรอง",
+  "@filters": {
+    "description": "เครื่องมือปุ่มตัวกรอง"
+  },
+  "refresh": "รีเฟรช",
+  "@refresh": {
+    "description": "เครื่องมือปุ่มรีเฟรช"
+  },
+  "searchHint": "ค้นหาตามที่อยู่ เจ้าของ หรือรหัสที่ดิน...",
+  "@searchHint": {
+    "description": "ข้อความคำแนะนำช่องค้นหา"
+  },
+  "clear": "ล้าง",
+  "@clear": {
+    "description": "ปุ่มล้าง"
+  },
+  "foundLiens": "พบ: {count} จำนอง",
+  "@foundLiens": {
+    "description": "ข้อความจำนวนจำนองที่พบ",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "sortBy": "เรียงตาม: {sortLabel}",
+  "@sortBy": {
+    "description": "ป้ายเรียงลำดับ",
+    "placeholders": {
+      "sortLabel": {
+        "type": "String",
+        "example": "วันที่ประมูล ↑"
+      }
+    }
+  },
+  "retry": "ลองใหม่",
+  "@retry": {
+    "description": "ปุ่มลองใหม่"
+  },
+  "noLiensFound": "ไม่พบจำนองภาษี",
+  "@noLiensFound": {
+    "description": "ข้อความไม่พบจำนอง"
+  },
+  "tryChangingSearch": "ลองเปลี่ยนพารามิเตอร์การค้นหาหรือตัวกรอง",
+  "@tryChangingSearch": {
+    "description": "คำแนะนำให้เปลี่ยนพารามิเตอร์การค้นหา"
+  },
+  "stateFilter": "รัฐ: {state}",
+  "@stateFilter": {
+    "description": "ป้ายตัวกรองรัฐ",
+    "placeholders": {
+      "state": {
+        "type": "String",
+        "example": "แคลิฟอร์เนีย"
+      }
+    }
+  },
+  "countyFilter": "เขต: {county}",
+  "@countyFilter": {
+    "description": "ป้ายตัวกรองเขต",
+    "placeholders": {
+      "county": {
+        "type": "String",
+        "example": "ลอสแองเจลิส"
+      }
+    }
+  },
+  "amountFrom": "ตั้งแต่: {amount}",
+  "@amountFrom": {
+    "description": "ตัวกรองจำนวนเงินขั้นต่ำ",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "amountTo": "ถึง: {amount}",
+  "@amountTo": {
+    "description": "ตัวกรองจำนวนเงินสูงสุด",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "5000.00"
+      }
+    }
+  },
+  "interestRateFrom": "อัตราดอกเบี้ยตั้งแต่: {rate}%",
+  "@interestRateFrom": {
+    "description": "ตัวกรองอัตราดอกเบี้ยขั้นต่ำ",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "12.0"
+      }
+    }
+  },
+  "auctionDateSort": "วันที่ประมูล {direction}",
+  "@auctionDateSort": {
+    "description": "ป้ายเรียงลำดับวันที่ประมูล",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "taxAmountSort": "จำนวนภาษี {direction}",
+  "@taxAmountSort": {
+    "description": "ป้ายเรียงลำดับจำนวนภาษี",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "interestRateSort": "อัตราดอกเบี้ย {direction}",
+  "@interestRateSort": {
+    "description": "ป้ายเรียงลำดับอัตราดอกเบี้ย",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "assessedValueSort": "มูลค่าประเมิน {direction}",
+  "@assessedValueSort": {
+    "description": "ป้ายเรียงลำดับมูลค่าประเมิน",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↓"
+      }
+    }
+  },
+  "redemptionDeadlineSort": "วันครบกำหนดไถ่ถอน {direction}",
+  "@redemptionDeadlineSort": {
+    "description": "ป้ายเรียงลำดับวันครบกำหนดไถ่ถอน",
+    "placeholders": {
+      "direction": {
+        "type": "String",
+        "example": "↑"
+      }
+    }
+  },
+  "lienNumber": "จำนอง #{parcelId}",
+  "@lienNumber": {
+    "description": "หมายเลขจำนองพร้อมรหัสที่ดิน",
+    "placeholders": {
+      "parcelId": {
+        "type": "String",
+        "example": "12345"
+      }
+    }
+  },
+  "owner": "เจ้าของ: {owner}",
+  "@owner": {
+    "description": "ข้อมูลเจ้าของ",
+    "placeholders": {
+      "owner": {
+        "type": "String",
+        "example": "จอห์น โด"
+      }
+    }
+  },
+  "taxAmount": "จำนวนภาษี",
+  "@taxAmount": {
+    "description": "ป้ายจำนวนภาษี"
+  },
+  "interestRate": "อัตราดอกเบี้ย",
+  "@interestRate": {
+    "description": "ป้ายอัตราดอกเบี้ย"
+  },
+  "assessedValue": "มูลค่าประเมิน",
+  "@assessedValue": {
+    "description": "ป้ายมูลค่าประเมิน"
+  },
+  "auctionDate": "วันที่ประมูล",
+  "@auctionDate": {
+    "description": "ป้ายวันที่ประมูล"
+  },
+  "additionalInfo": "ข้อมูลเพิ่มเติม",
+  "@additionalInfo": {
+    "description": "หัวข้อส่วนข้อมูลเพิ่มเติม"
+  },
+  "county": "เขต",
+  "@county": {
+    "description": "ป้ายเขต"
+  },
+  "state": "รัฐ",
+  "@state": {
+    "description": "ป้ายรัฐ"
+  },
+  "redemptionDeadline": "วันครบกำหนดไถ่ถอน",
+  "@redemptionDeadline": {
+    "description": "ป้ายวันครบกำหนดไถ่ถอน"
+  },
+  "status": "สถานะ",
+  "@status": {
+    "description": "ป้ายสถานะ"
+  },
+  "buyLien": "ซื้อจำนอง",
+  "@buyLien": {
+    "description": "ปุ่มซื้อจำนอง"
+  },
+  "availableForPurchase": "พร้อมสำหรับการซื้อ",
+  "@availableForPurchase": {
+    "description": "สถานะพร้อมสำหรับการซื้อ"
+  },
+  "sold": "ขายแล้ว",
+  "@sold": {
+    "description": "สถานะขายแล้ว"
+  },
+  "redeemed": "ไถ่ถอนแล้ว",
+  "@redeemed": {
+    "description": "สถานะไถ่ถอนแล้ว"
+  },
+  "foreclosed": "ยึดแล้ว",
+  "@foreclosed": {
+    "description": "สถานะยึดแล้ว"
+  },
+  "purchaseLien": "ซื้อจำนอง",
+  "@purchaseLien": {
+    "description": "หัวข้อไดอะล็อกซื้อจำนอง"
+  },
+  "enterBidAmount": "ป้อนจำนวนเงินประมูล (ขั้นต่ำ {amount}):",
+  "@enterBidAmount": {
+    "description": "คำแนะนำป้อนจำนวนเงินประมูล",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1000.00"
+      }
+    }
+  },
+  "bidAmount": "จำนวนเงินประมูล",
+  "@bidAmount": {
+    "description": "ป้ายช่องจำนวนเงินประมูล"
+  },
+  "lienPurchasedSuccessfully": "ซื้อจำนองสำเร็จแล้ว!",
+  "@lienPurchasedSuccessfully": {
+    "description": "ข้อความซื้อจำนองสำเร็จ"
+  },
+  "purchaseError": "ข้อผิดพลาดในการซื้อ",
+  "@purchaseError": {
+    "description": "ข้อความข้อผิดพลาดในการซื้อ"
+  },
+  "invalidBidAmount": "จำนวนเงินประมูลไม่ถูกต้อง",
+  "@invalidBidAmount": {
+    "description": "ข้อความจำนวนเงินประมูลไม่ถูกต้อง"
+  },
+  "buy": "ซื้อ",
+  "@buy": {
+    "description": "ปุ่มซื้อ"
+  },
+  "profile": "โปรไฟล์",
+  "@profile": {
+    "description": "หัวข้อหน้าจอโปรไฟล์"
+  },
+  "settings": "การตั้งค่า",
+  "@settings": {
+    "description": "เครื่องมือปุ่มการตั้งค่า"
+  },
+  "notAuthorized": "ไม่ได้รับอนุญาต",
+  "@notAuthorized": {
+    "description": "ข้อความไม่ได้รับอนุญาต"
+  },
+  "loginForAccess": "เข้าสู่ระบบเพื่อเข้าถึงฟีเจอร์",
+  "@loginForAccess": {
+    "description": "ข้อความคำแนะนำเข้าสู่ระบบ"
+  },
+  "login": "เข้าสู่ระบบ",
+  "@login": {
+    "description": "ปุ่มเข้าสู่ระบบ"
+  },
+  "register": "ลงทะเบียน",
+  "@register": {
+    "description": "ปุ่มลงทะเบียน"
+  },
+  "edit": "แก้ไข",
+  "@edit": {
+    "description": "ปุ่มแก้ไข"
+  },
+  "logout": "ออกจากระบบ",
+  "@logout": {
+    "description": "ปุ่มออกจากระบบ"
+  },
+  "balance": "ยอดเงิน",
+  "@balance": {
+    "description": "ป้ายยอดเงิน"
+  },
+  "available": "ใช้ได้",
+  "@available": {
+    "description": "ป้ายยอดเงินที่ใช้ได้"
+  },
+  "topUp": "เติมเงิน",
+  "@topUp": {
+    "description": "ปุ่มเติมเงิน"
+  },
+  "quickActions": "การดำเนินการด่วน",
+  "@quickActions": {
+    "description": "หัวข้อส่วนการดำเนินการด่วน"
+  },
+  "transactionHistory": "ประวัติธุรกรรม",
+  "@transactionHistory": {
+    "description": "รายการเมนูประวัติธุรกรรม"
+  },
+  "viewAllTransactions": "ดูธุรกรรมทั้งหมด",
+  "@viewAllTransactions": {
+    "description": "หัวข้อย่อยประวัติธุรกรรม"
+  },
+  "favoriteLiens": "จำนองที่ชื่นชอบ",
+  "@favoriteLiens": {
+    "description": "รายการเมนูจำนองที่ชื่นชอบ"
+  },
+  "savedLiens": "จำนองที่บันทึกของคุณ",
+  "@savedLiens": {
+    "description": "หัวข้อย่อยจำนองที่ชื่นชอบ"
+  },
+  "notifications": "การแจ้งเตือน",
+  "@notifications": {
+    "description": "รายการเมนูการแจ้งเตือน"
+  },
+  "notificationSettings": "การตั้งค่าการแจ้งเตือน",
+  "@notificationSettings": {
+    "description": "หัวข้อย่อยการแจ้งเตือน"
+  },
+  "help": "ความช่วยเหลือ",
+  "@help": {
+    "description": "รายการเมนูความช่วยเหลือ"
+  },
+  "appSettings": "การตั้งค่าแอป",
+  "@appSettings": {
+    "description": "หัวข้อส่วนการตั้งค่าแอป"
+  },
+  "language": "ภาษา",
+  "@language": {
+    "description": "รายการเมนูภาษา"
+  },
+  "theme": "ธีม",
+  "@theme": {
+    "description": "รายการเมนูธีม"
+  },
+  "dark": "มืด",
+  "@dark": {
+    "description": "ป้ายธีมมืด"
+  },
+  "light": "สว่าง",
+  "@light": {
+    "description": "ป้ายธีมสว่าง"
+  },
+  "security": "ความปลอดภัย",
+  "@security": {
+    "description": "รายการเมนูความปลอดภัย"
+  },
+  "securitySettings": "การตั้งค่าความปลอดภัย",
+  "@securitySettings": {
+    "description": "หัวข้อย่อยความปลอดภัย"
+  },
+  "privacy": "ความเป็นส่วนตัว",
+  "@privacy": {
+    "description": "รายการเมนูความเป็นส่วนตัว"
+  },
+  "privacySettings": "การตั้งค่าความเป็นส่วนตัว",
+  "@privacySettings": {
+    "description": "หัวข้อย่อยความเป็นส่วนตัว"
+  },
+  "aboutApp": "เกี่ยวกับแอป",
+  "@aboutApp": {
+    "description": "หัวข้อส่วนเกี่ยวกับแอป"
+  },
+  "version": "เวอร์ชัน",
+  "@version": {
+    "description": "รายการเมนูเวอร์ชัน"
+  },
+  "license": "ลิขสิทธิ์",
+  "@license": {
+    "description": "รายการเมนูลิขสิทธิ์"
+  },
+  "termsOfService": "เงื่อนไขการให้บริการ",
+  "@termsOfService": {
+    "description": "รายการเมนูเงื่อนไขการให้บริการ"
+  },
+  "userAgreement": "ข้อตกลงผู้ใช้",
+  "@userAgreement": {
+    "description": "หัวข้อย่อยเงื่อนไขการให้บริการ"
+  },
+  "privacyPolicy": "นโยบายความเป็นส่วนตัว",
+  "@privacyPolicy": {
+    "description": "รายการเมนูนโยบายความเป็นส่วนตัว"
+  },
+  "dataProcessing": "การประมวลผลข้อมูลส่วนบุคคล",
+  "@dataProcessing": {
+    "description": "หัวข้อย่อยนโยบายความเป็นส่วนตัว"
+  },
+  "loginToAccount": "เข้าสู่ระบบบัญชี",
+  "@loginToAccount": {
+    "description": "หัวข้อไดอะล็อกเข้าสู่ระบบ"
+  },
+  "password": "รหัสผ่าน",
+  "@password": {
+    "description": "ป้ายช่องรหัสผ่าน"
+  },
+  "loginSuccessful": "เข้าสู่ระบบสำเร็จแล้ว!",
+  "@loginSuccessful": {
+    "description": "ข้อความเข้าสู่ระบบสำเร็จ"
+  },
+  "loginError": "ข้อผิดพลาดในการเข้าสู่ระบบ",
+  "@loginError": {
+    "description": "ข้อความข้อผิดพลาดในการเข้าสู่ระบบ"
+  },
+  "registration": "การลงทะเบียน",
+  "@registration": {
+    "description": "หัวข้อไดอะล็อกการลงทะเบียน"
+  },
+  "firstName": "ชื่อ",
+  "@firstName": {
+    "description": "ป้ายช่องชื่อ"
+  },
+  "lastName": "นามสกุล",
+  "@lastName": {
+    "description": "ป้ายช่องนามสกุล"
+  },
+  "registrationSuccessful": "ลงทะเบียนสำเร็จแล้ว!",
+  "@registrationSuccessful": {
+    "description": "ข้อความลงทะเบียนสำเร็จ"
+  },
+  "registrationError": "ข้อผิดพลาดในการลงทะเบียน",
+  "@registrationError": {
+    "description": "ข้อความข้อผิดพลาดในการลงทะเบียน"
+  },
+  "registerAccount": "ลงทะเบียน",
+  "@registerAccount": {
+    "description": "ปุ่มลงทะเบียนในไดอะล็อกการลงทะเบียน"
+  },
+  "logoutConfirmation": "ยืนยันการออกจากระบบ",
+  "@logoutConfirmation": {
+    "description": "หัวข้อไดอะล็อกยืนยันการออกจากระบบ"
+  },
+  "logoutConfirmationMessage": "คุณแน่ใจหรือไม่ว่าต้องการออกจากระบบ?",
+  "@logoutConfirmationMessage": {
+    "description": "ข้อความยืนยันการออกจากระบบ"
   }
 } 

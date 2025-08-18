@@ -717,5 +717,251 @@
   "logoutConfirmationMessage": "Вы уверены, что хотите выйти из аккаунта?",
   "@logoutConfirmationMessage": {
     "description": "Сообщение подтверждения выхода"
+  },
+  "myInvestments": "Мои инвестиции",
+  "@myInvestments": {
+    "description": "Заголовок экрана моих инвестиций"
+  },
+  "myLiens": "Мои закладные",
+  "@myLiens": {
+    "description": "Заголовок вкладки моих закладных"
+  },
+  "favorites": "Избранное",
+  "@favorites": {
+    "description": "Заголовок вкладки избранного"
+  },
+  "statistics": "Статистика",
+  "@statistics": {
+    "description": "Заголовок вкладки статистики"
+  },
+  "noInvestmentsYet": "У вас пока нет инвестиций",
+  "@noInvestmentsYet": {
+    "description": "Сообщение об отсутствии инвестиций"
+  },
+  "goToMarketplace": "Перейдите на рынок, чтобы купить налоговые закладные",
+  "@goToMarketplace": {
+    "description": "Предложение перейти на рынок"
+  },
+  "goToMarketplaceButton": "Перейти на рынок",
+  "@goToMarketplaceButton": {
+    "description": "Кнопка перехода на рынок"
+  },
+  "noFavoriteLiens": "Нет избранных закладных",
+  "@noFavoriteLiens": {
+    "description": "Сообщение об отсутствии избранных закладных"
+  },
+  "addToFavoritesHint": "Добавляйте закладные в избранное для быстрого доступа",
+  "@addToFavoritesHint": {
+    "description": "Подсказка о добавлении закладных в избранное"
+  },
+  "overallStatistics": "Общая статистика",
+  "@overallStatistics": {
+    "description": "Заголовок секции общей статистики"
+  },
+  "totalInvested": "Всего инвестировано",
+  "@totalInvested": {
+    "description": "Метка общей суммы инвестиций"
+  },
+  "currentValue": "Текущая стоимость",
+  "@currentValue": {
+    "description": "Метка текущей стоимости"
+  },
+  "profitLoss": "Прибыль/убыток",
+  "@profitLoss": {
+    "description": "Метка прибыли/убытка"
+  },
+  "roi": "ROI",
+  "@roi": {
+    "description": "Метка ROI"
+  },
+  "statusStatistics": "Статистика по статусам",
+  "@statusStatistics": {
+    "description": "Заголовок секции статистики по статусам"
+  },
+  "activeLiens": "Активные закладные",
+  "@activeLiens": {
+    "description": "Метка активных закладных"
+  },
+  "redeemedLiens": "Погашенные закладные",
+  "@redeemedLiens": {
+    "description": "Метка погашенных закладных"
+  },
+  "foreclosedLiens": "Обращенные в собственность",
+  "@foreclosedLiens": {
+    "description": "Метка обращенных в собственность закладных"
+  },
+  "totalLiens": "Всего закладных",
+  "@totalLiens": {
+    "description": "Метка общего количества закладных"
+  },
+  "monthlyReturns": "Доходность по месяцам",
+  "@monthlyReturns": {
+    "description": "Заголовок графика месячной доходности"
+  },
+  "profitChartInDevelopment": "График доходности\n(в разработке)",
+  "@profitChartInDevelopment": {
+    "description": "Сообщение о разработке графика доходности"
+  },
+  "topPerformingLiens": "Топ закладных по доходности",
+  "@topPerformingLiens": {
+    "description": "Заголовок секции топ закладных по доходности"
+  },
+  "investmentInfo": "Информация об инвестиции",
+  "@investmentInfo": {
+    "description": "Заголовок секции информации об инвестиции"
+  },
+  "purchaseDate": "Дата покупки",
+  "@purchaseDate": {
+    "description": "Метка даты покупки"
+  },
+  "purchaseAmount": "Сумма покупки",
+  "@purchaseAmount": {
+    "description": "Метка суммы покупки"
+  },
+  "daysInInvestment": "Дней в инвестиции",
+  "@daysInInvestment": {
+    "description": "Метка дней в инвестиции"
+  },
+  "interestEarned": "Заработанные проценты",
+  "@interestEarned": {
+    "description": "Метка заработанных процентов"
+  },
+  "redemptionDate": "Дата погашения",
+  "@redemptionDate": {
+    "description": "Метка даты погашения"
+  },
+  "digitalFreedomGateway": "Врата к цифровой свободе",
+  "@digitalFreedomGateway": {
+    "description": "Подзаголовок приложения"
+  },
+  "settings": "Настройки",
+  "@settings": {
+    "description": "Метка кнопки настроек"
+  },
+  "connection": "Подключение",
+  "@connection": {
+    "description": "Метка кнопки подключения"
+  },
+  "calibrationScreenComingSoon": "Экран калибровки скоро появится",
+  "@calibrationScreenComingSoon": {
+    "description": "Сообщение о скором появлении экрана калибровки"
+  },
+  "mediaManagementComingSoon": "Управление медиа скоро появится",
+  "@mediaManagementComingSoon": {
+    "description": "Сообщение о скором появлении управления медиа"
+  },
+  "lienSearch": "Поиск закладных",
+  "@lienSearch": {
+    "description": "Заголовок экрана поиска закладных"
+  },
+  "searching": "Поиск...",
+  "@searching": {
+    "description": "Сообщение о поиске"
+  },
+  "noSearchHistory": "Нет истории поиска",
+  "@noSearchHistory": {
+    "description": "Сообщение об отсутствии истории поиска"
+  },
+  "clearSearchHistory": "Очистить историю поиска",
+  "@clearSearchHistory": {
+    "description": "Сообщение об очистке истории поиска"
+  },
+  "searchHistory": "История поиска",
+  "@searchHistory": {
+    "description": "Заголовок секции истории поиска"
+  },
+  "recentSearches": "Недавние поиски",
+  "@recentSearches": {
+    "description": "Заголовок секции недавних поисков"
+  },
+  "purchaseLien": "Покупка закладной",
+  "@purchaseLien": {
+    "description": "Заголовок диалога покупки закладной"
+  },
+  "enterBidAmount": "Введите сумму ставки (минимум {amount}):",
+  "@enterBidAmount": {
+    "description": "Запрос ввода суммы ставки",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "$1000.00"
+      }
+    }
+  },
+  "purchase": "Покупка",
+  "@purchase": {
+    "description": "Кнопка покупки"
+  },
+  "lienPurchasedSuccessfully": "Закладная успешно куплена!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Сообщение об успешной покупке закладной"
+  },
+  "purchaseError": "Ошибка покупки",
+  "@purchaseError": {
+    "description": "Сообщение об ошибке покупки"
+  },
+  "invalidBidAmount": "Неверная сумма ставки",
+  "@invalidBidAmount": {
+    "description": "Сообщение о неверной сумме ставки"
+  },
+  "searchHistoryEmpty": "История поиска пуста",
+  "@searchHistoryEmpty": {
+    "description": "Сообщение о пустой истории поиска"
+  },
+  "searchQueriesWillAppearHere": "Ваши поисковые запросы появятся здесь",
+  "@searchQueriesWillAppearHere": {
+    "description": "Сообщение о том, что поисковые запросы появятся здесь"
+  },
+  "nothingFound": "Ничего не найдено",
+  "@nothingFound": {
+    "description": "Сообщение о том, что ничего не найдено"
+  },
+  "tryChangingSearchQuery": "Попробуйте изменить поисковый запрос",
+  "@tryChangingSearchQuery": {
+    "description": "Сообщение с предложением изменить поисковый запрос"
+  },
+  "foundLiensCount": "Найдено: {count} закладных",
+  "@foundLiensCount": {
+    "description": "Сообщение о количестве найденных закладных",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "daysAgo": "{days} дней назад",
+  "@daysAgo": {
+    "description": "Формат дней назад",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": "{hours} часов назад",
+  "@hoursAgo": {
+    "description": "Формат часов назад",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "minutesAgo": "{minutes} минут назад",
+  "@minutesAgo": {
+    "description": "Формат минут назад",
+    "placeholders": {
+      "minutes": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "justNow": "Только что",
+  "@justNow": {
+    "description": "Формат только что"
   }
 } 

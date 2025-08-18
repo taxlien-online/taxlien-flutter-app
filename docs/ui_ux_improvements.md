@@ -1,7 +1,7 @@
 # UI/UX Improvements for Cinema Usage
 
 ## Overview
-This document outlines the improvements made to the FreeDome Manager UI/UX to better serve cinema operators and provide quick access to essential settings.
+This document outlines the improvements made to the TaxLien.online UI/UX to better serve cinema operators and provide quick access to essential settings.
 
 ## Key Improvements
 
@@ -119,7 +119,7 @@ Added "Quick Settings" section in the Dome Control screen with:
 
 ## Conclusion
 
-These UI/UX improvements significantly enhance the usability of FreeDome Manager for cinema environments by:
+These UI/UX improvements significantly enhance the usability of TaxLien.online for cinema environments by:
 - Providing quick access to essential settings
 - Reducing the number of clicks required for common tasks
 - Improving visual clarity and feedback
