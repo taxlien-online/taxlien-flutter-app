@@ -6,6 +6,7 @@ import '../services/localization_service.dart';
 import '../services/onboarding_service.dart';
 import '../services/wallet_service.dart';
 import '../services/yuku_service.dart';
+import '../services/plug_wallet_service.dart';
 import '../services/nft_service.dart';
 import 'wallet_settings_screen.dart';
 import 'yuku_marketplace_screen.dart';

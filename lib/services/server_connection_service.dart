@@ -2,15 +2,15 @@ import 'dart:async';
 import 'server_config_service.dart';
 import 'api_service.dart';
 import 'websocket_service.dart';
-import 'media_library_service.dart';
+import 'tax_lien_content_service.dart';
 
 class ServerConnectionService {
   final ServerConfigService _configService = ServerConfigService();
   final ApiService _apiService = ApiService();
   final WebSocketService _websocketService = WebSocketService();
-  late MediaLibraryService _mediaLibraryService;
+  late TaxLienContentService _contentService;
   
-  // Стримы для обновлений состояния
+  // Streams for state updates
   final StreamController<Map<String, dynamic>> _stateController = 
       StreamController<Map<String, dynamic>>.broadcast();
   final StreamController<bool> _connectionController = 
@@ -18,7 +18,7 @@ class ServerConnectionService {
   final StreamController<String> _logController = 
       StreamController<String>.broadcast();
   
-  // Геттеры
+  // Getters
   Stream<Map<String, dynamic>> get stateStream => _stateController.stream;
   Stream<bool> get connectionStream => _connectionController.stream;
   Stream<String> get logStream => _logController.stream;
@@ -26,27 +26,27 @@ class ServerConnectionService {
   ApiService get apiService => _apiService;
   WebSocketService get websocketService => _websocketService;
   
-  // Статус подключения
+  // Connection status
   bool get isConnected => _websocketService.isConnected;
   ServerConfig? get currentServer => _configService.currentServer;
   String? get serverAddress => _configService.currentServer?.url;
   
-  // Подписки
+  // Subscriptions
   StreamSubscription? _websocketStateSubscription;
   StreamSubscription? _websocketConnectionSubscription;
   StreamSubscription? _websocketLogSubscription;
   
-  // Инициализация
+  // Initialization
   Future<void> initialize() async {
     await _configService.initialize();
     
-    // Инициализация MediaLibraryService
-    _mediaLibraryService = MediaLibraryService(
+    // Initialize TaxLienContentService
+    _contentService = TaxLienContentService(
       apiService: _apiService,
       configService: _configService,
     );
     
-    // Настройка подписок на WebSocket события
+    // Setup WebSocket event subscriptions
     _websocketStateSubscription = _websocketService.stateStream.listen(
       (state) => _stateController.add(state),
     );
@@ -59,16 +59,16 @@ class ServerConnectionService {
       (log) => _logController.add(log),
     );
     
-    // Автоматическое подключение к сохраненному серверу
+    // Auto-connect to saved server
     if (_configService.currentServer != null) {
       await connectToServer(_configService.currentServer!);
     }
   }
   
-  // Подключение к серверу
+  // Connect to server
   Future<bool> connectToServer(ServerConfig server) async {
     try {
-      // Проверяем доступность сервера
+      // Check server availability
       final isAvailable = await _configService.testServerConnection(
         server.host, 
         server.port,
@@ -79,13 +79,13 @@ class ServerConnectionService {
         return false;
       }
       
-      // Устанавливаем сервер в конфигурации
+      // Set server in configuration
       await _configService.setCurrentServer(server);
       
-      // Настраиваем API сервис
+      // Setup API service
       _apiService.setServer(server);
       
-      // Подключаемся через WebSocket
+      // Connect via WebSocket
       await _websocketService.connect(server);
       
       _logController.add('Successfully connected to ${server.url}');
@@ -97,14 +97,14 @@ class ServerConnectionService {
     }
   }
   
-  // Отключение от сервера
+  // Disconnect from server
   Future<void> disconnect() async {
     await _websocketService.disconnect();
     await _configService.clearCurrentServer();
     _logController.add('Disconnected from server');
   }
   
-  // Переподключение к текущему серверу
+  // Reconnect to current server
   Future<bool> reconnect() async {
     if (_configService.currentServer == null) {
       _logController.add('No server configured for reconnection');
@@ -114,11 +114,11 @@ class ServerConnectionService {
     return await connectToServer(_configService.currentServer!);
   }
   
-  // Автоматическое обнаружение и подключение
+  // Auto-discovery and connection
   Future<ServerConfig?> autoConnect() async {
     _logController.add('Starting server discovery...');
     
-    // Сначала пробуем сохраненные серверы
+    // First try saved servers
     for (final server in _configService.savedServers) {
       final isAvailable = await _configService.testServerConnection(
         server.host, 
@@ -132,14 +132,14 @@ class ServerConnectionService {
       }
     }
     
-    // Если сохраненные серверы недоступны, ищем новые
+    // If saved servers are unavailable, search for new ones
     final discoveredServers = await _configService.discoverServers();
     
     if (discoveredServers.isNotEmpty) {
       final server = discoveredServers.first;
       _logController.add('Found discovered server: ${server.url}');
       
-      // Сохраняем найденный сервер
+      // Save found server
       await _configService.addServer(server.host, server.port, name: server.name);
       
       await connectToServer(server);
@@ -150,7 +150,7 @@ class ServerConnectionService {
     return null;
   }
   
-  // Получение статуса системы
+  // Get system status
   Future<Map<String, dynamic>?> getSystemStatus() async {
     try {
       return await _apiService.getStatus();
@@ -160,7 +160,7 @@ class ServerConnectionService {
     }
   }
   
-  // Проверка здоровья соединения
+  // Connection health check
   Future<bool> healthCheck() async {
     try {
       return await _apiService.healthCheck();
@@ -169,7 +169,7 @@ class ServerConnectionService {
     }
   }
   
-  // Управление воспроизведением
+  // Playback control
   Future<void> play() async {
     try {
       await _apiService.play();
@@ -200,7 +200,7 @@ class ServerConnectionService {
     }
   }
   
-  // Управление параметрами
+  // Parameter control
   Future<void> setBrightness(int brightness) async {
     try {
       await _apiService.setBrightness(brightness);
@@ -231,7 +231,7 @@ class ServerConnectionService {
     }
   }
   
-  // Управление калибровкой
+  // Calibration control
   Future<void> setCalibration({
     double? x,
     double? y,
@@ -252,32 +252,9 @@ class ServerConnectionService {
     }
   }
   
-  // Получение медиафайлов
-  Future<List<Map<String, dynamic>>> getMediaFiles() async {
-    try {
-      final files = await _mediaLibraryService.getMediaFiles();
-      return files.map((file) => file.toJson()).toList();
-    } catch (e) {
-      _logController.add('Failed to get media files: $e');
-      return [];
-    }
-  }
+
   
-  // Получение плейлистов
-  Future<List<Map<String, dynamic>>> getPlaylists() async {
-    try {
-      final playlists = await _mediaLibraryService.getPlaylists();
-      return playlists.map((playlist) => playlist.toJson()).toList();
-    } catch (e) {
-      _logController.add('Failed to get playlists: $e');
-      return [];
-    }
-  }
-  
-  // Геттер для MediaLibraryService
-  MediaLibraryService get mediaLibraryService => _mediaLibraryService;
-  
-  // Очистка ресурсов
+  // Cleanup resources
   void dispose() {
     _websocketStateSubscription?.cancel();
     _websocketConnectionSubscription?.cancel();

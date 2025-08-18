@@ -26,6 +26,7 @@ class MainNavigationScreen extends StatefulWidget {
   final NFTService nftService;
   final WalletService walletService;
   final YukuService yukuService;
+  final PlugWalletService plugWalletService;
   final AuthService authService;
   final DatabaseService databaseService;
   final UserPreferencesService userPreferencesService;
@@ -39,6 +40,7 @@ class MainNavigationScreen extends StatefulWidget {
     required this.nftService,
     required this.walletService,
     required this.yukuService,
+    required this.plugWalletService,
     required this.authService,
     required this.databaseService,
     required this.userPreferencesService,
@@ -115,6 +117,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       onboardingService: widget.onboardingService,
       walletService: widget.walletService,
       yukuService: widget.yukuService,
+      plugWalletService: widget.plugWalletService,
       nftService: widget.nftService,
     );
   }

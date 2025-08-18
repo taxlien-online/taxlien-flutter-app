@@ -178,7 +178,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Текущее подключение
+            // Current connection
             if (widget.serverService.currentServer != null) ...[
               Card(
                 child: Padding(
@@ -239,7 +239,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
               const SizedBox(height: 16),
             ],
             
-            // Форма для нового сервера
+            // Form for new server
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -327,7 +327,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
             
             const SizedBox(height: 16),
             
-            // Найденные серверы
+            // Discovered servers
             if (_discoveredServers.isNotEmpty) ...[
               Card(
                 child: Padding(
@@ -356,7 +356,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
               const SizedBox(height: 16),
             ],
             
-            // Сохраненные серверы
+            // Saved servers
             if (_savedServers.isNotEmpty) ...[
               Card(
                 child: Padding(

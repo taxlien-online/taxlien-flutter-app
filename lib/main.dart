@@ -7,6 +7,8 @@ import 'services/onboarding_service.dart';
 import 'services/tax_lien_service.dart';
 import 'services/nft_service.dart';
 import 'services/wallet_service.dart';
+import 'services/yuku_service.dart';
+import 'services/plug_wallet_service.dart';
 import 'services/auth_service.dart';
 import 'services/database_service.dart';
 import 'services/user_preferences_service.dart';
@@ -24,6 +26,8 @@ void main() async {
   final taxLienService = TaxLienService();
   final nftService = NFTService();
   final walletService = WalletService();
+  final yukuService = YukuService();
+  final plugWalletService = PlugWalletService();
   final authService = AuthService();
   final databaseService = DatabaseService();
   final userPreferencesService = UserPreferencesService();
@@ -34,6 +38,8 @@ void main() async {
   await taxLienService.initialize();
   await nftService.initialize();
   await walletService.initialize();
+  await yukuService.initialize();
+  await plugWalletService.initialize();
   await authService.initialize();
   await databaseService.initialize();
   await userPreferencesService.initialize();
@@ -41,12 +47,15 @@ void main() async {
   runApp(TaxLienApp(
     localizationService: localizationService,
     themeService: themeService,
-                          onboardingService: onboardingService,
-                      taxLienService: taxLienService,
-                      nftService: nftService,
-                      authService: authService,
-                      databaseService: databaseService,
-                      userPreferencesService: userPreferencesService,
+    onboardingService: onboardingService,
+    taxLienService: taxLienService,
+    nftService: nftService,
+    walletService: walletService,
+    yukuService: yukuService,
+    plugWalletService: plugWalletService,
+    authService: authService,
+    databaseService: databaseService,
+    userPreferencesService: userPreferencesService,
   ));
 }
 
@@ -57,6 +66,8 @@ class TaxLienApp extends StatelessWidget {
   final TaxLienService taxLienService;
   final NFTService nftService;
   final WalletService walletService;
+  final YukuService yukuService;
+  final PlugWalletService plugWalletService;
   final AuthService authService;
   final DatabaseService databaseService;
   final UserPreferencesService userPreferencesService;
@@ -69,6 +80,8 @@ class TaxLienApp extends StatelessWidget {
     required this.taxLienService,
     required this.nftService,
     required this.walletService,
+    required this.yukuService,
+    required this.plugWalletService,
     required this.authService,
     required this.databaseService,
     required this.userPreferencesService,
@@ -103,6 +116,8 @@ class TaxLienApp extends StatelessWidget {
                       taxLienService: taxLienService,
                       nftService: nftService,
                       walletService: walletService,
+                      yukuService: yukuService,
+                      plugWalletService: plugWalletService,
                       authService: authService,
                       databaseService: databaseService,
                       userPreferencesService: userPreferencesService,
@@ -114,6 +129,8 @@ class TaxLienApp extends StatelessWidget {
                       taxLienService: taxLienService,
                       nftService: nftService,
                       walletService: walletService,
+                      yukuService: yukuService,
+                      plugWalletService: plugWalletService,
                       authService: authService,
                       databaseService: databaseService,
                       userPreferencesService: userPreferencesService,

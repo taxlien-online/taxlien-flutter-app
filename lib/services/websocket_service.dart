@@ -7,7 +7,7 @@ class WebSocketService {
   WebSocket? _socket;
   bool _isConnected = false;
   
-  // Стримы для обновлений
+  // Streams for updates
   final StreamController<Map<String, dynamic>> _stateController = 
       StreamController<Map<String, dynamic>>.broadcast();
   final StreamController<bool> _connectionController = 
@@ -15,21 +15,21 @@ class WebSocketService {
   final StreamController<String> _logController = 
       StreamController<String>.broadcast();
   
-  // Геттеры
+  // Getters
   Stream<Map<String, dynamic>> get stateStream => _stateController.stream;
   Stream<bool> get connectionStream => _connectionController.stream;
   Stream<String> get logStream => _logController.stream;
   bool get isConnected => _isConnected;
   
-  // Подключение к серверу
+  // Connect to server
   Future<void> connect(ServerConfig server) async {
     try {
       _logController.add('Connecting to WebSocket at ${server.url}');
       
-      // Создаем WebSocket соединение
+      // Create WebSocket connection
       _socket = await WebSocket.connect(server.url);
       
-      // Настройка обработчиков событий
+      // Setup event handlers
       _setupEventHandlers();
       
       _isConnected = true;
@@ -43,7 +43,7 @@ class WebSocketService {
     }
   }
   
-  // Настройка обработчиков событий
+  // Setup event handlers
   void _setupEventHandlers() {
     if (_socket == null) return;
     
@@ -73,7 +73,7 @@ class WebSocketService {
     );
   }
   
-  // Отправка команды
+  // Send command
   Future<void> sendCommand(String command, [Map<String, dynamic>? data]) async {
     if (!_isConnected || _socket == null) {
       _logController.add('Cannot send command: not connected');
@@ -94,7 +94,7 @@ class WebSocketService {
     }
   }
   
-  // Отключение
+  // Disconnect
   Future<void> disconnect() async {
     if (_socket != null) {
       await _socket!.close();
@@ -106,7 +106,7 @@ class WebSocketService {
     _logController.add('WebSocket disconnected');
   }
   
-  // Очистка ресурсов
+  // Clean up resources
   void dispose() {
     disconnect();
     _stateController.close();
