@@ -495,7 +495,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text('${l10n.lienNumber.replaceAll('{parcelId}', widget.lien.parcelId)}'),
+        title: Text(l10n.lienNumber.replaceAll('{parcelId}', widget.lien.parcelId)),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

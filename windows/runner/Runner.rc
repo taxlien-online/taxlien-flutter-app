@@ -92,10 +92,10 @@ BEGIN
             VALUE "CompanyName", "taxlien.online" "\0"
             VALUE "FileDescription", "taxlien.online" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "freedome_manager" "\0"
+            VALUE "InternalName", "taxlien.online" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 taxlien.online. All rights reserved." "\0"
-            VALUE "OriginalFilename", "freedome_manager.exe" "\0"
-            VALUE "ProductName", "freedome_manager" "\0"
+            VALUE "OriginalFilename", "taxlien.online.exe" "\0"
+            VALUE "ProductName", "taxlien.online" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

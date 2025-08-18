@@ -504,6 +504,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
 
   void _navigateToCalibration() {
     // TODO: Implement calibration screen
+    final l10n = AppLocalizations.of(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(l10n?.calibrationScreenComingSoon ?? 'Calibration screen coming soon')),
     );
@@ -511,6 +512,7 @@ class _MainMenuScreenState extends State<MainMenuScreen>
 
   void _navigateToMedia() {
     // TODO: Create media management screen
+    final l10n = AppLocalizations.of(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(l10n?.mediaManagementComingSoon ?? 'Media management coming soon')),
     );

@@ -304,6 +304,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget _buildSearchHistory() {
+    final l10n = AppLocalizations.of(context)!;
     if (_searchHistory.isEmpty) {
       return Center(
         child: Column(

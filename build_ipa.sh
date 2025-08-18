@@ -1,72 +1,72 @@
 #!/bin/bash
 
 # HolySpots IPA Build Script
-# Скрипт для сборки IPA файла Flutter iOS приложения
+# Script for building Flutter iOS application IPA file
 
-echo "🚀 Начинаем сборку IPA для HolySpots..."
+echo "🚀 Starting IPA build for HolySpots..."
 
-# Проверяем, что мы в правильной директории
+# Check that we are in the correct directory
 if [ ! -f "pubspec.yaml" ]; then
-    echo "❌ Ошибка: pubspec.yaml не найден. Убедитесь, что вы находитесь в корневой папке Flutter проекта."
+    echo "❌ Error: pubspec.yaml not found. Make sure you are in the Flutter project root directory."
     exit 1
 fi
 
-# Проверяем, что Xcode установлен
+# Check that Xcode is installed
 if ! command -v xcodebuild &> /dev/null; then
-    echo "❌ Ошибка: Xcode не найден. Установите Xcode для сборки iOS приложений."
+    echo "❌ Error: Xcode not found. Install Xcode to build iOS applications."
     exit 1
 fi
 
-# Очищаем предыдущие сборки
-echo "🧹 Очищаем предыдущие сборки..."
+# Clean previous builds
+echo "🧹 Cleaning previous builds..."
 flutter clean
 
-# Получаем зависимости
-echo "📦 Получаем зависимости..."
+# Get dependencies
+echo "📦 Getting dependencies..."
 flutter pub get
 
-# Проверяем Flutter
-echo "🔍 Проверяем Flutter..."
+# Check Flutter
+echo "🔍 Checking Flutter..."
 flutter doctor
 
-# Переходим в iOS директорию
+# Go to iOS directory
 cd ios
 
-# Очищаем iOS проект
-echo "🧹 Очищаем iOS проект..."
+# Clean iOS project
+echo "🧹 Cleaning iOS project..."
 xcodebuild clean -workspace Runner.xcworkspace -scheme Runner
 
-# Возвращаемся в корневую директорию
+# Return to root directory
 cd ..
 
-# Собираем iOS приложение
-echo "🔨 Собираем iOS приложение..."
+# Build iOS application
+echo "🔨 Building iOS application..."
 flutter build ios --release --no-codesign
 
-# Проверяем, что сборка прошла успешно
+# Check if build was successful
 if [ $? -eq 0 ]; then
-    echo "✅ iOS приложение успешно собрано!"
-    echo "📱 Приложение находится в: build/ios/iphoneos/Runner.app"
+    echo "✅ iOS application built successfully!"
+    echo "📱 Application is located at: build/ios/iphoneos/Runner.app"
     
-    # Создаем IPA файл (требует подписанный код)
-    echo "📦 Создаем IPA файл..."
+    # Create IPA file (requires signed code)
+    echo "📦 Creating IPA file..."
     
-    # Проверяем наличие подписанного приложения
+    # Check for signed application
     if [ -d "build/ios/iphoneos/Runner.app" ]; then
-        echo "📏 Размер приложения: $(du -sh build/ios/iphoneos/Runner.app | cut -f1)"
-        echo "ℹ️  Для создания IPA файла требуется подписанный код."
-        echo "💡 Используйте Xcode для подписи и создания IPA:"
-        echo "   1. Откройте ios/Runner.xcworkspace в Xcode"
-        echo "   2. Выберите Product -> Archive"
-        echo "   3. В Organizer выберите Distribute App"
-        echo "   4. Выберите Ad Hoc или App Store"
-        echo "   5. Подпишите и экспортируйте IPA"
+        echo "📏 Application size: $(du -sh build/ios/iphoneos/Runner.app | cut -f1)"
+        echo "ℹ️  Signed code is required to create IPA file."
+        echo "💡 Use Xcode to sign and create IPA:"
+        echo "   1. Open ios/Runner.xcworkspace in Xcode"
+        echo "   2. Select Product -> Archive"
+        echo "   3. In Organizer select Distribute App"
+        echo "   4. Choose Ad Hoc or App Store"
+        echo "   5. Sign and export IPA"
     else
-        echo "❌ Приложение не найдено в build/ios/iphoneos/Runner.app"
+        echo "❌ Application not found in build/ios/iphoneos/Runner.app"
     fi
     
-    echo "🎉 Сборка завершена успешно!"
+    echo "🎉 Build completed successfully!"
 else
-    echo "❌ Ошибка при сборке iOS приложения"
+    echo "❌ Error building iOS application"
     exit 1
 fi 
