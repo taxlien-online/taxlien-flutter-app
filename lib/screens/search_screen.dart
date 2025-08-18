@@ -173,6 +173,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget _buildContent() {
+    final l10n = AppLocalizations.of(context)!;
     if (_isLoading) {
       return const Center(
         child: CircularProgressIndicator(),
@@ -252,6 +253,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget _buildSearchResults() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         // Results count header
@@ -260,7 +262,7 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Row(
             children: [
               Text(
-                l10n.foundLiensCount.replaceAll('{count}', _searchResults.length.toString()),
+                l10n.foundLiensCount(_searchResults.length),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Spacer(),
@@ -382,11 +384,11 @@ class _SearchScreenState extends State<SearchScreen> {
     final difference = now.difference(timestamp);
 
     if (difference.inDays > 0) {
-      return l10n.daysAgo.replaceAll('{days}', difference.inDays.toString());
+      return l10n.daysAgo(difference.inDays);
     } else if (difference.inHours > 0) {
-      return l10n.hoursAgo.replaceAll('{hours}', difference.inHours.toString());
+      return l10n.hoursAgo(difference.inHours);
     } else if (difference.inMinutes > 0) {
-      return l10n.minutesAgo.replaceAll('{minutes}', difference.inMinutes.toString());
+      return l10n.minutesAgo(difference.inMinutes);
     } else {
       return l10n.justNow;
     }
@@ -627,7 +629,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(l10n.enterBidAmount.replaceAll('{amount}', '\$${widget.lien.taxAmount.toStringAsFixed(2)}')),
+            Text(l10n.enterBidAmount('\$${widget.lien.taxAmount.toStringAsFixed(2)}')),
             const SizedBox(height: 16),
             TextField(
               controller: bidController,
