@@ -717,5 +717,251 @@
   "logoutConfirmationMessage": "¿Estás seguro de que quieres cerrar sesión?",
   "@logoutConfirmationMessage": {
     "description": "Mensaje de confirmación de cierre de sesión"
+  },
+  "myInvestments": "Mis Inversiones",
+  "@myInvestments": {
+    "description": "Título de la pantalla de mis inversiones"
+  },
+  "myLiens": "Mis Gravámenes",
+  "@myLiens": {
+    "description": "Título de la pestaña de mis gravámenes"
+  },
+  "favorites": "Favoritos",
+  "@favorites": {
+    "description": "Título de la pestaña de favoritos"
+  },
+  "statistics": "Estadísticas",
+  "@statistics": {
+    "description": "Título de la pestaña de estadísticas"
+  },
+  "noInvestmentsYet": "Aún no tienes ninguna inversión",
+  "@noInvestmentsYet": {
+    "description": "Mensaje de que no hay inversiones"
+  },
+  "goToMarketplace": "Ve al mercado para comprar gravámenes fiscales",
+  "@goToMarketplace": {
+    "description": "Sugerencia para ir al mercado"
+  },
+  "goToMarketplaceButton": "Ir al Mercado",
+  "@goToMarketplaceButton": {
+    "description": "Botón para ir al mercado"
+  },
+  "noFavoriteLiens": "No hay gravámenes favoritos",
+  "@noFavoriteLiens": {
+    "description": "Mensaje de que no hay gravámenes favoritos"
+  },
+  "addToFavoritesHint": "Agrega gravámenes a favoritos para acceso rápido",
+  "@addToFavoritesHint": {
+    "description": "Sugerencia para agregar gravámenes a favoritos"
+  },
+  "overallStatistics": "Estadísticas Generales",
+  "@overallStatistics": {
+    "description": "Título de la sección de estadísticas generales"
+  },
+  "totalInvested": "Total Invertido",
+  "@totalInvested": {
+    "description": "Etiqueta del monto total invertido"
+  },
+  "currentValue": "Valor Actual",
+  "@currentValue": {
+    "description": "Etiqueta del valor actual"
+  },
+  "profitLoss": "Ganancia/Pérdida",
+  "@profitLoss": {
+    "description": "Etiqueta de ganancia/pérdida"
+  },
+  "roi": "ROI",
+  "@roi": {
+    "description": "Etiqueta de ROI"
+  },
+  "statusStatistics": "Estadísticas de Estado",
+  "@statusStatistics": {
+    "description": "Título de la sección de estadísticas de estado"
+  },
+  "activeLiens": "Gravámenes Activos",
+  "@activeLiens": {
+    "description": "Etiqueta de gravámenes activos"
+  },
+  "redeemedLiens": "Gravámenes Redimidos",
+  "@redeemedLiens": {
+    "description": "Etiqueta de gravámenes redimidos"
+  },
+  "foreclosedLiens": "Gravámenes Embargados",
+  "@foreclosedLiens": {
+    "description": "Etiqueta de gravámenes embargados"
+  },
+  "totalLiens": "Total de Gravámenes",
+  "@totalLiens": {
+    "description": "Etiqueta del total de gravámenes"
+  },
+  "monthlyReturns": "Retornos Mensuales",
+  "@monthlyReturns": {
+    "description": "Título del gráfico de retornos mensuales"
+  },
+  "profitChartInDevelopment": "Gráfico de Ganancias\n(en desarrollo)",
+  "@profitChartInDevelopment": {
+    "description": "Mensaje de gráfico de ganancias en desarrollo"
+  },
+  "topPerformingLiens": "Gravámenes de Mejor Rendimiento",
+  "@topPerformingLiens": {
+    "description": "Título de la sección de gravámenes de mejor rendimiento"
+  },
+  "investmentInfo": "Información de Inversión",
+  "@investmentInfo": {
+    "description": "Título de la sección de información de inversión"
+  },
+  "purchaseDate": "Fecha de Compra",
+  "@purchaseDate": {
+    "description": "Etiqueta de fecha de compra"
+  },
+  "purchaseAmount": "Monto de Compra",
+  "@purchaseAmount": {
+    "description": "Etiqueta del monto de compra"
+  },
+  "daysInInvestment": "Días en la Inversión",
+  "@daysInInvestment": {
+    "description": "Etiqueta de días en la inversión"
+  },
+  "interestEarned": "Interés Ganado",
+  "@interestEarned": {
+    "description": "Etiqueta del interés ganado"
+  },
+  "redemptionDate": "Fecha de Redención",
+  "@redemptionDate": {
+    "description": "Etiqueta de fecha de redención"
+  },
+  "digitalFreedomGateway": "Puerta de Entrada a la Libertad Digital",
+  "@digitalFreedomGateway": {
+    "description": "Subtítulo de la aplicación"
+  },
+  "settings": "Configuración",
+  "@settings": {
+    "description": "Etiqueta del botón de configuración"
+  },
+  "connection": "Conexión",
+  "@connection": {
+    "description": "Etiqueta del botón de conexión"
+  },
+  "calibrationScreenComingSoon": "Pantalla de calibración próximamente",
+  "@calibrationScreenComingSoon": {
+    "description": "Mensaje de pantalla de calibración próximamente"
+  },
+  "mediaManagementComingSoon": "Gestión de medios próximamente",
+  "@mediaManagementComingSoon": {
+    "description": "Mensaje de gestión de medios próximamente"
+  },
+  "lienSearch": "Búsqueda de Gravamen",
+  "@lienSearch": {
+    "description": "Título de la pantalla de búsqueda de gravamen"
+  },
+  "searching": "Buscando...",
+  "@searching": {
+    "description": "Mensaje de búsqueda"
+  },
+  "noSearchHistory": "No hay historial de búsqueda",
+  "@noSearchHistory": {
+    "description": "Mensaje de que no hay historial de búsqueda"
+  },
+  "clearSearchHistory": "Limpiar historial de búsqueda",
+  "@clearSearchHistory": {
+    "description": "Mensaje de limpiar historial de búsqueda"
+  },
+  "searchHistory": "Historial de Búsqueda",
+  "@searchHistory": {
+    "description": "Título de la sección de historial de búsqueda"
+  },
+  "recentSearches": "Búsquedas Recientes",
+  "@recentSearches": {
+    "description": "Título de la sección de búsquedas recientes"
+  },
+  "purchaseLien": "Comprar Gravamen",
+  "@purchaseLien": {
+    "description": "Título del diálogo de compra de gravamen"
+  },
+  "enterBidAmount": "Ingresa el monto de la oferta (mínimo {amount}):",
+  "@enterBidAmount": {
+    "description": "Solicitud de ingreso de monto de oferta",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "$1000.00"
+      }
+    }
+  },
+  "purchase": "Comprar",
+  "@purchase": {
+    "description": "Botón de compra"
+  },
+  "lienPurchasedSuccessfully": "¡Gravamen comprado exitosamente!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Mensaje de compra exitosa de gravamen"
+  },
+  "purchaseError": "Error en la compra",
+  "@purchaseError": {
+    "description": "Mensaje de error en la compra"
+  },
+  "invalidBidAmount": "Monto de oferta inválido",
+  "@invalidBidAmount": {
+    "description": "Mensaje de monto de oferta inválido"
+  },
+  "searchHistoryEmpty": "El historial de búsqueda está vacío",
+  "@searchHistoryEmpty": {
+    "description": "Mensaje de historial de búsqueda vacío"
+  },
+  "searchQueriesWillAppearHere": "Tus consultas de búsqueda aparecerán aquí",
+  "@searchQueriesWillAppearHere": {
+    "description": "Mensaje de que las consultas de búsqueda aparecerán aquí"
+  },
+  "nothingFound": "No se encontró nada",
+  "@nothingFound": {
+    "description": "Mensaje de que no se encontró nada"
+  },
+  "tryChangingSearchQuery": "Intenta cambiar tu consulta de búsqueda",
+  "@tryChangingSearchQuery": {
+    "description": "Mensaje de sugerencia para cambiar la consulta de búsqueda"
+  },
+  "foundLiensCount": "Encontrados: {count} gravámenes",
+  "@foundLiensCount": {
+    "description": "Mensaje de conteo de gravámenes encontrados",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "daysAgo": "hace {days} días",
+  "@daysAgo": {
+    "description": "Formato de días atrás",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": "hace {hours} horas",
+  "@hoursAgo": {
+    "description": "Formato de horas atrás",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "minutesAgo": "hace {minutes} minutos",
+  "@minutesAgo": {
+    "description": "Formato de minutos atrás",
+    "placeholders": {
+      "minutes": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "justNow": "Ahora mismo",
+  "@justNow": {
+    "description": "Formato de ahora mismo"
   }
 }

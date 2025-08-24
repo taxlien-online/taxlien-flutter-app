@@ -717,5 +717,251 @@
   "logoutConfirmationMessage": "Êtes-vous sûr de vouloir vous déconnecter ?",
   "@logoutConfirmationMessage": {
     "description": "Message de confirmation de déconnexion"
+  },
+  "myInvestments": "Mes Investissements",
+  "@myInvestments": {
+    "description": "Titre de l'écran de mes investissements"
+  },
+  "myLiens": "Mes Privilèges",
+  "@myLiens": {
+    "description": "Titre de l'onglet de mes privilèges"
+  },
+  "favorites": "Favoris",
+  "@favorites": {
+    "description": "Titre de l'onglet favoris"
+  },
+  "statistics": "Statistiques",
+  "@statistics": {
+    "description": "Titre de l'onglet statistiques"
+  },
+  "noInvestmentsYet": "Vous n'avez pas encore d'investissements",
+  "@noInvestmentsYet": {
+    "description": "Message d'absence d'investissements"
+  },
+  "goToMarketplace": "Allez sur le marché pour acheter des privilèges fiscaux",
+  "@goToMarketplace": {
+    "description": "Suggestion d'aller sur le marché"
+  },
+  "goToMarketplaceButton": "Aller au Marché",
+  "@goToMarketplaceButton": {
+    "description": "Bouton pour aller au marché"
+  },
+  "noFavoriteLiens": "Aucun privilège favori",
+  "@noFavoriteLiens": {
+    "description": "Message d'absence de privilèges favoris"
+  },
+  "addToFavoritesHint": "Ajoutez des privilèges aux favoris pour un accès rapide",
+  "@addToFavoritesHint": {
+    "description": "Suggestion d'ajouter des privilèges aux favoris"
+  },
+  "overallStatistics": "Statistiques Générales",
+  "@overallStatistics": {
+    "description": "Titre de la section des statistiques générales"
+  },
+  "totalInvested": "Total Investi",
+  "@totalInvested": {
+    "description": "Étiquette du montant total investi"
+  },
+  "currentValue": "Valeur Actuelle",
+  "@currentValue": {
+    "description": "Étiquette de la valeur actuelle"
+  },
+  "profitLoss": "Bénéfice/Perte",
+  "@profitLoss": {
+    "description": "Étiquette de bénéfice/perte"
+  },
+  "roi": "ROI",
+  "@roi": {
+    "description": "Étiquette de ROI"
+  },
+  "statusStatistics": "Statistiques de Statut",
+  "@statusStatistics": {
+    "description": "Titre de la section des statistiques de statut"
+  },
+  "activeLiens": "Privilèges Actifs",
+  "@activeLiens": {
+    "description": "Étiquette des privilèges actifs"
+  },
+  "redeemedLiens": "Privilèges Rachetés",
+  "@redeemedLiens": {
+    "description": "Étiquette des privilèges rachetés"
+  },
+  "foreclosedLiens": "Privilèges Saisis",
+  "@foreclosedLiens": {
+    "description": "Étiquette des privilèges saisis"
+  },
+  "totalLiens": "Total des Privilèges",
+  "@totalLiens": {
+    "description": "Étiquette du total des privilèges"
+  },
+  "monthlyReturns": "Rendements Mensuels",
+  "@monthlyReturns": {
+    "description": "Titre du graphique des rendements mensuels"
+  },
+  "profitChartInDevelopment": "Graphique de Bénéfices\n(en développement)",
+  "@profitChartInDevelopment": {
+    "description": "Message de graphique de bénéfices en développement"
+  },
+  "topPerformingLiens": "Privilèges les Plus Performants",
+  "@topPerformingLiens": {
+    "description": "Titre de la section des privilèges les plus performants"
+  },
+  "investmentInfo": "Informations d'Investissement",
+  "@investmentInfo": {
+    "description": "Titre de la section des informations d'investissement"
+  },
+  "purchaseDate": "Date d'Achat",
+  "@purchaseDate": {
+    "description": "Étiquette de la date d'achat"
+  },
+  "purchaseAmount": "Montant d'Achat",
+  "@purchaseAmount": {
+    "description": "Étiquette du montant d'achat"
+  },
+  "daysInInvestment": "Jours d'Investissement",
+  "@daysInInvestment": {
+    "description": "Étiquette des jours d'investissement"
+  },
+  "interestEarned": "Intérêts Gagnés",
+  "@interestEarned": {
+    "description": "Étiquette des intérêts gagnés"
+  },
+  "redemptionDate": "Date de Rachat",
+  "@redemptionDate": {
+    "description": "Étiquette de la date de rachat"
+  },
+  "digitalFreedomGateway": "Passerelle vers la Liberté Numérique",
+  "@digitalFreedomGateway": {
+    "description": "Sous-titre de l'application"
+  },
+  "settings": "Paramètres",
+  "@settings": {
+    "description": "Étiquette du bouton paramètres"
+  },
+  "connection": "Connexion",
+  "@connection": {
+    "description": "Étiquette du bouton connexion"
+  },
+  "calibrationScreenComingSoon": "Écran de calibration bientôt disponible",
+  "@calibrationScreenComingSoon": {
+    "description": "Message d'écran de calibration bientôt disponible"
+  },
+  "mediaManagementComingSoon": "Gestion des médias bientôt disponible",
+  "@mediaManagementComingSoon": {
+    "description": "Message de gestion des médias bientôt disponible"
+  },
+  "lienSearch": "Recherche de Privilège",
+  "@lienSearch": {
+    "description": "Titre de l'écran de recherche de privilège"
+  },
+  "searching": "Recherche...",
+  "@searching": {
+    "description": "Message de recherche"
+  },
+  "noSearchHistory": "Aucun historique de recherche",
+  "@noSearchHistory": {
+    "description": "Message d'absence d'historique de recherche"
+  },
+  "clearSearchHistory": "Effacer l'historique de recherche",
+  "@clearSearchHistory": {
+    "description": "Message d'effacement de l'historique de recherche"
+  },
+  "searchHistory": "Historique de Recherche",
+  "@searchHistory": {
+    "description": "Titre de la section historique de recherche"
+  },
+  "recentSearches": "Recherches Récentes",
+  "@recentSearches": {
+    "description": "Titre de la section des recherches récentes"
+  },
+  "purchaseLien": "Acheter un Privilège",
+  "@purchaseLien": {
+    "description": "Titre du dialogue d'achat de privilège"
+  },
+  "enterBidAmount": "Entrez le montant de l'enchère (minimum {amount}):",
+  "@enterBidAmount": {
+    "description": "Demande de saisie du montant de l'enchère",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "$1000.00"
+      }
+    }
+  },
+  "purchase": "Acheter",
+  "@purchase": {
+    "description": "Bouton d'achat"
+  },
+  "lienPurchasedSuccessfully": "Privilège acheté avec succès !",
+  "@lienPurchasedSuccessfully": {
+    "description": "Message d'achat réussi de privilège"
+  },
+  "purchaseError": "Erreur d'achat",
+  "@purchaseError": {
+    "description": "Message d'erreur d'achat"
+  },
+  "invalidBidAmount": "Montant d'enchère invalide",
+  "@invalidBidAmount": {
+    "description": "Message de montant d'enchère invalide"
+  },
+  "searchHistoryEmpty": "L'historique de recherche est vide",
+  "@searchHistoryEmpty": {
+    "description": "Message d'historique de recherche vide"
+  },
+  "searchQueriesWillAppearHere": "Vos requêtes de recherche apparaîtront ici",
+  "@searchQueriesWillAppearHere": {
+    "description": "Message que les requêtes de recherche apparaîtront ici"
+  },
+  "nothingFound": "Rien trouvé",
+  "@nothingFound": {
+    "description": "Message que rien n'a été trouvé"
+  },
+  "tryChangingSearchQuery": "Essayez de modifier votre requête de recherche",
+  "@tryChangingSearchQuery": {
+    "description": "Message de suggestion pour modifier la requête de recherche"
+  },
+  "foundLiensCount": "Trouvé : {count} privilèges",
+  "@foundLiensCount": {
+    "description": "Message de comptage des privilèges trouvés",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "daysAgo": "il y a {days} jours",
+  "@daysAgo": {
+    "description": "Format d'il y a des jours",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": "il y a {hours} heures",
+  "@hoursAgo": {
+    "description": "Format d'il y a des heures",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "minutesAgo": "il y a {minutes} minutes",
+  "@minutesAgo": {
+    "description": "Format d'il y a des minutes",
+    "placeholders": {
+      "minutes": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "justNow": "À l'instant",
+  "@justNow": {
+    "description": "Format à l'instant"
   }
 }
