@@ -495,7 +495,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.lienNumber.replaceAll('{parcelId}', widget.lien.parcelId)),
+        title: Text(l10n.lienNumber(widget.lien.parcelId)),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -515,7 +515,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      l10n.owner.replaceAll('{owner}', widget.lien.owner),
+                      l10n.owner(widget.lien.owner),
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 16),
