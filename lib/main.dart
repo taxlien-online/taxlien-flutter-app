@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -9,17 +10,17 @@ import 'core/constants/app_constants.dart';
 import 'core/theme/app_theme.dart';
 import 'core/services/magento_api_service.dart';
 import 'core/services/theme_service.dart';
-import 'core/services/auth_service.dart';
 import 'core/services/localization_service.dart';
 import 'core/services/analytics_service.dart';
 import 'core/services/notification_service.dart';
 import 'core/services/secure_storage_service.dart';
+import 'core/models/magento_models.dart';
 
-// Feature imports
-import 'features/auth/providers/auth_provider.dart';
-import 'features/theme/providers/theme_provider.dart';
-import 'features/localization/providers/localization_provider.dart';
-import 'features/magento/providers/magento_provider.dart';
+// Provider imports
+import 'core/providers/theme_provider.dart';
+import 'core/providers/localization_provider.dart';
+import 'core/providers/auth_provider.dart';
+import 'core/providers/magento_provider.dart';
 
 // Navigation
 import 'core/navigation/app_router.dart';
@@ -112,10 +113,7 @@ class TaxLienApp extends ConsumerWidget {
         );
       },
       
-      // Navigation observer for analytics
-      navigatorObservers: AppConstants.enableAnalytics 
-          ? [AnalyticsService.navigatorObserver]
-          : [],
+      // Note: navigatorObservers not supported in MaterialApp.router
     );
   }
 }

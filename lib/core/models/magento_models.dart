@@ -317,7 +317,7 @@ class MagentoProduct extends MagentoModel {
 
   double get finalPrice => specialPrice ?? price ?? 0.0;
   bool get hasSpecialPrice => specialPrice != null && specialPrice! < (price ?? 0.0);
-  String? get mainImageUrl => mediaGalleryEntries?.firstWhere((img) => img.types.contains('image'), orElse: () => MagentoProductImage()).url;
+  String? get mainImageUrl => mediaGalleryEntries?.firstWhere((img) => img.types?.contains('image') ?? false, orElse: () => MagentoProductImage()).url;
 }
 
 /// Magento Product List model

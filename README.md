@@ -1,185 +1,344 @@
-# TaxLien Marketplace
+# TaxLien.online Mobile App
 
-Mobile application for investing in tax liens, developed with Flutter.
+A modern, feature-rich mobile application for investing in tax liens, built with Flutter and integrated with Magento API.
 
-## Description
+## 🚀 Features
 
-TaxLien Marketplace is a modern mobile application that allows investors to buy, track, and manage tax liens. The application provides a convenient interface for searching, analyzing, and investing in tax liens from various auctions.
+- **Modern UI/UX**: Beautiful, intuitive interface with Material Design 3
+- **Magento Integration**: Full integration with Magento e-commerce platform
+- **Authentication**: Secure user authentication and profile management
+- **Product Catalog**: Browse and search tax lien products
+- **Shopping Cart**: Add, remove, and manage cart items
+- **Order Management**: View order history and track orders
+- **Wishlist**: Save favorite products for later
+- **Dark/Light Theme**: Support for both light and dark themes
+- **Multi-language**: Internationalization support
+- **Offline Support**: Basic offline functionality
+- **Push Notifications**: Real-time updates and alerts
 
-## Main Features
+## 🏗️ Architecture
 
-### 🏠 Lien Marketplace
-- View available tax liens
-- Search by address, owner, parcel ID
-- Filter by state, county, tax amount, interest rate
-- Sort by various parameters
-- Detailed information about each lien
+### Modern State Management
+- **Riverpod**: Centralized state management with providers
+- **Clean Architecture**: Separation of concerns with feature-based organization
+- **Dependency Injection**: Proper dependency management
 
-### 💰 My Investments
-- Track purchased liens
-- Profitability statistics
-- Transaction history
-- Favorite liens
+### Navigation
+- **GoRouter**: Declarative routing with deep linking support
+- **Type-safe Navigation**: Compile-time route safety
 
-### 🔍 Search
-- Keyword search
-- Search query history
-- Quick access to results
+### API Integration
+- **Magento REST API**: Full integration with Magento e-commerce
+- **Dio**: Advanced HTTP client with interceptors
+- **Error Handling**: Comprehensive error handling and user feedback
 
-### 👤 User Profile
-- Registration and authentication
-- Profile management
-- Balance and finances
-- Application settings
+## 📱 Screenshots
 
-## Technical Features
+*Screenshots will be added here*
 
-### Architecture
-- **Flutter** - cross-platform development
-- **MVC Pattern** - architectural pattern
-- **Provider** - state management
-- **SQLite** - local database
-- **HTTP** - network communication
+## 🛠️ Technology Stack
 
-### Services
-- `TaxLienService` - work with tax liens
-- `AuthService` - authentication and authorization
-- `DatabaseService` - local data storage
-- `ThemeService` - application theme management
-- `LocalizationService` - localization
+- **Framework**: Flutter 3.2.3+
+- **Language**: Dart 3.2.3+
+- **State Management**: Riverpod
+- **Navigation**: GoRouter
+- **HTTP Client**: Dio
+- **UI Components**: Material Design 3
+- **Icons**: Material Icons + Custom Icons
+- **Fonts**: Inter (Google Fonts)
+- **Storage**: SharedPreferences + Secure Storage
+- **Analytics**: Firebase Analytics (optional)
+- **Notifications**: Firebase Cloud Messaging (optional)
 
-### Database
-- Tax liens table
-- Users table
-- Transactions table
-- Favorites table
-- Search history table
+## 📋 Prerequisites
 
-## Installation and Setup
-
-### Requirements
 - Flutter SDK 3.2.3 or higher
-- Dart SDK 3.0.0 or higher
+- Dart SDK 3.2.3 or higher
 - Android Studio / VS Code
-- Android SDK / Xcode (for emulators)
+- iOS development tools (for iOS builds)
+- Magento backend with REST API enabled
 
-### Install Dependencies
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/taxlien-mobile-app.git
+cd taxlien-mobile-app
+```
+
+### 2. Install Dependencies
+
+Run the installation script:
+
+```bash
+./install_dependencies.sh
+```
+
+Or manually:
+
 ```bash
 flutter pub get
+flutter gen-l10n
+flutter packages pub run build_runner build --delete-conflicting-outputs
 ```
 
-### Run Application
+### 3. Configure Environment
+
+Create a `.env` file in the root directory:
+
+```env
+MAGENTO_BASE_URL=https://your-magento-instance.com
+MAGENTO_API_KEY=your-api-key
+ENABLE_ANALYTICS=true
+ENABLE_NOTIFICATIONS=true
+```
+
+### 4. Run the App
+
 ```bash
+# Development
 flutter run
-```
 
-### Build Release Version
-```bash
-# Android
+# Production build
 flutter build apk --release
-
-# iOS
 flutter build ios --release
 ```
 
-## Project Structure
+## 🏛️ Project Structure
 
 ```
 lib/
-├── main.dart                 # Application entry point
-├── services/                 # Application services
-│   ├── auth_service.dart     # Authentication
-│   ├── tax_lien_service.dart # Work with liens
-│   ├── database_service.dart # Database
-│   ├── theme_service.dart    # Application theme
-│   └── localization_service.dart # Localization
-├── screens/                  # Application screens
-│   ├── onboarding_screen.dart    # Onboarding
-│   ├── main_navigation_screen.dart # Main navigation
-│   ├── marketplace_screen.dart   # Lien marketplace
-│   ├── my_investments_screen.dart # My investments
-│   ├── search_screen.dart        # Search
-│   └── profile_screen.dart       # Profile
-├── widgets/                  # Widgets
-│   ├── tax_lien_card.dart   # Lien card
-│   └── filter_bottom_sheet.dart # Filters
-└── theme/                   # Application theme
-    └── app_theme_export.dart
+├── core/                    # Core functionality
+│   ├── constants/          # App constants
+│   ├── theme/              # Theme and styling
+│   ├── models/             # Data models
+│   ├── services/           # Business logic services
+│   ├── navigation/         # Routing configuration
+│   ├── widgets/            # Reusable widgets
+│   └── utils/              # Utility functions
+├── features/               # Feature-based modules
+│   ├── auth/              # Authentication feature
+│   ├── theme/             # Theme management
+│   ├── localization/      # Internationalization
+│   └── magento/           # Magento integration
+└── main.dart              # App entry point
 ```
 
-## API Endpoints
+## 🎨 Design System
 
-The application uses REST API for server communication:
+### Colors
+- **Primary**: Deep Blue (#1E3A8A) - Trust and stability
+- **Secondary**: Gold (#F59E0B) - Wealth and prosperity
+- **Success**: Green (#10B981) - Growth and success
+- **Warning**: Orange (#F97316) - Caution
+- **Error**: Red (#EF4444) - Danger
 
-### Authentication
-- `POST /api/auth/register` - registration
-- `POST /api/auth/login` - login
-- `PUT /api/auth/profile` - update profile
-- `PUT /api/auth/password` - change password
+### Typography
+- **Font Family**: Inter
+- **Weights**: Regular (400), Medium (500), SemiBold (600), Bold (700)
 
-### Tax Liens
-- `GET /api/tax-liens/available` - available liens
-- `GET /api/tax-liens/my-liens` - my liens
-- `POST /api/tax-liens/{id}/purchase` - purchase lien
-- `GET /api/tax-liens/search` - search liens
+### Spacing
+- **Base Unit**: 4px
+- **Scale**: xs(4), sm(8), md(16), lg(24), xl(32), xxl(48), xxxl(64)
 
-## Security
+## 🔧 Configuration
 
-- JWT tokens for authentication
-- Password encryption
-- Secure data storage
-- Input validation
+### Magento API Configuration
 
-## Localization
+The app integrates with Magento REST API. Configure the following endpoints:
 
-The application supports multilingualism:
-- English (primary)
-- Russian
-- Ability to add other languages
+```dart
+// Base URL
+https://your-magento-instance.com/rest/V1
 
-## Themes
+// Required endpoints
+- /integration/customer/token (Authentication)
+- /customers (Customer management)
+- /products (Product catalog)
+- /guest-carts (Cart management)
+- /categories (Category management)
+```
 
-Light and dark themes are supported:
-- Automatic switching
-- Manual control
-- Save user choice
+### Environment Variables
 
-## License
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `MAGENTO_BASE_URL` | Magento instance URL | `https://taxlien.online` |
+| `ENABLE_ANALYTICS` | Enable analytics tracking | `true` |
+| `ENABLE_NOTIFICATIONS` | Enable push notifications | `true` |
 
-MIT License - see LICENSE file for details.
+## 🧪 Testing
 
-## Support
+### Run Tests
 
-For support or bug reports:
-- Create an Issue in the repository
-- Refer to documentation
-- Contact the development team
+```bash
+# Unit tests
+flutter test
 
-## Contributing
+# Integration tests
+flutter test integration_test/
 
-We welcome contributions to project development:
+# Coverage report
+flutter test --coverage
+```
+
+### Test Structure
+
+- **Unit Tests**: Business logic and utilities
+- **Widget Tests**: UI component testing
+- **Integration Tests**: End-to-end user flows
+
+## 📦 Building
+
+### Android
+
+```bash
+# Debug build
+flutter build apk --debug
+
+# Release build
+flutter build apk --release
+
+# App bundle for Play Store
+flutter build appbundle --release
+```
+
+### iOS
+
+```bash
+# Debug build
+flutter build ios --debug
+
+# Release build
+flutter build ios --release
+```
+
+## 🚀 Deployment
+
+### Android (Google Play Store)
+
+1. Build the app bundle:
+   ```bash
+   flutter build appbundle --release
+   ```
+
+2. Upload to Google Play Console
+
+### iOS (App Store)
+
+1. Build the app:
+   ```bash
+   flutter build ios --release
+   ```
+
+2. Archive and upload via Xcode
+
+## 🔒 Security
+
+- **Secure Storage**: Encrypted storage for sensitive data
+- **Token Management**: Secure token handling
+- **Input Validation**: Comprehensive form validation
+- **Network Security**: HTTPS enforcement
+
+## 📊 Analytics
+
+The app includes optional analytics tracking:
+
+- **User Behavior**: Screen views, button clicks
+- **Performance**: App startup time, crash reports
+- **Business Metrics**: Conversions, user engagement
+
+## 🔔 Notifications
+
+Push notifications for:
+
+- **Order Updates**: Status changes, delivery updates
+- **Price Alerts**: Price changes for wishlist items
+- **Promotional**: Special offers and announcements
+
+## 🌍 Internationalization
+
+Supported languages:
+
+- English (en_US)
+- Spanish (es_ES)
+- French (fr_FR)
+- German (de_DE)
+- Russian (ru_RU)
+
+## 🤝 Contributing
+
 1. Fork the repository
-2. Create a branch for new feature
-3. Make changes
-4. Create Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Submit a pull request
 
-## Roadmap
+### Code Style
 
-### Version 1.1
-- [ ] Notifications about new liens
-- [ ] Extended analytics
-- [ ] Data export
-- [ ] Payment system integration
+- Follow Dart style guide
+- Use meaningful variable names
+- Add comments for complex logic
+- Write unit tests for business logic
 
-### Version 1.2
-- [ ] Web application version
-- [ ] API for third-party developers
-- [ ] Machine learning for risk analysis
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👥 Team
+
+- **Rupa (Andrey Isakin)** - Technical vision and architecture
+- **Sudarshan (Sean)** - Business logic and user experience
+- **Alexander (Urabi-Nativemind)** - Business ideas and market strategy
+- **Avadhut Maharaj** - iOS testing and validation
+- **Hrishikesh Maharaj** - Android testing and validation
+- **Vijay Raman** - Bug fixes and code quality
+
+## 📞 Support
+
+For support and questions:
+
+- **Email**: support@taxlien.online
+- **Documentation**: [REFACTORING_DOCUMENTATION.md](REFACTORING_DOCUMENTATION.md)
+- **Issues**: [GitHub Issues](https://github.com/your-username/taxlien-mobile-app/issues)
+
+## 🔄 Changelog
+
+### Version 2.0.0 (Current)
+- Complete UI/UX refactoring
+- Magento API integration
+- Modern state management with Riverpod
+- GoRouter navigation
+- Dark/Light theme support
+- Enhanced security features
+- Performance optimizations
+
+### Version 1.0.5 (Previous)
+- Basic tax lien functionality
+- Simple UI
+- Local data storage
+
+## 🎯 Roadmap
+
+### Upcoming Features
+- [ ] Advanced search and filtering
+- [ ] Real-time bidding
+- [ ] Portfolio management
+- [ ] Advanced analytics dashboard
 - [ ] Social features
+- [ ] Multi-currency support
+- [ ] Advanced notifications
+- [ ] Offline-first architecture
 
-### Version 2.0
+### Long-term Goals
+- [ ] AI-powered investment recommendations
 - [ ] Blockchain integration
-- [ ] NFT tokens for liens
-- [ ] Decentralized marketplace
-- [ ] International expansion
+- [ ] Advanced reporting tools
+- [ ] White-label solution
+- [ ] Enterprise features
+
+---
+
+**Built with ❤️ by the TaxLien.online team**
 
