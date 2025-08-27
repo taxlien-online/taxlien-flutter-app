@@ -717,5 +717,251 @@
   "logoutConfirmationMessage": "Sind Sie sicher, dass Sie sich abmelden möchten?",
   "@logoutConfirmationMessage": {
     "description": "Abmeldung-Bestätigungsnachricht"
+  },
+  "myInvestments": "Meine Investitionen",
+  "@myInvestments": {
+    "description": "Meine Investitionen-Bildschirmtitel"
+  },
+  "myLiens": "Meine Pfandrechte",
+  "@myLiens": {
+    "description": "Meine Pfandrechte-Tabtitel"
+  },
+  "favorites": "Favoriten",
+  "@favorites": {
+    "description": "Favoriten-Tabtitel"
+  },
+  "statistics": "Statistiken",
+  "@statistics": {
+    "description": "Statistiken-Tabtitel"
+  },
+  "noInvestmentsYet": "Sie haben noch keine Investitionen",
+  "@noInvestmentsYet": {
+    "description": "Keine Investitionen-Nachricht"
+  },
+  "goToMarketplace": "Gehen Sie zum Marktplatz, um Steuerpfandrechte zu kaufen",
+  "@goToMarketplace": {
+    "description": "Vorschlag, zum Marktplatz zu gehen"
+  },
+  "goToMarketplaceButton": "Zum Marktplatz",
+  "@goToMarketplaceButton": {
+    "description": "Zum Marktplatz-Button"
+  },
+  "noFavoriteLiens": "Keine Lieblingspfandrechte",
+  "@noFavoriteLiens": {
+    "description": "Keine Lieblingspfandrechte-Nachricht"
+  },
+  "addToFavoritesHint": "Fügen Sie Pfandrechte zu Favoriten für schnellen Zugriff hinzu",
+  "@addToFavoritesHint": {
+    "description": "Hinweis, Pfandrechte zu Favoriten hinzuzufügen"
+  },
+  "overallStatistics": "Gesamtstatistiken",
+  "@overallStatistics": {
+    "description": "Gesamtstatistiken-Abschnittstitel"
+  },
+  "totalInvested": "Gesamt investiert",
+  "@totalInvested": {
+    "description": "Gesamt investiert-Bezeichnung"
+  },
+  "currentValue": "Aktueller Wert",
+  "@currentValue": {
+    "description": "Aktueller Wert-Bezeichnung"
+  },
+  "profitLoss": "Gewinn/Verlust",
+  "@profitLoss": {
+    "description": "Gewinn/Verlust-Bezeichnung"
+  },
+  "roi": "ROI",
+  "@roi": {
+    "description": "ROI-Bezeichnung"
+  },
+  "statusStatistics": "Statusstatistiken",
+  "@statusStatistics": {
+    "description": "Statusstatistiken-Abschnittstitel"
+  },
+  "activeLiens": "Aktive Pfandrechte",
+  "@activeLiens": {
+    "description": "Aktive Pfandrechte-Bezeichnung"
+  },
+  "redeemedLiens": "Eingelöste Pfandrechte",
+  "@redeemedLiens": {
+    "description": "Eingelöste Pfandrechte-Bezeichnung"
+  },
+  "foreclosedLiens": "Zwangsversteigerte Pfandrechte",
+  "@foreclosedLiens": {
+    "description": "Zwangsversteigerte Pfandrechte-Bezeichnung"
+  },
+  "totalLiens": "Gesamte Pfandrechte",
+  "@totalLiens": {
+    "description": "Gesamte Pfandrechte-Bezeichnung"
+  },
+  "monthlyReturns": "Monatliche Renditen",
+  "@monthlyReturns": {
+    "description": "Monatliche Renditen-Diagrammtitel"
+  },
+  "profitChartInDevelopment": "Gewinndiagramm\n(in Entwicklung)",
+  "@profitChartInDevelopment": {
+    "description": "Gewinndiagramm-Entwicklungsnachricht"
+  },
+  "topPerformingLiens": "Beste Pfandrechte",
+  "@topPerformingLiens": {
+    "description": "Beste Pfandrechte-Abschnittstitel"
+  },
+  "investmentInfo": "Investitionsinformationen",
+  "@investmentInfo": {
+    "description": "Investitionsinformationen-Abschnittstitel"
+  },
+  "purchaseDate": "Kaufdatum",
+  "@purchaseDate": {
+    "description": "Kaufdatum-Bezeichnung"
+  },
+  "purchaseAmount": "Kaufbetrag",
+  "@purchaseAmount": {
+    "description": "Kaufbetrag-Bezeichnung"
+  },
+  "daysInInvestment": "Tage in der Investition",
+  "@daysInInvestment": {
+    "description": "Tage in der Investition-Bezeichnung"
+  },
+  "interestEarned": "Verdiente Zinsen",
+  "@interestEarned": {
+    "description": "Verdiente Zinsen-Bezeichnung"
+  },
+  "redemptionDate": "Einlösungsdatum",
+  "@redemptionDate": {
+    "description": "Einlösungsdatum-Bezeichnung"
+  },
+  "digitalFreedomGateway": "Tor zur digitalen Freiheit",
+  "@digitalFreedomGateway": {
+    "description": "App-Untertitel"
+  },
+  "settings": "Einstellungen",
+  "@settings": {
+    "description": "Einstellungen-Buttonbezeichnung"
+  },
+  "connection": "Verbindung",
+  "@connection": {
+    "description": "Verbindung-Buttonbezeichnung"
+  },
+  "calibrationScreenComingSoon": "Kalibrierungsbildschirm kommt bald",
+  "@calibrationScreenComingSoon": {
+    "description": "Kalibrierungsbildschirm-kommt bald-Nachricht"
+  },
+  "mediaManagementComingSoon": "Medienverwaltung kommt bald",
+  "@mediaManagementComingSoon": {
+    "description": "Medienverwaltung-kommt bald-Nachricht"
+  },
+  "lienSearch": "Pfandrechtssuche",
+  "@lienSearch": {
+    "description": "Pfandrechtssuche-Bildschirmtitel"
+  },
+  "searching": "Suche...",
+  "@searching": {
+    "description": "Suche-Nachricht"
+  },
+  "noSearchHistory": "Keine Suchhistorie",
+  "@noSearchHistory": {
+    "description": "Keine Suchhistorie-Nachricht"
+  },
+  "clearSearchHistory": "Suchhistorie löschen",
+  "@clearSearchHistory": {
+    "description": "Suchhistorie löschen-Nachricht"
+  },
+  "searchHistory": "Suchhistorie",
+  "@searchHistory": {
+    "description": "Suchhistorie-Abschnittstitel"
+  },
+  "recentSearches": "Letzte Suchen",
+  "@recentSearches": {
+    "description": "Letzte Suchen-Abschnittstitel"
+  },
+  "purchaseLien": "Pfandrecht kaufen",
+  "@purchaseLien": {
+    "description": "Pfandrecht kaufen-Dialogtitel"
+  },
+  "enterBidAmount": "Gebotsbetrag eingeben (Minimum {amount}):",
+  "@enterBidAmount": {
+    "description": "Gebotsbetrag eingeben-Aufforderung",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "$1000.00"
+      }
+    }
+  },
+  "purchase": "Kaufen",
+  "@purchase": {
+    "description": "Kaufen-Button"
+  },
+  "lienPurchasedSuccessfully": "Pfandrecht erfolgreich gekauft!",
+  "@lienPurchasedSuccessfully": {
+    "description": "Pfandrecht erfolgreich gekauft-Erfolgsnachricht"
+  },
+  "purchaseError": "Kauf Fehler",
+  "@purchaseError": {
+    "description": "Kauf Fehler-Nachricht"
+  },
+  "invalidBidAmount": "Ungültiger Gebotsbetrag",
+  "@invalidBidAmount": {
+    "description": "Ungültiger Gebotsbetrag-Nachricht"
+  },
+  "searchHistoryEmpty": "Suchhistorie ist leer",
+  "@searchHistoryEmpty": {
+    "description": "Suchhistorie ist leer-Nachricht"
+  },
+  "searchQueriesWillAppearHere": "Ihre Suchanfragen werden hier angezeigt",
+  "@searchQueriesWillAppearHere": {
+    "description": "Suchanfragen werden hier angezeigt-Nachricht"
+  },
+  "nothingFound": "Nichts gefunden",
+  "@nothingFound": {
+    "description": "Nichts gefunden-Nachricht"
+  },
+  "tryChangingSearchQuery": "Versuchen Sie, Ihre Suchanfrage zu ändern",
+  "@tryChangingSearchQuery": {
+    "description": "Suchanfrage ändern-Vorschlagnachricht"
+  },
+  "foundLiensCount": "Gefunden: {count} Pfandrechte",
+  "@foundLiensCount": {
+    "description": "Gefundene Pfandrechte-Zählungsnachricht",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "daysAgo": "vor {days} Tagen",
+  "@daysAgo": {
+    "description": "Vor Tagen-Format",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": "vor {hours} Stunden",
+  "@hoursAgo": {
+    "description": "Vor Stunden-Format",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "minutesAgo": "vor {minutes} Minuten",
+  "@minutesAgo": {
+    "description": "Vor Minuten-Format",
+    "placeholders": {
+      "minutes": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "justNow": "Gerade eben",
+  "@justNow": {
+    "description": "Gerade eben-Format"
   }
 } 
