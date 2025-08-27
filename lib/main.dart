@@ -16,18 +16,13 @@ import 'core/services/notification_service.dart';
 import 'core/services/secure_storage_service.dart';
 import 'core/models/magento_models.dart';
 
-// Provider imports
-import 'core/providers/theme_provider.dart';
-import 'core/providers/localization_provider.dart';
-import 'core/providers/auth_provider.dart';
-import 'core/providers/magento_provider.dart';
-
-// Navigation
-import 'core/navigation/app_router.dart';
+// Provider imports - defined in this file
 
 // Widgets
-import 'core/widgets/error_boundary.dart';
 import 'core/widgets/loading_screen.dart';
+
+// Screens
+import 'screens/main_navigation_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -84,7 +79,7 @@ class TaxLienApp extends ConsumerWidget {
     final authState = ref.watch(authProvider);
     final magentoState = ref.watch(magentoProvider);
 
-    return MaterialApp.router(
+    return MaterialApp(
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
       
@@ -103,8 +98,8 @@ class TaxLienApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       
-      // Router configuration
-      routerConfig: AppRouter.router,
+      // Home page
+      home: const SimpleHomeScreen(),
       
       // Error handling
       builder: (context, child) {
@@ -112,8 +107,6 @@ class TaxLienApp extends ConsumerWidget {
           child: child ?? const LoadingScreen(),
         );
       },
-      
-      // Note: navigatorObservers not supported in MaterialApp.router
     );
   }
 }
@@ -601,6 +594,43 @@ class MagentoNotifier extends StateNotifier<MagentoState> {
 
   void clearError() {
     state = state.copyWith(error: null);
+  }
+}
+
+/// Simple home screen for testing
+class SimpleHomeScreen extends StatelessWidget {
+  const SimpleHomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('TaxLien Mobile App'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              Icons.home,
+              size: 100,
+              color: Colors.blue,
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Welcome to TaxLien Mobile App!',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Your tax lien investment platform',
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

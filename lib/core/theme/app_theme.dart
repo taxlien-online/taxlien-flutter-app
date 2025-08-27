@@ -196,7 +196,7 @@ class AppTheme {
       ),
       
       // Dialogs
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         backgroundColor: AppColors.lightSurface,
         elevation: 8,
         shape: RoundedRectangleBorder(
