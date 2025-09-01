@@ -12,6 +12,7 @@ class AppConstants {
   static const String magentoBaseUrl = 'https://taxlien.online';
   static const String magentoGraphQLEndpoint = '$magentoBaseUrl/graphql';
   static const String magentoRestEndpoint = '$magentoBaseUrl/rest/V1';
+  static const String magentoMediaUrl = '$magentoBaseUrl/pub/media/catalog/product';
   
   // Timeouts
   static const Duration connectionTimeout = Duration(seconds: 30);
