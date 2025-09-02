@@ -225,6 +225,7 @@ class MagentoProduct extends MagentoModel {
   final bool? isInStock;
   final int? qty;
   final String? visibility;
+  final int? status;
   final List<String>? categoryIds;
   final List<MagentoProductImage>? mediaGalleryEntries;
   final List<MagentoProductAttribute>? customAttributes;
@@ -249,6 +250,7 @@ class MagentoProduct extends MagentoModel {
     this.isInStock,
     this.qty,
     this.visibility,
+    this.status,
     this.categoryIds,
     this.mediaGalleryEntries,
     this.customAttributes,
@@ -275,6 +277,7 @@ class MagentoProduct extends MagentoModel {
       isInStock: json['is_in_stock'],
       qty: json['qty'],
       visibility: json['visibility'],
+      status: json['status'],
       categoryIds: json['category_ids'] != null ? List<String>.from(json['category_ids']) : null,
       mediaGalleryEntries: json['media_gallery_entries'] != null
           ? List<MagentoProductImage>.from(json['media_gallery_entries'].map((x) => MagentoProductImage.fromJson(x)))
@@ -307,6 +310,7 @@ class MagentoProduct extends MagentoModel {
       'is_in_stock': isInStock,
       'qty': qty,
       'visibility': visibility,
+      'status': status,
       'category_ids': categoryIds,
       'media_gallery_entries': mediaGalleryEntries?.map((x) => x.toJson()).toList(),
       'custom_attributes': customAttributes?.map((x) => x.toJson()).toList(),
@@ -359,6 +363,7 @@ class MagentoProductImage extends MagentoModel {
   final bool? disabled;
   final List<String>? types;
   final String? url;
+  final String? file;
 
   MagentoProductImage({
     this.id,
@@ -368,6 +373,7 @@ class MagentoProductImage extends MagentoModel {
     this.disabled,
     this.types,
     this.url,
+    this.file,
   });
 
   factory MagentoProductImage.fromJson(Map<String, dynamic> json) {
@@ -379,11 +385,12 @@ class MagentoProductImage extends MagentoModel {
       disabled: json['disabled'],
       types: json['types'] != null ? List<String>.from(json['types']) : null,
       url: json['url'],
+      file: json['file'],
     );
   }
 
   @override
-  Map<String, dynamic> toJson() {
+ Map<String, dynamic> toJson() {
     return {
       'id': id,
       'media_type': mediaType,
@@ -392,6 +399,7 @@ class MagentoProductImage extends MagentoModel {
       'disabled': disabled,
       'types': types,
       'url': url,
+      'file': file,
     };
   }
 }
@@ -547,6 +555,7 @@ class MagentoCategory extends MagentoModel {
   final String? metaTitle;
   final String? metaDescription;
   final String? metaKeywords;
+  final int? productCount;
   final List<MagentoCategory>? childrenData;
 
   MagentoCategory({
@@ -561,6 +570,7 @@ class MagentoCategory extends MagentoModel {
     this.metaTitle,
     this.metaDescription,
     this.metaKeywords,
+    this.productCount,
     this.childrenData,
   });
 
@@ -577,6 +587,7 @@ class MagentoCategory extends MagentoModel {
       metaTitle: json['meta_title'],
       metaDescription: json['meta_description'],
       metaKeywords: json['meta_keywords'],
+      productCount: json['product_count'],
       childrenData: json['children_data'] != null
           ? List<MagentoCategory>.from(json['children_data'].map((x) => MagentoCategory.fromJson(x)))
           : null,
@@ -597,6 +608,7 @@ class MagentoCategory extends MagentoModel {
       'meta_title': metaTitle,
       'meta_description': metaDescription,
       'meta_keywords': metaKeywords,
+      'product_count': productCount,
       'children_data': childrenData?.map((x) => x.toJson()).toList(),
     };
   }

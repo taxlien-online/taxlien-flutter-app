@@ -125,7 +125,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   Widget _buildProductImage() {
     if (widget.product.mediaGalleryEntries?.isNotEmpty == true) {
-      final imageUrl = '${AppConstants.magentoMediaUrl}${widget.product.mediaGalleryEntries!.first.file}';
+      final imageUrl = '${AppConstants.magentoMediaUrl}${widget.product.mediaGalleryEntries!.first.file ?? ''}';
       return CachedNetworkImage(
         imageUrl: imageUrl,
         fit: BoxFit.cover,
@@ -180,17 +180,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         Row(
           children: [
             Text(
-              '\$${widget.product.price.toStringAsFixed(2)}',
+              '\$${widget.product.price?.toStringAsFixed(2) ?? '0.00'}',
               style: theme.textTheme.headlineLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: colorScheme.primary,
               ),
             ),
             
-            if (widget.product.specialPrice != null && widget.product.specialPrice! < widget.product.price) ...[
+            if (widget.product.specialPrice != null && widget.product.specialPrice! < (widget.product.price ?? 0)) ...[
               const SizedBox(width: 12),
               Text(
-                '\$${widget.product.price.toStringAsFixed(2)}',
+                '\$${widget.product.price?.toStringAsFixed(2) ?? '0.00'}',
                 style: theme.textTheme.titleMedium?.copyWith(
                   decoration: TextDecoration.lineThrough,
                   color: colorScheme.onSurfaceVariant,
@@ -203,11 +203,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: widget.product.status == 1 ? Colors.green : Colors.red,
+                color: (widget.product.status ?? 0) == 1 ? Colors.green : Colors.red,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
-                widget.product.status == 1 ? 'Available' : 'Sold',
+                (widget.product.status ?? 0) == 1 ? 'Available' : 'Sold',
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -417,7 +417,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         child: _isLoading
             ? const CircularProgressIndicator(color: Colors.white)
             : Text(
-                'Purchase for \$${widget.product.price.toStringAsFixed(2)}',
+                'Purchase for \$${widget.product.price?.toStringAsFixed(2) ?? '0.00'}',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -432,7 +432,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     final customAttributes = widget.product.customAttributes ?? [];
     final attribute = customAttributes.firstWhere(
       (attr) => attr.attributeCode == attributeCode,
-      orElse: () => MagentoCustomAttribute(attributeCode: attributeCode, value: defaultValue),
+      orElse: () => MagentoProductAttribute(attributeCode: attributeCode, value: defaultValue),
     );
     return attribute.value.toString();
   }
@@ -480,7 +480,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           children: [
             Text('Product: ${widget.product.name}'),
             const SizedBox(height: 8),
-            Text('Price: \$${widget.product.price.toStringAsFixed(2)}'),
+            Text('Price: \$${widget.product.price?.toStringAsFixed(2) ?? '0.00'}'),
             const SizedBox(height: 16),
             const Text('Are you sure you want to purchase this tax lien?'),
           ],

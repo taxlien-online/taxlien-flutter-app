@@ -125,7 +125,7 @@ class EnhancedProductCard extends StatelessWidget {
             ClipRRect(
               borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
               child: CachedNetworkImage(
-                imageUrl: '${AppConstants.magentoMediaUrl}${product.mediaGalleryEntries!.first.file}',
+                imageUrl: '${AppConstants.magentoMediaUrl}${product.mediaGalleryEntries!.first.file ?? ''}',
                 width: double.infinity,
                 height: 120,
                 fit: BoxFit.cover,
@@ -219,19 +219,19 @@ class EnhancedProductCard extends StatelessWidget {
     // Tax amount
     final taxAmountAttr = customAttributes.firstWhere(
       (attr) => attr.attributeCode == 'tax_amount',
-      orElse: () => MagentoCustomAttribute(attributeCode: 'tax_amount', value: '0'),
+      orElse: () => MagentoProductAttribute(attributeCode: 'tax_amount', value: '0'),
     );
     
     // Interest rate
     final interestRateAttr = customAttributes.firstWhere(
       (attr) => attr.attributeCode == 'interest_rate',
-      orElse: () => MagentoCustomAttribute(attributeCode: 'interest_rate', value: '0'),
+      orElse: () => MagentoProductAttribute(attributeCode: 'interest_rate', value: '0'),
     );
     
     // Location
     final locationAttr = customAttributes.firstWhere(
       (attr) => attr.attributeCode == 'property_location',
-      orElse: () => MagentoCustomAttribute(attributeCode: 'property_location', value: 'N/A'),
+      orElse: () => MagentoProductAttribute(attributeCode: 'property_location', value: 'N/A'),
     );
 
     return Column(
@@ -311,15 +311,15 @@ class EnhancedProductCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '\$${product.price.toStringAsFixed(2)}',
+                '\$${product.price?.toStringAsFixed(2) ?? '0.00'}',
                 style: textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: colorScheme.primary,
                 ),
               ),
-              if (product.specialPrice != null && product.specialPrice! < product.price)
+              if (product.specialPrice != null && product.specialPrice! < (product.price ?? 0))
                 Text(
-                  '\$${product.price.toStringAsFixed(2)}',
+                  '\$${product.price?.toStringAsFixed(2) ?? '0.00'}',
                   style: textTheme.bodySmall?.copyWith(
                     decoration: TextDecoration.lineThrough,
                     color: colorScheme.onSurfaceVariant,
@@ -402,7 +402,7 @@ class EnhancedProductCard extends StatelessWidget {
                       
                       // Price
                       Text(
-                        '\$${product.price.toStringAsFixed(2)}',
+                        '\$${product.price?.toStringAsFixed(2) ?? '0.00'}',
                         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,

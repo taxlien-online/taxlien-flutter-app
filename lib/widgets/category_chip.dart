@@ -118,7 +118,6 @@ class CategoryChipList extends StatelessWidget {
                 isActive: true,
                 position: 0,
                 level: 1,
-                productCount: null,
                 childrenData: [],
               ),
               isSelected: selectedCategory == null,

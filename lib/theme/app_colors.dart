@@ -97,6 +97,10 @@ class AppColors {
   static const Color lightInputBorderFocused = primary;
   static const Color lightShadow = Color(0x1A000000);
   static const Color lightCardShadow = Color(0x0A000000);
+  
+  // Additional colors for compatibility
+  static const Color secondary = accent;
+  static const Color surface = lightCardBackground;
 
   // Dark theme - backgrounds
   static const Color darkBackgroundPrimary = Color(0xFF0F172A);

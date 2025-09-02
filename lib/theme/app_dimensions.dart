@@ -98,6 +98,13 @@ class AppDimensions {
   // Animation durations
   static const Duration animationDurationFast = Duration(milliseconds: 200);
   static const Duration animationDurationNormal = Duration(milliseconds: 300);
+  
+  // Additional dimensions for compatibility
+  static const double xs = paddingXS;
+  static const double sm = paddingS;
+  static const double md = paddingM;
+  static const double lg = paddingL;
+  static const double xl = paddingXL;
   static const Duration animationDurationSlow = Duration(milliseconds: 500);
   
   // Additional spacing for compatibility

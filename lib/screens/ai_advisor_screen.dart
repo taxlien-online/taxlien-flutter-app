@@ -442,24 +442,7 @@ class _AIAdvisorScreenState extends State<AIAdvisorScreen>
           child: TaxLienCard(
             lien: lien,
             onTap: () => _analyzeLien(lien),
-            trailing: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppDimensions.sm,
-                vertical: AppDimensions.xs,
-              ),
-              decoration: BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.circular(AppDimensions.xs),
-              ),
-              child: const Text(
-                'Анализ',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            onFavoriteToggle: () {},
           ).animate().fadeIn(delay: Duration(milliseconds: index * 100)),
         );
       },
