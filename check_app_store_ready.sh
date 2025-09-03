@@ -248,3 +248,4 @@ echo -e "${BLUE}5. Run: ./build_and_upload.sh${NC}"
 if [ $ERRORS -gt 0 ]; then
     exit 1
 fi
+

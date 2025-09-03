@@ -44,3 +44,4 @@
 
 # Keep network security config
 -keep class android.security.net.config.** { *; }
+

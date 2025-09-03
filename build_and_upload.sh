@@ -208,3 +208,4 @@ echo -e "${YELLOW}2. Window -> Organizer${NC}"
 echo -e "${YELLOW}3. Select your archive${NC}"
 echo -e "${YELLOW}4. Click 'Distribute App'${NC}"
 echo -e "${YELLOW}5. Choose 'App Store Connect'${NC}"
+
