@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../services/tax_lien_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
@@ -47,6 +47,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
   bool _isLoading = false;
   String? _error;
   bool _useModernView = true;
+  bool _sortAscending = true;
   
   // Filters
   MagentoCategory? _selectedCategory;
@@ -207,7 +208,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _error = AppLocalizations.of(context)?.dataLoadError(e.toString()) ?? 'Data loading error: $e';
+          _error = 'Data loading error: $e';
         });
       }
     } finally {
@@ -334,7 +335,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)?.taxLienMarketplace ?? 'Tax Lien Marketplace'),
+        title: const Text('Tax Lien Marketplace'),
         elevation: 0,
         backgroundColor: theme.colorScheme.surface,
         actions: [
@@ -424,7 +425,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
         count: _products.where((p) {
           final interestRate = p.customAttributes
               ?.firstWhere((attr) => attr.attributeCode == 'interest_rate', 
-                         orElse: () => MagentoCustomAttribute(attributeCode: 'interest_rate', value: '0'))
+                         orElse: () => MagentoProductAttribute(attributeCode: 'interest_rate', value: '0'))
               .value;
           return double.tryParse(interestRate.toString()) != null && 
                  double.parse(interestRate.toString()) > 10.0;
@@ -434,7 +435,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
         id: 'under_10k',
         label: 'Under $10k',
         icon: Icons.attach_money,
-        count: _products.where((p) => p.price < 10000).length,
+        count: _products.where((p) => (p.price ?? 0) < 10000).length,
       ),
     ];
 
@@ -550,7 +551,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _loadLiens,
-              child: Text(AppLocalizations.of(context)?.retry ?? 'Retry'),
+              child: const Text('Retry'),
             ),
           ],
         ),
@@ -569,12 +570,12 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context)?.noLiensFound ?? 'No tax liens found',
+              'No tax liens found',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             Text(
-              AppLocalizations.of(context)?.tryChangingSearch ?? 'Try changing search parameters or filters',
+              'Try changing search parameters or filters',
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -614,11 +615,11 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
 
   String _buildFilterSummary() {
     final filters = <String>[];
-    if (_selectedState != null) filters.add(AppLocalizations.of(context)?.stateFilter(_selectedState!) ?? 'State: $_selectedState');
-    if (_selectedCounty != null) filters.add(AppLocalizations.of(context)?.countyFilter(_selectedCounty!) ?? 'County: $_selectedCounty');
-    if (_minAmount != null) filters.add(AppLocalizations.of(context)?.amountFrom(_minAmount!.toStringAsFixed(2)) ?? 'From: \$${_minAmount!.toStringAsFixed(2)}');
-    if (_maxAmount != null) filters.add(AppLocalizations.of(context)?.amountTo(_maxAmount!.toStringAsFixed(2)) ?? 'To: \$${_maxAmount!.toStringAsFixed(2)}');
-    if (_minInterestRate != null) filters.add(AppLocalizations.of(context)?.interestRateFrom(_minInterestRate!.toStringAsFixed(1)) ?? 'Rate from: ${_minInterestRate!.toStringAsFixed(1)}%');
+    if (_selectedState != null) filters.add('State: $_selectedState');
+    if (_selectedCounty != null) filters.add('County: $_selectedCounty');
+    if (_minAmount != null) filters.add('From: \$${_minAmount!.toStringAsFixed(2)}');
+    if (_maxAmount != null) filters.add('To: \$${_maxAmount!.toStringAsFixed(2)}');
+    if (_minInterestRate != null) filters.add('Rate from: ${_minInterestRate!.toStringAsFixed(1)}%');
     return filters.join(', ');
   }
 
@@ -829,15 +830,15 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
       case 'created_at':
         return 'Date $direction';
       case 'auctionDate':
-        return AppLocalizations.of(context)?.auctionDateSort(direction) ?? 'Auction Date $direction';
-      case 'taxAmount':
-        return AppLocalizations.of(context)?.taxAmountSort(direction) ?? 'Tax Amount $direction';
-      case 'interestRate':
-        return AppLocalizations.of(context)?.interestRateSort(direction) ?? 'Interest Rate $direction';
-      case 'assessedValue':
-        return AppLocalizations.of(context)?.assessedValueSort(direction) ?? 'Assessed Value $direction';
-      case 'redemptionDeadline':
-        return AppLocalizations.of(context)?.redemptionDeadlineSort(direction) ?? 'Redemption Deadline $direction';
+        return 'Auction Date $direction';
+              case 'taxAmount':
+          return 'Tax Amount $direction';
+        case 'interestRate':
+          return 'Interest Rate $direction';
+        case 'assessedValue':
+          return 'Assessed Value $direction';
+        case 'redemptionDeadline':
+          return 'Redemption Deadline $direction';
       default:
         return '';
     }
@@ -867,7 +868,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)?.lienNumber(widget.lien.parcelId) ?? 'Lien #${widget.lien.parcelId}'),
+        title: Text('Lien #${widget.lien.parcelId}'),
         actions: [
           IconButton(
             icon: const Icon(Icons.share),
@@ -895,7 +896,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      AppLocalizations.of(context)?.owner(widget.lien.owner) ?? 'Owner: ${widget.lien.owner}',
+                      'Owner: ${widget.lien.owner}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 16),
@@ -903,14 +904,14 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                       children: [
                         Expanded(
                           child: _buildInfoItem(
-                            AppLocalizations.of(context)?.taxAmount ?? 'Tax Amount',
+                            'Tax Amount',
                             '\$${widget.lien.taxAmount.toStringAsFixed(2)}',
                             Icons.attach_money,
                           ),
                         ),
                         Expanded(
                           child: _buildInfoItem(
-                            AppLocalizations.of(context)?.interestRate ?? 'Interest Rate',
+                            'Interest Rate',
                             '${widget.lien.interestRate.toStringAsFixed(1)}%',
                             Icons.percent,
                           ),
@@ -922,14 +923,14 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                       children: [
                         Expanded(
                           child: _buildInfoItem(
-                            AppLocalizations.of(context)?.assessedValue ?? 'Assessed Value',
+                            'Assessed Value',
                             '\$${widget.lien.assessedValue.toStringAsFixed(2)}',
                             Icons.assessment,
                           ),
                         ),
                         Expanded(
                           child: _buildInfoItem(
-                            AppLocalizations.of(context)?.auctionDate ?? 'Auction Date',
+                            'Auction Date',
                             _formatDate(widget.lien.auctionDate),
                             Icons.event,
                           ),
@@ -951,15 +952,15 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      AppLocalizations.of(context)?.additionalInfo ?? 'Additional Information',
+                      'Additional Information',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
                     _buildDetailRow('Parcel ID', widget.lien.parcelId),
-                    _buildDetailRow(AppLocalizations.of(context)?.county ?? 'County', widget.lien.county),
-                    _buildDetailRow(AppLocalizations.of(context)?.state ?? 'State', widget.lien.state),
-                    _buildDetailRow(AppLocalizations.of(context)?.redemptionDeadline ?? 'Redemption Deadline', _formatDate(widget.lien.redemptionDeadline)),
-                    _buildDetailRow(AppLocalizations.of(context)?.status ?? 'Status', _getStatusLabel(widget.lien.status)),
+                    _buildDetailRow('County', widget.lien.county),
+                    _buildDetailRow('State', widget.lien.state),
+                    _buildDetailRow('Redemption Deadline', _formatDate(widget.lien.redemptionDeadline)),
+                    _buildDetailRow('Status', _getStatusLabel(widget.lien.status)),
                   ],
                 ),
               ),
@@ -977,7 +978,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   child: Text(
-                    AppLocalizations.of(context)?.buyLien ?? 'Buy Lien',
+                    'Buy Lien',
                     style: const TextStyle(fontSize: 18),
                   ),
                 ),
@@ -1040,13 +1041,13 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
   String _getStatusLabel(String status) {
     switch (status) {
       case 'available':
-        return AppLocalizations.of(context)?.availableForPurchase ?? 'Available for purchase';
+        return 'Available for purchase';
       case 'sold':
-        return AppLocalizations.of(context)?.sold ?? 'Sold';
+        return 'Sold';
       case 'redeemed':
-        return AppLocalizations.of(context)?.redeemed ?? 'Redeemed';
+        return 'Redeemed';
       case 'foreclosed':
-        return AppLocalizations.of(context)?.foreclosed ?? 'Foreclosed';
+        return 'Foreclosed';
       default:
         return status;
     }
@@ -1058,17 +1059,17 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)?.purchaseLien ?? 'Purchase Lien'),
+        title: const Text('Purchase Lien'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(AppLocalizations.of(context)?.enterBidAmount(widget.lien.taxAmount.toStringAsFixed(2)) ?? 'Enter bid amount (minimum \$${widget.lien.taxAmount.toStringAsFixed(2)}):'),
+            Text('Enter bid amount (minimum \$${widget.lien.taxAmount.toStringAsFixed(2)}):'),
             const SizedBox(height: 16),
             TextField(
               controller: bidController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)?.bidAmount ?? 'Bid Amount',
+                labelText: 'Bid Amount',
                 prefixText: '\$',
               ),
             ),
@@ -1077,7 +1078,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(AppLocalizations.of(context)?.cancel ?? 'Cancel'),
+            child: const Text('Cancel'),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -1087,23 +1088,23 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                 final success = await widget.taxLienService.purchaseLien(widget.lien.id, bidAmount);
                 if (success && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(AppLocalizations.of(context)?.lienPurchasedSuccessfully ?? 'Lien purchased successfully!')),
+                    SnackBar(content: const Text('Lien purchased successfully!')),
                   );
                   Navigator.pop(context);
                 } else if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(widget.taxLienService.error ?? (AppLocalizations.of(context)?.purchaseError ?? 'Purchase error')),
+                      content: Text(widget.taxLienService.error ?? 'Purchase error'),
                     ),
                   );
                 }
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(AppLocalizations.of(context)?.invalidBidAmount ?? 'Invalid bid amount')),
+                  SnackBar(content: const Text('Invalid bid amount')),
                 );
               }
             },
-            child: Text(AppLocalizations.of(context)?.buy ?? 'Buy'),
+            child: const Text('Buy'),
           ),
         ],
       ),

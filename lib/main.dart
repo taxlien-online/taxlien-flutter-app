@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Core imports
 import 'core/constants/app_constants.dart';
@@ -99,9 +99,30 @@ class TaxLienApp extends ConsumerWidget {
       
       // Localization configuration
       locale: locale,
-      supportedLocales: AppLocalizations.supportedLocales,
+      supportedLocales: const [
+        Locale('en', 'US'),
+        Locale('ru', 'RU'),
+        Locale('uk', 'UA'),
+        Locale('es', 'ES'),
+        Locale('fr', 'FR'),
+        Locale('de', 'DE'),
+        Locale('zh', 'CN'),
+        Locale('ja', 'JP'),
+        Locale('ko', 'KR'),
+        Locale('ar', 'SA'),
+        Locale('hi', 'IN'),
+        Locale('th', 'TH'),
+        Locale('pl', 'PL'),
+        Locale('pt', 'PT'),
+        Locale('it', 'IT'),
+        Locale('fi', 'FI'),
+        Locale('et', 'EE'),
+        Locale('he', 'IL'),
+        Locale('km', 'KH'),
+        Locale('lo', 'LA'),
+        Locale('my', 'MM'),
+      ],
       localizationsDelegates: const [
-        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
