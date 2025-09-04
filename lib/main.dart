@@ -203,30 +203,10 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
   }
 
   void _showErrorDialog(String error) {
-    // Check if the widget is still mounted and has a valid context
-    if (!mounted) return;
-    
-    // Use a post-frame callback to ensure the widget tree is built
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted && Navigator.of(context, rootNavigator: true).canPop()) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Error'),
-            content: Text(error),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      } else {
-        // Fallback: just print the error to console
-        print('Error: $error');
-      }
-    });
+    // Simply log the error to avoid Navigator context issues
+    if (kDebugMode) {
+      print('Error: $error');
+    }
   }
 
   @override
