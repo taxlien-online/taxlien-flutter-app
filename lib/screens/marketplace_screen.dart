@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import '../l10n/app_localizations.dart';
+import '../main.dart';
 import '../services/tax_lien_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
@@ -433,7 +434,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
       ),
       QuickFilter(
         id: 'under_10k',
-        label: 'Under $10k',
+        label: 'Under \$10k',
         icon: Icons.attach_money,
         count: _products.where((p) => (p.price ?? 0) < 10000).length,
       ),

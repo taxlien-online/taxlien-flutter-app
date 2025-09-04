@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart';
 import '../services/tax_lien_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
