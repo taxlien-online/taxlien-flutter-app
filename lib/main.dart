@@ -622,6 +622,112 @@ class MagentoNotifier extends StateNotifier<MagentoState> {
     }
   }
 
+  Future<String?> createCart() async {
+    state = state.copyWith(isLoading: true, error: null);
+
+    try {
+      final cartId = await MagentoApiService().createCart();
+      state = state.copyWith(isLoading: false);
+      return cartId;
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: e.toString(),
+      );
+      return null;
+    }
+  }
+
+  Future<bool> addToCart({
+    required String cartId,
+    required String sku,
+    required int quantity,
+    Map<String, dynamic>? productOption,
+  }) async {
+    state = state.copyWith(isLoading: true, error: null);
+
+    try {
+      final success = await MagentoApiService().addToCart(
+        cartId: cartId,
+        sku: sku,
+        quantity: quantity,
+        productOption: productOption,
+      );
+      
+      if (success) {
+        // Reload cart to get updated state
+        await loadCart(cartId);
+      }
+      
+      state = state.copyWith(isLoading: false);
+      return success;
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: e.toString(),
+      );
+      return false;
+    }
+  }
+
+  Future<bool> updateCartItem({
+    required String cartId,
+    required int itemId,
+    required int quantity,
+  }) async {
+    state = state.copyWith(isLoading: true, error: null);
+
+    try {
+      final success = await MagentoApiService().updateCartItem(
+        cartId: cartId,
+        itemId: itemId,
+        quantity: quantity,
+      );
+      
+      if (success) {
+        // Reload cart to get updated state
+        await loadCart(cartId);
+      }
+      
+      state = state.copyWith(isLoading: false);
+      return success;
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: e.toString(),
+      );
+      return false;
+    }
+  }
+
+  Future<bool> removeFromCart({
+    required String cartId,
+    required int itemId,
+  }) async {
+    state = state.copyWith(isLoading: true, error: null);
+
+    try {
+      final success = await MagentoApiService().removeFromCart(
+        cartId: cartId,
+        itemId: itemId,
+      );
+      
+      if (success) {
+        // Reload cart to get updated state
+        await loadCart(cartId);
+      }
+      
+      state = state.copyWith(isLoading: false);
+      return success;
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: e.toString(),
+      );
+      return false;
+    }
+  }
+
   void clearError() {
     state = state.copyWith(error: null);
   }

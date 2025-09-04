@@ -507,18 +507,73 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       _isLoading = true;
     });
 
-    // TODO: Implement actual purchase logic with Magento API
-    await Future.delayed(const Duration(seconds: 2));
-
-    setState(() {
-      _isLoading = false;
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('${widget.product.name} purchased successfully!'),
-        backgroundColor: Colors.green,
-      ),
-    );
+    try {
+      final magentoNotifier = ref.read(magentoProvider.notifier);
+      
+      // Get or create cart
+      String? cartId = await widget.databaseService.getCartId();
+      if (cartId == null) {
+        cartId = await magentoNotifier.createCart();
+        if (cartId != null) {
+          await widget.databaseService.saveCartId(cartId);
+        }
+      }
+      
+      if (cartId == null) {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Failed to create cart'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+        return;
+      }
+      
+      // Add product to cart
+      final success = await magentoNotifier.addToCart(
+        cartId: cartId,
+        sku: widget.product.sku,
+        quantity: 1,
+      );
+      
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        
+        if (success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('${widget.product.name} added to cart!'),
+              backgroundColor: Colors.green,
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Failed to add product to cart'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error processing purchase: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }

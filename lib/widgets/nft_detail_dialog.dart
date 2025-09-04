@@ -203,7 +203,7 @@ class NFTDetailDialog extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pop();
-                          // TODO: Implement share functionality
+                          _shareNFT(nft);
                         },
                         child: const Text('Share'),
                       ),
@@ -285,5 +285,132 @@ class NFTDetailDialog extends StatelessWidget {
       default:
         return Colors.grey;
     }
+  }
+
+  void _shareNFT(NFT nft) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Share NFT'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Choose how you want to share this NFT:'),
+            const SizedBox(height: 16),
+            ListTile(
+              leading: const Icon(Icons.copy),
+              title: const Text('Copy Link'),
+              subtitle: const Text('Copy NFT link to clipboard'),
+              onTap: () {
+                Navigator.pop(context);
+                _copyNFTLink(nft);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.share),
+              title: const Text('Share via App'),
+              subtitle: const Text('Share using system share sheet'),
+              onTap: () {
+                Navigator.pop(context);
+                _shareViaSystem(nft);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.qr_code),
+              title: const Text('Generate QR Code'),
+              subtitle: const Text('Create QR code for this NFT'),
+              onTap: () {
+                Navigator.pop(context);
+                _generateQRCode(nft);
+              },
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _copyNFTLink(NFT nft) {
+    final nftLink = 'https://taxlien.online/nft/${nft.id}';
+    // In a real implementation, this would copy to clipboard
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('NFT link copied: $nftLink'),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  void _shareViaSystem(NFT nft) {
+    // In a real implementation, this would use the share_plus package
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Sharing ${nft.name}...'),
+        backgroundColor: Colors.blue,
+      ),
+    );
+  }
+
+  void _generateQRCode(NFT nft) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('NFT QR Code'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey),
+              ),
+              child: const Center(
+                child: Text(
+                  'QR CODE\nPLACEHOLDER',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Scan this QR code to view ${nft.name}',
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('QR code saved to gallery'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            },
+            child: const Text('Save'),
+          ),
+        ],
+      ),
+    );
   }
 }

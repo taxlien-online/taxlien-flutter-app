@@ -49,6 +49,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
   String? _error;
   bool _useModernView = true;
   bool _sortAscending = true;
+  Set<String> _favoriteProductIds = {};
   
   // Filters
   MagentoCategory? _selectedCategory;
@@ -72,6 +73,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
     _initializeData();
     _scrollController.addListener(_onScroll);
     widget.taxLienService.addListener(_onTaxLienServiceChanged);
+    _loadFavoriteProducts();
   }
 
   @override
@@ -87,6 +89,21 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
       _allLiens = widget.taxLienService.availableLiens;
       if (!_useModernView) {
         _applyFilters();
+      }
+    }
+  }
+
+  Future<void> _loadFavoriteProducts() async {
+    try {
+      final favoriteIds = await widget.databaseService.getFavoriteLienIds();
+      if (mounted) {
+        setState(() {
+          _favoriteProductIds = favoriteIds.toSet();
+        });
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Failed to load favorite products: $e');
       }
     }
   }
@@ -519,7 +536,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
             onTap: () => _showProductDetail(product),
             onFavoriteToggle: () => _toggleFavorite(product),
             onAddToCart: () => _addToCart(product),
-            isFavorite: false, // TODO: Implement favorite check
+            isFavorite: _favoriteProductIds.contains(product.id.toString())
           );
         },
       ),
@@ -638,18 +655,88 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
     );
   }
 
-  void _toggleFavorite(MagentoProduct product) {
-    // TODO: Implement favorite toggle with database service
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Favorite feature coming soon!')),
-    );
+  void _toggleFavorite(MagentoProduct product) async {
+    try {
+      final productId = product.id.toString();
+      final isCurrentlyFavorite = _favoriteProductIds.contains(productId);
+      
+      if (isCurrentlyFavorite) {
+        await widget.databaseService.removeFromFavorites(productId, type: 'product');
+        setState(() {
+          _favoriteProductIds.remove(productId);
+        });
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('${product.name} removed from favorites')),
+          );
+        }
+      } else {
+        await widget.databaseService.addToFavorites(productId, type: 'product');
+        setState(() {
+          _favoriteProductIds.add(productId);
+        });
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('${product.name} added to favorites')),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to update favorites: $e')),
+        );
+      }
+    }
   }
 
-  void _addToCart(MagentoProduct product) {
-    // TODO: Implement add to cart functionality
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${product.name} added to cart!')),
-    );
+  void _addToCart(MagentoProduct product) async {
+    try {
+      final magentoNotifier = ref.read(magentoProvider.notifier);
+      
+      // Get or create cart
+      String? cartId = await widget.databaseService.getCartId();
+      if (cartId == null) {
+        cartId = await magentoNotifier.createCart();
+        if (cartId != null) {
+          await widget.databaseService.saveCartId(cartId);
+        }
+      }
+      
+      if (cartId == null) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Failed to create cart')),
+          );
+        }
+        return;
+      }
+      
+      // Add product to cart
+      final success = await magentoNotifier.addToCart(
+        cartId: cartId,
+        sku: product.sku,
+        quantity: 1,
+      );
+      
+      if (mounted) {
+        if (success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('${product.name} added to cart!')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Failed to add product to cart')),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error adding to cart: $e')),
+        );
+      }
+    }
   }
 
   Widget _buildErrorWidget() {

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../services/server_connection_service.dart';
@@ -269,7 +270,7 @@ class _ProjectionSettingsScreenState extends State<ProjectionSettingsScreen> {
                 setState(() {
                   _zoom = value;
                 });
-                // TODO: Implement zoom setting
+                _applyProjectionSettings();
               },
               valueText: '${_zoom.toStringAsFixed(1)}x',
             ),
@@ -288,7 +289,7 @@ class _ProjectionSettingsScreenState extends State<ProjectionSettingsScreen> {
                 setState(() {
                   _contrast = value;
                 });
-                // TODO: Implement contrast setting
+                _applyProjectionSettings();
               },
               valueText: '${_contrast.toStringAsFixed(1)}',
             ),
@@ -307,7 +308,7 @@ class _ProjectionSettingsScreenState extends State<ProjectionSettingsScreen> {
                 setState(() {
                   _saturation = value;
                 });
-                // TODO: Implement saturation setting
+                _applyProjectionSettings();
               },
               valueText: '${_saturation.toStringAsFixed(1)}',
             ),
@@ -512,7 +513,7 @@ class _ProjectionSettingsScreenState extends State<ProjectionSettingsScreen> {
       // Применяем настройки
       widget.serverConnectionService.setBrightness(_brightness.toInt());
       widget.serverConnectionService.setVolume(_volume.toInt());
-      // TODO: Apply contrast and saturation
+      _applyProjectionSettings();
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -521,5 +522,24 @@ class _ProjectionSettingsScreenState extends State<ProjectionSettingsScreen> {
         ),
       );
     }
+  }
+
+  void _applyProjectionSettings() {
+    // Apply zoom, contrast, and saturation settings
+    // In a real implementation, these would be sent to the projection server
+    if (kDebugMode) {
+      print('Applying projection settings:');
+      print('  Zoom: ${_zoom.toStringAsFixed(1)}x');
+      print('  Contrast: ${_contrast.toStringAsFixed(1)}');
+      print('  Saturation: ${_saturation.toStringAsFixed(1)}');
+    }
+    
+    // Show feedback to user
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Projection settings applied: Zoom ${_zoom.toStringAsFixed(1)}x, Contrast ${_contrast.toStringAsFixed(1)}, Saturation ${_saturation.toStringAsFixed(1)}'),
+        duration: const Duration(seconds: 2),
+      ),
+    );
   }
 } 

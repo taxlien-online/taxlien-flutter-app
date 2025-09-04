@@ -928,9 +928,94 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
   }
 
   void _viewOffers(YukuListing listing) {
-    // TODO: Implement view offers for specific listing
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Offers for ${listing.name}'),
+        content: SizedBox(
+          width: double.maxFinite,
+          height: 400,
+          child: Column(
+            children: [
+              // Mock offers data
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 3, // Mock number of offers
+                  itemBuilder: (context, index) {
+                    final offerAmount = (listing.price * (0.8 + (index * 0.1))).toStringAsFixed(2);
+                    final offerer = 'User${index + 1}';
+                    final timeAgo = '${(index + 1) * 2} hours ago';
+                    
+                    return Card(
+                      margin: const EdgeInsets.symmetric(vertical: 4),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          child: Text(offerer[4]), // First letter of username
+                        ),
+                        title: Text('$offerAmount ICP'),
+                        subtitle: Text('From $offerer • $timeAgo'),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                _acceptOffer(listing, offerAmount, offerer);
+                              },
+                              child: const Text('Accept'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                _rejectOffer(listing, offerer);
+                              },
+                              child: const Text('Reject'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _acceptOffer(YukuListing listing, String amount, String offerer) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('View offers feature coming soon')),
+      SnackBar(
+        content: Text('Accepting offer of $amount ICP from $offerer...'),
+        backgroundColor: Colors.blue,
+      ),
+    );
+    
+    // Simulate accepting offer
+    Future.delayed(const Duration(seconds: 2), () {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Offer accepted! ${listing.name} sold to $offerer for $amount ICP'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    });
+  }
+
+  void _rejectOffer(YukuListing listing, String offerer) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Offer from $offerer rejected'),
+        backgroundColor: Colors.orange,
+      ),
     );
   }
 

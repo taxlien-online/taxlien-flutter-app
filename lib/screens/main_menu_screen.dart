@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../services/localization_service.dart';
@@ -11,6 +12,8 @@ import 'language_settings_screen.dart';
 import 'settings_screen.dart';
 import 'server_settings_screen.dart';
 import 'tax_lien_content_manager_screen.dart';
+import 'calibration_screen.dart';
+import 'media_management_screen.dart';
 
 class MainMenuScreen extends StatefulWidget {
   final LocalizationService localizationService;
@@ -503,18 +506,20 @@ class _MainMenuScreenState extends State<MainMenuScreen>
   }
 
   void _navigateToCalibration() {
-    // TODO: Implement calibration screen
-    final l10n = AppLocalizations.of(context);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n?.calibrationScreenComingSoon ?? 'Calibration screen coming soon')),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const CalibrationScreen(),
+      ),
     );
   }
 
   void _navigateToMedia() {
-    // TODO: Create media management screen
-    final l10n = AppLocalizations.of(context);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n?.mediaManagementComingSoon ?? 'Media management coming soon')),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const MediaManagementScreen(),
+      ),
     );
   }
 
@@ -672,7 +677,25 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
   }
 
   void _setPosition(double value) {
-    // TODO: Implement position setting
+    // In a real implementation, this would send the position to the dome server
+    if (kDebugMode) {
+      print('Setting media position to: ${value.toInt()} seconds');
+    }
+    
+    // Update local state
+    setState(() {
+      domeState['media'] = {
+        ...domeState['media'] ?? {},
+        'position': value.toInt(),
+      };
+    });
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Media position set to ${value.toInt()} seconds'),
+        duration: const Duration(seconds: 1),
+      ),
+    );
   }
 
   @override

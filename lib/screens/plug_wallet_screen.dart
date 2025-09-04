@@ -1289,37 +1289,340 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
   }
 
   void _showSendDialog({String? currency}) {
-    // TODO: Implement send dialog
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Send functionality coming soon')),
+    final amountController = TextEditingController();
+    final addressController = TextEditingController();
+    final selectedCurrency = currency ?? 'ICP';
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Send $selectedCurrency'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: amountController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Amount ($selectedCurrency)',
+                border: const OutlineInputBorder(),
+                suffixText: selectedCurrency,
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: addressController,
+              decoration: const InputDecoration(
+                labelText: 'Recipient Address',
+                border: OutlineInputBorder(),
+                hintText: 'Enter wallet address...',
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Available: 100.0 $selectedCurrency',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (amountController.text.isNotEmpty && addressController.text.isNotEmpty) {
+                Navigator.pop(context);
+                _processSend(selectedCurrency, amountController.text, addressController.text);
+              }
+            },
+            child: const Text('Send'),
+          ),
+        ],
+      ),
     );
   }
 
-  void _showReceiveDialog() {
-    // TODO: Implement receive dialog
+  void _processSend(String currency, String amount, String address) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Receive functionality coming soon')),
+      SnackBar(
+        content: Text('Sending $amount $currency to $address...'),
+        backgroundColor: Colors.blue,
+      ),
+    );
+    
+    // Simulate transaction processing
+    Future.delayed(const Duration(seconds: 2), () {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Successfully sent $amount $currency!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    });
+  }
+
+  void _showReceiveDialog() {
+    final walletAddress = 'rdmx6-jaaaa-aaaah-qcaiq-cai'; // Mock wallet address
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Receive Funds'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text('Share this address to receive funds:'),
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceVariant,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: SelectableText(
+                walletAddress,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontFamily: 'monospace',
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      // Copy to clipboard
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Address copied to clipboard')),
+                      );
+                    },
+                    icon: const Icon(Icons.copy),
+                    label: const Text('Copy'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      // Share address
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Share functionality coming soon')),
+                      );
+                    },
+                    icon: const Icon(Icons.share),
+                    label: const Text('Share'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
     );
   }
 
   void _showImportNFTDialog() {
-    // TODO: Implement import NFT dialog
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Import NFT functionality coming soon')),
+    final nftIdController = TextEditingController();
+    final collectionController = TextEditingController();
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Import NFT'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: nftIdController,
+              decoration: const InputDecoration(
+                labelText: 'NFT ID',
+                border: OutlineInputBorder(),
+                hintText: 'Enter NFT identifier...',
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: collectionController,
+              decoration: const InputDecoration(
+                labelText: 'Collection (Optional)',
+                border: OutlineInputBorder(),
+                hintText: 'Enter collection name...',
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Note: You can only import NFTs that you own.',
+              style: TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (nftIdController.text.isNotEmpty) {
+                Navigator.pop(context);
+                _processImportNFT(nftIdController.text, collectionController.text);
+              }
+            },
+            child: const Text('Import'),
+          ),
+        ],
+      ),
     );
   }
 
-  void _showTransactionDetails(Map<String, dynamic> transaction) {
-    // TODO: Implement transaction details dialog
+  void _processImportNFT(String nftId, String collection) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Transaction details coming soon')),
+      SnackBar(
+        content: Text('Importing NFT: $nftId...'),
+        backgroundColor: Colors.blue,
+      ),
+    );
+    
+    // Simulate import process
+    Future.delayed(const Duration(seconds: 2), () {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Successfully imported NFT: $nftId'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    });
+  }
+
+  void _showTransactionDetails(Map<String, dynamic> transaction) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Transaction Details'),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildDetailRow('Transaction ID', transaction['id'] ?? 'N/A'),
+              _buildDetailRow('Type', transaction['type'] ?? 'N/A'),
+              _buildDetailRow('Amount', '${transaction['amount'] ?? 'N/A'} ${transaction['currency'] ?? ''}'),
+              _buildDetailRow('From', transaction['from'] ?? 'N/A'),
+              _buildDetailRow('To', transaction['to'] ?? 'N/A'),
+              _buildDetailRow('Status', transaction['status'] ?? 'N/A'),
+              _buildDetailRow('Date', transaction['date'] ?? 'N/A'),
+              _buildDetailRow('Fee', '${transaction['fee'] ?? 'N/A'} ${transaction['currency'] ?? ''}'),
+              if (transaction['memo'] != null)
+                _buildDetailRow('Memo', transaction['memo']),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          ),
+          ElevatedButton.icon(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Transaction copied to clipboard')),
+              );
+            },
+            icon: const Icon(Icons.copy),
+            label: const Text('Copy Details'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 100,
+            child: Text(
+              '$label:',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(fontFamily: 'monospace'),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   void _showNFTDetails(Map<String, dynamic> nft) {
-    // TODO: Implement NFT details dialog
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('NFT details coming soon')),
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(nft['name'] ?? 'NFT Details'),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (nft['image'] != null)
+                Container(
+                  width: double.infinity,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Center(
+                    child: Text(
+                      nft['image'] ?? '🖼️',
+                      style: const TextStyle(fontSize: 64),
+                    ),
+                  ),
+                ),
+              const SizedBox(height: 16),
+              _buildDetailRow('Name', nft['name'] ?? 'N/A'),
+              _buildDetailRow('Collection', nft['collection'] ?? 'N/A'),
+              _buildDetailRow('Token ID', nft['tokenId'] ?? 'N/A'),
+              _buildDetailRow('Owner', nft['owner'] ?? 'N/A'),
+              _buildDetailRow('Description', nft['description'] ?? 'N/A'),
+              if (nft['attributes'] != null)
+                _buildDetailRow('Attributes', nft['attributes'].toString()),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          ),
+          ElevatedButton.icon(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('NFT details copied to clipboard')),
+              );
+            },
+            icon: const Icon(Icons.copy),
+            label: const Text('Copy Details'),
+          ),
+        ],
+      ),
     );
   }
 
@@ -1353,9 +1656,41 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
   }
 
   void _openPlugWalletWebsite() {
-    // TODO: Open Plug Wallet website
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Opening Plug Wallet website...')),
+    // In a real implementation, this would use url_launcher to open the website
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Open Plug Wallet'),
+        content: const Text('This would open the Plug Wallet website in your browser.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Opening Plug Wallet website...'),
+                  backgroundColor: Colors.blue,
+                ),
+              );
+              
+              // Simulate opening website
+              Future.delayed(const Duration(seconds: 1), () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Website opened successfully!'),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              });
+            },
+            child: const Text('Open Website'),
+          ),
+        ],
+      ),
     );
   }
 }

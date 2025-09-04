@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../services/server_connection_service.dart';
@@ -357,7 +358,7 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
               max: (domeState['media']?['duration'] ?? 100).toDouble(),
               divisions: 100,
               onChanged: (value) {
-                // TODO: Implement position setting
+                _setMediaPosition(value.toInt());
               },
               valueText: '${domeState['media']?['position'] ?? 0} ${l10n?.seconds ?? 'seconds'}',
             ),
@@ -747,7 +748,7 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
                   setState(() {
                     zoom = value;
                   });
-                  // TODO: Implement zoom setting
+                  _setZoom(value);
                 },
                 activeColor: AppColors.primary,
                 inactiveColor: AppColors.primary.withOpacity(0.3),
@@ -766,6 +767,47 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void _setMediaPosition(int position) {
+    // In a real implementation, this would send the position to the dome server
+    if (kDebugMode) {
+      print('Setting media position to: $position seconds');
+    }
+    
+    // Update local state
+    setState(() {
+      domeState['media'] = {
+        ...domeState['media'] ?? {},
+        'position': position,
+      };
+    });
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Media position set to $position seconds'),
+        duration: const Duration(seconds: 1),
+      ),
+    );
+  }
+
+  void _setZoom(double zoom) {
+    // In a real implementation, this would send the zoom level to the dome server
+    if (kDebugMode) {
+      print('Setting zoom to: ${zoom.toStringAsFixed(1)}x');
+    }
+    
+    // Update local state
+    setState(() {
+      domeState['zoom'] = zoom;
+    });
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Zoom set to ${zoom.toStringAsFixed(1)}x'),
+        duration: const Duration(seconds: 1),
       ),
     );
   }

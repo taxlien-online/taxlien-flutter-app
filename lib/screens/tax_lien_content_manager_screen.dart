@@ -758,51 +758,690 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
 
   // Action handlers
   void _handleDocumentAction(TaxLienDocument document, String action) {
-    // TODO: Implement document actions
+    switch (action) {
+      case 'view':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Viewing document: ${document.title}')),
+        );
+        break;
+      case 'download':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Downloading document: ${document.title}')),
+        );
+        break;
+      case 'edit':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Editing document: ${document.title}')),
+        );
+        break;
+      case 'delete':
+        _showDeleteConfirmation('document', document.title, () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Document deleted: ${document.title}')),
+          );
+        });
+        break;
+    }
   }
 
   void _handlePropertyMediaAction(PropertyMedia media, String action) {
-    // TODO: Implement property media actions
+    switch (action) {
+      case 'view':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Viewing media: ${media.title}')),
+        );
+        break;
+      case 'download':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Downloading media: ${media.title}')),
+        );
+        break;
+      case 'edit':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Editing media: ${media.title}')),
+        );
+        break;
+      case 'delete':
+        _showDeleteConfirmation('media', media.title, () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Media deleted: ${media.title}')),
+          );
+        });
+        break;
+    }
   }
 
   void _handleEducationalContentAction(EducationalContent content, String action) {
-    // TODO: Implement educational content actions
+    switch (action) {
+      case 'view':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Viewing content: ${content.title}')),
+        );
+        break;
+      case 'edit':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Editing content: ${content.title}')),
+        );
+        break;
+      case 'share':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Sharing content: ${content.title}')),
+        );
+        break;
+      case 'delete':
+        _showDeleteConfirmation('content', content.title, () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Content deleted: ${content.title}')),
+          );
+        });
+        break;
+    }
   }
 
   void _handleMarketIntelligenceAction(MarketIntelligence intelligence, String action) {
-    // TODO: Implement market intelligence actions
+    switch (action) {
+      case 'view':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Viewing intelligence: ${intelligence.title}')),
+        );
+        break;
+      case 'export':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Exporting intelligence: ${intelligence.title}')),
+        );
+        break;
+      case 'edit':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Editing intelligence: ${intelligence.title}')),
+        );
+        break;
+      case 'delete':
+        _showDeleteConfirmation('intelligence', intelligence.title, () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Intelligence deleted: ${intelligence.title}')),
+          );
+        });
+        break;
+    }
   }
 
   void _handleLegalResourceAction(LegalResource resource, String action) {
-    // TODO: Implement legal resource actions
+    switch (action) {
+      case 'view':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Viewing resource: ${resource.title}')),
+        );
+        break;
+      case 'download':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Downloading resource: ${resource.title}')),
+        );
+        break;
+      case 'edit':
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Editing resource: ${resource.title}')),
+        );
+        break;
+      case 'delete':
+        _showDeleteConfirmation('resource', resource.title, () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Resource deleted: ${resource.title}')),
+          );
+        });
+        break;
+    }
+  }
+
+  void _showDeleteConfirmation(String type, String title, VoidCallback onConfirm) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Confirm Delete'),
+        content: Text('Are you sure you want to delete this $type: $title?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              onConfirm();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
   }
 
   // Dialog methods
   void _showSearchDialog() {
-    // TODO: Implement search dialog
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Search Content'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              decoration: const InputDecoration(
+                labelText: 'Search term',
+                hintText: 'Enter search term...',
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (value) {
+                // Handle search input
+              },
+            ),
+            const SizedBox(height: 16),
+            DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                labelText: 'Content Type',
+                border: OutlineInputBorder(),
+              ),
+              items: const [
+                DropdownMenuItem(value: 'all', child: Text('All Content')),
+                DropdownMenuItem(value: 'documents', child: Text('Documents')),
+                DropdownMenuItem(value: 'media', child: Text('Property Media')),
+                DropdownMenuItem(value: 'educational', child: Text('Educational Content')),
+                DropdownMenuItem(value: 'intelligence', child: Text('Market Intelligence')),
+                DropdownMenuItem(value: 'legal', child: Text('Legal Resources')),
+              ],
+              onChanged: (value) {
+                // Handle content type selection
+              },
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // Perform search
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Search functionality coming soon!')),
+              );
+            },
+            child: const Text('Search'),
+          ),
+        ],
+      ),
+    );
   }
 
   void _showAddContentDialog() {
-    // TODO: Implement add content dialog
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Add Content'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.description),
+              title: const Text('Upload Document'),
+              subtitle: const Text('Add property documents, certificates, etc.'),
+              onTap: () {
+                Navigator.pop(context);
+                _showUploadDocumentDialog();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Add Property Media'),
+              subtitle: const Text('Add photos, videos, virtual tours'),
+              onTap: () {
+                Navigator.pop(context);
+                _showAddPropertyMediaDialog();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.school),
+              title: const Text('Add Educational Content'),
+              subtitle: const Text('Add guides, tutorials, resources'),
+              onTap: () {
+                Navigator.pop(context);
+                _showAddEducationalContentDialog();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.analytics),
+              title: const Text('Add Market Intelligence'),
+              subtitle: const Text('Add market reports, trends, analysis'),
+              onTap: () {
+                Navigator.pop(context);
+                _showAddMarketIntelligenceDialog();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.gavel),
+              title: const Text('Add Legal Resource'),
+              subtitle: const Text('Add legal documents, forms, templates'),
+              onTap: () {
+                Navigator.pop(context);
+                _showAddLegalResourceDialog();
+              },
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+        ],
+      ),
+    );
   }
 
   void _showUploadDocumentDialog() {
-    // TODO: Implement upload document dialog
+    final titleController = TextEditingController();
+    final descriptionController = TextEditingController();
+    String selectedCategory = 'property_document';
+    
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: const Text('Upload Document'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(
+                    labelText: 'Document Title',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: descriptionController,
+                  decoration: const InputDecoration(
+                    labelText: 'Description',
+                    border: OutlineInputBorder(),
+                  ),
+                  maxLines: 3,
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  value: selectedCategory,
+                  decoration: const InputDecoration(
+                    labelText: 'Category',
+                    border: OutlineInputBorder(),
+                  ),
+                  items: const [
+                    DropdownMenuItem(value: 'property_document', child: Text('Property Document')),
+                    DropdownMenuItem(value: 'certificate', child: Text('Certificate')),
+                    DropdownMenuItem(value: 'legal_document', child: Text('Legal Document')),
+                    DropdownMenuItem(value: 'financial_document', child: Text('Financial Document')),
+                    DropdownMenuItem(value: 'other', child: Text('Other')),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      selectedCategory = value!;
+                    });
+                  },
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    // Handle file selection
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('File selection coming soon!')),
+                    );
+                  },
+                  icon: const Icon(Icons.upload_file),
+                  label: const Text('Select File'),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (titleController.text.isNotEmpty) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Document upload functionality coming soon!')),
+                  );
+                }
+              },
+              child: const Text('Upload'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _showAddPropertyMediaDialog() {
-    // TODO: Implement add property media dialog
+    final titleController = TextEditingController();
+    final descriptionController = TextEditingController();
+    String selectedType = 'photo';
+    
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: const Text('Add Property Media'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(
+                    labelText: 'Media Title',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: descriptionController,
+                  decoration: const InputDecoration(
+                    labelText: 'Description',
+                    border: OutlineInputBorder(),
+                  ),
+                  maxLines: 3,
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  value: selectedType,
+                  decoration: const InputDecoration(
+                    labelText: 'Media Type',
+                    border: OutlineInputBorder(),
+                  ),
+                  items: const [
+                    DropdownMenuItem(value: 'photo', child: Text('Photo')),
+                    DropdownMenuItem(value: 'video', child: Text('Video')),
+                    DropdownMenuItem(value: 'virtual_tour', child: Text('Virtual Tour')),
+                    DropdownMenuItem(value: 'drone_footage', child: Text('Drone Footage')),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      selectedType = value!;
+                    });
+                  },
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Media selection coming soon!')),
+                    );
+                  },
+                  icon: const Icon(Icons.photo_library),
+                  label: const Text('Select Media'),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (titleController.text.isNotEmpty) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Property media functionality coming soon!')),
+                  );
+                }
+              },
+              child: const Text('Add'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _showAddEducationalContentDialog() {
-    // TODO: Implement add educational content dialog
+    final titleController = TextEditingController();
+    final contentController = TextEditingController();
+    String selectedCategory = 'guide';
+    
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: const Text('Add Educational Content'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(
+                    labelText: 'Content Title',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  value: selectedCategory,
+                  decoration: const InputDecoration(
+                    labelText: 'Category',
+                    border: OutlineInputBorder(),
+                  ),
+                  items: const [
+                    DropdownMenuItem(value: 'guide', child: Text('Guide')),
+                    DropdownMenuItem(value: 'tutorial', child: Text('Tutorial')),
+                    DropdownMenuItem(value: 'faq', child: Text('FAQ')),
+                    DropdownMenuItem(value: 'resource', child: Text('Resource')),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      selectedCategory = value!;
+                    });
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: contentController,
+                  decoration: const InputDecoration(
+                    labelText: 'Content',
+                    border: OutlineInputBorder(),
+                  ),
+                  maxLines: 5,
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (titleController.text.isNotEmpty && contentController.text.isNotEmpty) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Educational content functionality coming soon!')),
+                  );
+                }
+              },
+              child: const Text('Add'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _showAddMarketIntelligenceDialog() {
-    // TODO: Implement add market intelligence dialog
+    final titleController = TextEditingController();
+    final reportController = TextEditingController();
+    String selectedType = 'market_report';
+    
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: const Text('Add Market Intelligence'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(
+                    labelText: 'Report Title',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  value: selectedType,
+                  decoration: const InputDecoration(
+                    labelText: 'Report Type',
+                    border: OutlineInputBorder(),
+                  ),
+                  items: const [
+                    DropdownMenuItem(value: 'market_report', child: Text('Market Report')),
+                    DropdownMenuItem(value: 'trend_analysis', child: Text('Trend Analysis')),
+                    DropdownMenuItem(value: 'forecast', child: Text('Forecast')),
+                    DropdownMenuItem(value: 'comparison', child: Text('Market Comparison')),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      selectedType = value!;
+                    });
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: reportController,
+                  decoration: const InputDecoration(
+                    labelText: 'Report Content',
+                    border: OutlineInputBorder(),
+                  ),
+                  maxLines: 5,
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (titleController.text.isNotEmpty && reportController.text.isNotEmpty) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Market intelligence functionality coming soon!')),
+                  );
+                }
+              },
+              child: const Text('Add'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _showAddLegalResourceDialog() {
-    // TODO: Implement add legal resource dialog
+    final titleController = TextEditingController();
+    final descriptionController = TextEditingController();
+    String selectedType = 'legal_document';
+    
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: const Text('Add Legal Resource'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(
+                    labelText: 'Resource Title',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  value: selectedType,
+                  decoration: const InputDecoration(
+                    labelText: 'Resource Type',
+                    border: OutlineInputBorder(),
+                  ),
+                  items: const [
+                    DropdownMenuItem(value: 'legal_document', child: Text('Legal Document')),
+                    DropdownMenuItem(value: 'form', child: Text('Form')),
+                    DropdownMenuItem(value: 'template', child: Text('Template')),
+                    DropdownMenuItem(value: 'regulation', child: Text('Regulation')),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      selectedType = value!;
+                    });
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: descriptionController,
+                  decoration: const InputDecoration(
+                    labelText: 'Description',
+                    border: OutlineInputBorder(),
+                  ),
+                  maxLines: 3,
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('File selection coming soon!')),
+                    );
+                  },
+                  icon: const Icon(Icons.upload_file),
+                  label: const Text('Select File'),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (titleController.text.isNotEmpty) {
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Legal resource functionality coming soon!')),
+                  );
+                }
+              },
+              child: const Text('Add'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -74,3 +74,4 @@ com.yourcompany.taxlien-online
 
 💡 **Совет**: Запустите `./check_app_store_ready.sh` для диагностики проблем!
 
+

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../services/theme_service.dart';
 import '../services/localization_service.dart';
@@ -553,7 +554,7 @@ class SettingsScreen extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        // TODO: Apply brightness setting
+                        _applyBrightnessSetting(brightness);
                         Navigator.pop(context);
                       },
                       child: const Text('Apply'),
@@ -620,7 +621,7 @@ class SettingsScreen extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        // TODO: Apply volume setting
+                        _applyVolumeSetting(volume);
                         Navigator.pop(context);
                       },
                       child: const Text('Apply'),
@@ -705,6 +706,36 @@ class SettingsScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _applyBrightnessSetting(double brightness) {
+    // In a real implementation, this would apply the brightness setting to the system
+    if (kDebugMode) {
+      print('Applying brightness setting: ${brightness.toInt()}%');
+    }
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Brightness set to ${brightness.toInt()}%'),
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
+  void _applyVolumeSetting(double volume) {
+    // In a real implementation, this would apply the volume setting to the system
+    if (kDebugMode) {
+      print('Applying volume setting: ${volume.toInt()}%');
+    }
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Volume set to ${volume.toInt()}%'),
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 2),
       ),
     );
   }

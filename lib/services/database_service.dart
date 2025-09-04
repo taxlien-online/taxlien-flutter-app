@@ -17,6 +17,7 @@ class DatabaseService extends ChangeNotifier {
   static const String _tableTransactions = 'transactions';
   static const String _tableFavorites = 'favorites';
   static const String _tableSearchHistory = 'search_history';
+  static const String _tableCart = 'cart';
 
   Future<void> initialize() async {
     await _initDatabase();
@@ -103,6 +104,16 @@ class DatabaseService extends ChangeNotifier {
         query TEXT NOT NULL,
         filters TEXT,
         timestamp TEXT NOT NULL
+      )
+    ''');
+
+    // Cart table
+    await db.execute('''
+      CREATE TABLE $_tableCart (
+        id TEXT PRIMARY KEY,
+        cartId TEXT NOT NULL,
+        createdAt TEXT NOT NULL,
+        lastUpdated TEXT NOT NULL
       )
     ''');
   }
@@ -251,26 +262,26 @@ class DatabaseService extends ChangeNotifier {
   }
 
   // Methods for working with favorites
-  Future<void> addToFavorites(String lienId) async {
+  Future<void> addToFavorites(String itemId, {String type = 'lien'}) async {
     if (_database == null) return;
 
     await _database!.insert(
       _tableFavorites,
       {
-        'lienId': lienId,
+        'lienId': itemId, // Using lienId column for both liens and products
         'addedAt': DateTime.now().toIso8601String(),
       },
       conflictAlgorithm: ConflictAlgorithm.ignore,
     );
   }
 
-  Future<void> removeFromFavorites(String lienId) async {
+  Future<void> removeFromFavorites(String itemId, {String type = 'lien'}) async {
     if (_database == null) return;
 
     await _database!.delete(
       _tableFavorites,
       where: 'lienId = ?',
-      whereArgs: [lienId],
+      whereArgs: [itemId],
     );
   }
 
@@ -286,13 +297,13 @@ class DatabaseService extends ChangeNotifier {
     return maps.map((map) => map['lienId'] as String).toList();
   }
 
-  Future<bool> isFavorite(String lienId) async {
+  Future<bool> isFavorite(String itemId, {String type = 'lien'}) async {
     if (_database == null) return false;
 
     final List<Map<String, dynamic>> maps = await _database!.query(
       _tableFavorites,
       where: 'lienId = ?',
-      whereArgs: [lienId],
+      whereArgs: [itemId],
       limit: 1,
     );
 
@@ -332,6 +343,43 @@ class DatabaseService extends ChangeNotifier {
     await _database!.delete(_tableSearchHistory);
   }
 
+  // Methods for working with cart
+  Future<void> saveCartId(String cartId) async {
+    if (_database == null) return;
+
+    final now = DateTime.now().toIso8601String();
+    await _database!.insert(
+      _tableCart,
+      {
+        'id': 'current_cart',
+        'cartId': cartId,
+        'createdAt': now,
+        'lastUpdated': now,
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<String?> getCartId() async {
+    if (_database == null) return null;
+
+    final List<Map<String, dynamic>> maps = await _database!.query(
+      _tableCart,
+      where: 'id = ?',
+      whereArgs: ['current_cart'],
+      limit: 1,
+    );
+
+    if (maps.isEmpty) return null;
+    return maps.first['cartId'] as String?;
+  }
+
+  Future<void> clearCart() async {
+    if (_database == null) return;
+
+    await _database!.delete(_tableCart);
+  }
+
   // Methods for clearing data
   Future<void> clearAllData() async {
     if (_database == null) return;
@@ -341,6 +389,7 @@ class DatabaseService extends ChangeNotifier {
     await _database!.delete(_tableTransactions);
     await _database!.delete(_tableFavorites);
     await _database!.delete(_tableSearchHistory);
+    await _database!.delete(_tableCart);
   }
 
   Future<void> close() async {

@@ -38,8 +38,8 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "taxlien.online"
+        // Unique Application ID for TaxLien.online marketplace app
+        applicationId = "com.taxlien.online.marketplace"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
