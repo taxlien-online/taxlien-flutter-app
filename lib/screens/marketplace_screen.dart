@@ -14,6 +14,7 @@ import '../widgets/enhanced_product_card.dart';
 import '../widgets/category_chip.dart';
 import '../widgets/search_filter_bar.dart';
 import 'product_detail_screen.dart';
+import 'advanced_search_screen.dart';
 
 class MarketplaceScreen extends ConsumerStatefulWidget {
   final TaxLienService taxLienService;
@@ -367,6 +368,24 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
               _initializeData();
             },
             tooltip: _useModernView ? 'List View' : 'Grid View',
+          ),
+          
+          // Advanced Search
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AdvancedSearchScreen(
+                    taxLienService: widget.taxLienService,
+                    magentoApiService: widget.magentoApiService,
+                    useModernView: _useModernView,
+                  ),
+                ),
+              );
+            },
+            tooltip: 'Advanced Search',
           ),
           
           // Refresh

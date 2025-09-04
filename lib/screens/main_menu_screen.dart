@@ -762,9 +762,13 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
           ),
           IconButton(
             onPressed: () {
-              // TODO: Implement calibration screen
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Calibration screen coming soon')),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CalibrationScreen(
+                    domeService: widget.domeService,
+                  ),
+                ),
               );
             },
             icon: const Icon(Icons.tune),
