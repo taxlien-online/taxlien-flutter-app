@@ -63,17 +63,24 @@ void main() async {
 }
 
 Future<void> _initializeServices() async {
-  // Initialize secure storage
-  await SecureStorageService.initialize();
-  
-  // Initialize analytics
-  if (AppConstants.enableAnalytics) {
-    await AnalyticsService.initialize();
-  }
-  
-  // Initialize notifications
-  if (AppConstants.enablePushNotifications) {
-    await NotificationService.initialize();
+  try {
+    // Initialize secure storage
+    await SecureStorageService.initialize();
+    
+    // Initialize analytics (disabled for now to avoid Firebase issues)
+    if (false && AppConstants.enableAnalytics) {
+      await AnalyticsService.initialize();
+    }
+    
+    // Initialize notifications (disabled for now to avoid Firebase issues)
+    if (false && AppConstants.enablePushNotifications) {
+      await NotificationService.initialize();
+    }
+  } catch (e) {
+    // Log error but don't crash the app
+    if (kDebugMode) {
+      print('Service initialization error: $e');
+    }
   }
 }
 
@@ -171,9 +178,10 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
         // CrashlyticsService.recordFlutterError(details);
       }
       
-      // Show error dialog in debug mode
+      // Log error instead of showing dialog to avoid Navigator issues
       if (kDebugMode) {
-        _showErrorDialog(details.exception.toString());
+        print('Flutter Error: ${details.exception}');
+        print('Stack trace: ${details.stack}');
       }
     };
 
@@ -184,9 +192,10 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
         // CrashlyticsService.recordError(error, stack);
       }
       
-      // Show error dialog in debug mode
+      // Log error instead of showing dialog to avoid Navigator issues
       if (kDebugMode) {
-        _showErrorDialog(error.toString());
+        print('Platform Error: $error');
+        print('Stack trace: $stack');
       }
       
       return true;
@@ -194,19 +203,30 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
   }
 
   void _showErrorDialog(String error) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Error'),
-        content: Text(error),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+    // Check if the widget is still mounted and has a valid context
+    if (!mounted) return;
+    
+    // Use a post-frame callback to ensure the widget tree is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && Navigator.of(context, rootNavigator: true).canPop()) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Error'),
+            content: Text(error),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        );
+      } else {
+        // Fallback: just print the error to console
+        print('Error: $error');
+      }
+    });
   }
 
   @override

@@ -348,6 +348,10 @@ class MagentoApiService extends ChangeNotifier {
       }
       return null;
     } catch (e) {
+      // Log the error but don't crash the app
+      if (kDebugMode) {
+        print('Magento API Error in getCategories: $e');
+      }
       return null;
     } finally {
       _setLoading(false);
