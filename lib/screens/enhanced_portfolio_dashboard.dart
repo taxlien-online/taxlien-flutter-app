@@ -8,6 +8,7 @@ import '../widgets/asset_allocation_chart.dart';
 import '../widgets/goals_progress_widget.dart';
 import '../widgets/alerts_widget.dart';
 import '../widgets/quick_actions_widget.dart';
+import '../widgets/goal_setting_dialog.dart';
 
 class EnhancedPortfolioDashboard extends StatefulWidget {
   final PortfolioService portfolioService;
@@ -743,46 +744,66 @@ class _EnhancedPortfolioDashboardState extends State<EnhancedPortfolioDashboard>
   }
 
   void _showSetGoalDialog() {
-    // TODO: Implement goal setting dialog
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Goal setting dialog coming soon')),
+    showDialog(
+      context: context,
+      builder: (context) => GoalSettingDialog(
+        onSave: (goal) async {
+          final success = await widget.portfolioService.addGoal(goal);
+          if (success && mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Goal added successfully')),
+            );
+          } else if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Failed to add goal')),
+            );
+          }
+        },
+      ),
     );
   }
 
   void _showEditGoalDialog(String goalId) {
-    // TODO: Implement goal editing dialog
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Goal editing dialog coming soon')),
+    final goal = widget.portfolioService.goals?.goals.firstWhere(
+      (g) => g.id == goalId,
+      orElse: () => throw Exception('Goal not found'),
+    );
+    
+    showDialog(
+      context: context,
+      builder: (context) => GoalSettingDialog(
+        initialGoal: goal,
+        onSave: (updatedGoal) async {
+          final success = await widget.portfolioService.updateGoal(goalId, updatedGoal);
+          if (success && mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Goal updated successfully')),
+            );
+          } else if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Failed to update goal')),
+            );
+          }
+        },
+      ),
     );
   }
 
   void _navigateToMarketplace() {
-    // TODO: Navigate to marketplace
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Navigating to marketplace...')),
-    );
+    Navigator.of(context).pushNamed('/marketplace');
   }
 
   void _navigateToReports() {
-    // TODO: Navigate to reports
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Reports coming soon')),
-    );
+    Navigator.of(context).pushNamed('/reports');
   }
 
   void _navigateToTransactions() {
-    // TODO: Navigate to transactions
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Transaction history coming soon')),
-    );
+    Navigator.of(context).pushNamed('/transactions');
   }
 
   void _handleAlertTap(PortfolioAlert alert) {
     if (alert.actionUrl != null) {
-      // TODO: Navigate to alert action
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Navigating to ${alert.actionUrl}')),
-      );
+      Navigator.of(context).pushNamed(alert.actionUrl!);
     }
   }
 
@@ -791,9 +812,6 @@ class _EnhancedPortfolioDashboardState extends State<EnhancedPortfolioDashboard>
   }
 
   void _handleGoalTap(PortfolioGoal goal) {
-    // TODO: Show goal details
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Goal details for ${goal.title}')),
-    );
+    _showEditGoalDialog(goal.id);
   }
 }

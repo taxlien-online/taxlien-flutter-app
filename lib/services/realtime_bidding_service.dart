@@ -4,11 +4,15 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
+import 'package:riverpod/riverpod.dart';
+import '../core/services/magento_api_service.dart';
 import '../core/models/tax_lien_models.dart';
 
 /// Real-time bidding service for tax lien auctions
 class RealtimeBiddingService extends ChangeNotifier {
   static const String _baseUrl = 'wss://api.taxlien.online/ws';
+  
+  final MagentoApiService _magentoApiService = MagentoApiService();
   
   WebSocketChannel? _channel;
   StreamSubscription? _subscription;
@@ -58,10 +62,13 @@ class RealtimeBiddingService extends ChangeNotifier {
       );
       
       // Send authentication message
-      _sendMessage({
-        'type': 'auth',
-        'token': 'user_token_here', // TODO: Get from auth service
-      });
+      final customer = await _magentoApiService.getCurrentCustomer();
+      if (customer != null) {
+        _sendMessage({
+          'type': 'auth',
+          'token': customer.id.toString(),
+        });
+      }
       
       _isConnected = true;
       notifyListeners();
@@ -277,13 +284,18 @@ class RealtimeBiddingService extends ChangeNotifier {
     final bid = Bid.fromJson(data['bid']);
     
     // Update my highest bid if this is mine
-    if (bid.bidderId == 'user123') { // TODO: Get actual user ID
-      _myHighestBid = bid;
-    }
+    _checkAndUpdateMyBid(bid);
     
     _setBidding(false);
     _notificationController.add('Your bid of \$${bid.amount.toStringAsFixed(2)} was accepted!');
     notifyListeners();
+  }
+  
+  Future<void> _checkAndUpdateMyBid(Bid bid) async {
+    final customer = await _magentoApiService.getCurrentCustomer();
+    if (customer != null && bid.bidderId == customer.id.toString()) {
+      _myHighestBid = bid;
+    }
   }
   
   void _handleBidRejected(Map<String, dynamic> data) {
