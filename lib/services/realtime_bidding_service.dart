@@ -173,9 +173,18 @@ class RealtimeBiddingService extends ChangeNotifier {
   /// Get auction history
   Future<List<TaxLienAuction>> getAuctionHistory({int limit = 50}) async {
     try {
-      // TODO: Implement API call to get auction history
-      await Future.delayed(const Duration(milliseconds: 500));
-      return [];
+      final response = await _magentoApiService.dio.get(
+        '/auctions/history',
+        queryParameters: {'limit': limit},
+      );
+      
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data['auctions'] ?? [];
+        return data.map((json) => TaxLienAuction.fromJson(json)).toList();
+      } else {
+        _setError('Failed to fetch auction history: ${response.statusCode}');
+        return [];
+      }
     } catch (e) {
       _setError('Failed to get auction history: $e');
       return [];
@@ -185,9 +194,27 @@ class RealtimeBiddingService extends ChangeNotifier {
   /// Get my bidding history
   Future<List<Bid>> getMyBiddingHistory({int limit = 50}) async {
     try {
-      // TODO: Implement API call to get user's bidding history
-      await Future.delayed(const Duration(milliseconds: 500));
-      return [];
+      final customer = await _magentoApiService.getCurrentCustomer();
+      if (customer == null) {
+        _setError('User not authenticated');
+        return [];
+      }
+      
+      final response = await _magentoApiService.dio.get(
+        '/bids/history',
+        queryParameters: {
+          'userId': customer.id,
+          'limit': limit,
+        },
+      );
+      
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data['bids'] ?? [];
+        return data.map((json) => Bid.fromJson(json)).toList();
+      } else {
+        _setError('Failed to fetch bidding history: ${response.statusCode}');
+        return [];
+      }
     } catch (e) {
       _setError('Failed to get bidding history: $e');
       return [];

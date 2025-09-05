@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/search_autocomplete_service.dart';
 
 /// Enhanced search and filter bar with modern design
 class SearchFilterBar extends StatefulWidget {
@@ -31,6 +32,10 @@ class _SearchFilterBarState extends State<SearchFilterBar>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
+  
+  final SearchAutocompleteService _autocompleteService = SearchAutocompleteService();
+  final LayerLink _layerLink = LayerLink();
+  OverlayEntry? _overlayEntry;
 
   @override
   void initState() {
@@ -51,6 +56,8 @@ class _SearchFilterBarState extends State<SearchFilterBar>
   @override
   void dispose() {
     _animationController.dispose();
+    _autocompleteService.dispose();
+    _removeOverlay();
     super.dispose();
   }
 
@@ -91,15 +98,23 @@ class _SearchFilterBarState extends State<SearchFilterBar>
                             color: colorScheme.outline.withOpacity(0.3),
                           ),
                         ),
-                        child: TextField(
-                          controller: widget.searchController,
-                          onChanged: (value) => widget.onSearchChanged?.call(),
-                          onTap: () {
-                            _animationController.forward();
-                          },
-                          onEditingComplete: () {
-                            _animationController.reverse();
-                          },
+                        child: CompositedTransformTarget(
+                          link: _layerLink,
+                          child: TextField(
+                            controller: widget.searchController,
+                            onChanged: (value) {
+                              widget.onSearchChanged?.call();
+                              _handleSearchChanged(value);
+                            },
+                            onTap: () {
+                              _animationController.forward();
+                              _showAutocompleteOverlay();
+                            },
+                            onEditingComplete: () {
+                              _animationController.reverse();
+                              _removeOverlay();
+                              _saveSearchQuery();
+                            },
                           decoration: InputDecoration(
                             hintText: widget.hintText ?? 'Search tax liens...',
                             hintStyle: TextStyle(
@@ -126,6 +141,7 @@ class _SearchFilterBarState extends State<SearchFilterBar>
                               horizontal: 16,
                               vertical: 12,
                             ),
+                          ),
                           ),
                         ),
                       ),
@@ -401,5 +417,75 @@ class QuickFilter {
       isSelected: isSelected ?? this.isSelected,
       filterData: filterData ?? this.filterData,
     );
+  }
+  
+  void _handleSearchChanged(String value) {
+    if (value.isNotEmpty) {
+      _autocompleteService.getSuggestions(value);
+    } else {
+      _removeOverlay();
+    }
+  }
+  
+  void _showAutocompleteOverlay() {
+    _removeOverlay();
+    
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        width: MediaQuery.of(context).size.width - 32,
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          showWhenUnlinked: false,
+          offset: const Offset(0, 60),
+          child: Material(
+            elevation: 8,
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+              constraints: const BoxConstraints(maxHeight: 200),
+              child: AnimatedBuilder(
+                animation: _autocompleteService,
+                builder: (context, child) {
+                  if (_autocompleteService.suggestions.isEmpty) {
+                    return const SizedBox.shrink();
+                  }
+                  
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: _autocompleteService.suggestions.length,
+                    itemBuilder: (context, index) {
+                      final suggestion = _autocompleteService.suggestions[index];
+                      return ListTile(
+                        leading: const Icon(Icons.search),
+                        title: Text(suggestion),
+                        onTap: () {
+                          widget.searchController.text = suggestion;
+                          widget.onSearchChanged?.call();
+                          _removeOverlay();
+                          _saveSearchQuery();
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+  
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+  
+  void _saveSearchQuery() {
+    final query = widget.searchController.text.trim();
+    if (query.isNotEmpty) {
+      _autocompleteService.saveSearchQuery(query);
+    }
   }
 }

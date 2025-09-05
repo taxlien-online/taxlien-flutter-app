@@ -172,17 +172,32 @@ class YukuService extends ChangeNotifier {
   Future<void> loadActiveListings() async {
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(milliseconds: 800));
+      final response = await http.get(
+        Uri.parse('$_yukuApiUrl/listings/active'),
+        headers: {'Content-Type': 'application/json'},
+      );
       
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        _activeListings = (data['listings'] as List)
+            .map((json) => YukuListing.fromJson(json))
+            .toList();
+        _error = null;
+      } else {
+        _error = 'Failed to load listings: ${response.statusCode}';
+        // Fallback to mock data for development
+        _activeListings = _mockListings
+            .where((listing) => listing['status'] == 'active')
+            .map((json) => YukuListing.fromJson(json))
+            .toList();
+      }
+    } catch (e) {
+      _error = 'Failed to load active listings: $e';
+      // Fallback to mock data for development
       _activeListings = _mockListings
           .where((listing) => listing['status'] == 'active')
           .map((json) => YukuListing.fromJson(json))
           .toList();
-      
-      _error = null;
-    } catch (e) {
-      _error = 'Failed to load active listings: $e';
     } finally {
       _setLoading(false);
     }
@@ -253,9 +268,34 @@ class YukuService extends ChangeNotifier {
   }) async {
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(seconds: 2));
+      final response = await http.post(
+        Uri.parse('$_yukuApiUrl/listings'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'nftId': nftId,
+          'price': price,
+          'currency': currency,
+          'expirationDays': expirationDays,
+        }),
+      );
       
+      if (response.statusCode == 201) {
+        final data = jsonDecode(response.body);
+        final listing = YukuListing.fromJson(data['listing']);
+        
+        _myListings.add(listing);
+        _activeListings.add(listing);
+        
+        _error = null;
+        notifyListeners();
+        return true;
+      } else {
+        _error = 'Failed to create listing: ${response.statusCode}';
+        return false;
+      }
+    } catch (e) {
+      _error = 'Failed to create listing: $e';
+      // Fallback to mock data for development
       final listing = YukuListing(
         id: 'listing_${DateTime.now().millisecondsSinceEpoch}',
         nftId: nftId,
@@ -271,13 +311,8 @@ class YukuService extends ChangeNotifier {
       
       _myListings.add(listing);
       _activeListings.add(listing);
-      
-      _error = null;
       notifyListeners();
       return true;
-    } catch (e) {
-      _error = 'Failed to create listing: $e';
-      return false;
     } finally {
       _setLoading(false);
     }

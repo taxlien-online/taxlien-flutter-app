@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../services/realtime_bidding_service.dart';
 import '../core/models/tax_lien_models.dart';
+import '../core/services/magento_api_service.dart';
 import '../widgets/auction_timer.dart';
 import '../widgets/bid_history_list.dart';
 import '../widgets/bid_input_widget.dart';
@@ -26,6 +27,8 @@ class _AuctionScreenState extends State<AuctionScreen>
   late AnimationController _slideController;
   late Animation<double> _pulseAnimation;
   late Animation<Offset> _slideAnimation;
+  
+  final MagentoApiService _magentoApiService = MagentoApiService();
   
   final TextEditingController _bidController = TextEditingController();
   final FocusNode _bidFocusNode = FocusNode();
@@ -275,8 +278,13 @@ class _AuctionScreenState extends State<AuctionScreen>
         ? widget.biddingService.bids.first.amount
         : widget.auction.startingBid;
     
-    final isMyBid = widget.biddingService.bids.isNotEmpty &&
-        widget.biddingService.bids.first.bidderId == 'user123'; // TODO: Get actual user ID
+    return FutureBuilder(
+      future: _magentoApiService.getCurrentCustomer(),
+      builder: (context, snapshot) {
+        final customer = snapshot.data;
+        final isMyBid = widget.biddingService.bids.isNotEmpty &&
+            customer != null &&
+            widget.biddingService.bids.first.bidderId == customer.id.toString();
     
     return Container(
       padding: const EdgeInsets.all(16),
@@ -364,9 +372,15 @@ class _AuctionScreenState extends State<AuctionScreen>
         ),
         const SizedBox(height: 8),
         Expanded(
-          child: BidHistoryList(
-            bids: widget.biddingService.bids,
-            myUserId: 'user123', // TODO: Get actual user ID
+          child: FutureBuilder(
+            future: _magentoApiService.getCurrentCustomer(),
+            builder: (context, snapshot) {
+              final customer = snapshot.data;
+              return BidHistoryList(
+                bids: widget.biddingService.bids,
+                myUserId: customer?.id.toString() ?? '',
+              );
+            },
           ),
         ),
       ],

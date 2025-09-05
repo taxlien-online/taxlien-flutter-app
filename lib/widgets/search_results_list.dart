@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../core/models/magento_models.dart';
+import '../core/services/magento_api_service.dart';
+import '../services/database_service.dart';
 import 'enhanced_product_card.dart';
 
 class SearchResultsList extends StatelessWidget {
@@ -340,23 +342,106 @@ class SearchResultsList extends StatelessWidget {
     );
   }
 
-  void _toggleFavorite(BuildContext context, MagentoProduct product) {
-    // TODO: Implement favorite toggle functionality
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('${product.name} added to favorites'),
-        duration: const Duration(seconds: 2),
-      ),
-    );
+  void _toggleFavorite(BuildContext context, MagentoProduct product) async {
+    try {
+      final databaseService = DatabaseService();
+      await databaseService.initialize();
+      
+      final isFavorite = await databaseService.isFavorite(product.sku, type: 'product');
+      
+      if (isFavorite) {
+        await databaseService.removeFavorite(product.sku);
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('${product.name} removed from favorites'),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+      } else {
+        await databaseService.addFavorite(
+          lienId: product.sku,
+          type: 'product',
+          title: product.name,
+          price: product.price,
+          imageUrl: product.mediaGalleryEntries?.isNotEmpty == true 
+              ? product.mediaGalleryEntries!.first.file 
+              : null,
+        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('${product.name} added to favorites'),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error updating favorites: $e'),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    }
   }
 
-  void _addToCart(BuildContext context, MagentoProduct product) {
-    // TODO: Implement add to cart functionality
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('${product.name} added to cart'),
-        duration: const Duration(seconds: 2),
-      ),
-    );
+  void _addToCart(BuildContext context, MagentoProduct product) async {
+    try {
+      final magentoApiService = MagentoApiService();
+      
+      // Get or create cart
+      String? cartId = await magentoApiService.getCartId();
+      if (cartId == null) {
+        cartId = await magentoApiService.createCart();
+      }
+      
+      if (cartId != null) {
+        // Add item to cart
+        final success = await magentoApiService.addItemToCart(
+          cartId: cartId,
+          sku: product.sku,
+          quantity: 1,
+        );
+        
+        if (success && context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('${product.name} added to cart'),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        } else if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Failed to add ${product.name} to cart'),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+      } else {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Failed to create cart'),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error adding to cart: $e'),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    }
   }
 }
