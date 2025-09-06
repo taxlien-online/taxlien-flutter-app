@@ -260,3 +260,4 @@ echo -e "${BLUE}🧹 Очистка временных файлов...${NC}"
 rm -f upload_to_play.py
 
 echo -e "${GREEN}✅ Готово!${NC}"
+

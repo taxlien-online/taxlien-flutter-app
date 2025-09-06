@@ -1,0 +1,290 @@
+# TaxLien.online GitLab CI/CD Pipeline
+# Compatible with both GitLab and GitHub workflows
+
+stages:
+  - test
+  - build
+  - deploy
+
+variables:
+  FLUTTER_VERSION: "3.24.0"
+  JAVA_VERSION: "17"
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+# Cache Flutter dependencies
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - .pub-cache/
+    - build/
+    - ios/Pods/
+
+# Job 1: Test & Code Quality
+test:
+  stage: test
+  image: cirrusci/flutter:3.24.0
+  
+  before_script:
+    - flutter --version
+    - flutter pub get
+    - flutter gen-l10n
+    
+  script:
+    - flutter analyze
+    - flutter test
+    - dart format --output=none --set-exit-if-changed .
+    
+  artifacts:
+    reports:
+      junit: test-results.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+
+# Job 2: Build Android APK
+build-android-apk:
+  stage: build
+  image: cirrusci/flutter:3.24.0
+  
+  before_script:
+    - flutter pub get
+    - flutter gen-l10n
+    
+  script:
+    - flutter build apk --release
+    
+  artifacts:
+    paths:
+      - build/app/outputs/flutter-apk/app-release.apk
+    expire_in: 1 week
+    
+  only:
+    - main
+    - master
+    - develop
+    - tags
+
+# Job 3: Build Android AAB
+build-android-aab:
+  stage: build
+  image: cirrusci/flutter:3.24.0
+  
+  before_script:
+    - flutter pub get
+    - flutter gen-l10n
+    
+  script:
+    - flutter build appbundle --release
+    
+  artifacts:
+    paths:
+      - build/app/outputs/bundle/release/app-release.aab
+    expire_in: 1 week
+    
+  only:
+    - main
+    - master
+    - develop
+    - tags
+
+# Job 4: Build iOS (macOS only)
+build-ios:
+  stage: build
+  image: cirrusci/flutter:3.24.0
+  
+  before_script:
+    - flutter pub get
+    - flutter gen-l10n
+    - cd ios && pod install --repo-update && cd ..
+    
+  script:
+    - flutter build ios --release --no-codesign
+    
+  artifacts:
+    paths:
+      - build/ios/iphoneos/Runner.app
+    expire_in: 1 week
+    
+  only:
+    - main
+    - master
+    - develop
+    - tags
+  # Note: This job requires macOS runner in GitLab CI
+  # You may need to use a custom runner or skip this job
+
+# Job 5: Deploy to Google Play Store
+deploy-android:
+  stage: deploy
+  image: google/cloud-sdk:latest
+  
+  dependencies:
+    - build-android-aab
+    
+  before_script:
+    - apt-get update && apt-get install -y python3 python3-pip
+    - pip3 install google-api-python-client google-auth-httplib2 google-auth-oauthlib
+    
+  script:
+    - echo "$GOOGLE_PLAY_SERVICE_ACCOUNT_JSON" > google-play-service-account.json
+    - |
+      python3 << 'EOF'
+      import os
+      import json
+      from google.oauth2 import service_account
+      from googleapiclient.discovery import build
+      from googleapiclient.http import MediaFileUpload
+      from googleapiclient.errors import HttpError
+
+      PACKAGE_NAME = "taxlien.online"
+      AAB_FILE = "build/app/outputs/bundle/release/app-release.aab"
+      SERVICE_ACCOUNT_JSON = "google-play-service-account.json"
+      TRACK = "internal"
+
+      print(f"🚀 Deploying {PACKAGE_NAME} to Google Play Store...")
+
+      try:
+          credentials = service_account.Credentials.from_service_account_file(
+              SERVICE_ACCOUNT_JSON,
+              scopes=['https://www.googleapis.com/auth/androidpublisher']
+          )
+          
+          service = build('androidpublisher', 'v3', credentials=credentials)
+          
+          app_info = service.edits().insert(packageName=PACKAGE_NAME).execute()
+          edit_id = app_info['id']
+          
+          media = MediaFileUpload(AAB_FILE, mimetype='application/octet-stream', resumable=True)
+          bundle_response = service.edits().bundles().upload(
+              editId=edit_id,
+              packageName=PACKAGE_NAME,
+              media_body=media
+          ).execute()
+          
+          version_code = bundle_response['versionCode']
+          print(f"✅ AAB uploaded, version: {version_code}")
+          
+          release_body = {
+              'releases': [{
+                  'versionCodes': [version_code],
+                  'status': 'draft',
+                  'releaseNotes': [{
+                      'language': 'ru-RU',
+                      'text': 'Automated release from GitLab CI/CD pipeline'
+                  }]
+              }]
+          }
+          
+          service.edits().tracks().update(
+              editId=edit_id,
+              packageName=PACKAGE_NAME,
+              track=TRACK,
+              body=release_body
+          ).execute()
+          
+          service.edits().commit(editId=edit_id, packageName=PACKAGE_NAME).execute()
+          
+          print("🎉 Successfully deployed to Google Play Store!")
+          
+      except Exception as e:
+          print(f"❌ Error: {e}")
+          exit(1)
+      EOF
+      
+  only:
+    - main
+    - master
+    - tags
+
+# Job 6: Deploy to App Store Connect (requires macOS runner)
+deploy-ios:
+  stage: deploy
+  image: cirrusci/flutter:3.24.0
+  
+  dependencies:
+    - build-ios
+    
+  before_script:
+    - flutter pub get
+    
+  script:
+    - |
+      # This job requires macOS runner and proper code signing
+      # For now, we'll just prepare the build
+      echo "iOS deployment requires macOS runner and code signing setup"
+      echo "Build artifacts are available for manual upload to App Store Connect"
+      
+  only:
+    - main
+    - master
+    - tags
+  # Note: This job requires macOS runner in GitLab CI
+  # You may need to use a custom runner or skip this job
+
+# Job 7: Create Release
+create-release:
+  stage: deploy
+  image: alpine:latest
+  
+  dependencies:
+    - build-android-apk
+    - build-android-aab
+    - build-ios
+    
+  before_script:
+    - apk add --no-cache curl jq
+    
+  script:
+    - |
+      if [[ "$CI_COMMIT_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+        echo "Creating release for tag: $CI_COMMIT_TAG"
+        
+        # Create release description
+        cat > release_notes.md << 'EOF'
+      ## TaxLien.online Mobile App Release
+      
+      ### What's New
+      - Automated release from GitLab CI/CD pipeline
+      - Bug fixes and improvements
+      
+      ### Downloads
+      - **Android APK**: Direct installation
+      - **Android AAB**: For Google Play Store
+      - **iOS IPA**: For App Store Connect
+      
+      ### Installation
+      - Android: Download APK and enable "Install from unknown sources"
+      - iOS: Install via TestFlight or App Store
+      EOF
+      
+        # Create release using GitLab API
+        curl --request POST \
+          --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+          --header "Content-Type: application/json" \
+          --data "{
+            \"tag_name\": \"$CI_COMMIT_TAG\",
+            \"name\": \"TaxLien.online $CI_COMMIT_TAG\",
+            \"description\": \"$(cat release_notes.md)\",
+            \"assets\": {
+              \"links\": [
+                {
+                  \"name\": \"Android APK\",
+                  \"url\": \"$CI_JOB_URL/artifacts/file/build/app/outputs/flutter-apk/app-release.apk\"
+                },
+                {
+                  \"name\": \"Android AAB\",
+                  \"url\": \"$CI_JOB_URL/artifacts/file/build/app/outputs/bundle/release/app-release.aab\"
+                }
+              ]
+            }
+          }" \
+          "$CI_API_V4_URL/projects/$CI_PROJECT_ID/releases"
+          
+        echo "Release created successfully!"
+      else
+        echo "No release tag found, skipping release creation"
+      fi
+      
+  only:
+    - tags
+  when: manual
