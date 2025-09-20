@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nft/flutter_nft.dart';
-import 'package:flutter_icp/flutter_icp.dart';
+// import 'package:flutter_icp/flutter_icp.dart'; // Not needed here
 
 class PlugWalletScreen extends StatefulWidget {
   final NFTClient nftClient;
@@ -42,11 +42,12 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
       });
     });
 
-    // Get providers
-    _walletProvider = widget.nftClient.getWalletProvider(BlockchainNetwork.icp);
-    _nftProvider = widget.nftClient.getNFTProvider(BlockchainNetwork.icp);
+    // Get providers - handle null safety
+    _walletProvider =
+        widget.nftClient.getWalletProvider(BlockchainNetwork.icp)!;
+    _nftProvider = widget.nftClient.getNFTProvider(BlockchainNetwork.icp)!;
     _marketplaceProvider =
-        widget.nftClient.getMarketplaceProvider(BlockchainNetwork.icp);
+        widget.nftClient.getMarketplaceProvider(BlockchainNetwork.icp)!;
 
     // Load initial data
     _loadData();
@@ -454,7 +455,7 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                         child: Icon(
                           transaction['type'] == 'send'
                               ? Icons.send
-                              : Icons.receive,
+                              : Icons.download,
                           color: transaction['type'] == 'send'
                               ? Colors.red
                               : Colors.green,

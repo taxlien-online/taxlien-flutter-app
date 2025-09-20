@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import '../l10n/app_localizations.dart';
+// import '../l10n/app_localizations.dart'; // Not used
 import '../services/localization_service.dart';
 import '../services/theme_service.dart';
 import '../services/onboarding_service.dart';
 import '../services/tax_lien_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
-import '../theme/app_theme_export.dart';
+import '../services/user_preferences_service.dart';
+// import '../theme/app_theme_export.dart'; // Not used
 import 'main_navigation_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class OnboardingScreen extends StatefulWidget {
   final TaxLienService taxLienService;
   final AuthService authService;
   final DatabaseService databaseService;
+  final UserPreferencesService userPreferencesService;
 
   const OnboardingScreen({
     super.key,
@@ -25,6 +27,7 @@ class OnboardingScreen extends StatefulWidget {
     required this.taxLienService,
     required this.authService,
     required this.databaseService,
+    required this.userPreferencesService,
   });
 
   @override

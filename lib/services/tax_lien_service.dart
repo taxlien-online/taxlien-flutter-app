@@ -19,6 +19,10 @@ class TaxLien {
   final String? buyerId;
   final Map<String, dynamic>? additionalData;
 
+  // Additional fields for compatibility
+  String? get propertyAddress => address;
+  double? get lienAmount => taxAmount;
+
   TaxLien({
     required this.id,
     required this.parcelId,
@@ -198,9 +202,11 @@ class TaxLienService extends ChangeNotifier {
     _setLoading(true);
     try {
       // For prototype, we'll use mock data
-      await Future.delayed(Duration(milliseconds: 500)); // Simulate network delay
-      
-      _availableLiens = _mockAvailableLiens.map((json) => TaxLien.fromJson(json)).toList();
+      await Future.delayed(
+          Duration(milliseconds: 500)); // Simulate network delay
+
+      _availableLiens =
+          _mockAvailableLiens.map((json) => TaxLien.fromJson(json)).toList();
       _error = null;
     } catch (e) {
       _error = 'Failed to load available liens: $e';
@@ -213,8 +219,9 @@ class TaxLienService extends ChangeNotifier {
     _setLoading(true);
     try {
       // For prototype, we'll use mock data
-      await Future.delayed(Duration(milliseconds: 500)); // Simulate network delay
-      
+      await Future.delayed(
+          Duration(milliseconds: 500)); // Simulate network delay
+
       _myLiens = _mockMyLiens.map((json) => TaxLien.fromJson(json)).toList();
       _error = null;
     } catch (e) {
@@ -250,6 +257,10 @@ class TaxLienService extends ChangeNotifier {
     }
   }
 
+  Future<List<TaxLien>> getTaxLiens() async {
+    return _myLiens;
+  }
+
   Future<List<TaxLien>> searchLiens({
     String? county,
     String? state,
@@ -263,10 +274,13 @@ class TaxLienService extends ChangeNotifier {
       if (state != null) queryParams['state'] = state;
       if (minAmount != null) queryParams['minAmount'] = minAmount.toString();
       if (maxAmount != null) queryParams['maxAmount'] = maxAmount.toString();
-      if (minInterestRate != null) queryParams['minInterestRate'] = minInterestRate.toString();
+      if (minInterestRate != null)
+        queryParams['minInterestRate'] = minInterestRate.toString();
 
-      final uri = Uri.parse('$_baseUrl/api/tax-liens/search').replace(queryParameters: queryParams);
-      final response = await http.get(uri, headers: {'Content-Type': 'application/json'});
+      final uri = Uri.parse('$_baseUrl/api/tax-liens/search')
+          .replace(queryParameters: queryParams);
+      final response =
+          await http.get(uri, headers: {'Content-Type': 'application/json'});
 
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body);

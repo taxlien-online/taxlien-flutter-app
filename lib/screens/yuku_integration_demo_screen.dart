@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import '../services/yuku_service.dart';
-import '../services/nft_service.dart';
+import 'package:flutter_nft/flutter_nft.dart';
 import 'yuku_marketplace_screen.dart';
 
 class YukuIntegrationDemoScreen extends StatefulWidget {
-  final YukuService yukuService;
-  final NFTService nftService;
+  final NFTClient nftClient;
 
   const YukuIntegrationDemoScreen({
     super.key,
-    required this.yukuService,
-    required this.nftService,
+    required this.nftClient,
   });
 
   @override
-  State<YukuIntegrationDemoScreen> createState() => _YukuIntegrationDemoScreenState();
+  State<YukuIntegrationDemoScreen> createState() =>
+      _YukuIntegrationDemoScreenState();
 }
 
 class _YukuIntegrationDemoScreenState extends State<YukuIntegrationDemoScreen> {
@@ -68,16 +66,16 @@ class _YukuIntegrationDemoScreenState extends State<YukuIntegrationDemoScreen> {
             Text(
               'Yuku Marketplace Integration',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
             Text(
               'Buy and sell NFT tax liens on Internet Computer',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[600],
-              ),
+                    color: Colors.grey[600],
+                  ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -96,19 +94,21 @@ class _YukuIntegrationDemoScreenState extends State<YukuIntegrationDemoScreen> {
             Text(
               'Key Features',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 16),
             _buildFeatureItem(
               icon: Icons.shopping_cart,
               title: 'Buy NFTs',
-              description: 'Purchase tax lien NFTs directly from the marketplace',
+              description:
+                  'Purchase tax lien NFTs directly from the marketplace',
             ),
             _buildFeatureItem(
               icon: Icons.storefront,
               title: 'Sell NFTs',
-              description: 'List your tax lien NFTs for sale with custom pricing',
+              description:
+                  'List your tax lien NFTs for sale with custom pricing',
             ),
             _buildFeatureItem(
               icon: Icons.attach_money,
@@ -161,15 +161,15 @@ class _YukuIntegrationDemoScreenState extends State<YukuIntegrationDemoScreen> {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey[600],
-                  ),
+                        color: Colors.grey[600],
+                      ),
                 ),
               ],
             ),
@@ -189,8 +189,8 @@ class _YukuIntegrationDemoScreenState extends State<YukuIntegrationDemoScreen> {
             Text(
               'Demo Actions',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 16),
             SizedBox(
@@ -244,8 +244,8 @@ class _YukuIntegrationDemoScreenState extends State<YukuIntegrationDemoScreen> {
             Text(
               'Integration Details',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 16),
             _buildInfoItem('Platform', 'Yuku.app'),
@@ -270,17 +270,17 @@ class _YukuIntegrationDemoScreenState extends State<YukuIntegrationDemoScreen> {
             child: Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Colors.grey[600],
-              ),
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey[600],
+                  ),
             ),
           ),
           Expanded(
             child: Text(
               value,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
           ),
         ],

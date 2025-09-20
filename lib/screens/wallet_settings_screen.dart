@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../services/wallet_service.dart';
+import 'package:flutter_nft/flutter_nft.dart';
 
 class WalletSettingsScreen extends StatefulWidget {
-  final WalletService walletService;
+  final NFTClient nftClient;
 
   const WalletSettingsScreen({
     super.key,
-    required this.walletService,
+    required this.nftClient,
   });
 
   @override
@@ -48,7 +48,7 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
 
   Widget _buildConnectedWalletSection() {
     final connectedWallet = widget.walletService.connectedWallet;
-    
+
     if (connectedWallet == null) {
       return Card(
         child: Padding(
@@ -66,8 +66,8 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
                   Text(
                     'Connected Wallet',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ],
               ),
@@ -116,8 +116,8 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
                 Text(
                   'Connected Wallet',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 const Spacer(),
                 Container(
@@ -143,12 +143,16 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
             const SizedBox(height: 16),
             _buildWalletInfoRow('Name', connectedWallet.name),
             _buildWalletInfoRow('Type', connectedWallet.type.toUpperCase()),
-            _buildWalletInfoRow('Address', _formatAddress(connectedWallet.address)),
+            _buildWalletInfoRow(
+                'Address', _formatAddress(connectedWallet.address)),
             if (connectedWallet.balance != null)
-              _buildWalletInfoRow('Balance', '${connectedWallet.balance!.toStringAsFixed(4)} ETH'),
-            _buildWalletInfoRow('Chains', connectedWallet.supportedChains.join(', ')),
+              _buildWalletInfoRow('Balance',
+                  '${connectedWallet.balance!.toStringAsFixed(4)} ETH'),
+            _buildWalletInfoRow(
+                'Chains', connectedWallet.supportedChains.join(', ')),
             if (connectedWallet.lastConnected != null)
-              _buildWalletInfoRow('Last Connected', _formatDate(connectedWallet.lastConnected!)),
+              _buildWalletInfoRow('Last Connected',
+                  _formatDate(connectedWallet.lastConnected!)),
           ],
         ),
       ),
@@ -172,13 +176,14 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
                 Text(
                   'Available Wallets',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ],
             ),
             const SizedBox(height: 12),
-            ...widget.walletService.availableWallets.map((wallet) => _buildWalletListItem(wallet)),
+            ...widget.walletService.availableWallets
+                .map((wallet) => _buildWalletListItem(wallet)),
           ],
         ),
       ),
@@ -187,7 +192,7 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
 
   Widget _buildWalletListItem(WalletInfo wallet) {
     final isConnected = wallet.isConnected;
-    
+
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       child: ListTile(
@@ -224,8 +229,8 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
                   Text(
                     'NFT Balances',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ],
               ),
@@ -274,13 +279,14 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
                 Text(
                   'NFT Balances',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ],
             ),
             const SizedBox(height: 12),
-            ...widget.walletService.nftBalances.map((nft) => _buildNFTBalanceItem(nft)),
+            ...widget.walletService.nftBalances
+                .map((nft) => _buildNFTBalanceItem(nft)),
           ],
         ),
       ),
@@ -330,8 +336,8 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
                 Text(
                   'Wallet Actions',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ],
             ),
@@ -418,7 +424,7 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
   Widget _buildWalletIcon(String walletType) {
     IconData iconData;
     Color iconColor;
-    
+
     switch (walletType) {
       case 'metamask':
         iconData = Icons.account_balance_wallet;
@@ -436,7 +442,7 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
         iconData = Icons.account_balance_wallet;
         iconColor = Colors.grey;
     }
-    
+
     return Container(
       width: 40,
       height: 40,
@@ -452,13 +458,16 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
     );
   }
 
-  Widget _buildActionButton(String title, IconData icon, VoidCallback onPressed, {bool isDestructive = false}) {
+  Widget _buildActionButton(String title, IconData icon, VoidCallback onPressed,
+      {bool isDestructive = false}) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       child: ListTile(
         leading: Icon(
           icon,
-          color: isDestructive ? Colors.red : Theme.of(context).colorScheme.primary,
+          color: isDestructive
+              ? Colors.red
+              : Theme.of(context).colorScheme.primary,
         ),
         title: Text(
           title,
@@ -604,7 +613,8 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
             onPressed: () async {
               if (controller.text.isNotEmpty) {
                 Navigator.of(context).pop();
-                final success = await widget.walletService.signMessage(controller.text);
+                final success =
+                    await widget.walletService.signMessage(controller.text);
                 if (success && mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -636,7 +646,8 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
             Text('Contract: ${_formatAddress(nft.contractAddress)}'),
             if (nft.metadata != null) ...[
               const SizedBox(height: 8),
-              const Text('Metadata:', style: TextStyle(fontWeight: FontWeight.bold)),
+              const Text('Metadata:',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               Text(nft.metadata!),
             ],
           ],

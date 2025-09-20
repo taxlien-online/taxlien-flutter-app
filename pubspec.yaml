@@ -81,7 +81,7 @@ dependencies:
   
   # Networking
   dio: ^5.3.2
-  connectivity_plus: ^6.1.5
+  connectivity_plus: ^5.0.2
   
   # GraphQL for Magento integration
   graphql_flutter: ^5.1.2

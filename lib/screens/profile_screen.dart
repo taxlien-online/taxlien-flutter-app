@@ -6,7 +6,7 @@ import '../services/localization_service.dart';
 import '../services/onboarding_service.dart';
 // Services replaced with flutter_nft and flutter_icp libraries
 import 'package:flutter_nft/flutter_nft.dart';
-import 'package:flutter_icp/flutter_icp.dart';
+// import 'package:flutter_icp/flutter_icp.dart'; // Not needed here
 import '../core/constants/app_constants.dart';
 import 'wallet_settings_screen.dart';
 import 'yuku_marketplace_screen.dart';
@@ -369,8 +369,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               icon: Icons.account_balance_wallet,
               title: 'Wallet Settings',
               subtitle: widget.nftClient
-                      .getWalletProvider(BlockchainNetwork.icp)
-                      .isConnected
+                          .getWalletProvider(BlockchainNetwork.icp)
+                          ?.isConnected ==
+                      true
                   ? 'Connected: Plug Wallet'
                   : 'Not connected',
               onTap: () => _showWalletSettings(context),

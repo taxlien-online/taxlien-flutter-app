@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nft/flutter_nft.dart';
-import 'package:flutter_icp/flutter_icp.dart';
+// import 'package:flutter_icp/flutter_icp.dart'; // Not needed here
 
 class YukuMarketplaceScreen extends StatefulWidget {
   final NFTClient nftClient;
@@ -42,11 +42,12 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
       });
     });
 
-    // Get providers
+    // Get providers - handle null safety
     _marketplaceProvider =
-        widget.nftClient.getMarketplaceProvider(BlockchainNetwork.icp);
-    _walletProvider = widget.nftClient.getWalletProvider(BlockchainNetwork.icp);
-    _nftProvider = widget.nftClient.getNFTProvider(BlockchainNetwork.icp);
+        widget.nftClient.getMarketplaceProvider(BlockchainNetwork.icp)!;
+    _walletProvider =
+        widget.nftClient.getWalletProvider(BlockchainNetwork.icp)!;
+    _nftProvider = widget.nftClient.getNFTProvider(BlockchainNetwork.icp)!;
 
     // Load initial data
     _loadData();

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../services/nft_service.dart';
+import 'package:flutter_nft/flutter_nft.dart';
 
 class NFTCard extends StatelessWidget {
-  final TaxLienNFT nft;
+  final NFT nft;
   final VoidCallback? onTap;
   final VoidCallback? onTransfer;
   final VoidCallback? onBurn;
@@ -43,8 +43,11 @@ class NFTCard extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      _getRarityColor(nft.metadata.attributes['Rarity'] ?? 'Common'),
-                      _getRarityColor(nft.metadata.attributes['Rarity'] ?? 'Common').withOpacity(0.7),
+                      _getRarityColor(
+                          nft.metadata.attributes['Rarity'] ?? 'Common'),
+                      _getRarityColor(
+                              nft.metadata.attributes['Rarity'] ?? 'Common')
+                          .withOpacity(0.7),
                     ],
                   ),
                 ),
@@ -117,8 +120,8 @@ class NFTCard extends StatelessWidget {
                     Text(
                       nft.metadata.name,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                            fontWeight: FontWeight.bold,
+                          ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -135,10 +138,13 @@ class NFTCard extends StatelessWidget {
                       children: [
                         Text(
                           'Value: \$${(nft.currentValue ?? 0).toStringAsFixed(0)}',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(
@@ -146,7 +152,8 @@ class NFTCard extends StatelessWidget {
                             vertical: 2,
                           ),
                           decoration: BoxDecoration(
-                            color: _getRiskColor(nft.metadata.attributes['Risk Level'] ?? 'Low'),
+                            color: _getRiskColor(
+                                nft.metadata.attributes['Risk Level'] ?? 'Low'),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
@@ -167,7 +174,8 @@ class NFTCard extends StatelessWidget {
             // Actions
             if (showActions && nft.status != 'burned')
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -178,7 +186,10 @@ class NFTCard extends StatelessWidget {
                           icon: const Icon(Icons.send, size: 20),
                           tooltip: 'Transfer',
                           style: IconButton.styleFrom(
-                            backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                            backgroundColor: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withOpacity(0.1),
                           ),
                         ),
                       ),
@@ -191,7 +202,10 @@ class NFTCard extends StatelessWidget {
                           icon: const Icon(Icons.delete, size: 20),
                           tooltip: 'Burn',
                           style: IconButton.styleFrom(
-                            backgroundColor: Theme.of(context).colorScheme.error.withOpacity(0.1),
+                            backgroundColor: Theme.of(context)
+                                .colorScheme
+                                .error
+                                .withOpacity(0.1),
                           ),
                         ),
                       ),

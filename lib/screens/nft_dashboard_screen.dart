@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nft/flutter_nft.dart';
-import 'package:flutter_icp/flutter_icp.dart';
+// import 'package:flutter_icp/flutter_icp.dart'; // Not needed here
 import '../services/tax_lien_service.dart';
 import '../widgets/nft_card.dart';
 import '../widgets/nft_detail_dialog.dart';
@@ -47,11 +47,12 @@ class _NFTDashboardScreenState extends State<NFTDashboardScreen>
       });
     });
 
-    // Get providers
-    _nftProvider = widget.nftClient.getNFTProvider(BlockchainNetwork.icp);
-    _walletProvider = widget.nftClient.getWalletProvider(BlockchainNetwork.icp);
+    // Get providers - handle null safety
+    _nftProvider = widget.nftClient.getNFTProvider(BlockchainNetwork.icp)!;
+    _walletProvider =
+        widget.nftClient.getWalletProvider(BlockchainNetwork.icp)!;
     _marketplaceProvider =
-        widget.nftClient.getMarketplaceProvider(BlockchainNetwork.icp);
+        widget.nftClient.getMarketplaceProvider(BlockchainNetwork.icp)!;
 
     // Load initial data
     _loadData();
