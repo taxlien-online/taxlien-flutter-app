@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:flutter_localizations/flutter_localizations.dart';
 // import './l10n/app_localizations.dart';
 
@@ -9,6 +10,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/constants/app_constants.dart';
 import 'core/theme/app_theme.dart';
 import 'core/services/magento_api_service.dart';
+import 'core/services/magento_graphql_service.dart';
+import 'core/services/hybrid_magento_service.dart';
 import 'core/services/theme_service.dart';
 import 'core/services/localization_service.dart';
 import 'core/services/analytics_service.dart';
@@ -20,6 +23,7 @@ import 'core/models/magento_models.dart';
 
 // Widgets
 import 'core/widgets/loading_screen.dart';
+import 'core/widgets/cloud_status_widget.dart';
 
 // Screens
 import 'screens/main_navigation_screen.dart';
@@ -32,6 +36,14 @@ import 'services/tax_lien_service.dart';
 import 'services/auth_service.dart';
 import 'services/database_service.dart';
 import 'services/ai_investment_advisor_service.dart';
+import 'services/flutter_magento_cloud_service.dart';
+
+// Widgets
+import 'widgets/cloud_functions_status_widget.dart';
+
+// NFT and ICP libraries
+import 'package:flutter_nft/flutter_nft.dart';
+import 'package:flutter_icp/flutter_icp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,8 +68,24 @@ void main() async {
   await _initializeServices();
 
   runApp(
-    const ProviderScope(
-      child: TaxLienApp(),
+    provider.MultiProvider(
+      providers: [
+        provider.ChangeNotifierProvider(
+            create: (_) => FlutterMagentoCloudService()),
+        provider.ChangeNotifierProxyProvider<FlutterMagentoCloudService,
+            HybridMagentoService>(
+          create: (_) => HybridMagentoService(),
+          update: (_, flutterMagentoService, hybridService) {
+            hybridService?.setFlutterMagentoService(flutterMagentoService);
+            return hybridService ??
+                HybridMagentoService(
+                    flutterMagentoService: flutterMagentoService);
+          },
+        ),
+      ],
+      child: const ProviderScope(
+        child: TaxLienApp(),
+      ),
     ),
   );
 }
@@ -66,12 +94,15 @@ Future<void> _initializeServices() async {
   try {
     // Initialize secure storage
     await SecureStorageService.initialize();
-    
+
+    // Initialize NFT client with ICP providers
+    await _initializeNFTServices();
+
     // Initialize analytics (disabled for now to avoid Firebase issues)
     if (false && AppConstants.enableAnalytics) {
       await AnalyticsService.initialize();
     }
-    
+
     // Initialize notifications (disabled for now to avoid Firebase issues)
     if (false && AppConstants.enablePushNotifications) {
       await NotificationService.initialize();
@@ -80,6 +111,32 @@ Future<void> _initializeServices() async {
     // Log error but don't crash the app
     if (kDebugMode) {
       print('Service initialization error: $e');
+    }
+  }
+}
+
+Future<void> _initializeNFTServices() async {
+  try {
+    // Create NFT client
+    final nftClient = NFTClient();
+
+    // Register ICP providers
+    nftClient.registerNFTProvider(ICPNFTProvider());
+    nftClient.registerWalletProvider(PlugWalletProvider());
+    nftClient.registerMarketplaceProvider(YukuMarketplaceProvider());
+
+    // Initialize all providers
+    await nftClient.initialize();
+
+    // Store NFT client globally for access throughout the app
+    AppConstants.nftClient = nftClient;
+
+    if (kDebugMode) {
+      print('NFT services initialized successfully');
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print('Error initializing NFT services: $e');
     }
   }
 }
@@ -98,12 +155,12 @@ class TaxLienApp extends ConsumerWidget {
     return MaterialApp(
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
-      
+
       // Theme configuration
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeMode,
-      
+
       // Localization configuration
       locale: locale,
       supportedLocales: const [
@@ -134,10 +191,10 @@ class TaxLienApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      
+
       // Home page
       home: const SimpleHomeScreen(),
-      
+
       // Error handling
       builder: (context, child) {
         return ErrorBoundary(
@@ -177,7 +234,7 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
         // Report to crashlytics
         // CrashlyticsService.recordFlutterError(details);
       }
-      
+
       // Log error instead of showing dialog to avoid Navigator issues
       if (kDebugMode) {
         print('Flutter Error: ${details.exception}');
@@ -191,13 +248,13 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
         // Report to crashlytics
         // CrashlyticsService.recordError(error, stack);
       }
-      
+
       // Log error instead of showing dialog to avoid Navigator issues
       if (kDebugMode) {
         print('Platform Error: $error');
         print('Stack trace: $stack');
       }
-      
+
       return true;
     };
   }
@@ -286,27 +343,27 @@ class LoadingScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            
+
             // App name
             Text(
               AppConstants.appName,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
             ),
             const SizedBox(height: 8),
-            
+
             // App description
             Text(
               AppConstants.appDescription,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
-            
+
             // Loading indicator
             CircularProgressIndicator(
               color: Theme.of(context).colorScheme.primary,
@@ -323,7 +380,8 @@ final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeMode>((ref) {
   return ThemeNotifier();
 });
 
-final localizationProvider = StateNotifierProvider<LocalizationNotifier, Locale>((ref) {
+final localizationProvider =
+    StateNotifierProvider<LocalizationNotifier, Locale>((ref) {
   return LocalizationNotifier();
 });
 
@@ -331,8 +389,19 @@ final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   return AuthNotifier();
 });
 
-final magentoProvider = StateNotifierProvider<MagentoNotifier, MagentoState>((ref) {
+final magentoProvider =
+    StateNotifierProvider<MagentoNotifier, MagentoState>((ref) {
   return MagentoNotifier();
+});
+
+final hybridMagentoServiceProvider =
+    StateNotifierProvider<HybridMagentoService, dynamic>((ref) {
+  return HybridMagentoService();
+});
+
+final flutterMagentoCloudServiceProvider =
+    StateNotifierProvider<FlutterMagentoCloudService, dynamic>((ref) {
+  return FlutterMagentoCloudService();
 });
 
 /// Theme notifier for managing app theme
@@ -352,7 +421,8 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
   }
 
   Future<void> toggleTheme() async {
-    final newTheme = state == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    final newTheme =
+        state == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
     await setTheme(newTheme);
   }
 }
@@ -653,12 +723,12 @@ class MagentoNotifier extends StateNotifier<MagentoState> {
         quantity: quantity,
         productOption: productOption,
       );
-      
+
       if (success) {
         // Reload cart to get updated state
         await loadCart(cartId);
       }
-      
+
       state = state.copyWith(isLoading: false);
       return success;
     } catch (e) {
@@ -683,12 +753,12 @@ class MagentoNotifier extends StateNotifier<MagentoState> {
         itemId: itemId,
         quantity: quantity,
       );
-      
+
       if (success) {
         // Reload cart to get updated state
         await loadCart(cartId);
       }
-      
+
       state = state.copyWith(isLoading: false);
       return success;
     } catch (e) {
@@ -711,12 +781,12 @@ class MagentoNotifier extends StateNotifier<MagentoState> {
         cartId: cartId,
         itemId: itemId,
       );
-      
+
       if (success) {
         // Reload cart to get updated state
         await loadCart(cartId);
       }
-      
+
       state = state.copyWith(isLoading: false);
       return success;
     } catch (e) {
@@ -759,7 +829,7 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
     _aiService = AIInvestmentAdvisorService();
     _authService = AuthService();
     _databaseService = DatabaseService();
-    
+
     // Initialize services
     _taxLienService.initialize();
   }
@@ -828,6 +898,10 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
       appBar: AppBar(
         title: const Text('TaxLien.online'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        actions: const [
+          CompactCloudStatusWidget(),
+          SizedBox(width: 16),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -884,18 +958,18 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Quick actions
             Text(
               'Быстрые действия',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 16),
-            
+
             GridView.count(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -932,24 +1006,25 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
                   Colors.orange,
                   () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Раздел обучения в разработке')),
+                      const SnackBar(
+                          content: Text('Раздел обучения в разработке')),
                     );
                   },
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // Features section
             Text(
               'Новые возможности',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 16),
-            
+
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -1000,17 +1075,20 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
                         Chip(
                           label: Text('Анализ рисков'),
                           backgroundColor: Colors.green,
-                          labelStyle: TextStyle(color: Colors.white, fontSize: 12),
+                          labelStyle:
+                              TextStyle(color: Colors.white, fontSize: 12),
                         ),
                         Chip(
                           label: Text('Персональные рекомендации'),
                           backgroundColor: Colors.blue,
-                          labelStyle: TextStyle(color: Colors.white, fontSize: 12),
+                          labelStyle:
+                              TextStyle(color: Colors.white, fontSize: 12),
                         ),
                         Chip(
                           label: Text('Рыночная аналитика'),
                           backgroundColor: Colors.orange,
-                          labelStyle: TextStyle(color: Colors.white, fontSize: 12),
+                          labelStyle:
+                              TextStyle(color: Colors.white, fontSize: 12),
                         ),
                       ],
                     ),
@@ -1082,25 +1160,155 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Профиль'),
+        actions: const [
+          CloudStatusWidget(
+            showIcon: true,
+            showLabel: true,
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          ),
+          SizedBox(width: 16),
+        ],
       ),
-      body: const Center(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.person,
-              size: 80,
-              color: Colors.grey,
+            // Profile Header
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceVariant,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                children: [
+                  const CircleAvatar(
+                    radius: 40,
+                    child: Icon(Icons.person, size: 40),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Профиль пользователя',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Гость',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.grey[600],
+                        ),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 16),
-            Text(
-              'Профиль пользователя',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+
+            const SizedBox(height: 24),
+
+            // Settings
+            Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.account_circle),
+                    title: const Text('Личные данные'),
+                    subtitle: const Text('Управление профилем'),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('В разработке')),
+                      );
+                    },
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.security),
+                    title: const Text('Безопасность'),
+                    subtitle:
+                        const Text('Пароль и двухфакторная аутентификация'),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('В разработке')),
+                      );
+                    },
+                  ),
+                  const Divider(height: 1),
+                  const CloudSettingsTile(),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.notifications),
+                    title: const Text('Уведомления'),
+                    subtitle: const Text('Настройка push-уведомлений'),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('В разработке')),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 8),
-            Text(
-              'Раздел в разработке',
-              style: TextStyle(color: Colors.grey),
+
+            const SizedBox(height: 24),
+
+            // App Info
+            Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.info),
+                    title: const Text('О приложении'),
+                    subtitle: Text('Версия ${AppConstants.appVersion}'),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      showAboutDialog(
+                        context: context,
+                        applicationName: AppConstants.appName,
+                        applicationVersion: AppConstants.appVersion,
+                        applicationLegalese: '© 2024 TaxLien.online',
+                        children: [
+                          const SizedBox(height: 16),
+                          Text(AppConstants.appDescription),
+                        ],
+                      );
+                    },
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.help),
+                    title: const Text('Помощь'),
+                    subtitle: const Text('FAQ и поддержка'),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('В разработке')),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 24),
+
+            // Logout/Login Button
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Функция входа в разработке')),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: const Text('Войти в аккаунт'),
+              ),
             ),
           ],
         ),
@@ -1108,5 +1316,3 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
     );
   }
 }
-
-

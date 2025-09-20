@@ -4,10 +4,10 @@ import '../services/auth_service.dart';
 import '../services/theme_service.dart';
 import '../services/localization_service.dart';
 import '../services/onboarding_service.dart';
-import '../services/wallet_service.dart';
-import '../services/yuku_service.dart';
-import '../services/plug_wallet_service.dart';
-import '../services/nft_service.dart';
+// Services replaced with flutter_nft and flutter_icp libraries
+import 'package:flutter_nft/flutter_nft.dart';
+import 'package:flutter_icp/flutter_icp.dart';
+import '../core/constants/app_constants.dart';
 import 'wallet_settings_screen.dart';
 import 'yuku_marketplace_screen.dart';
 import 'yuku_integration_demo_screen.dart';
@@ -18,10 +18,8 @@ class ProfileScreen extends StatefulWidget {
   final ThemeService themeService;
   final LocalizationService localizationService;
   final OnboardingService onboardingService;
-  final WalletService walletService;
-  final YukuService yukuService;
-  final PlugWalletService plugWalletService;
-  final NFTService nftService;
+  // Services replaced with NFT client
+  final NFTClient nftClient;
 
   const ProfileScreen({
     super.key,
@@ -29,10 +27,7 @@ class ProfileScreen extends StatefulWidget {
     required this.themeService,
     required this.localizationService,
     required this.onboardingService,
-    required this.walletService,
-    required this.yukuService,
-    required this.plugWalletService,
-    required this.nftService,
+    required this.nftClient,
   });
 
   @override
@@ -59,24 +54,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             // Информация о пользователе
             _buildUserInfoCard(),
-            
+
             const SizedBox(height: 16),
-            
+
             // Баланс и финансы
             _buildBalanceCard(),
-            
+
             const SizedBox(height: 16),
-            
+
             // Быстрые действия
             _buildQuickActionsCard(),
-            
+
             const SizedBox(height: 16),
-            
+
             // Настройки приложения
             _buildAppSettingsCard(),
-            
+
             const SizedBox(height: 16),
-            
+
             // Информация о приложении
             _buildAppInfoCard(),
           ],
@@ -87,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildUserInfoCard() {
     final user = widget.authService.currentUser;
-    
+
     if (user == null) {
       return Card(
         child: Padding(
@@ -106,7 +101,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                AppLocalizations.of(context)?.loginForAccess ?? 'Log in to access features',
+                AppLocalizations.of(context)?.loginForAccess ??
+                    'Log in to access features',
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
@@ -116,14 +112,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () => _showLoginDialog(context),
-                      child: Text(AppLocalizations.of(context)?.login ?? 'Login'),
+                      child:
+                          Text(AppLocalizations.of(context)?.login ?? 'Login'),
                     ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () => _showRegisterDialog(context),
-                      child: Text(AppLocalizations.of(context)?.register ?? 'Register'),
+                      child: Text(
+                          AppLocalizations.of(context)?.register ?? 'Register'),
                     ),
                   ),
                 ],
@@ -160,16 +158,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Text(
               user.email,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
             ),
             if (user.phone != null) ...[
               const SizedBox(height: 4),
               Text(
                 user.phone!,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
               ),
             ],
             const SizedBox(height: 16),
@@ -189,7 +187,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
                     ),
-                    child: Text(AppLocalizations.of(context)?.logout ?? 'Logout'),
+                    child:
+                        Text(AppLocalizations.of(context)?.logout ?? 'Logout'),
                   ),
                 ),
               ],
@@ -202,7 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildBalanceCard() {
     final user = widget.authService.currentUser;
-    
+
     if (user == null) {
       return const SizedBox.shrink();
     }
@@ -236,10 +235,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       Text(
                         '\$${user.balance.toStringAsFixed(2)}',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                       ),
                     ],
                   ),
@@ -282,20 +282,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             _buildActionTile(
               icon: Icons.history,
-              title: AppLocalizations.of(context)?.transactionHistory ?? 'Transaction History',
-              subtitle: AppLocalizations.of(context)?.viewAllTransactions ?? 'View all transactions',
+              title: AppLocalizations.of(context)?.transactionHistory ??
+                  'Transaction History',
+              subtitle: AppLocalizations.of(context)?.viewAllTransactions ??
+                  'View all transactions',
               onTap: () => _showTransactionHistory(context),
             ),
             _buildActionTile(
               icon: Icons.favorite,
-              title: AppLocalizations.of(context)?.favoriteLiens ?? 'Favorite Liens',
-              subtitle: AppLocalizations.of(context)?.savedLiens ?? 'Your saved liens',
+              title: AppLocalizations.of(context)?.favoriteLiens ??
+                  'Favorite Liens',
+              subtitle: AppLocalizations.of(context)?.savedLiens ??
+                  'Your saved liens',
               onTap: () => _showFavorites(context),
             ),
             _buildActionTile(
               icon: Icons.notifications,
-              title: AppLocalizations.of(context)?.notifications ?? 'Notifications',
-              subtitle: AppLocalizations.of(context)?.notificationSettings ?? 'Notification settings',
+              title: AppLocalizations.of(context)?.notifications ??
+                  'Notifications',
+              subtitle: AppLocalizations.of(context)?.notificationSettings ??
+                  'Notification settings',
               onTap: () => _showNotificationsSettings(context),
             ),
             _buildActionTile(
@@ -337,7 +343,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _buildSettingTile(
               icon: Icons.dark_mode,
               title: AppLocalizations.of(context)?.theme ?? 'Theme',
-              subtitle: widget.themeService.isDarkMode ? (AppLocalizations.of(context)?.dark ?? 'Dark') : (AppLocalizations.of(context)?.light ?? 'Light'),
+              subtitle: widget.themeService.isDarkMode
+                  ? (AppLocalizations.of(context)?.dark ?? 'Dark')
+                  : (AppLocalizations.of(context)?.light ?? 'Light'),
               onTap: () {
                 widget.themeService.toggleTheme();
                 setState(() {});
@@ -346,20 +354,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _buildSettingTile(
               icon: Icons.security,
               title: AppLocalizations.of(context)?.security ?? 'Security',
-              subtitle: AppLocalizations.of(context)?.securitySettings ?? 'Security settings',
+              subtitle: AppLocalizations.of(context)?.securitySettings ??
+                  'Security settings',
               onTap: () => _showSecuritySettings(context),
             ),
             _buildSettingTile(
               icon: Icons.privacy_tip,
               title: AppLocalizations.of(context)?.privacy ?? 'Privacy',
-              subtitle: AppLocalizations.of(context)?.privacySettings ?? 'Privacy settings',
+              subtitle: AppLocalizations.of(context)?.privacySettings ??
+                  'Privacy settings',
               onTap: () => _showPrivacySettings(context),
             ),
             _buildSettingTile(
               icon: Icons.account_balance_wallet,
               title: 'Wallet Settings',
-              subtitle: widget.walletService.isWalletConnected 
-                  ? 'Connected: ${widget.walletService.connectedWallet?.name ?? "Unknown"}'
+              subtitle: widget.nftClient
+                      .getWalletProvider(BlockchainNetwork.icp)
+                      .isConnected
+                  ? 'Connected: Plug Wallet'
                   : 'Not connected',
               onTap: () => _showWalletSettings(context),
             ),
@@ -394,14 +406,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             _buildInfoTile(
               icon: Icons.description,
-              title: AppLocalizations.of(context)?.termsOfService ?? 'Terms of Service',
-              subtitle: AppLocalizations.of(context)?.userAgreement ?? 'User Agreement',
+              title: AppLocalizations.of(context)?.termsOfService ??
+                  'Terms of Service',
+              subtitle: AppLocalizations.of(context)?.userAgreement ??
+                  'User Agreement',
               onTap: () => _showTermsOfService(context),
             ),
             _buildInfoTile(
               icon: Icons.description,
-              title: AppLocalizations.of(context)?.privacyPolicy ?? 'Privacy Policy',
-              subtitle: AppLocalizations.of(context)?.dataProcessing ?? 'Personal data processing',
+              title: AppLocalizations.of(context)?.privacyPolicy ??
+                  'Privacy Policy',
+              subtitle: AppLocalizations.of(context)?.dataProcessing ??
+                  'Personal data processing',
               onTap: () => _showPrivacyPolicy(context),
             ),
           ],
@@ -450,7 +466,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       leading: Icon(icon),
       title: Text(title),
       subtitle: Text(subtitle),
-      trailing: onTap != null ? const Icon(Icons.arrow_forward_ios, size: 16) : null,
+      trailing:
+          onTap != null ? const Icon(Icons.arrow_forward_ios, size: 16) : null,
       onTap: onTap,
     );
   }
@@ -463,7 +480,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)?.loginToAccount ?? 'Login to Account'),
+        title: Text(
+            AppLocalizations.of(context)?.loginToAccount ?? 'Login to Account'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -501,12 +519,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.pop(context);
                 setState(() {});
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(AppLocalizations.of(context)?.loginSuccessful ?? 'Login successful!')),
+                  SnackBar(
+                      content: Text(
+                          AppLocalizations.of(context)?.loginSuccessful ??
+                              'Login successful!')),
                 );
               } else if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(widget.authService.error ?? (AppLocalizations.of(context)?.loginError ?? 'Login error')),
+                    content: Text(widget.authService.error ??
+                        (AppLocalizations.of(context)?.loginError ??
+                            'Login error')),
                   ),
                 );
               }
@@ -527,7 +550,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)?.registration ?? 'Registration'),
+        title:
+            Text(AppLocalizations.of(context)?.registration ?? 'Registration'),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -535,7 +559,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               TextField(
                 controller: firstNameController,
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)?.firstName ?? 'First Name',
+                  labelText:
+                      AppLocalizations.of(context)?.firstName ?? 'First Name',
                   border: const OutlineInputBorder(),
                 ),
               ),
@@ -543,7 +568,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               TextField(
                 controller: lastNameController,
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)?.lastName ?? 'Last Name',
+                  labelText:
+                      AppLocalizations.of(context)?.lastName ?? 'Last Name',
                   border: const OutlineInputBorder(),
                 ),
               ),
@@ -560,7 +586,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               TextField(
                 controller: passwordController,
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)?.password ?? 'Password',
+                  labelText:
+                      AppLocalizations.of(context)?.password ?? 'Password',
                   border: const OutlineInputBorder(),
                 ),
                 obscureText: true,
@@ -585,17 +612,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.pop(context);
                 setState(() {});
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(AppLocalizations.of(context)?.registrationSuccessful ?? 'Registration successful!')),
+                  SnackBar(
+                      content: Text(AppLocalizations.of(context)
+                              ?.registrationSuccessful ??
+                          'Registration successful!')),
                 );
               } else if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(widget.authService.error ?? (AppLocalizations.of(context)?.registrationError ?? 'Registration error')),
+                    content: Text(widget.authService.error ??
+                        (AppLocalizations.of(context)?.registrationError ??
+                            'Registration error')),
                   ),
                 );
               }
             },
-            child: Text(AppLocalizations.of(context)?.registerAccount ?? 'Register'),
+            child: Text(
+                AppLocalizations.of(context)?.registerAccount ?? 'Register'),
           ),
         ],
       ),
@@ -606,8 +639,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)?.logoutConfirmation ?? 'Logout Confirmation'),
-        content: Text(AppLocalizations.of(context)?.logoutConfirmationMessage ?? 'Are you sure you want to logout?'),
+        title: Text(AppLocalizations.of(context)?.logoutConfirmation ??
+            'Logout Confirmation'),
+        content: Text(AppLocalizations.of(context)?.logoutConfirmationMessage ??
+            'Are you sure you want to logout?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -686,7 +721,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               final success = await widget.authService.updateProfile(
                 firstName: firstNameController.text,
                 lastName: lastNameController.text,
-                phone: phoneController.text.isNotEmpty ? phoneController.text : null,
+                phone: phoneController.text.isNotEmpty
+                    ? phoneController.text
+                    : null,
               );
               if (success && context.mounted) {
                 Navigator.pop(context);
@@ -697,7 +734,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               } else if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(widget.authService.error ?? 'Ошибка обновления'),
+                    content:
+                        Text(widget.authService.error ?? 'Ошибка обновления'),
                   ),
                 );
               }
@@ -761,8 +799,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => YukuMarketplaceScreen(
-          yukuService: widget.yukuService,
-          nftService: widget.nftService,
+          nftClient: widget.nftClient,
         ),
       ),
     );
@@ -773,8 +810,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => YukuIntegrationDemoScreen(
-          yukuService: widget.yukuService,
-          nftService: widget.nftService,
+          nftClient: widget.nftClient,
         ),
       ),
     );
@@ -844,7 +880,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => WalletSettingsScreen(
-          walletService: widget.walletService,
+          nftClient: widget.nftClient,
         ),
       ),
     );
@@ -854,7 +890,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => PlugWalletScreen(
-          plugWalletService: widget.plugWalletService,
+          nftClient: widget.nftClient,
         ),
       ),
     );

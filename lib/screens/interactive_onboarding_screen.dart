@@ -45,11 +45,12 @@ class InteractiveOnboardingScreen extends StatefulWidget {
   });
 
   @override
-  State<InteractiveOnboardingScreen> createState() => _InteractiveOnboardingScreenState();
+  State<InteractiveOnboardingScreen> createState() =>
+      _InteractiveOnboardingScreenState();
 }
 
-class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScreen>
-    with TickerProviderStateMixin {
+class _InteractiveOnboardingScreenState
+    extends State<InteractiveOnboardingScreen> with TickerProviderStateMixin {
   late PageController _pageController;
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
@@ -74,35 +75,52 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
       'FL',
       'Florida',
       [
-        CountyData('fl_dixie', 'Dixie County', 'FL', 'High interest rates, rural properties'),
-        CountyData('fl_columbia', 'Columbia County', 'FL', 'Mixed urban/rural, good returns'),
-        CountyData('fl_lafayette', 'Lafayette County', 'FL', 'Agricultural land, stable values'),
-        CountyData('fl_bradford', 'Bradford County', 'FL', 'Small county, high competition'),
-        CountyData('fl_okeechobee', 'Okeechobee County', 'FL', 'Lake area, tourism potential'),
-        CountyData('fl_suwannee', 'Suwannee County', 'FL', 'River properties, natural beauty'),
-        CountyData('fl_union', 'Union County', 'FL', 'Forest land, hunting properties'),
-        CountyData('fl_clay', 'Clay County', 'FL', 'Suburban growth, family homes'),
-        CountyData('fl_alachua', 'Alachua County', 'FL', 'University town, student housing'),
-        CountyData('fl_polk', 'Polk County', 'FL', 'Central location, diverse properties'),
+        CountyData('fl_dixie', 'Dixie County', 'FL',
+            'High interest rates, rural properties'),
+        CountyData('fl_columbia', 'Columbia County', 'FL',
+            'Mixed urban/rural, good returns'),
+        CountyData('fl_lafayette', 'Lafayette County', 'FL',
+            'Agricultural land, stable values'),
+        CountyData('fl_bradford', 'Bradford County', 'FL',
+            'Small county, high competition'),
+        CountyData('fl_okeechobee', 'Okeechobee County', 'FL',
+            'Lake area, tourism potential'),
+        CountyData('fl_suwannee', 'Suwannee County', 'FL',
+            'River properties, natural beauty'),
+        CountyData('fl_union', 'Union County', 'FL',
+            'Forest land, hunting properties'),
+        CountyData(
+            'fl_clay', 'Clay County', 'FL', 'Suburban growth, family homes'),
+        CountyData('fl_alachua', 'Alachua County', 'FL',
+            'University town, student housing'),
+        CountyData('fl_polk', 'Polk County', 'FL',
+            'Central location, diverse properties'),
       ],
     ),
     StateData(
       'TX',
       'Texas',
       [
-        CountyData('tx_harris', 'Harris County', 'TX', 'Houston metro area, diverse opportunities'),
-        CountyData('tx_dallas', 'Dallas County', 'TX', 'Dallas metro area, commercial properties'),
-        CountyData('tx_travis', 'Travis County', 'TX', 'Austin area, tech boom properties'),
-        CountyData('tx_bexar', 'Bexar County', 'TX', 'San Antonio area, historic properties'),
+        CountyData('tx_harris', 'Harris County', 'TX',
+            'Houston metro area, diverse opportunities'),
+        CountyData('tx_dallas', 'Dallas County', 'TX',
+            'Dallas metro area, commercial properties'),
+        CountyData('tx_travis', 'Travis County', 'TX',
+            'Austin area, tech boom properties'),
+        CountyData('tx_bexar', 'Bexar County', 'TX',
+            'San Antonio area, historic properties'),
       ],
     ),
     StateData(
       'CA',
       'California',
       [
-        CountyData('ca_los_angeles', 'Los Angeles County', 'CA', 'LA metro area, high-value properties'),
-        CountyData('ca_san_diego', 'San Diego County', 'CA', 'Coastal properties, tourism potential'),
-        CountyData('ca_orange', 'Orange County', 'CA', 'Suburban growth, family homes'),
+        CountyData('ca_los_angeles', 'Los Angeles County', 'CA',
+            'LA metro area, high-value properties'),
+        CountyData('ca_san_diego', 'San Diego County', 'CA',
+            'Coastal properties, tourism potential'),
+        CountyData('ca_orange', 'Orange County', 'CA',
+            'Suburban growth, family homes'),
       ],
     ),
   ];
@@ -184,8 +202,9 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0.3, 0.0),
       end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeOut));
-    
+    ).animate(
+        CurvedAnimation(parent: _animationController, curve: Curves.easeOut));
+
     _animationController.forward();
   }
 
@@ -241,7 +260,10 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                   decoration: BoxDecoration(
                     color: index <= _currentPage
                         ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                        : Theme.of(context)
+                            .colorScheme
+                            .outline
+                            .withOpacity(0.3),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -252,8 +274,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
           Text(
             'Step ${_currentPage + 1} of ${_steps.length}',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
           ),
         ],
       ),
@@ -273,16 +295,16 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
               Text(
                 step.title,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
               ),
               const SizedBox(height: 8),
               Text(
                 step.subtitle,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
               ),
               const SizedBox(height: 32),
               Expanded(
@@ -341,17 +363,17 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         Text(
           'Let\'s personalize your investment experience',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+                fontWeight: FontWeight.w600,
+              ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
         Text(
           'We\'ll ask you a few questions to customize your dashboard and investment recommendations.',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-            height: 1.5,
-          ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                height: 1.5,
+              ),
           textAlign: TextAlign.center,
         ),
       ],
@@ -364,7 +386,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         _buildOptionCard(
           title: 'Tax Liens',
           subtitle: 'Earn guaranteed interest rates',
-          description: 'Invest in unpaid property taxes and earn high interest rates (up to 18%) with government backing.',
+          description:
+              'Invest in unpaid property taxes and earn high interest rates (up to 18%) with government backing.',
           icon: Icons.receipt_long,
           isSelected: _selectedInvestmentTypes.contains('lien'),
           onTap: () {
@@ -381,7 +404,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         _buildOptionCard(
           title: 'Tax Deeds',
           subtitle: 'Own the property',
-          description: 'Purchase properties at auction for pennies on the dollar when owners don\'t redeem their liens.',
+          description:
+              'Purchase properties at auction for pennies on the dollar when owners don\'t redeem their liens.',
           icon: Icons.home,
           isSelected: _selectedInvestmentTypes.contains('deed'),
           onTap: () {
@@ -399,7 +423,10 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+              color: Theme.of(context)
+                  .colorScheme
+                  .primaryContainer
+                  .withOpacity(0.3),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -414,8 +441,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                   child: Text(
                     'You can select both investment types to diversify your portfolio',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                   ),
                 ),
               ],
@@ -432,7 +459,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         _buildOptionCard(
           title: 'Guaranteed Profit',
           subtitle: 'Steady income from interest',
-          description: 'Focus on tax liens with high interest rates for predictable returns.',
+          description:
+              'Focus on tax liens with high interest rates for predictable returns.',
           icon: Icons.security,
           isSelected: _selectedProfitType == 'guaranteed',
           onTap: () => setState(() => _selectedProfitType = 'guaranteed'),
@@ -441,7 +469,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         _buildOptionCard(
           title: 'Collateral Property',
           subtitle: 'Potential for property ownership',
-          description: 'Invest in liens where property owners are likely to default, giving you ownership.',
+          description:
+              'Invest in liens where property owners are likely to default, giving you ownership.',
           icon: Icons.key,
           isSelected: _selectedProfitType == 'collateral',
           onTap: () => setState(() => _selectedProfitType = 'collateral'),
@@ -462,8 +491,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         Text(
           'You can select entire states or specific counties within states',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
         ),
         const SizedBox(height: 16),
         Expanded(
@@ -473,10 +502,11 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
               final state = _availableStates[stateIndex];
               final isStateSelected = _selectedStates.contains(state.code);
               final selectedCountiesInState = _selectedCounties
-                  .where((countyId) => countyId.startsWith(state.code.toLowerCase()))
+                  .where((countyId) =>
+                      countyId.startsWith(state.code.toLowerCase()))
                   .length;
               final totalCountiesInState = state.counties.length;
-              
+
               return Card(
                 margin: const EdgeInsets.only(bottom: 16),
                 child: ExpansionTile(
@@ -490,8 +520,9 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                               // Select entire state
                               _selectedStates.add(state.code);
                               // Remove individual counties from this state
-                              _selectedCounties.removeWhere((countyId) => 
-                                  countyId.startsWith(state.code.toLowerCase()));
+                              _selectedCounties.removeWhere((countyId) =>
+                                  countyId
+                                      .startsWith(state.code.toLowerCase()));
                             } else {
                               // Deselect entire state
                               _selectedStates.remove(state.code);
@@ -506,23 +537,34 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                           children: [
                             Text(
                               '${state.name} (${state.code})',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
                             if (isStateSelected)
                               Text(
                                 'All ${totalCountiesInState} counties selected',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
                               )
                             else if (selectedCountiesInState > 0)
                               Text(
                                 '$selectedCountiesInState of $totalCountiesInState counties selected',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
                               ),
                           ],
                         ),
@@ -536,8 +578,9 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Column(
                           children: state.counties.map((county) {
-                            final isCountySelected = _selectedCounties.contains(county.id);
-                            
+                            final isCountySelected =
+                                _selectedCounties.contains(county.id);
+
                             return CheckboxListTile(
                               title: Text(county.name),
                               subtitle: Text(county.description),
@@ -569,7 +612,10 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+              color: Theme.of(context)
+                  .colorScheme
+                  .primaryContainer
+                  .withOpacity(0.3),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
@@ -578,9 +624,9 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                 Text(
                   'Selected Locations:',
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                 ),
                 const SizedBox(height: 8),
                 if (_selectedStates.isNotEmpty) ...[
@@ -610,9 +656,9 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         Text(
           '\$${_investmentAmount.toInt()}',
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.primary,
-          ),
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
         ),
         const SizedBox(height: 24),
         Slider(
@@ -639,8 +685,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         Text(
           'This will be your typical investment amount per lien',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
           textAlign: TextAlign.center,
         ),
       ],
@@ -653,7 +699,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         _buildExperienceCard(
           title: 'Beginner',
           subtitle: 'New to tax lien investing',
-          description: 'We\'ll provide detailed explanations and conservative recommendations.',
+          description:
+              'We\'ll provide detailed explanations and conservative recommendations.',
           icon: Icons.school,
           isSelected: _experienceLevel == 'beginner',
           onTap: () => setState(() => _experienceLevel = 'beginner'),
@@ -662,7 +709,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         _buildExperienceCard(
           title: 'Intermediate',
           subtitle: 'Some experience with liens',
-          description: 'Balanced approach with moderate risk and detailed analytics.',
+          description:
+              'Balanced approach with moderate risk and detailed analytics.',
           icon: Icons.trending_up,
           isSelected: _experienceLevel == 'intermediate',
           onTap: () => setState(() => _experienceLevel = 'intermediate'),
@@ -671,7 +719,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         _buildExperienceCard(
           title: 'Expert',
           subtitle: 'Experienced investor',
-          description: 'Advanced tools and high-risk, high-reward opportunities.',
+          description:
+              'Advanced tools and high-risk, high-reward opportunities.',
           icon: Icons.psychology,
           isSelected: _experienceLevel == 'expert',
           onTap: () => setState(() => _experienceLevel = 'expert'),
@@ -685,7 +734,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
       children: [
         SwitchListTile(
           title: const Text('Push Notifications'),
-          subtitle: const Text('Get alerts for new auctions and important updates'),
+          subtitle:
+              const Text('Get alerts for new auctions and important updates'),
           value: _wantsNotifications,
           onChanged: (value) => setState(() => _wantsNotifications = value),
           secondary: const Icon(Icons.notifications),
@@ -693,7 +743,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         const Divider(),
         SwitchListTile(
           title: const Text('Auto-Bidding'),
-          subtitle: const Text('Automatically place bids up to your maximum amount'),
+          subtitle:
+              const Text('Automatically place bids up to your maximum amount'),
           value: _wantsAutoBidding,
           onChanged: (value) => setState(() => _wantsAutoBidding = value),
           secondary: const Icon(Icons.auto_awesome),
@@ -722,17 +773,17 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         Text(
           'NFT Tokenization',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+                fontWeight: FontWeight.w600,
+              ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
         Text(
           'Transform your tax lien investments into digital assets on the blockchain for enhanced liquidity and transparency.',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-            height: 1.5,
-          ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                height: 1.5,
+              ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 32),
@@ -766,8 +817,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         Text(
           'Would you like to explore NFT tokenization options?',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+                fontWeight: FontWeight.w600,
+              ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
@@ -817,17 +868,17 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         Text(
           'Connect Your Wallet',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+                fontWeight: FontWeight.w600,
+              ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
         Text(
           'Connect your crypto wallet to manage NFT tax liens, participate in trading, and access DeFi features.',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-            height: 1.5,
-          ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                height: 1.5,
+              ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 32),
@@ -858,8 +909,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         Text(
           'Would you like to connect a wallet now?',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+                fontWeight: FontWeight.w600,
+              ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
@@ -929,23 +980,23 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   subtitle,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: color,
-                    fontWeight: FontWeight.w500,
-                  ),
+                        color: color,
+                        fontWeight: FontWeight.w500,
+                      ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   description,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                 ),
               ],
             ),
@@ -991,24 +1042,26 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                   Text(
                     title,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: isSelected ? color : null,
-                    ),
+                          fontWeight: FontWeight.w600,
+                          color: isSelected ? color : null,
+                        ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     subtitle,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: isSelected ? color : Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.w500,
-                    ),
+                          color: isSelected
+                              ? color
+                              : Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w500,
+                        ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     description,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
                   ),
                 ],
               ),
@@ -1069,21 +1122,43 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         Text(
           'Your Investment Profile',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 24),
-        _buildSummaryItem('Investment Type', _selectedInvestmentTypes.length > 0 ? _selectedInvestmentTypes.map((type) => type == 'lien' ? 'Tax Liens' : 'Tax Deeds').join(', ') : 'None selected'),
-        _buildSummaryItem('Profit Focus', _selectedProfitType == 'guaranteed' ? 'Guaranteed Interest' : 'Property Ownership'),
+        _buildSummaryItem(
+            'Investment Type',
+            _selectedInvestmentTypes.length > 0
+                ? _selectedInvestmentTypes
+                    .map((type) => type == 'lien' ? 'Tax Liens' : 'Tax Deeds')
+                    .join(', ')
+                : 'None selected'),
+        _buildSummaryItem(
+            'Profit Focus',
+            _selectedProfitType == 'guaranteed'
+                ? 'Guaranteed Interest'
+                : 'Property Ownership'),
         _buildSummaryItem('Locations', _buildLocationSummary()),
-        _buildSummaryItem('Investment Amount', '\$${_investmentAmount.toInt()}'),
+        _buildSummaryItem(
+            'Investment Amount', '\$${_investmentAmount.toInt()}'),
         _buildSummaryItem('Experience Level', _experienceLevel.capitalize()),
-        _buildSummaryItem('Notifications', _wantsNotifications ? 'Enabled' : 'Disabled'),
-        _buildSummaryItem('Auto-Bidding', _wantsAutoBidding ? 'Enabled' : 'Disabled'),
-        _buildSummaryItem('NFT Tokenization', widget.userPreferencesService.wantsNFTTokenization ? 'Enabled' : 'Disabled'),
+        _buildSummaryItem(
+            'Notifications', _wantsNotifications ? 'Enabled' : 'Disabled'),
+        _buildSummaryItem(
+            'Auto-Bidding', _wantsAutoBidding ? 'Enabled' : 'Disabled'),
+        _buildSummaryItem(
+            'NFT Tokenization',
+            widget.userPreferencesService.wantsNFTTokenization
+                ? 'Enabled'
+                : 'Disabled'),
         if (widget.userPreferencesService.wantsNFTTokenization) ...[
-          _buildSummaryItem('Blockchain', widget.userPreferencesService.wantsICPNFT ? 'ICP' : 'Traditional'),
-          _buildSummaryItem('NFT Allocation', '${widget.userPreferencesService.nftInvestmentPercentage.toInt()}%'),
+          _buildSummaryItem(
+              'Blockchain',
+              widget.userPreferencesService.wantsICPNFT
+                  ? 'ICP'
+                  : 'Traditional'),
+          _buildSummaryItem('NFT Allocation',
+              '${widget.userPreferencesService.nftInvestmentPercentage.toInt()}%'),
         ],
         const SizedBox(height: 32),
         Container(
@@ -1103,8 +1178,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                 child: Text(
                   'We\'ll customize your dashboard based on these preferences and show you the most relevant investment opportunities.',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  ),
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
                 ),
               ),
             ],
@@ -1136,14 +1211,14 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: isSelected 
+                  color: isSelected
                       ? Theme.of(context).colorScheme.primary
                       : Theme.of(context).colorScheme.surfaceVariant,
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: Icon(
                   icon,
-                  color: isSelected 
+                  color: isSelected
                       ? Theme.of(context).colorScheme.onPrimary
                       : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
@@ -1156,30 +1231,38 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                     Text(
                       title,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : null,
-                      ),
+                            fontWeight: FontWeight.w600,
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : null,
+                          ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.w500,
-                      ),
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.w500,
+                          ),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       description,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
+                          ),
                     ),
                   ],
                 ),
@@ -1218,14 +1301,14 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: isSelected 
+                  color: isSelected
                       ? Theme.of(context).colorScheme.primary
                       : Theme.of(context).colorScheme.surfaceVariant,
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: Icon(
                   icon,
-                  color: isSelected 
+                  color: isSelected
                       ? Theme.of(context).colorScheme.onPrimary
                       : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
@@ -1238,30 +1321,38 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
                     Text(
                       title,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : null,
-                      ),
+                            fontWeight: FontWeight.w600,
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : null,
+                          ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.w500,
-                      ),
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.w500,
+                          ),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       description,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
+                          ),
                     ),
                   ],
                 ),
@@ -1287,14 +1378,14 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
           Text(
             label,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
           ),
           Text(
             value,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ],
       ),
@@ -1303,21 +1394,23 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
 
   String _buildLocationSummary() {
     final List<String> parts = [];
-    
+
     if (_selectedStates.isNotEmpty) {
-      final stateNames = _selectedStates.map((stateCode) => 
-          _availableStates.firstWhere((s) => s.code == stateCode).name).join(', ');
+      final stateNames = _selectedStates
+          .map((stateCode) =>
+              _availableStates.firstWhere((s) => s.code == stateCode).name)
+          .join(', ');
       parts.add('States: $stateNames');
     }
-    
+
     if (_selectedCounties.isNotEmpty) {
       parts.add('Counties: ${_selectedCounties.length} selected');
     }
-    
+
     if (parts.isEmpty) {
       return 'None selected';
     }
-    
+
     return parts.join('; ');
   }
 
@@ -1342,7 +1435,8 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
           Expanded(
             child: ElevatedButton(
               onPressed: _canProceed() ? _handleNext : null,
-              child: Text(_currentPage < _steps.length - 1 ? 'Next' : 'Get Started'),
+              child: Text(
+                  _currentPage < _steps.length - 1 ? 'Next' : 'Get Started'),
             ),
           ),
         ],
@@ -1358,7 +1452,7 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
         return _selectedInvestmentTypes.isNotEmpty;
       case OnboardingStepType.profitPreference:
         return _selectedProfitType != null;
-              case OnboardingStepType.countySelection:
+      case OnboardingStepType.countySelection:
         return _selectedStates.isNotEmpty || _selectedCounties.isNotEmpty;
       case OnboardingStepType.investmentAmount:
         return _investmentAmount >= 100;
@@ -1409,27 +1503,23 @@ class _InteractiveOnboardingScreenState extends State<InteractiveOnboardingScree
       nftInvestmentPercentage: 25.0,
       createdAt: DateTime.now(),
     );
-    
+
     await widget.userPreferencesService.savePreferences(preferences);
 
     await widget.onboardingService.completeOnboarding();
-    
+
     if (mounted) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-                      builder: (context) => MainNavigationScreen(
-              localizationService: widget.localizationService,
-              themeService: widget.themeService,
-              onboardingService: widget.onboardingService,
-              taxLienService: widget.taxLienService,
-              nftService: widget.nftService,
-              walletService: widget.walletService,
-              yukuService: widget.yukuService,
-              plugWalletService: widget.plugWalletService,
-              authService: widget.authService,
-              databaseService: widget.databaseService,
-              userPreferencesService: widget.userPreferencesService,
-            ),
+          builder: (context) => MainNavigationScreen(
+            localizationService: widget.localizationService,
+            themeService: widget.themeService,
+            onboardingService: widget.onboardingService,
+            taxLienService: widget.taxLienService,
+            authService: widget.authService,
+            databaseService: widget.databaseService,
+            userPreferencesService: widget.userPreferencesService,
+          ),
         ),
       );
     }

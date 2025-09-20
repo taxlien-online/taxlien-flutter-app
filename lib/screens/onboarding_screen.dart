@@ -39,28 +39,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     OnboardingPage(
       title: 'Добро пожаловать в TaxLien Marketplace',
       subtitle: 'Платформа для инвестирования в налоговые закладные',
-      description: 'Откройте для себя мир прибыльных инвестиций в налоговые закладные. Получайте высокие проценты и диверсифицируйте свой портфель.',
+      description:
+          'Откройте для себя мир прибыльных инвестиций в налоговые закладные. Получайте высокие проценты и диверсифицируйте свой портфель.',
       icon: Icons.trending_up,
       color: Colors.blue,
     ),
     OnboardingPage(
       title: 'Как это работает',
       subtitle: 'Простой процесс инвестирования',
-      description: '1. Выберите налоговую закладную\n2. Разместите ставку\n3. Получайте проценты\n4. Дождитесь погашения или выкупа',
+      description:
+          '1. Выберите налоговую закладную\n2. Разместите ставку\n3. Получайте проценты\n4. Дождитесь погашения или выкупа',
       icon: Icons.how_to_reg,
       color: Colors.green,
     ),
     OnboardingPage(
       title: 'Безопасность и надежность',
       subtitle: 'Ваши инвестиции под защитой',
-      description: 'Все сделки защищены законодательством. Налоговые закладные - это обеспеченные инвестиции с государственной гарантией.',
+      description:
+          'Все сделки защищены законодательством. Налоговые закладные - это обеспеченные инвестиции с государственной гарантией.',
       icon: Icons.security,
       color: Colors.orange,
     ),
     OnboardingPage(
       title: 'Начните инвестировать',
       subtitle: 'Присоединяйтесь к тысячам инвесторов',
-      description: 'Создайте аккаунт и начните инвестировать уже сегодня. Минимальная сумма инвестиций от \$100.',
+      description:
+          'Создайте аккаунт и начните инвестировать уже сегодня. Минимальная сумма инвестиций от \$100.',
       icon: Icons.rocket_launch,
       color: Colors.purple,
     ),
@@ -116,27 +120,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Text(
             page.title,
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
           Text(
             page.subtitle,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: page.color,
-              fontWeight: FontWeight.w600,
-            ),
+                  color: page.color,
+                  fontWeight: FontWeight.w600,
+                ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
           Text(
             page.description,
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-              height: 1.5,
-            ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  height: 1.5,
+                ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -194,7 +198,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       _completeOnboarding();
                     }
                   },
-                  child: Text(_currentPage < _pages.length - 1 ? 'Далее' : 'Начать'),
+                  child: Text(
+                      _currentPage < _pages.length - 1 ? 'Далее' : 'Начать'),
                 ),
               ),
             ],
@@ -213,7 +218,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void _completeOnboarding() async {
     await widget.onboardingService.completeOnboarding();
-    
+
     if (mounted) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
@@ -224,6 +229,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             taxLienService: widget.taxLienService,
             authService: widget.authService,
             databaseService: widget.databaseService,
+            userPreferencesService: widget.userPreferencesService,
           ),
         ),
       );
@@ -251,4 +257,4 @@ class OnboardingPage {
     required this.icon,
     required this.color,
   });
-} 
+}

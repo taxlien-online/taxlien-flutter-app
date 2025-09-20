@@ -4,10 +4,10 @@ import '../services/localization_service.dart';
 import '../services/theme_service.dart';
 import '../services/onboarding_service.dart';
 import '../services/tax_lien_service.dart';
-import '../services/nft_service.dart';
-import '../services/wallet_service.dart';
-import '../services/yuku_service.dart';
-import '../services/plug_wallet_service.dart';
+// Replaced with flutter_nft and flutter_icp libraries
+import 'package:flutter_nft/flutter_nft.dart';
+import 'package:flutter_icp/flutter_icp.dart';
+import '../core/constants/app_constants.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import '../services/user_preferences_service.dart';
@@ -23,10 +23,7 @@ class MainNavigationScreen extends StatefulWidget {
   final ThemeService themeService;
   final OnboardingService onboardingService;
   final TaxLienService taxLienService;
-  final NFTService nftService;
-  final WalletService walletService;
-  final YukuService yukuService;
-  final PlugWalletService plugWalletService;
+  // Services replaced with NFT client from libraries
   final AuthService authService;
   final DatabaseService databaseService;
   final UserPreferencesService userPreferencesService;
@@ -37,10 +34,7 @@ class MainNavigationScreen extends StatefulWidget {
     required this.themeService,
     required this.onboardingService,
     required this.taxLienService,
-    required this.nftService,
-    required this.walletService,
-    required this.yukuService,
-    required this.plugWalletService,
+    // NFT services now handled by global NFT client
     required this.authService,
     required this.databaseService,
     required this.userPreferencesService,
@@ -86,39 +80,36 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   void initState() {
     super.initState();
     _pageController = PageController();
-    
+
     // Initialize screens
     _navigationItems[0].screen = MarketplaceScreen(
       taxLienService: widget.taxLienService,
       authService: widget.authService,
       databaseService: widget.databaseService,
     );
-    
+
     _navigationItems[1].screen = MyInvestmentsScreen(
       taxLienService: widget.taxLienService,
       authService: widget.authService,
       databaseService: widget.databaseService,
     );
-    
+
     _navigationItems[2].screen = NFTDashboardScreen(
-      nftService: widget.nftService,
+      nftClient: AppConstants.nftClient!,
       taxLienService: widget.taxLienService,
     );
-    
+
     _navigationItems[3].screen = SearchScreen(
       taxLienService: widget.taxLienService,
       databaseService: widget.databaseService,
     );
-    
+
     _navigationItems[4].screen = ProfileScreen(
       authService: widget.authService,
       themeService: widget.themeService,
       localizationService: widget.localizationService,
       onboardingService: widget.onboardingService,
-      walletService: widget.walletService,
-      yukuService: widget.yukuService,
-      plugWalletService: widget.plugWalletService,
-      nftService: widget.nftService,
+      nftClient: AppConstants.nftClient!,
     );
   }
 
@@ -193,4 +184,4 @@ class NavigationItem {
     required this.icon,
     this.screen,
   });
-} 
+}

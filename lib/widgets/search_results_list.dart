@@ -394,15 +394,12 @@ class SearchResultsList extends StatelessWidget {
     try {
       final magentoApiService = MagentoApiService();
       
-      // Get or create cart
-      String? cartId = await magentoApiService.getCartId();
-      if (cartId == null) {
-        cartId = await magentoApiService.createCart();
-      }
+      // Create cart
+      String? cartId = await magentoApiService.createCart();
       
       if (cartId != null) {
         // Add item to cart
-        final success = await magentoApiService.addItemToCart(
+        final success = await magentoApiService.addToCart(
           cartId: cartId,
           sku: product.sku,
           quantity: 1,
