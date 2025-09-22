@@ -31,8 +31,11 @@ class NFTDetailDialog extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    _getRarityColor(nft.metadata.attributes['Rarity'] ?? 'Common'),
-                    _getRarityColor(nft.metadata.attributes['Rarity'] ?? 'Common').withOpacity(0.7),
+                    _getRarityColor(
+                        nft.metadata.attributes['Rarity'] ?? 'Common'),
+                    _getRarityColor(
+                            nft.metadata.attributes['Rarity'] ?? 'Common')
+                        .withOpacity(0.7),
                   ],
                 ),
               ),
@@ -103,9 +106,10 @@ class NFTDetailDialog extends StatelessWidget {
                     // Title and basic info
                     Text(
                       nft.metadata.name,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -113,7 +117,7 @@ class NFTDetailDialog extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 16),
-                    
+
                     // Property details
                     _buildSection(
                       context,
@@ -126,38 +130,52 @@ class NFTDetailDialog extends StatelessWidget {
                         _buildInfoRow('Owner', nft.originalLien.owner),
                       ],
                     ),
-                    
+
                     const SizedBox(height: 16),
-                    
+
                     // Financial details
                     _buildSection(
                       context,
                       'Financial Information',
                       [
-                        _buildInfoRow('Assessed Value', '\$${nft.originalLien.assessedValue.toStringAsFixed(0)}'),
-                        _buildInfoRow('Tax Amount', '\$${nft.originalLien.taxAmount.toStringAsFixed(0)}'),
-                        _buildInfoRow('Interest Rate', '${nft.originalLien.interestRate}%'),
-                        _buildInfoRow('Current NFT Value', '\$${(nft.currentValue ?? 0).toStringAsFixed(0)}'),
+                        _buildInfoRow('Assessed Value',
+                            '\$${nft.originalLien.assessedValue.toStringAsFixed(0)}'),
+                        _buildInfoRow('Tax Amount',
+                            '\$${nft.originalLien.taxAmount.toStringAsFixed(0)}'),
+                        _buildInfoRow('Interest Rate',
+                            '${nft.originalLien.interestRate}%'),
+                        _buildInfoRow('Current NFT Value',
+                            '\$${(nft.currentValue ?? 0).toStringAsFixed(0)}'),
                         if (nft.originalLien.salePrice != null)
-                          _buildInfoRow('Purchase Price', '\$${nft.originalLien.salePrice!.toStringAsFixed(0)}'),
+                          _buildInfoRow('Purchase Price',
+                              '\$${nft.originalLien.salePrice!.toStringAsFixed(0)}'),
                       ],
                     ),
-                    
+
                     const SizedBox(height: 16),
-                    
+
                     // Dates
                     _buildSection(
                       context,
                       'Important Dates',
                       [
-                        _buildInfoRow('Auction Date', nft.originalLien.auctionDate.toString().split(' ')[0]),
-                        _buildInfoRow('Redemption Deadline', nft.originalLien.redemptionDeadline.toString().split(' ')[0]),
-                        _buildInfoRow('NFT Created', nft.createdAt.toString().split(' ')[0]),
+                        _buildInfoRow(
+                            'Auction Date',
+                            nft.originalLien.auctionDate
+                                .toString()
+                                .split(' ')[0]),
+                        _buildInfoRow(
+                            'Redemption Deadline',
+                            nft.originalLien.redemptionDeadline
+                                .toString()
+                                .split(' ')[0]),
+                        _buildInfoRow('NFT Created',
+                            nft.createdAt.toString().split(' ')[0]),
                       ],
                     ),
-                    
+
                     const SizedBox(height: 16),
-                    
+
                     // NFT details
                     _buildSection(
                       context,
@@ -166,20 +184,23 @@ class NFTDetailDialog extends StatelessWidget {
                         _buildInfoRow('Token ID', nft.tokenId),
                         _buildInfoRow('Owner Address', nft.ownerAddress),
                         _buildInfoRow('Status', nft.status.toUpperCase()),
-                        _buildInfoRow('Risk Level', nft.metadata.attributes['Risk Level'] ?? 'Low'),
+                        _buildInfoRow('Risk Level',
+                            nft.metadata.attributes['Risk Level'] ?? 'Low'),
                       ],
                     ),
-                    
+
                     const SizedBox(height: 16),
-                    
+
                     // Transaction history
                     if (nft.transactionHistory.isNotEmpty)
                       _buildSection(
                         context,
                         'Transaction History',
-                        nft.transactionHistory.map((tx) => _buildInfoRow('', tx)).toList(),
+                        nft.transactionHistory
+                            .map((tx) => _buildInfoRow('', tx))
+                            .toList(),
                       ),
-                    
+
                     const SizedBox(height: 16),
                   ],
                 ),
@@ -218,22 +239,24 @@ class NFTDetailDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(BuildContext context, String title, List<Widget> children) {
+  Widget _buildSection(
+      BuildContext context, String title, List<Widget> children) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.primary,
-          ),
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
         ),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+            color:
+                Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
@@ -312,7 +335,7 @@ class NFTDetailDialog extends StatelessWidget {
               subtitle: const Text('Share using system share sheet'),
               onTap: () {
                 Navigator.pop(context);
-                _shareViaSystem(nft);
+                _shareViaSystem(context, nft);
               },
             ),
             ListTile(
@@ -321,7 +344,7 @@ class NFTDetailDialog extends StatelessWidget {
               subtitle: const Text('Create QR code for this NFT'),
               onTap: () {
                 Navigator.pop(context);
-                _generateQRCode(nft);
+                _generateQRCode(context, nft);
               },
             ),
           ],
@@ -347,17 +370,17 @@ class NFTDetailDialog extends StatelessWidget {
     );
   }
 
-  void _shareViaSystem(TaxLienNFT nft) {
+  void _shareViaSystem(BuildContext context, TaxLienNFT nft) {
     // In a real implementation, this would use the share_plus package
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Sharing ${nft.name}...'),
+        content: Text('Sharing ${nft.metadata.name}...'),
         backgroundColor: Colors.blue,
       ),
     );
   }
 
-  void _generateQRCode(NFT nft) {
+  void _generateQRCode(BuildContext context, TaxLienNFT nft) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -387,7 +410,7 @@ class NFTDetailDialog extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'Scan this QR code to view ${nft.name}',
+              'Scan this QR code to view ${nft.metadata.name}',
               textAlign: TextAlign.center,
             ),
           ],

@@ -67,16 +67,19 @@ class MagentoApiService extends ChangeNotifier {
       case DioExceptionType.badResponse:
         final statusCode = error.response?.statusCode;
         final responseData = error.response?.data;
-        
+
         if (statusCode == 401) {
           _error = 'Authentication failed. Please login again.';
           _customerToken = null;
         } else if (statusCode == 403) {
-          _error = 'Access denied. You don\'t have permission to perform this action.';
+          _error =
+              'Access denied. You don\'t have permission to perform this action.';
         } else if (statusCode == 404) {
           _error = 'Resource not found.';
         } else if (statusCode == 422) {
-          final message = responseData is Map ? responseData['message'] : 'Validation error.';
+          final message = responseData is Map
+              ? responseData['message']
+              : 'Validation error.';
           _error = message;
         } else if (statusCode == 500) {
           _error = 'Server error. Please try again later.';
@@ -169,7 +172,7 @@ class MagentoApiService extends ChangeNotifier {
   Future<bool> getGuestToken() async {
     try {
       final response = await _dio.post('/integration/guest-cart');
-      
+
       if (response.statusCode == 200) {
         _guestToken = response.data;
         return true;
@@ -208,7 +211,7 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.get('/customers/me');
-      
+
       if (response.statusCode == 200) {
         return MagentoCustomer.fromJson(response.data);
       }
@@ -286,24 +289,34 @@ class MagentoApiService extends ChangeNotifier {
       };
 
       if (searchQuery != null && searchQuery.isNotEmpty) {
-        queryParams['searchCriteria[filterGroups][0][filters][0][field]'] = 'name';
-        queryParams['searchCriteria[filterGroups][0][filters][0][value]'] = '%$searchQuery%';
-        queryParams['searchCriteria[filterGroups][0][filters][0][conditionType]'] = 'like';
+        queryParams['searchCriteria[filterGroups][0][filters][0][field]'] =
+            'name';
+        queryParams['searchCriteria[filterGroups][0][filters][0][value]'] =
+            '%$searchQuery%';
+        queryParams[
+                'searchCriteria[filterGroups][0][filters][0][conditionType]'] =
+            'like';
       }
 
       if (categoryId != null) {
-        queryParams['searchCriteria[filterGroups][1][filters][0][field]'] = 'category_id';
-        queryParams['searchCriteria[filterGroups][1][filters][0][value]'] = categoryId;
-        queryParams['searchCriteria[filterGroups][1][filters][0][conditionType]'] = 'eq';
+        queryParams['searchCriteria[filterGroups][1][filters][0][field]'] =
+            'category_id';
+        queryParams['searchCriteria[filterGroups][1][filters][0][value]'] =
+            categoryId;
+        queryParams[
+                'searchCriteria[filterGroups][1][filters][0][conditionType]'] =
+            'eq';
       }
 
       if (sortBy != null) {
         queryParams['searchCriteria[sortOrders][0][field]'] = sortBy;
-        queryParams['searchCriteria[sortOrders][0][direction]'] = sortOrder ?? 'ASC';
+        queryParams['searchCriteria[sortOrders][0][direction]'] =
+            sortOrder ?? 'ASC';
       }
 
-      final response = await _dio.get('/products', queryParameters: queryParams);
-      
+      final response =
+          await _dio.get('/products', queryParameters: queryParams);
+
       if (response.statusCode == 200) {
         return MagentoProductList.fromJson(response.data);
       }
@@ -322,7 +335,7 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.get('/products/$sku');
-      
+
       if (response.statusCode == 200) {
         return MagentoProduct.fromJson(response.data);
       }
@@ -341,10 +354,12 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.get('/categories');
-      
+
       if (response.statusCode == 200) {
         final List<dynamic> categoriesData = response.data['children_data'];
-        return categoriesData.map((json) => MagentoCategory.fromJson(json)).toList();
+        return categoriesData
+            .map((json) => MagentoCategory.fromJson(json))
+            .toList();
       }
       return null;
     } catch (e) {
@@ -367,7 +382,7 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.post('/guest-carts');
-      
+
       if (response.statusCode == 200) {
         return response.data;
       }
@@ -386,7 +401,7 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.get('/guest-carts/$cartId');
-      
+
       if (response.statusCode == 200) {
         return MagentoCart.fromJson(response.data);
       }
@@ -417,8 +432,9 @@ class MagentoApiService extends ChangeNotifier {
         },
       };
 
-      final response = await _dio.post('/guest-carts/$cartId/items', data: cartItem);
-      
+      final response =
+          await _dio.post('/guest-carts/$cartId/items', data: cartItem);
+
       return response.statusCode == 200;
     } catch (e) {
       return false;
@@ -437,12 +453,13 @@ class MagentoApiService extends ChangeNotifier {
     clearError();
 
     try {
-      final response = await _dio.put('/guest-carts/$cartId/items/$itemId', data: {
+      final response =
+          await _dio.put('/guest-carts/$cartId/items/$itemId', data: {
         'cartItem': {
           'qty': quantity,
         },
       });
-      
+
       return response.statusCode == 200;
     } catch (e) {
       return false;
@@ -461,7 +478,7 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.delete('/guest-carts/$cartId/items/$itemId');
-      
+
       return response.statusCode == 200;
     } catch (e) {
       return false;
@@ -479,8 +496,9 @@ class MagentoApiService extends ChangeNotifier {
     clearError();
 
     try {
-      final response = await _dio.put('/guest-carts/$cartId/coupons/$couponCode');
-      
+      final response =
+          await _dio.put('/guest-carts/$cartId/coupons/$couponCode');
+
       return response.statusCode == 200;
     } catch (e) {
       return false;
@@ -498,7 +516,7 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.delete('/guest-carts/$cartId/coupons');
-      
+
       return response.statusCode == 200;
     } catch (e) {
       return false;
@@ -518,8 +536,9 @@ class MagentoApiService extends ChangeNotifier {
     clearError();
 
     try {
-      final response = await _dio.post('/guest-carts/$cartId/order', data: orderRequest.toJson());
-      
+      final response = await _dio.post('/guest-carts/$cartId/order',
+          data: orderRequest.toJson());
+
       if (response.statusCode == 200) {
         return MagentoOrder.fromJson(response.data);
       }
@@ -540,7 +559,7 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.get('/customers/me/orders');
-      
+
       if (response.statusCode == 200) {
         final List<dynamic> ordersData = response.data;
         return ordersData.map((json) => MagentoOrder.fromJson(json)).toList();
@@ -562,7 +581,7 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.get('/customers/me/orders/$orderId');
-      
+
       if (response.statusCode == 200) {
         return MagentoOrder.fromJson(response.data);
       }
@@ -585,7 +604,7 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.get('/customers/me/wishlist');
-      
+
       if (response.statusCode == 200) {
         return MagentoWishlist.fromJson(response.data);
       }
@@ -610,7 +629,7 @@ class MagentoApiService extends ChangeNotifier {
           'sku': sku,
         },
       });
-      
+
       return response.statusCode == 200;
     } catch (e) {
       return false;
@@ -628,7 +647,7 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.delete('/customers/me/wishlist/$itemId');
-      
+
       return response.statusCode == 200;
     } catch (e) {
       return false;
@@ -646,7 +665,7 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.get('/store/storeConfigs');
-      
+
       if (response.statusCode == 200) {
         final List<dynamic> configsData = response.data;
         if (configsData.isNotEmpty) {
@@ -668,10 +687,12 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.get('/directory/currency');
-      
+
       if (response.statusCode == 200) {
         final List<dynamic> currenciesData = response.data;
-        return currenciesData.map((json) => MagentoCurrency.fromJson(json)).toList();
+        return currenciesData
+            .map((json) => MagentoCurrency.fromJson(json))
+            .toList();
       }
       return null;
     } catch (e) {
@@ -688,10 +709,12 @@ class MagentoApiService extends ChangeNotifier {
 
     try {
       final response = await _dio.get('/directory/countries');
-      
+
       if (response.statusCode == 200) {
         final List<dynamic> countriesData = response.data;
-        return countriesData.map((json) => MagentoCountry.fromJson(json)).toList();
+        return countriesData
+            .map((json) => MagentoCountry.fromJson(json))
+            .toList();
       }
       return null;
     } catch (e) {
@@ -721,7 +744,8 @@ class MagentoApiService extends ChangeNotifier {
       if (query != null && query.isNotEmpty) {
         params['searchCriteria[filterGroups][0][filters][0][field]'] = 'name';
         params['searchCriteria[filterGroups][0][filters][0][value]'] = query;
-        params['searchCriteria[filterGroups][0][filters][0][conditionType]'] = 'like';
+        params['searchCriteria[filterGroups][0][filters][0][conditionType]'] =
+            'like';
       }
 
       if (sortField != null) {
@@ -730,7 +754,7 @@ class MagentoApiService extends ChangeNotifier {
       }
 
       final response = await _dio.get('/products', queryParameters: params);
-      
+
       if (response.statusCode == 200) {
         return MagentoProductList.fromJson(response.data);
       }

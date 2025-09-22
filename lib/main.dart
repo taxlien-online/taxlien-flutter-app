@@ -379,7 +379,8 @@ final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeMode>(() {
   return ThemeNotifier();
 });
 
-final localizationProvider = StateNotifierProvider<LocalizationNotifier, Locale>(() {
+final localizationProvider =
+    StateNotifierProvider<LocalizationNotifier, Locale>(() {
   return LocalizationNotifier();
 });
 
@@ -387,7 +388,8 @@ final authProvider = StateNotifierProvider<AuthNotifier, AuthState>(() {
   return AuthNotifier();
 });
 
-final magentoProvider = StateNotifierProvider<MagentoNotifier, MagentoState>(() {
+final magentoProvider =
+    StateNotifierProvider<MagentoNotifier, MagentoState>(() {
   return MagentoNotifier();
 });
 

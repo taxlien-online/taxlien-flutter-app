@@ -192,7 +192,7 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
     );
   }
 
-  Widget _buildWalletListItem(WalletInfo wallet) {
+  Widget _buildWalletListItem(dynamic wallet) {
     final isConnected = wallet.isConnected;
 
     return Container(
