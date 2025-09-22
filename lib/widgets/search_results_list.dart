@@ -34,8 +34,8 @@ class SearchResultsList extends StatelessWidget {
               Text(
                 '${magentoProducts.length} products found',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
               ),
               const Spacer(),
               if (isLoadingMore)
@@ -47,7 +47,7 @@ class SearchResultsList extends StatelessWidget {
             ],
           ),
         ),
-        
+
         // Products grid
         Expanded(
           child: GridView.builder(
@@ -64,7 +64,7 @@ class SearchResultsList extends StatelessWidget {
                 // Load more button
                 return _buildLoadMoreCard(context);
               }
-              
+
               final product = magentoProducts[index];
               return EnhancedProductCard(
                 product: product,
@@ -106,9 +106,9 @@ class SearchResultsList extends StatelessWidget {
               Text(
                 isLoadingMore ? 'Loading...' : 'Load More',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.w500,
-                ),
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.w500,
+                    ),
               ),
             ],
           ),
@@ -146,7 +146,7 @@ class SearchResultsList extends StatelessWidget {
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              
+
               // Header
               Padding(
                 padding: const EdgeInsets.all(16),
@@ -165,7 +165,7 @@ class SearchResultsList extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               // Content
               Expanded(
                 child: SingleChildScrollView(
@@ -186,54 +186,65 @@ class SearchResultsList extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
-                              product.mediaGalleryEntries!.first.url,
+                              product.mediaGalleryEntries!.first.url ?? '',
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return Icon(
                                   Icons.image_not_supported,
                                   size: 64,
-                                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurfaceVariant,
                                 );
                               },
                             ),
                           ),
                         ),
-                      
+
                       const SizedBox(height: 16),
-                      
+
                       // Price
                       Row(
                         children: [
                           Text(
                             '\$${product.price?.toStringAsFixed(2) ?? '0.00'}',
-                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          if (product.specialPrice != null && product.specialPrice! < product.price!)
-                            ...[
-                              const SizedBox(width: 8),
-                              Text(
-                                '\$${product.price!.toStringAsFixed(2)}',
-                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                  decoration: TextDecoration.lineThrough,
-                                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                              ),
-                            ],
+                          ),
+                          if (product.specialPrice != null &&
+                              product.specialPrice! < product.price!) ...[
+                            const SizedBox(width: 8),
+                            Text(
+                              '\$${product.price!.toStringAsFixed(2)}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                    decoration: TextDecoration.lineThrough,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant,
+                                  ),
+                            ),
+                          ],
                         ],
                       ),
-                      
+
                       const SizedBox(height: 16),
-                      
+
                       // Description
                       if (product.shortDescription?.isNotEmpty == true) ...[
                         Text(
                           'Description',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
                         ),
                         const SizedBox(height: 8),
                         Text(
@@ -242,18 +253,19 @@ class SearchResultsList extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                       ],
-                      
+
                       // Product details
                       _buildProductDetails(context, product),
-                      
+
                       const SizedBox(height: 16),
-                      
+
                       // Action buttons
                       Row(
                         children: [
                           Expanded(
                             child: OutlinedButton.icon(
-                              onPressed: () => _toggleFavorite(context, product),
+                              onPressed: () =>
+                                  _toggleFavorite(context, product),
                               icon: const Icon(Icons.favorite_border),
                               label: const Text('Add to Favorites'),
                             ),
@@ -268,7 +280,7 @@ class SearchResultsList extends StatelessWidget {
                           ),
                         ],
                       ),
-                      
+
                       const SizedBox(height: 32),
                     ],
                   ),
@@ -288,28 +300,25 @@ class SearchResultsList extends StatelessWidget {
         Text(
           'Product Details',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+                fontWeight: FontWeight.w600,
+              ),
         ),
         const SizedBox(height: 8),
-        
         _buildDetailRow(context, 'SKU', product.sku ?? 'N/A'),
         _buildDetailRow(context, 'Type', product.typeId ?? 'N/A'),
         _buildDetailRow(context, 'Weight', product.weight?.toString() ?? 'N/A'),
         _buildDetailRow(context, 'Status', product.status?.toString() ?? 'N/A'),
-        
         if (product.customAttributes?.isNotEmpty == true) ...[
           const SizedBox(height: 8),
           Text(
             'Custom Attributes',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
           const SizedBox(height: 4),
-          ...product.customAttributes!.map((attr) => 
-            _buildDetailRow(context, attr.attributeCode ?? 'Unknown', attr.value ?? 'N/A')
-          ),
+          ...product.customAttributes!.map((attr) => _buildDetailRow(
+              context, attr.attributeCode ?? 'Unknown', attr.value ?? 'N/A')),
         ],
       ],
     );
@@ -326,9 +335,9 @@ class SearchResultsList extends StatelessWidget {
             child: Text(
               '$label:',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
             ),
           ),
           Expanded(
@@ -346,9 +355,10 @@ class SearchResultsList extends StatelessWidget {
     try {
       final databaseService = DatabaseService();
       await databaseService.initialize();
-      
-      final isFavorite = await databaseService.isFavorite(product.sku, type: 'product');
-      
+
+      final isFavorite =
+          await databaseService.isFavorite(product.sku, type: 'product');
+
       if (isFavorite) {
         await databaseService.removeFromFavorites(product.sku);
         if (context.mounted) {
@@ -385,10 +395,10 @@ class SearchResultsList extends StatelessWidget {
   void _addToCart(BuildContext context, MagentoProduct product) async {
     try {
       final magentoApiService = MagentoApiService();
-      
+
       // Create cart
       String? cartId = await magentoApiService.createCart();
-      
+
       if (cartId != null) {
         // Add item to cart
         final success = await magentoApiService.addToCart(
@@ -396,7 +406,7 @@ class SearchResultsList extends StatelessWidget {
           sku: product.sku,
           quantity: 1,
         );
-        
+
         if (success && context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

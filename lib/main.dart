@@ -40,9 +40,9 @@ import 'services/flutter_magento_cloud_service.dart' as magento_cloud;
 // Widgets
 import 'widgets/cloud_functions_status_widget.dart';
 
-// NFT and ICP libraries - temporarily disabled due to compilation errors
-// import 'package:flutter_nft/flutter_nft.dart';
-// import 'package:flutter_icp/flutter_icp.dart';
+// NFT and ICP libraries
+import 'package:flutter_nft/flutter_nft.dart';
+import 'package:flutter_icp/flutter_icp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,9 +70,9 @@ void main() async {
     provider.MultiProvider(
       providers: [
         provider.ChangeNotifierProvider(
-            create: (_) => FlutterMagentoCloudService()),
-        provider.ChangeNotifierProxyProvider<FlutterMagentoCloudService,
-            HybridMagentoService>(
+            create: (_) => magento_cloud.FlutterMagentoCloudService()),
+        provider.ChangeNotifierProxyProvider<
+            magento_cloud.FlutterMagentoCloudService, HybridMagentoService>(
           create: (_) => HybridMagentoService(),
           update: (_, flutterMagentoService, hybridService) {
             hybridService?.setFlutterMagentoService(flutterMagentoService);
@@ -94,8 +94,8 @@ Future<void> _initializeServices() async {
     // Initialize secure storage
     await SecureStorageService.initialize();
 
-    // Initialize NFT client with ICP providers - temporarily disabled
-    // await _initializeNFTServices();
+    // Initialize NFT client with ICP providers
+    await _initializeNFTServices();
 
     // Initialize analytics (disabled for now to avoid Firebase issues)
     if (false && AppConstants.enableAnalytics) {
@@ -375,26 +375,23 @@ class LoadingScreen extends StatelessWidget {
 }
 
 /// Global providers for the application
-final themeProvider = NotifierProvider<ThemeNotifier, ThemeMode>(() {
+final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeMode>(() {
   return ThemeNotifier();
 });
 
-final localizationProvider =
-    NotifierProvider<LocalizationNotifier, Locale>(() {
+final localizationProvider = StateNotifierProvider<LocalizationNotifier, Locale>(() {
   return LocalizationNotifier();
 });
 
-final authProvider = NotifierProvider<AuthNotifier, AuthState>(() {
+final authProvider = StateNotifierProvider<AuthNotifier, AuthState>(() {
   return AuthNotifier();
 });
 
-final magentoProvider =
-    NotifierProvider<MagentoNotifier, MagentoState>(() {
+final magentoProvider = StateNotifierProvider<MagentoNotifier, MagentoState>(() {
   return MagentoNotifier();
 });
 
-final hybridMagentoServiceProvider =
-    Provider<HybridMagentoService>((ref) {
+final hybridMagentoServiceProvider = Provider<HybridMagentoService>((ref) {
   return HybridMagentoService();
 });
 

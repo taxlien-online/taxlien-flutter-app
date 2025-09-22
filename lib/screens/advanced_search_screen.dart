@@ -20,25 +20,26 @@ class AdvancedSearchScreen extends ConsumerStatefulWidget {
   }) : super(key: key);
 
   @override
-  ConsumerState<AdvancedSearchScreen> createState() => _AdvancedSearchScreenState();
+  ConsumerState<AdvancedSearchScreen> createState() =>
+      _AdvancedSearchScreenState();
 }
 
 class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
-  
+
   // Search state
   bool _isSearching = false;
   String? _searchError;
-  
+
   // Results
   List<MagentoProduct> _magentoResults = [];
   List<TaxLien> _taxLienResults = [];
-  
+
   // Advanced filters
   AdvancedSearchFilters _filters = AdvancedSearchFilters();
-  
+
   // Pagination
   int _currentPage = 1;
   final int _pageSize = 20;
@@ -82,10 +83,10 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
         children: [
           // Search bar
           _buildSearchBar(),
-          
+
           // Advanced filters
           _buildAdvancedFilters(),
-          
+
           // Results
           Expanded(
             child: TabBarView(
@@ -120,7 +121,8 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search by address, owner, parcel ID, or product name...',
+                hintText:
+                    'Search by address, owner, parcel ID, or product name...',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
@@ -186,9 +188,9 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
               Text(
                 'Advanced Filters',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
               ),
               const Spacer(),
               TextButton(
@@ -450,9 +452,9 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
                 Text(
                   '\$${lien.taxAmount.toStringAsFixed(2)}',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                 ),
                 Text(
                   '${lien.interestRate}% APR',

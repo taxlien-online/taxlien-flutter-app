@@ -3,10 +3,12 @@ import 'package:flutter_nft/flutter_nft.dart';
 
 class WalletSettingsScreen extends StatefulWidget {
   final NFTClient nftClient;
+  final dynamic walletService;
 
   const WalletSettingsScreen({
     super.key,
     required this.nftClient,
+    this.walletService,
   });
 
   @override
@@ -293,7 +295,7 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
     );
   }
 
-  Widget _buildNFTBalanceItem(NFTBalance nft) {
+  Widget _buildNFTBalanceItem(dynamic nft) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       child: ListTile(
@@ -632,7 +634,7 @@ class _WalletSettingsScreenState extends State<WalletSettingsScreen> {
     );
   }
 
-  void _viewNFTDetails(NFTBalance nft) {
+  void _viewNFTDetails(dynamic nft) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(

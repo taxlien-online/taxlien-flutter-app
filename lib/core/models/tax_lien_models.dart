@@ -18,7 +18,7 @@ class TaxLien {
   final String? description;
   final List<String> images;
   final Map<String, dynamic>? additionalInfo;
-  
+
   const TaxLien({
     required this.id,
     required this.address,
@@ -37,7 +37,7 @@ class TaxLien {
     this.images = const [],
     this.additionalInfo,
   });
-  
+
   factory TaxLien.fromJson(Map<String, dynamic> json) {
     return TaxLien(
       id: json['id'],
@@ -58,7 +58,7 @@ class TaxLien {
       additionalInfo: json['additional_info'],
     );
   }
-  
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -79,9 +79,9 @@ class TaxLien {
       'additional_info': additionalInfo,
     };
   }
-  
+
   String get fullAddress => '$address, $city, $state $zipCode';
-  
+
   bool get isAvailable => status == 'available';
   bool get isSold => status == 'sold';
   bool get isRedeemed => status == 'redeemed';
@@ -99,7 +99,7 @@ class TaxLienAuction {
   final String? winnerId;
   final double? winningBid;
   final List<String> participants;
-  
+
   const TaxLienAuction({
     required this.id,
     required this.lien,
@@ -112,7 +112,7 @@ class TaxLienAuction {
     this.winningBid,
     this.participants = const [],
   });
-  
+
   factory TaxLienAuction.fromJson(Map<String, dynamic> json) {
     return TaxLienAuction(
       id: json['id'],
@@ -127,7 +127,7 @@ class TaxLienAuction {
       participants: List<String>.from(json['participants'] ?? []),
     );
   }
-  
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -142,7 +142,7 @@ class TaxLienAuction {
       'participants': participants,
     };
   }
-  
+
   bool get isActive => status == 'active' && DateTime.now().isBefore(endTime);
   bool get isEnded => status == 'ended' || DateTime.now().isAfter(endTime);
   Duration get timeRemaining => endTime.difference(DateTime.now());
@@ -157,7 +157,7 @@ class Bid {
   final double amount;
   final DateTime timestamp;
   final String status; // 'pending', 'accepted', 'rejected'
-  
+
   const Bid({
     required this.id,
     required this.auctionId,
@@ -167,7 +167,7 @@ class Bid {
     required this.timestamp,
     this.status = 'pending',
   });
-  
+
   factory Bid.fromJson(Map<String, dynamic> json) {
     return Bid(
       id: json['id'],
@@ -179,7 +179,7 @@ class Bid {
       status: json['status'] ?? 'pending',
     );
   }
-  
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -201,7 +201,7 @@ class TaxLienPortfolio {
   final double totalValue;
   final double totalReturn;
   final double totalReturnPercentage;
-  
+
   const TaxLienPortfolio({
     required this.userId,
     required this.investments,
@@ -210,7 +210,7 @@ class TaxLienPortfolio {
     required this.totalReturn,
     required this.totalReturnPercentage,
   });
-  
+
   factory TaxLienPortfolio.fromJson(Map<String, dynamic> json) {
     return TaxLienPortfolio(
       userId: json['user_id'],
@@ -223,11 +223,12 @@ class TaxLienPortfolio {
       totalReturnPercentage: json['total_return_percentage'].toDouble(),
     );
   }
-  
+
   Map<String, dynamic> toJson() {
     return {
       'user_id': userId,
-      'investments': investments.map((investment) => investment.toJson()).toList(),
+      'investments':
+          investments.map((investment) => investment.toJson()).toList(),
       'total_invested': totalInvested,
       'total_value': totalValue,
       'total_return': totalReturn,
@@ -248,7 +249,7 @@ class TaxLienInvestment {
   final double? returnAmount;
   final DateTime? redemptionDate;
   final String? notes;
-  
+
   const TaxLienInvestment({
     required this.id,
     required this.userId,
@@ -261,7 +262,7 @@ class TaxLienInvestment {
     this.redemptionDate,
     this.notes,
   });
-  
+
   factory TaxLienInvestment.fromJson(Map<String, dynamic> json) {
     return TaxLienInvestment(
       id: json['id'],
@@ -272,13 +273,13 @@ class TaxLienInvestment {
       status: json['status'],
       currentValue: json['current_value']?.toDouble(),
       returnAmount: json['return_amount']?.toDouble(),
-      redemptionDate: json['redemption_date'] != null 
-          ? DateTime.parse(json['redemption_date']) 
+      redemptionDate: json['redemption_date'] != null
+          ? DateTime.parse(json['redemption_date'])
           : null,
       notes: json['notes'],
     );
   }
-  
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -293,11 +294,11 @@ class TaxLienInvestment {
       'notes': notes,
     };
   }
-  
+
   bool get isActive => status == 'active';
   bool get isRedeemed => status == 'redeemed';
   bool get isForeclosed => status == 'foreclosed';
-  
+
   double get returnPercentage {
     if (returnAmount == null || amountInvested == 0) return 0.0;
     return (returnAmount! / amountInvested) * 100;
@@ -319,7 +320,7 @@ class TaxLienSearchFilters {
   final DateTime? maxSaleDate;
   final List<String> statuses;
   final String? searchQuery;
-  
+
   const TaxLienSearchFilters({
     this.state,
     this.county,
@@ -335,7 +336,7 @@ class TaxLienSearchFilters {
     this.statuses = const [],
     this.searchQuery,
   });
-  
+
   factory TaxLienSearchFilters.fromJson(Map<String, dynamic> json) {
     return TaxLienSearchFilters(
       state: json['state'],
@@ -347,17 +348,17 @@ class TaxLienSearchFilters {
       maxAssessedValue: json['max_assessed_value']?.toDouble(),
       minInterestRate: json['min_interest_rate']?.toDouble(),
       maxInterestRate: json['max_interest_rate']?.toDouble(),
-      minSaleDate: json['min_sale_date'] != null 
-          ? DateTime.parse(json['min_sale_date']) 
+      minSaleDate: json['min_sale_date'] != null
+          ? DateTime.parse(json['min_sale_date'])
           : null,
-      maxSaleDate: json['max_sale_date'] != null 
-          ? DateTime.parse(json['max_sale_date']) 
+      maxSaleDate: json['max_sale_date'] != null
+          ? DateTime.parse(json['max_sale_date'])
           : null,
       statuses: List<String>.from(json['statuses'] ?? []),
       searchQuery: json['search_query'],
     );
   }
-  
+
   Map<String, dynamic> toJson() {
     return {
       'state': state,
@@ -375,8 +376,8 @@ class TaxLienSearchFilters {
       'search_query': searchQuery,
     };
   }
-  
-  bool get hasFilters => 
+
+  bool get hasFilters =>
       state != null ||
       county != null ||
       city != null ||

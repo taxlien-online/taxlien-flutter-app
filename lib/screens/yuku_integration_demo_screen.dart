@@ -4,10 +4,14 @@ import 'yuku_marketplace_screen.dart';
 
 class YukuIntegrationDemoScreen extends StatefulWidget {
   final NFTClient nftClient;
+  final dynamic yukuService;
+  final dynamic nftService;
 
   const YukuIntegrationDemoScreen({
     super.key,
     required this.nftClient,
+    this.yukuService,
+    this.nftService,
   });
 
   @override
@@ -293,8 +297,7 @@ class _YukuIntegrationDemoScreenState extends State<YukuIntegrationDemoScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => YukuMarketplaceScreen(
-          yukuService: widget.yukuService,
-          nftService: widget.nftService,
+          nftClient: widget.nftClient,
         ),
       ),
     );

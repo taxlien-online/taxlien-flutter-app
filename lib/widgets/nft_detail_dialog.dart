@@ -347,7 +347,7 @@ class NFTDetailDialog extends StatelessWidget {
     );
   }
 
-  void _shareViaSystem(NFT nft) {
+  void _shareViaSystem(TaxLienNFT nft) {
     // In a real implementation, this would use the share_plus package
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

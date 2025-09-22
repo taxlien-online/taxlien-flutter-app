@@ -700,4 +700,55 @@ class MagentoApiService extends ChangeNotifier {
       _setLoading(false);
     }
   }
+
+  /// Search products
+  Future<MagentoProductList?> searchProducts({
+    String? query,
+    int page = 1,
+    int pageSize = 20,
+    String? sortField,
+    String? sortDirection = 'asc',
+  }) async {
+    _setLoading(true);
+    clearError();
+
+    try {
+      final Map<String, dynamic> params = {
+        'searchCriteria[pageSize]': pageSize,
+        'searchCriteria[currentPage]': page,
+      };
+
+      if (query != null && query.isNotEmpty) {
+        params['searchCriteria[filterGroups][0][filters][0][field]'] = 'name';
+        params['searchCriteria[filterGroups][0][filters][0][value]'] = query;
+        params['searchCriteria[filterGroups][0][filters][0][conditionType]'] = 'like';
+      }
+
+      if (sortField != null) {
+        params['searchCriteria[sortOrders][0][field]'] = sortField;
+        params['searchCriteria[sortOrders][0][direction]'] = sortDirection;
+      }
+
+      final response = await _dio.get('/products', queryParameters: params);
+      
+      if (response.statusCode == 200) {
+        return MagentoProductList.fromJson(response.data);
+      }
+      return null;
+    } catch (e) {
+      _error = 'Failed to search products: $e';
+      return null;
+    } finally {
+      _setLoading(false);
+    }
+  }
+
+  void _setLoading(bool loading) {
+    _isLoading = loading;
+    notifyListeners();
+  }
+
+  void clearError() {
+    _error = null;
+  }
 }

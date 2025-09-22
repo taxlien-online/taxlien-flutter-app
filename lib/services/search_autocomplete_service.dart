@@ -60,9 +60,9 @@ class SearchAutocompleteService extends ChangeNotifier {
           page: 1,
           pageSize: 5,
         );
-        final productSuggestions = products.items
-            .map((product) => product.name)
-            .toList();
+        final productSuggestions = products?.items
+            ?.map((product) => product.name)
+            .toList() ?? [];
         allSuggestions.addAll(productSuggestions);
       } catch (e) {
         if (kDebugMode) {
