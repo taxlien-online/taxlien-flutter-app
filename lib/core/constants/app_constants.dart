@@ -1,4 +1,5 @@
 import 'package:flutter_nft/flutter_nft.dart';
+import '../services/integrated_services.dart';
 
 /// Application constants for TaxLien.online
 class AppConstants {
@@ -114,4 +115,7 @@ class AppConstants {
 
   // NFT Client - Global instance for the app
   static NFTClient? nftClient;
+  
+  // Integrated Services - Global instance for the app
+  static IntegratedServices? integratedServices;
 }

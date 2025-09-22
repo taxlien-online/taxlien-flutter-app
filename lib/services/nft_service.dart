@@ -1,7 +1,7 @@
-import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_nft/flutter_nft.dart';
+import 'package:flutter_icp/flutter_icp.dart';
 import 'tax_lien_service.dart';
 
 class NFTMetadata {
@@ -99,10 +99,15 @@ class NFTService extends ChangeNotifier {
   bool _isLoading = false;
   String? _error;
 
+  // Flutter NFT client
+  late NFTClient _nftClient;
+  bool _isInitialized = false;
+
   List<TaxLienNFT> get myNFTs => _myNFTs;
   List<TaxLienNFT> get marketplaceNFTs => _marketplaceNFTs;
   bool get isLoading => _isLoading;
   String? get error => _error;
+  bool get isInitialized => _isInitialized;
 
   // Mock data for prototype
   final List<Map<String, dynamic>> _mockLienData = [
@@ -173,21 +178,43 @@ class NFTService extends ChangeNotifier {
   ];
 
   Future<void> initialize() async {
-    await loadMyNFTs();
-    await loadMarketplaceNFTs();
+    try {
+      // Initialize Flutter NFT client
+      _nftClient = NFTClient();
+
+      // Register ICP providers
+      _nftClient.registerNFTProvider(ICPNFTProvider());
+      _nftClient.registerWalletProvider(PlugWalletProvider());
+      _nftClient.registerMarketplaceProvider(YukuMarketplaceProvider());
+
+      // Initialize all providers
+      await _nftClient.initialize();
+
+      _isInitialized = true;
+
+      // Load NFT data
+      await loadMyNFTs();
+      await loadMarketplaceNFTs();
+    } catch (e) {
+      _error = 'Failed to initialize NFT service: $e';
+      if (kDebugMode) {
+        print('NFT Service initialization error: $e');
+      }
+    }
   }
 
   Future<void> loadMyNFTs() async {
     _setLoading(true);
     try {
       // For prototype, we'll use mock data
-      await Future.delayed(Duration(milliseconds: 500)); // Simulate network delay
-      
+      await Future.delayed(
+          Duration(milliseconds: 500)); // Simulate network delay
+
       _myNFTs = _mockLienData.map((lienData) {
         final lien = TaxLien.fromJson(lienData);
         return _createNFTFromLien(lien, 'user123');
       }).toList();
-      
+
       _error = null;
     } catch (e) {
       _error = 'Failed to load my NFTs: $e';
@@ -200,13 +227,14 @@ class NFTService extends ChangeNotifier {
     _setLoading(true);
     try {
       // For prototype, we'll use mock data
-      await Future.delayed(Duration(milliseconds: 500)); // Simulate network delay
-      
+      await Future.delayed(
+          Duration(milliseconds: 500)); // Simulate network delay
+
       _marketplaceNFTs = _mockLienData.take(2).map((lienData) {
         final lien = TaxLien.fromJson(lienData);
         return _createNFTFromLien(lien, 'other_user_${Random().nextInt(1000)}');
       }).toList();
-      
+
       _error = null;
     } catch (e) {
       _error = 'Failed to load marketplace NFTs: $e';
@@ -217,10 +245,11 @@ class NFTService extends ChangeNotifier {
 
   TaxLienNFT _createNFTFromLien(TaxLien lien, String ownerAddress) {
     final tokenId = 'NFT_${lien.id}_${DateTime.now().millisecondsSinceEpoch}';
-    
+
     final metadata = NFTMetadata(
       name: 'Tax Lien NFT #${lien.id}',
-      description: 'NFT representing a tax lien on property at ${lien.address}. '
+      description:
+          'NFT representing a tax lien on property at ${lien.address}. '
           'This NFT entitles the holder to collect interest and potentially foreclose on the property.',
       image: 'https://api.taxlien.online/images/nft/${lien.id}.png',
       attributes: {
@@ -257,8 +286,12 @@ class NFTService extends ChangeNotifier {
       ownerAddress: ownerAddress,
       createdAt: DateTime.now(),
       status: 'minted',
-      currentValue: lien.salePrice != null ? lien.salePrice! * 1.05 : lien.taxAmount * 1.05,
-      transactionHistory: ['Minted on ${DateTime.now().toString().split(' ')[0]}'],
+      currentValue: lien.salePrice != null
+          ? lien.salePrice! * 1.05
+          : lien.taxAmount * 1.05,
+      transactionHistory: [
+        'Minted on ${DateTime.now().toString().split(' ')[0]}'
+      ],
     );
   }
 
@@ -270,24 +303,75 @@ class NFTService extends ChangeNotifier {
   }
 
   String _calculateRiskLevel(TaxLien lien) {
-    final daysUntilRedemption = lien.redemptionDeadline.difference(DateTime.now()).inDays;
+    final daysUntilRedemption =
+        lien.redemptionDeadline.difference(DateTime.now()).inDays;
     if (daysUntilRedemption < 30) return 'High';
     if (daysUntilRedemption < 90) return 'Medium';
     return 'Low';
   }
 
+  /// Create NFT metadata for Flutter NFT client
+  Map<String, dynamic> _createNFTMetadata(TaxLien lien) {
+    return {
+      'name': 'Tax Lien NFT #${lien.id}',
+      'description': 'NFT representing a tax lien on property at ${lien.address}. '
+          'This NFT entitles the holder to collect interest and potentially foreclose on the property.',
+      'image': 'https://api.taxlien.online/images/nft/${lien.id}.png',
+      'attributes': {
+        'Parcel ID': lien.parcelId,
+        'Property Address': lien.address,
+        'County': lien.county,
+        'State': lien.state,
+        'Assessed Value': '\$${lien.assessedValue.toStringAsFixed(0)}',
+        'Tax Amount': '\$${lien.taxAmount.toStringAsFixed(0)}',
+        'Interest Rate': '${lien.interestRate}%',
+        'Auction Date': lien.auctionDate.toString().split(' ')[0],
+        'Redemption Deadline': lien.redemptionDeadline.toString().split(' ')[0],
+        'Rarity': _calculateRarity(lien),
+        'Risk Level': _calculateRiskLevel(lien),
+      },
+      'properties': {
+        'original_lien_id': lien.id,
+        'parcel_id': lien.parcelId,
+        'county': lien.county,
+        'state': lien.state,
+        'assessed_value': lien.assessedValue,
+        'tax_amount': lien.taxAmount,
+        'interest_rate': lien.interestRate,
+        'auction_date': lien.auctionDate.toIso8601String(),
+        'redemption_deadline': lien.redemptionDeadline.toIso8601String(),
+      },
+    };
+  }
+
   Future<bool> mintNFTFromLien(TaxLien lien) async {
+    if (!_isInitialized) {
+      _error = 'NFT service not initialized';
+      return false;
+    }
+
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(seconds: 2));
-      
-      final nft = _createNFTFromLien(lien, 'user123');
-      _myNFTs.add(nft);
-      
-      _error = null;
-      notifyListeners();
-      return true;
+      // Create NFT metadata
+      final metadata = _createNFTMetadata(lien);
+
+      // Use Flutter NFT client to mint NFT
+      final result = await _nftClient.createNFT(
+        metadata: metadata,
+        ownerAddress: 'user123', // This should come from wallet
+      );
+
+      if (result.success) {
+        final nft = _createNFTFromLien(lien, 'user123');
+        _myNFTs.add(nft);
+
+        _error = null;
+        notifyListeners();
+        return true;
+      } else {
+        _error = 'Failed to mint NFT: ${result.error}';
+        return false;
+      }
     } catch (e) {
       _error = 'Failed to mint NFT: $e';
       return false;
@@ -297,34 +381,50 @@ class NFTService extends ChangeNotifier {
   }
 
   Future<bool> transferNFT(String nftId, String toAddress) async {
+    if (!_isInitialized) {
+      _error = 'NFT service not initialized';
+      return false;
+    }
+
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(seconds: 1));
-      
-      final nftIndex = _myNFTs.indexWhere((nft) => nft.id == nftId);
-      if (nftIndex != -1) {
-        final nft = _myNFTs[nftIndex];
-        final updatedNFT = TaxLienNFT(
-          id: nft.id,
-          tokenId: nft.tokenId,
-          originalLien: nft.originalLien,
-          metadata: nft.metadata,
-          ownerAddress: toAddress,
-          createdAt: nft.createdAt,
-          status: 'transferred',
-          currentValue: nft.currentValue,
-          transactionHistory: [...nft.transactionHistory, 'Transferred to $toAddress on ${DateTime.now().toString().split(' ')[0]}'],
-        );
-        
-        _myNFTs.removeAt(nftIndex);
-        _marketplaceNFTs.add(updatedNFT);
-        
-        _error = null;
-        notifyListeners();
-        return true;
+      // Use Flutter NFT client to transfer NFT
+      final result = await _nftClient.transferNFT(
+        nftId: nftId,
+        toAddress: toAddress,
+      );
+
+      if (result.success) {
+        final nftIndex = _myNFTs.indexWhere((nft) => nft.id == nftId);
+        if (nftIndex != -1) {
+          final nft = _myNFTs[nftIndex];
+          final updatedNFT = TaxLienNFT(
+            id: nft.id,
+            tokenId: nft.tokenId,
+            originalLien: nft.originalLien,
+            metadata: nft.metadata,
+            ownerAddress: toAddress,
+            createdAt: nft.createdAt,
+            status: 'transferred',
+            currentValue: nft.currentValue,
+            transactionHistory: [
+              ...nft.transactionHistory,
+              'Transferred to $toAddress on ${DateTime.now().toString().split(' ')[0]}'
+            ],
+          );
+
+          _myNFTs.removeAt(nftIndex);
+          _marketplaceNFTs.add(updatedNFT);
+
+          _error = null;
+          notifyListeners();
+          return true;
+        }
+        return false;
+      } else {
+        _error = 'Failed to transfer NFT: ${result.error}';
+        return false;
       }
-      return false;
     } catch (e) {
       _error = 'Failed to transfer NFT: $e';
       return false;
@@ -334,33 +434,46 @@ class NFTService extends ChangeNotifier {
   }
 
   Future<bool> burnNFT(String nftId) async {
+    if (!_isInitialized) {
+      _error = 'NFT service not initialized';
+      return false;
+    }
+
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(seconds: 1));
-      
-      final nftIndex = _myNFTs.indexWhere((nft) => nft.id == nftId);
-      if (nftIndex != -1) {
-        final nft = _myNFTs[nftIndex];
-        final updatedNFT = TaxLienNFT(
-          id: nft.id,
-          tokenId: nft.tokenId,
-          originalLien: nft.originalLien,
-          metadata: nft.metadata,
-          ownerAddress: nft.ownerAddress,
-          createdAt: nft.createdAt,
-          status: 'burned',
-          currentValue: nft.currentValue,
-          transactionHistory: [...nft.transactionHistory, 'Burned on ${DateTime.now().toString().split(' ')[0]}'],
-        );
-        
-        _myNFTs[nftIndex] = updatedNFT;
-        
-        _error = null;
-        notifyListeners();
-        return true;
+      // Use Flutter NFT client to burn NFT
+      final result = await _nftClient.destroyNFT(nftId: nftId);
+
+      if (result.success) {
+        final nftIndex = _myNFTs.indexWhere((nft) => nft.id == nftId);
+        if (nftIndex != -1) {
+          final nft = _myNFTs[nftIndex];
+          final updatedNFT = TaxLienNFT(
+            id: nft.id,
+            tokenId: nft.tokenId,
+            originalLien: nft.originalLien,
+            metadata: nft.metadata,
+            ownerAddress: nft.ownerAddress,
+            createdAt: nft.createdAt,
+            status: 'burned',
+            currentValue: nft.currentValue,
+            transactionHistory: [
+              ...nft.transactionHistory,
+              'Burned on ${DateTime.now().toString().split(' ')[0]}'
+            ],
+          );
+
+          _myNFTs[nftIndex] = updatedNFT;
+
+          _error = null;
+          notifyListeners();
+          return true;
+        }
+        return false;
+      } else {
+        _error = 'Failed to burn NFT: ${result.error}';
+        return false;
       }
-      return false;
     } catch (e) {
       _error = 'Failed to burn NFT: $e';
       return false;
@@ -378,15 +491,18 @@ class NFTService extends ChangeNotifier {
   }) async {
     try {
       await Future.delayed(Duration(milliseconds: 300));
-      
+
       List<TaxLienNFT> allNFTs = [..._myNFTs, ..._marketplaceNFTs];
-      
+
       return allNFTs.where((nft) {
         if (county != null && nft.originalLien.county != county) return false;
         if (state != null && nft.originalLien.state != state) return false;
-        if (minValue != null && (nft.currentValue ?? 0) < minValue) return false;
-        if (maxValue != null && (nft.currentValue ?? 0) > maxValue) return false;
-        if (rarity != null && nft.metadata.attributes['Rarity'] != rarity) return false;
+        if (minValue != null && (nft.currentValue ?? 0) < minValue)
+          return false;
+        if (maxValue != null && (nft.currentValue ?? 0) > maxValue)
+          return false;
+        if (rarity != null && nft.metadata.attributes['Rarity'] != rarity)
+          return false;
         return true;
       }).toList();
     } catch (e) {

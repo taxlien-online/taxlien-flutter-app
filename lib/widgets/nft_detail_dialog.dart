@@ -310,7 +310,7 @@ class NFTDetailDialog extends StatelessWidget {
     }
   }
 
-  void _shareNFT(NFT nft) {
+  void _shareNFT(TaxLienNFT nft) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -359,7 +359,7 @@ class NFTDetailDialog extends StatelessWidget {
     );
   }
 
-  void _copyNFTLink(NFT nft) {
+  void _copyNFTLink(TaxLienNFT nft) {
     final nftLink = 'https://taxlien.online/nft/${nft.id}';
     // In a real implementation, this would copy to clipboard
     ScaffoldMessenger.of(context).showSnackBar(

@@ -767,12 +767,4 @@ class MagentoApiService extends ChangeNotifier {
     }
   }
 
-  void _setLoading(bool loading) {
-    _isLoading = loading;
-    notifyListeners();
-  }
-
-  void clearError() {
-    _error = null;
-  }
 }

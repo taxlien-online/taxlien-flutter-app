@@ -1,12 +1,16 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-// import 'package:flutter_magento/flutter_magento.dart';
+import 'package:flutter_magento/flutter_magento.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../core/constants/app_constants.dart';
 import '../core/services/secure_storage_service.dart';
+import 'auth_service.dart' as local_auth;
 
-// Временные заглушки для flutter_magento пакета
+// Реальная реализация с использованием flutter_magento пакета
 class FlutterMagentoPlugin {
+  late FlutterMagento _magento;
+  bool _isInitialized = false;
+
   Future<void> initialize({
     required String baseUrl,
     List<String>? supportedLanguages,
@@ -14,7 +18,14 @@ class FlutterMagentoPlugin {
     int? receiveTimeout,
     Map<String, String>? headers,
   }) async {
-    // Заглушка
+    _magento = FlutterMagento();
+    await _magento.initialize(
+      baseUrl: baseUrl,
+      connectionTimeout: connectionTimeout,
+      receiveTimeout: receiveTimeout,
+      headers: headers,
+    );
+    _isInitialized = true;
   }
 
   Future<dynamic> createCustomer({
@@ -23,11 +34,18 @@ class FlutterMagentoPlugin {
     required String firstName,
     required String lastName,
   }) async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.createCustomer(
+      email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+    );
   }
 
   Future<dynamic> getCurrentCustomer() async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.getCurrentCustomer();
   }
 
   Future<dynamic> getProducts({
@@ -41,20 +59,38 @@ class FlutterMagentoPlugin {
     double? minPrice,
     double? maxPrice,
   }) async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.getProducts(
+      page: page,
+      pageSize: pageSize,
+      searchQuery: searchQuery,
+      categoryId: categoryId,
+      sortBy: sortBy,
+      sortOrder: sortOrder,
+      filters: filters,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+    );
   }
 
   Future<dynamic> searchProducts(String query,
       {int page = 1, int pageSize = 20}) async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.searchProducts(
+      query,
+      page: page,
+      pageSize: pageSize,
+    );
   }
 
   Future<dynamic> getProduct(String sku) async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.getProduct(sku);
   }
 
   Future<dynamic> createCart() async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.createCart();
   }
 
   Future<dynamic> addToCart({
@@ -62,31 +98,48 @@ class FlutterMagentoPlugin {
     required String sku,
     required int quantity,
   }) async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.addToCart(
+      cartId: cartId,
+      sku: sku,
+      quantity: quantity,
+    );
   }
 
   Future<dynamic> getCartTotals(String cartId) async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.getCartTotals(cartId);
   }
 
   Future<dynamic> getCustomerOrders({int page = 1, int pageSize = 20}) async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.getCustomerOrders(page: page, pageSize: pageSize);
   }
 
   Future<dynamic> getOrder(String orderId) async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.getOrder(orderId);
   }
 
   Future<dynamic> getWishlist() async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.getWishlist();
   }
 
   Future<dynamic> addToDefaultWishlist({required String productId}) async {
-    return null; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.addToWishlist(
+      wishlistId: 'default',
+      productId: productId,
+    );
   }
 
   Future<bool> removeFromDefaultWishlist(int itemId) async {
-    return false; // Заглушка
+    if (!_isInitialized) throw Exception('Plugin not initialized');
+    return await _magento.removeFromWishlist(
+      wishlistId: 'default',
+      itemId: itemId,
+    );
   }
 }
 
@@ -113,7 +166,7 @@ class MagentoAuthService {
 }
 
 class AuthProvider {
-  final AuthService auth;
+  final local_auth.AuthService auth;
 
   AuthProvider(this.auth);
 
@@ -497,6 +550,8 @@ class FlutterMagentoCloudService extends ChangeNotifier {
         sortBy: sortBy,
         sortOrder: sortOrder,
         filters: filters ?? {},
+        minPrice: minPrice,
+        maxPrice: maxPrice,
       );
 
       _cloudFunctionsStatus['product_catalog'] = true;

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_icp/flutter_icp.dart';
 import 'nft_service.dart';
 
 class YukuListing {
@@ -36,7 +37,8 @@ class YukuListing {
       currency: json['currency'],
       sellerAddress: json['sellerAddress'],
       createdAt: DateTime.parse(json['createdAt']),
-      expiresAt: json['expiresAt'] != null ? DateTime.parse(json['expiresAt']) : null,
+      expiresAt:
+          json['expiresAt'] != null ? DateTime.parse(json['expiresAt']) : null,
       status: json['status'],
       buyerAddress: json['buyerAddress'],
       soldAt: json['soldAt'] != null ? DateTime.parse(json['soldAt']) : null,
@@ -88,7 +90,8 @@ class YukuOffer {
       currency: json['currency'],
       buyerAddress: json['buyerAddress'],
       createdAt: DateTime.parse(json['createdAt']),
-      expiresAt: json['expiresAt'] != null ? DateTime.parse(json['expiresAt']) : null,
+      expiresAt:
+          json['expiresAt'] != null ? DateTime.parse(json['expiresAt']) : null,
       status: json['status'],
     );
   }
@@ -110,13 +113,18 @@ class YukuOffer {
 class YukuService extends ChangeNotifier {
   static const String _yukuApiUrl = 'https://yuku.app/api';
   static const String _yukuMarketplaceUrl = 'https://yuku.app/marketplace';
-  
+
   List<YukuListing> _activeListings = [];
   List<YukuListing> _myListings = [];
   List<YukuOffer> _myOffers = [];
   List<YukuOffer> _receivedOffers = [];
   bool _isLoading = false;
   String? _error;
+
+  // Flutter ICP client
+  late ICPClient _icpClient;
+  late YukuMarketplaceProvider _yukuProvider;
+  bool _isInitialized = false;
 
   List<YukuListing> get activeListings => _activeListings;
   List<YukuListing> get myListings => _myListings;
@@ -156,17 +164,38 @@ class YukuService extends ChangeNotifier {
       'amount': 1400.0,
       'currency': 'ICP',
       'buyerAddress': 'user123',
-      'createdAt': DateTime.now().subtract(Duration(hours: 6)).toIso8601String(),
+      'createdAt':
+          DateTime.now().subtract(Duration(hours: 6)).toIso8601String(),
       'expiresAt': DateTime.now().add(Duration(days: 7)).toIso8601String(),
       'status': 'pending',
     },
   ];
 
   Future<void> initialize() async {
-    await loadActiveListings();
-    await loadMyListings();
-    await loadMyOffers();
-    await loadReceivedOffers();
+    try {
+      // Initialize Flutter ICP client
+      _icpClient = ICPClient();
+      _yukuProvider = YukuMarketplaceProvider();
+
+      // Register Yuku marketplace provider
+      _icpClient.registerMarketplaceProvider(_yukuProvider);
+
+      // Initialize ICP client
+      await _icpClient.initialize();
+
+      _isInitialized = true;
+
+      // Load marketplace data
+      await loadActiveListings();
+      await loadMyListings();
+      await loadMyOffers();
+      await loadReceivedOffers();
+    } catch (e) {
+      _error = 'Failed to initialize Yuku service: $e';
+      if (kDebugMode) {
+        print('Yuku Service initialization error: $e');
+      }
+    }
   }
 
   Future<void> loadActiveListings() async {
@@ -176,7 +205,7 @@ class YukuService extends ChangeNotifier {
         Uri.parse('$_yukuApiUrl/listings/active'),
         headers: {'Content-Type': 'application/json'},
       );
-      
+
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         _activeListings = (data['listings'] as List)
@@ -208,12 +237,12 @@ class YukuService extends ChangeNotifier {
     try {
       // Simulate API call
       await Future.delayed(Duration(milliseconds: 600));
-      
+
       _myListings = _mockListings
           .where((listing) => listing['sellerAddress'] == 'user123')
           .map((json) => YukuListing.fromJson(json))
           .toList();
-      
+
       _error = null;
     } catch (e) {
       _error = 'Failed to load my listings: $e';
@@ -227,12 +256,12 @@ class YukuService extends ChangeNotifier {
     try {
       // Simulate API call
       await Future.delayed(Duration(milliseconds: 500));
-      
+
       _myOffers = _mockOffers
           .where((offer) => offer['buyerAddress'] == 'user123')
           .map((json) => YukuOffer.fromJson(json))
           .toList();
-      
+
       _error = null;
     } catch (e) {
       _error = 'Failed to load my offers: $e';
@@ -246,12 +275,12 @@ class YukuService extends ChangeNotifier {
     try {
       // Simulate API call
       await Future.delayed(Duration(milliseconds: 500));
-      
+
       _receivedOffers = _mockOffers
           .where((offer) => offer['buyerAddress'] != 'user123')
           .map((json) => YukuOffer.fromJson(json))
           .toList();
-      
+
       _error = null;
     } catch (e) {
       _error = 'Failed to load received offers: $e';
@@ -278,14 +307,14 @@ class YukuService extends ChangeNotifier {
           'expirationDays': expirationDays,
         }),
       );
-      
+
       if (response.statusCode == 201) {
         final data = jsonDecode(response.body);
         final listing = YukuListing.fromJson(data['listing']);
-        
+
         _myListings.add(listing);
         _activeListings.add(listing);
-        
+
         _error = null;
         notifyListeners();
         return true;
@@ -303,12 +332,12 @@ class YukuService extends ChangeNotifier {
         currency: currency,
         sellerAddress: 'user123',
         createdAt: DateTime.now(),
-        expiresAt: expirationDays != null 
+        expiresAt: expirationDays != null
             ? DateTime.now().add(Duration(days: expirationDays))
             : null,
         status: 'active',
       );
-      
+
       _myListings.add(listing);
       _activeListings.add(listing);
       notifyListeners();
@@ -323,8 +352,9 @@ class YukuService extends ChangeNotifier {
     try {
       // Simulate API call
       await Future.delayed(Duration(seconds: 1));
-      
-      final listingIndex = _myListings.indexWhere((listing) => listing.id == listingId);
+
+      final listingIndex =
+          _myListings.indexWhere((listing) => listing.id == listingId);
       if (listingIndex != -1) {
         final listing = _myListings[listingIndex];
         final updatedListing = YukuListing(
@@ -337,12 +367,12 @@ class YukuService extends ChangeNotifier {
           expiresAt: listing.expiresAt,
           status: 'cancelled',
         );
-        
+
         _myListings[listingIndex] = updatedListing;
-        
+
         // Remove from active listings
         _activeListings.removeWhere((listing) => listing.id == listingId);
-        
+
         _error = null;
         notifyListeners();
         return true;
@@ -361,8 +391,9 @@ class YukuService extends ChangeNotifier {
     try {
       // Simulate API call
       await Future.delayed(Duration(seconds: 3));
-      
-      final listingIndex = _activeListings.indexWhere((listing) => listing.id == listingId);
+
+      final listingIndex =
+          _activeListings.indexWhere((listing) => listing.id == listingId);
       if (listingIndex != -1) {
         final listing = _activeListings[listingIndex];
         final updatedListing = YukuListing(
@@ -377,12 +408,12 @@ class YukuService extends ChangeNotifier {
           buyerAddress: 'user123',
           soldAt: DateTime.now(),
         );
-        
+
         _activeListings[listingIndex] = updatedListing;
-        
+
         // Remove from active listings
         _activeListings.removeWhere((listing) => listing.id == listingId);
-        
+
         _error = null;
         notifyListeners();
         return true;
@@ -406,7 +437,7 @@ class YukuService extends ChangeNotifier {
     try {
       // Simulate API call
       await Future.delayed(Duration(seconds: 2));
-      
+
       final offer = YukuOffer(
         id: 'offer_${DateTime.now().millisecondsSinceEpoch}',
         nftId: nftId,
@@ -414,14 +445,14 @@ class YukuService extends ChangeNotifier {
         currency: currency,
         buyerAddress: 'user123',
         createdAt: DateTime.now(),
-        expiresAt: expirationDays != null 
+        expiresAt: expirationDays != null
             ? DateTime.now().add(Duration(days: expirationDays))
             : null,
         status: 'pending',
       );
-      
+
       _myOffers.add(offer);
-      
+
       _error = null;
       notifyListeners();
       return true;
@@ -438,8 +469,9 @@ class YukuService extends ChangeNotifier {
     try {
       // Simulate API call
       await Future.delayed(Duration(seconds: 2));
-      
-      final offerIndex = _receivedOffers.indexWhere((offer) => offer.id == offerId);
+
+      final offerIndex =
+          _receivedOffers.indexWhere((offer) => offer.id == offerId);
       if (offerIndex != -1) {
         final offer = _receivedOffers[offerIndex];
         final updatedOffer = YukuOffer(
@@ -452,9 +484,9 @@ class YukuService extends ChangeNotifier {
           expiresAt: offer.expiresAt,
           status: 'accepted',
         );
-        
+
         _receivedOffers[offerIndex] = updatedOffer;
-        
+
         _error = null;
         notifyListeners();
         return true;
@@ -473,8 +505,9 @@ class YukuService extends ChangeNotifier {
     try {
       // Simulate API call
       await Future.delayed(Duration(seconds: 1));
-      
-      final offerIndex = _receivedOffers.indexWhere((offer) => offer.id == offerId);
+
+      final offerIndex =
+          _receivedOffers.indexWhere((offer) => offer.id == offerId);
       if (offerIndex != -1) {
         final offer = _receivedOffers[offerIndex];
         final updatedOffer = YukuOffer(
@@ -487,9 +520,9 @@ class YukuService extends ChangeNotifier {
           expiresAt: offer.expiresAt,
           status: 'rejected',
         );
-        
+
         _receivedOffers[offerIndex] = updatedOffer;
-        
+
         _error = null;
         notifyListeners();
         return true;
@@ -508,7 +541,7 @@ class YukuService extends ChangeNotifier {
     try {
       // Simulate API call
       await Future.delayed(Duration(seconds: 1));
-      
+
       final offerIndex = _myOffers.indexWhere((offer) => offer.id == offerId);
       if (offerIndex != -1) {
         final offer = _myOffers[offerIndex];
@@ -522,9 +555,9 @@ class YukuService extends ChangeNotifier {
           expiresAt: offer.expiresAt,
           status: 'cancelled',
         );
-        
+
         _myOffers[offerIndex] = updatedOffer;
-        
+
         _error = null;
         notifyListeners();
         return true;
@@ -547,13 +580,14 @@ class YukuService extends ChangeNotifier {
   }) async {
     try {
       await Future.delayed(Duration(milliseconds: 300));
-      
+
       return _activeListings.where((listing) {
         if (nftId != null && listing.nftId != nftId) return false;
         if (minPrice != null && listing.price < minPrice) return false;
         if (maxPrice != null && listing.price > maxPrice) return false;
         if (currency != null && listing.currency != currency) return false;
-        if (sellerAddress != null && listing.sellerAddress != sellerAddress) return false;
+        if (sellerAddress != null && listing.sellerAddress != sellerAddress)
+          return false;
         return true;
       }).toList();
     } catch (e) {

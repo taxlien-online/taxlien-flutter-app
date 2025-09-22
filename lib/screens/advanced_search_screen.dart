@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/models/magento_models.dart';
-import '../core/models/tax_lien_models.dart';
+import '../core/models/tax_lien_models.dart' as models;
 import '../services/tax_lien_service.dart';
 import '../core/services/magento_api_service.dart';
 import '../widgets/advanced_search_filters.dart';
@@ -35,7 +35,7 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
 
   // Results
   List<MagentoProduct> _magentoResults = [];
-  List<TaxLien> _taxLienResults = [];
+  List<models.TaxLien> _taxLienResults = [];
 
   // Advanced filters
   AdvancedSearchFilters _filters = AdvancedSearchFilters();
@@ -593,7 +593,7 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
     });
   }
 
-  void _showTaxLienDetails(TaxLien lien) {
+  void _showTaxLienDetails(models.TaxLien lien) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(

@@ -17,6 +17,7 @@ import 'core/services/analytics_service.dart';
 import 'core/services/notification_service.dart';
 import 'core/services/secure_storage_service.dart';
 import 'core/models/magento_models.dart';
+import 'services/integrated_services.dart';
 
 // Provider imports - defined in this file
 
@@ -116,26 +117,20 @@ Future<void> _initializeServices() async {
 
 Future<void> _initializeNFTServices() async {
   try {
-    // Create NFT client
-    final nftClient = NFTClient();
+    // Initialize integrated services
+    final integratedServices = IntegratedServices();
+    await integratedServices.initialize();
 
-    // Register ICP providers
-    nftClient.registerNFTProvider(ICPNFTProvider());
-    nftClient.registerWalletProvider(PlugWalletProvider());
-    nftClient.registerMarketplaceProvider(YukuMarketplaceProvider());
-
-    // Initialize all providers
-    await nftClient.initialize();
-
-    // Store NFT client globally for access throughout the app
-    AppConstants.nftClient = nftClient;
+    // Store services globally for access throughout the app
+    AppConstants.integratedServices = integratedServices;
+    AppConstants.nftClient = integratedServices.nftClient;
 
     if (kDebugMode) {
-      print('NFT services initialized successfully');
+      print('Integrated services initialized successfully');
     }
   } catch (e) {
     if (kDebugMode) {
-      print('Error initializing NFT services: $e');
+      print('Error initializing integrated services: $e');
     }
   }
 }
@@ -375,21 +370,21 @@ class LoadingScreen extends StatelessWidget {
 }
 
 /// Global providers for the application
-final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeMode>(() {
+final themeProvider = NotifierProvider<ThemeNotifier, ThemeMode>(() {
   return ThemeNotifier();
 });
 
 final localizationProvider =
-    StateNotifierProvider<LocalizationNotifier, Locale>(() {
+    NotifierProvider<LocalizationNotifier, Locale>(() {
   return LocalizationNotifier();
 });
 
-final authProvider = StateNotifierProvider<AuthNotifier, AuthState>(() {
+final authProvider = NotifierProvider<AuthNotifier, AuthState>(() {
   return AuthNotifier();
 });
 
 final magentoProvider =
-    StateNotifierProvider<MagentoNotifier, MagentoState>(() {
+    NotifierProvider<MagentoNotifier, MagentoState>(() {
   return MagentoNotifier();
 });
 

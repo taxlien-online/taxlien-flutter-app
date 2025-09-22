@@ -379,7 +379,6 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
                 MaterialPageRoute(
                   builder: (context) => AdvancedSearchScreen(
                     taxLienService: widget.taxLienService,
-                    magentoApiService: widget.magentoApiService,
                     useModernView: _useModernView,
                   ),
                 ),
@@ -555,7 +554,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
             onTap: () => _showProductDetail(product),
             onFavoriteToggle: () => _toggleFavorite(product),
             onAddToCart: () => _addToCart(product),
-            isFavorite: _favoriteProductIds.contains(product.id.toString())
+                isFavorite: _favoriteProductIds.contains(product.sku)
           );
         },
       ),
@@ -676,7 +675,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
 
   void _toggleFavorite(MagentoProduct product) async {
     try {
-      final productId = product.id.toString();
+          final productId = product.sku;
       final isCurrentlyFavorite = _favoriteProductIds.contains(productId);
       
       if (isCurrentlyFavorite) {

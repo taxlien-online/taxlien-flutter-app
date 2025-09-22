@@ -6,7 +6,7 @@ import '../services/auth_service.dart';
 import '../services/database_service.dart';
 
 /// Product detail screen for tax lien products
-class ProductDetailScreen extends StatefulWidget {
+class ProductDetailScreen extends ConsumerStatefulWidget {
   final MagentoProduct product;
   final AuthService authService;
   final DatabaseService databaseService;
@@ -19,10 +19,10 @@ class ProductDetailScreen extends StatefulWidget {
   });
 
   @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  ConsumerState<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
+class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   bool _isFavorite = false;
   bool _isLoading = false;
 
