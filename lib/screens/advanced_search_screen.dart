@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/models/magento_models.dart';
 import '../core/models/tax_lien_models.dart';
 import '../services/tax_lien_service.dart';
-import '../services/magento_api_service.dart';
+import '../core/services/magento_api_service.dart';
 import '../widgets/advanced_search_filters.dart';
 import '../widgets/search_results_list.dart';
 

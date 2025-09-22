@@ -12,7 +12,6 @@ class AppConstants {
 
   // API Configuration
   static const String magentoBaseUrl = 'https://taxlien.online';
-  static const String magentoGraphQLEndpoint = '$magentoBaseUrl/graphql';
   static const String magentoRestEndpoint = '$magentoBaseUrl/rest/V1';
   static const String magentoMediaUrl =
       '$magentoBaseUrl/pub/media/catalog/product';

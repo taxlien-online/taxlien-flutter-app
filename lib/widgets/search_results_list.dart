@@ -175,7 +175,7 @@ class SearchResultsList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Product image
-                      if (product.mediaGallery?.isNotEmpty == true)
+                      if (product.mediaGalleryEntries?.isNotEmpty == true)
                         Container(
                           height: 200,
                           width: double.infinity,
@@ -186,7 +186,7 @@ class SearchResultsList extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
-                              product.mediaGallery!.first.url,
+                              product.mediaGalleryEntries!.first.url,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return Icon(
@@ -296,7 +296,7 @@ class SearchResultsList extends StatelessWidget {
         _buildDetailRow(context, 'SKU', product.sku ?? 'N/A'),
         _buildDetailRow(context, 'Type', product.typeId ?? 'N/A'),
         _buildDetailRow(context, 'Weight', product.weight?.toString() ?? 'N/A'),
-        _buildDetailRow(context, 'Status', product.status ?? 'N/A'),
+        _buildDetailRow(context, 'Status', product.status?.toString() ?? 'N/A'),
         
         if (product.customAttributes?.isNotEmpty == true) ...[
           const SizedBox(height: 8),
@@ -350,7 +350,7 @@ class SearchResultsList extends StatelessWidget {
       final isFavorite = await databaseService.isFavorite(product.sku, type: 'product');
       
       if (isFavorite) {
-        await databaseService.removeFavorite(product.sku);
+        await databaseService.removeFromFavorites(product.sku);
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -360,15 +360,7 @@ class SearchResultsList extends StatelessWidget {
           );
         }
       } else {
-        await databaseService.addFavorite(
-          lienId: product.sku,
-          type: 'product',
-          title: product.name,
-          price: product.price,
-          imageUrl: product.mediaGalleryEntries?.isNotEmpty == true 
-              ? product.mediaGalleryEntries!.first.file 
-              : null,
-        );
+        await databaseService.addToFavorites(product.sku);
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

@@ -91,14 +91,14 @@ class FlutterMagentoPlugin {
 }
 
 class MagentoProvider {
-  late AuthService auth;
+  late MagentoAuthService auth;
 
   MagentoProvider() {
-    auth = AuthService();
+    auth = MagentoAuthService();
   }
 }
 
-class AuthService {
+class MagentoAuthService {
   Future<bool> authenticate({
     required String email,
     required String password,

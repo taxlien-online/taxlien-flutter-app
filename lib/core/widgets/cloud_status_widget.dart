@@ -39,7 +39,8 @@ class CloudStatusWidget extends ConsumerWidget {
         children: [
           if (showIcon) ...[
             Icon(
-              _getStatusIcon(status['isOnline'], status['preferGraphQL']),
+              _getStatusIcon(
+                  status['isOnline'], status['preferFlutterMagento']),
               size: 16,
               color: textColor ?? _getTextColor(status['isOnline'], context),
             ),
@@ -63,8 +64,8 @@ class CloudStatusWidget extends ConsumerWidget {
     // This would normally come from the hybrid service
     return {
       'isOnline': true,
-      'connectionStatus': 'Cloud (GraphQL)',
-      'preferGraphQL': true,
+      'connectionStatus': 'Cloud (Flutter Magento)',
+      'preferFlutterMagento': true,
       'enableOfflineMode': true,
       'isAuthenticated': false,
     };
@@ -86,9 +87,9 @@ class CloudStatusWidget extends ConsumerWidget {
     }
   }
 
-  IconData _getStatusIcon(bool isOnline, bool preferGraphQL) {
+  IconData _getStatusIcon(bool isOnline, bool preferFlutterMagento) {
     if (isOnline) {
-      return preferGraphQL ? Icons.cloud_sync : Icons.cloud;
+      return preferFlutterMagento ? Icons.cloud_sync : Icons.cloud;
     } else {
       return Icons.cloud_off;
     }
@@ -134,7 +135,7 @@ class CloudStatusCard extends ConsumerWidget {
             ),
             _buildStatusRow(
               'API Method',
-              status['preferGraphQL'] ? 'GraphQL' : 'REST',
+              status['preferFlutterMagento'] ? 'Flutter Magento' : 'REST',
               Colors.blue,
             ),
             _buildStatusRow(
@@ -208,12 +209,12 @@ class CloudStatusCard extends ConsumerWidget {
   Map<String, dynamic> _getMockDetailedStatus() {
     return {
       'isOnline': true,
-      'connectionStatus': 'Cloud (GraphQL)',
-      'preferGraphQL': true,
+      'connectionStatus': 'Cloud (Flutter Magento)',
+      'preferFlutterMagento': true,
       'enableOfflineMode': true,
       'isAuthenticated': false,
       'restServiceLoading': false,
-      'graphqlServiceInitialized': true,
+      'flutterMagentoAvailable': true,
     };
   }
 }
@@ -261,8 +262,9 @@ class CloudSettingsTile extends ConsumerWidget {
           child: Column(
             children: [
               SwitchListTile(
-                title: const Text('Prefer GraphQL API'),
-                subtitle: const Text('Use GraphQL when available (faster)'),
+                title: const Text('Prefer Flutter Magento'),
+                subtitle:
+                    const Text('Use Flutter Magento when available (faster)'),
                 value: true, // This would come from the service
                 onChanged: (value) {
                   // Update preference

@@ -10,7 +10,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/constants/app_constants.dart';
 import 'core/theme/app_theme.dart';
 import 'core/services/magento_api_service.dart';
-import 'core/services/magento_graphql_service.dart';
 import 'core/services/hybrid_magento_service.dart';
 import 'core/services/theme_service.dart';
 import 'core/services/localization_service.dart';
@@ -36,14 +35,14 @@ import 'services/tax_lien_service.dart';
 import 'services/auth_service.dart';
 import 'services/database_service.dart';
 import 'services/ai_investment_advisor_service.dart';
-import 'services/flutter_magento_cloud_service.dart';
+import 'services/flutter_magento_cloud_service.dart' as magento_cloud;
 
 // Widgets
 import 'widgets/cloud_functions_status_widget.dart';
 
-// NFT and ICP libraries
-import 'package:flutter_nft/flutter_nft.dart';
-import 'package:flutter_icp/flutter_icp.dart';
+// NFT and ICP libraries - temporarily disabled due to compilation errors
+// import 'package:flutter_nft/flutter_nft.dart';
+// import 'package:flutter_icp/flutter_icp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -95,8 +94,8 @@ Future<void> _initializeServices() async {
     // Initialize secure storage
     await SecureStorageService.initialize();
 
-    // Initialize NFT client with ICP providers
-    await _initializeNFTServices();
+    // Initialize NFT client with ICP providers - temporarily disabled
+    // await _initializeNFTServices();
 
     // Initialize analytics (disabled for now to avoid Firebase issues)
     if (false && AppConstants.enableAnalytics) {
@@ -376,38 +375,40 @@ class LoadingScreen extends StatelessWidget {
 }
 
 /// Global providers for the application
-final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeMode>((ref) {
+final themeProvider = NotifierProvider<ThemeNotifier, ThemeMode>(() {
   return ThemeNotifier();
 });
 
 final localizationProvider =
-    StateNotifierProvider<LocalizationNotifier, Locale>((ref) {
+    NotifierProvider<LocalizationNotifier, Locale>(() {
   return LocalizationNotifier();
 });
 
-final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
+final authProvider = NotifierProvider<AuthNotifier, AuthState>(() {
   return AuthNotifier();
 });
 
 final magentoProvider =
-    StateNotifierProvider<MagentoNotifier, MagentoState>((ref) {
+    NotifierProvider<MagentoNotifier, MagentoState>(() {
   return MagentoNotifier();
 });
 
 final hybridMagentoServiceProvider =
-    StateNotifierProvider<HybridMagentoService, dynamic>((ref) {
+    Provider<HybridMagentoService>((ref) {
   return HybridMagentoService();
 });
 
 final flutterMagentoCloudServiceProvider =
-    StateNotifierProvider<FlutterMagentoCloudService, dynamic>((ref) {
-  return FlutterMagentoCloudService();
+    Provider<magento_cloud.FlutterMagentoCloudService>((ref) {
+  return magento_cloud.FlutterMagentoCloudService();
 });
 
 /// Theme notifier for managing app theme
-class ThemeNotifier extends StateNotifier<ThemeMode> {
-  ThemeNotifier() : super(ThemeMode.system) {
+class ThemeNotifier extends Notifier<ThemeMode> {
+  @override
+  ThemeMode build() {
     _loadTheme();
+    return ThemeMode.system;
   }
 
   Future<void> _loadTheme() async {
@@ -428,9 +429,11 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
 }
 
 /// Localization notifier for managing app locale
-class LocalizationNotifier extends StateNotifier<Locale> {
-  LocalizationNotifier() : super(const Locale('en', 'US')) {
+class LocalizationNotifier extends Notifier<Locale> {
+  @override
+  Locale build() {
     _loadLocale();
+    return const Locale('en', 'US');
   }
 
   Future<void> _loadLocale() async {
@@ -474,9 +477,11 @@ class AuthState {
 }
 
 /// Auth notifier for managing authentication state
-class AuthNotifier extends StateNotifier<AuthState> {
-  AuthNotifier() : super(const AuthState()) {
+class AuthNotifier extends Notifier<AuthState> {
+  @override
+  AuthState build() {
     _initialize();
+    return const AuthState();
   }
 
   Future<void> _initialize() async {
@@ -606,8 +611,11 @@ class MagentoState {
 }
 
 /// Magento notifier for managing Magento data
-class MagentoNotifier extends StateNotifier<MagentoState> {
-  MagentoNotifier() : super(const MagentoState());
+class MagentoNotifier extends Notifier<MagentoState> {
+  @override
+  MagentoState build() {
+    return const MagentoState();
+  }
 
   Future<void> loadProducts({
     int page = 1,

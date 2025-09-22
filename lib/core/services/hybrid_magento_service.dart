@@ -5,20 +5,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/app_constants.dart';
 import '../models/magento_models.dart';
 import 'magento_api_service.dart';
-import 'magento_graphql_service.dart';
 import 'secure_storage_service.dart';
 import '../../services/flutter_magento_cloud_service.dart';
 
-/// Hybrid Magento service that combines REST API, GraphQL, Flutter Magento, and offline capabilities
+/// Hybrid Magento service that combines REST API, Flutter Magento, and offline capabilities
 /// Automatically switches between cloud and offline mode based on connectivity
 class HybridMagentoService extends ChangeNotifier {
   final MagentoApiService _restService;
-  final MagentoGraphQLService _graphqlService;
   FlutterMagentoCloudService? _flutterMagentoService;
 
   bool _isOnline = false;
-  bool _preferGraphQL = true;
-  bool _preferFlutterMagento = true; // Новый приоритет для Flutter Magento
+  bool _preferFlutterMagento = true; // Приоритет для Flutter Magento
   bool _enableOfflineMode = AppConstants.enableOfflineMode;
 
   // Cache keys
@@ -29,31 +26,24 @@ class HybridMagentoService extends ChangeNotifier {
 
   // Getters
   bool get isOnline => _isOnline;
-  bool get preferGraphQL => _preferGraphQL;
   bool get preferFlutterMagento => _preferFlutterMagento;
   bool get enableOfflineMode => _enableOfflineMode;
   bool get isAuthenticated => _isOnline
       ? (_preferFlutterMagento && _flutterMagentoService != null
           ? _flutterMagentoService!.isAuthenticated
-          : _preferGraphQL
-              ? _graphqlService.isAuthenticated
-              : _restService.isAuthenticated)
+          : _restService.isAuthenticated)
       : false;
 
   String get connectionStatus => _isOnline
       ? (_preferFlutterMagento && _flutterMagentoService != null
           ? 'Cloud (Flutter Magento)'
-          : _preferGraphQL
-              ? 'Cloud (GraphQL)'
-              : 'Cloud (REST)')
+          : 'Cloud (REST)')
       : 'Offline Mode';
 
   HybridMagentoService({
     MagentoApiService? restService,
-    MagentoGraphQLService? graphqlService,
     FlutterMagentoCloudService? flutterMagentoService,
   })  : _restService = restService ?? MagentoApiService(),
-        _graphqlService = graphqlService ?? MagentoGraphQLService(),
         _flutterMagentoService = flutterMagentoService {
     _initialize();
   }
@@ -74,15 +64,15 @@ class HybridMagentoService extends ChangeNotifier {
 
   Future<void> _loadPreferences() async {
     final prefs = await SharedPreferences.getInstance();
-    _preferGraphQL = prefs.getBool('prefer_graphql') ?? true;
     _preferFlutterMagento = prefs.getBool('prefer_flutter_magento') ?? true;
     _enableOfflineMode =
         prefs.getBool('enable_offline_mode') ?? AppConstants.enableOfflineMode;
   }
 
   Future<void> _initializeServices() async {
-    if (_isOnline) {
-      await _graphqlService.initializeAuth();
+    // Initialize Flutter Magento service if available
+    if (_isOnline && _flutterMagentoService != null) {
+      // Flutter Magento service initialization is handled internally
     }
   }
 
@@ -127,15 +117,7 @@ class HybridMagentoService extends ChangeNotifier {
 
   // Configuration Methods
 
-  /// Set preference for GraphQL vs REST API
-  Future<void> setPreferGraphQL(bool prefer) async {
-    _preferGraphQL = prefer;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('prefer_graphql', prefer);
-    notifyListeners();
-  }
-
-  /// Set preference for Flutter Magento vs other services
+  /// Set preference for Flutter Magento vs REST API
   Future<void> setPreferFlutterMagento(bool prefer) async {
     _preferFlutterMagento = prefer;
     final prefs = await SharedPreferences.getInstance();
@@ -182,15 +164,7 @@ class HybridMagentoService extends ChangeNotifier {
       );
     }
 
-    // Fallback to GraphQL if Flutter Magento fails or is not preferred
-    if (!success && _preferGraphQL && AppConstants.preferCloudWhenAvailable) {
-      success = await _graphqlService.authenticateCustomer(
-        email: email,
-        password: password,
-      );
-    }
-
-    // Final fallback to REST API
+    // Fallback to REST API if Flutter Magento fails or is not preferred
     if (!success) {
       success = await _restService.authenticateCustomer(
         email: email,
@@ -242,24 +216,24 @@ class HybridMagentoService extends ChangeNotifier {
 
     MagentoCustomer? customer;
 
-    if (_preferGraphQL && AppConstants.preferCloudWhenAvailable) {
-      customer = await _graphqlService.createCustomer(
+    if (_preferFlutterMagento &&
+        _flutterMagentoService != null &&
+        AppConstants.preferCloudWhenAvailable) {
+      final success = await _flutterMagentoService!.createCustomer(
         email: email,
         password: password,
         firstName: firstName,
         lastName: lastName,
       );
 
-      // Fallback to REST if GraphQL fails
-      if (customer == null) {
-        customer = await _restService.createCustomer(
-          email: email,
-          password: password,
-          firstName: firstName,
-          lastName: lastName,
-        );
+      if (success) {
+        // Get the created customer
+        customer = await _flutterMagentoService!.getCurrentCustomer();
       }
-    } else {
+    }
+
+    // Fallback to REST API if Flutter Magento fails or is not preferred
+    if (customer == null) {
       customer = await _restService.createCustomer(
         email: email,
         password: password,
@@ -283,14 +257,19 @@ class HybridMagentoService extends ChangeNotifier {
 
     MagentoCustomer? customer;
 
-    if (_preferGraphQL && AppConstants.preferCloudWhenAvailable) {
-      customer = await _graphqlService.getCurrentCustomer();
-
-      // Fallback to REST if GraphQL fails
-      if (customer == null) {
-        customer = await _restService.getCurrentCustomer();
+    if (_preferFlutterMagento &&
+        _flutterMagentoService != null &&
+        AppConstants.preferCloudWhenAvailable) {
+      final flutterCustomer =
+          await _flutterMagentoService!.getCurrentCustomer();
+      if (flutterCustomer != null) {
+        // Convert Flutter Magento customer to MagentoCustomer
+        customer = _convertFlutterMagentoCustomer(flutterCustomer);
       }
-    } else {
+    }
+
+    // Fallback to REST API if Flutter Magento fails or is not preferred
+    if (customer == null) {
       customer = await _restService.getCurrentCustomer();
     }
 
@@ -343,24 +322,7 @@ class HybridMagentoService extends ChangeNotifier {
       }
     }
 
-    // Fallback to GraphQL if Flutter Magento fails or is not preferred
-    if (products == null &&
-        _preferGraphQL &&
-        AppConstants.preferCloudWhenAvailable) {
-      products = await _graphqlService.getProducts(
-        currentPage: page,
-        pageSize: pageSize,
-        searchQuery: searchQuery,
-        categoryIds: categoryId != null ? [categoryId] : null,
-        sortBy: sortBy,
-        sortDirection: sortOrder,
-        filters: filters,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
-      );
-    }
-
-    // Final fallback to REST API
+    // Fallback to REST API if Flutter Magento fails or is not preferred
     if (products == null) {
       products = await _restService.getProducts(
         page: page,
@@ -388,14 +350,18 @@ class HybridMagentoService extends ChangeNotifier {
 
     MagentoProduct? product;
 
-    if (_preferGraphQL && AppConstants.preferCloudWhenAvailable) {
-      product = await _graphqlService.getProduct(sku);
-
-      // Fallback to REST if GraphQL fails
-      if (product == null) {
-        product = await _restService.getProduct(sku);
+    if (_preferFlutterMagento &&
+        _flutterMagentoService != null &&
+        AppConstants.preferCloudWhenAvailable) {
+      final flutterProduct = await _flutterMagentoService!.getProduct(sku);
+      if (flutterProduct != null) {
+        // Convert Flutter Magento product to MagentoProduct
+        product = _convertFlutterMagentoProduct(flutterProduct);
       }
-    } else {
+    }
+
+    // Fallback to REST API if Flutter Magento fails or is not preferred
+    if (product == null) {
       product = await _restService.getProduct(sku);
     }
 
@@ -410,16 +376,9 @@ class HybridMagentoService extends ChangeNotifier {
 
     List<MagentoCategory>? categories;
 
-    if (_preferGraphQL && AppConstants.preferCloudWhenAvailable) {
-      categories = await _graphqlService.getCategories();
-
-      // Fallback to REST if GraphQL fails
-      if (categories == null) {
-        categories = await _restService.getCategories();
-      }
-    } else {
-      categories = await _restService.getCategories();
-    }
+    // For now, use REST API for categories
+    // Flutter Magento categories support can be added later
+    categories = await _restService.getCategories();
 
     if (categories != null && _enableOfflineMode) {
       await _cacheCategories(categories);
@@ -439,14 +398,17 @@ class HybridMagentoService extends ChangeNotifier {
 
     String? cartId;
 
-    if (_preferGraphQL && AppConstants.preferCloudWhenAvailable) {
-      cartId = await _graphqlService.createCart();
-
-      // Fallback to REST if GraphQL fails
-      if (cartId == null) {
-        cartId = await _restService.createCart();
+    if (_preferFlutterMagento &&
+        _flutterMagentoService != null &&
+        AppConstants.preferCloudWhenAvailable) {
+      final flutterCart = await _flutterMagentoService!.createCart();
+      if (flutterCart != null) {
+        cartId = flutterCart['id']?.toString();
       }
-    } else {
+    }
+
+    // Fallback to REST API if Flutter Magento fails or is not preferred
+    if (cartId == null) {
       cartId = await _restService.createCart();
     }
 
@@ -466,24 +428,19 @@ class HybridMagentoService extends ChangeNotifier {
 
     bool success = false;
 
-    if (_preferGraphQL && AppConstants.preferCloudWhenAvailable) {
-      success = await _graphqlService.addToCart(
+    if (_preferFlutterMagento &&
+        _flutterMagentoService != null &&
+        AppConstants.preferCloudWhenAvailable) {
+      success = await _flutterMagentoService!.addToCart(
         cartId: cartId,
         sku: sku,
         quantity: quantity,
-        selectedOptions: productOption,
+        options: productOption,
       );
+    }
 
-      // Fallback to REST if GraphQL fails
-      if (!success) {
-        success = await _restService.addToCart(
-          cartId: cartId,
-          sku: sku,
-          quantity: quantity,
-          productOption: productOption,
-        );
-      }
-    } else {
+    // Fallback to REST API if Flutter Magento fails or is not preferred
+    if (!success) {
       success = await _restService.addToCart(
         cartId: cartId,
         sku: sku,
@@ -503,14 +460,18 @@ class HybridMagentoService extends ChangeNotifier {
 
     MagentoCart? cart;
 
-    if (_preferGraphQL && AppConstants.preferCloudWhenAvailable) {
-      cart = await _graphqlService.getCart(cartId);
-
-      // Fallback to REST if GraphQL fails
-      if (cart == null) {
-        cart = await _restService.getCart(cartId);
+    if (_preferFlutterMagento &&
+        _flutterMagentoService != null &&
+        AppConstants.preferCloudWhenAvailable) {
+      final flutterCart = await _flutterMagentoService!.getCart(cartId);
+      if (flutterCart != null) {
+        // Convert Flutter Magento cart to MagentoCart
+        cart = _convertFlutterMagentoCart(flutterCart);
       }
-    } else {
+    }
+
+    // Fallback to REST API if Flutter Magento fails or is not preferred
+    if (cart == null) {
       cart = await _restService.getCart(cartId);
     }
 
@@ -524,7 +485,7 @@ class HybridMagentoService extends ChangeNotifier {
   /// Logout
   void logout() {
     _restService.logout();
-    _graphqlService.logout();
+    _flutterMagentoService?.logout();
     _clearOfflineData();
     notifyListeners();
   }
@@ -817,17 +778,117 @@ class HybridMagentoService extends ChangeNotifier {
     );
   }
 
+  /// Convert Flutter Magento customer to MagentoCustomer
+  MagentoCustomer? _convertFlutterMagentoCustomer(dynamic flutterCustomer) {
+    try {
+      if (flutterCustomer is Map<String, dynamic>) {
+        return MagentoCustomer(
+          id: int.tryParse(flutterCustomer['id']?.toString() ?? '0') ?? 0,
+          email: flutterCustomer['email'] ?? '',
+          firstname: flutterCustomer['firstname'] ?? '',
+          lastname: flutterCustomer['lastname'] ?? '',
+          createdAt: flutterCustomer['created_at'] != null
+              ? DateTime.parse(flutterCustomer['created_at'])
+              : null,
+          updatedAt: flutterCustomer['updated_at'] != null
+              ? DateTime.parse(flutterCustomer['updated_at'])
+              : null,
+        );
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error converting Flutter Magento customer: $e');
+      }
+    }
+    return null;
+  }
+
+  /// Convert Flutter Magento product to MagentoProduct
+  MagentoProduct? _convertFlutterMagentoProduct(dynamic flutterProduct) {
+    try {
+      if (flutterProduct is Map<String, dynamic>) {
+        return MagentoProduct(
+          sku: flutterProduct['sku'] ?? '',
+          name: flutterProduct['name'] ?? '',
+          description: flutterProduct['description']?['html'],
+          shortDescription: flutterProduct['short_description']?['html'],
+          price: (flutterProduct['price_range']?['minimum_price']
+                  ?['regular_price']?['value'])
+              ?.toDouble(),
+          specialPrice: (flutterProduct['price_range']?['minimum_price']
+                  ?['final_price']?['value'])
+              ?.toDouble(),
+          typeId: flutterProduct['type_id'] ?? 'simple',
+          urlKey: flutterProduct['url_key'] ?? '',
+          isActive: flutterProduct['status'] == 1,
+          isVisible: flutterProduct['visibility'] != 1,
+          isInStock: flutterProduct['stock_status'] == 'IN_STOCK',
+          qty: flutterProduct['only_x_left_in_stock'],
+          categoryIds: flutterProduct['categories'] != null
+              ? List<String>.from(
+                  flutterProduct['categories'].map((c) => c['id'].toString()))
+              : null,
+          mediaGalleryEntries: flutterProduct['media_gallery_entries'] != null
+              ? List<MagentoProductImage>.from(
+                  flutterProduct['media_gallery_entries']
+                      .map((x) => MagentoProductImage.fromJson(x)),
+                )
+              : null,
+          createdAt: flutterProduct['created_at'] != null
+              ? DateTime.parse(flutterProduct['created_at'])
+              : null,
+          updatedAt: flutterProduct['updated_at'] != null
+              ? DateTime.parse(flutterProduct['updated_at'])
+              : null,
+        );
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error converting Flutter Magento product: $e');
+      }
+    }
+    return null;
+  }
+
+  /// Convert Flutter Magento cart to MagentoCart
+  MagentoCart? _convertFlutterMagentoCart(dynamic flutterCart) {
+    try {
+      if (flutterCart is Map<String, dynamic>) {
+        return MagentoCart(
+          id: int.tryParse(flutterCart['id']?.toString() ?? '0') ?? 0,
+          createdAt: flutterCart['created_at'] != null
+              ? DateTime.parse(flutterCart['created_at'])
+              : DateTime.now(),
+          updatedAt: flutterCart['updated_at'] != null
+              ? DateTime.parse(flutterCart['updated_at'])
+              : DateTime.now(),
+          isActive: flutterCart['is_active'] ?? true,
+          isVirtual: flutterCart['is_virtual'] ?? false,
+          items: flutterCart['items'] != null
+              ? List<MagentoCartItem>.from(flutterCart['items']
+                  .map((item) => MagentoCartItem.fromJson(item)))
+              : [],
+          itemsCount: flutterCart['items_count'] ?? 0,
+          itemsQty: flutterCart['items_qty'] ?? 0,
+        );
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error converting Flutter Magento cart: $e');
+      }
+    }
+    return null;
+  }
+
   /// Get service status information
   Map<String, dynamic> getServiceStatus() {
     return {
       'isOnline': _isOnline,
       'connectionStatus': connectionStatus,
-      'preferGraphQL': _preferGraphQL,
       'preferFlutterMagento': _preferFlutterMagento,
       'enableOfflineMode': _enableOfflineMode,
       'isAuthenticated': isAuthenticated,
       'restServiceLoading': _restService.isLoading,
-      'graphqlServiceInitialized': _graphqlService.isInitialized,
       'flutterMagentoAvailable': _flutterMagentoService != null,
     };
   }
