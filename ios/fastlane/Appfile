@@ -1,8 +1,20 @@
-app_identifier("online.taxlien") # The bundle identifier of your app
-apple_id("anton.v.dodonov@gmail.com") # Your Apple Developer Portal username
+# The bundle identifier of your app
+app_identifier("online.taxlien")
 
-itc_team_id("120374799") # App Store Connect Team ID
-team_id("6XT4R7V83F") # Developer Portal Team ID
+# Your Apple Developer Portal username
+apple_id("anton.v.dodonov@gmail.com")
+
+# App Store Connect Team ID
+itc_team_id("120374799")
+
+# Developer Portal Team ID
+team_id("6XT4R7V83F")
+
+# Optional: Specify the app name for better logging
+app_name("TaxLien.online")
+
+# Optional: Specify the app version for better logging
+app_version("3.1.0")
 
 # For more information about the Appfile, see:
 #     https://docs.fastlane.tools/advanced/#appfile

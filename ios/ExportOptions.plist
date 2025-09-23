@@ -5,7 +5,7 @@
     <key>method</key>
     <string>app-store</string>
     <key>teamID</key>
-    <string>Мозгач108</string>
+    <string>6XT4R7V83F</string>
     <key>signingStyle</key>
     <string>automatic</string>
     <key>stripSwiftSymbols</key>
@@ -14,5 +14,16 @@
     <false/>
     <key>uploadSymbols</key>
     <true/>
+    <key>compileBitcode</key>
+    <false/>
+    <key>thinning</key>
+    <string>&lt;none&gt;</string>
+    <key>destination</key>
+    <string>upload</string>
+    <key>provisioningProfiles</key>
+    <dict>
+        <key>online.taxlien</key>
+        <string>match AppStore online.taxlien</string>
+    </dict>
 </dict>
 </plist>

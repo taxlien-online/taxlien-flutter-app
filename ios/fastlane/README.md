@@ -21,7 +21,55 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios release
 ```
 
-Push a new release build to the App Store
+Build and upload a new release to App Store
+
+### ios beta
+
+```sh
+[bundle exec] fastlane ios beta
+```
+
+Build and upload a new beta release to TestFlight
+
+### ios build
+
+```sh
+[bundle exec] fastlane ios build
+```
+
+Build app for local testing
+
+### ios metadata
+
+```sh
+[bundle exec] fastlane ios metadata
+```
+
+Update app metadata
+
+### ios download_metadata
+
+```sh
+[bundle exec] fastlane ios download_metadata
+```
+
+Download existing metadata and screenshots from App Store
+
+### ios submit
+
+```sh
+[bundle exec] fastlane ios submit
+```
+
+Submit app for review
+
+### ios release_auto
+
+```sh
+[bundle exec] fastlane ios release_auto
+```
+
+Release app automatically after approval
 
 ----
 
