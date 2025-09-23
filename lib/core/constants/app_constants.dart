@@ -115,7 +115,7 @@ class AppConstants {
 
   // NFT Client - Global instance for the app
   static NFTClient? nftClient;
-  
+
   // Integrated Services - Global instance for the app
   static IntegratedServices? integratedServices;
 }

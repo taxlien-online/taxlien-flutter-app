@@ -1,42 +1,42 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_magento/flutter_magento.dart';
 import 'package:flutter_nft/flutter_nft.dart';
-import 'package:flutter_icp/flutter_icp.dart';
+import 'package:flutter_icp/flutter_icp.dart' as icp;
 import 'flutter_magento_cloud_service.dart';
 import 'nft_service.dart';
-import 'plug_wallet_service.dart';
-import 'yuku_service.dart';
+import 'plug_wallet_service.dart' as local;
+import 'yuku_service.dart' as local_yuku;
 
 /// Интегрированный сервис для управления всеми внешними интеграциями
 class IntegratedServices extends ChangeNotifier {
   // Основные сервисы
   late FlutterMagentoCloudService _magentoService;
   late NFTService _nftService;
-  late PlugWalletService _walletService;
-  late YukuService _yukuService;
-  
+  late local.PlugWalletService _walletService;
+  late local_yuku.YukuService _yukuService;
+
   // Flutter пакеты
   late FlutterMagento _magento;
   late NFTClient _nftClient;
-  late ICPClient _icpClient;
-  
+  late icp.ICPClient _icpClient;
+
   bool _isInitialized = false;
   bool _isLoading = false;
   String? _error;
-  
+
   // Getters
   bool get isInitialized => _isInitialized;
   bool get isLoading => _isLoading;
   String? get error => _error;
-  
+
   FlutterMagentoCloudService get magentoService => _magentoService;
   NFTService get nftService => _nftService;
-  PlugWalletService get walletService => _walletService;
-  YukuService get yukuService => _yukuService;
-  
+  local.PlugWalletService get walletService => _walletService;
+  local_yuku.YukuService get yukuService => _yukuService;
+
   FlutterMagento get magento => _magento;
   NFTClient get nftClient => _nftClient;
-  ICPClient get icpClient => _icpClient;
+  icp.ICPClient get icpClient => _icpClient;
 
   /// Инициализация всех сервисов
   Future<void> initialize() async {
@@ -44,16 +44,16 @@ class IntegratedServices extends ChangeNotifier {
     try {
       // Инициализация Flutter Magento
       await _initializeMagento();
-      
+
       // Инициализация Flutter NFT и ICP
       await _initializeNFTAndICP();
-      
+
       // Инициализация сервисов
       await _initializeServices();
-      
+
       _isInitialized = true;
       _error = null;
-      
+
       if (kDebugMode) {
         print('All integrated services initialized successfully');
       }
@@ -80,10 +80,10 @@ class IntegratedServices extends ChangeNotifier {
           'Accept-Language': 'en-US',
         },
       );
-      
+
       _magentoService = FlutterMagentoCloudService();
-      await _magentoService.initialize();
-      
+      await _magentoService._initialize();
+
       if (kDebugMode) {
         print('Flutter Magento initialized successfully');
       }
@@ -96,19 +96,19 @@ class IntegratedServices extends ChangeNotifier {
   Future<void> _initializeNFTAndICP() async {
     try {
       // Инициализация ICP клиента
-      _icpClient = ICPClient();
+      _icpClient = icp.ICPClient();
       await _icpClient.initialize();
-      
+
       // Инициализация NFT клиента
       _nftClient = NFTClient();
-      
+
       // Регистрация ICP провайдеров для NFT
       _nftClient.registerNFTProvider(ICPNFTProvider());
       _nftClient.registerWalletProvider(PlugWalletProvider());
       _nftClient.registerMarketplaceProvider(YukuMarketplaceProvider());
-      
+
       await _nftClient.initialize();
-      
+
       if (kDebugMode) {
         print('Flutter NFT and ICP initialized successfully');
       }
@@ -123,15 +123,15 @@ class IntegratedServices extends ChangeNotifier {
       // Инициализация NFT сервиса
       _nftService = NFTService();
       await _nftService.initialize();
-      
+
       // Инициализация кошелька
-      _walletService = PlugWalletService();
+      _walletService = local.PlugWalletService();
       await _walletService.initialize();
-      
+
       // Инициализация Yuku маркетплейса
-      _yukuService = YukuService();
+      _yukuService = local_yuku.YukuService();
       await _yukuService.initialize();
-      
+
       if (kDebugMode) {
         print('All services initialized successfully');
       }
@@ -185,20 +185,20 @@ class IntegratedServices extends ChangeNotifier {
       if (!_walletService.isConnected) {
         await _walletService.connect();
       }
-      
+
       // Переподключение Magento
       if (!_magentoService.isOnline) {
-        await _magentoService.initialize();
+        await _magentoService._initialize();
       }
-      
+
       // Обновление NFT данных
       await _nftService.loadMyNFTs();
       await _nftService.loadMarketplaceNFTs();
-      
+
       // Обновление Yuku данных
       await _yukuService.loadActiveListings();
       await _yukuService.loadMyListings();
-      
+
       _error = null;
       notifyListeners();
     } catch (e) {
@@ -213,11 +213,11 @@ class IntegratedServices extends ChangeNotifier {
     try {
       await _walletService.disconnect();
       await _magentoService.logout();
-      
+
       _isInitialized = false;
       _error = null;
       notifyListeners();
-      
+
       if (kDebugMode) {
         print('All services cleaned up successfully');
       }
