@@ -34,6 +34,7 @@ class IntegratedServices extends ChangeNotifier {
   local.PlugWalletService get walletService => _walletService;
   local_yuku.YukuService get yukuService => _yukuService;
 
+  // Getters для Flutter пакетов
   FlutterMagento get magento => _magento;
   NFTClient get nftClient => _nftClient;
   icp.ICPClient get icpClient => _icpClient;
@@ -95,18 +96,10 @@ class IntegratedServices extends ChangeNotifier {
   /// Инициализация Flutter NFT и ICP
   Future<void> _initializeNFTAndICP() async {
     try {
-      // Инициализация ICP клиента
       _icpClient = icp.ICPClient();
       await _icpClient.initialize();
 
-      // Инициализация NFT клиента
       _nftClient = NFTClient();
-
-      // Регистрация ICP провайдеров для NFT
-      _nftClient.registerNFTProvider(ICPNFTProvider());
-      _nftClient.registerWalletProvider(PlugWalletProvider());
-      _nftClient.registerMarketplaceProvider(YukuMarketplaceProvider());
-
       await _nftClient.initialize();
 
       if (kDebugMode) {

@@ -392,3 +392,4 @@ class TaxLienSearchFilters {
       statuses.isNotEmpty ||
       (searchQuery != null && searchQuery!.isNotEmpty);
 }
+

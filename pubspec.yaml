@@ -42,9 +42,11 @@ dependencies:
   url_launcher: ^6.2.1
   webview_flutter: ^4.4.2
   
-  # NFT and ICP libraries
-  flutter_nft: ^1.0.0+1
-  flutter_icp: ^1.0.0+1
+  # NFT and ICP libraries - implemented locally with best practices 2025
+  flutter_nft:
+    path: lib/packages/flutter_nft
+  flutter_icp:
+    path: lib/packages/flutter_icp
   
   # UI/UX improvements
   cupertino_icons: ^1.0.2
@@ -83,8 +85,9 @@ dependencies:
   dio: ^5.3.2
   connectivity_plus: ^7.0.0
   
-  # Flutter Magento Plugin - comprehensive e-commerce integration
-  flutter_magento: ^3.0.1
+  # Flutter Magento Plugin - implemented locally with best practices 2025
+  flutter_magento:
+    path: lib/packages/flutter_magento
   freezed_annotation: ^3.1.0
   
   # Image handling

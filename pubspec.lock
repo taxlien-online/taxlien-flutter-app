@@ -281,22 +281,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.11"
-  device_info_plus:
-    dependency: transitive
-    description:
-      name: device_info_plus
-      sha256: "49413c8ca514dea7633e8def233b25efdf83ec8522955cc2c0e3ad802927e7c6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "12.1.0"
-  device_info_plus_platform_interface:
-    dependency: transitive
-    description:
-      name: device_info_plus_platform_interface
-      sha256: e1ea89119e34903dca74b883d0dd78eb762814f97fb6c76f35e9ff74d261a18f
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.0.3"
   dio:
     dependency: "direct main"
     description:
@@ -313,14 +297,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  drift:
-    dependency: transitive
-    description:
-      name: drift
-      sha256: "540cf382a3bfa99b76e51514db5b0ebcd81ce3679b7c1c9cb9478ff3735e47a1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.28.2"
   equatable:
     dependency: transitive
     description:
@@ -529,11 +505,10 @@ packages:
   flutter_icp:
     dependency: "direct main"
     description:
-      name: flutter_icp
-      sha256: "8bc562dc4c91f1a13868856603e194f390047dccf18ab1436842d9bd1af4dcf8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0+3"
+      path: "lib/packages/flutter_icp"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -582,19 +557,17 @@ packages:
   flutter_magento:
     dependency: "direct main"
     description:
-      name: flutter_magento
-      sha256: "7bc5d59366f54c14cfe660f09b7bd8f68eed43549cc36fa6bfcc6a4f903c96de"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
+      path: "lib/packages/flutter_magento"
+      relative: true
+    source: path
+    version: "3.0.1+1"
   flutter_nft:
     dependency: "direct main"
     description:
-      name: flutter_nft
-      sha256: f69b7fe02efbd528904d778f107d896bd30af9fd2a119ddc72021817d4652ca9
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0+3"
+      path: "lib/packages/flutter_nft"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -1005,14 +978,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.11"
-  logger:
-    dependency: transitive
-    description:
-      name: logger
-      sha256: "55d6c23a6c15db14920e037fe7e0dc32e7cdaf3b64b4b25df2d541b5b6b81c0c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.6.1"
   logging:
     dependency: transitive
     description:
@@ -1301,14 +1266,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
-  retrofit:
-    dependency: transitive
-    description:
-      name: retrofit
-      sha256: "699cf44ec6c7fc7d248740932eca75d334e36bdafe0a8b3e9ff93100591c8a25"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.7.2"
   riverpod:
     dependency: "direct main"
     description:
@@ -1442,22 +1399,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  socket_io_client:
-    dependency: transitive
-    description:
-      name: socket_io_client
-      sha256: c8471c2c6843cf308a5532ff653f2bcdb7fa9ae79d84d1179920578a06624f0d
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.2"
-  socket_io_common:
-    dependency: transitive
-    description:
-      name: socket_io_common
-      sha256: "162fbaecbf4bf9a9372a62a341b3550b51dcef2f02f3e5830a297fd48203d45b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.1"
   source_map_stack_trace:
     dependency: transitive
     description:
@@ -1530,22 +1471,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
-  sqlite3:
-    dependency: transitive
-    description:
-      name: sqlite3
-      sha256: f393d92c71bdcc118d6203d07c991b9be0f84b1a6f89dd4f7eed348131329924
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.9.0"
-  sqlite3_flutter_libs:
-    dependency: transitive
-    description:
-      name: sqlite3_flutter_libs
-      sha256: "2b03273e71867a8a4d030861fc21706200debe5c5858a4b9e58f4a1c129586a4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.5.39"
   stack_trace:
     dependency: transitive
     description:
@@ -1746,14 +1671,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
-  visibility_detector:
-    dependency: transitive
-    description:
-      name: visibility_detector
-      sha256: dd5cc11e13494f432d15939c3aa8ae76844c42b723398643ce9addb88a5ed420
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.0+2"
   vm_service:
     dependency: transitive
     description:
@@ -1842,14 +1759,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.14.0"
-  win32_registry:
-    dependency: transitive
-    description:
-      name: win32_registry
-      sha256: "6f1b564492d0147b330dd794fee8f512cec4977957f310f9951b5f9d83618dae"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   xdg_directories:
     dependency: transitive
     description:
