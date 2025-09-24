@@ -18,6 +18,9 @@ class TaxLien {
   final String? description;
   final List<String> images;
   final Map<String, dynamic>? additionalInfo;
+  final String? parcelId;
+  final String? owner;
+  final DateTime? issueDate;
 
   const TaxLien({
     required this.id,
@@ -36,6 +39,9 @@ class TaxLien {
     this.description,
     this.images = const [],
     this.additionalInfo,
+    this.parcelId,
+    this.owner,
+    this.issueDate,
   });
 
   factory TaxLien.fromJson(Map<String, dynamic> json) {
@@ -56,6 +62,11 @@ class TaxLien {
       description: json['description'],
       images: List<String>.from(json['images'] ?? []),
       additionalInfo: json['additional_info'],
+      parcelId: json['parcel_id'],
+      owner: json['owner'],
+      issueDate: json['issue_date'] != null
+          ? DateTime.parse(json['issue_date'])
+          : null,
     );
   }
 
@@ -77,6 +88,9 @@ class TaxLien {
       'description': description,
       'images': images,
       'additional_info': additionalInfo,
+      'parcel_id': parcelId,
+      'owner': owner,
+      'issue_date': issueDate?.toIso8601String(),
     };
   }
 
@@ -392,4 +406,3 @@ class TaxLienSearchFilters {
       statuses.isNotEmpty ||
       (searchQuery != null && searchQuery!.isNotEmpty);
 }
-

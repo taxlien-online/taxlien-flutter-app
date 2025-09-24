@@ -37,14 +37,33 @@ dependencies:
   # Core dependencies
   http: ^1.1.0
   shared_preferences: ^2.2.0
-  sqflite: ^2.3.0
+  # sqflite: ^2.3.0  # Removed - using Magento API
   path: ^1.8.3
   url_launcher: ^6.2.1
   webview_flutter: ^4.4.2
   
   # NFT and ICP libraries - implemented locally with best practices 2025
-  flutter_nft: latest
-  flutter_icp: latest
+  flutter_nft: ^1.0.0
+  flutter_icp: ^1.0.0
+  
+  # Database and storage - Migrated to Magento
+  # hive: ^2.2.3  # Removed - using Magento API
+  # hive_flutter: ^1.1.0  # Removed - using Magento API
+  
+  # Additional utilities
+  device_info_plus: ^12.1.0
+  package_info_plus: ^4.2.0
+  logger: ^2.6.1
+  retrofit: ^4.7.2
+  riverpod_annotation: ^3.0.0
+  # drift: ^2.28.2  # Removed - using Magento API
+  # sqlite3: ^2.9.0  # Removed - using Magento API
+  # sqlite3_flutter_libs: ^0.5.39  # Removed - using Magento API
+  socket_io_client: ^3.1.2
+  pull_to_refresh: ^2.0.0
+  flutter_staggered_grid_view: ^0.7.0
+  visibility_detector: ^0.4.0+2
+  win32_registry: ^2.1.0
   
   # UI/UX improvements
   cupertino_icons: ^1.0.2
@@ -84,9 +103,11 @@ dependencies:
   connectivity_plus: ^7.0.0
   
   # Flutter Magento Plugin - implemented locally with best practices 2025
-  flutter_magento:3.1.0
-  flutter_magento_marktplace: latest
-  freezed_annotation: ^3.1.0
+  flutter_magento: ^3.0.1
+  
+  # State management
+  flutter_hooks: ^0.21.3
+  hooks_riverpod: ^3.0.0
   
   # Image handling
   image_picker: ^1.0.4

@@ -5,7 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../main.dart';
 import '../services/tax_lien_service.dart';
 import '../services/auth_service.dart';
-import '../services/database_service.dart';
+import '../services/tax_lien_magento_service.dart';
+import '../core/models/tax_lien_models.dart';
 import '../widgets/tax_lien_card.dart';
 import '../widgets/filter_bottom_sheet.dart';
 import '../core/services/magento_api_service.dart';
@@ -19,13 +20,13 @@ import 'advanced_search_screen.dart';
 class MarketplaceScreen extends ConsumerStatefulWidget {
   final TaxLienService taxLienService;
   final AuthService authService;
-  final DatabaseService databaseService;
+  final TaxLienMagentoService taxLienMagentoService;
 
   const MarketplaceScreen({
     super.key,
     required this.taxLienService,
     required this.authService,
-    required this.databaseService,
+    required this.taxLienMagentoService,
   });
 
   @override
@@ -35,23 +36,23 @@ class MarketplaceScreen extends ConsumerStatefulWidget {
 class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  
+
   // Magento products
   List<MagentoProduct> _products = [];
   List<MagentoCategory> _categories = [];
   MagentoProductList? _productList;
-  
+
   // Legacy tax liens
   List<TaxLien> _filteredLiens = [];
   List<TaxLien> _allLiens = [];
-  
+
   // State management
   bool _isLoading = false;
   String? _error;
   bool _useModernView = true;
   bool _sortAscending = true;
   Set<String> _favoriteProductIds = {};
-  
+
   // Filters
   MagentoCategory? _selectedCategory;
   String? _selectedState;
@@ -61,7 +62,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
   double? _minInterestRate;
   String _sortBy = 'price';
   String _sortOrder = 'ASC';
-  
+
   // Pagination
   int _currentPage = 1;
   final int _pageSize = 20;
@@ -96,7 +97,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
 
   Future<void> _loadFavoriteProducts() async {
     try {
-      final favoriteIds = await widget.databaseService.getFavoriteLienIds();
+      final favoriteIds = await widget.taxLienMagentoService.favoriteLienIds;
       if (mounted) {
         setState(() {
           _favoriteProductIds = favoriteIds.toSet();
@@ -110,7 +111,8 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent * 0.8) {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent * 0.8) {
       if (!_isLoadingMore && _hasMoreItems && _useModernView) {
         _loadMoreProducts();
       }
@@ -146,7 +148,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
   Future<void> _loadCategories() async {
     final magentoState = ref.read(magentoProvider);
     final magentoNotifier = ref.read(magentoProvider.notifier);
-    
+
     try {
       final apiService = MagentoApiService();
       final categories = await apiService.getCategories();
@@ -173,11 +175,12 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
     }
 
     final magentoNotifier = ref.read(magentoProvider.notifier);
-    
+
     await magentoNotifier.loadProducts(
       page: _currentPage,
       pageSize: _pageSize,
-      searchQuery: _searchController.text.isNotEmpty ? _searchController.text : null,
+      searchQuery:
+          _searchController.text.isNotEmpty ? _searchController.text : null,
       categoryId: _selectedCategory?.id.toString(),
       sortBy: _sortBy,
       sortOrder: _sortOrder,
@@ -247,33 +250,39 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
       final searchTerm = _searchController.text.toLowerCase();
       filtered = filtered.where((lien) {
         return lien.address.toLowerCase().contains(searchTerm) ||
-               lien.owner.toLowerCase().contains(searchTerm) ||
-               lien.parcelId.toLowerCase().contains(searchTerm) ||
-               lien.county.toLowerCase().contains(searchTerm);
+            lien.owner.toLowerCase().contains(searchTerm) ||
+            lien.parcelId.toLowerCase().contains(searchTerm) ||
+            lien.county.toLowerCase().contains(searchTerm);
       }).toList();
     }
 
     // Фильтр по штату
     if (_selectedState != null) {
-      filtered = filtered.where((lien) => lien.state == _selectedState).toList();
+      filtered =
+          filtered.where((lien) => lien.state == _selectedState).toList();
     }
 
     // Фильтр по округу
     if (_selectedCounty != null) {
-      filtered = filtered.where((lien) => lien.county == _selectedCounty).toList();
+      filtered =
+          filtered.where((lien) => lien.county == _selectedCounty).toList();
     }
 
     // Фильтр по сумме
     if (_minAmount != null) {
-      filtered = filtered.where((lien) => lien.taxAmount >= _minAmount!).toList();
+      filtered =
+          filtered.where((lien) => lien.taxAmount >= _minAmount!).toList();
     }
     if (_maxAmount != null) {
-      filtered = filtered.where((lien) => lien.taxAmount <= _maxAmount!).toList();
+      filtered =
+          filtered.where((lien) => lien.taxAmount <= _maxAmount!).toList();
     }
 
     // Фильтр по процентной ставке
     if (_minInterestRate != null) {
-      filtered = filtered.where((lien) => lien.interestRate >= _minInterestRate!).toList();
+      filtered = filtered
+          .where((lien) => lien.interestRate >= _minInterestRate!)
+          .toList();
     }
 
     // Сортировка
@@ -340,7 +349,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
           lien: lien,
           taxLienService: widget.taxLienService,
           authService: widget.authService,
-          databaseService: widget.databaseService,
+          taxLienMagentoService: widget.taxLienMagentoService,
         ),
       ),
     );
@@ -350,7 +359,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final magentoState = ref.watch(magentoProvider);
-    
+
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
@@ -369,7 +378,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
             },
             tooltip: _useModernView ? 'List View' : 'Grid View',
           ),
-          
+
           // Advanced Search
           IconButton(
             icon: const Icon(Icons.search),
@@ -386,11 +395,12 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
             },
             tooltip: 'Advanced Search',
           ),
-          
+
           // Refresh
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: () => _useModernView ? _loadProducts(isRefresh: true) : _loadLiens(),
+            onPressed: () =>
+                _useModernView ? _loadProducts(isRefresh: true) : _loadLiens(),
             tooltip: 'Refresh',
           ),
         ],
@@ -400,7 +410,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
           // Enhanced search bar
           SearchFilterBar(
             searchController: _searchController,
-            hintText: _useModernView 
+            hintText: _useModernView
                 ? 'Search tax lien products...'
                 : 'Search by address, owner or parcel ID...',
             onFilterTap: _showFilterBottomSheet,
@@ -431,15 +441,16 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
             ),
 
           // Quick filters
-          if (_useModernView)
-            _buildQuickFilters(),
+          if (_useModernView) _buildQuickFilters(),
 
           // Results count and view options
           _buildResultsHeader(),
 
           // Main content
           Expanded(
-            child: _useModernView ? _buildModernProductsList() : _buildLegacyLiensList(),
+            child: _useModernView
+                ? _buildModernProductsList()
+                : _buildLegacyLiensList(),
           ),
         ],
       ),
@@ -460,11 +471,12 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
         icon: Icons.trending_up,
         count: _products.where((p) {
           final interestRate = p.customAttributes
-              ?.firstWhere((attr) => attr.attributeCode == 'interest_rate', 
-                         orElse: () => MagentoProductAttribute(attributeCode: 'interest_rate', value: '0'))
+              ?.firstWhere((attr) => attr.attributeCode == 'interest_rate',
+                  orElse: () => MagentoProductAttribute(
+                      attributeCode: 'interest_rate', value: '0'))
               .value;
-          return double.tryParse(interestRate.toString()) != null && 
-                 double.parse(interestRate.toString()) > 10.0;
+          return double.tryParse(interestRate.toString()) != null &&
+              double.parse(interestRate.toString()) > 10.0;
         }).length,
       ),
       QuickFilter(
@@ -487,14 +499,15 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
   Widget _buildResultsHeader() {
     final theme = Theme.of(context);
     final count = _useModernView ? _products.length : _filteredLiens.length;
-    final totalCount = _useModernView ? (_productList?.totalCount ?? 0) : _allLiens.length;
+    final totalCount =
+        _useModernView ? (_productList?.totalCount ?? 0) : _allLiens.length;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
           Text(
-            _useModernView 
+            _useModernView
                 ? 'Showing $count of $totalCount products'
                 : 'Found: $count liens',
             style: theme.textTheme.bodyMedium?.copyWith(
@@ -550,12 +563,11 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
 
           final product = _products[index];
           return EnhancedProductCard(
-            product: product,
-            onTap: () => _showProductDetail(product),
-            onFavoriteToggle: () => _toggleFavorite(product),
-            onAddToCart: () => _addToCart(product),
-                isFavorite: _favoriteProductIds.contains(product.sku)
-          );
+              product: product,
+              onTap: () => _showProductDetail(product),
+              onFavoriteToggle: () => _toggleFavorite(product),
+              onAddToCart: () => _addToCart(product),
+              isFavorite: _favoriteProductIds.contains(product.sku));
         },
       ),
     );
@@ -634,11 +646,13 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
               lien: lien,
               onTap: () => _onLienTap(lien),
               onFavoriteToggle: () async {
-                final isFavorite = await widget.databaseService.isFavorite(lien.id);
+                final isFavorite =
+                    await widget.taxLienMagentoService.isFavorite(lien.id);
                 if (isFavorite) {
-                  await widget.databaseService.removeFromFavorites(lien.id);
+                  await widget.taxLienMagentoService
+                      .removeFromFavorites(lien.id);
                 } else {
-                  await widget.databaseService.addToFavorites(lien.id);
+                  await widget.taxLienMagentoService.addToFavorites(lien.id);
                 }
                 setState(() {});
               },
@@ -653,9 +667,12 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
     final filters = <String>[];
     if (_selectedState != null) filters.add('State: $_selectedState');
     if (_selectedCounty != null) filters.add('County: $_selectedCounty');
-    if (_minAmount != null) filters.add('From: \$${_minAmount!.toStringAsFixed(2)}');
-    if (_maxAmount != null) filters.add('To: \$${_maxAmount!.toStringAsFixed(2)}');
-    if (_minInterestRate != null) filters.add('Rate from: ${_minInterestRate!.toStringAsFixed(1)}%');
+    if (_minAmount != null)
+      filters.add('From: \$${_minAmount!.toStringAsFixed(2)}');
+    if (_maxAmount != null)
+      filters.add('To: \$${_maxAmount!.toStringAsFixed(2)}');
+    if (_minInterestRate != null)
+      filters.add('Rate from: ${_minInterestRate!.toStringAsFixed(1)}%');
     return filters.join(', ');
   }
 
@@ -667,7 +684,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
         builder: (context) => ProductDetailScreen(
           product: product,
           authService: widget.authService,
-          databaseService: widget.databaseService,
+          taxLienMagentoService: widget.taxLienMagentoService,
         ),
       ),
     );
@@ -675,11 +692,12 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
 
   void _toggleFavorite(MagentoProduct product) async {
     try {
-          final productId = product.sku;
+      final productId = product.sku;
       final isCurrentlyFavorite = _favoriteProductIds.contains(productId);
-      
+
       if (isCurrentlyFavorite) {
-        await widget.databaseService.removeFromFavorites(productId, type: 'product');
+        await widget.taxLienMagentoService
+            .removeFromFavorites(productId, type: 'product');
         setState(() {
           _favoriteProductIds.remove(productId);
         });
@@ -689,7 +707,8 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
           );
         }
       } else {
-        await widget.databaseService.addToFavorites(productId, type: 'product');
+        await widget.taxLienMagentoService
+            .addToFavorites(productId, type: 'product');
         setState(() {
           _favoriteProductIds.add(productId);
         });
@@ -711,16 +730,11 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
   void _addToCart(MagentoProduct product) async {
     try {
       final magentoNotifier = ref.read(magentoProvider.notifier);
-      
+
       // Get or create cart
-      String? cartId = await widget.databaseService.getCartId();
-      if (cartId == null) {
-        cartId = await magentoNotifier.createCart();
-        if (cartId != null) {
-          await widget.databaseService.saveCartId(cartId);
-        }
-      }
-      
+      String? cartId = await magentoNotifier.createCart();
+      // Cart management is now handled by Magento service
+
       if (cartId == null) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -729,14 +743,14 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
         }
         return;
       }
-      
+
       // Add product to cart
       final success = await magentoNotifier.addToCart(
         cartId: cartId,
         sku: product.sku,
         quantity: 1,
       );
-      
+
       if (mounted) {
         if (success) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -759,7 +773,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
 
   Widget _buildErrorWidget() {
     final theme = Theme.of(context);
-    
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -777,7 +791,8 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
           ),
           const SizedBox(height: 16),
           ElevatedButton(
-            onPressed: () => _useModernView ? _loadProducts(isRefresh: true) : _loadLiens(),
+            onPressed: () =>
+                _useModernView ? _loadProducts(isRefresh: true) : _loadLiens(),
             child: const Text('Retry'),
           ),
         ],
@@ -787,7 +802,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
 
   Widget _buildEmptyWidget() {
     final theme = Theme.of(context);
-    
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -816,24 +831,28 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
   // Filter and sort helper methods
   bool _hasActiveFilters() {
     return _selectedCategory != null ||
-           _selectedState != null ||
-           _selectedCounty != null ||
-           _minAmount != null ||
-           _maxAmount != null ||
-           _minInterestRate != null;
+        _selectedState != null ||
+        _selectedCounty != null ||
+        _minAmount != null ||
+        _maxAmount != null ||
+        _minInterestRate != null;
   }
 
   String? _buildActiveFiltersText() {
     if (!_hasActiveFilters()) return null;
-    
+
     final filters = <String>[];
-    if (_selectedCategory != null) filters.add('Category: ${_selectedCategory!.name}');
+    if (_selectedCategory != null)
+      filters.add('Category: ${_selectedCategory!.name}');
     if (_selectedState != null) filters.add('State: $_selectedState');
     if (_selectedCounty != null) filters.add('County: $_selectedCounty');
-    if (_minAmount != null) filters.add('Min: \$${_minAmount!.toStringAsFixed(2)}');
-    if (_maxAmount != null) filters.add('Max: \$${_maxAmount!.toStringAsFixed(2)}');
-    if (_minInterestRate != null) filters.add('Rate: ${_minInterestRate!.toStringAsFixed(1)}%');
-    
+    if (_minAmount != null)
+      filters.add('Min: \$${_minAmount!.toStringAsFixed(2)}');
+    if (_maxAmount != null)
+      filters.add('Max: \$${_maxAmount!.toStringAsFixed(2)}');
+    if (_minInterestRate != null)
+      filters.add('Rate: ${_minInterestRate!.toStringAsFixed(1)}%');
+
     return filters.join(', ');
   }
 
@@ -848,7 +867,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
       _sortBy = _useModernView ? 'price' : 'auctionDate';
       _sortOrder = 'ASC';
     });
-    
+
     if (_useModernView) {
       _loadProducts(isRefresh: true);
     } else {
@@ -869,16 +888,18 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 16),
-            ..._useModernView ? [
-              _buildSortOption('price', 'Price'),
-              _buildSortOption('name', 'Name'),
-              _buildSortOption('created_at', 'Date Added'),
-            ] : [
-              _buildSortOption('auctionDate', 'Auction Date'),
-              _buildSortOption('taxAmount', 'Tax Amount'),
-              _buildSortOption('interestRate', 'Interest Rate'),
-              _buildSortOption('assessedValue', 'Assessed Value'),
-            ],
+            ..._useModernView
+                ? [
+                    _buildSortOption('price', 'Price'),
+                    _buildSortOption('name', 'Name'),
+                    _buildSortOption('created_at', 'Date Added'),
+                  ]
+                : [
+                    _buildSortOption('auctionDate', 'Auction Date'),
+                    _buildSortOption('taxAmount', 'Tax Amount'),
+                    _buildSortOption('interestRate', 'Interest Rate'),
+                    _buildSortOption('assessedValue', 'Assessed Value'),
+                  ],
           ],
         ),
       ),
@@ -887,7 +908,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
 
   Widget _buildSortOption(String sortKey, String label) {
     final isSelected = _sortBy == sortKey;
-    
+
     return ListTile(
       title: Text(label),
       trailing: isSelected
@@ -906,7 +927,9 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
                       _applyFilters();
                     }
                   },
-                  icon: Icon(_sortOrder == 'ASC' ? Icons.arrow_upward : Icons.arrow_downward),
+                  icon: Icon(_sortOrder == 'ASC'
+                      ? Icons.arrow_upward
+                      : Icons.arrow_downward),
                 ),
                 const Icon(Icons.check),
               ],
@@ -937,14 +960,14 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
         return 'Date $direction';
       case 'auctionDate':
         return 'Auction Date $direction';
-              case 'taxAmount':
-          return 'Tax Amount $direction';
-        case 'interestRate':
-          return 'Interest Rate $direction';
-        case 'assessedValue':
-          return 'Assessed Value $direction';
-        case 'redemptionDeadline':
-          return 'Redemption Deadline $direction';
+      case 'taxAmount':
+        return 'Tax Amount $direction';
+      case 'interestRate':
+        return 'Interest Rate $direction';
+      case 'assessedValue':
+        return 'Assessed Value $direction';
+      case 'redemptionDeadline':
+        return 'Redemption Deadline $direction';
       default:
         return '';
     }
@@ -955,14 +978,14 @@ class TaxLienDetailScreen extends StatefulWidget {
   final TaxLien lien;
   final TaxLienService taxLienService;
   final AuthService authService;
-  final DatabaseService databaseService;
+  final TaxLienMagentoService taxLienMagentoService;
 
   const TaxLienDetailScreen({
     super.key,
     required this.lien,
     required this.taxLienService,
     required this.authService,
-    required this.databaseService,
+    required this.taxLienMagentoService,
   });
 
   @override
@@ -1065,8 +1088,10 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                     _buildDetailRow('Parcel ID', widget.lien.parcelId),
                     _buildDetailRow('County', widget.lien.county),
                     _buildDetailRow('State', widget.lien.state),
-                    _buildDetailRow('Redemption Deadline', _formatDate(widget.lien.redemptionDeadline)),
-                    _buildDetailRow('Status', _getStatusLabel(widget.lien.status)),
+                    _buildDetailRow('Redemption Deadline',
+                        _formatDate(widget.lien.redemptionDeadline)),
+                    _buildDetailRow(
+                        'Status', _getStatusLabel(widget.lien.status)),
                   ],
                 ),
               ),
@@ -1075,7 +1100,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
             const SizedBox(height: 16),
 
             // Кнопка покупки
-            if (widget.lien.status == 'available' && widget.authService.isAuthenticated)
+            if (widget.lien.status == 'available' &&
+                widget.authService.isAuthenticated)
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -1107,8 +1133,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
         Text(
           value,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
       ],
     );
@@ -1125,8 +1151,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
             child: Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+                    fontWeight: FontWeight.w500,
+                  ),
             ),
           ),
           Expanded(
@@ -1160,8 +1186,9 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
   }
 
   void _showPurchaseDialog(BuildContext context) {
-    final bidController = TextEditingController(text: widget.lien.taxAmount.toString());
-    
+    final bidController =
+        TextEditingController(text: widget.lien.taxAmount.toString());
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -1169,7 +1196,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Enter bid amount (minimum \$${widget.lien.taxAmount.toStringAsFixed(2)}):'),
+            Text(
+                'Enter bid amount (minimum \$${widget.lien.taxAmount.toStringAsFixed(2)}):'),
             const SizedBox(height: 16),
             TextField(
               controller: bidController,
@@ -1191,16 +1219,19 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
               final bidAmount = double.tryParse(bidController.text);
               if (bidAmount != null && bidAmount >= widget.lien.taxAmount) {
                 Navigator.pop(context);
-                final success = await widget.taxLienService.purchaseLien(widget.lien.id, bidAmount);
+                final success = await widget.taxLienService
+                    .purchaseLien(widget.lien.id, bidAmount);
                 if (success && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: const Text('Lien purchased successfully!')),
+                    SnackBar(
+                        content: const Text('Lien purchased successfully!')),
                   );
                   Navigator.pop(context);
                 } else if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(widget.taxLienService.error ?? 'Purchase error'),
+                      content:
+                          Text(widget.taxLienService.error ?? 'Purchase error'),
                     ),
                   );
                 }

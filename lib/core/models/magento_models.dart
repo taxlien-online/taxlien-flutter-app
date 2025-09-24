@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'tax_lien_models.dart';
 
 /// Base class for Magento models
 abstract class MagentoModel {
@@ -61,10 +61,15 @@ class MagentoCustomer extends MagentoModel {
       suffix: json['suffix'],
       defaultBilling: json['default_billing'],
       defaultShipping: json['default_shipping'],
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : null,
-      updatedAt: json['updated_at'] != null ? DateTime.parse(json['updated_at']) : null,
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : null,
+      updatedAt: json['updated_at'] != null
+          ? DateTime.parse(json['updated_at'])
+          : null,
       addresses: json['addresses'] != null
-          ? List<MagentoAddress>.from(json['addresses'].map((x) => MagentoAddress.fromJson(x)))
+          ? List<MagentoAddress>.from(
+              json['addresses'].map((x) => MagentoAddress.fromJson(x)))
           : null,
     );
   }
@@ -93,7 +98,8 @@ class MagentoCustomer extends MagentoModel {
   }
 
   String get fullName => '$firstname $lastname';
-  String get displayName => middlename != null ? '$firstname $middlename $lastname' : fullName;
+  String get displayName =>
+      middlename != null ? '$firstname $middlename $lastname' : fullName;
 }
 
 /// Magento Address model
@@ -278,15 +284,23 @@ class MagentoProduct extends MagentoModel {
       qty: json['qty'],
       visibility: json['visibility'],
       status: json['status'],
-      categoryIds: json['category_ids'] != null ? List<String>.from(json['category_ids']) : null,
+      categoryIds: json['category_ids'] != null
+          ? List<String>.from(json['category_ids'])
+          : null,
       mediaGalleryEntries: json['media_gallery_entries'] != null
-          ? List<MagentoProductImage>.from(json['media_gallery_entries'].map((x) => MagentoProductImage.fromJson(x)))
+          ? List<MagentoProductImage>.from(json['media_gallery_entries']
+              .map((x) => MagentoProductImage.fromJson(x)))
           : null,
       customAttributes: json['custom_attributes'] != null
-          ? List<MagentoProductAttribute>.from(json['custom_attributes'].map((x) => MagentoProductAttribute.fromJson(x)))
+          ? List<MagentoProductAttribute>.from(json['custom_attributes']
+              .map((x) => MagentoProductAttribute.fromJson(x)))
           : null,
-      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : null,
-      updatedAt: json['updated_at'] != null ? DateTime.parse(json['updated_at']) : null,
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : null,
+      updatedAt: json['updated_at'] != null
+          ? DateTime.parse(json['updated_at'])
+          : null,
     );
   }
 
@@ -312,7 +326,8 @@ class MagentoProduct extends MagentoModel {
       'visibility': visibility,
       'status': status,
       'category_ids': categoryIds,
-      'media_gallery_entries': mediaGalleryEntries?.map((x) => x.toJson()).toList(),
+      'media_gallery_entries':
+          mediaGalleryEntries?.map((x) => x.toJson()).toList(),
       'custom_attributes': customAttributes?.map((x) => x.toJson()).toList(),
       'created_at': createdAt?.toIso8601String(),
       'updated_at': updatedAt?.toIso8601String(),
@@ -320,8 +335,57 @@ class MagentoProduct extends MagentoModel {
   }
 
   double get finalPrice => specialPrice ?? price ?? 0.0;
-  bool get hasSpecialPrice => specialPrice != null && specialPrice! < (price ?? 0.0);
-  String? get mainImageUrl => mediaGalleryEntries?.firstWhere((img) => img.types?.contains('image') ?? false, orElse: () => MagentoProductImage()).url;
+  bool get hasSpecialPrice =>
+      specialPrice != null && specialPrice! < (price ?? 0.0);
+  String? get mainImageUrl => mediaGalleryEntries
+      ?.firstWhere((img) => img.types?.contains('image') ?? false,
+          orElse: () => MagentoProductImage())
+      .url;
+
+  // Tax Lien specific methods using custom attributes
+  String? get taxLienId => _getCustomAttributeValue('tax_lien_id');
+  String? get parcelId => _getCustomAttributeValue('parcel_id');
+  String? get ownerName => _getCustomAttributeValue('owner_name');
+  String? get taxLienAddress => _getCustomAttributeValue('address');
+  String? get taxLienCity => _getCustomAttributeValue('city');
+  String? get taxLienState => _getCustomAttributeValue('state');
+  String? get zipCode => _getCustomAttributeValue('zip_code');
+  String? get county => _getCustomAttributeValue('county');
+  double? get assessedValue =>
+      double.tryParse(_getCustomAttributeValue('assessed_value') ?? '0');
+  double? get taxAmount =>
+      double.tryParse(_getCustomAttributeValue('tax_amount') ?? '0');
+  double? get interestRate =>
+      double.tryParse(_getCustomAttributeValue('interest_rate') ?? '0');
+  DateTime? get taxYear => _parseDate(_getCustomAttributeValue('tax_year'));
+  DateTime? get saleDate => _parseDate(_getCustomAttributeValue('sale_date'));
+  String? get taxLienStatus => _getCustomAttributeValue('status');
+  DateTime? get issueDate => _parseDate(_getCustomAttributeValue('issue_date'));
+
+  // Helper methods for custom attributes
+  String? _getCustomAttributeValue(String attributeCode) {
+    final attribute = customAttributes?.firstWhere(
+      (attr) => attr.attributeCode == attributeCode,
+      orElse: () => MagentoProductAttribute(attributeCode: '', value: null),
+    );
+    return attribute?.value?.toString();
+  }
+
+  DateTime? _parseDate(String? dateString) {
+    if (dateString == null || dateString.isEmpty) return null;
+    try {
+      return DateTime.parse(dateString);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Tax Lien specific getters
+  String get fullTaxLienAddress =>
+      '$taxLienAddress, $taxLienCity, $taxLienState $zipCode';
+  bool get isTaxLienAvailable => taxLienStatus == 'available';
+  bool get isTaxLienSold => taxLienStatus == 'sold';
+  bool get isTaxLienRedeemed => taxLienStatus == 'redeemed';
 }
 
 /// Magento Product List model
@@ -338,7 +402,8 @@ class MagentoProductList extends MagentoModel {
 
   factory MagentoProductList.fromJson(Map<String, dynamic> json) {
     return MagentoProductList(
-      items: List<MagentoProduct>.from(json['items'].map((x) => MagentoProduct.fromJson(x))),
+      items: List<MagentoProduct>.from(
+          json['items'].map((x) => MagentoProduct.fromJson(x))),
       totalCount: json['total_count'],
       searchCriteria: MagentoSearchCriteria.fromJson(json['search_criteria']),
     );
@@ -390,7 +455,7 @@ class MagentoProductImage extends MagentoModel {
   }
 
   @override
- Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'media_type': mediaType,
@@ -446,8 +511,10 @@ class MagentoSearchCriteria extends MagentoModel {
 
   factory MagentoSearchCriteria.fromJson(Map<String, dynamic> json) {
     return MagentoSearchCriteria(
-      filterGroups: List<MagentoFilterGroup>.from(json['filter_groups'].map((x) => MagentoFilterGroup.fromJson(x))),
-      sortOrders: List<MagentoSortOrder>.from(json['sort_orders'].map((x) => MagentoSortOrder.fromJson(x))),
+      filterGroups: List<MagentoFilterGroup>.from(
+          json['filter_groups'].map((x) => MagentoFilterGroup.fromJson(x))),
+      sortOrders: List<MagentoSortOrder>.from(
+          json['sort_orders'].map((x) => MagentoSortOrder.fromJson(x))),
       pageSize: json['page_size'],
       currentPage: json['current_page'],
     );
@@ -474,7 +541,8 @@ class MagentoFilterGroup extends MagentoModel {
 
   factory MagentoFilterGroup.fromJson(Map<String, dynamic> json) {
     return MagentoFilterGroup(
-      filters: List<MagentoFilter>.from(json['filters'].map((x) => MagentoFilter.fromJson(x))),
+      filters: List<MagentoFilter>.from(
+          json['filters'].map((x) => MagentoFilter.fromJson(x))),
     );
   }
 
@@ -589,7 +657,8 @@ class MagentoCategory extends MagentoModel {
       metaKeywords: json['meta_keywords'],
       productCount: json['product_count'],
       childrenData: json['children_data'] != null
-          ? List<MagentoCategory>.from(json['children_data'].map((x) => MagentoCategory.fromJson(x)))
+          ? List<MagentoCategory>.from(
+              json['children_data'].map((x) => MagentoCategory.fromJson(x)))
           : null,
     );
   }
@@ -649,12 +718,17 @@ class MagentoCart extends MagentoModel {
       updatedAt: DateTime.parse(json['updated_at']),
       isActive: json['is_active'],
       isVirtual: json['is_virtual'],
-      items: List<MagentoCartItem>.from(json['items'].map((x) => MagentoCartItem.fromJson(x))),
+      items: List<MagentoCartItem>.from(
+          json['items'].map((x) => MagentoCartItem.fromJson(x))),
       itemsCount: json['items_count'],
       itemsQty: json['items_qty'],
-      totals: json['totals'] != null ? MagentoCartTotals.fromJson(json['totals']) : null,
+      totals: json['totals'] != null
+          ? MagentoCartTotals.fromJson(json['totals'])
+          : null,
       currencyCode: json['currency_code'],
-      customer: json['customer'] != null ? MagentoCustomer.fromJson(json['customer']) : null,
+      customer: json['customer'] != null
+          ? MagentoCustomer.fromJson(json['customer'])
+          : null,
     );
   }
 
@@ -717,7 +791,8 @@ class MagentoCartItem extends MagentoModel {
       rowTotal: json['row_total']?.toDouble(),
       rowTotalWithDiscount: json['row_total_with_discount']?.toDouble(),
       productOption: json['product_option'] != null
-          ? List<MagentoProductAttribute>.from(json['product_option'].map((x) => MagentoProductAttribute.fromJson(x)))
+          ? List<MagentoProductAttribute>.from(json['product_option']
+              .map((x) => MagentoProductAttribute.fromJson(x)))
           : null,
     );
   }
@@ -865,9 +940,12 @@ class MagentoOrder extends MagentoModel {
       currencyCode: json['currency_code'],
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
-      customer: json['customer'] != null ? MagentoCustomer.fromJson(json['customer']) : null,
+      customer: json['customer'] != null
+          ? MagentoCustomer.fromJson(json['customer'])
+          : null,
       items: json['items'] != null
-          ? List<MagentoOrderItem>.from(json['items'].map((x) => MagentoOrderItem.fromJson(x)))
+          ? List<MagentoOrderItem>.from(
+              json['items'].map((x) => MagentoOrderItem.fromJson(x)))
           : null,
     );
   }
@@ -1083,7 +1161,8 @@ class MagentoWishlist extends MagentoModel {
       id: json['id'],
       customerId: json['customer_id'],
       shared: json['shared'],
-      items: List<MagentoWishlistItem>.from(json['items'].map((x) => MagentoWishlistItem.fromJson(x))),
+      items: List<MagentoWishlistItem>.from(
+          json['items'].map((x) => MagentoWishlistItem.fromJson(x))),
     );
   }
 
@@ -1282,7 +1361,8 @@ class MagentoCountry extends MagentoModel {
       fullNameLocale: json['full_name_locale'],
       fullNameEnglish: json['full_name_english'],
       availableRegions: json['available_regions'] != null
-          ? List<MagentoRegion>.from(json['available_regions'].map((x) => MagentoRegion.fromJson(x)))
+          ? List<MagentoRegion>.from(
+              json['available_regions'].map((x) => MagentoRegion.fromJson(x)))
           : null,
     );
   }
@@ -1327,5 +1407,142 @@ class MagentoRegion extends MagentoModel {
       'code': code,
       'name': name,
     };
+  }
+}
+
+/// Tax Lien to Magento Product Converter
+class TaxLienMagentoConverter {
+  /// Convert TaxLien to MagentoProduct with custom attributes
+  static MagentoProduct taxLienToMagentoProduct(TaxLien taxLien) {
+    return MagentoProduct(
+      sku: taxLien.id,
+      name: taxLien.fullAddress,
+      description: taxLien.description,
+      shortDescription: 'Tax Lien in ${taxLien.county}, ${taxLien.state}',
+      price: taxLien.assessedValue,
+      typeId: 'tax_lien',
+      urlKey: 'tax-lien-${taxLien.id}',
+      isActive: true,
+      isVisible: true,
+      isInStock: taxLien.isAvailable,
+      qty: taxLien.isAvailable ? 1 : 0,
+      visibility: '4', // Visible in catalog and search
+      status: 1, // Enabled
+      customAttributes: _createTaxLienCustomAttributes(taxLien),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    );
+  }
+
+  /// Convert MagentoProduct to TaxLien
+  static TaxLien magentoProductToTaxLien(MagentoProduct product) {
+    return TaxLien(
+      id: product.sku,
+      address: product.taxLienAddress ?? '',
+      city: product.taxLienCity ?? '',
+      state: product.taxLienState ?? '',
+      zipCode: product.zipCode ?? '',
+      county: product.county ?? '',
+      assessedValue: product.assessedValue ?? 0.0,
+      taxAmount: product.taxAmount ?? 0.0,
+      interestRate: product.interestRate ?? 0.0,
+      taxYear: product.taxYear ?? DateTime.now(),
+      saleDate: product.saleDate ?? DateTime.now(),
+      status: product.taxLienStatus ?? 'available',
+      ownerName: product.ownerName,
+      description: product.description,
+      images: product.mediaGalleryEntries
+              ?.map((img) => img.url ?? '')
+              .where((url) => url.isNotEmpty)
+              .toList() ??
+          [],
+      additionalInfo: null,
+      parcelId: product.parcelId,
+      owner: product.ownerName,
+      issueDate: product.issueDate,
+    );
+  }
+
+  /// Create custom attributes for TaxLien
+  static List<MagentoProductAttribute> _createTaxLienCustomAttributes(
+      TaxLien taxLien) {
+    return [
+      MagentoProductAttribute(attributeCode: 'tax_lien_id', value: taxLien.id),
+      MagentoProductAttribute(
+          attributeCode: 'parcel_id', value: taxLien.parcelId),
+      MagentoProductAttribute(
+          attributeCode: 'owner_name', value: taxLien.ownerName),
+      MagentoProductAttribute(attributeCode: 'address', value: taxLien.address),
+      MagentoProductAttribute(attributeCode: 'city', value: taxLien.city),
+      MagentoProductAttribute(attributeCode: 'state', value: taxLien.state),
+      MagentoProductAttribute(
+          attributeCode: 'zip_code', value: taxLien.zipCode),
+      MagentoProductAttribute(attributeCode: 'county', value: taxLien.county),
+      MagentoProductAttribute(
+          attributeCode: 'assessed_value',
+          value: taxLien.assessedValue.toString()),
+      MagentoProductAttribute(
+          attributeCode: 'tax_amount', value: taxLien.taxAmount.toString()),
+      MagentoProductAttribute(
+          attributeCode: 'interest_rate',
+          value: taxLien.interestRate.toString()),
+      MagentoProductAttribute(
+          attributeCode: 'tax_year', value: taxLien.taxYear.toIso8601String()),
+      MagentoProductAttribute(
+          attributeCode: 'sale_date',
+          value: taxLien.saleDate.toIso8601String()),
+      MagentoProductAttribute(attributeCode: 'status', value: taxLien.status),
+      if (taxLien.issueDate != null)
+        MagentoProductAttribute(
+            attributeCode: 'issue_date',
+            value: taxLien.issueDate!.toIso8601String()),
+    ];
+  }
+
+  /// Update MagentoProduct with TaxLien data
+  static MagentoProduct updateMagentoProductWithTaxLien(
+      MagentoProduct product, TaxLien taxLien) {
+    final updatedCustomAttributes =
+        List<MagentoProductAttribute>.from(product.customAttributes ?? []);
+
+    // Update existing attributes or add new ones
+    final newAttributes = _createTaxLienCustomAttributes(taxLien);
+    for (final newAttr in newAttributes) {
+      final existingIndex = updatedCustomAttributes.indexWhere(
+        (attr) => attr.attributeCode == newAttr.attributeCode,
+      );
+
+      if (existingIndex >= 0) {
+        updatedCustomAttributes[existingIndex] = newAttr;
+      } else {
+        updatedCustomAttributes.add(newAttr);
+      }
+    }
+
+    return MagentoProduct(
+      sku: product.sku,
+      name: taxLien.fullAddress,
+      description: taxLien.description,
+      shortDescription: product.shortDescription,
+      price: taxLien.assessedValue,
+      specialPrice: product.specialPrice,
+      specialPriceFromDate: product.specialPriceFromDate,
+      specialPriceToDate: product.specialPriceToDate,
+      weight: product.weight,
+      typeId: product.typeId ?? 'tax_lien',
+      attributeSetId: product.attributeSetId,
+      urlKey: product.urlKey ?? 'tax-lien-${taxLien.id}',
+      isActive: product.isActive,
+      isVisible: product.isVisible,
+      isInStock: taxLien.isAvailable,
+      qty: taxLien.isAvailable ? 1 : 0,
+      visibility: product.visibility,
+      status: product.status,
+      categoryIds: product.categoryIds,
+      mediaGalleryEntries: product.mediaGalleryEntries,
+      customAttributes: updatedCustomAttributes,
+      createdAt: product.createdAt,
+      updatedAt: DateTime.now(),
+    );
   }
 }

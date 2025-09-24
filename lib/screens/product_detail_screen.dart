@@ -4,25 +4,28 @@ import '../core/models/magento_models.dart';
 import '../core/constants/app_constants.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
+import '../services/magento_service.dart';
 
 /// Product detail screen for tax lien products
-class ProductDetailScreen extends ConsumerStatefulWidget {
+class ProductDetailScreen extends StatefulWidget {
   final MagentoProduct product;
   final AuthService authService;
   final DatabaseService databaseService;
+  final MagentoService magentoService;
 
   const ProductDetailScreen({
     super.key,
     required this.product,
     required this.authService,
     required this.databaseService,
+    required this.magentoService,
   });
 
   @override
-  ConsumerState<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
   bool _isFavorite = false;
   bool _isLoading = false;
 
@@ -33,7 +36,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   }
 
   Future<void> _checkFavoriteStatus() async {
-    final isFavorite = await widget.databaseService.isFavorite(widget.product.sku);
+    final isFavorite =
+        await widget.databaseService.isFavorite(widget.product.sku);
     if (mounted) {
       setState(() {
         _isFavorite = isFavorite;
@@ -83,7 +87,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
             child: Container(
               decoration: BoxDecoration(
                 color: colorScheme.surface,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(20)),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(20),
@@ -92,22 +97,22 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                   children: [
                     // Title and price
                     _buildTitleSection(),
-                    
+
                     const SizedBox(height: 20),
-                    
+
                     // Tax lien specific details
                     _buildTaxLienDetails(),
-                    
+
                     const SizedBox(height: 20),
-                    
+
                     // Description
                     _buildDescriptionSection(),
-                    
+
                     const SizedBox(height: 20),
-                    
+
                     // Additional attributes
                     _buildAttributesSection(),
-                    
+
                     const SizedBox(height: 100), // Space for floating button
                   ],
                 ),
@@ -116,7 +121,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
           ),
         ],
       ),
-      
+
       // Purchase button
       floatingActionButton: _buildPurchaseButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -125,7 +130,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
 
   Widget _buildProductImage() {
     if (widget.product.mediaGalleryEntries?.isNotEmpty == true) {
-      final imageUrl = '${AppConstants.magentoMediaUrl}${widget.product.mediaGalleryEntries!.first.file ?? ''}';
+      final imageUrl =
+          '${AppConstants.magentoMediaUrl}${widget.product.mediaGalleryEntries!.first.file ?? ''}';
       return CachedNetworkImage(
         imageUrl: imageUrl,
         fit: BoxFit.cover,
@@ -138,7 +144,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
 
   Widget _buildImagePlaceholder() {
     final colorScheme = Theme.of(context).colorScheme;
-    
+
     return Container(
       color: colorScheme.surfaceVariant,
       child: Center(
@@ -165,18 +171,14 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
             color: colorScheme.onSurface,
           ),
         ),
-        
         const SizedBox(height: 8),
-        
         Text(
           'SKU: ${widget.product.sku}',
           style: theme.textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
         ),
-        
         const SizedBox(height: 16),
-        
         Row(
           children: [
             Text(
@@ -186,8 +188,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                 color: colorScheme.primary,
               ),
             ),
-            
-            if (widget.product.specialPrice != null && widget.product.specialPrice! < (widget.product.price ?? 0)) ...[
+            if (widget.product.specialPrice != null &&
+                widget.product.specialPrice! < (widget.product.price ?? 0)) ...[
               const SizedBox(width: 12),
               Text(
                 '\$${widget.product.price?.toStringAsFixed(2) ?? '0.00'}',
@@ -197,13 +199,13 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                 ),
               ),
             ],
-            
             const Spacer(),
-            
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: (widget.product.status ?? 0) == 1 ? Colors.green : Colors.red,
+                color: (widget.product.status ?? 0) == 1
+                    ? Colors.green
+                    : Colors.red,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
@@ -224,14 +226,14 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   Widget _buildTaxLienDetails() {
     final theme = Theme.of(context);
     final customAttributes = widget.product.customAttributes ?? [];
-    
+
     // Extract tax lien specific data
     final taxAmount = _getAttributeValue('tax_amount', '0');
     final interestRate = _getAttributeValue('interest_rate', '0');
     final propertyLocation = _getAttributeValue('property_location', 'N/A');
     final auctionDate = _getAttributeValue('auction_date', 'N/A');
     final redemptionPeriod = _getAttributeValue('redemption_period', 'N/A');
-    
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -244,9 +246,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            
             const SizedBox(height: 16),
-            
             Row(
               children: [
                 Expanded(
@@ -267,15 +267,11 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                 ),
               ],
             ),
-            
             const SizedBox(height: 16),
-            
             if (propertyLocation != 'N/A')
               _buildDetailRow('Property Location', propertyLocation),
-            
             if (auctionDate != 'N/A')
               _buildDetailRow('Auction Date', auctionDate),
-            
             if (redemptionPeriod != 'N/A')
               _buildDetailRow('Redemption Period', redemptionPeriod),
           ],
@@ -284,9 +280,10 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
     );
   }
 
-  Widget _buildDetailItem(String label, String value, IconData icon, Color color) {
+  Widget _buildDetailItem(
+      String label, String value, IconData icon, Color color) {
     final theme = Theme.of(context);
-    
+
     return Column(
       children: [
         Icon(icon, color: color, size: 32),
@@ -311,7 +308,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
 
   Widget _buildDetailRow(String label, String value) {
     final theme = Theme.of(context);
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -339,7 +336,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
 
   Widget _buildDescriptionSection() {
     final theme = Theme.of(context);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -349,9 +346,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        
         const SizedBox(height: 12),
-        
         Text(
           widget.product.name, // Using name as description for now
           style: theme.textTheme.bodyMedium,
@@ -363,9 +358,9 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   Widget _buildAttributesSection() {
     final theme = Theme.of(context);
     final customAttributes = widget.product.customAttributes ?? [];
-    
+
     if (customAttributes.isEmpty) return const SizedBox.shrink();
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -375,15 +370,19 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        
         const SizedBox(height: 12),
-        
         Card(
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
               children: customAttributes
-                  .where((attr) => !['tax_amount', 'interest_rate', 'property_location', 'auction_date', 'redemption_period'].contains(attr.attributeCode))
+                  .where((attr) => ![
+                        'tax_amount',
+                        'interest_rate',
+                        'property_location',
+                        'auction_date',
+                        'redemption_period'
+                      ].contains(attr.attributeCode))
                   .map((attr) => _buildDetailRow(
                         attr.attributeCode.replaceAll('_', ' ').toUpperCase(),
                         attr.value.toString(),
@@ -399,7 +398,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
   Widget _buildPurchaseButton() {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     if (widget.product.status != 1) return const SizedBox.shrink();
 
     return Container(
@@ -432,7 +431,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
     final customAttributes = widget.product.customAttributes ?? [];
     final attribute = customAttributes.firstWhere(
       (attr) => attr.attributeCode == attributeCode,
-      orElse: () => MagentoProductAttribute(attributeCode: attributeCode, value: defaultValue),
+      orElse: () => MagentoProductAttribute(
+          attributeCode: attributeCode, value: defaultValue),
     );
     return attribute.value.toString();
   }
@@ -448,14 +448,15 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
       } else {
         await widget.databaseService.addToFavorites(widget.product.sku);
       }
-      
+
       setState(() {
         _isFavorite = !_isFavorite;
       });
-      
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(_isFavorite ? 'Added to favorites' : 'Removed from favorites'),
+          content: Text(
+              _isFavorite ? 'Added to favorites' : 'Removed from favorites'),
         ),
       );
     } catch (e) {
@@ -480,7 +481,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
           children: [
             Text('Product: ${widget.product.name}'),
             const SizedBox(height: 8),
-            Text('Price: \$${widget.product.price?.toStringAsFixed(2) ?? '0.00'}'),
+            Text(
+                'Price: \$${widget.product.price?.toStringAsFixed(2) ?? '0.00'}'),
             const SizedBox(height: 16),
             const Text('Are you sure you want to purchase this tax lien?'),
           ],
@@ -508,17 +510,17 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
     });
 
     try {
-      final magentoNotifier = ref.read(magentoProvider.notifier);
-      
+      // Use MagentoService directly
+
       // Get or create cart
       String? cartId = await widget.databaseService.getCartId();
       if (cartId == null) {
-        cartId = await magentoNotifier.createCart();
+        cartId = await widget.magentoService.createCart();
         if (cartId != null) {
           await widget.databaseService.saveCartId(cartId);
         }
       }
-      
+
       if (cartId == null) {
         if (mounted) {
           setState(() {
@@ -533,19 +535,18 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
         }
         return;
       }
-      
+
       // Add product to cart
-      final success = await magentoNotifier.addToCart(
-        cartId: cartId,
+      final success = await widget.magentoService.addToCart(
         sku: widget.product.sku,
         quantity: 1,
       );
-      
+
       if (mounted) {
         setState(() {
           _isLoading = false;
         });
-        
+
         if (success) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

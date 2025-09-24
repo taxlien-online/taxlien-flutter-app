@@ -33,8 +33,8 @@ import 'screens/ai_advisor_screen.dart';
 
 // Services
 import 'services/tax_lien_service.dart';
+import 'services/tax_lien_magento_service.dart';
 import 'services/auth_service.dart';
-import 'services/database_service.dart';
 import 'services/ai_investment_advisor_service.dart';
 import 'services/flutter_magento_cloud_service.dart' as magento_cloud;
 
@@ -816,7 +816,7 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
   late TaxLienService _taxLienService;
   late AIInvestmentAdvisorService _aiService;
   late AuthService _authService;
-  late DatabaseService _databaseService;
+  late TaxLienMagentoService _taxLienMagentoService;
 
   @override
   void initState() {
@@ -828,7 +828,14 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
     _taxLienService = TaxLienService();
     _aiService = AIInvestmentAdvisorService();
     _authService = AuthService();
-    _databaseService = DatabaseService();
+
+    // Get HybridMagentoService from provider
+    final hybridMagentoService =
+        provider.Provider.of<HybridMagentoService>(context, listen: false);
+    _taxLienMagentoService = TaxLienMagentoService(hybridMagentoService);
+
+    // Set Magento service for tax lien service
+    _taxLienService.setMagentoService(_taxLienMagentoService);
 
     // Initialize services
     _taxLienService.initialize();
@@ -850,7 +857,7 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
           MarketplaceScreen(
             taxLienService: _taxLienService,
             authService: _authService,
-            databaseService: _databaseService,
+            taxLienMagentoService: _taxLienMagentoService,
           ),
           PortfolioDashboardScreen(
             taxLienService: _taxLienService,

@@ -1,8 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
+import '../core/models/tax_lien_models.dart';
+import 'tax_lien_magento_service.dart';
 
-class TaxLien {
+/// Legacy TaxLien class for backward compatibility
+/// This will be deprecated in favor of the new TaxLien model
+class LegacyTaxLien {
   final String id;
   final String parcelId;
   final String owner;
@@ -23,7 +27,7 @@ class TaxLien {
   String? get propertyAddress => address;
   double? get lienAmount => taxAmount;
 
-  TaxLien({
+  LegacyTaxLien({
     required this.id,
     required this.parcelId,
     required this.owner,
@@ -41,8 +45,8 @@ class TaxLien {
     this.additionalData,
   });
 
-  factory TaxLien.fromJson(Map<String, dynamic> json) {
-    return TaxLien(
+  factory LegacyTaxLien.fromJson(Map<String, dynamic> json) {
+    return LegacyTaxLien(
       id: json['id'],
       parcelId: json['parcelId'],
       owner: json['owner'],
@@ -84,10 +88,13 @@ class TaxLien {
 
 class TaxLienService extends ChangeNotifier {
   static const String _baseUrl = 'https://api.taxlien.online';
-  List<TaxLien> _availableLiens = [];
-  List<TaxLien> _myLiens = [];
+  List<LegacyTaxLien> _availableLiens = [];
+  List<LegacyTaxLien> _myLiens = [];
   bool _isLoading = false;
   String? _error;
+
+  // New Magento service for tax lien management
+  TaxLienMagentoService? _magentoService;
 
   // Mock data for prototype
   final List<Map<String, dynamic>> _mockAvailableLiens = [
@@ -188,10 +195,15 @@ class TaxLienService extends ChangeNotifier {
     },
   ];
 
-  List<TaxLien> get availableLiens => _availableLiens;
-  List<TaxLien> get myLiens => _myLiens;
+  List<LegacyTaxLien> get availableLiens => _availableLiens;
+  List<LegacyTaxLien> get myLiens => _myLiens;
   bool get isLoading => _isLoading;
   String? get error => _error;
+
+  /// Set the Magento service for tax lien management
+  void setMagentoService(TaxLienMagentoService magentoService) {
+    _magentoService = magentoService;
+  }
 
   Future<void> initialize() async {
     await loadAvailableLiens();
@@ -205,8 +217,9 @@ class TaxLienService extends ChangeNotifier {
       await Future.delayed(
           Duration(milliseconds: 500)); // Simulate network delay
 
-      _availableLiens =
-          _mockAvailableLiens.map((json) => TaxLien.fromJson(json)).toList();
+      _availableLiens = _mockAvailableLiens
+          .map((json) => LegacyTaxLien.fromJson(json))
+          .toList();
       _error = null;
     } catch (e) {
       _error = 'Failed to load available liens: $e';
@@ -222,7 +235,8 @@ class TaxLienService extends ChangeNotifier {
       await Future.delayed(
           Duration(milliseconds: 500)); // Simulate network delay
 
-      _myLiens = _mockMyLiens.map((json) => TaxLien.fromJson(json)).toList();
+      _myLiens =
+          _mockMyLiens.map((json) => LegacyTaxLien.fromJson(json)).toList();
       _error = null;
     } catch (e) {
       _error = 'Failed to load my liens: $e';
@@ -257,11 +271,11 @@ class TaxLienService extends ChangeNotifier {
     }
   }
 
-  Future<List<TaxLien>> getTaxLiens() async {
+  Future<List<LegacyTaxLien>> getTaxLiens() async {
     return _myLiens;
   }
 
-  Future<List<TaxLien>> searchLiens({
+  Future<List<LegacyTaxLien>> searchLiens({
     String? county,
     String? state,
     double? minAmount,
@@ -269,6 +283,21 @@ class TaxLienService extends ChangeNotifier {
     double? minInterestRate,
   }) async {
     try {
+      // Try using Magento service first if available
+      if (_magentoService != null) {
+        final taxLiens = await _magentoService!.getTaxLiens(
+          searchQuery: null,
+          state: state,
+          county: county,
+          minAssessedValue: minAmount,
+          maxAssessedValue: maxAmount,
+        );
+
+        // Convert new TaxLien models to LegacyTaxLien for backward compatibility
+        return taxLiens.map((lien) => _convertToLegacyTaxLien(lien)).toList();
+      }
+
+      // Fallback to HTTP API
       final queryParams = <String, String>{};
       if (county != null) queryParams['county'] = county;
       if (state != null) queryParams['state'] = state;
@@ -284,9 +313,66 @@ class TaxLienService extends ChangeNotifier {
 
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body);
-        return data.map((json) => TaxLien.fromJson(json)).toList();
+        return data.map((json) => LegacyTaxLien.fromJson(json)).toList();
       } else {
         throw Exception('Failed to search liens');
+      }
+    } catch (e) {
+      throw Exception('Search error: $e');
+    }
+  }
+
+  Future<List<LegacyTaxLien>> searchTaxLiens({
+    String? county,
+    String? state,
+    double? minAmount,
+    double? maxAmount,
+    double? minInterestRate,
+    Map<String, dynamic>? filters,
+  }) async {
+    try {
+      // Try using Magento service first if available
+      if (_magentoService != null) {
+        final taxLiens = await _magentoService!.getTaxLiens(
+          searchQuery: null,
+          state: state,
+          county: county,
+          minAssessedValue: minAmount,
+          maxAssessedValue: maxAmount,
+        );
+
+        // Convert new TaxLien models to LegacyTaxLien for backward compatibility
+        return taxLiens.map((lien) => _convertToLegacyTaxLien(lien)).toList();
+      }
+
+      // Fallback to HTTP API
+      final queryParams = <String, String>{};
+      if (county != null) queryParams['county'] = county;
+      if (state != null) queryParams['state'] = state;
+      if (minAmount != null) queryParams['minAmount'] = minAmount.toString();
+      if (maxAmount != null) queryParams['maxAmount'] = maxAmount.toString();
+      if (minInterestRate != null)
+        queryParams['minInterestRate'] = minInterestRate.toString();
+
+      // Add additional filters if provided
+      if (filters != null) {
+        filters.forEach((key, value) {
+          if (value != null) {
+            queryParams[key] = value.toString();
+          }
+        });
+      }
+
+      final uri = Uri.parse('$_baseUrl/api/tax-liens/search')
+          .replace(queryParameters: queryParams);
+      final response =
+          await http.get(uri, headers: {'Content-Type': 'application/json'});
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
+        return data.map((json) => LegacyTaxLien.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed to search tax liens');
       }
     } catch (e) {
       throw Exception('Search error: $e');
@@ -301,5 +387,27 @@ class TaxLienService extends ChangeNotifier {
   void clearError() {
     _error = null;
     notifyListeners();
+  }
+
+  /// Convert new TaxLien model to LegacyTaxLien for backward compatibility
+  LegacyTaxLien _convertToLegacyTaxLien(TaxLien taxLien) {
+    return LegacyTaxLien(
+      id: taxLien.id,
+      parcelId: taxLien.parcelId ?? '',
+      owner: taxLien.ownerName ?? '',
+      address: taxLien.address,
+      county: taxLien.county,
+      state: taxLien.state,
+      assessedValue: taxLien.assessedValue,
+      taxAmount: taxLien.taxAmount,
+      interestRate: taxLien.interestRate,
+      auctionDate: taxLien.saleDate,
+      redemptionDeadline: taxLien.saleDate
+          .add(const Duration(days: 365)), // Assume 1 year redemption period
+      status: taxLien.status,
+      salePrice: taxLien.isSold ? taxLien.assessedValue : null,
+      buyerId: taxLien.isSold ? 'user123' : null, // Mock buyer ID
+      additionalData: taxLien.additionalInfo,
+    );
   }
 }
