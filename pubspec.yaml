@@ -17,7 +17,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 3.1.0+5
+version: 3.2.0
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -43,10 +43,8 @@ dependencies:
   webview_flutter: ^4.4.2
   
   # NFT and ICP libraries - implemented locally with best practices 2025
-  flutter_nft:
-    path: lib/packages/flutter_nft
-  flutter_icp:
-    path: lib/packages/flutter_icp
+  flutter_nft: latest
+  flutter_icp: latest
   
   # UI/UX improvements
   cupertino_icons: ^1.0.2
@@ -86,8 +84,8 @@ dependencies:
   connectivity_plus: ^7.0.0
   
   # Flutter Magento Plugin - implemented locally with best practices 2025
-  flutter_magento:
-    path: lib/packages/flutter_magento
+  flutter_magento:3.1.0
+  flutter_magento_marktplace: latest
   freezed_annotation: ^3.1.0
   
   # Image handling
