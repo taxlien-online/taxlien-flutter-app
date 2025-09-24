@@ -13,6 +13,14 @@ class NFTClient {
   }
 
   bool get isInitialized => _isInitialized;
+
+  void registerNFTProvider(NFTProvider provider) {}
+  void registerWalletProvider(WalletProvider provider) {}
+  void registerMarketplaceProvider(MarketplaceProvider provider) {}
+
+  NFTProvider? getNFTProvider(dynamic network) => null;
+  WalletProvider? getWalletProvider(dynamic network) => null;
+  MarketplaceProvider? getMarketplaceProvider(dynamic network) => null;
 }
 
 class NFT {
@@ -51,7 +59,7 @@ class NFTMetadata {
   });
 }
 
-class Listing {
+class NFTListing {
   final String id;
   final String tokenId;
   final double price;
@@ -62,7 +70,7 @@ class Listing {
   final String status;
   final String marketplaceId;
 
-  Listing({
+  NFTListing({
     required this.id,
     required this.tokenId,
     required this.price,
@@ -72,6 +80,28 @@ class Listing {
     this.expiresAt,
     required this.status,
     required this.marketplaceId,
+  });
+}
+
+class NFTOffer {
+  final String id;
+  final String tokenId;
+  final double price;
+  final String currency;
+  final String buyerAddress;
+  final DateTime createdAt;
+  final DateTime? expiresAt;
+  final String status;
+
+  NFTOffer({
+    required this.id,
+    required this.tokenId,
+    required this.price,
+    required this.currency,
+    required this.buyerAddress,
+    required this.createdAt,
+    this.expiresAt,
+    required this.status,
   });
 }
 
@@ -123,7 +153,7 @@ class WalletProvider {
 }
 
 class MarketplaceProvider {
-  Future<Listing> createListing({
+  Future<NFTListing> createListing({
     required String tokenId,
     required double price,
     required String currency,
@@ -142,7 +172,7 @@ class MarketplaceProvider {
     throw UnimplementedError('MarketplaceProvider.buyNFT not implemented');
   }
 
-  Future<List<Listing>> getActiveListings({
+  Future<List<NFTListing>> getActiveListings({
     String? collectionId,
     double? minPrice,
     double? maxPrice,

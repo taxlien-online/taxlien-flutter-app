@@ -73,6 +73,34 @@ class CanisterInfo {
   });
 }
 
+class ICPNFTProvider {
+  Future<void> initialize() async {}
+}
+
+class PlugWalletProvider {
+  Future<void> initialize() async {}
+}
+
+class YukuMarketplaceProvider {
+  Future<void> initialize() async {}
+}
+
+class BlockchainNetwork {
+  static const icp = 'icp';
+}
+
+class ListingStatus {
+  static const active = 'active';
+  static const inactive = 'inactive';
+  static const sold = 'sold';
+}
+
+class OfferStatus {
+  static const pending = 'pending';
+  static const accepted = 'accepted';
+  static const rejected = 'rejected';
+}
+
 class ICPException implements Exception {
   final String message;
   final int? statusCode;

@@ -23,6 +23,17 @@ class FlutterMagento {
   bool get isOnline => true;
 }
 
+class MagentoAuthService {
+  Future<Map<String, dynamic>> authenticate(
+      String username, String password) async {
+    throw UnimplementedError('MagentoAuthService.authenticate not implemented');
+  }
+}
+
+class MagentoProvider {
+  MagentoAuthService get auth => MagentoAuthService();
+}
+
 class MagentoException implements Exception {
   final String message;
   final int statusCode;
