@@ -103,7 +103,7 @@ dependencies:
   connectivity_plus: ^7.0.0
   
   # Flutter Magento Plugin - implemented locally with best practices 2025
-  flutter_magento: ^3.0.1
+  # flutter_magento: ^3.2.0  # Temporarily disabled due to JSON serialization issues
   
   # State management
   flutter_hooks: ^0.21.3

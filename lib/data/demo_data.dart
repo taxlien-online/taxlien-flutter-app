@@ -155,6 +155,81 @@ class TaxLienDemoData {
           "value": "GA"
         }
       ]
+    },
+    {
+      "id": 8,
+      "name": "Polk County",
+      "parent_id": 2,
+      "is_active": true,
+      "position": 1,
+      "level": 3,
+      "path": "1/2/8",
+      "available_sort_by": ["position", "name", "price"],
+      "include_in_menu": true,
+      "custom_attributes": [
+        {
+          "attribute_code": "description",
+          "value": "Tax lien certificates from Polk County, Florida - 2024 collection"
+        },
+        {
+          "attribute_code": "county_code",
+          "value": "POLK"
+        },
+        {
+          "attribute_code": "collection_year",
+          "value": "2024"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Dixie County",
+      "parent_id": 2,
+      "is_active": true,
+      "position": 2,
+      "level": 3,
+      "path": "1/2/9",
+      "available_sort_by": ["position", "name", "price"],
+      "include_in_menu": true,
+      "custom_attributes": [
+        {
+          "attribute_code": "description",
+          "value": "Tax lien certificates from Dixie County, Florida - 2024 collection"
+        },
+        {
+          "attribute_code": "county_code",
+          "value": "DIXIE"
+        },
+        {
+          "attribute_code": "collection_year",
+          "value": "2024"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Putnam County",
+      "parent_id": 2,
+      "is_active": true,
+      "position": 3,
+      "level": 3,
+      "path": "1/2/10",
+      "available_sort_by": ["position", "name", "price"],
+      "include_in_menu": true,
+      "custom_attributes": [
+        {
+          "attribute_code": "description",
+          "value": "Tax lien certificates from Putnam County, Florida - 2024 collection"
+        },
+        {
+          "attribute_code": "county_code",
+          "value": "PUTNAM"
+        },
+        {
+          "attribute_code": "collection_year",
+          "value": "2024"
+        }
+      ]
     }
   ],
   "products": [
@@ -539,6 +614,294 @@ class TaxLienDemoData {
         {
           "attribute_code": "short_description",
           "value": "Harris County Tax Lien - Urban Property"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "sku": "TL-FL-POLK-001",
+      "name": "Polk County Tax Lien - 2024 Collection",
+      "type_id": "tax_lien",
+      "attribute_set_id": 4,
+      "price": 1850.00,
+      "status": 1,
+      "visibility": 4,
+      "weight": 0,
+      "created_at": "2024-01-10 10:00:00",
+      "updated_at": "2024-01-10 10:00:00",
+      "extension_attributes": {
+        "stock_item": {
+          "item_id": 5,
+          "product_id": 5,
+          "stock_id": 1,
+          "qty": 1,
+          "is_in_stock": true,
+          "is_qty_decimal": false,
+          "use_config_min_qty": true,
+          "min_qty": 0,
+          "use_config_min_sale_qty": 1,
+          "min_sale_qty": 1,
+          "use_config_max_sale_qty": true,
+          "max_sale_qty": 10000,
+          "use_config_backorders": true,
+          "backorders": 0,
+          "use_config_notify_stock_qty": true,
+          "notify_stock_qty": 1,
+          "use_config_qty_increments": true,
+          "qty_increments": 1,
+          "use_config_enable_qty_inc": true,
+          "enable_qty_increments": false,
+          "use_config_manage_stock": true,
+          "manage_stock": true,
+          "low_stock_date": null,
+          "is_decimal_divided": false,
+          "stock_status_changed_auto": 0
+        }
+      },
+      "custom_attributes": [
+        {
+          "attribute_code": "parcel_id",
+          "value": "POLK-2024-001"
+        },
+        {
+          "attribute_code": "property_address",
+          "value": "Various Properties, Polk County, FL"
+        },
+        {
+          "attribute_code": "county",
+          "value": "Polk"
+        },
+        {
+          "attribute_code": "state",
+          "value": "FL"
+        },
+        {
+          "attribute_code": "owner_name",
+          "value": "Multiple Property Owners"
+        },
+        {
+          "attribute_code": "assessed_value",
+          "value": "125000.00"
+        },
+        {
+          "attribute_code": "tax_amount",
+          "value": "1850.00"
+        },
+        {
+          "attribute_code": "interest_rate",
+          "value": "18.0"
+        },
+        {
+          "attribute_code": "auction_date",
+          "value": "2024-01-10"
+        },
+        {
+          "attribute_code": "redemption_deadline",
+          "value": "2025-01-10"
+        },
+        {
+          "attribute_code": "lien_status",
+          "value": "available"
+        },
+        {
+          "attribute_code": "description",
+          "value": "Polk County tax lien certificate from 2024 collection. Central Florida location with diverse property types and competitive interest rates."
+        },
+        {
+          "attribute_code": "short_description",
+          "value": "Polk County Tax Lien - 2024 Collection"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "sku": "TL-FL-DIXIE-001",
+      "name": "Dixie County Tax Lien - 2024 Collection",
+      "type_id": "tax_lien",
+      "attribute_set_id": 4,
+      "price": 1200.00,
+      "status": 1,
+      "visibility": 4,
+      "weight": 0,
+      "created_at": "2024-02-15 10:00:00",
+      "updated_at": "2024-02-15 10:00:00",
+      "extension_attributes": {
+        "stock_item": {
+          "item_id": 6,
+          "product_id": 6,
+          "stock_id": 1,
+          "qty": 1,
+          "is_in_stock": true,
+          "is_qty_decimal": false,
+          "use_config_min_qty": true,
+          "min_qty": 0,
+          "use_config_min_sale_qty": 1,
+          "min_sale_qty": 1,
+          "use_config_max_sale_qty": true,
+          "max_sale_qty": 10000,
+          "use_config_backorders": true,
+          "backorders": 0,
+          "use_config_notify_stock_qty": true,
+          "notify_stock_qty": 1,
+          "use_config_qty_increments": true,
+          "qty_increments": 1,
+          "use_config_enable_qty_inc": true,
+          "enable_qty_increments": false,
+          "use_config_manage_stock": true,
+          "manage_stock": true,
+          "low_stock_date": null,
+          "is_decimal_divided": false,
+          "stock_status_changed_auto": 0
+        }
+      },
+      "custom_attributes": [
+        {
+          "attribute_code": "parcel_id",
+          "value": "DIXIE-2024-001"
+        },
+        {
+          "attribute_code": "property_address",
+          "value": "Various Properties, Dixie County, FL"
+        },
+        {
+          "attribute_code": "county",
+          "value": "Dixie"
+        },
+        {
+          "attribute_code": "state",
+          "value": "FL"
+        },
+        {
+          "attribute_code": "owner_name",
+          "value": "Multiple Property Owners"
+        },
+        {
+          "attribute_code": "assessed_value",
+          "value": "80000.00"
+        },
+        {
+          "attribute_code": "tax_amount",
+          "value": "1200.00"
+        },
+        {
+          "attribute_code": "interest_rate",
+          "value": "18.0"
+        },
+        {
+          "attribute_code": "auction_date",
+          "value": "2024-02-15"
+        },
+        {
+          "attribute_code": "redemption_deadline",
+          "value": "2025-02-15"
+        },
+        {
+          "attribute_code": "lien_status",
+          "value": "available"
+        },
+        {
+          "attribute_code": "description",
+          "value": "Dixie County tax lien certificate from 2024 collection. Rural North Florida location with agricultural and residential properties."
+        },
+        {
+          "attribute_code": "short_description",
+          "value": "Dixie County Tax Lien - 2024 Collection"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "sku": "TL-FL-PUTNAM-001",
+      "name": "Putnam County Tax Lien - 2024 Collection",
+      "type_id": "tax_lien",
+      "attribute_set_id": 4,
+      "price": 1650.00,
+      "status": 1,
+      "visibility": 4,
+      "weight": 0,
+      "created_at": "2024-03-20 10:00:00",
+      "updated_at": "2024-03-20 10:00:00",
+      "extension_attributes": {
+        "stock_item": {
+          "item_id": 7,
+          "product_id": 7,
+          "stock_id": 1,
+          "qty": 1,
+          "is_in_stock": true,
+          "is_qty_decimal": false,
+          "use_config_min_qty": true,
+          "min_qty": 0,
+          "use_config_min_sale_qty": 1,
+          "min_sale_qty": 1,
+          "use_config_max_sale_qty": true,
+          "max_sale_qty": 10000,
+          "use_config_backorders": true,
+          "backorders": 0,
+          "use_config_notify_stock_qty": true,
+          "notify_stock_qty": 1,
+          "use_config_qty_increments": true,
+          "qty_increments": 1,
+          "use_config_enable_qty_inc": true,
+          "enable_qty_increments": false,
+          "use_config_manage_stock": true,
+          "manage_stock": true,
+          "low_stock_date": null,
+          "is_decimal_divided": false,
+          "stock_status_changed_auto": 0
+        }
+      },
+      "custom_attributes": [
+        {
+          "attribute_code": "parcel_id",
+          "value": "PUTNAM-2024-001"
+        },
+        {
+          "attribute_code": "property_address",
+          "value": "Various Properties, Putnam County, FL"
+        },
+        {
+          "attribute_code": "county",
+          "value": "Putnam"
+        },
+        {
+          "attribute_code": "state",
+          "value": "FL"
+        },
+        {
+          "attribute_code": "owner_name",
+          "value": "Multiple Property Owners"
+        },
+        {
+          "attribute_code": "assessed_value",
+          "value": "110000.00"
+        },
+        {
+          "attribute_code": "tax_amount",
+          "value": "1650.00"
+        },
+        {
+          "attribute_code": "interest_rate",
+          "value": "18.0"
+        },
+        {
+          "attribute_code": "auction_date",
+          "value": "2024-03-20"
+        },
+        {
+          "attribute_code": "redemption_deadline",
+          "value": "2025-03-20"
+        },
+        {
+          "attribute_code": "lien_status",
+          "value": "available"
+        },
+        {
+          "attribute_code": "description",
+          "value": "Putnam County tax lien certificate from 2024 collection. East Central Florida location with mix of residential and commercial properties."
+        },
+        {
+          "attribute_code": "short_description",
+          "value": "Putnam County Tax Lien - 2024 Collection"
         }
       ]
     }
@@ -1178,6 +1541,102 @@ class TaxLienDemoData {
       if (valueAttr == null) return false;
       final value = double.tryParse(valueAttr['value'].toString()) ?? 0.0;
       return value >= minValue && value <= maxValue;
+    }).toList();
+  }
+
+  /// Get tax liens from 2024 collection (based on tax24.sql data)
+  static List<Map<String, dynamic>> getTaxLiensFrom2024Collection() {
+    return demoProducts.where((product) {
+      final sku = product['sku'] as String?;
+      return sku != null && sku.contains('2024');
+    }).toList();
+  }
+
+  /// Get tax liens by collection year
+  static List<Map<String, dynamic>> getTaxLiensByCollectionYear(String year) {
+    return demoProducts.where((product) {
+      final attributes = product['custom_attributes'] as List<dynamic>?;
+      if (attributes == null) return false;
+
+      final yearAttr = attributes.firstWhere(
+        (attr) => attr['attribute_code'] == 'collection_year',
+        orElse: () => null,
+      );
+
+      return yearAttr != null && yearAttr['value'] == year;
+    }).toList();
+  }
+
+  /// Get tax liens from Polk County (2024 collection)
+  static List<Map<String, dynamic>> getPolkCountyTaxLiens() {
+    return demoProducts.where((product) {
+      final attributes = product['custom_attributes'] as List<dynamic>?;
+      if (attributes == null) return false;
+
+      final countyAttr = attributes.firstWhere(
+        (attr) => attr['attribute_code'] == 'county',
+        orElse: () => null,
+      );
+
+      return countyAttr != null && countyAttr['value'] == 'Polk';
+    }).toList();
+  }
+
+  /// Get tax liens from Dixie County (2024 collection)
+  static List<Map<String, dynamic>> getDixieCountyTaxLiens() {
+    return demoProducts.where((product) {
+      final attributes = product['custom_attributes'] as List<dynamic>?;
+      if (attributes == null) return false;
+
+      final countyAttr = attributes.firstWhere(
+        (attr) => attr['attribute_code'] == 'county',
+        orElse: () => null,
+      );
+
+      return countyAttr != null && countyAttr['value'] == 'Dixie';
+    }).toList();
+  }
+
+  /// Get tax liens from Putnam County (2024 collection)
+  static List<Map<String, dynamic>> getPutnamCountyTaxLiens() {
+    return demoProducts.where((product) {
+      final attributes = product['custom_attributes'] as List<dynamic>?;
+      if (attributes == null) return false;
+
+      final countyAttr = attributes.firstWhere(
+        (attr) => attr['attribute_code'] == 'county',
+        orElse: () => null,
+      );
+
+      return countyAttr != null && countyAttr['value'] == 'Putnam';
+    }).toList();
+  }
+
+  /// Get all Florida tax liens from 2024 collection
+  static List<Map<String, dynamic>> getFlorida2024TaxLiens() {
+    return demoProducts.where((product) {
+      final attributes = product['custom_attributes'] as List<dynamic>?;
+      if (attributes == null) return false;
+
+      final stateAttr = attributes.firstWhere(
+        (attr) => attr['attribute_code'] == 'state',
+        orElse: () => null,
+      );
+
+      final sku = product['sku'] as String?;
+      
+      return stateAttr != null && 
+             stateAttr['value'] == 'FL' && 
+             sku != null && 
+             sku.contains('2024');
+    }).toList();
+  }
+
+  /// Get tax liens by county code (POLK, DIXIE, PUTNAM)
+  static List<Map<String, dynamic>> getTaxLiensByCountyCode(String countyCode) {
+    return demoProducts.where((product) {
+      final sku = product['sku'] as String?;
+      return sku != null && sku.contains(countyCode.toUpperCase());
     }).toList();
   }
 }

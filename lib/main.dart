@@ -22,14 +22,13 @@ import 'services/integrated_services.dart';
 // Provider imports - defined in this file
 
 // Widgets
-import 'core/widgets/loading_screen.dart';
 import 'core/widgets/cloud_status_widget.dart';
 
 // Screens
-import 'screens/main_navigation_screen.dart';
 import 'screens/marketplace_screen.dart';
 import 'screens/portfolio_dashboard_screen.dart';
 import 'screens/ai_advisor_screen.dart';
+import 'screens/preload_info_screen.dart';
 
 // Services
 import 'services/tax_lien_service.dart';
@@ -37,13 +36,12 @@ import 'services/tax_lien_magento_service.dart';
 import 'services/auth_service.dart';
 import 'services/ai_investment_advisor_service.dart';
 import 'services/flutter_magento_cloud_service.dart' as magento_cloud;
+import 'services/preload_service.dart';
 
 // Widgets
 import 'widgets/cloud_functions_status_widget.dart';
 
 // NFT and ICP libraries
-import 'package:flutter_nft/flutter_nft.dart';
-import 'package:flutter_icp/flutter_icp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -95,6 +93,9 @@ Future<void> _initializeServices() async {
     // Initialize secure storage
     await SecureStorageService.initialize();
 
+    // Initialize preload data (historical data from tax24.sql)
+    await PreloadService.initializePreloadData();
+
     // Initialize NFT client with ICP providers
     await _initializeNFTServices();
 
@@ -143,8 +144,8 @@ class TaxLienApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeProvider);
     final locale = ref.watch(localizationProvider);
-    final authState = ref.watch(authProvider);
-    final magentoState = ref.watch(magentoProvider);
+    // final authState = ref.watch(authProvider);
+    // final magentoState = ref.watch(magentoProvider);
 
     return MaterialApp(
       title: AppConstants.appName,
@@ -1281,6 +1282,21 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
                           const SizedBox(height: 16),
                           Text(AppConstants.appDescription),
                         ],
+                      );
+                    },
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.storage),
+                    title: const Text('Данные приложения'),
+                    subtitle: const Text('Исторические данные и прелоад'),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PreloadInfoScreen(),
+                        ),
                       );
                     },
                   ),
