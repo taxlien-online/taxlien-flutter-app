@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_magento/flutter_magento.dart';
+// import 'package:flutter_magento/flutter_magento.dart';  // Temporarily disabled
 import 'package:flutter_icp/flutter_icp.dart' as icp;
 import 'package:flutter_nft/flutter_nft.dart' as nft;
 import 'package:flutter_yuku/flutter_yuku.dart' as yuku;
@@ -10,21 +10,21 @@ import 'flutter_magento_cloud_service.dart';
 
 class IntegratedServices {
   static IntegratedServices? _instance;
-  
+
   // Services
-  late FlutterMagento _magento;
+  // late FlutterMagento _magento;  // Temporarily disabled
   late DatabaseService _databaseService;
   late NFTService _nftService;
   late PlugWalletService _walletService;
   late FlutterMagentoCloudService _magentoService;
   late icp.ICPClient _icpClient;
-  
+
   // State
   bool _isInitialized = false;
   Map<String, bool> _serviceStatus = {};
 
   IntegratedServices._internal();
-  
+
   static IntegratedServices get instance {
     _instance ??= IntegratedServices._internal();
     return _instance!;
@@ -33,42 +33,42 @@ class IntegratedServices {
   // Initialize all services
   Future<void> initialize() async {
     if (_isInitialized) return;
-    
+
     try {
       debugPrint('Initializing Integrated Services...');
-      
-      // Initialize Magento
-      _magento = FlutterMagento();
-      await _magento.initialize();
-      
+
+      // Initialize Magento (temporarily disabled)
+      // _magento = FlutterMagento();
+      // await _magento.initialize();
+
       // Initialize database
       _databaseService = DatabaseService.instance;
       await _databaseService.initialize();
-      
+
       // Initialize NFT service
       _nftService = NFTService.instance;
       await _nftService.initialize();
-      
+
       // Initialize wallet service
       _walletService = PlugWalletService.instance;
       await _walletService.initialize();
-      
+
       // Initialize Magento cloud service
       _magentoService = FlutterMagentoCloudService();
       await _magentoService._initialize();
-      
+
       // Initialize ICP client
       _icpClient = icp.ICPClient();
-      
+
       // Update service status
       _serviceStatus = {
-        'magento': true,
+        'magento': false, // Temporarily disabled
         'database': true,
         'nft': _nftService.isInitialized,
         'wallet': _walletService.isConnected,
         'icp': true,
       };
-      
+
       _isInitialized = true;
       debugPrint('Integrated Services initialized successfully');
     } catch (e) {
@@ -78,16 +78,16 @@ class IntegratedServices {
   }
 
   // Getters
-  FlutterMagento get magento => _magento;
+  // FlutterMagento get magento => _magento;  // Temporarily disabled
   DatabaseService get database => _databaseService;
   NFTService get nft => _nftService;
   PlugWalletService get wallet => _walletService;
   FlutterMagentoCloudService get magentoCloud => _magentoService;
   icp.ICPClient get icp => _icpClient;
-  
+
   bool get isInitialized => _isInitialized;
   Map<String, bool> get serviceStatus => _serviceStatus;
-  
+
   // Get service statistics
   Map<String, dynamic> getStatistics() {
     return {
@@ -97,12 +97,12 @@ class IntegratedServices {
       'databaseReady': _databaseService != null,
     };
   }
-  
+
   // Check if all services are ready
   bool get allServicesReady {
     return _serviceStatus.values.every((status) => status);
   }
-  
+
   // Get service health
   Map<String, String> getServiceHealth() {
     return {

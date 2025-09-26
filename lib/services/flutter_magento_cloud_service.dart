@@ -1,17 +1,17 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_magento/flutter_magento.dart';
+// import 'package:flutter_magento/flutter_magento.dart';  // Temporarily disabled
 
 class FlutterMagentoCloudService {
-  late FlutterMagento _magento;
+  // late FlutterMagento _magento;  // Temporarily disabled
   bool _isInitialized = false;
-  
+
   FlutterMagentoCloudService();
-  
+
   // Initialize the service
   Future<void> _initialize() async {
     try {
-      _magento = FlutterMagento();
-      await _magento.initialize();
+      // _magento = FlutterMagento();  // Temporarily disabled
+      // await _magento.initialize();
       _isInitialized = true;
       debugPrint('Flutter Magento Cloud Service initialized');
     } catch (e) {
@@ -19,13 +19,13 @@ class FlutterMagentoCloudService {
       _isInitialized = false;
     }
   }
-  
-  // Get Magento instance
-  FlutterMagento get magento => _magento;
-  
+
+  // Get Magento instance (temporarily disabled)
+  // FlutterMagento get magento => _magento;
+
   // Check if service is initialized
   bool get isInitialized => _isInitialized;
-  
+
   // Get products
   Future<List<dynamic>> getProducts({
     int page = 1,
@@ -37,39 +37,42 @@ class FlutterMagentoCloudService {
       if (!_isInitialized) {
         await _initialize();
       }
-      
+
       // Simulate API call
       await Future.delayed(const Duration(milliseconds: 500));
-      
+
       // Return mock data
-      return List.generate(limit, (index) => {
-        'id': index + 1,
-        'name': 'Product ${index + 1}',
-        'price': 99.99 + (index * 10),
-        'image': 'https://via.placeholder.com/300x300?text=Product+${index + 1}',
-        'description': 'Description for product ${index + 1}',
-        'sku': 'SKU-${index + 1}',
-        'category': 'Electronics',
-        'in_stock': true,
-        'rating': 4.5,
-        'reviews_count': 10 + index,
-      });
+      return List.generate(
+          limit,
+          (index) => {
+                'id': index + 1,
+                'name': 'Product ${index + 1}',
+                'price': 99.99 + (index * 10),
+                'image':
+                    'https://via.placeholder.com/300x300?text=Product+${index + 1}',
+                'description': 'Description for product ${index + 1}',
+                'sku': 'SKU-${index + 1}',
+                'category': 'Electronics',
+                'in_stock': true,
+                'rating': 4.5,
+                'reviews_count': 10 + index,
+              });
     } catch (e) {
       debugPrint('Error getting products: $e');
       return [];
     }
   }
-  
+
   // Get product by ID
   Future<Map<String, dynamic>?> getProductById(String id) async {
     try {
       if (!_isInitialized) {
         await _initialize();
       }
-      
+
       // Simulate API call
       await Future.delayed(const Duration(milliseconds: 300));
-      
+
       // Return mock data
       return {
         'id': id,
@@ -98,7 +101,7 @@ class FlutterMagentoCloudService {
       return null;
     }
   }
-  
+
   // Search products
   Future<List<dynamic>> searchProducts({
     required String query,
@@ -110,39 +113,42 @@ class FlutterMagentoCloudService {
       if (!_isInitialized) {
         await _initialize();
       }
-      
+
       // Simulate API call
       await Future.delayed(const Duration(milliseconds: 500));
-      
+
       // Return mock search results
-      return List.generate(limit, (index) => {
-        'id': index + 1,
-        'name': '$query Product ${index + 1}',
-        'price': 99.99 + (index * 10),
-        'image': 'https://via.placeholder.com/300x300?text=$query+${index + 1}',
-        'description': 'Search result for $query',
-        'sku': 'SKU-${index + 1}',
-        'category': 'Electronics',
-        'in_stock': true,
-        'rating': 4.5,
-        'reviews_count': 10 + index,
-      });
+      return List.generate(
+          limit,
+          (index) => {
+                'id': index + 1,
+                'name': '$query Product ${index + 1}',
+                'price': 99.99 + (index * 10),
+                'image':
+                    'https://via.placeholder.com/300x300?text=$query+${index + 1}',
+                'description': 'Search result for $query',
+                'sku': 'SKU-${index + 1}',
+                'category': 'Electronics',
+                'in_stock': true,
+                'rating': 4.5,
+                'reviews_count': 10 + index,
+              });
     } catch (e) {
       debugPrint('Error searching products: $e');
       return [];
     }
   }
-  
+
   // Get categories
   Future<List<dynamic>> getCategories() async {
     try {
       if (!_isInitialized) {
         await _initialize();
       }
-      
+
       // Simulate API call
       await Future.delayed(const Duration(milliseconds: 300));
-      
+
       // Return mock categories
       return [
         {'id': '1', 'name': 'Electronics', 'product_count': 150},
@@ -156,17 +162,17 @@ class FlutterMagentoCloudService {
       return [];
     }
   }
-  
+
   // Get cart
   Future<Map<String, dynamic>?> getCart() async {
     try {
       if (!_isInitialized) {
         await _initialize();
       }
-      
+
       // Simulate API call
       await Future.delayed(const Duration(milliseconds: 300));
-      
+
       // Return mock cart
       return {
         'id': 'cart_123',
@@ -180,7 +186,7 @@ class FlutterMagentoCloudService {
       return null;
     }
   }
-  
+
   // Add to cart
   Future<bool> addToCart({
     required String productId,
@@ -190,10 +196,10 @@ class FlutterMagentoCloudService {
       if (!_isInitialized) {
         await _initialize();
       }
-      
+
       // Simulate API call
       await Future.delayed(const Duration(milliseconds: 500));
-      
+
       debugPrint('Added $quantity of product $productId to cart');
       return true;
     } catch (e) {
@@ -201,7 +207,7 @@ class FlutterMagentoCloudService {
       return false;
     }
   }
-  
+
   // Remove from cart
   Future<bool> removeFromCart({
     required String productId,
@@ -210,10 +216,10 @@ class FlutterMagentoCloudService {
       if (!_isInitialized) {
         await _initialize();
       }
-      
+
       // Simulate API call
       await Future.delayed(const Duration(milliseconds: 300));
-      
+
       debugPrint('Removed product $productId from cart');
       return true;
     } catch (e) {
@@ -221,7 +227,7 @@ class FlutterMagentoCloudService {
       return false;
     }
   }
-  
+
   // Update cart item
   Future<bool> updateCartItem({
     required String productId,
@@ -231,10 +237,10 @@ class FlutterMagentoCloudService {
       if (!_isInitialized) {
         await _initialize();
       }
-      
+
       // Simulate API call
       await Future.delayed(const Duration(milliseconds: 300));
-      
+
       debugPrint('Updated product $productId quantity to $quantity');
       return true;
     } catch (e) {

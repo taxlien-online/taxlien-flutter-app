@@ -6,7 +6,7 @@ import '../services/database_service.dart';
 /// Service for providing search autocomplete suggestions
 class SearchAutocompleteService extends ChangeNotifier {
   final MagentoApiService _magentoApiService = MagentoApiService();
-  final DatabaseService _databaseService = DatabaseService();
+  final DatabaseService _databaseService = DatabaseService.instance;
 
   List<String> _suggestions = [];
   bool _isLoading = false;

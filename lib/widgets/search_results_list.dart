@@ -353,7 +353,7 @@ class SearchResultsList extends StatelessWidget {
 
   void _toggleFavorite(BuildContext context, MagentoProduct product) async {
     try {
-      final databaseService = DatabaseService();
+      final databaseService = DatabaseService.instance;
       await databaseService.initialize();
 
       final isFavorite =
