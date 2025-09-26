@@ -19,23 +19,28 @@ platform :ios do
   before_all do
     # Set Flutter root path
     ENV["FLUTTER_ROOT"] = "/opt/homebrew/bin/flutter" # Adjust path if needed
+    
+    # Ensure we're in the Flutter project directory
+    unless File.exist?("../../pubspec.yaml")
+      UI.user_error!("pubspec.yaml not found. Make sure you're in the Flutter project root directory.")
+    end
   end
 
   desc "Build and upload a new release to App Store"
   lane :release do
     # Clean and get dependencies
-    sh("cd .. && flutter clean")
-    sh("cd .. && flutter pub get")
+    sh("cd ../.. && flutter clean")
+    sh("cd ../.. && flutter pub get")
     
     # Run Flutter tests (skip if test directory doesn't exist)
     begin
-      sh("cd .. && flutter test")
+      sh("cd ../.. && flutter test")
     rescue => ex
       UI.message("Skipping tests: #{ex.message}")
     end
     
     # Build Flutter iOS app
-    sh("cd .. && flutter build ios --release --no-codesign")
+    sh("cd ../.. && flutter build ios --release --no-codesign")
     
     # Increment build number
     increment_build_number(
@@ -76,18 +81,18 @@ platform :ios do
   desc "Build and upload a new beta release to TestFlight"
   lane :beta do
     # Clean and get dependencies
-    sh("cd .. && flutter clean")
-    sh("cd .. && flutter pub get")
+    sh("cd ../.. && flutter clean")
+    sh("cd ../.. && flutter pub get")
     
     # Run Flutter tests (skip if test directory doesn't exist)
     begin
-      sh("cd .. && flutter test")
+      sh("cd ../.. && flutter test")
     rescue => ex
       UI.message("Skipping tests: #{ex.message}")
     end
     
     # Build Flutter iOS app
-    sh("cd .. && flutter build ios --release --no-codesign")
+    sh("cd ../.. && flutter build ios --release --no-codesign")
     
     # Increment build number
     increment_build_number(
@@ -120,11 +125,11 @@ platform :ios do
   desc "Build app for local testing"
   lane :build do
     # Clean and get dependencies
-    sh("cd .. && flutter clean")
-    sh("cd .. && flutter pub get")
+    sh("cd ../.. && flutter clean")
+    sh("cd ../.. && flutter pub get")
     
     # Build Flutter iOS app
-    sh("cd .. && flutter build ios --release --no-codesign")
+    sh("cd ../.. && flutter build ios --release --no-codesign")
     
     # Build the app
     build_app(

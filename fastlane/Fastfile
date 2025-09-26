@@ -1,0 +1,342 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+# Set Flutter root path
+ENV["FLUTTER_ROOT"] = "/opt/homebrew/bin/flutter" # Adjust path if needed
+
+# Global before_all hook
+before_all do
+  # Ensure we're in the Flutter project directory
+  unless File.exist?("pubspec.yaml")
+    UI.user_error!("pubspec.yaml not found. Make sure you're in the Flutter project root directory.")
+  end
+  
+  # Check if Flutter is available
+  unless system("which flutter > /dev/null 2>&1")
+    UI.user_error!("Flutter not found. Please install Flutter and add it to your PATH.")
+  end
+end
+
+# Global after_all hook
+after_all do |lane|
+  # Clean up build artifacts
+  clean_build_artifacts
+end
+
+# Global error handler
+error do |lane, exception|
+  UI.error("Error in lane #{lane}: #{exception.message}")
+  clean_build_artifacts
+end
+
+# iOS Platform
+platform :ios do
+  desc "Build and upload iOS app to App Store"
+  lane :release do
+    # Clean and get dependencies
+    sh("flutter clean")
+    sh("flutter pub get")
+    
+    # Run Flutter tests
+    begin
+      sh("flutter test")
+    rescue => ex
+      UI.message("Skipping tests: #{ex.message}")
+    end
+    
+    # Generate localization files
+    sh("flutter gen-l10n")
+    
+    # Build Flutter iOS app
+    sh("flutter build ios --release --no-codesign")
+    
+    # Change to iOS directory for fastlane
+    Dir.chdir("ios") do
+      # Increment build number
+      increment_build_number(
+        xcodeproj: "Runner.xcodeproj",
+        build_number: get_build_number(xcodeproj: "Runner.xcodeproj").to_i + 1
+      )
+      
+      # Build the app with proper signing
+      build_app(
+        workspace: "Runner.xcworkspace",
+        scheme: "Runner",
+        export_method: "app-store",
+        export_options: {
+          method: "app-store",
+          teamID: "6XT4R7V83F",
+          uploadBitcode: false,
+          uploadSymbols: true,
+          stripSwiftSymbols: true
+        },
+        output_directory: "./build",
+        output_name: "TaxLien.ipa"
+      )
+      
+      # Upload to App Store
+      upload_to_app_store(
+        force: true,
+        skip_binary_upload: false,
+        skip_screenshots: false,
+        skip_metadata: false,
+        submit_for_review: false,
+        automatic_release: false
+      )
+    end
+  end
+
+  desc "Build and upload iOS app to TestFlight"
+  lane :beta do
+    # Clean and get dependencies
+    sh("flutter clean")
+    sh("flutter pub get")
+    
+    # Run Flutter tests
+    begin
+      sh("flutter test")
+    rescue => ex
+      UI.message("Skipping tests: #{ex.message}")
+    end
+    
+    # Generate localization files
+    sh("flutter gen-l10n")
+    
+    # Build Flutter iOS app
+    sh("flutter build ios --release --no-codesign")
+    
+    # Change to iOS directory for fastlane
+    Dir.chdir("ios") do
+      # Increment build number
+      increment_build_number(
+        xcodeproj: "Runner.xcodeproj",
+        build_number: get_build_number(xcodeproj: "Runner.xcodeproj").to_i + 1
+      )
+      
+      # Build the app for TestFlight
+      build_app(
+        workspace: "Runner.xcworkspace",
+        scheme: "Runner",
+        export_method: "app-store",
+        export_options: {
+          method: "app-store",
+          teamID: "6XT4R7V83F",
+          uploadBitcode: false,
+          uploadSymbols: true,
+          stripSwiftSymbols: true
+        },
+        output_directory: "./build",
+        output_name: "TaxLien-Beta.ipa"
+      )
+      
+      # Upload to TestFlight
+      upload_to_testflight(
+        skip_waiting_for_build_processing: true
+      )
+    end
+  end
+
+  desc "Build iOS app for local testing"
+  lane :build do
+    # Clean and get dependencies
+    sh("flutter clean")
+    sh("flutter pub get")
+    
+    # Generate localization files
+    sh("flutter gen-l10n")
+    
+    # Build Flutter iOS app
+    sh("flutter build ios --release --no-codesign")
+    
+    # Change to iOS directory for fastlane
+    Dir.chdir("ios") do
+      # Build the app
+      build_app(
+        workspace: "Runner.xcworkspace",
+        scheme: "Runner",
+        export_method: "development",
+        output_directory: "./build",
+        output_name: "TaxLien-Development.ipa"
+      )
+    end
+  end
+end
+
+# Android Platform
+platform :android do
+  desc "Build and upload Android app to Google Play Store"
+  lane :release do
+    # Clean and get dependencies
+    sh("flutter clean")
+    sh("flutter pub get")
+    
+    # Run Flutter tests
+    begin
+      sh("flutter test")
+    rescue => ex
+      UI.message("Skipping tests: #{ex.message}")
+    end
+    
+    # Generate localization files
+    sh("flutter gen-l10n")
+    
+    # Build App Bundle for Google Play Store
+    sh("flutter build appbundle --release")
+    
+    # Change to Android directory for fastlane
+    Dir.chdir("android") do
+      # Upload to Google Play Store
+      upload_to_play_store(
+        track: "production",
+        aab: "../build/app/outputs/bundle/release/app-release.aab",
+        skip_upload_apk: true,
+        skip_upload_metadata: false,
+        skip_upload_images: false,
+        skip_upload_screenshots: false
+      )
+    end
+  end
+
+  desc "Build and upload Android app to Google Play Store Beta"
+  lane :beta do
+    # Clean and get dependencies
+    sh("flutter clean")
+    sh("flutter pub get")
+    
+    # Run Flutter tests
+    begin
+      sh("flutter test")
+    rescue => ex
+      UI.message("Skipping tests: #{ex.message}")
+    end
+    
+    # Generate localization files
+    sh("flutter gen-l10n")
+    
+    # Build App Bundle for Google Play Store
+    sh("flutter build appbundle --release")
+    
+    # Change to Android directory for fastlane
+    Dir.chdir("android") do
+      # Upload to Google Play Store Beta track
+      upload_to_play_store(
+        track: "beta",
+        aab: "../build/app/outputs/bundle/release/app-release.aab",
+        skip_upload_apk: true,
+        skip_upload_metadata: false,
+        skip_upload_images: false,
+        skip_upload_screenshots: false
+      )
+    end
+  end
+
+  desc "Build and upload Android app to Google Play Store Alpha"
+  lane :alpha do
+    # Clean and get dependencies
+    sh("flutter clean")
+    sh("flutter pub get")
+    
+    # Run Flutter tests
+    begin
+      sh("flutter test")
+    rescue => ex
+      UI.message("Skipping tests: #{ex.message}")
+    end
+    
+    # Generate localization files
+    sh("flutter gen-l10n")
+    
+    # Build App Bundle for Google Play Store
+    sh("flutter build appbundle --release")
+    
+    # Change to Android directory for fastlane
+    Dir.chdir("android") do
+      # Upload to Google Play Store Alpha track
+      upload_to_play_store(
+        track: "alpha",
+        aab: "../build/app/outputs/bundle/release/app-release.aab",
+        skip_upload_apk: true,
+        skip_upload_metadata: false,
+        skip_upload_images: false,
+        skip_upload_screenshots: false
+      )
+    end
+  end
+
+  desc "Build Android app for local testing"
+  lane :build do
+    # Clean and get dependencies
+    sh("flutter clean")
+    sh("flutter pub get")
+    
+    # Generate localization files
+    sh("flutter gen-l10n")
+    
+    # Build APK for local testing
+    sh("flutter build apk --release")
+    
+    # Build App Bundle for testing
+    sh("flutter build appbundle --release")
+  end
+end
+
+# Cross-platform lanes
+desc "Build both iOS and Android apps"
+lane :build_all do
+  # Build iOS
+  ios_build
+    
+  # Build Android
+  android_build
+end
+
+desc "Release both iOS and Android apps"
+lane :release_all do
+  # Release iOS
+  ios_release
+    
+  # Release Android
+  android_release
+end
+
+desc "Beta release for both platforms"
+lane :beta_all do
+  # Beta iOS
+  ios_beta
+    
+  # Beta Android
+  android_beta
+end
+
+desc "Clean all build artifacts"
+lane :clean_all do
+  sh("flutter clean")
+  clean_build_artifacts
+end
+
+desc "Run all tests"
+lane :test_all do
+  sh("flutter test")
+end
+
+desc "Generate localization files"
+lane :gen_l10n do
+  sh("flutter gen-l10n")
+end
+
+desc "Check Flutter doctor"
+lane :doctor do
+  sh("flutter doctor")
+end

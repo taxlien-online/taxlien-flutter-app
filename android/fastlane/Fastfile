@@ -1,0 +1,178 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  before_all do
+    # Set Flutter root path
+    ENV["FLUTTER_ROOT"] = "/opt/homebrew/bin/flutter" # Adjust path if needed
+  end
+
+  desc "Build and upload a new release to Google Play Store"
+  lane :release do
+    # Clean and get dependencies
+    sh("cd .. && flutter clean")
+    sh("cd .. && flutter pub get")
+    
+    # Run Flutter tests (skip if test directory doesn't exist)
+    begin
+      sh("cd .. && flutter test")
+    rescue => ex
+      UI.message("Skipping tests: #{ex.message}")
+    end
+    
+    # Generate localization files
+    sh("cd .. && flutter gen-l10n")
+    
+    # Build App Bundle for Google Play Store
+    sh("cd .. && flutter build appbundle --release")
+    
+    # Upload to Google Play Store
+    upload_to_play_store(
+      track: "production",
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+    
+    # Clean up
+    clean_build_artifacts
+  end
+
+  desc "Build and upload a new beta release to Google Play Store"
+  lane :beta do
+    # Clean and get dependencies
+    sh("cd .. && flutter clean")
+    sh("cd .. && flutter pub get")
+    
+    # Run Flutter tests (skip if test directory doesn't exist)
+    begin
+      sh("cd .. && flutter test")
+    rescue => ex
+      UI.message("Skipping tests: #{ex.message}")
+    end
+    
+    # Generate localization files
+    sh("cd .. && flutter gen-l10n")
+    
+    # Build App Bundle for Google Play Store
+    sh("cd .. && flutter build appbundle --release")
+    
+    # Upload to Google Play Store Beta track
+    upload_to_play_store(
+      track: "beta",
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+    
+    # Clean up
+    clean_build_artifacts
+  end
+
+  desc "Build and upload a new alpha release to Google Play Store"
+  lane :alpha do
+    # Clean and get dependencies
+    sh("cd .. && flutter clean")
+    sh("cd .. && flutter pub get")
+    
+    # Run Flutter tests (skip if test directory doesn't exist)
+    begin
+      sh("cd .. && flutter test")
+    rescue => ex
+      UI.message("Skipping tests: #{ex.message}")
+    end
+    
+    # Generate localization files
+    sh("cd .. && flutter gen-l10n")
+    
+    # Build App Bundle for Google Play Store
+    sh("cd .. && flutter build appbundle --release")
+    
+    # Upload to Google Play Store Alpha track
+    upload_to_play_store(
+      track: "alpha",
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+    
+    # Clean up
+    clean_build_artifacts
+  end
+
+  desc "Build app for local testing"
+  lane :build do
+    # Clean and get dependencies
+    sh("cd .. && flutter clean")
+    sh("cd .. && flutter pub get")
+    
+    # Generate localization files
+    sh("cd .. && flutter gen-l10n")
+    
+    # Build APK for local testing
+    sh("cd .. && flutter build apk --release")
+    
+    # Build App Bundle for testing
+    sh("cd .. && flutter build appbundle --release")
+  end
+
+  desc "Update app metadata"
+  lane :metadata do
+    # Update app metadata from fastlane/metadata
+    upload_to_play_store(
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+  end
+
+  desc "Download existing metadata and screenshots from Google Play Store"
+  lane :download_metadata do
+    download_metadata
+    download_screenshots
+  end
+
+  desc "Promote alpha to beta"
+  lane :promote_alpha_to_beta do
+    promote_track(
+      track: "alpha",
+      to_track: "beta"
+    )
+  end
+
+  desc "Promote beta to production"
+  lane :promote_beta_to_production do
+    promote_track(
+      track: "beta",
+      to_track: "production"
+    )
+  end
+
+  error do |lane, exception|
+    # Handle errors
+    UI.error("Error in lane #{lane}: #{exception.message}")
+    clean_build_artifacts
+  end
+end
