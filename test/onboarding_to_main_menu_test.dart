@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   group('Onboarding to Main Menu Tests', () {
-    testWidgets('Onboarding to main menu navigation', (WidgetTester tester) async {
+    testWidgets('Onboarding to main menu navigation',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(
@@ -20,7 +21,8 @@ void main() {
       expect(find.text('Onboarding to Main Menu Test'), findsOneWidget);
     });
 
-    testWidgets('Main menu screen loads after onboarding', (WidgetTester tester) async {
+    testWidgets('Main menu screen loads after onboarding',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
           child: MaterialApp(

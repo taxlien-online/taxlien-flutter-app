@@ -23,7 +23,7 @@ void main() {
 
   testWidgets('App theme test', (WidgetTester tester) async {
     await tester.pumpWidget(
-      const ProviderScope(
+      ProviderScope(
         child: MaterialApp(
           theme: ThemeData.light(),
           darkTheme: ThemeData.dark(),
