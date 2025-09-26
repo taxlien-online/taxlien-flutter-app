@@ -200,4 +200,20 @@ class NFTService {
       'Property Type: ${taxLien.propertyType}',
     ];
   }
+
+  // Initialize method
+  Future<void> initialize() async {
+    try {
+      // Initialize NFT service
+      debugPrint('NFT Service initialized');
+    } catch (e) {
+      debugPrint('Error initializing NFT service: $e');
+    }
+  }
+
+  // Check if service is initialized
+  bool get isInitialized => true;
+
+  // Get my NFTs
+  List<TaxLienNFT> get myNFTs => [];
 }

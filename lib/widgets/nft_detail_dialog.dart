@@ -312,7 +312,7 @@ class NFTDetailDialog extends StatelessWidget {
 
   void _shareNFT(TaxLienNFT nft) {
     showDialog(
-      context: context,
+      context: widget.context,
       builder: (context) => AlertDialog(
         title: const Text('Share NFT'),
         content: Column(
@@ -423,7 +423,7 @@ class NFTDetailDialog extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
+              ScaffoldMessenger.of(widget.context).showSnackBar(
                 const SnackBar(
                   content: Text('QR code saved to gallery'),
                   backgroundColor: Colors.green,

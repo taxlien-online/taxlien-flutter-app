@@ -43,8 +43,6 @@ dependencies:
   webview_flutter: ^4.4.2
   
   # NFT and ICP libraries - implemented locally with best practices 2025
-  flutter_nft: ^1.0.0
-  flutter_icp: ^1.0.0
   
   # Database and storage - Migrated to Magento
   # hive: ^2.2.3  # Removed - using Magento API
@@ -103,7 +101,12 @@ dependencies:
   connectivity_plus: ^7.0.0
   
   # Flutter Magento Plugin - implemented locally with best practices 2025
-  # flutter_magento: ^3.2.0  # Temporarily disabled due to JSON serialization issues
+  flutter_magento: ^3.2.0
+  
+  # NFT and Blockchain Integration
+  flutter_nft: ^1.2.0+4
+  flutter_icp: ^1.2.0+3
+  flutter_yuku: ^1.0.0
   
   # State management
   flutter_hooks: ^0.21.3

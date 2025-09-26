@@ -1,5 +1,5 @@
 import 'package:flutter_nft/flutter_nft.dart';
-import '../services/integrated_services.dart';
+import '../../services/integrated_services.dart';
 
 /// Application constants for TaxLien.online
 class AppConstants {

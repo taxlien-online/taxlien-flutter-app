@@ -219,6 +219,99 @@ class DatabaseService {
     return List.generate(maps.length, (i) => TaxLien.fromJson(maps[i]));
   }
 
+  // Search history methods
+  Future<List<String>> getSearchHistory({int limit = 10}) async {
+    try {
+      final db = await database;
+      final List<Map<String, dynamic>> maps = await db.query(
+        'user_preferences',
+        where: 'key LIKE ?',
+        whereArgs: ['search_history_%'],
+        orderBy: 'value DESC',
+        limit: limit,
+      );
+      return maps.map((map) => map['value'] as String).toList();
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<void> saveSearchHistory({required String query}) async {
+    try {
+      final db = await database;
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      await db.insert(
+        'user_preferences',
+        {'key': 'search_history_$timestamp', 'value': query},
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    } catch (e) {
+      // Ignore errors
+    }
+  }
+
+  // Cart methods
+  Future<String?> getCartId() async {
+    try {
+      return await getPreference('cart_id');
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<void> saveCartId(String cartId) async {
+    try {
+      await setPreference('cart_id', cartId);
+    } catch (e) {
+      // Ignore errors
+    }
+  }
+
+  // Favorites methods
+  Future<bool> isFavorite(String sku) async {
+    try {
+      final db = await database;
+      final List<Map<String, dynamic>> maps = await db.query(
+        'user_preferences',
+        where: 'key = ?',
+        whereArgs: ['favorite_$sku'],
+      );
+      return maps.isNotEmpty;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<void> addToFavorites(String sku) async {
+    try {
+      await setPreference('favorite_$sku', 'true');
+    } catch (e) {
+      // Ignore errors
+    }
+  }
+
+  Future<void> removeFromFavorites(String sku) async {
+    try {
+      final db = await database;
+      await db.delete(
+        'user_preferences',
+        where: 'key = ?',
+        whereArgs: ['favorite_$sku'],
+      );
+    } catch (e) {
+      // Ignore errors
+    }
+  }
+
+  // Initialize method
+  Future<void> initialize() async {
+    try {
+      await database; // This will create the database if it doesn't exist
+    } catch (e) {
+      // Ignore errors
+    }
+  }
+
   // Close database
   Future<void> close() async {
     final db = await database;

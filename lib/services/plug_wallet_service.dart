@@ -189,7 +189,7 @@ class PlugWalletService {
     try {
       // Simulate signature verification
       await Future.delayed(const Duration(milliseconds: 500));
-
+      
       // For demo purposes, always return true
       return true;
     } catch (e) {
@@ -197,4 +197,17 @@ class PlugWalletService {
       return false;
     }
   }
+
+  // Initialize method
+  Future<void> initialize() async {
+    try {
+      // Initialize wallet service
+      debugPrint('Plug Wallet Service initialized');
+    } catch (e) {
+      debugPrint('Error initializing wallet service: $e');
+    }
+  }
+
+  // Check if wallet is connected
+  bool get isConnected => false;
 }

@@ -313,6 +313,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  drift:
+    dependency: transitive
+    description:
+      name: drift
+      sha256: "540cf382a3bfa99b76e51514db5b0ebcd81ce3679b7c1c9cb9478ff3735e47a1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.28.2"
   equatable:
     dependency: transitive
     description:
@@ -579,6 +587,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_magento:
+    dependency: "direct main"
+    description:
+      name: flutter_magento
+      sha256: f473e3f7562e7e42c05f531eaef83750e7e1c6f57065801676f47f83e9d514b7
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
   flutter_nft:
     dependency: "direct main"
     description:
@@ -685,6 +701,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_yuku:
+    dependency: "direct main"
+    description:
+      name: flutter_yuku
+      sha256: ac5bbf3191b6efbec8391edd2054638e709562f08a7fd094eb1a7acba175752b
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   form_builder_validators:
     dependency: "direct main"
     description:
@@ -693,6 +717,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "11.2.0"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      sha256: "7294967ff0a6d98638e7acb774aac3af2550777accd8149c90af5b014e6d44d8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -1562,6 +1594,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
+  sqlite3:
+    dependency: transitive
+    description:
+      name: sqlite3
+      sha256: f393d92c71bdcc118d6203d07c991b9be0f84b1a6f89dd4f7eed348131329924
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.9.0"
+  sqlite3_flutter_libs:
+    dependency: transitive
+    description:
+      name: sqlite3_flutter_libs
+      sha256: "2b03273e71867a8a4d030861fc21706200debe5c5858a4b9e58f4a1c129586a4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.39"
   stack_trace:
     dependency: transitive
     description:
