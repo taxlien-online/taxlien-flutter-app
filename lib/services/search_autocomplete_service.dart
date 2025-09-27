@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import '../core/services/magento_api_service.dart';
-import '../services/database_service.dart';
+import 'magento_api_service.dart';
+import 'database_service.dart';
 
 /// Service for providing search autocomplete suggestions
 class SearchAutocompleteService extends ChangeNotifier {
-  final MagentoApiService _magentoApiService = MagentoApiService();
+  final MagentoApiService _magentoApiService = MagentoApiService.instance;
   final DatabaseService _databaseService = DatabaseService.instance;
 
   List<String> _suggestions = [];

@@ -26,6 +26,43 @@ class FlutterMagentoCloudService {
   // Check if service is initialized
   bool get isInitialized => _isInitialized;
 
+  // Error handling
+  String? _error;
+  String? get error => _error;
+
+  void clearError() {
+    _error = null;
+  }
+
+  // Cloud functions support
+  List<String> get supportedCloudFunctions => [
+        'search_products',
+        'get_product_details',
+        'get_categories',
+        'cart_operations',
+        'user_management',
+      ];
+
+  List<String> get unsupportedFunctions => [];
+
+  bool isCloudFunctionAvailable(String function) {
+    return supportedCloudFunctions.contains(function);
+  }
+
+  Future<void> refreshCloudFunctionsStatus() async {
+    // Simulate refresh
+    await Future.delayed(const Duration(milliseconds: 500));
+  }
+
+  Map<String, dynamic> getCloudFunctionsStats() {
+    return {
+      'total_functions': supportedCloudFunctions.length,
+      'available_functions': supportedCloudFunctions.length,
+      'unavailable_functions': 0,
+      'last_updated': DateTime.now().toIso8601String(),
+    };
+  }
+
   // Get products
   Future<List<dynamic>> getProducts({
     int page = 1,

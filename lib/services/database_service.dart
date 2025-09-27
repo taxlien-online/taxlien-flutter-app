@@ -268,7 +268,7 @@ class DatabaseService {
   }
 
   // Favorites methods
-  Future<bool> isFavorite(String sku) async {
+  Future<bool> isFavorite(String sku, {String? type}) async {
     try {
       final db = await database;
       final List<Map<String, dynamic>> maps = await db.query(
