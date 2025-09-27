@@ -104,6 +104,10 @@ class AppConstants {
 
   // Legal
   static const String privacyPolicyUrl = 'https://taxlien.online/privacy';
+
+  // Donation
+  static const String donationAddress =
+      '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a';
   static const String termsOfServiceUrl = 'https://taxlien.online/terms';
   static const String cookiePolicyUrl = 'https://taxlien.online/cookies';
 

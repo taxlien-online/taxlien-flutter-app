@@ -1281,6 +1281,40 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
                         children: [
                           const SizedBox(height: 16),
                           Text(AppConstants.appDescription),
+                          const SizedBox(height: 16),
+                          const Divider(),
+                          const SizedBox(height: 16),
+                          const Row(
+                            children: [
+                              Icon(Icons.favorite, color: Colors.red, size: 20),
+                              SizedBox(width: 8),
+                              Text(
+                                'Support Development',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'Donations accepted at:',
+                            style: TextStyle(fontSize: 14),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color:
+                                  Theme.of(context).colorScheme.surfaceVariant,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: SelectableText(
+                              AppConstants.donationAddress,
+                              style: const TextStyle(
+                                fontFamily: 'monospace',
+                                fontSize: 10,
+                              ),
+                            ),
+                          ),
                         ],
                       );
                     },

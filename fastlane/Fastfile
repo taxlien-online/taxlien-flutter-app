@@ -344,28 +344,28 @@ end
 desc "Build both iOS and Android apps"
 lane :build_all do
   # Build iOS
-  ios_build
+  ios(lane: "build")
     
   # Build Android
-  android_build
+  android(lane: "build")
 end
 
 desc "Release both iOS and Android apps"
 lane :release_all do
   # Release iOS
-  ios_release
+  ios(lane: "release")
     
   # Release Android
-  android_release
+  android(lane: "release")
 end
 
 desc "Beta release for both platforms"
 lane :beta_all do
   # Beta iOS
-  ios_beta
+  ios(lane: "beta")
     
   # Beta Android
-  android_beta
+  android(lane: "beta")
 end
 
 desc "Clean all build artifacts"

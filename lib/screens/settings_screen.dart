@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import '../services/theme_service.dart';
 import '../services/localization_service.dart';
 import '../theme/app_colors.dart';
+import '../core/constants/app_constants.dart';
 
 class SettingsScreen extends StatelessWidget {
   final ThemeService themeService;
   final LocalizationService localizationService;
-  
+
   const SettingsScreen({
     super.key,
     required this.themeService,
@@ -27,7 +28,7 @@ class SettingsScreen extends StatelessWidget {
           // Быстрые действия для кинотеатров
           _buildQuickActions(context),
           const SizedBox(height: 24),
-          
+
           // Секция внешнего вида
           _buildSection(
             context,
@@ -37,9 +38,9 @@ class SettingsScreen extends StatelessWidget {
               _buildThemeSelector(context),
             ],
           ),
-          
+
           const SizedBox(height: 24),
-          
+
           // Секция языка
           _buildSection(
             context,
@@ -49,9 +50,9 @@ class SettingsScreen extends StatelessWidget {
               _buildLanguageSelector(context),
             ],
           ),
-          
+
           const SizedBox(height: 24),
-          
+
           // Секция FreeDome
           _buildSection(
             context,
@@ -61,9 +62,9 @@ class SettingsScreen extends StatelessWidget {
               _buildFreedomeSettings(context),
             ],
           ),
-          
+
           const SizedBox(height: 24),
-          
+
           // Секция о приложении
           _buildSection(
             context,
@@ -97,8 +98,8 @@ class SettingsScreen extends StatelessWidget {
                 Text(
                   'Quick Actions',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ],
             ),
@@ -106,11 +107,14 @@ class SettingsScreen extends StatelessWidget {
             Text(
               'Essential settings for cinema operators',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
-              ),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withOpacity(0.7),
+                  ),
             ),
             const SizedBox(height: 20),
-            
+
             // Быстрые кнопки
             Row(
               children: [
@@ -220,8 +224,8 @@ class SettingsScreen extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
               ],
             ),
@@ -241,7 +245,7 @@ class SettingsScreen extends StatelessWidget {
           children: [
             ...themeService.getAvailableThemes().map((theme) {
               final isSelected = theme.mode == themeService.themeMode;
-              
+
               return ListTile(
                 leading: Icon(
                   theme.icon,
@@ -268,9 +272,9 @@ class SettingsScreen extends StatelessWidget {
         return Column(
           children: [
             ...localizationService.getAvailableLanguages().map((language) {
-              final isSelected = language['code'] == 
+              final isSelected = language['code'] ==
                   localizationService.getCurrentLanguageCode();
-              
+
               return ListTile(
                 leading: Text(
                   _getLanguageFlag(language['code']!),
@@ -334,6 +338,14 @@ class SettingsScreen extends StatelessWidget {
           subtitle: const Text('1.0.0'),
         ),
         ListTile(
+          leading: const Icon(Icons.favorite),
+          title: const Text('Support Development'),
+          subtitle: const Text('Donations accepted'),
+          onTap: () {
+            _showDonationDialog(context);
+          },
+        ),
+        ListTile(
           leading: const Icon(Icons.description),
           title: const Text('Privacy Policy'),
           onTap: () {
@@ -355,6 +367,81 @@ class SettingsScreen extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+
+  void _showDonationDialog(BuildContext context) {
+    const donationAddress = AppConstants.donationAddress;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.favorite, color: Colors.red),
+            SizedBox(width: 8),
+            Text('Support Development'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Thank you for considering supporting our development!',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Donation Address:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceVariant,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                ),
+              ),
+              child: SelectableText(
+                donationAddress,
+                style: const TextStyle(
+                  fontFamily: 'monospace',
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'You can copy this address and send donations to support the continued development of TaxLien.online.',
+              style: TextStyle(fontSize: 14),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          ),
+          ElevatedButton.icon(
+            onPressed: () {
+              // Copy to clipboard functionality would go here
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Address copied to clipboard'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.copy),
+            label: const Text('Copy Address'),
+          ),
+        ],
+      ),
     );
   }
 
@@ -420,8 +507,8 @@ class SettingsScreen extends StatelessWidget {
             Text(
               'Select Language',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 20),
             Wrap(
@@ -453,8 +540,8 @@ class SettingsScreen extends StatelessWidget {
             Text(
               'Select Theme',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 20),
             Row(
@@ -516,8 +603,8 @@ class SettingsScreen extends StatelessWidget {
               Text(
                 'Brightness',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const SizedBox(height: 20),
               Row(
@@ -554,7 +641,7 @@ class SettingsScreen extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        _applyBrightnessSetting(brightness);
+                        _applyBrightnessSetting(context, brightness);
                         Navigator.pop(context);
                       },
                       child: const Text('Apply'),
@@ -583,8 +670,8 @@ class SettingsScreen extends StatelessWidget {
               Text(
                 'Volume',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const SizedBox(height: 20),
               Row(
@@ -621,7 +708,7 @@ class SettingsScreen extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        _applyVolumeSetting(volume);
+                        _applyVolumeSetting(context, volume);
                         Navigator.pop(context);
                       },
                       child: const Text('Apply'),
@@ -636,7 +723,8 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLanguageFlagButton(BuildContext context, String flag, String name, String code) {
+  Widget _buildLanguageFlagButton(
+      BuildContext context, String flag, String name, String code) {
     return InkWell(
       onTap: () async {
         await localizationService.setLanguage(code);
@@ -710,12 +798,12 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  void _applyBrightnessSetting(double brightness) {
+  void _applyBrightnessSetting(BuildContext context, double brightness) {
     // In a real implementation, this would apply the brightness setting to the system
     if (kDebugMode) {
       print('Applying brightness setting: ${brightness.toInt()}%');
     }
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Brightness set to ${brightness.toInt()}%'),
@@ -725,12 +813,12 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  void _applyVolumeSetting(double volume) {
+  void _applyVolumeSetting(BuildContext context, double volume) {
     // In a real implementation, this would apply the volume setting to the system
     if (kDebugMode) {
       print('Applying volume setting: ${volume.toInt()}%');
     }
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Volume set to ${volume.toInt()}%'),
@@ -739,4 +827,4 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
-} 
+}
