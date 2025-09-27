@@ -17,7 +17,7 @@ class IntegratedServices {
   late NFTService _nftService;
   late PlugWalletService _walletService;
   late FlutterMagentoCloudService _magentoService;
-  late icp.ICPClient _icpClient;
+  late dynamic _icpClient; // Using dynamic to avoid import issues
 
   // State
   bool _isInitialized = false;
@@ -55,10 +55,11 @@ class IntegratedServices {
 
       // Initialize Magento cloud service
       _magentoService = FlutterMagentoCloudService();
-      await _magentoService._initialize();
+      // await _magentoService._initialize();  // Temporarily disabled
 
-      // Initialize ICP client
-      _icpClient = icp.ICPClient();
+      // Initialize ICP client (temporarily disabled)
+      // _icpClient = icp.ICPClient();
+      _icpClient = null;
 
       // Update service status
       _serviceStatus = {
@@ -83,7 +84,7 @@ class IntegratedServices {
   NFTService get nft => _nftService;
   PlugWalletService get wallet => _walletService;
   FlutterMagentoCloudService get magentoCloud => _magentoService;
-  icp.ICPClient get icp => _icpClient;
+  dynamic get icp => _icpClient;
 
   bool get isInitialized => _isInitialized;
   Map<String, bool> get serviceStatus => _serviceStatus;

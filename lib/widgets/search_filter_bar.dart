@@ -32,8 +32,9 @@ class _SearchFilterBarState extends State<SearchFilterBar>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
-  
-  final SearchAutocompleteService _autocompleteService = SearchAutocompleteService();
+
+  final SearchAutocompleteService _autocompleteService =
+      SearchAutocompleteService();
   final LayerLink _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
 
@@ -59,6 +60,73 @@ class _SearchFilterBarState extends State<SearchFilterBar>
     _autocompleteService.dispose();
     _removeOverlay();
     super.dispose();
+  }
+
+  // Handle search changes
+  void _handleSearchChanged(String value) {
+    if (value.isNotEmpty) {
+      _autocompleteService.getSuggestions(value);
+    } else {
+      _removeOverlay();
+    }
+  }
+
+  // Show autocomplete overlay
+  void _showAutocompleteOverlay() {
+    _removeOverlay();
+
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        width: MediaQuery.of(context).size.width - 32,
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          showWhenUnlinked: false,
+          offset: const Offset(0, 60),
+          child: Material(
+            elevation: 8,
+            borderRadius: BorderRadius.circular(12),
+            child: AnimatedBuilder(
+              animation: _autocompleteService,
+              builder: (context, child) {
+                if (_autocompleteService.suggestions.isEmpty) {
+                  return const SizedBox.shrink();
+                }
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: _autocompleteService.suggestions.length,
+                  itemBuilder: (context, index) {
+                    final suggestion = _autocompleteService.suggestions[index];
+                    return ListTile(
+                      title: Text(suggestion),
+                      onTap: () {
+                        widget.searchController.text = suggestion;
+                        widget.onSearchChanged?.call();
+                        _removeOverlay();
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  // Remove overlay
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+
+  // Save search query
+  void _saveSearchQuery() {
+    final query = widget.searchController.text.trim();
+    if (query.isNotEmpty) {
+      _autocompleteService.saveSearchQuery(query);
+    }
   }
 
   @override
@@ -115,33 +183,36 @@ class _SearchFilterBarState extends State<SearchFilterBar>
                               _removeOverlay();
                               _saveSearchQuery();
                             },
-                          decoration: InputDecoration(
-                            hintText: widget.hintText ?? 'Search tax liens...',
-                            hintStyle: TextStyle(
-                              color: colorScheme.onSurfaceVariant.withOpacity(0.7),
+                            decoration: InputDecoration(
+                              hintText:
+                                  widget.hintText ?? 'Search tax liens...',
+                              hintStyle: TextStyle(
+                                color: colorScheme.onSurfaceVariant
+                                    .withOpacity(0.7),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                              suffixIcon:
+                                  widget.searchController.text.isNotEmpty
+                                      ? IconButton(
+                                          onPressed: () {
+                                            widget.searchController.clear();
+                                            widget.onSearchChanged?.call();
+                                          },
+                                          icon: Icon(
+                                            Icons.clear,
+                                            color: colorScheme.onSurfaceVariant,
+                                          ),
+                                        )
+                                      : null,
+                              border: InputBorder.none,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
                             ),
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: colorScheme.onSurfaceVariant,
-                            ),
-                            suffixIcon: widget.searchController.text.isNotEmpty
-                                ? IconButton(
-                                    onPressed: () {
-                                      widget.searchController.clear();
-                                      widget.onSearchChanged?.call();
-                                    },
-                                    icon: Icon(
-                                      Icons.clear,
-                                      color: colorScheme.onSurfaceVariant,
-                                    ),
-                                  )
-                                : null,
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 12,
-                            ),
-                          ),
                           ),
                         ),
                       ),
@@ -149,9 +220,9 @@ class _SearchFilterBarState extends State<SearchFilterBar>
                   },
                 ),
               ),
-              
+
               const SizedBox(width: 12),
-              
+
               // Filter button
               _buildActionButton(
                 icon: Icons.filter_list,
@@ -159,9 +230,9 @@ class _SearchFilterBarState extends State<SearchFilterBar>
                 onTap: widget.onFilterTap,
                 tooltip: 'Filters',
               ),
-              
+
               const SizedBox(width: 8),
-              
+
               // Sort button
               _buildActionButton(
                 icon: Icons.sort,
@@ -171,7 +242,7 @@ class _SearchFilterBarState extends State<SearchFilterBar>
               ),
             ],
           ),
-          
+
           // Active filters indicator
           if (widget.hasActiveFilters && widget.activeFiltersText != null)
             _buildActiveFiltersRow(),
@@ -200,7 +271,7 @@ class _SearchFilterBarState extends State<SearchFilterBar>
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: isActive 
+              color: isActive
                   ? colorScheme.primary
                   : colorScheme.outline.withOpacity(0.3),
             ),
@@ -210,11 +281,13 @@ class _SearchFilterBarState extends State<SearchFilterBar>
               Center(
                 child: Icon(
                   icon,
-                  color: isActive ? colorScheme.onPrimary : colorScheme.onSurfaceVariant,
+                  color: isActive
+                      ? colorScheme.onPrimary
+                      : colorScheme.onSurfaceVariant,
                   size: 20,
                 ),
               ),
-              
+
               // Active indicator
               if (isActive)
                 Positioned(
@@ -332,7 +405,9 @@ class QuickFilterChips extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
               border: Border.all(
-                color: filter.isSelected ? colorScheme.primary : colorScheme.outline,
+                color: filter.isSelected
+                    ? colorScheme.primary
+                    : colorScheme.outline,
               ),
               borderRadius: BorderRadius.circular(20),
             ),
@@ -343,23 +418,29 @@ class QuickFilterChips extends StatelessWidget {
                   Icon(
                     filter.icon,
                     size: 16,
-                    color: filter.isSelected ? colorScheme.onPrimary : colorScheme.onSurface,
+                    color: filter.isSelected
+                        ? colorScheme.onPrimary
+                        : colorScheme.onSurface,
                   ),
                   const SizedBox(width: 4),
                 ],
                 Text(
                   filter.label,
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: filter.isSelected ? colorScheme.onPrimary : colorScheme.onSurface,
-                    fontWeight: filter.isSelected ? FontWeight.w600 : FontWeight.normal,
+                    color: filter.isSelected
+                        ? colorScheme.onPrimary
+                        : colorScheme.onSurface,
+                    fontWeight:
+                        filter.isSelected ? FontWeight.w600 : FontWeight.normal,
                   ),
                 ),
                 if (filter.count != null) ...[
                   const SizedBox(width: 4),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                     decoration: BoxDecoration(
-                      color: filter.isSelected 
+                      color: filter.isSelected
                           ? colorScheme.onPrimary.withOpacity(0.2)
                           : colorScheme.primary.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
@@ -369,7 +450,9 @@ class QuickFilterChips extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
-                        color: filter.isSelected ? colorScheme.onPrimary : colorScheme.primary,
+                        color: filter.isSelected
+                            ? colorScheme.onPrimary
+                            : colorScheme.primary,
                       ),
                     ),
                   ),
@@ -417,75 +500,5 @@ class QuickFilter {
       isSelected: isSelected ?? this.isSelected,
       filterData: filterData ?? this.filterData,
     );
-  }
-  
-  void _handleSearchChanged(String value) {
-    if (value.isNotEmpty) {
-      _autocompleteService.getSuggestions(value);
-    } else {
-      _removeOverlay();
-    }
-  }
-  
-  void _showAutocompleteOverlay() {
-    _removeOverlay();
-    
-    _overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        width: MediaQuery.of(context).size.width - 32,
-        child: CompositedTransformFollower(
-          link: _layerLink,
-          showWhenUnlinked: false,
-          offset: const Offset(0, 60),
-          child: Material(
-            elevation: 8,
-            borderRadius: BorderRadius.circular(12),
-            child: Container(
-              constraints: const BoxConstraints(maxHeight: 200),
-              child: AnimatedBuilder(
-                animation: _autocompleteService,
-                builder: (context, child) {
-                  if (_autocompleteService.suggestions.isEmpty) {
-                    return const SizedBox.shrink();
-                  }
-                  
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: _autocompleteService.suggestions.length,
-                    itemBuilder: (context, index) {
-                      final suggestion = _autocompleteService.suggestions[index];
-                      return ListTile(
-                        leading: const Icon(Icons.search),
-                        title: Text(suggestion),
-                        onTap: () {
-                          widget.searchController.text = suggestion;
-                          widget.onSearchChanged?.call();
-                          _removeOverlay();
-                          _saveSearchQuery();
-                        },
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-    
-    Overlay.of(context).insert(_overlayEntry!);
-  }
-  
-  void _removeOverlay() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-  }
-  
-  void _saveSearchQuery() {
-    final query = widget.searchController.text.trim();
-    if (query.isNotEmpty) {
-      _autocompleteService.saveSearchQuery(query);
-    }
   }
 }

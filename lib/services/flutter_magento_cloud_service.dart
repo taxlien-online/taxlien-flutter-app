@@ -63,6 +63,102 @@ class FlutterMagentoCloudService {
     };
   }
 
+  // Authentication methods
+  bool get isAuthenticated => _isInitialized;
+
+  Future<bool> authenticateCustomer(String email, String password) async {
+    try {
+      // Mock authentication
+      await Future.delayed(const Duration(seconds: 1));
+      return true;
+    } catch (e) {
+      _error = e.toString();
+      return false;
+    }
+  }
+
+  Future<bool> createCustomer({
+    required String email,
+    required String password,
+    required String firstName,
+    required String lastName,
+  }) async {
+    try {
+      // Mock customer creation
+      await Future.delayed(const Duration(seconds: 1));
+      return true;
+    } catch (e) {
+      _error = e.toString();
+      return false;
+    }
+  }
+
+  Future<Map<String, dynamic>?> getCurrentCustomer() async {
+    try {
+      // Mock customer data
+      return {
+        'id': '1',
+        'email': 'user@example.com',
+        'firstname': 'John',
+        'lastname': 'Doe',
+      };
+    } catch (e) {
+      _error = e.toString();
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>?> getProduct(String sku) async {
+    try {
+      // Mock product data
+      return {
+        'sku': sku,
+        'name': 'Sample Product',
+        'price': 99.99,
+        'description': 'Sample product description',
+      };
+    } catch (e) {
+      _error = e.toString();
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>?> createCart() async {
+    try {
+      // Mock cart creation
+      return {
+        'id': 'cart_${DateTime.now().millisecondsSinceEpoch}',
+        'items': [],
+      };
+    } catch (e) {
+      _error = e.toString();
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>?> getCart(String cartId) async {
+    try {
+      // Mock cart data
+      return {
+        'id': cartId,
+        'items': [],
+        'total': 0.0,
+      };
+    } catch (e) {
+      _error = e.toString();
+      return null;
+    }
+  }
+
+  Future<void> logout() async {
+    try {
+      // Mock logout
+      await Future.delayed(const Duration(milliseconds: 500));
+    } catch (e) {
+      _error = e.toString();
+    }
+  }
+
   // Get products
   Future<List<dynamic>> getProducts({
     int page = 1,
@@ -197,30 +293,6 @@ class FlutterMagentoCloudService {
     } catch (e) {
       debugPrint('Error getting categories: $e');
       return [];
-    }
-  }
-
-  // Get cart
-  Future<Map<String, dynamic>?> getCart() async {
-    try {
-      if (!_isInitialized) {
-        await _initialize();
-      }
-
-      // Simulate API call
-      await Future.delayed(const Duration(milliseconds: 300));
-
-      // Return mock cart
-      return {
-        'id': 'cart_123',
-        'items': [],
-        'total': 0.0,
-        'item_count': 0,
-        'currency': 'USD',
-      };
-    } catch (e) {
-      debugPrint('Error getting cart: $e');
-      return null;
     }
   }
 

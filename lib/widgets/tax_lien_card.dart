@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/tax_lien_service.dart';
 import '../services/database_service.dart';
+import '../core/models/tax_lien_models.dart';
 
 class TaxLienCard extends StatefulWidget {
   final TaxLien lien;
@@ -59,8 +60,8 @@ class _TaxLienCardState extends State<TaxLienCard> {
                     child: Text(
                       widget.lien.address,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                            fontWeight: FontWeight.bold,
+                          ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -74,16 +75,22 @@ class _TaxLienCardState extends State<TaxLienCard> {
                             child: CircularProgressIndicator(strokeWidth: 2),
                           )
                         : Icon(
-                            _isFavorite ? Icons.favorite : Icons.favorite_border,
+                            _isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_border,
                             color: _isFavorite ? Colors.red : null,
                           ),
-                    onPressed: _isLoadingFavorite ? null : () {
-                      setState(() {
-                        _isFavorite = !_isFavorite;
-                      });
-                      widget.onFavoriteToggle();
-                    },
-                    tooltip: _isFavorite ? 'Remove from favorites' : 'Add to favorites',
+                    onPressed: _isLoadingFavorite
+                        ? null
+                        : () {
+                            setState(() {
+                              _isFavorite = !_isFavorite;
+                            });
+                            widget.onFavoriteToggle();
+                          },
+                    tooltip: _isFavorite
+                        ? 'Remove from favorites'
+                        : 'Add to favorites',
                   ),
                 ],
               ),
@@ -157,34 +164,39 @@ class _TaxLienCardState extends State<TaxLienCard> {
                     child: Text(
                       'ID: ${widget.lien.parcelId}',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
                     ),
                   ),
-                  
+
                   // Status
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: _getStatusColor(widget.lien.status).withOpacity(0.1),
+                      color:
+                          _getStatusColor(widget.lien.status).withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: _getStatusColor(widget.lien.status).withOpacity(0.3),
+                        color: _getStatusColor(widget.lien.status)
+                            .withOpacity(0.3),
                       ),
                     ),
                     child: Text(
                       _getStatusLabel(widget.lien.status),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: _getStatusColor(widget.lien.status),
-                        fontWeight: FontWeight.w500,
-                      ),
+                            color: _getStatusColor(widget.lien.status),
+                            fontWeight: FontWeight.w500,
+                          ),
                     ),
                   ),
                 ],
               ),
 
               // Redemption deadline
-              if (widget.lien.redemptionDeadline.isAfter(DateTime.now()))
+              if (widget.lien.redemptionDeadline?.isAfter(DateTime.now()) ==
+                  true)
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Row(
@@ -196,10 +208,12 @@ class _TaxLienCardState extends State<TaxLienCard> {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        'Redemption deadline: ${_formatDate(widget.lien.redemptionDeadline)}',
+                        'Redemption deadline: ${_formatDate(widget.lien.redemptionDeadline ?? DateTime.now())}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                            ),
                       ),
                     ],
                   ),
@@ -211,7 +225,8 @@ class _TaxLienCardState extends State<TaxLienCard> {
     );
   }
 
-  Widget _buildInfoChip(String label, String value, IconData icon, Color color) {
+  Widget _buildInfoChip(
+      String label, String value, IconData icon, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
@@ -228,15 +243,15 @@ class _TaxLienCardState extends State<TaxLienCard> {
           Text(
             value,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
           ),
           Text(
             label,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
           ),
         ],
       ),

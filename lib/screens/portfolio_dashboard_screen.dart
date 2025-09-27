@@ -5,6 +5,7 @@ import '../services/tax_lien_service.dart';
 import '../services/ai_investment_advisor_service.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_dimensions.dart';
+import '../core/models/tax_lien_models.dart';
 
 class PortfolioDashboardScreen extends StatefulWidget {
   final TaxLienService taxLienService;
@@ -55,7 +56,7 @@ class _PortfolioDashboardScreenState extends State<PortfolioDashboardScreen>
       
       // Получаем рыночную аналитику
       _marketInsights = await widget.aiService.getMarketInsights(
-        widget.taxLienService.availableLiens,
+        widget.taxLienService.availableLiens.cast<TaxLien>(),
       );
       
       _animationController.forward();
@@ -91,7 +92,7 @@ class _PortfolioDashboardScreenState extends State<PortfolioDashboardScreen>
     
     // Симуляция текущей стоимости (с учетом процентов)
     double currentValue = 0;
-    for (TaxLien lien in myLiens) {
+    for (LegacyTaxLien lien in myLiens) {
       double principal = lien.salePrice ?? lien.taxAmount;
       int monthsHeld = DateTime.now().difference(lien.auctionDate).inDays ~/ 30;
       double interest = principal * (lien.interestRate / 100) * (monthsHeld / 12);
@@ -109,7 +110,7 @@ class _PortfolioDashboardScreenState extends State<PortfolioDashboardScreen>
     
     // Распределение по округам
     Map<String, double> countyDistribution = {};
-    for (TaxLien lien in myLiens) {
+    for (LegacyTaxLien lien in myLiens) {
       double investment = lien.salePrice ?? lien.taxAmount;
       countyDistribution[lien.county] = 
           (countyDistribution[lien.county] ?? 0) + investment;

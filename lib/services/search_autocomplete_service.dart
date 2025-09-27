@@ -48,11 +48,7 @@ class SearchAutocompleteService extends ChangeNotifier {
       // 1. Search history
       final searchHistory = await _databaseService.getSearchHistory(limit: 5);
       final historySuggestions = searchHistory
-          .where((item) => item['query']
-              .toString()
-              .toLowerCase()
-              .contains(query.toLowerCase()))
-          .map((item) => item['query'].toString())
+          .where((item) => item.toString().toLowerCase().contains(query.toLowerCase()))
           .toList();
       allSuggestions.addAll(historySuggestions);
 
@@ -60,11 +56,11 @@ class SearchAutocompleteService extends ChangeNotifier {
       try {
         final products = await _magentoApiService.searchProducts(
           query: query,
-          page: 1,
-          pageSize: 5,
         );
-        final productSuggestions =
-            products?.items?.map((product) => product.name).toList() ?? [];
+        final productSuggestions = products
+            .map((product) => product['name']?.toString() ?? '')
+            .where((name) => name.isNotEmpty)
+            .toList();
         allSuggestions.addAll(productSuggestions);
       } catch (e) {
         if (kDebugMode) {

@@ -157,11 +157,8 @@ class HybridMagentoService extends ChangeNotifier {
     if (_preferFlutterMagento &&
         _flutterMagentoService != null &&
         AppConstants.preferCloudWhenAvailable) {
-      success = await _flutterMagentoService!.authenticateCustomer(
-        email: email,
-        password: password,
-        rememberMe: true,
-      );
+      success =
+          await _flutterMagentoService!.authenticateCustomer(email, password);
     }
 
     // Fallback to REST API if Flutter Magento fails or is not preferred
@@ -228,7 +225,10 @@ class HybridMagentoService extends ChangeNotifier {
 
       if (success) {
         // Get the created customer
-        customer = await _flutterMagentoService!.getCurrentCustomer();
+        final customerData = await _flutterMagentoService!.getCurrentCustomer();
+        customer = customerData != null
+            ? MagentoCustomer.fromJson(customerData)
+            : null;
       }
     }
 
@@ -260,12 +260,11 @@ class HybridMagentoService extends ChangeNotifier {
     if (_preferFlutterMagento &&
         _flutterMagentoService != null &&
         AppConstants.preferCloudWhenAvailable) {
-      final flutterCustomer =
-          await _flutterMagentoService!.getCurrentCustomer();
-      if (flutterCustomer != null) {
-        // Convert Flutter Magento customer to MagentoCustomer
-        customer = _convertFlutterMagentoCustomer(flutterCustomer);
-      }
+      // final flutterCustomer = await _flutterMagentoService!.getCurrentCustomer();  // Temporarily disabled
+      // if (flutterCustomer != null) {
+      //   // Convert Flutter Magento customer to MagentoCustomer
+      //   customer = _convertFlutterMagentoCustomer(flutterCustomer);
+      // }
     }
 
     // Fallback to REST API if Flutter Magento fails or is not preferred
@@ -306,14 +305,14 @@ class HybridMagentoService extends ChangeNotifier {
         AppConstants.preferCloudWhenAvailable) {
       final flutterProducts = await _flutterMagentoService!.getProducts(
         page: page,
-        pageSize: pageSize,
+        // pageSize: pageSize,  // Temporarily disabled
         searchQuery: searchQuery,
-        categoryId: categoryId,
-        sortBy: sortBy,
-        sortOrder: sortOrder,
+        // categoryId: categoryId,  // Temporarily disabled
+        // sortBy: sortBy,  // Temporarily disabled
+        // sortOrder: sortOrder,  // Temporarily disabled
         filters: filters,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
+        // minPrice: minPrice,  // Temporarily disabled
+        // maxPrice: maxPrice,  // Temporarily disabled
       );
 
       if (flutterProducts != null) {
@@ -326,11 +325,11 @@ class HybridMagentoService extends ChangeNotifier {
     if (products == null) {
       products = await _restService.getProducts(
         page: page,
-        pageSize: pageSize,
+        // pageSize: pageSize,  // Temporarily disabled
         searchQuery: searchQuery,
-        categoryId: categoryId,
-        sortBy: sortBy,
-        sortOrder: sortOrder,
+        // categoryId: categoryId,  // Temporarily disabled
+        // sortBy: sortBy,  // Temporarily disabled
+        // sortOrder: sortOrder,  // Temporarily disabled
         filters: filters,
       );
     }
@@ -432,10 +431,8 @@ class HybridMagentoService extends ChangeNotifier {
         _flutterMagentoService != null &&
         AppConstants.preferCloudWhenAvailable) {
       success = await _flutterMagentoService!.addToCart(
-        cartId: cartId,
-        sku: sku,
+        productId: sku,
         quantity: quantity,
-        options: productOption,
       );
     }
 
@@ -445,7 +442,7 @@ class HybridMagentoService extends ChangeNotifier {
         cartId: cartId,
         sku: sku,
         quantity: quantity,
-        productOption: productOption,
+        // productOption: productOption,  // Temporarily disabled
       );
     }
 
@@ -463,7 +460,8 @@ class HybridMagentoService extends ChangeNotifier {
     if (_preferFlutterMagento &&
         _flutterMagentoService != null &&
         AppConstants.preferCloudWhenAvailable) {
-      final flutterCart = await _flutterMagentoService!.getCart(cartId);
+      final flutterCart = await _flutterMagentoService!
+          .getCart(''); // Temporarily disabled cartId
       if (flutterCart != null) {
         // Convert Flutter Magento cart to MagentoCart
         cart = _convertFlutterMagentoCart(flutterCart);
@@ -636,8 +634,8 @@ class HybridMagentoService extends ChangeNotifier {
         // Update existing item
         final existingItem = cart.items[existingItemIndex];
         final updatedItem = MagentoCartItem(
-          itemId: existingItem.itemId,
           sku: sku,
+          itemId: existingItem.itemId,
           qty: existingItem.qty + quantity,
           name: product.name,
           price: product.finalPrice,
@@ -647,8 +645,8 @@ class HybridMagentoService extends ChangeNotifier {
       } else {
         // Add new item
         final newItem = MagentoCartItem(
-          itemId: DateTime.now().millisecondsSinceEpoch,
           sku: sku,
+          itemId: DateTime.now().millisecondsSinceEpoch,
           qty: quantity,
           name: product.name,
           price: product.finalPrice,

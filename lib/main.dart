@@ -68,7 +68,7 @@ void main() async {
   runApp(
     provider.MultiProvider(
       providers: [
-        provider.ChangeNotifierProvider(
+        provider.Provider(
             create: (_) => magento_cloud.FlutterMagentoCloudService()),
         provider.ChangeNotifierProxyProvider<
             magento_cloud.FlutterMagentoCloudService, HybridMagentoService>(
@@ -119,12 +119,12 @@ Future<void> _initializeServices() async {
 Future<void> _initializeNFTServices() async {
   try {
     // Initialize integrated services
-    final integratedServices = IntegratedServices();
+    final integratedServices = IntegratedServices.instance;
     await integratedServices.initialize();
 
     // Store services globally for access throughout the app
     AppConstants.integratedServices = integratedServices;
-    AppConstants.nftClient = integratedServices.nftClient;
+    // AppConstants.nftClient = integratedServices.nftClient;  // Temporarily disabled
 
     if (kDebugMode) {
       print('Integrated services initialized successfully');

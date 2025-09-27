@@ -5,6 +5,7 @@ import '../services/ai_investment_advisor_service.dart';
 import '../widgets/tax_lien_card.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_dimensions.dart';
+import '../core/models/tax_lien_models.dart';
 
 class AIAdvisorScreen extends StatefulWidget {
   final TaxLienService taxLienService;
@@ -53,7 +54,7 @@ class _AIAdvisorScreenState extends State<AIAdvisorScreen>
     try {
       await widget.taxLienService.loadAvailableLiens();
       final recommendations = await widget.aiService.getPersonalizedRecommendations(
-        widget.taxLienService.availableLiens,
+        widget.taxLienService.availableLiens.cast<TaxLien>(),
         _investmentGoal,
         _maxInvestment,
         _riskTolerance,
@@ -440,8 +441,8 @@ class _AIAdvisorScreenState extends State<AIAdvisorScreen>
         return Padding(
           padding: const EdgeInsets.only(bottom: AppDimensions.sm),
           child: TaxLienCard(
-            lien: lien,
-            onTap: () => _analyzeLien(lien),
+            lien: lien as TaxLien,
+            onTap: () => _analyzeLien(lien as TaxLien),
             onFavoriteToggle: () {},
           ).animate().fadeIn(delay: Duration(milliseconds: index * 100)),
         );

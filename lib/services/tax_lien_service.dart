@@ -401,13 +401,13 @@ class TaxLienService extends ChangeNotifier {
       assessedValue: taxLien.assessedValue,
       taxAmount: taxLien.taxAmount,
       interestRate: taxLien.interestRate,
-      auctionDate: taxLien.saleDate,
-      redemptionDeadline: taxLien.saleDate
+      auctionDate: taxLien.saleDate ?? DateTime.now(),
+      redemptionDeadline: (taxLien.saleDate ?? DateTime.now())
           .add(const Duration(days: 365)), // Assume 1 year redemption period
       status: taxLien.status,
-      salePrice: taxLien.isSold ? taxLien.assessedValue : null,
-      buyerId: taxLien.isSold ? 'user123' : null, // Mock buyer ID
-      additionalData: taxLien.additionalInfo,
+      salePrice: (taxLien.isSold ?? false) ? taxLien.assessedValue : null,
+      buyerId: (taxLien.isSold ?? false) ? 'user123' : null, // Mock buyer ID
+      additionalData: taxLien.additionalInfo != null ? {'info': taxLien.additionalInfo} : null,
     );
   }
 }

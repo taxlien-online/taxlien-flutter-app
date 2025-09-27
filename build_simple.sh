@@ -24,3 +24,5 @@ flutter build ios --debug --no-codesign
 echo "✅ Build completed!"
 echo "📱 APK location: build/app/outputs/flutter-apk/app-debug.apk"
 echo "🍎 iOS build location: build/ios/iphoneos/Runner.app"
+
+

@@ -1425,7 +1425,7 @@ class TaxLienMagentoConverter {
       isActive: true,
       isVisible: true,
       isInStock: taxLien.isAvailable,
-      qty: taxLien.isAvailable ? 1 : 0,
+      qty: (taxLien.isAvailable ?? false) ? 1 : 0,
       visibility: '4', // Visible in catalog and search
       status: 1, // Enabled
       customAttributes: _createTaxLienCustomAttributes(taxLien),
@@ -1438,28 +1438,33 @@ class TaxLienMagentoConverter {
   static TaxLien magentoProductToTaxLien(MagentoProduct product) {
     return TaxLien(
       id: product.sku,
-      address: product.taxLienAddress ?? '',
+      propertyAddress: product.taxLienAddress ?? '',
       city: product.taxLienCity ?? '',
       state: product.taxLienState ?? '',
       zipCode: product.zipCode ?? '',
       county: product.county ?? '',
       assessedValue: product.assessedValue ?? 0.0,
+      estimatedValue: product.assessedValue ?? 0.0,
+      auctionDate: DateTime.now(),
+      propertyType: 'residential',
       taxAmount: product.taxAmount ?? 0.0,
       interestRate: product.interestRate ?? 0.0,
       taxYear: product.taxYear ?? DateTime.now(),
       saleDate: product.saleDate ?? DateTime.now(),
       status: product.taxLienStatus ?? 'available',
-      ownerName: product.ownerName,
-      description: product.description,
+      description: product.description ?? '',
       images: product.mediaGalleryEntries
               ?.map((img) => img.url ?? '')
               .where((url) => url.isNotEmpty)
               .toList() ??
           [],
+      ownerName: product.ownerName,
       additionalInfo: null,
       parcelId: product.parcelId,
       owner: product.ownerName,
       issueDate: product.issueDate,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
     );
   }
 
@@ -1487,10 +1492,11 @@ class TaxLienMagentoConverter {
           attributeCode: 'interest_rate',
           value: taxLien.interestRate.toString()),
       MagentoProductAttribute(
-          attributeCode: 'tax_year', value: taxLien.taxYear.toIso8601String()),
+          attributeCode: 'tax_year',
+          value: taxLien.taxYear?.toIso8601String() ?? ''),
       MagentoProductAttribute(
           attributeCode: 'sale_date',
-          value: taxLien.saleDate.toIso8601String()),
+          value: taxLien.saleDate?.toIso8601String() ?? ''),
       MagentoProductAttribute(attributeCode: 'status', value: taxLien.status),
       if (taxLien.issueDate != null)
         MagentoProductAttribute(
@@ -1535,7 +1541,7 @@ class TaxLienMagentoConverter {
       isActive: product.isActive,
       isVisible: product.isVisible,
       isInStock: taxLien.isAvailable,
-      qty: taxLien.isAvailable ? 1 : 0,
+      qty: (taxLien.isAvailable ?? false) ? 1 : 0,
       visibility: product.visibility,
       status: product.status,
       categoryIds: product.categoryIds,

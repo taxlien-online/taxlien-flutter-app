@@ -88,7 +88,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
 
   void _onTaxLienServiceChanged() {
     if (mounted) {
-      _allLiens = widget.taxLienService.availableLiens;
+      _allLiens = widget.taxLienService.availableLiens.cast<TaxLien>();
       if (!_useModernView) {
         _applyFilters();
       }
@@ -224,7 +224,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
     try {
       await widget.taxLienService.loadAvailableLiens();
       if (mounted) {
-        _allLiens = widget.taxLienService.availableLiens;
+        _allLiens = widget.taxLienService.availableLiens.cast<TaxLien>();
         _applyFilters();
       }
     } catch (e) {
@@ -250,8 +250,8 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
       final searchTerm = _searchController.text.toLowerCase();
       filtered = filtered.where((lien) {
         return lien.address.toLowerCase().contains(searchTerm) ||
-            lien.owner.toLowerCase().contains(searchTerm) ||
-            lien.parcelId.toLowerCase().contains(searchTerm) ||
+            lien.owner?.toLowerCase().contains(searchTerm) == true ||
+            lien.parcelId?.toLowerCase().contains(searchTerm) == true ||
             lien.county.toLowerCase().contains(searchTerm);
       }).toList();
     }
@@ -302,7 +302,8 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
           comparison = a.assessedValue.compareTo(b.assessedValue);
           break;
         case 'redemptionDeadline':
-          comparison = a.redemptionDeadline.compareTo(b.redemptionDeadline);
+          comparison = (a.redemptionDeadline ?? DateTime.now())
+              .compareTo(b.redemptionDeadline ?? DateTime.now());
           break;
       }
       return _sortAscending ? comparison : -comparison;
@@ -346,10 +347,10 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => TaxLienDetailScreen(
+          taxLienMagentoService: TaxLienMagentoService(MagentoApiService()),
           lien: lien,
           taxLienService: widget.taxLienService,
           authService: widget.authService,
-          taxLienMagentoService: widget.taxLienMagentoService,
         ),
       ),
     );
@@ -387,6 +388,7 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => AdvancedSearchScreen(
+                    magentoApiService: MagentoApiService(),
                     taxLienService: widget.taxLienService,
                     useModernView: _useModernView,
                   ),
@@ -682,9 +684,10 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => ProductDetailScreen(
+          databaseService: DatabaseService(),
+          magentoService: MagentoApiService(),
           product: product,
           authService: widget.authService,
-          taxLienMagentoService: widget.taxLienMagentoService,
         ),
       ),
     );
@@ -1085,11 +1088,13 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
-                    _buildDetailRow('Parcel ID', widget.lien.parcelId),
+                    _buildDetailRow('Parcel ID', widget.lien.parcelId ?? 'N/A'),
                     _buildDetailRow('County', widget.lien.county),
                     _buildDetailRow('State', widget.lien.state),
-                    _buildDetailRow('Redemption Deadline',
-                        _formatDate(widget.lien.redemptionDeadline)),
+                    _buildDetailRow(
+                        'Redemption Deadline',
+                        _formatDate(
+                            widget.lien.redemptionDeadline ?? DateTime.now())),
                     _buildDetailRow(
                         'Status', _getStatusLabel(widget.lien.status)),
                   ],
