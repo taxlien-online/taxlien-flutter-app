@@ -101,12 +101,12 @@ dependencies:
   connectivity_plus: ^7.0.0
   
   # Flutter Magento Plugin - implemented locally with best practices 2025
-  # flutter_magento: ^3.2.0  # Temporarily disabled due to JSON serialization issues
+  flutter_magento: ^3.2.0
   
-  # NFT and Blockchain Integration
-  flutter_nft: ^1.2.0+4
-  flutter_icp: ^1.2.0+3
-  flutter_yuku: ^1.0.0
+  # NFT and Blockchain Integration - temporarily disabled due to compatibility issues
+  # flutter_nft: ^1.2.0+3
+  # flutter_icp: ^1.2.0+2
+  # flutter_yuku: ^1.0.0
   
   # State management
   flutter_hooks: ^0.21.3

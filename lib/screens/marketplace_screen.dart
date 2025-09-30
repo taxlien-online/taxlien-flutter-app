@@ -10,10 +10,13 @@ import '../core/models/tax_lien_models.dart';
 import '../widgets/tax_lien_card.dart';
 import '../widgets/filter_bottom_sheet.dart';
 import '../core/services/magento_api_service.dart';
+import '../core/services/hybrid_magento_service.dart';
 import '../core/models/magento_models.dart';
 import '../widgets/enhanced_product_card.dart';
 import '../widgets/category_chip.dart';
 import '../widgets/search_filter_bar.dart';
+import '../services/database_service.dart';
+import '../services/magento_service.dart';
 import 'product_detail_screen.dart';
 import 'advanced_search_screen.dart';
 
@@ -347,7 +350,8 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => TaxLienDetailScreen(
-          taxLienMagentoService: TaxLienMagentoService(MagentoApiService()),
+          taxLienMagentoService: TaxLienMagentoService(
+              HybridMagentoService(restService: MagentoApiService())),
           lien: lien,
           taxLienService: widget.taxLienService,
           authService: widget.authService,
@@ -684,8 +688,8 @@ class _MarketplaceScreenState extends ConsumerState<MarketplaceScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => ProductDetailScreen(
-          databaseService: DatabaseService(),
-          magentoService: MagentoApiService(),
+          databaseService: DatabaseService.instance,
+          magentoService: MagentoService(),
           product: product,
           authService: widget.authService,
         ),

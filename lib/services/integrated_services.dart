@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 // import 'package:flutter_magento/flutter_magento.dart';  // Temporarily disabled
-import 'package:flutter_icp/flutter_icp.dart' as icp;
-import 'package:flutter_nft/flutter_nft.dart' as nft;
-import 'package:flutter_yuku/flutter_yuku.dart' as yuku;
+// import 'package:flutter_icp/flutter_icp.dart' as icp; // Temporarily disabled
+// import 'package:flutter_nft/flutter_nft.dart' as nft; // Temporarily disabled
+// import 'package:flutter_yuku/flutter_yuku.dart' as yuku; // Temporarily disabled
 import 'database_service.dart';
 import 'nft_service.dart';
 import 'plug_wallet_service.dart';
