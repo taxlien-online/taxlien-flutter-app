@@ -214,8 +214,7 @@ class ErrorBoundary extends StatefulWidget {
 }
 
 class _ErrorBoundaryState extends State<ErrorBoundary> {
-  Object? _error;
-  bool _hasError = false;
+  Error? _error;
 
   @override
   void initState() {
@@ -231,17 +230,10 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
         // CrashlyticsService.recordFlutterError(details);
       }
 
-      // Store error and update UI
-      if (mounted) {
-        setState(() {
-          _error = details.exception;
-          _hasError = true;
-        });
-      }
-
-      // Log error
+      // Log error instead of showing dialog to avoid Navigator issues
       if (kDebugMode) {
-        FlutterError.dumpErrorToConsole(details);
+        print('Flutter Error: ${details.exception}');
+        print('Stack trace: ${details.stack}');
       }
     };
 
@@ -252,21 +244,12 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
         // CrashlyticsService.recordError(error, stack);
       }
 
-      // Store error and update UI
-      if (mounted) {
-        setState(() {
-          _error = error;
-          _hasError = true;
-        });
+      // Log error instead of showing dialog to avoid Navigator issues
+      if (kDebugMode) {
+        print('Platform Error: $error');
+        print('Stack trace: $stack');
       }
 
-      // Log error
-      if (kDebugMode) {
-        debugPrint('Platform Error: $error');
-        debugPrint('Stack trace: $stack');
-      }
-      
-      // Prevent the error from propagating further
       return true;
     };
   }
@@ -274,24 +257,21 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
   void _showErrorDialog(String error) {
     // Simply log the error to avoid Navigator context issues
     if (kDebugMode) {
-      debugPrint('Error: $error');
+      print('Error: $error');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_hasError && _error != null) {
+    if (_error != null) {
       return _buildErrorScreen();
     }
+
     return widget.child;
   }
 
   Widget _buildErrorScreen() {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Error Occurred'),
-        centerTitle: true,
-      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -315,22 +295,11 @@ class _ErrorBoundaryState extends State<ErrorBoundary> {
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
-              if (_error != null && kDebugMode) ...[
-                const SizedBox(height: 16),
-                Text(
-                  'Error details: $_error',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.error,
-                      ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () {
                   setState(() {
                     _error = null;
-                    _hasError = false;
                   });
                 },
                 child: const Text('Try Again'),

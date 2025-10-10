@@ -571,13 +571,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_magento:
-    dependency: "direct main"
-    description:
-      path: "lib/packages/flutter_magento"
-      relative: true
-    source: path
-    version: "3.4.2"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

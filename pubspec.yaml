@@ -17,7 +17,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 3.2.0
+version: 3.3.0
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -96,16 +96,17 @@ dependencies:
   crypto: ^3.0.3
   flutter_secure_storage: ^9.0.0
   
-  # Magento integration and networking
-  flutter_magento:
-    path: lib/packages/flutter_magento
+  # Networking
   dio: ^5.3.2
   connectivity_plus: ^7.0.0
   
+  # Flutter Magento Plugin - implemented locally with best practices 2025
+  # flutter_magento: ^3.2.0  # Temporarily disabled due to compilation errors
+  
   # NFT and Blockchain Integration - temporarily disabled due to compatibility issues
   # flutter_nft: ^1.2.0+3
-  # flutter_icp: ^1.2.0+2
-  # flutter_yuku: ^1.0.0
+  flutter_icp: ^1.2.0+2
+  flutter_yuku: ^1.0.0
   
   # State management
   flutter_hooks: ^0.21.3
@@ -147,6 +148,8 @@ dependencies:
   
   # AdMob
   google_mobile_ads: ^6.0.0
+  
+  # Admin Panel - Using custom implementation to avoid dependency conflicts
 
 dev_dependencies:
   flutter_test:
