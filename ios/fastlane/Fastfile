@@ -21,7 +21,7 @@ platform :ios do
     ENV["FLUTTER_ROOT"] = "/opt/homebrew/bin/flutter" # Adjust path if needed
     
     # Ensure we're in the Flutter project directory
-    unless File.exist?("../pubspec.yaml")
+    unless File.exist?("../../pubspec.yaml")
       UI.user_error!("pubspec.yaml not found. Make sure you're in the Flutter project root directory.")
     end
   end

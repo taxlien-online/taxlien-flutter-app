@@ -1,6 +1,6 @@
 name: flutter_magento
 description: Flutter Magento SDK - Modern implementation with best practices 2025
-version: 3.0.1+1
+version: 3.6.2
 homepage: https://github.com/taxlien/flutter_magento
 
 environment:

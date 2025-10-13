@@ -1,0 +1,23 @@
+name: flutter_magento_marketplace
+description: Flutter Magento Marketplace SDK - Multi-vendor marketplace extension
+version: 1.0.0
+homepage: https://github.com/taxlien/flutter_magento_marketplace
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+  flutter: ">=3.16.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.1.0
+  crypto: ^3.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+

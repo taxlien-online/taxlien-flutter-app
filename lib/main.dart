@@ -29,6 +29,7 @@ import 'screens/marketplace_screen.dart';
 import 'screens/portfolio_dashboard_screen.dart';
 import 'screens/ai_advisor_screen.dart';
 import 'screens/preload_info_screen.dart';
+import 'screens/sync_management_screen.dart';
 
 // Services
 import 'services/tax_lien_service.dart';
@@ -42,6 +43,8 @@ import 'services/preload_service.dart';
 import 'widgets/cloud_functions_status_widget.dart';
 
 // NFT and ICP libraries
+import 'package:flutter_magento_messenger/flutter_magento_messenger.dart';
+import 'package:flutter_magento_notifications/flutter_magento_notifications.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -93,8 +96,25 @@ Future<void> _initializeServices() async {
     // Initialize secure storage
     await SecureStorageService.initialize();
 
-    // Initialize preload data (historical data from tax24.sql)
+    // Initialize preload data with .rada file support
+    // This will load data from /assets/taxlien_data.rada and initialize scheduled sync
     await PreloadService.initializePreloadData();
+
+    // Create default sync schedules for common states (disabled by default)
+    // Users can enable them in settings
+    await PreloadService.createDefaultSyncSchedules();
+
+    if (kDebugMode) {
+      // Print preload status for debugging
+      final preloadStatus = await PreloadService.getPreloadStatus();
+      print('Preload Status: ${preloadStatus['data_source']}');
+      print('Using RADA data: ${preloadStatus['rada_file_loaded']}');
+
+      if (PreloadService.offlineLoader != null) {
+        final stats = await PreloadService.offlineLoader!.getDataStats();
+        print('Offline Data Stats: $stats');
+      }
+    }
 
     // Initialize NFT client with ICP providers
     await _initializeNFTServices();
@@ -103,6 +123,12 @@ Future<void> _initializeServices() async {
     if (false && AppConstants.enableAnalytics) {
       await AnalyticsService.initialize();
     }
+
+    // Initialize Magento Messenger
+    await MessagingService().initialize();
+
+    // Initialize Magento Notifications
+    await NotificationManager().initialize();
 
     // Initialize notifications (disabled for now to avoid Firebase issues)
     if (false && AppConstants.enablePushNotifications) {
@@ -1330,6 +1356,22 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => const PreloadInfoScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.sync),
+                    title: const Text('Управление синхронизацией'),
+                    subtitle:
+                        const Text('Расписание загрузки данных по штатам'),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SyncManagementScreen(),
                         ),
                       );
                     },

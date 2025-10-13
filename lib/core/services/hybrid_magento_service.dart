@@ -7,6 +7,7 @@ import '../models/magento_models.dart';
 import 'magento_api_service.dart';
 import 'secure_storage_service.dart';
 import '../../services/flutter_magento_cloud_service.dart';
+import '../../services/preload_service.dart';
 
 /// Hybrid Magento service that combines REST API, Flutter Magento, and offline capabilities
 /// Automatically switches between cloud and offline mode based on connectivity
@@ -74,6 +75,9 @@ class HybridMagentoService extends ChangeNotifier {
     if (_isOnline && _flutterMagentoService != null) {
       // Flutter Magento service initialization is handled internally
     }
+
+    // Set this service as Magento service for PreloadService
+    PreloadService.setMagentoService(this);
   }
 
   void _onConnectivityChanged(List<ConnectivityResult> results) {
@@ -293,7 +297,33 @@ class HybridMagentoService extends ChangeNotifier {
     double? minPrice,
     double? maxPrice,
   }) async {
+    // If offline, try preload service first, then cached data
     if (!_isOnline) {
+      // Try to get from PreloadService (includes .rada data)
+      try {
+        final String? state = filters?['state'] as String?;
+        final String? county = filters?['county'] as String?;
+
+        final preloadProducts = await PreloadService.getCombinedProducts(
+          state: state,
+          county: county,
+        );
+
+        if (preloadProducts.isNotEmpty) {
+          // Convert to MagentoProductList
+          return _convertPreloadProductsToMagentoList(
+            preloadProducts,
+            page: page,
+            pageSize: pageSize,
+          );
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print('Error getting preload products: $e');
+        }
+      }
+
+      // Fallback to cached products
       return await _getCachedProducts();
     }
 
@@ -369,7 +399,21 @@ class HybridMagentoService extends ChangeNotifier {
 
   /// Get categories
   Future<List<MagentoCategory>?> getCategories() async {
+    // If offline, try preload service first, then cached data
     if (!_isOnline) {
+      // Try to get from PreloadService
+      try {
+        final preloadCategories = await PreloadService.getCombinedCategories();
+        if (preloadCategories.isNotEmpty) {
+          return _convertPreloadCategoriesToMagentoList(preloadCategories);
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print('Error getting preload categories: $e');
+        }
+      }
+
+      // Fallback to cached categories
       return await _getCachedCategories();
     }
 
@@ -878,6 +922,116 @@ class HybridMagentoService extends ChangeNotifier {
     return null;
   }
 
+  /// Convert preload products to MagentoProductList
+  MagentoProductList _convertPreloadProductsToMagentoList(
+    List<Map<String, dynamic>> preloadProducts, {
+    int page = 1,
+    int pageSize = 20,
+  }) {
+    try {
+      // Apply pagination
+      final startIndex = (page - 1) * pageSize;
+      final endIndex = startIndex + pageSize;
+
+      final paginatedProducts = preloadProducts.length > startIndex
+          ? preloadProducts.sublist(
+              startIndex,
+              endIndex > preloadProducts.length
+                  ? preloadProducts.length
+                  : endIndex,
+            )
+          : <Map<String, dynamic>>[];
+
+      final magentoProducts = paginatedProducts.map((item) {
+        // Convert category IDs to String list
+        final categoryIds = (item['category_ids'] as List<dynamic>?)
+                ?.map((id) => id.toString())
+                .toList() ??
+            [];
+
+        // Create media gallery from image URLs if available
+        final List<MagentoProductImage>? mediaGallery =
+            item['image_url'] != null
+                ? [
+                    MagentoProductImage(
+                      url: item['image_url'],
+                      mediaType: 'image',
+                      types: ['image', 'small_image', 'thumbnail'],
+                    )
+                  ]
+                : null;
+
+        return MagentoProduct(
+          sku: item['sku'] ?? '',
+          name: item['name'] ?? '',
+          description: item['description'],
+          shortDescription: item['short_description'],
+          price: (item['price'] as num?)?.toDouble(),
+          specialPrice: (item['special_price'] as num?)?.toDouble(),
+          typeId: item['type_id'] ?? 'simple',
+          urlKey: item['url_key'] ?? '',
+          isActive: item['status'] == 1,
+          isVisible: item['visibility'] != 1,
+          isInStock: true,
+          qty: 100,
+          categoryIds: categoryIds,
+          mediaGalleryEntries: mediaGallery,
+        );
+      }).toList();
+
+      return MagentoProductList(
+        items: magentoProducts,
+        totalCount: preloadProducts.length,
+        searchCriteria: MagentoSearchCriteria(
+          filterGroups: [],
+          sortOrders: [],
+          pageSize: pageSize,
+          currentPage: page,
+        ),
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error converting preload products: $e');
+      }
+      return MagentoProductList(
+        items: [],
+        totalCount: 0,
+        searchCriteria: MagentoSearchCriteria(
+          filterGroups: [],
+          sortOrders: [],
+          pageSize: pageSize,
+          currentPage: page,
+        ),
+      );
+    }
+  }
+
+  /// Convert preload categories to Magento categories list
+  List<MagentoCategory> _convertPreloadCategoriesToMagentoList(
+    List<Map<String, dynamic>> preloadCategories,
+  ) {
+    try {
+      return preloadCategories.map((item) {
+        return MagentoCategory(
+          id: int.tryParse(item['id']?.toString() ?? '0') ?? 0,
+          name: item['name'] ?? '',
+          isActive: item['is_active'] == true,
+          position: int.tryParse(item['position']?.toString() ?? '0') ?? 0,
+          level: int.tryParse(item['level']?.toString() ?? '1') ?? 1,
+          parentId: int.tryParse(item['parent_id']?.toString() ?? '0'),
+          productCount: int.tryParse(item['product_count']?.toString() ?? '0'),
+          description: item['description'],
+          urlKey: item['url_key'],
+        );
+      }).toList();
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error converting preload categories: $e');
+      }
+      return [];
+    }
+  }
+
   /// Get service status information
   Map<String, dynamic> getServiceStatus() {
     return {
@@ -888,6 +1042,7 @@ class HybridMagentoService extends ChangeNotifier {
       'isAuthenticated': isAuthenticated,
       'restServiceLoading': _restService.isLoading,
       'flutterMagentoAvailable': _flutterMagentoService != null,
+      'preloadDataAvailable': PreloadService.isUsingRadaData,
     };
   }
 }

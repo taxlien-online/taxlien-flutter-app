@@ -1,30 +1,108 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/initial_preload_data.dart';
 import '../data/demo_data.dart';
+import 'offline_data_loader_service.dart';
+import 'scheduled_data_sync_service.dart';
+import '../core/services/hybrid_magento_service.dart';
 
 /// Service for managing initial app preload data
-/// Handles offline data loading, caching, and synchronization
+/// Handles offline data loading, caching, and synchronization with flutter_magento
 class PreloadService {
   static const String _preloadKey = 'app_preload_data';
   static const String _preloadVersionKey = 'preload_version';
   static const String _lastSyncKey = 'last_sync_date';
+  static const String _radaDataLoadedKey = 'rada_data_loaded';
 
-  static const String _currentVersion = '1.0.0';
+  static const String _currentVersion =
+      '2.0.0'; // Updated version for .rada support
+
+  static OfflineDataLoaderService? _offlineLoader;
+  static ScheduledDataSyncService? _syncService;
+  static HybridMagentoService? _magentoService;
+
+  /// Initialize offline data loader and sync service
+  static Future<void> _initializeServices() async {
+    if (_offlineLoader == null) {
+      _offlineLoader = OfflineDataLoaderService();
+      await _offlineLoader!.initialize();
+    }
+
+    if (_syncService == null && _offlineLoader != null) {
+      _syncService = ScheduledDataSyncService(
+        offlineLoader: _offlineLoader!,
+        magentoService: _magentoService,
+      );
+      await _syncService!.initialize();
+    }
+  }
+
+  /// Set Magento service for online/offline sync
+  static void setMagentoService(HybridMagentoService service) {
+    _magentoService = service;
+  }
 
   /// Initialize preload data on first app launch
   static Future<bool> initializePreloadData() async {
     try {
       final prefs = await SharedPreferences.getInstance();
 
-      // Check if preload data already exists
-      final existingData = prefs.getString(_preloadKey);
+      // Initialize services
+      await _initializeServices();
+
+      // Check if .rada file data is already loaded
+      final radaDataLoaded = prefs.getBool(_radaDataLoadedKey) ?? false;
       final existingVersion = prefs.getString(_preloadVersionKey);
 
-      if (existingData != null && existingVersion == _currentVersion) {
-        print('Preload data already exists and is up to date');
-        return true;
+      // Load data from .rada file if not already loaded or version changed
+      if (!radaDataLoaded || existingVersion != _currentVersion) {
+        if (kDebugMode) {
+          print('Loading data from taxlien_data.rada...');
+        }
+
+        final success = await _offlineLoader!.loadFromRadaFile();
+
+        if (success) {
+          // Mark as loaded
+          await prefs.setBool(_radaDataLoadedKey, true);
+          await prefs.setString(_preloadVersionKey, _currentVersion);
+          await prefs.setString(_lastSyncKey, DateTime.now().toIso8601String());
+
+          if (kDebugMode) {
+            print('Data from .rada file loaded successfully');
+          }
+
+          // Also save initial demo data for fallback
+          await _saveInitialDemoData();
+
+          return true;
+        } else {
+          if (kDebugMode) {
+            print('Failed to load .rada file, using demo data');
+          }
+          // Fallback to demo data
+          return await _initializeDemoData();
+        }
       }
+
+      if (kDebugMode) {
+        print('Preload data already loaded and up to date');
+      }
+      return true;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error initializing preload data: $e');
+      }
+      // Fallback to demo data
+      return await _initializeDemoData();
+    }
+  }
+
+  /// Initialize with demo data as fallback
+  static Future<bool> _initializeDemoData() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
 
       // Generate initial preload data
       final preloadData = InitialPreloadData.getInitialPreloadData();
@@ -35,11 +113,29 @@ class PreloadService {
       await prefs.setString(_preloadVersionKey, _currentVersion);
       await prefs.setString(_lastSyncKey, DateTime.now().toIso8601String());
 
-      print('Initial preload data saved successfully');
+      if (kDebugMode) {
+        print('Initial demo preload data saved successfully');
+      }
       return true;
     } catch (e) {
-      print('Error initializing preload data: $e');
+      if (kDebugMode) {
+        print('Error initializing demo data: $e');
+      }
       return false;
+    }
+  }
+
+  /// Save initial demo data for fallback
+  static Future<void> _saveInitialDemoData() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final preloadData = InitialPreloadData.getInitialPreloadData();
+      final preloadJson = json.encode(preloadData);
+      await prefs.setString(_preloadKey, preloadJson);
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error saving demo data: $e');
+      }
     }
   }
 
@@ -107,17 +203,67 @@ class PreloadService {
     }
   }
 
-  /// Get combined products (demo + historical)
-  static Future<List<Map<String, dynamic>>> getCombinedProducts() async {
+  /// Get combined products (demo + historical + .rada data)
+  static Future<List<Map<String, dynamic>>> getCombinedProducts({
+    String? state,
+    String? county,
+  }) async {
     try {
+      // Try to get from .rada file first
+      if (_offlineLoader != null && _offlineLoader!.isLoaded) {
+        final radaProducts = await _offlineLoader!.getProducts(
+          state: state,
+          county: county,
+        );
+
+        if (radaProducts.isNotEmpty) {
+          return radaProducts;
+        }
+      }
+
+      // Fallback to cached demo data
       final data = await getCachedPreloadData();
       if (data == null) return TaxLienDemoData.demoProducts;
 
       final combinedProducts = data['combined_products'] as List<dynamic>?;
-      return combinedProducts?.cast<Map<String, dynamic>>() ??
-          TaxLienDemoData.demoProducts;
+      List<Map<String, dynamic>> products =
+          combinedProducts?.cast<Map<String, dynamic>>() ??
+              TaxLienDemoData.demoProducts;
+
+      // Filter by state/county if needed
+      if (state != null) {
+        products = products.where((p) {
+          final customAttrs = p['custom_attributes'] as List<dynamic>?;
+          if (customAttrs == null) return false;
+
+          final stateAttr = customAttrs.firstWhere(
+            (attr) => attr['attribute_code'] == 'state',
+            orElse: () => null,
+          );
+
+          return stateAttr != null && stateAttr['value'] == state;
+        }).toList();
+      }
+
+      if (county != null) {
+        products = products.where((p) {
+          final customAttrs = p['custom_attributes'] as List<dynamic>?;
+          if (customAttrs == null) return false;
+
+          final countyAttr = customAttrs.firstWhere(
+            (attr) => attr['attribute_code'] == 'county',
+            orElse: () => null,
+          );
+
+          return countyAttr != null && countyAttr['value'] == county;
+        }).toList();
+      }
+
+      return products;
     } catch (e) {
-      print('Error getting combined products: $e');
+      if (kDebugMode) {
+        print('Error getting combined products: $e');
+      }
       return TaxLienDemoData.demoProducts;
     }
   }
@@ -333,21 +479,210 @@ class PreloadService {
       final freshness = await getDataFreshness();
       final summary = await getPreloadSummary();
 
+      // Add offline loader stats
+      Map<String, dynamic>? offlineStats;
+      if (_offlineLoader != null) {
+        offlineStats = await _offlineLoader!.getDataStats();
+      }
+
+      // Add sync service stats
+      Map<String, dynamic>? syncStats;
+      if (_syncService != null) {
+        syncStats = _syncService!.getSyncStatistics();
+      }
+
       return {
         'is_available': isAvailable,
         'needs_update': needsUpdate,
         'freshness': freshness,
         'summary': summary,
         'current_version': _currentVersion,
-        'data_source': 'tax24.sql + demo_data.dart'
+        'data_source': 'taxlien_data.rada + tax24.sql + demo_data.dart',
+        'offline_loader': offlineStats,
+        'sync_service': syncStats,
+        'rada_file_loaded': _offlineLoader?.isLoaded ?? false,
       };
     } catch (e) {
-      print('Error getting preload status: $e');
+      if (kDebugMode) {
+        print('Error getting preload status: $e');
+      }
       return {
         'is_available': false,
         'needs_update': true,
         'error': e.toString()
       };
     }
+  }
+
+  // ===== Offline Data Loader Methods =====
+
+  /// Get offline data loader instance
+  static OfflineDataLoaderService? get offlineLoader => _offlineLoader;
+
+  /// Get available states from offline data
+  static Future<List<String>> getAvailableStates() async {
+    await _initializeServices();
+    if (_offlineLoader != null) {
+      return await _offlineLoader!.getAvailableStates();
+    }
+    return [];
+  }
+
+  /// Get counties for a specific state
+  static Future<List<String>> getCountiesForState(String state) async {
+    await _initializeServices();
+    if (_offlineLoader != null) {
+      return await _offlineLoader!.getCountiesForState(state);
+    }
+    return [];
+  }
+
+  /// Reload data from .rada file
+  static Future<bool> reloadRadaData() async {
+    await _initializeServices();
+    if (_offlineLoader != null) {
+      return await _offlineLoader!.reload();
+    }
+    return false;
+  }
+
+  // ===== Scheduled Sync Methods =====
+
+  /// Get scheduled sync service instance
+  static ScheduledDataSyncService? get syncService => _syncService;
+
+  /// Add a sync schedule for a state
+  static Future<void> addSyncSchedule({
+    required String state,
+    List<String>? counties,
+    required Duration interval,
+    bool enabled = true,
+  }) async {
+    await _initializeServices();
+    if (_syncService != null) {
+      final schedule = SyncScheduleConfig(
+        state: state,
+        counties: counties,
+        interval: interval,
+        enabled: enabled,
+      );
+      await _syncService!.addSchedule(schedule);
+    }
+  }
+
+  /// Remove sync schedule for a state
+  static Future<void> removeSyncSchedule(String state) async {
+    if (_syncService != null) {
+      await _syncService!.removeSchedule(state);
+    }
+  }
+
+  /// Toggle sync schedule enabled/disabled
+  static Future<void> toggleSyncSchedule(String state, bool enabled) async {
+    if (_syncService != null) {
+      await _syncService!.toggleSchedule(state, enabled);
+    }
+  }
+
+  /// Get all sync schedules
+  static List<SyncScheduleConfig> getSyncSchedules() {
+    return _syncService?.schedules ?? [];
+  }
+
+  /// Get sync status for a state
+  static Map<String, dynamic>? getSyncStatus(String state) {
+    return _syncService?.getSyncStatus(state);
+  }
+
+  /// Manually sync data for a state
+  static Future<bool> syncStateNow(String state) async {
+    if (_syncService == null) return false;
+
+    final schedules = _syncService!.schedules;
+    final schedule = schedules.firstWhere(
+      (s) => s.state == state,
+      orElse: () => SyncScheduleConfig(
+        state: state,
+        interval: const Duration(hours: 1),
+      ),
+    );
+
+    return await _syncService!.syncStateData(schedule);
+  }
+
+  /// Sync all enabled schedules
+  static Future<void> syncAllStates() async {
+    if (_syncService != null) {
+      await _syncService!.syncAllNow();
+    }
+  }
+
+  /// Get sync history
+  static List<Map<String, dynamic>> getSyncHistory() {
+    return _syncService?.syncHistory ?? [];
+  }
+
+  /// Get sync statistics
+  static Map<String, dynamic> getSyncStatistics() {
+    return _syncService?.getSyncStatistics() ?? {};
+  }
+
+  /// Create default sync schedules for common states
+  static Future<void> createDefaultSyncSchedules() async {
+    await _initializeServices();
+    if (_syncService != null) {
+      await _syncService!.createDefaultSchedules();
+    }
+  }
+
+  /// Clear sync history
+  static Future<void> clearSyncHistory() async {
+    if (_syncService != null) {
+      await _syncService!.clearSyncHistory();
+    }
+  }
+
+  // ===== Utility Methods =====
+
+  /// Get products by state and county (convenience method)
+  static Future<List<Map<String, dynamic>>> getProductsByLocation({
+    String? state,
+    String? county,
+    int? limit,
+    int? offset,
+  }) async {
+    await _initializeServices();
+
+    if (_offlineLoader != null) {
+      return await _offlineLoader!.getProducts(
+        state: state,
+        county: county,
+        limit: limit,
+        offset: offset,
+      );
+    }
+
+    // Fallback to combined products
+    return await getCombinedProducts(state: state, county: county);
+  }
+
+  /// Check if using .rada data
+  static bool get isUsingRadaData {
+    return _offlineLoader?.isLoaded ?? false;
+  }
+
+  /// Get data source info
+  static Future<Map<String, dynamic>> getDataSourceInfo() async {
+    final isRadaLoaded = _offlineLoader?.isLoaded ?? false;
+    final radaStats =
+        isRadaLoaded ? await _offlineLoader!.getDataStats() : null;
+
+    return {
+      'primary_source': isRadaLoaded ? 'taxlien_data.rada' : 'demo_data',
+      'rada_loaded': isRadaLoaded,
+      'rada_stats': radaStats,
+      'fallback_available': true,
+      'version': _currentVersion,
+    };
   }
 }

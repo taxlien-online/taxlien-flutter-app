@@ -49,5 +49,7 @@
 	<string>TaxLien.online needs access to your camera to capture photos of properties and documents for your records.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>TaxLien.online needs access to your photo library to attach photos of properties and documents to your saved listings.</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
 </dict>
 </plist>
