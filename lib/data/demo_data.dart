@@ -5,7 +5,7 @@ import 'dart:convert';
 /// All actual data is loaded from /assets/*.rada files via OfflineDataLoaderService
 class TaxLienDemoData {
   // DEPRECATED: Use OfflineDataLoaderService to load data from .rada files
-  static const String _deprecationMessage = 
+  static const String _deprecationMessage =
       'TaxLienDemoData is deprecated. Use OfflineDataLoaderService to load data from .rada files.';
 
   // Empty JSON structure for backward compatibility
@@ -71,14 +71,18 @@ class TaxLienDemoData {
   }
 
   // All filter methods now deprecated - use OfflineDataLoaderService
-  
+
   static List<Map<String, dynamic>> getTaxLienProductsByCounty(String county) {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(county: "$county")');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(county: "$county")',
+    );
     return [];
   }
 
   static List<Map<String, dynamic>> getTaxLienProductsByState(String state) {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "$state")');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "$state")',
+    );
     return [];
   }
 
@@ -93,19 +97,25 @@ class TaxLienDemoData {
   }
 
   static List<Map<String, dynamic>> getTaxLiensByPriceRange(
-      double minPrice, double maxPrice) {
+    double minPrice,
+    double maxPrice,
+  ) {
     print(_deprecationMessage);
     return [];
   }
 
   static List<Map<String, dynamic>> getTaxLiensByInterestRateRange(
-      double minRate, double maxRate) {
+    double minRate,
+    double maxRate,
+  ) {
     print(_deprecationMessage);
     return [];
   }
 
   static List<Map<String, dynamic>> getTaxLiensByAssessedValueRange(
-      double minValue, double maxValue) {
+    double minValue,
+    double maxValue,
+  ) {
     print(_deprecationMessage);
     return [];
   }
@@ -121,27 +131,37 @@ class TaxLienDemoData {
   }
 
   static List<Map<String, dynamic>> getPolkCountyTaxLiens() {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "FL", county: "Polk")');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "FL", county: "Polk")',
+    );
     return [];
   }
 
   static List<Map<String, dynamic>> getDixieCountyTaxLiens() {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "FL", county: "Dixie")');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "FL", county: "Dixie")',
+    );
     return [];
   }
 
   static List<Map<String, dynamic>> getPutnamCountyTaxLiens() {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "FL", county: "Putnam")');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "FL", county: "Putnam")',
+    );
     return [];
   }
 
   static List<Map<String, dynamic>> getFlorida2024TaxLiens() {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "FL")');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "FL")',
+    );
     return [];
   }
 
   static List<Map<String, dynamic>> getTaxLiensByCountyCode(String countyCode) {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(county: "$countyCode")');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(county: "$countyCode")',
+    );
     return [];
   }
 }

@@ -185,15 +185,16 @@ class PreloadService {
         'total_categories': stats['total_categories'] ?? 0,
         'states': stats['states'] ?? 0,
         'state_list': stats['state_list'] ?? [],
-        'last_updated': stats['last_loaded'] ?? DateTime.now().toIso8601String(),
+        'last_updated':
+            stats['last_loaded'] ?? DateTime.now().toIso8601String(),
         'data_source': '.rada files',
         'features_available': [
           'Browse tax liens offline',
           'View county statistics',
           'Analyze investment opportunities',
           'Filter by state and county',
-          'Multi-state support'
-        ]
+          'Multi-state support',
+        ],
       };
     } catch (e) {
       print('Error getting preload summary: $e');
@@ -217,7 +218,7 @@ class PreloadService {
         'available_states': await _offlineLoader!.getAvailableStates(),
         'total_products': (await _offlineLoader!.getProducts()).length,
         'total_categories': categories.length,
-        'data_source': '.rada files'
+        'data_source': '.rada files',
       };
     } catch (e) {
       print('Error getting quick access data: $e');
@@ -249,7 +250,7 @@ class PreloadService {
   }) async {
     try {
       await _initializeServices();
-      
+
       if (_offlineLoader == null || !_offlineLoader!.isLoaded) {
         if (kDebugMode) {
           print('Offline loader not initialized, loading now...');
@@ -275,7 +276,7 @@ class PreloadService {
   static Future<List<Map<String, dynamic>>> getCombinedCategories() async {
     try {
       await _initializeServices();
-      
+
       if (_offlineLoader == null || !_offlineLoader!.isLoaded) {
         await _offlineLoader?.initialize();
       }
@@ -329,7 +330,8 @@ class PreloadService {
 
   /// Get tax liens by county
   static Future<List<Map<String, dynamic>>> getTaxLiensByCounty(
-      String county) async {
+    String county,
+  ) async {
     try {
       final liens = await getHistoricalTaxLiens();
       return liens.where((lien) {
@@ -343,7 +345,8 @@ class PreloadService {
 
   /// Get tax liens by collection year
   static Future<List<Map<String, dynamic>>> getTaxLiensByCollectionYear(
-      String year) async {
+    String year,
+  ) async {
     try {
       final liens = await getHistoricalTaxLiens();
       return liens.where((lien) {
@@ -370,7 +373,9 @@ class PreloadService {
 
   /// Get tax liens by price range
   static Future<List<Map<String, dynamic>>> getTaxLiensByPriceRange(
-      double minPrice, double maxPrice) async {
+    double minPrice,
+    double maxPrice,
+  ) async {
     try {
       final liens = await getHistoricalTaxLiens();
       return liens.where((lien) {
@@ -385,7 +390,9 @@ class PreloadService {
 
   /// Get tax liens by interest rate range
   static Future<List<Map<String, dynamic>>> getTaxLiensByInterestRateRange(
-      double minRate, double maxRate) async {
+    double minRate,
+    double maxRate,
+  ) async {
     try {
       final liens = await getHistoricalTaxLiens();
       return liens.where((lien) {
@@ -400,7 +407,9 @@ class PreloadService {
 
   /// Get tax liens by assessed value range
   static Future<List<Map<String, dynamic>>> getTaxLiensByAssessedValueRange(
-      double minValue, double maxValue) async {
+    double minValue,
+    double maxValue,
+  ) async {
     try {
       final liens = await getHistoricalTaxLiens();
       return liens.where((lien) {
@@ -455,7 +464,7 @@ class PreloadService {
         'last_sync': lastSync ?? 'Never',
         'data_source': 'tax24.sql + demo_data.dart',
         'offline_capable': true,
-        'update_frequency': 'On app update'
+        'update_frequency': 'On app update',
       };
     } catch (e) {
       print('Error getting data freshness: $e');
@@ -514,7 +523,7 @@ class PreloadService {
       return {
         'is_available': false,
         'needs_update': true,
-        'error': e.toString()
+        'error': e.toString(),
       };
     }
   }
@@ -537,7 +546,7 @@ class PreloadService {
   static Future<List<String>> getCountiesForState(String state) async {
     await _initializeServices();
     if (_offlineLoader != null) {
-      return await _offlineLoader!.getCountiesForState(state);
+      return await _offlineLoader!.getCountyNamesForState(state);
     }
     return [];
   }
@@ -606,10 +615,8 @@ class PreloadService {
     final schedules = _syncService!.schedules;
     final schedule = schedules.firstWhere(
       (s) => s.state == state,
-      orElse: () => SyncScheduleConfig(
-        state: state,
-        interval: const Duration(hours: 1),
-      ),
+      orElse: () =>
+          SyncScheduleConfig(state: state, interval: const Duration(hours: 1)),
     );
 
     return await _syncService!.syncStateData(schedule);
@@ -679,8 +686,9 @@ class PreloadService {
   /// Get data source info
   static Future<Map<String, dynamic>> getDataSourceInfo() async {
     final isRadaLoaded = _offlineLoader?.isLoaded ?? false;
-    final radaStats =
-        isRadaLoaded ? await _offlineLoader!.getDataStats() : null;
+    final radaStats = isRadaLoaded
+        ? await _offlineLoader!.getDataStats()
+        : null;
     final selectedStates = _offlineLoader?.selectedStates ?? {};
 
     return {

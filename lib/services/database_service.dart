@@ -85,7 +85,7 @@ class DatabaseService {
         value TEXT NOT NULL
       )
     ''');
-    
+
     // Create locked assets table
     await db.execute('''
       CREATE TABLE locked_assets (
@@ -103,13 +103,15 @@ class DatabaseService {
       )
     ''');
   }
-  
+
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
       // Add new columns to tax_liens
-      await db.execute('ALTER TABLE tax_liens ADD COLUMN is_locked INTEGER DEFAULT 0');
+      await db.execute(
+        'ALTER TABLE tax_liens ADD COLUMN is_locked INTEGER DEFAULT 0',
+      );
       await db.execute('ALTER TABLE tax_liens ADD COLUMN locked_for_nft TEXT');
-      
+
       // Create locked assets table
       await db.execute('''
         CREATE TABLE IF NOT EXISTS locked_assets (
@@ -346,7 +348,11 @@ class DatabaseService {
 
   Future<List<Map<String, dynamic>>> getLockedAssetsRaw() async {
     final db = await database;
-    return await db.query('locked_assets', where: 'status = ?', whereArgs: ['locked']);
+    return await db.query(
+      'locked_assets',
+      where: 'status = ?',
+      whereArgs: ['locked'],
+    );
   }
 
   Future<List<dynamic>> getLockedAssets() async {
@@ -356,7 +362,7 @@ class DatabaseService {
       where: 'status = ?',
       whereArgs: ['locked'],
     );
-    
+
     // Import needed
     // return List.generate(maps.length, (i) => LockedAsset.fromJson(maps[i]));
     // For now return raw maps

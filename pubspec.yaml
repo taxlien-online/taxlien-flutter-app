@@ -37,7 +37,7 @@ dependencies:
   # Core dependencies
   http: ^1.1.0
   shared_preferences: ^2.2.0
-  # sqflite: ^2.3.0  # Removed - using Magento API
+  sqflite: ^2.3.0  # Re-enabled for unified system
   path: ^1.8.3
   url_launcher: ^6.2.1
   webview_flutter: ^4.4.2
@@ -94,22 +94,24 @@ dependencies:
   connectivity_plus: ^7.0.0
   
   # Magento Integration - using local packages from monorepo
-  flutter_magento:
-    path: ../flutter_magento
-  flutter_magento_marketplace:
-    path: ../flutter_magento_marketplace
-  flutter_magento_messenger:
-    path: ../flutter_magento_messenger
-  flutter_magento_notifications:
-    path: ../flutter_magento_notifications
+  # TEMPORARILY COMMENTED OUT - packages not found
+  # flutter_magento:
+  #   path: ../flutter_magento
+  # flutter_magento_marketplace:
+  #   path: ../flutter_magento_marketplace
+  # flutter_magento_messenger:
+  #   path: ../flutter_magento_messenger
+  # flutter_magento_notifications:
+  #   path: ../flutter_magento_notifications
   
   # NFT and Blockchain Integration - using local packages from monorepo
-  flutter_nft:
-    path: ../flutter_nft
-  flutter_icp:
-    path: ../flutter_icp
-  flutter_yuku:
-    path: ../flutter_yuku
+  # TEMPORARILY COMMENTED OUT - packages not found
+  # flutter_nft:
+  #   path: ../flutter_nft
+  # flutter_icp:
+  #   path: ../flutter_icp
+  # flutter_yuku:
+  #   path: ../flutter_yuku
   
   # State management
   flutter_hooks: ^0.21.3

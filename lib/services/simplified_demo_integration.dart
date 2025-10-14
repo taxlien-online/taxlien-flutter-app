@@ -3,7 +3,7 @@ import 'offline_data_loader_service.dart';
 
 /// DEPRECATED: Simplified demo data integration service
 /// NOW USES .rada FILES via OfflineDataLoaderService
-/// 
+///
 /// This service now loads data from .rada files instead of hardcoded demo data
 /// Provides backward-compatible interface while using OfflineDataLoaderService
 class SimplifiedDemoIntegration extends ChangeNotifier {
@@ -25,13 +25,15 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
     try {
       // Initialize offline loader with .rada files
       final success = await _offlineLoader.initialize();
-      
+
       if (success) {
         _isInitialized = true;
         _error = null;
 
         if (kDebugMode) {
-          print('SimplifiedDemoIntegration initialized successfully from .rada files');
+          print(
+            'SimplifiedDemoIntegration initialized successfully from .rada files',
+          );
         }
       } else {
         throw Exception('Failed to load .rada files');
@@ -102,8 +104,9 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
     var categories = TaxLienCategoriesDemoData.allCategories;
 
     if (parentId != null) {
-      categories =
-          categories.where((cat) => cat['parent_id'] == parentId).toList();
+      categories = categories
+          .where((cat) => cat['parent_id'] == parentId)
+          .toList();
     }
 
     if (level != null) {
@@ -132,8 +135,8 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
 
     if (searchQuery != null && searchQuery.isNotEmpty) {
       customers = customers.where((customer) {
-        final name =
-            '${customer['firstname']} ${customer['lastname']}'.toLowerCase();
+        final name = '${customer['firstname']} ${customer['lastname']}'
+            .toLowerCase();
         final email = customer['email']?.toString().toLowerCase() ?? '';
         return name.contains(searchQuery.toLowerCase()) ||
             email.contains(searchQuery.toLowerCase());
@@ -163,8 +166,9 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
       final fromDate = DateTime.tryParse(dateFrom);
       if (fromDate != null) {
         orders = orders.where((order) {
-          final orderDate =
-              DateTime.tryParse(order['created_at']?.toString() ?? '');
+          final orderDate = DateTime.tryParse(
+            order['created_at']?.toString() ?? '',
+          );
           return orderDate != null && orderDate.isAfter(fromDate);
         }).toList();
       }
@@ -174,8 +178,9 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
       final toDate = DateTime.tryParse(dateTo);
       if (toDate != null) {
         orders = orders.where((order) {
-          final orderDate =
-              DateTime.tryParse(order['created_at']?.toString() ?? '');
+          final orderDate = DateTime.tryParse(
+            order['created_at']?.toString() ?? '',
+          );
           return orderDate != null && orderDate.isBefore(toDate);
         }).toList();
       }
@@ -294,34 +299,54 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
 
   /// Get largest counties by population
   List<Map<String, dynamic>> getLargestCountiesByPopulation(
-      String stateCode, int limit) {
+    String stateCode,
+    int limit,
+  ) {
     if (!_isInitialized) return [];
     return TaxLienCountiesDemoData.getLargestCountiesByPopulation(
-        stateCode, limit);
+      stateCode,
+      limit,
+    );
   }
 
   /// Get smallest counties by population
   List<Map<String, dynamic>> getSmallestCountiesByPopulation(
-      String stateCode, int limit) {
+    String stateCode,
+    int limit,
+  ) {
     if (!_isInitialized) return [];
     return TaxLienCountiesDemoData.getSmallestCountiesByPopulation(
-        stateCode, limit);
+      stateCode,
+      limit,
+    );
   }
 
   /// Get counties by population range
   List<Map<String, dynamic>> getCountiesByPopulationRange(
-      String stateCode, int minPopulation, int maxPopulation) {
+    String stateCode,
+    int minPopulation,
+    int maxPopulation,
+  ) {
     if (!_isInitialized) return [];
     return TaxLienCountiesDemoData.getCountiesByPopulationRange(
-        stateCode, minPopulation, maxPopulation);
+      stateCode,
+      minPopulation,
+      maxPopulation,
+    );
   }
 
   /// Get counties by area range
   List<Map<String, dynamic>> getCountiesByAreaRange(
-      String stateCode, double minArea, double maxArea) {
+    String stateCode,
+    double minArea,
+    double maxArea,
+  ) {
     if (!_isInitialized) return [];
     return TaxLienCountiesDemoData.getCountiesByAreaRange(
-        stateCode, minArea, maxArea);
+      stateCode,
+      minArea,
+      maxArea,
+    );
   }
 
   /// Get total population for a state
@@ -340,7 +365,8 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
   double getAveragePopulationDensityForState(String stateCode) {
     if (!_isInitialized) return 0.0;
     return TaxLienCountiesDemoData.getAveragePopulationDensityForState(
-        stateCode);
+      stateCode,
+    );
   }
 
   /// Toggle between demo and real data

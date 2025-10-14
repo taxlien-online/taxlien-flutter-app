@@ -96,10 +96,7 @@ class OfflineDataLoaderService extends ChangeNotifier {
         print('Loading offline data for states: ${_selectedStates.join(", ")}');
       }
 
-      Map<String, dynamic> combinedData = {
-        'products': [],
-        'categories': [],
-      };
+      Map<String, dynamic> combinedData = {'products': [], 'categories': []};
 
       if (_selectedStates.contains('ALL')) {
         // Загружаем основной файл со всеми данными
@@ -137,7 +134,8 @@ class OfflineDataLoaderService extends ChangeNotifier {
         print('States: ${_selectedStates.join(", ")}');
         print('Total products: ${(combinedData['products'] as List).length}');
         print(
-            'Total categories: ${(combinedData['categories'] as List).length}');
+          'Total categories: ${(combinedData['categories'] as List).length}',
+        );
       }
 
       _setLoading(false);
@@ -352,17 +350,24 @@ class OfflineDataLoaderService extends ChangeNotifier {
   }
 
   /// Get counties for a specific state
-  Future<List<Map<String, dynamic>>> getCountiesForState(String stateCode) async {
+  Future<List<Map<String, dynamic>>> getCountiesForState(
+    String stateCode,
+  ) async {
     final allCounties = await getCountiesData();
     return allCounties[stateCode] ?? [];
   }
 
   /// Get county by name and state
-  Future<Map<String, dynamic>?> getCountyByName(String stateCode, String countyName) async {
+  Future<Map<String, dynamic>?> getCountyByName(
+    String stateCode,
+    String countyName,
+  ) async {
     final counties = await getCountiesForState(stateCode);
     try {
       return counties.firstWhere(
-        (county) => county['name']?.toString().toLowerCase() == countyName.toLowerCase(),
+        (county) =>
+            county['name']?.toString().toLowerCase() ==
+            countyName.toLowerCase(),
       );
     } catch (e) {
       return null;
@@ -482,9 +487,7 @@ class OfflineDataLoaderService extends ChangeNotifier {
       if (kDebugMode) {
         print('Error getting data stats: $e');
       }
-      return {
-        'error': e.toString(),
-      };
+      return {'error': e.toString()};
     }
   }
 
@@ -598,8 +601,9 @@ class OfflineDataLoaderService extends ChangeNotifier {
       // Merge categories (avoid duplicates)
       if (parsedData.containsKey('categories')) {
         final categories = parsedData['categories'] as List;
-        final existingIds =
-            (targetData['categories'] as List).map((c) => c['id']).toSet();
+        final existingIds = (targetData['categories'] as List)
+            .map((c) => c['id'])
+            .toSet();
 
         for (var category in categories) {
           if (!existingIds.contains(category['id'])) {

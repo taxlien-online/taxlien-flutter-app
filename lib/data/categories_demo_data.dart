@@ -5,7 +5,7 @@ import 'dart:convert';
 /// All actual category data is loaded from /assets/*.rada files via OfflineDataLoaderService
 class TaxLienCategoriesDemoData {
   // DEPRECATED: Use OfflineDataLoaderService to load category data from .rada files
-  static const String _deprecationMessage = 
+  static const String _deprecationMessage =
       'TaxLienCategoriesDemoData is deprecated. Use OfflineDataLoaderService.getCategories() to load category data from .rada files.';
 
   // Empty JSON structure for backward compatibility
@@ -39,7 +39,9 @@ class TaxLienCategoriesDemoData {
 
   /// Get categories by state code (DEPRECATED - returns empty list)
   static List<Map<String, dynamic>> getCategoriesByStateCode(String stateCode) {
-    print('$_deprecationMessage\nNote: Filter categories by state_code attribute from OfflineDataLoaderService.getCategories()');
+    print(
+      '$_deprecationMessage\nNote: Filter categories by state_code attribute from OfflineDataLoaderService.getCategories()',
+    );
     return [];
   }
 
@@ -58,7 +60,9 @@ class TaxLienCategoriesDemoData {
   /// Get all US states with tax lien programs (DEPRECATED - returns empty list)
   /// Use OfflineDataLoaderService.getAvailableStates() instead
   static List<String> get statesWithTaxLiens {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getAvailableStates()');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getAvailableStates()',
+    );
     return [];
   }
 
@@ -94,7 +98,7 @@ class TaxLienCategoriesDemoData {
       'VA': 'Virginia',
       'WA': 'Washington',
       'WI': 'Wisconsin',
-      'WY': 'Wyoming'
+      'WY': 'Wyoming',
     };
     return stateNames[stateCode] ?? stateCode;
   }

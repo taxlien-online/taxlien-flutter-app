@@ -5,7 +5,7 @@ import 'dart:convert';
 /// All actual historical data is loaded from /assets/*.rada files via OfflineDataLoaderService
 class TaxLienHistoricalData {
   // DEPRECATED: Use OfflineDataLoaderService to load historical data from .rada files
-  static const String _deprecationMessage = 
+  static const String _deprecationMessage =
       'TaxLienHistoricalData is deprecated. Use OfflineDataLoaderService to load historical data from .rada files.';
 
   // Minimal JSON structure for backward compatibility
@@ -43,13 +43,17 @@ class TaxLienHistoricalData {
 
   /// Get county statistics (DEPRECATED - returns null)
   static Map<String, dynamic>? getCountyStatistics(String countyCode) {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getCountyByName()');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getCountyByName()',
+    );
     return null;
   }
 
   /// Get investment analytics for a specific year and state (DEPRECATED - returns null)
   static Map<String, dynamic>? getInvestmentAnalytics(
-      String year, String state) {
+    String year,
+    String state,
+  ) {
     print(_deprecationMessage);
     return null;
   }
@@ -62,7 +66,9 @@ class TaxLienHistoricalData {
 
   /// Get tax liens by county from historical data (DEPRECATED - returns empty list)
   static List<Map<String, dynamic>> getTaxLiensByCounty(String county) {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(county: "$county")');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(county: "$county")',
+    );
     return [];
   }
 
@@ -74,7 +80,9 @@ class TaxLienHistoricalData {
 
   /// Get tax liens by state (DEPRECATED - returns empty list)
   static List<Map<String, dynamic>> getTaxLiensByState(String state) {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "$state")');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getProducts(state: "$state")',
+    );
     return [];
   }
 
@@ -86,28 +94,36 @@ class TaxLienHistoricalData {
 
   /// Get tax liens by interest rate range (DEPRECATED - returns empty list)
   static List<Map<String, dynamic>> getTaxLiensByInterestRateRange(
-      double minRate, double maxRate) {
+    double minRate,
+    double maxRate,
+  ) {
     print(_deprecationMessage);
     return [];
   }
 
   /// Get tax liens by assessed value range (DEPRECATED - returns empty list)
   static List<Map<String, dynamic>> getTaxLiensByAssessedValueRange(
-      double minValue, double maxValue) {
+    double minValue,
+    double maxValue,
+  ) {
     print(_deprecationMessage);
     return [];
   }
 
   /// Get tax liens by tax amount range (DEPRECATED - returns empty list)
   static List<Map<String, dynamic>> getTaxLiensByTaxAmountRange(
-      double minAmount, double maxAmount) {
+    double minAmount,
+    double maxAmount,
+  ) {
     print(_deprecationMessage);
     return [];
   }
 
   /// Get all Florida counties from 2024 collection (DEPRECATED - returns empty list)
   static List<Map<String, dynamic>> getFlorida2024Counties() {
-    print('$_deprecationMessage\nUse: OfflineDataLoaderService.getCountiesForState("FL")');
+    print(
+      '$_deprecationMessage\nUse: OfflineDataLoaderService.getCountiesForState("FL")',
+    );
     return [];
   }
 

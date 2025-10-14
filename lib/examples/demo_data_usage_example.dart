@@ -3,11 +3,11 @@ import '../services/simplified_demo_integration.dart';
 
 /// DEPRECATED: This example uses old demo data classes
 /// For production code, use OfflineDataLoaderService to load data from .rada files
-/// 
+///
 /// Example:
 /// ```dart
 /// import '../services/offline_data_loader_service.dart';
-/// 
+///
 /// final loader = OfflineDataLoaderService();
 /// await loader.initialize();
 /// final products = await loader.getProducts();
@@ -79,11 +79,7 @@ class _DemoDataUsageExampleState extends State<DemoDataUsageExample> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     if (_error != null) {
@@ -173,10 +169,7 @@ class _DemoDataUsageExampleState extends State<DemoDataUsageExample> {
           value,
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 12, color: Colors.grey),
-        ),
+        Text(label, style: const TextStyle(fontSize: 12, color: Colors.grey)),
       ],
     );
   }
@@ -207,13 +200,15 @@ class _DemoDataUsageExampleState extends State<DemoDataUsageExample> {
 
   Widget _buildProductItem(Map<String, dynamic> product) {
     final attributes = product['custom_attributes'] as List<dynamic>?;
-    final address = attributes?.firstWhere(
+    final address =
+        attributes?.firstWhere(
           (attr) => attr['attribute_code'] == 'property_address',
           orElse: () => null,
         )?['value'] ??
         'Unknown Address';
 
-    final county = attributes?.firstWhere(
+    final county =
+        attributes?.firstWhere(
           (attr) => attr['attribute_code'] == 'county',
           orElse: () => null,
         )?['value'] ??
@@ -247,10 +242,12 @@ class _DemoDataUsageExampleState extends State<DemoDataUsageExample> {
               children: _categories
                   .where((cat) => cat['level'] == 2)
                   .take(10)
-                  .map((category) => Chip(
-                        label: Text(category['name']?.toString() ?? ''),
-                        backgroundColor: Colors.blue[100],
-                      ))
+                  .map(
+                    (category) => Chip(
+                      label: Text(category['name']?.toString() ?? ''),
+                      backgroundColor: Colors.blue[100],
+                    ),
+                  )
                   .toList(),
             ),
           ],
@@ -314,9 +311,7 @@ class _DemoDataUsageExampleState extends State<DemoDataUsageExample> {
 
   Widget _buildCustomerItem(Map<String, dynamic> customer) {
     return ListTile(
-      title: Text(
-        '${customer['firstname']} ${customer['lastname']}',
-      ),
+      title: Text('${customer['firstname']} ${customer['lastname']}'),
       subtitle: Text(customer['email']?.toString() ?? ''),
       trailing: const Icon(Icons.person),
     );
@@ -443,11 +438,13 @@ class StaticDemoDataExample {
     print('Largest Florida counties: ${largestCounties.length}');
 
     // Получение статистики по штату
-    final totalPopulation =
-        TaxLienCountiesDemoData.getTotalPopulationForState('FL');
+    final totalPopulation = TaxLienCountiesDemoData.getTotalPopulationForState(
+      'FL',
+    );
     final totalArea = TaxLienCountiesDemoData.getTotalAreaForState('FL');
-    final density =
-        TaxLienCountiesDemoData.getAveragePopulationDensityForState('FL');
+    final density = TaxLienCountiesDemoData.getAveragePopulationDensityForState(
+      'FL',
+    );
 
     print('Florida statistics:');
     print('  Total population: $totalPopulation');

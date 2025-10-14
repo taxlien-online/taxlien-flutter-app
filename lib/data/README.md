@@ -1,219 +1,248 @@
-# TaxLien.online Demo Data
+# TaxLien.online Data - Migration to .rada Files
 
-Этот каталог содержит демо данные для приложения TaxLien.online, совместимые с flutter_magento 3.2.0.
+**ВАЖНО:** Все захардкоженные данные перенесены в `.rada` файлы!
 
-## Структура файлов
+## 🔄 Изменения
 
-### `demo_data.dart`
-Основной файл с демо данными, включающий:
-- **Продукты**: Tax lien сертификаты с полными атрибутами
-- **Категории**: Иерархическая структура штатов
-- **Клиенты**: Демо пользователи-инвесторы
-- **Заказы**: Примеры транзакций
-- **Корзина**: Демо корзина покупок
-- **Магазин**: Конфигурация магазина
+Все классы в этой папке теперь являются **DEPRECATED** и сохранены только для обратной совместимости.
 
-### `categories_demo_data.dart`
-Расширенные данные категорий:
-- **Все штаты США** с программами tax lien
-- **Иерархическая структура** категорий
-- **Атрибуты штатов** (коды, описания)
-- **Методы поиска** и фильтрации
+### Было
+Данные хранились в захардкоженном виде в:
+- `demo_data.dart` - продукты, категории, клиенты, заказы
+- `counties_demo_data.dart` - данные об округах
+- `categories_demo_data.dart` - категории штатов
+- `historical_data.dart` - исторические данные
 
-### `counties_demo_data.dart`
-Данные округов:
-- **Полный список округов** для каждого штата
-- **Демографические данные** (население, площадь)
-- **Методы фильтрации** по различным критериям
-- **Статистические данные** по штатам
+### Стало
+Все данные загружаются из файлов `.rada` в директории `/assets/`:
+- `assets/taxlien_data.rada` - все данные
+- `assets/taxlien_florida.rada` - данные по Флориде
+- `assets/taxlien_arizona.rada` - данные по Аризоне
+- `assets/taxlien_demo.rada` - демо данные
+- `assets/taxlien.rada` - базовые данные
 
-## Использование
+## 📦 Новая архитектура
 
-### Инициализация
+### Основные сервисы для работы с данными:
+
+1. **OfflineDataLoaderService** - основной сервис загрузки из .rada файлов
+2. **PreloadService** - сервис предзагрузки данных
+3. **DemoDataService** - обновленный сервис с обратной совместимостью
+
+## 🚀 Использование
+
+### Правильно ✅
 
 ```dart
-import '../data/demo_data.dart';
-import '../data/categories_demo_data.dart';
-import '../data/counties_demo_data.dart';
+import 'package:flutter/material.dart';
+import '../services/offline_data_loader_service.dart';
+
+// Инициализация
+final loader = OfflineDataLoaderService();
+await loader.initialize();
 
 // Получение продуктов
-final products = TaxLienDemoData.demoProducts;
+final products = await loader.getProducts(
+  state: 'FL',
+  county: 'Polk',
+  limit: 20,
+);
 
 // Получение категорий
-final categories = TaxLienCategoriesDemoData.allCategories;
+final categories = await loader.getCategories();
 
-// Получение округов по штату
-final counties = TaxLienCountiesDemoData.getCountiesByState('FL');
+// Получение данных об округах
+final counties = await loader.getCountiesForState('FL');
+final county = await loader.getCountyByName('FL', 'Polk');
+
+// Статистика
+final stats = await loader.getDataStats();
+print('Total products: ${stats['total_products']}');
+print('Available states: ${stats['state_list']}');
 ```
 
-### Сервисы
-
-#### `DemoDataService`
-Основной сервис для работы с демо данными:
+### С использованием DemoDataService (обратная совместимость)
 
 ```dart
 import '../services/demo_data_service.dart';
 
 final demoService = DemoDataService();
-await demoService.initialize();
+await demoService.initialize(); // Теперь загружает из .rada
 
-// Получение продуктов
-final products = demoService.getDemoProducts();
-
-// Поиск по штату
-final floridaProducts = demoService.getTaxLienProductsByState('FL');
-
-// Поиск по округу
-final columbiaProducts = demoService.getTaxLienProductsByCounty('Columbia');
+// Все методы теперь async и возвращают Future
+final products = await demoService.getDemoProducts();
+final counties = await demoService.getCountiesByState('FL');
+final taxLiens = await demoService.getTaxLienProductsByState('FL');
 ```
 
-#### `SimplifiedDemoIntegration`
-Упрощенная интеграция для быстрого старта:
+### Неправильно ❌
 
 ```dart
-import '../services/simplified_demo_integration.dart';
+// НЕ ИСПОЛЬЗУЙТЕ НАПРЯМУЮ!
+import '../data/demo_data.dart';
+import '../data/counties_demo_data.dart';
 
-final integration = SimplifiedDemoIntegration();
-await integration.initialize();
-
-// Получение продуктов с фильтрацией
-final products = integration.getProducts(
-  page: 1,
-  pageSize: 20,
-  searchQuery: 'Florida',
-  minPrice: 1000.0,
-  maxPrice: 5000.0,
-);
+// Это вернет пустые массивы и выведет предупреждения
+final products = TaxLienDemoData.demoProducts; // []
+final counties = TaxLienCountiesDemoData.getCountiesByState('FL'); // []
 ```
 
-## Структура данных
+## 🔧 Функции OfflineDataLoaderService
 
-### Продукты (Tax Liens)
-
-Каждый продукт содержит:
-- **Основные поля**: id, sku, name, price, status
-- **Кастомные атрибуты**:
-  - `parcel_id`: ID участка
-  - `property_address`: Адрес недвижимости
-  - `county`: Округ
-  - `state`: Штат
-  - `owner_name`: Имя владельца
-  - `assessed_value`: Оценочная стоимость
-  - `tax_amount`: Сумма налога
-  - `interest_rate`: Процентная ставка
-  - `auction_date`: Дата аукциона
-  - `redemption_deadline`: Срок выкупа
-  - `lien_status`: Статус залога
-
-### Категории
-
-Иерархическая структура:
-```
-Tax Liens (root)
-├── Florida
-├── Texas
-├── California
-├── New York
-├── Arizona
-├── Georgia
-└── ... (все штаты с tax lien программами)
-```
-
-### Клиенты
-
-Демо клиенты включают:
-- **Профили инвесторов** с различным опытом
-- **Предпочтения** по штатам и округам
-- **Лимиты инвестиций**
-- **Типы инвесторов** (частные, профессиональные)
-
-## Фильтрация и поиск
-
-### Поиск продуктов
+### Управление данными
 
 ```dart
-// Поиск по названию, SKU или описанию
-final results = integration.searchProducts('Columbia County');
+// Выбор штатов для загрузки
+await loader.setSelectedStates({'FL', 'AZ'});
 
-// Фильтрация по цене
-final affordableLiens = integration.getProducts(
-  minPrice: 1000.0,
-  maxPrice: 2000.0,
+// Получение доступных .rada файлов
+final availableStates = loader.getAvailableRadaStates();
+// ['FL', 'AZ', 'ALL', 'DEMO', 'DEFAULT']
+
+// Размер данных для штата
+final sizeInfo = await loader.getStateDataSize('FL');
+print('Products: ${sizeInfo['products']}');
+print('Size: ${sizeInfo['file_size_kb']} KB');
+
+// Перезагрузка данных
+await loader.reload();
+
+// Очистка кеша
+await loader.clearCache();
+```
+
+### Фильтрация данных
+
+```dart
+// По штату и округу
+final floridaProducts = await loader.getProducts(state: 'FL');
+final polkProducts = await loader.getProducts(
+  state: 'FL', 
+  county: 'Polk'
 );
 
-// Фильтрация по штату
-final floridaLiens = integration.getTaxLiensByState('FL');
+// С пагинацией
+final page1 = await loader.getProducts(limit: 20, offset: 0);
+final page2 = await loader.getProducts(limit: 20, offset: 20);
+
+// Получение списка округов
+final countyNames = await loader.getCountyNamesForState('FL');
+
+// Получение доступных штатов
+final states = await loader.getAvailableStates();
 ```
 
-### Работа с округами
+## 📊 Структура данных в .rada файлах
 
-```dart
-// Получение всех округов штата
-final counties = integration.getCountiesByState('FL');
+Файлы `.rada` содержат JSON со следующей структурой:
 
-// Поиск округа по имени
-final county = integration.getCountyByName('FL', 'Columbia');
-
-// Фильтрация по населению
-final largeCounties = integration.getCountiesByPopulationRange(
-  'FL', 
-  100000, 
-  1000000,
-);
+```json
+{
+  "products": [
+    {
+      "id": "...",
+      "sku": "...",
+      "name": "...",
+      "price": 1000.00,
+      "custom_attributes": [
+        {"attribute_code": "state", "value": "FL"},
+        {"attribute_code": "county", "value": "Polk"},
+        {"attribute_code": "interest_rate", "value": "18.0"}
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Florida",
+      "custom_attributes": [
+        {"attribute_code": "state_code", "value": "FL"}
+      ]
+    }
+  ],
+  "counties": {
+    "FL": [
+      {
+        "name": "Polk",
+        "code": "polk",
+        "population": 720000,
+        "area": 1866
+      }
+    ]
+  }
+}
 ```
 
-## Интеграция с flutter_magento
+## ⚠️ Миграция существующего кода
 
-Демо данные полностью совместимы с flutter_magento 3.2.0 и могут использоваться как:
+Если ваш код использует старые классы, выполните следующие шаги:
 
-1. **Замена реального API** для разработки и тестирования
-2. **Fallback данные** при отсутствии интернета
-3. **Демонстрационные данные** для презентаций
-4. **Тестовые данные** для unit и integration тестов
+1. **Замените импорты:**
+   ```dart
+   // Было:
+   import '../data/demo_data.dart';
+   
+   // Стало:
+   import '../services/offline_data_loader_service.dart';
+   // или
+   import '../services/demo_data_service.dart';
+   ```
 
-### Переключение между демо и реальными данными
+2. **Обновите вызовы методов на async:**
+   ```dart
+   // Было:
+   final products = TaxLienDemoData.demoProducts;
+   
+   // Стало:
+   final products = await loader.getProducts();
+   // или
+   final products = await demoService.getDemoProducts();
+   ```
 
-```dart
-// Включение демо режима
-integration.toggleDemoMode(true);
+3. **Обновите инициализацию:**
+   ```dart
+   // Добавьте инициализацию в начале
+   final loader = OfflineDataLoaderService();
+   await loader.initialize();
+   ```
 
-// Отключение демо режима
-integration.toggleDemoMode(false);
-```
+## 🎯 Преимущества новой архитектуры
 
-## Расширение данных
+✅ **Динамическая загрузка** - данные загружаются из файлов, а не хардкодятся  
+✅ **Мультиштатность** - поддержка загрузки данных по нескольким штатам  
+✅ **Кеширование** - автоматическое кеширование для быстрого доступа  
+✅ **Масштабируемость** - легко добавлять новые .rada файлы  
+✅ **Производительность** - оптимизированная загрузка и фильтрация  
+✅ **Офлайн режим** - полная поддержка работы без интернета  
 
-### Добавление новых штатов
+## 📝 Поддержка обратной совместимости
 
-1. Обновите `categories_demo_data.dart`
-2. Добавьте штат в `statesWithTaxLiens`
-3. Обновите `getStateNameByCode`
+Все старые классы сохранены с deprecation warnings:
+- `TaxLienDemoData` - все методы возвращают пустые массивы
+- `TaxLienCountiesDemoData` - все методы возвращают пустые массивы
+- `TaxLienCategoriesDemoData` - все методы возвращают пустые массивы (кроме `getStateNameByCode`)
+- `TaxLienHistoricalData` - все методы возвращают null/пустые массивы
+- `InitialPreloadData` - минимальная структура с указателями на новые сервисы
 
-### Добавление новых округов
+## 🔍 Troubleshooting
 
-1. Обновите `counties_demo_data.dart`
-2. Добавьте округа в соответствующий штат
-3. Обновите статистические методы
+**Проблема:** Получаю пустые массивы  
+**Решение:** Убедитесь что используете `OfflineDataLoaderService` или `DemoDataService`, а не старые классы напрямую
 
-### Добавление новых продуктов
+**Проблема:** Ошибка "Failed to load .rada files"  
+**Решение:** Проверьте наличие файлов в `/assets/` и добавьте их в `pubspec.yaml`
 
-1. Обновите `demo_data.dart`
-2. Добавьте продукт в массив `products`
-3. Убедитесь в корректности всех атрибутов
+**Проблема:** Методы не async  
+**Решение:** Обновите ваш код - все новые методы асинхронные
 
-## Производительность
+## 📚 Дополнительная информация
 
-- **Быстрая инициализация**: Данные загружаются из JSON
-- **Эффективный поиск**: Оптимизированные алгоритмы фильтрации
-- **Минимальная память**: Данные не кэшируются в памяти
-- **Масштабируемость**: Легко добавлять новые данные
+- Документация по OfflineDataLoaderService: см. код с комментариями
+- Документация по PreloadService: см. код с комментариями  
+- Примеры использования: `lib/services/demo_data_service.dart`
 
-## Безопасность
+---
 
-- **Нет реальных данных**: Все данные являются демонстрационными
-- **Валидация**: Все входные параметры проверяются
-- **Изоляция**: Демо данные не влияют на продакшн
-
-## Поддержка
-
-Для вопросов и предложений по демо данным обращайтесь к команде разработки TaxLien.online.
+**Версия:** 3.0.0  
+**Дата обновления:** 2025-01-14  
+**Статус:** ✅ Активно используется
