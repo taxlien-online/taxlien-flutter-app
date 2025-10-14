@@ -7,16 +7,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Service for loading offline data from .rada files
 /// Handles reading, parsing, and caching of preload data
 class OfflineDataLoaderService extends ChangeNotifier {
-  static const String _radaFilePath = 'assets/taxlien_data.rada';
+  // Маппинг штатов к .rada файлам
+  static const Map<String, String> stateRadaFiles = {
+    'FL': 'assets/taxlien_florida.rada',
+    'AZ': 'assets/taxlien_arizona.rada',
+    'ALL': 'assets/taxlien_data.rada',
+    'DEMO': 'assets/taxlien_demo.rada',
+    'DEFAULT': 'assets/taxlien.rada',
+  };
+
   static const String _cacheKeyPrefix = 'offline_data_';
   static const String _lastLoadKey = 'offline_data_last_load';
   static const String _dataVersionKey = 'offline_data_version';
+  static const String _selectedStatesKey = 'selected_rada_states';
 
   bool _isLoading = false;
   bool _isLoaded = false;
   String? _error;
   Map<String, dynamic>? _cachedData;
   DateTime? _lastLoadTime;
+  Set<String> _selectedStates = {'ALL'}; // По умолчанию все данные
 
   // Getters
   bool get isLoading => _isLoading;
@@ -24,12 +34,19 @@ class OfflineDataLoaderService extends ChangeNotifier {
   String? get error => _error;
   DateTime? get lastLoadTime => _lastLoadTime;
   Map<String, dynamic>? get cachedData => _cachedData;
+  Set<String> get selectedStates => Set.from(_selectedStates);
+  bool get isMultipleStates => _selectedStates.length > 1;
+  String get selectedState =>
+      _selectedStates.first; // Для обратной совместимости
 
   /// Initialize and load offline data
   Future<bool> initialize() async {
     try {
       _setLoading(true);
       _error = null;
+
+      // Загрузить сохраненные предпочтения штатов
+      await _loadStatePreferences();
 
       // Try to load from cache first
       final cachedSuccess = await _loadFromCache();
@@ -39,8 +56,8 @@ class OfflineDataLoaderService extends ChangeNotifier {
         return true;
       }
 
-      // Load from .rada file
-      final fileSuccess = await loadFromRadaFile();
+      // Load from .rada files based on selection
+      final fileSuccess = await loadSelectedStates();
 
       _setLoading(false);
       return fileSuccess;
@@ -51,43 +68,127 @@ class OfflineDataLoaderService extends ChangeNotifier {
     }
   }
 
-  /// Load data from .rada file
-  Future<bool> loadFromRadaFile() async {
+  /// Load saved state preferences
+  Future<void> _loadStatePreferences() async {
     try {
+      final prefs = await SharedPreferences.getInstance();
+      final savedStates = prefs.getStringList(_selectedStatesKey);
+
+      if (savedStates != null && savedStates.isNotEmpty) {
+        _selectedStates = savedStates.toSet();
+        if (kDebugMode) {
+          print('Loaded saved state selection: ${_selectedStates.join(", ")}');
+        }
+      }
+    } catch (e) {
       if (kDebugMode) {
-        print('Loading offline data from: $_radaFilePath');
+        print('Error loading state preferences: $e');
+      }
+    }
+  }
+
+  /// Load data from selected .rada files
+  Future<bool> loadSelectedStates() async {
+    try {
+      _setLoading(true);
+
+      if (kDebugMode) {
+        print('Loading offline data for states: ${_selectedStates.join(", ")}');
       }
 
-      // Load the .rada file as bytes
-      final ByteData data = await rootBundle.load(_radaFilePath);
-      final bytes = data.buffer.asUint8List();
+      Map<String, dynamic> combinedData = {
+        'products': [],
+        'categories': [],
+      };
 
-      // Parse .rada file format
-      // .rada files are expected to be JSON format (you can modify this based on actual format)
-      final jsonString = utf8.decode(bytes);
-      final parsedData = json.decode(jsonString) as Map<String, dynamic>;
+      if (_selectedStates.contains('ALL')) {
+        // Загружаем основной файл со всеми данными
+        final success = await _loadSingleFile(
+          stateRadaFiles['ALL']!,
+          combinedData,
+        );
 
-      _cachedData = parsedData;
+        if (!success) {
+          throw Exception('Failed to load ALL states file');
+        }
+      } else {
+        // Загружаем и комбинируем несколько файлов
+        for (var state in _selectedStates) {
+          if (stateRadaFiles.containsKey(state)) {
+            await _loadAndMergeFile(
+              stateRadaFiles[state]!,
+              state,
+              combinedData,
+            );
+          }
+        }
+      }
+
+      _cachedData = combinedData;
       _lastLoadTime = DateTime.now();
       _isLoaded = true;
       _error = null;
 
       // Cache the loaded data
-      await _saveToCache(parsedData);
+      await _saveToCache(combinedData);
 
       if (kDebugMode) {
-        print('Successfully loaded offline data from .rada file');
-        print('Data keys: ${parsedData.keys.join(", ")}');
+        print('Successfully loaded offline data');
+        print('States: ${_selectedStates.join(", ")}');
+        print('Total products: ${(combinedData['products'] as List).length}');
+        print(
+            'Total categories: ${(combinedData['categories'] as List).length}');
       }
 
+      _setLoading(false);
       notifyListeners();
       return true;
     } catch (e) {
-      _error = 'Failed to load from .rada file: $e';
+      _error = 'Failed to load from .rada files: $e';
       if (kDebugMode) {
-        print('Error loading .rada file: $e');
+        print('Error loading .rada files: $e');
       }
+      _setLoading(false);
       notifyListeners();
+      return false;
+    }
+  }
+
+  /// Load data from .rada file (legacy method)
+  Future<bool> loadFromRadaFile() async {
+    return await loadSelectedStates();
+  }
+
+  /// Load single file
+  Future<bool> _loadSingleFile(
+    String filePath,
+    Map<String, dynamic> targetData,
+  ) async {
+    try {
+      if (kDebugMode) {
+        print('Loading: $filePath');
+      }
+
+      // Load the .rada file as bytes
+      final ByteData data = await rootBundle.load(filePath);
+      final bytes = data.buffer.asUint8List();
+
+      // Parse .rada file format
+      final jsonString = utf8.decode(bytes);
+      final parsedData = json.decode(jsonString) as Map<String, dynamic>;
+
+      // Copy all data
+      targetData.addAll(parsedData);
+
+      if (kDebugMode) {
+        print('✓ Successfully loaded: $filePath');
+      }
+
+      return true;
+    } catch (e) {
+      if (kDebugMode) {
+        print('✗ Failed to load $filePath: $e');
+      }
       return false;
     }
   }
@@ -358,6 +459,106 @@ class OfflineDataLoaderService extends ChangeNotifier {
   Future<bool> reload() async {
     await clearCache();
     return await loadFromRadaFile();
+  }
+
+  /// Set selected states and reload data
+  Future<bool> setSelectedStates(Set<String> states) async {
+    if (states.isEmpty) {
+      _error = 'At least one state must be selected';
+      return false;
+    }
+
+    _selectedStates = states;
+
+    // Сохранить выбор
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setStringList(_selectedStatesKey, states.toList());
+
+      if (kDebugMode) {
+        print('Saved state selection: ${states.join(", ")}');
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error saving state selection: $e');
+      }
+    }
+
+    // Очистить кеш и загрузить новые данные
+    await clearCache();
+    return await loadSelectedStates();
+  }
+
+  /// Get list of available RADA states
+  List<String> getAvailableRadaStates() {
+    return stateRadaFiles.keys.toList();
+  }
+
+  /// Get data size estimate for a state
+  Future<Map<String, int>> getStateDataSize(String state) async {
+    if (!stateRadaFiles.containsKey(state)) {
+      return {'products': 0, 'categories': 0, 'file_size_kb': 0};
+    }
+
+    try {
+      final filePath = stateRadaFiles[state]!;
+      final ByteData data = await rootBundle.load(filePath);
+      final bytes = data.buffer.asUint8List();
+      final jsonString = utf8.decode(bytes);
+      final parsedData = json.decode(jsonString) as Map<String, dynamic>;
+
+      return {
+        'products': (parsedData['products'] as List?)?.length ?? 0,
+        'categories': (parsedData['categories'] as List?)?.length ?? 0,
+        'file_size_kb': (bytes.length / 1024).round(),
+      };
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error getting size for $state: $e');
+      }
+      return {'products': 0, 'categories': 0, 'file_size_kb': 0};
+    }
+  }
+
+  /// Load and merge data from a specific file
+  Future<void> _loadAndMergeFile(
+    String filePath,
+    String state,
+    Map<String, dynamic> targetData,
+  ) async {
+    try {
+      final ByteData data = await rootBundle.load(filePath);
+      final bytes = data.buffer.asUint8List();
+      final jsonString = utf8.decode(bytes);
+      final parsedData = json.decode(jsonString) as Map<String, dynamic>;
+
+      // Merge products
+      if (parsedData.containsKey('products')) {
+        final products = parsedData['products'] as List;
+        (targetData['products'] as List).addAll(products);
+      }
+
+      // Merge categories (avoid duplicates)
+      if (parsedData.containsKey('categories')) {
+        final categories = parsedData['categories'] as List;
+        final existingIds =
+            (targetData['categories'] as List).map((c) => c['id']).toSet();
+
+        for (var category in categories) {
+          if (!existingIds.contains(category['id'])) {
+            (targetData['categories'] as List).add(category);
+          }
+        }
+      }
+
+      if (kDebugMode) {
+        print('Merged data from $filePath for state $state');
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error loading $filePath: $e');
+      }
+    }
   }
 
   void _setLoading(bool loading) {

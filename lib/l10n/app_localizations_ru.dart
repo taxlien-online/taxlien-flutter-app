@@ -207,6 +207,18 @@ class AppLocalizationsRu extends AppLocalizations {
   String get ukrainian => 'Українська';
 
   @override
+  String get english => 'English';
+
+  @override
+  String get chinese => '中文';
+
+  @override
+  String get hindi => 'हिन्दी';
+
+  @override
+  String get thai => 'ไทย';
+
+  @override
   String dataLoadError(String error) {
     return 'Ошибка загрузки данных: $error';
   }

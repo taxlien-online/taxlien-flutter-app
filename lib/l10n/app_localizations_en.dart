@@ -206,6 +206,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ukrainian => 'Ukrainian';
 
   @override
+  String get english => 'English';
+
+  @override
+  String get chinese => 'Chinese';
+
+  @override
+  String get hindi => 'Hindi';
+
+  @override
+  String get thai => 'Thai';
+
+  @override
   String dataLoadError(String error) {
     return 'Data loading error: $error';
   }

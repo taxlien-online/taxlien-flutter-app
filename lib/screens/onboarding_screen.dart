@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../services/localization_service.dart';
 import '../services/theme_service.dart';
 import '../services/onboarding_service.dart';
+import '../services/onboarding_data_provider.dart';
 import '../services/tax_lien_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
@@ -36,45 +37,131 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
+  final OnboardingDataProvider _dataProvider = OnboardingDataProvider();
   int _currentPage = 0;
+  List<OnboardingPage> _pages = [];
+  bool _isLoading = true;
 
-  final List<OnboardingPage> _pages = [
-    OnboardingPage(
-      title: 'Добро пожаловать в TaxLien Marketplace',
-      subtitle: 'Платформа для инвестирования в налоговые закладные',
-      description:
-          'Откройте для себя мир прибыльных инвестиций в налоговые закладные. Получайте высокие проценты и диверсифицируйте свой портфель.',
-      icon: Icons.trending_up,
-      color: Colors.blue,
-    ),
-    OnboardingPage(
-      title: 'Как это работает',
-      subtitle: 'Простой процесс инвестирования',
-      description:
-          '1. Выберите налоговую закладную\n2. Разместите ставку\n3. Получайте проценты\n4. Дождитесь погашения или выкупа',
-      icon: Icons.how_to_reg,
-      color: Colors.green,
-    ),
-    OnboardingPage(
-      title: 'Безопасность и надежность',
-      subtitle: 'Ваши инвестиции под защитой',
-      description:
-          'Все сделки защищены законодательством. Налоговые закладные - это обеспеченные инвестиции с государственной гарантией.',
-      icon: Icons.security,
-      color: Colors.orange,
-    ),
-    OnboardingPage(
-      title: 'Начните инвестировать',
-      subtitle: 'Присоединяйтесь к тысячам инвесторов',
-      description:
-          'Создайте аккаунт и начните инвестировать уже сегодня. Минимальная сумма инвестиций от \$100.',
-      icon: Icons.rocket_launch,
-      color: Colors.purple,
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _loadOnboardingPages();
+  }
+
+  Future<void> _loadOnboardingPages() async {
+    try {
+      final result = await _dataProvider.getList(
+        sortField: 'order',
+        sortOrder: 'ASC',
+      );
+
+      final pagesData = List<Map<String, dynamic>>.from(result['data'] as List)
+          .where((page) => page['isActive'] == true)
+          .toList();
+
+      if (pagesData.isEmpty) {
+        // Use default pages if no data
+        _pages = _getDefaultPages();
+      } else {
+        _pages = pagesData
+            .map((data) => OnboardingPage(
+                  title: data['title'] as String,
+                  subtitle: data['subtitle'] as String,
+                  description: data['description'] as String,
+                  icon: _getIconData(data['iconName'] as String),
+                  color: _getColor(data['colorHex'] as String),
+                ))
+            .toList();
+      }
+
+      setState(() {
+        _isLoading = false;
+      });
+    } catch (e) {
+      // Fallback to default pages on error
+      setState(() {
+        _pages = _getDefaultPages();
+        _isLoading = false;
+      });
+    }
+  }
+
+  List<OnboardingPage> _getDefaultPages() {
+    return [
+      OnboardingPage(
+        title: 'Добро пожаловать в TaxLien Marketplace',
+        subtitle: 'Платформа для инвестирования в налоговые закладные',
+        description:
+            'Откройте для себя мир прибыльных инвестиций в налоговые закладные. Получайте высокие проценты и диверсифицируйте свой портфель.',
+        icon: Icons.trending_up,
+        color: Colors.blue,
+      ),
+      OnboardingPage(
+        title: 'Как это работает',
+        subtitle: 'Простой процесс инвестирования',
+        description:
+            '1. Выберите налоговую закладную\n2. Разместите ставку\n3. Получайте проценты\n4. Дождитесь погашения или выкупа',
+        icon: Icons.how_to_reg,
+        color: Colors.green,
+      ),
+      OnboardingPage(
+        title: 'Безопасность и надежность',
+        subtitle: 'Ваши инвестиции под защитой',
+        description:
+            'Все сделки защищены законодательством. Налоговые закладные - это обеспеченные инвестиции с государственной гарантией.',
+        icon: Icons.security,
+        color: Colors.orange,
+      ),
+      OnboardingPage(
+        title: 'Начните инвестировать',
+        subtitle: 'Присоединяйтесь к тысячам инвесторов',
+        description:
+            'Создайте аккаунт и начните инвестировать уже сегодня. Минимальная сумма инвестиций от \$100.',
+        icon: Icons.rocket_launch,
+        color: Colors.purple,
+      ),
+    ];
+  }
+
+  IconData _getIconData(String iconName) {
+    final iconMap = {
+      'trending_up': Icons.trending_up,
+      'how_to_reg': Icons.how_to_reg,
+      'security': Icons.security,
+      'rocket_launch': Icons.rocket_launch,
+      'person': Icons.person,
+      'shopping_cart': Icons.shopping_cart,
+      'wallet': Icons.wallet,
+      'analytics': Icons.analytics,
+      'settings': Icons.settings,
+      'home': Icons.home,
+      'favorite': Icons.favorite,
+      'star': Icons.star,
+      'info': Icons.info,
+      'help': Icons.help,
+      'check_circle': Icons.check_circle,
+    };
+    return iconMap[iconName] ?? Icons.info;
+  }
+
+  Color _getColor(String colorHex) {
+    try {
+      return Color(int.parse(colorHex.replaceFirst('#', '0xff')));
+    } catch (e) {
+      return Colors.blue;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Column(

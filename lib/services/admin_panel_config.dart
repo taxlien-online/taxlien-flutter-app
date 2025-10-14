@@ -24,6 +24,7 @@ class TaxLienAdminConfig {
       _createUserResource(),
       _createNFTResource(),
       _createAuctionResource(),
+      _createOnboardingResource(),
     ];
   }
 
@@ -598,6 +599,93 @@ class TaxLienAdminConfig {
         ),
         const ColumnConfig(
           key: 'created_at',
+          label: 'Created',
+          type: ColumnType.datetime,
+          sortable: true,
+        ),
+      ],
+      canCreate: true,
+      canEdit: true,
+      canDelete: true,
+    );
+  }
+
+  /// Onboarding Resource
+  static AdminResource _createOnboardingResource() {
+    return AdminResource(
+      name: 'onboarding_pages',
+      label: 'Onboarding',
+      icon: Icons.view_carousel,
+      columns: [
+        const ColumnConfig(
+          key: 'id',
+          label: 'ID',
+          type: ColumnType.text,
+          visible: false,
+        ),
+        const ColumnConfig(
+          key: 'order',
+          label: 'Order',
+          type: ColumnType.number,
+          required: true,
+          sortable: true,
+        ),
+        const ColumnConfig(
+          key: 'title',
+          label: 'Title',
+          type: ColumnType.text,
+          required: true,
+          sortable: true,
+        ),
+        const ColumnConfig(
+          key: 'subtitle',
+          label: 'Subtitle',
+          type: ColumnType.text,
+          required: true,
+        ),
+        const ColumnConfig(
+          key: 'description',
+          label: 'Description',
+          type: ColumnType.richText,
+          required: true,
+        ),
+        const ColumnConfig(
+          key: 'iconName',
+          label: 'Icon',
+          type: ColumnType.select,
+          options: [
+            'trending_up',
+            'how_to_reg',
+            'security',
+            'rocket_launch',
+            'person',
+            'shopping_cart',
+            'wallet',
+            'analytics',
+            'settings',
+            'home',
+            'favorite',
+            'star',
+            'info',
+            'help',
+            'check_circle',
+          ],
+          required: true,
+        ),
+        const ColumnConfig(
+          key: 'colorHex',
+          label: 'Color',
+          type: ColumnType.text,
+          required: true,
+        ),
+        const ColumnConfig(
+          key: 'isActive',
+          label: 'Active',
+          type: ColumnType.bool,
+          sortable: true,
+        ),
+        const ColumnConfig(
+          key: 'createdAt',
           label: 'Created',
           type: ColumnType.datetime,
           sortable: true,

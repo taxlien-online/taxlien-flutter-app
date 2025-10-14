@@ -206,6 +206,18 @@ class AppLocalizationsTh extends AppLocalizations {
   String get ukrainian => 'ยูเครน';
 
   @override
+  String get english => 'English';
+
+  @override
+  String get chinese => '中文';
+
+  @override
+  String get hindi => 'हिन्दी';
+
+  @override
+  String get thai => 'ไทย';
+
+  @override
   String dataLoadError(String error) {
     return 'ข้อผิดพลาดในการโหลดข้อมูล: $error';
   }
@@ -512,155 +524,156 @@ class AppLocalizationsTh extends AppLocalizations {
       'คุณแน่ใจหรือไม่ว่าต้องการออกจากระบบ?';
 
   @override
-  String get myInvestments => 'My Investments';
+  String get myInvestments => 'การลงทุนของฉัน';
 
   @override
-  String get myLiens => 'My Liens';
+  String get myLiens => 'จำนองของฉัน';
 
   @override
-  String get favorites => 'Favorites';
+  String get favorites => 'รายการโปรด';
 
   @override
-  String get statistics => 'Statistics';
+  String get statistics => 'สถิติ';
 
   @override
-  String get noInvestmentsYet => 'You don\'t have any investments yet';
+  String get noInvestmentsYet => 'คุณยังไม่มีการลงทุน';
 
   @override
-  String get goToMarketplace => 'Go to marketplace to buy tax liens';
+  String get goToMarketplace => 'ไปที่ตลาดเพื่อซื้อจำนองภาษี';
 
   @override
-  String get goToMarketplaceButton => 'Go to Marketplace';
+  String get goToMarketplaceButton => 'ไปที่ตลาด';
 
   @override
-  String get noFavoriteLiens => 'No favorite liens';
+  String get noFavoriteLiens => 'ไม่มีจำนองที่ชื่นชอบ';
 
   @override
-  String get addToFavoritesHint => 'Add liens to favorites for quick access';
+  String get addToFavoritesHint =>
+      'เพิ่มจำนองไปยังรายการโปรดเพื่อการเข้าถึงที่รวดเร็ว';
 
   @override
-  String get overallStatistics => 'Overall Statistics';
+  String get overallStatistics => 'สถิติโดยรวม';
 
   @override
-  String get totalInvested => 'Total Invested';
+  String get totalInvested => 'ลงทุนทั้งหมด';
 
   @override
-  String get currentValue => 'Current Value';
+  String get currentValue => 'มูลค่าปัจจุบัน';
 
   @override
-  String get profitLoss => 'Profit/Loss';
+  String get profitLoss => 'กำไร/ขาดทุน';
 
   @override
   String get roi => 'ROI';
 
   @override
-  String get statusStatistics => 'Status Statistics';
+  String get statusStatistics => 'สถิติสถานะ';
 
   @override
-  String get activeLiens => 'Active Liens';
+  String get activeLiens => 'จำนองที่ใช้งาน';
 
   @override
-  String get redeemedLiens => 'Redeemed Liens';
+  String get redeemedLiens => 'จำนองที่ไถ่ถอนแล้ว';
 
   @override
-  String get foreclosedLiens => 'Foreclosed Liens';
+  String get foreclosedLiens => 'จำนองที่ยึดแล้ว';
 
   @override
-  String get totalLiens => 'Total Liens';
+  String get totalLiens => 'จำนองทั้งหมด';
 
   @override
-  String get monthlyReturns => 'Monthly Returns';
+  String get monthlyReturns => 'ผลตอบแทนรายเดือน';
 
   @override
-  String get profitChartInDevelopment => 'Profit Chart\n(in development)';
+  String get profitChartInDevelopment => 'กราฟกำไร\n(กำลังพัฒนา)';
 
   @override
-  String get topPerformingLiens => 'Top Performing Liens';
+  String get topPerformingLiens => 'จำนองที่ทำกำไรสูงสุด';
 
   @override
-  String get investmentInfo => 'Investment Information';
+  String get investmentInfo => 'ข้อมูลการลงทุน';
 
   @override
-  String get purchaseDate => 'Purchase Date';
+  String get purchaseDate => 'วันที่ซื้อ';
 
   @override
-  String get purchaseAmount => 'Purchase Amount';
+  String get purchaseAmount => 'จำนวนเงินซื้อ';
 
   @override
-  String get daysInInvestment => 'Days in Investment';
+  String get daysInInvestment => 'วันในการลงทุน';
 
   @override
-  String get interestEarned => 'Interest Earned';
+  String get interestEarned => 'ดอกเบี้ยที่ได้รับ';
 
   @override
-  String get redemptionDate => 'Redemption Date';
+  String get redemptionDate => 'วันที่ไถ่ถอน';
 
   @override
-  String get digitalFreedomGateway => 'Digital Freedom Gateway';
+  String get digitalFreedomGateway => 'ประตูสู่เสรีภาพดิจิทัล';
 
   @override
-  String get connection => 'Connection';
+  String get connection => 'การเชื่อมต่อ';
 
   @override
-  String get calibrationScreenComingSoon => 'Calibration screen coming soon';
+  String get calibrationScreenComingSoon =>
+      'หน้าจอการปรับเทียบกำลังจะมาเร็วๆ นี้';
 
   @override
-  String get mediaManagementComingSoon => 'Media management coming soon';
+  String get mediaManagementComingSoon => 'การจัดการมีเดียกำลังจะมาเร็วๆ นี้';
 
   @override
-  String get lienSearch => 'Lien Search';
+  String get lienSearch => 'ค้นหาจำนอง';
 
   @override
-  String get searching => 'Searching...';
+  String get searching => 'กำลังค้นหา...';
 
   @override
-  String get noSearchHistory => 'No search history';
+  String get noSearchHistory => 'ไม่มีประวัติการค้นหา';
 
   @override
-  String get clearSearchHistory => 'Clear search history';
+  String get clearSearchHistory => 'ล้างประวัติการค้นหา';
 
   @override
-  String get searchHistory => 'Search History';
+  String get searchHistory => 'ประวัติการค้นหา';
 
   @override
-  String get recentSearches => 'Recent Searches';
+  String get recentSearches => 'การค้นหาล่าสุด';
 
   @override
-  String get purchase => 'Purchase';
+  String get purchase => 'ซื้อ';
 
   @override
-  String get searchHistoryEmpty => 'Search history is empty';
+  String get searchHistoryEmpty => 'ประวัติการค้นหาว่างเปล่า';
 
   @override
-  String get searchQueriesWillAppearHere =>
-      'Your search queries will appear here';
+  String get searchQueriesWillAppearHere => 'การค้นหาของคุณจะปรากฏที่นี่';
 
   @override
-  String get nothingFound => 'Nothing found';
+  String get nothingFound => 'ไม่พบอะไร';
 
   @override
-  String get tryChangingSearchQuery => 'Try changing your search query';
+  String get tryChangingSearchQuery => 'ลองเปลี่ยนคำค้นหาของคุณ';
 
   @override
   String foundLiensCount(int count) {
-    return 'Found: $count liens';
+    return 'พบ: $count จำนอง';
   }
 
   @override
   String daysAgo(int days) {
-    return '$days days ago';
+    return '$days วันที่แล้ว';
   }
 
   @override
   String hoursAgo(int hours) {
-    return '$hours hours ago';
+    return '$hours ชั่วโมงที่แล้ว';
   }
 
   @override
   String minutesAgo(int minutes) {
-    return '$minutes minutes ago';
+    return '$minutes นาทีที่แล้ว';
   }
 
   @override
-  String get justNow => 'Just now';
+  String get justNow => 'เมื่อสักครู่';
 }

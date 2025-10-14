@@ -258,6 +258,22 @@
   "@ukrainian": {
     "description": "यूक्रेनी भाषा का नाम"
   },
+  "english": "English",
+  "@english": {
+    "description": "अंग्रेजी भाषा का नाम"
+  },
+  "chinese": "中文",
+  "@chinese": {
+    "description": "चीनी भाषा का नाम"
+  },
+  "hindi": "हिन्दी",
+  "@hindi": {
+    "description": "हिन्दी भाषा का नाम"
+  },
+  "thai": "ไทย",
+  "@thai": {
+    "description": "थाई भाषा का नाम"
+  },
   "dataLoadError": "डेटा लोडिंग त्रुटि: {error}",
   "@dataLoadError": {
     "description": "डेटा लोडिंग त्रुटि संदेश",
@@ -717,5 +733,221 @@
   "logoutConfirmationMessage": "क्या आप वाकई लॉगआउट करना चाहते हैं?",
   "@logoutConfirmationMessage": {
     "description": "लॉगआउट पुष्टि संदेश"
+  },
+  "myInvestments": "मेरे निवेश",
+  "@myInvestments": {
+    "description": "मेरे निवेश स्क्रीन शीर्षक"
+  },
+  "myLiens": "मेरे लीयन",
+  "@myLiens": {
+    "description": "मेरे लीयन टैब शीर्षक"
+  },
+  "favorites": "पसंदीदा",
+  "@favorites": {
+    "description": "पसंदीदा टैब शीर्षक"
+  },
+  "statistics": "सांख्यिकी",
+  "@statistics": {
+    "description": "सांख्यिकी टैब शीर्षक"
+  },
+  "noInvestmentsYet": "आपके पास अभी तक कोई निवेश नहीं है",
+  "@noInvestmentsYet": {
+    "description": "कोई निवेश नहीं संदेश"
+  },
+  "goToMarketplace": "टैक्स लीयन खरीदने के लिए मार्केटप्लेस पर जाएं",
+  "@goToMarketplace": {
+    "description": "मार्केटप्लेस पर जाने का सुझाव"
+  },
+  "goToMarketplaceButton": "मार्केटप्लेस पर जाएं",
+  "@goToMarketplaceButton": {
+    "description": "मार्केटप्लेस पर जाने का बटन"
+  },
+  "noFavoriteLiens": "कोई पसंदीदा लीयन नहीं",
+  "@noFavoriteLiens": {
+    "description": "कोई पसंदीदा लीयन नहीं संदेश"
+  },
+  "addToFavoritesHint": "त्वरित पहुंच के लिए पसंदीदा में लीयन जोड़ें",
+  "@addToFavoritesHint": {
+    "description": "पसंदीदा में लीयन जोड़ने का संकेत"
+  },
+  "overallStatistics": "समग्र सांख्यिकी",
+  "@overallStatistics": {
+    "description": "समग्र सांख्यिकी अनुभाग शीर्षक"
+  },
+  "totalInvested": "कुल निवेश",
+  "@totalInvested": {
+    "description": "कुल निवेश राशि लेबल"
+  },
+  "currentValue": "वर्तमान मूल्य",
+  "@currentValue": {
+    "description": "वर्तमान मूल्य लेबल"
+  },
+  "profitLoss": "लाभ/हानि",
+  "@profitLoss": {
+    "description": "लाभ/हानि लेबल"
+  },
+  "roi": "ROI",
+  "@roi": {
+    "description": "ROI लेबल"
+  },
+  "statusStatistics": "स्थिति सांख्यिकी",
+  "@statusStatistics": {
+    "description": "स्थिति सांख्यिकी अनुभाग शीर्षक"
+  },
+  "activeLiens": "सक्रिय लीयन",
+  "@activeLiens": {
+    "description": "सक्रिय लीयन लेबल"
+  },
+  "redeemedLiens": "मोचित लीयन",
+  "@redeemedLiens": {
+    "description": "मोचित लीयन लेबल"
+  },
+  "foreclosedLiens": "जब्त लीयन",
+  "@foreclosedLiens": {
+    "description": "जब्त लीयन लेबल"
+  },
+  "totalLiens": "कुल लीयन",
+  "@totalLiens": {
+    "description": "कुल लीयन लेबल"
+  },
+  "monthlyReturns": "मासिक रिटर्न",
+  "@monthlyReturns": {
+    "description": "मासिक रिटर्न चार्ट शीर्षक"
+  },
+  "profitChartInDevelopment": "लाभ चार्ट\n(विकास में)",
+  "@profitChartInDevelopment": {
+    "description": "लाभ चार्ट विकास संदेश"
+  },
+  "topPerformingLiens": "शीर्ष प्रदर्शन लीयन",
+  "@topPerformingLiens": {
+    "description": "शीर्ष प्रदर्शन लीयन अनुभाग शीर्षक"
+  },
+  "investmentInfo": "निवेश जानकारी",
+  "@investmentInfo": {
+    "description": "निवेश जानकारी अनुभाग शीर्षक"
+  },
+  "purchaseDate": "खरीद तिथि",
+  "@purchaseDate": {
+    "description": "खरीद तिथि लेबल"
+  },
+  "purchaseAmount": "खरीद राशि",
+  "@purchaseAmount": {
+    "description": "खरीद राशि लेबल"
+  },
+  "daysInInvestment": "निवेश में दिन",
+  "@daysInInvestment": {
+    "description": "निवेश में दिन लेबल"
+  },
+  "interestEarned": "अर्जित ब्याज",
+  "@interestEarned": {
+    "description": "अर्जित ब्याज लेबल"
+  },
+  "redemptionDate": "मोचन तिथि",
+  "@redemptionDate": {
+    "description": "मोचन तिथि लेबल"
+  },
+  "digitalFreedomGateway": "डिजिटल स्वतंत्रता प्रवेश द्वार",
+  "@digitalFreedomGateway": {
+    "description": "ऐप उपशीर्षक"
+  },
+  "connection": "कनेक्शन",
+  "@connection": {
+    "description": "कनेक्शन बटन लेबल"
+  },
+  "calibrationScreenComingSoon": "कैलिब्रेशन स्क्रीन जल्द आ रही है",
+  "@calibrationScreenComingSoon": {
+    "description": "कैलिब्रेशन स्क्रीन जल्द आने वाला संदेश"
+  },
+  "mediaManagementComingSoon": "मीडिया प्रबंधन जल्द आ रहा है",
+  "@mediaManagementComingSoon": {
+    "description": "मीडिया प्रबंधन जल्द आने वाला संदेश"
+  },
+  "lienSearch": "लीयन खोज",
+  "@lienSearch": {
+    "description": "लीयन खोज स्क्रीन शीर्षक"
+  },
+  "searching": "खोज रहे हैं...",
+  "@searching": {
+    "description": "खोज संदेश"
+  },
+  "noSearchHistory": "कोई खोज इतिहास नहीं",
+  "@noSearchHistory": {
+    "description": "कोई खोज इतिहास नहीं संदेश"
+  },
+  "clearSearchHistory": "खोज इतिहास साफ़ करें",
+  "@clearSearchHistory": {
+    "description": "खोज इतिहास साफ़ करने का संदेश"
+  },
+  "searchHistory": "खोज इतिहास",
+  "@searchHistory": {
+    "description": "खोज इतिहास अनुभाग शीर्षक"
+  },
+  "recentSearches": "हाल की खोजें",
+  "@recentSearches": {
+    "description": "हाल की खोजें अनुभाग शीर्षक"
+  },
+  "purchase": "खरीदें",
+  "@purchase": {
+    "description": "खरीद बटन"
+  },
+  "searchHistoryEmpty": "खोज इतिहास खाली है",
+  "@searchHistoryEmpty": {
+    "description": "खोज इतिहास खाली संदेश"
+  },
+  "searchQueriesWillAppearHere": "आपकी खोज क्वेरी यहां दिखाई देंगी",
+  "@searchQueriesWillAppearHere": {
+    "description": "खोज क्वेरी यहां दिखाई देंगी संदेश"
+  },
+  "nothingFound": "कुछ नहीं मिला",
+  "@nothingFound": {
+    "description": "कुछ नहीं मिला संदेश"
+  },
+  "tryChangingSearchQuery": "अपनी खोज क्वेरी बदलने का प्रयास करें",
+  "@tryChangingSearchQuery": {
+    "description": "खोज क्वेरी बदलने का सुझाव संदेश"
+  },
+  "foundLiensCount": "मिला: {count} लीयन",
+  "@foundLiensCount": {
+    "description": "मिले लीयन की संख्या संदेश",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "daysAgo": "{days} दिन पहले",
+  "@daysAgo": {
+    "description": "दिन पहले प्रारूप",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": "{hours} घंटे पहले",
+  "@hoursAgo": {
+    "description": "घंटे पहले प्रारूप",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "minutesAgo": "{minutes} मिनट पहले",
+  "@minutesAgo": {
+    "description": "मिनट पहले प्रारूप",
+    "placeholders": {
+      "minutes": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "justNow": "अभी-अभी",
+  "@justNow": {
+    "description": "अभी-अभी प्रारूप"
   }
 } 

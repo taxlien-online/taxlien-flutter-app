@@ -676,13 +676,51 @@ class PreloadService {
     final isRadaLoaded = _offlineLoader?.isLoaded ?? false;
     final radaStats =
         isRadaLoaded ? await _offlineLoader!.getDataStats() : null;
+    final selectedStates = _offlineLoader?.selectedStates ?? {};
 
     return {
       'primary_source': isRadaLoaded ? 'taxlien_data.rada' : 'demo_data',
       'rada_loaded': isRadaLoaded,
       'rada_stats': radaStats,
+      'selected_states': selectedStates.toList(),
+      'is_multiple_states': selectedStates.length > 1,
       'fallback_available': true,
       'version': _currentVersion,
     };
+  }
+
+  // ===== State Selection Methods =====
+
+  /// Set selected states for RADA loading
+  static Future<bool> setSelectedStates(Set<String> states) async {
+    await _initializeServices();
+    if (_offlineLoader != null) {
+      return await _offlineLoader!.setSelectedStates(states);
+    }
+    return false;
+  }
+
+  /// Get currently selected states
+  static Set<String> getSelectedStates() {
+    return _offlineLoader?.selectedStates ?? {'ALL'};
+  }
+
+  /// Get available RADA state keys
+  static List<String> getAvailableRadaStates() {
+    return _offlineLoader?.getAvailableRadaStates() ?? [];
+  }
+
+  /// Get size information for a state
+  static Future<Map<String, int>> getStateDataSize(String state) async {
+    await _initializeServices();
+    if (_offlineLoader != null) {
+      return await _offlineLoader!.getStateDataSize(state);
+    }
+    return {'products': 0, 'categories': 0, 'file_size_kb': 0};
+  }
+
+  /// Check if using multiple states
+  static bool get isUsingMultipleStates {
+    return _offlineLoader?.isMultipleStates ?? false;
   }
 }

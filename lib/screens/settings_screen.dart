@@ -2,8 +2,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../services/theme_service.dart';
 import '../services/localization_service.dart';
+import '../services/onboarding_service.dart';
 import '../theme/app_colors.dart';
 import '../core/constants/app_constants.dart';
+import 'onboarding_management_screen.dart';
+import 'onboarding_screen.dart';
+import '../services/tax_lien_service.dart';
+import '../services/auth_service.dart';
+import '../services/database_service.dart';
+import '../services/user_preferences_service.dart';
 
 class SettingsScreen extends StatelessWidget {
   final ThemeService themeService;
@@ -48,6 +55,18 @@ class SettingsScreen extends StatelessWidget {
             icon: Icons.language,
             children: [
               _buildLanguageSelector(context),
+            ],
+          ),
+
+          const SizedBox(height: 24),
+
+          // Секция Onboarding
+          _buildSection(
+            context,
+            title: 'Onboarding',
+            icon: Icons.view_carousel,
+            children: [
+              _buildOnboardingSettings(context),
             ],
           ),
 
@@ -794,6 +813,88 @@ class SettingsScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildOnboardingSettings(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          leading: const Icon(Icons.replay),
+          title: const Text('Reset Onboarding'),
+          subtitle: const Text('View onboarding tutorial again'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => _resetOnboarding(context),
+        ),
+        const Divider(height: 1),
+        ListTile(
+          leading: const Icon(Icons.edit),
+          title: const Text('Manage Onboarding'),
+          subtitle: const Text('Edit onboarding pages in admin panel'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => _openOnboardingManagement(context),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _resetOnboarding(BuildContext context) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Reset Onboarding'),
+        content: const Text(
+          'This will show the onboarding tutorial on next app restart. Continue?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Reset'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      final onboardingService = OnboardingService();
+      await onboardingService.initialize();
+      await onboardingService.resetOnboarding();
+
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Onboarding reset. Restart app to view tutorial.'),
+            backgroundColor: Colors.green,
+          ),
+        );
+
+        // Navigate to onboarding
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => OnboardingScreen(
+              localizationService: localizationService,
+              themeService: themeService,
+              onboardingService: onboardingService,
+              taxLienService: TaxLienService(),
+              authService: AuthService(),
+              databaseService: DatabaseService(),
+              userPreferencesService: UserPreferencesService(),
+            ),
+          ),
+        );
+      }
+    }
+  }
+
+  void _openOnboardingManagement(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const OnboardingManagementScreen(),
       ),
     );
   }

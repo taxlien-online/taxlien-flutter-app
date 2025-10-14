@@ -30,6 +30,8 @@ import 'screens/portfolio_dashboard_screen.dart';
 import 'screens/ai_advisor_screen.dart';
 import 'screens/preload_info_screen.dart';
 import 'screens/sync_management_screen.dart';
+import 'screens/rada_state_selector_screen.dart';
+import 'screens/app_router_screen.dart';
 
 // Services
 import 'services/tax_lien_service.dart';
@@ -43,8 +45,8 @@ import 'services/preload_service.dart';
 import 'widgets/cloud_functions_status_widget.dart';
 
 // NFT and ICP libraries
-import 'package:flutter_magento_messenger/flutter_magento_messenger.dart';
-import 'package:flutter_magento_notifications/flutter_magento_notifications.dart';
+// import 'package:flutter_magento_messenger/flutter_magento_messenger.dart';
+// import 'package:flutter_magento_notifications/flutter_magento_notifications.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -124,11 +126,11 @@ Future<void> _initializeServices() async {
       await AnalyticsService.initialize();
     }
 
-    // Initialize Magento Messenger
-    await MessagingService().initialize();
+    // Initialize Magento Messenger (disabled - package not available)
+    // await MessagingService().initialize();
 
-    // Initialize Magento Notifications
-    await NotificationManager().initialize();
+    // Initialize Magento Notifications (disabled - package not available)
+    // await NotificationManager().initialize();
 
     // Initialize notifications (disabled for now to avoid Firebase issues)
     if (false && AppConstants.enablePushNotifications) {
@@ -213,8 +215,8 @@ class TaxLienApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
 
-      // Home page
-      home: const SimpleHomeScreen(),
+      // Home page - Shows onboarding for first-time users
+      home: const AppRouterScreen(),
 
       // Error handling
       builder: (context, child) {
@@ -874,6 +876,24 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
     });
   }
 
+  Future<String> _getCurrentStatesText() async {
+    final selectedStates = PreloadService.getSelectedStates();
+
+    if (selectedStates.contains('ALL')) {
+      return 'Все штаты';
+    } else if (selectedStates.length == 1) {
+      final state = selectedStates.first;
+      final stateNames = {
+        'FL': 'Florida',
+        'AZ': 'Arizona',
+        'DEMO': 'Demo',
+      };
+      return stateNames[state] ?? state;
+    } else {
+      return '${selectedStates.length} штатов выбрано';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1358,6 +1378,32 @@ class _SimpleHomeScreenState extends State<SimpleHomeScreen> {
                           builder: (context) => const PreloadInfoScreen(),
                         ),
                       );
+                    },
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.map),
+                    title: const Text('Выбор штатов'),
+                    subtitle: FutureBuilder<String>(
+                      future: _getCurrentStatesText(),
+                      builder: (context, snapshot) {
+                        return Text(
+                          snapshot.data ?? 'Загрузка...',
+                        );
+                      },
+                    ),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () async {
+                      final result = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RadaStateSelectorScreen(),
+                        ),
+                      );
+
+                      if (result == true && mounted) {
+                        setState(() {}); // Обновить UI
+                      }
                     },
                   ),
                   const Divider(height: 1),

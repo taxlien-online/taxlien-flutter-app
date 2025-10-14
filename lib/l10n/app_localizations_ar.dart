@@ -205,6 +205,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ukrainian => 'الأوكرانية';
 
   @override
+  String get english => 'English';
+
+  @override
+  String get chinese => 'Chinese';
+
+  @override
+  String get hindi => 'Hindi';
+
+  @override
+  String get thai => 'Thai';
+
+  @override
   String dataLoadError(String error) {
     return 'خطأ في تحميل البيانات: $error';
   }

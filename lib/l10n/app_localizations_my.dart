@@ -207,6 +207,18 @@ class AppLocalizationsMy extends AppLocalizations {
   String get ukrainian => 'ယူကရိန်း';
 
   @override
+  String get english => 'English';
+
+  @override
+  String get chinese => 'Chinese';
+
+  @override
+  String get hindi => 'Hindi';
+
+  @override
+  String get thai => 'Thai';
+
+  @override
   String dataLoadError(String error) {
     return 'ဒေတာ ဖွင့်ခြင်း အမှား: $error';
   }

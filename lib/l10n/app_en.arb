@@ -258,6 +258,22 @@
   "@ukrainian": {
     "description": "Ukrainian language name"
   },
+  "english": "English",
+  "@english": {
+    "description": "English language name"
+  },
+  "chinese": "Chinese",
+  "@chinese": {
+    "description": "Chinese language name"
+  },
+  "hindi": "Hindi",
+  "@hindi": {
+    "description": "Hindi language name"
+  },
+  "thai": "Thai",
+  "@thai": {
+    "description": "Thai language name"
+  },
   "dataLoadError": "Data loading error: {error}",
   "@dataLoadError": {
     "description": "Data loading error message",

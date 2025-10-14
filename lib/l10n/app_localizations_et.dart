@@ -207,6 +207,18 @@ class AppLocalizationsEt extends AppLocalizations {
   String get ukrainian => 'Ukraina';
 
   @override
+  String get english => 'English';
+
+  @override
+  String get chinese => 'Chinese';
+
+  @override
+  String get hindi => 'Hindi';
+
+  @override
+  String get thai => 'Thai';
+
+  @override
   String dataLoadError(String error) {
     return 'Andmete laadimise viga: $error';
   }

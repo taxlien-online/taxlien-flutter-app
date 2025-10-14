@@ -207,6 +207,18 @@ class AppLocalizationsHi extends AppLocalizations {
   String get ukrainian => 'यूक्रेनी';
 
   @override
+  String get english => 'English';
+
+  @override
+  String get chinese => '中文';
+
+  @override
+  String get hindi => 'हिन्दी';
+
+  @override
+  String get thai => 'ไทย';
+
+  @override
   String dataLoadError(String error) {
     return 'डेटा लोडिंग त्रुटि: $error';
   }
@@ -513,155 +525,155 @@ class AppLocalizationsHi extends AppLocalizations {
   String get logoutConfirmationMessage => 'क्या आप वाकई लॉगआउट करना चाहते हैं?';
 
   @override
-  String get myInvestments => 'My Investments';
+  String get myInvestments => 'मेरे निवेश';
 
   @override
-  String get myLiens => 'My Liens';
+  String get myLiens => 'मेरे लीयन';
 
   @override
-  String get favorites => 'Favorites';
+  String get favorites => 'पसंदीदा';
 
   @override
-  String get statistics => 'Statistics';
+  String get statistics => 'सांख्यिकी';
 
   @override
-  String get noInvestmentsYet => 'You don\'t have any investments yet';
+  String get noInvestmentsYet => 'आपके पास अभी तक कोई निवेश नहीं है';
 
   @override
-  String get goToMarketplace => 'Go to marketplace to buy tax liens';
+  String get goToMarketplace => 'टैक्स लीयन खरीदने के लिए मार्केटप्लेस पर जाएं';
 
   @override
-  String get goToMarketplaceButton => 'Go to Marketplace';
+  String get goToMarketplaceButton => 'मार्केटप्लेस पर जाएं';
 
   @override
-  String get noFavoriteLiens => 'No favorite liens';
+  String get noFavoriteLiens => 'कोई पसंदीदा लीयन नहीं';
 
   @override
-  String get addToFavoritesHint => 'Add liens to favorites for quick access';
+  String get addToFavoritesHint =>
+      'त्वरित पहुंच के लिए पसंदीदा में लीयन जोड़ें';
 
   @override
-  String get overallStatistics => 'Overall Statistics';
+  String get overallStatistics => 'समग्र सांख्यिकी';
 
   @override
-  String get totalInvested => 'Total Invested';
+  String get totalInvested => 'कुल निवेश';
 
   @override
-  String get currentValue => 'Current Value';
+  String get currentValue => 'वर्तमान मूल्य';
 
   @override
-  String get profitLoss => 'Profit/Loss';
+  String get profitLoss => 'लाभ/हानि';
 
   @override
   String get roi => 'ROI';
 
   @override
-  String get statusStatistics => 'Status Statistics';
+  String get statusStatistics => 'स्थिति सांख्यिकी';
 
   @override
-  String get activeLiens => 'Active Liens';
+  String get activeLiens => 'सक्रिय लीयन';
 
   @override
-  String get redeemedLiens => 'Redeemed Liens';
+  String get redeemedLiens => 'मोचित लीयन';
 
   @override
-  String get foreclosedLiens => 'Foreclosed Liens';
+  String get foreclosedLiens => 'जब्त लीयन';
 
   @override
-  String get totalLiens => 'Total Liens';
+  String get totalLiens => 'कुल लीयन';
 
   @override
-  String get monthlyReturns => 'Monthly Returns';
+  String get monthlyReturns => 'मासिक रिटर्न';
 
   @override
-  String get profitChartInDevelopment => 'Profit Chart\n(in development)';
+  String get profitChartInDevelopment => 'लाभ चार्ट\n(विकास में)';
 
   @override
-  String get topPerformingLiens => 'Top Performing Liens';
+  String get topPerformingLiens => 'शीर्ष प्रदर्शन लीयन';
 
   @override
-  String get investmentInfo => 'Investment Information';
+  String get investmentInfo => 'निवेश जानकारी';
 
   @override
-  String get purchaseDate => 'Purchase Date';
+  String get purchaseDate => 'खरीद तिथि';
 
   @override
-  String get purchaseAmount => 'Purchase Amount';
+  String get purchaseAmount => 'खरीद राशि';
 
   @override
-  String get daysInInvestment => 'Days in Investment';
+  String get daysInInvestment => 'निवेश में दिन';
 
   @override
-  String get interestEarned => 'Interest Earned';
+  String get interestEarned => 'अर्जित ब्याज';
 
   @override
-  String get redemptionDate => 'Redemption Date';
+  String get redemptionDate => 'मोचन तिथि';
 
   @override
-  String get digitalFreedomGateway => 'Digital Freedom Gateway';
+  String get digitalFreedomGateway => 'डिजिटल स्वतंत्रता प्रवेश द्वार';
 
   @override
-  String get connection => 'Connection';
+  String get connection => 'कनेक्शन';
 
   @override
-  String get calibrationScreenComingSoon => 'Calibration screen coming soon';
+  String get calibrationScreenComingSoon => 'कैलिब्रेशन स्क्रीन जल्द आ रही है';
 
   @override
-  String get mediaManagementComingSoon => 'Media management coming soon';
+  String get mediaManagementComingSoon => 'मीडिया प्रबंधन जल्द आ रहा है';
 
   @override
-  String get lienSearch => 'Lien Search';
+  String get lienSearch => 'लीयन खोज';
 
   @override
-  String get searching => 'Searching...';
+  String get searching => 'खोज रहे हैं...';
 
   @override
-  String get noSearchHistory => 'No search history';
+  String get noSearchHistory => 'कोई खोज इतिहास नहीं';
 
   @override
-  String get clearSearchHistory => 'Clear search history';
+  String get clearSearchHistory => 'खोज इतिहास साफ़ करें';
 
   @override
-  String get searchHistory => 'Search History';
+  String get searchHistory => 'खोज इतिहास';
 
   @override
-  String get recentSearches => 'Recent Searches';
+  String get recentSearches => 'हाल की खोजें';
 
   @override
-  String get purchase => 'Purchase';
+  String get purchase => 'खरीदें';
 
   @override
-  String get searchHistoryEmpty => 'Search history is empty';
+  String get searchHistoryEmpty => 'खोज इतिहास खाली है';
 
   @override
-  String get searchQueriesWillAppearHere =>
-      'Your search queries will appear here';
+  String get searchQueriesWillAppearHere => 'आपकी खोज क्वेरी यहां दिखाई देंगी';
 
   @override
-  String get nothingFound => 'Nothing found';
+  String get nothingFound => 'कुछ नहीं मिला';
 
   @override
-  String get tryChangingSearchQuery => 'Try changing your search query';
+  String get tryChangingSearchQuery => 'अपनी खोज क्वेरी बदलने का प्रयास करें';
 
   @override
   String foundLiensCount(int count) {
-    return 'Found: $count liens';
+    return 'मिला: $count लीयन';
   }
 
   @override
   String daysAgo(int days) {
-    return '$days days ago';
+    return '$days दिन पहले';
   }
 
   @override
   String hoursAgo(int hours) {
-    return '$hours hours ago';
+    return '$hours घंटे पहले';
   }
 
   @override
   String minutesAgo(int minutes) {
-    return '$minutes minutes ago';
+    return '$minutes मिनट पहले';
   }
 
   @override
-  String get justNow => 'Just now';
+  String get justNow => 'अभी-अभी';
 }

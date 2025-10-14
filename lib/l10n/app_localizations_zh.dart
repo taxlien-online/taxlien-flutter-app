@@ -200,6 +200,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ukrainian => '乌克兰语';
 
   @override
+  String get english => 'English';
+
+  @override
+  String get chinese => '中文';
+
+  @override
+  String get hindi => 'हिन्दी';
+
+  @override
+  String get thai => 'ไทย';
+
+  @override
   String dataLoadError(String error) {
     return '数据加载错误：$error';
   }
@@ -505,155 +517,154 @@ class AppLocalizationsZh extends AppLocalizations {
   String get logoutConfirmationMessage => '您确定要登出吗？';
 
   @override
-  String get myInvestments => 'My Investments';
+  String get myInvestments => '我的投资';
 
   @override
-  String get myLiens => 'My Liens';
+  String get myLiens => '我的留置权';
 
   @override
-  String get favorites => 'Favorites';
+  String get favorites => '收藏';
 
   @override
-  String get statistics => 'Statistics';
+  String get statistics => '统计';
 
   @override
-  String get noInvestmentsYet => 'You don\'t have any investments yet';
+  String get noInvestmentsYet => '您还没有任何投资';
 
   @override
-  String get goToMarketplace => 'Go to marketplace to buy tax liens';
+  String get goToMarketplace => '前往市场购买税务留置权';
 
   @override
-  String get goToMarketplaceButton => 'Go to Marketplace';
+  String get goToMarketplaceButton => '前往市场';
 
   @override
-  String get noFavoriteLiens => 'No favorite liens';
+  String get noFavoriteLiens => '没有收藏的留置权';
 
   @override
-  String get addToFavoritesHint => 'Add liens to favorites for quick access';
+  String get addToFavoritesHint => '将留置权添加到收藏以快速访问';
 
   @override
-  String get overallStatistics => 'Overall Statistics';
+  String get overallStatistics => '总体统计';
 
   @override
-  String get totalInvested => 'Total Invested';
+  String get totalInvested => '总投资额';
 
   @override
-  String get currentValue => 'Current Value';
+  String get currentValue => '当前价值';
 
   @override
-  String get profitLoss => 'Profit/Loss';
+  String get profitLoss => '盈亏';
 
   @override
-  String get roi => 'ROI';
+  String get roi => '投资回报率';
 
   @override
-  String get statusStatistics => 'Status Statistics';
+  String get statusStatistics => '状态统计';
 
   @override
-  String get activeLiens => 'Active Liens';
+  String get activeLiens => '活跃留置权';
 
   @override
-  String get redeemedLiens => 'Redeemed Liens';
+  String get redeemedLiens => '已赎回留置权';
 
   @override
-  String get foreclosedLiens => 'Foreclosed Liens';
+  String get foreclosedLiens => '已止赎留置权';
 
   @override
-  String get totalLiens => 'Total Liens';
+  String get totalLiens => '总留置权';
 
   @override
-  String get monthlyReturns => 'Monthly Returns';
+  String get monthlyReturns => '月度回报';
 
   @override
-  String get profitChartInDevelopment => 'Profit Chart\n(in development)';
+  String get profitChartInDevelopment => '利润图表\n（开发中）';
 
   @override
-  String get topPerformingLiens => 'Top Performing Liens';
+  String get topPerformingLiens => '表现最佳的留置权';
 
   @override
-  String get investmentInfo => 'Investment Information';
+  String get investmentInfo => '投资信息';
 
   @override
-  String get purchaseDate => 'Purchase Date';
+  String get purchaseDate => '购买日期';
 
   @override
-  String get purchaseAmount => 'Purchase Amount';
+  String get purchaseAmount => '购买金额';
 
   @override
-  String get daysInInvestment => 'Days in Investment';
+  String get daysInInvestment => '投资天数';
 
   @override
-  String get interestEarned => 'Interest Earned';
+  String get interestEarned => '赚取的利息';
 
   @override
-  String get redemptionDate => 'Redemption Date';
+  String get redemptionDate => '赎回日期';
 
   @override
-  String get digitalFreedomGateway => 'Digital Freedom Gateway';
+  String get digitalFreedomGateway => '数字自由之门';
 
   @override
-  String get connection => 'Connection';
+  String get connection => '连接';
 
   @override
-  String get calibrationScreenComingSoon => 'Calibration screen coming soon';
+  String get calibrationScreenComingSoon => '校准屏幕即将推出';
 
   @override
-  String get mediaManagementComingSoon => 'Media management coming soon';
+  String get mediaManagementComingSoon => '媒体管理即将推出';
 
   @override
-  String get lienSearch => 'Lien Search';
+  String get lienSearch => '留置权搜索';
 
   @override
-  String get searching => 'Searching...';
+  String get searching => '搜索中...';
 
   @override
-  String get noSearchHistory => 'No search history';
+  String get noSearchHistory => '没有搜索历史';
 
   @override
-  String get clearSearchHistory => 'Clear search history';
+  String get clearSearchHistory => '清除搜索历史';
 
   @override
-  String get searchHistory => 'Search History';
+  String get searchHistory => '搜索历史';
 
   @override
-  String get recentSearches => 'Recent Searches';
+  String get recentSearches => '最近搜索';
 
   @override
-  String get purchase => 'Purchase';
+  String get purchase => '购买';
 
   @override
-  String get searchHistoryEmpty => 'Search history is empty';
+  String get searchHistoryEmpty => '搜索历史为空';
 
   @override
-  String get searchQueriesWillAppearHere =>
-      'Your search queries will appear here';
+  String get searchQueriesWillAppearHere => '您的搜索查询将显示在这里';
 
   @override
-  String get nothingFound => 'Nothing found';
+  String get nothingFound => '未找到任何内容';
 
   @override
-  String get tryChangingSearchQuery => 'Try changing your search query';
+  String get tryChangingSearchQuery => '尝试更改搜索查询';
 
   @override
   String foundLiensCount(int count) {
-    return 'Found: $count liens';
+    return '找到：$count 个留置权';
   }
 
   @override
   String daysAgo(int days) {
-    return '$days days ago';
+    return '$days 天前';
   }
 
   @override
   String hoursAgo(int hours) {
-    return '$hours hours ago';
+    return '$hours 小时前';
   }
 
   @override
   String minutesAgo(int minutes) {
-    return '$minutes minutes ago';
+    return '$minutes 分钟前';
   }
 
   @override
-  String get justNow => 'Just now';
+  String get justNow => '刚刚';
 }

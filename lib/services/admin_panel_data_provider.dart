@@ -2,10 +2,12 @@ import 'dart:convert';
 import '../core/admin_panel/data_provider.dart';
 import 'api_service.dart';
 import 'server_config_service.dart';
+import 'onboarding_data_provider.dart';
 
 /// Custom data provider that adapts the existing API service to admin panel
 class TaxLienDataProvider implements AdminDataProvider {
   final ApiService _apiService;
+  final OnboardingDataProvider _onboardingProvider = OnboardingDataProvider();
 
   TaxLienDataProvider({
     required ApiService apiService,
@@ -19,6 +21,24 @@ class TaxLienDataProvider implements AdminDataProvider {
     List<FilterConfig>? filters,
     SortConfig? sort,
   }) async {
+    // Handle onboarding_pages locally
+    if (resource == 'onboarding_pages') {
+      try {
+        final result = await _onboardingProvider.getList(
+          page: pagination?.page ?? 1,
+          perPage: pagination?.pageSize ?? 100,
+          sortField: sort?.field,
+          sortOrder: sort?.ascending == true ? 'ASC' : 'DESC',
+        );
+        return ListResult(
+          data: List<Map<String, dynamic>>.from(result['data'] as List),
+          total: result['total'] as int,
+        );
+      } catch (e) {
+        throw Exception('Error getting onboarding pages: $e');
+      }
+    }
+
     try {
       // Build query parameters
       final queryParams = <String, String>{};
@@ -70,6 +90,11 @@ class TaxLienDataProvider implements AdminDataProvider {
 
   @override
   Future<Map<String, dynamic>> getOne(String resource, String id) async {
+    // Handle onboarding_pages locally
+    if (resource == 'onboarding_pages') {
+      return await _onboardingProvider.getOne(id);
+    }
+
     try {
       final response =
           await _apiService.makeRequest('GET', '/api/admin/$resource/$id');
@@ -90,6 +115,11 @@ class TaxLienDataProvider implements AdminDataProvider {
   @override
   Future<Map<String, dynamic>> create(
       String resource, Map<String, dynamic> data) async {
+    // Handle onboarding_pages locally
+    if (resource == 'onboarding_pages') {
+      return await _onboardingProvider.create(data);
+    }
+
     try {
       final response = await _apiService.makeRequest(
         'POST',
@@ -111,6 +141,11 @@ class TaxLienDataProvider implements AdminDataProvider {
   @override
   Future<Map<String, dynamic>> update(
       String resource, String id, Map<String, dynamic> data) async {
+    // Handle onboarding_pages locally
+    if (resource == 'onboarding_pages') {
+      return await _onboardingProvider.update(id, data);
+    }
+
     try {
       final response = await _apiService.makeRequest(
         'PUT',
@@ -131,6 +166,11 @@ class TaxLienDataProvider implements AdminDataProvider {
 
   @override
   Future<void> delete(String resource, String id) async {
+    // Handle onboarding_pages locally
+    if (resource == 'onboarding_pages') {
+      return await _onboardingProvider.delete(id);
+    }
+
     try {
       final response =
           await _apiService.makeRequest('DELETE', '/api/admin/$resource/$id');

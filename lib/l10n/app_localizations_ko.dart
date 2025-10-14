@@ -201,6 +201,18 @@ class AppLocalizationsKo extends AppLocalizations {
   String get ukrainian => '우크라이나어';
 
   @override
+  String get english => 'English';
+
+  @override
+  String get chinese => 'Chinese';
+
+  @override
+  String get hindi => 'Hindi';
+
+  @override
+  String get thai => 'Thai';
+
+  @override
   String dataLoadError(String error) {
     return '데이터 로드 오류: $error';
   }

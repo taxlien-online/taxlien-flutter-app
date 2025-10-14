@@ -514,6 +514,30 @@ abstract class AppLocalizations {
   /// **'Ukrainian'**
   String get ukrainian;
 
+  /// English language name
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// Chinese language name
+  ///
+  /// In en, this message translates to:
+  /// **'Chinese'**
+  String get chinese;
+
+  /// Hindi language name
+  ///
+  /// In en, this message translates to:
+  /// **'Hindi'**
+  String get hindi;
+
+  /// Thai language name
+  ///
+  /// In en, this message translates to:
+  /// **'Thai'**
+  String get thai;
+
   /// Data loading error message
   ///
   /// In en, this message translates to:

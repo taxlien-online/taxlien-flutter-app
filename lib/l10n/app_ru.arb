@@ -258,6 +258,22 @@
   "@ukrainian": {
     "description": "Название украинского языка"
   },
+  "english": "English",
+  "@english": {
+    "description": "Название английского языка"
+  },
+  "chinese": "中文",
+  "@chinese": {
+    "description": "Название китайского языка"
+  },
+  "hindi": "हिन्दी",
+  "@hindi": {
+    "description": "Название языка хинди"
+  },
+  "thai": "ไทย",
+  "@thai": {
+    "description": "Название тайского языка"
+  },
   "dataLoadError": "Ошибка загрузки данных: {error}",
   "@dataLoadError": {
     "description": "Сообщение об ошибке загрузки данных",

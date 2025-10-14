@@ -258,6 +258,22 @@
   "@ukrainian": {
     "description": "乌克兰语语言名称"
   },
+  "english": "English",
+  "@english": {
+    "description": "英语语言名称"
+  },
+  "chinese": "中文",
+  "@chinese": {
+    "description": "中文语言名称"
+  },
+  "hindi": "हिन्दी",
+  "@hindi": {
+    "description": "印地语语言名称"
+  },
+  "thai": "ไทย",
+  "@thai": {
+    "description": "泰语语言名称"
+  },
   "dataLoadError": "数据加载错误：{error}",
   "@dataLoadError": {
     "description": "数据加载错误消息",
@@ -717,5 +733,221 @@
   "logoutConfirmationMessage": "您确定要登出吗？",
   "@logoutConfirmationMessage": {
     "description": "登出确认消息"
+  },
+  "myInvestments": "我的投资",
+  "@myInvestments": {
+    "description": "我的投资屏幕标题"
+  },
+  "myLiens": "我的留置权",
+  "@myLiens": {
+    "description": "我的留置权标签标题"
+  },
+  "favorites": "收藏",
+  "@favorites": {
+    "description": "收藏标签标题"
+  },
+  "statistics": "统计",
+  "@statistics": {
+    "description": "统计标签标题"
+  },
+  "noInvestmentsYet": "您还没有任何投资",
+  "@noInvestmentsYet": {
+    "description": "无投资消息"
+  },
+  "goToMarketplace": "前往市场购买税务留置权",
+  "@goToMarketplace": {
+    "description": "前往市场的建议"
+  },
+  "goToMarketplaceButton": "前往市场",
+  "@goToMarketplaceButton": {
+    "description": "前往市场按钮"
+  },
+  "noFavoriteLiens": "没有收藏的留置权",
+  "@noFavoriteLiens": {
+    "description": "没有收藏留置权消息"
+  },
+  "addToFavoritesHint": "将留置权添加到收藏以快速访问",
+  "@addToFavoritesHint": {
+    "description": "添加留置权到收藏的提示"
+  },
+  "overallStatistics": "总体统计",
+  "@overallStatistics": {
+    "description": "总体统计部分标题"
+  },
+  "totalInvested": "总投资额",
+  "@totalInvested": {
+    "description": "总投资额标签"
+  },
+  "currentValue": "当前价值",
+  "@currentValue": {
+    "description": "当前价值标签"
+  },
+  "profitLoss": "盈亏",
+  "@profitLoss": {
+    "description": "盈亏标签"
+  },
+  "roi": "投资回报率",
+  "@roi": {
+    "description": "投资回报率标签"
+  },
+  "statusStatistics": "状态统计",
+  "@statusStatistics": {
+    "description": "状态统计部分标题"
+  },
+  "activeLiens": "活跃留置权",
+  "@activeLiens": {
+    "description": "活跃留置权标签"
+  },
+  "redeemedLiens": "已赎回留置权",
+  "@redeemedLiens": {
+    "description": "已赎回留置权标签"
+  },
+  "foreclosedLiens": "已止赎留置权",
+  "@foreclosedLiens": {
+    "description": "已止赎留置权标签"
+  },
+  "totalLiens": "总留置权",
+  "@totalLiens": {
+    "description": "总留置权标签"
+  },
+  "monthlyReturns": "月度回报",
+  "@monthlyReturns": {
+    "description": "月度回报图表标题"
+  },
+  "profitChartInDevelopment": "利润图表\n（开发中）",
+  "@profitChartInDevelopment": {
+    "description": "利润图表开发消息"
+  },
+  "topPerformingLiens": "表现最佳的留置权",
+  "@topPerformingLiens": {
+    "description": "表现最佳留置权部分标题"
+  },
+  "investmentInfo": "投资信息",
+  "@investmentInfo": {
+    "description": "投资信息部分标题"
+  },
+  "purchaseDate": "购买日期",
+  "@purchaseDate": {
+    "description": "购买日期标签"
+  },
+  "purchaseAmount": "购买金额",
+  "@purchaseAmount": {
+    "description": "购买金额标签"
+  },
+  "daysInInvestment": "投资天数",
+  "@daysInInvestment": {
+    "description": "投资天数标签"
+  },
+  "interestEarned": "赚取的利息",
+  "@interestEarned": {
+    "description": "赚取利息标签"
+  },
+  "redemptionDate": "赎回日期",
+  "@redemptionDate": {
+    "description": "赎回日期标签"
+  },
+  "digitalFreedomGateway": "数字自由之门",
+  "@digitalFreedomGateway": {
+    "description": "应用副标题"
+  },
+  "connection": "连接",
+  "@connection": {
+    "description": "连接按钮标签"
+  },
+  "calibrationScreenComingSoon": "校准屏幕即将推出",
+  "@calibrationScreenComingSoon": {
+    "description": "校准屏幕即将推出消息"
+  },
+  "mediaManagementComingSoon": "媒体管理即将推出",
+  "@mediaManagementComingSoon": {
+    "description": "媒体管理即将推出消息"
+  },
+  "lienSearch": "留置权搜索",
+  "@lienSearch": {
+    "description": "留置权搜索屏幕标题"
+  },
+  "searching": "搜索中...",
+  "@searching": {
+    "description": "搜索消息"
+  },
+  "noSearchHistory": "没有搜索历史",
+  "@noSearchHistory": {
+    "description": "没有搜索历史消息"
+  },
+  "clearSearchHistory": "清除搜索历史",
+  "@clearSearchHistory": {
+    "description": "清除搜索历史消息"
+  },
+  "searchHistory": "搜索历史",
+  "@searchHistory": {
+    "description": "搜索历史部分标题"
+  },
+  "recentSearches": "最近搜索",
+  "@recentSearches": {
+    "description": "最近搜索部分标题"
+  },
+  "purchase": "购买",
+  "@purchase": {
+    "description": "购买按钮"
+  },
+  "searchHistoryEmpty": "搜索历史为空",
+  "@searchHistoryEmpty": {
+    "description": "搜索历史为空消息"
+  },
+  "searchQueriesWillAppearHere": "您的搜索查询将显示在这里",
+  "@searchQueriesWillAppearHere": {
+    "description": "搜索查询将显示在这里消息"
+  },
+  "nothingFound": "未找到任何内容",
+  "@nothingFound": {
+    "description": "未找到任何内容消息"
+  },
+  "tryChangingSearchQuery": "尝试更改搜索查询",
+  "@tryChangingSearchQuery": {
+    "description": "尝试更改搜索查询消息"
+  },
+  "foundLiensCount": "找到：{count} 个留置权",
+  "@foundLiensCount": {
+    "description": "找到留置权数量消息",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "25"
+      }
+    }
+  },
+  "daysAgo": "{days} 天前",
+  "@daysAgo": {
+    "description": "天前格式",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "hoursAgo": "{hours} 小时前",
+  "@hoursAgo": {
+    "description": "小时前格式",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "minutesAgo": "{minutes} 分钟前",
+  "@minutesAgo": {
+    "description": "分钟前格式",
+    "placeholders": {
+      "minutes": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
+  "justNow": "刚刚",
+  "@justNow": {
+    "description": "刚刚格式"
   }
 } 
