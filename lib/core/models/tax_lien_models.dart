@@ -36,6 +36,10 @@ class TaxLien {
   final String? additionalInfo;
   final bool? isAvailable;
 
+  // Unified system fields
+  final bool isLocked;
+  final String? lockedForNFT; // NFT ID if tokenized
+
   const TaxLien({
     required this.id,
     required this.propertyAddress,
@@ -66,6 +70,8 @@ class TaxLien {
     this.salePrice,
     this.additionalInfo,
     this.isAvailable,
+    this.isLocked = false,
+    this.lockedForNFT,
   });
 
   factory TaxLien.fromJson(Map<String, dynamic> json) =>
@@ -102,6 +108,8 @@ class TaxLien {
     double? salePrice,
     String? additionalInfo,
     bool? isAvailable,
+    bool? isLocked,
+    String? lockedForNFT,
   }) {
     return TaxLien(
       id: id ?? this.id,
@@ -133,8 +141,15 @@ class TaxLien {
       salePrice: salePrice ?? this.salePrice,
       additionalInfo: additionalInfo ?? this.additionalInfo,
       isAvailable: isAvailable ?? this.isAvailable,
+      isLocked: isLocked ?? this.isLocked,
+      lockedForNFT: lockedForNFT ?? this.lockedForNFT,
     );
   }
+
+  // Helper getters
+  double get lienAmount => taxAmount;
+  bool get canBeTokenized => !isLocked && status == 'active';
+  bool get isTokenized => lockedForNFT != null;
 
   // Computed properties for compatibility
   String get address => propertyAddress;

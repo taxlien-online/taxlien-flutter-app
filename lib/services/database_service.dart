@@ -26,8 +26,9 @@ class DatabaseService {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
     );
   }
 
@@ -49,7 +50,9 @@ class DatabaseService {
         images TEXT NOT NULL,
         metadata TEXT,
         created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL
+        updated_at TEXT NOT NULL,
+        is_locked INTEGER DEFAULT 0,
+        locked_for_nft TEXT
       )
     ''');
 
@@ -122,11 +125,7 @@ class DatabaseService {
 
   Future<int> deleteTaxLien(String id) async {
     final db = await database;
-    return await db.delete(
-      'tax_liens',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    return await db.delete('tax_liens', where: 'id = ?', whereArgs: [id]);
   }
 
   // Tax Lien NFT CRUD operations
@@ -177,21 +176,16 @@ class DatabaseService {
 
   Future<int> deleteTaxLienNFT(String id) async {
     final db = await database;
-    return await db.delete(
-      'tax_lien_nfts',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    return await db.delete('tax_lien_nfts', where: 'id = ?', whereArgs: [id]);
   }
 
   // User preferences
   Future<void> setPreference(String key, String value) async {
     final db = await database;
-    await db.insert(
-      'user_preferences',
-      {'key': key, 'value': value},
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+    await db.insert('user_preferences', {
+      'key': key,
+      'value': value,
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<String?> getPreference(String key) async {
@@ -240,11 +234,10 @@ class DatabaseService {
     try {
       final db = await database;
       final timestamp = DateTime.now().millisecondsSinceEpoch;
-      await db.insert(
-        'user_preferences',
-        {'key': 'search_history_$timestamp', 'value': query},
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      await db.insert('user_preferences', {
+        'key': 'search_history_$timestamp',
+        'value': query,
+      }, conflictAlgorithm: ConflictAlgorithm.replace);
     } catch (e) {
       // Ignore errors
     }
