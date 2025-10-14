@@ -85,6 +85,48 @@ class DatabaseService {
         value TEXT NOT NULL
       )
     ''');
+    
+    // Create locked assets table
+    await db.execute('''
+      CREATE TABLE locked_assets (
+        id TEXT PRIMARY KEY,
+        asset_id TEXT NOT NULL,
+        asset_type TEXT NOT NULL,
+        locked_at TEXT NOT NULL,
+        unlock_at TEXT NOT NULL,
+        collateral_value REAL NOT NULL,
+        loan_amount REAL NOT NULL,
+        repayment_amount REAL NOT NULL,
+        status TEXT NOT NULL,
+        purpose TEXT NOT NULL,
+        contract_id TEXT
+      )
+    ''');
+  }
+  
+  Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      // Add new columns to tax_liens
+      await db.execute('ALTER TABLE tax_liens ADD COLUMN is_locked INTEGER DEFAULT 0');
+      await db.execute('ALTER TABLE tax_liens ADD COLUMN locked_for_nft TEXT');
+      
+      // Create locked assets table
+      await db.execute('''
+        CREATE TABLE IF NOT EXISTS locked_assets (
+          id TEXT PRIMARY KEY,
+          asset_id TEXT NOT NULL,
+          asset_type TEXT NOT NULL,
+          locked_at TEXT NOT NULL,
+          unlock_at TEXT NOT NULL,
+          collateral_value REAL NOT NULL,
+          loan_amount REAL NOT NULL,
+          repayment_amount REAL NOT NULL,
+          status TEXT NOT NULL,
+          purpose TEXT NOT NULL,
+          contract_id TEXT
+        )
+      ''');
+    }
   }
 
   // Tax Lien CRUD operations
@@ -294,6 +336,76 @@ class DatabaseService {
     } catch (e) {
       // Ignore errors
     }
+  }
+
+  // Locked Assets CRUD operations
+  Future<int> insertLockedAsset(Map<String, dynamic> lockedAsset) async {
+    final db = await database;
+    return await db.insert('locked_assets', lockedAsset);
+  }
+
+  Future<List<Map<String, dynamic>>> getLockedAssetsRaw() async {
+    final db = await database;
+    return await db.query('locked_assets', where: 'status = ?', whereArgs: ['locked']);
+  }
+
+  Future<List<dynamic>> getLockedAssets() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'locked_assets',
+      where: 'status = ?',
+      whereArgs: ['locked'],
+    );
+    
+    // Import needed
+    // return List.generate(maps.length, (i) => LockedAsset.fromJson(maps[i]));
+    // For now return raw maps
+    return maps;
+  }
+
+  Future<Map<String, dynamic>?> getLockedAssetById(String id) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'locked_assets',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return maps.isNotEmpty ? maps.first : null;
+  }
+
+  Future<Map<String, dynamic>?> getLockedAssetByAssetId(String assetId) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'locked_assets',
+      where: 'asset_id = ? AND status = ?',
+      whereArgs: [assetId, 'locked'],
+    );
+    return maps.isNotEmpty ? maps.first : null;
+  }
+
+  Future<int> updateLockedAsset(String id, Map<String, dynamic> data) async {
+    final db = await database;
+    return await db.update(
+      'locked_assets',
+      data,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<int> updateLockedAssetStatus(String id, String status) async {
+    final db = await database;
+    return await db.update(
+      'locked_assets',
+      {'status': status},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<int> deleteLockedAsset(String id) async {
+    final db = await database;
+    return await db.delete('locked_assets', where: 'id = ?', whereArgs: [id]);
   }
 
   // Initialize method

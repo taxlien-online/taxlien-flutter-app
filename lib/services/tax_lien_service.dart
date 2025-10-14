@@ -389,6 +389,119 @@ class TaxLienService extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Get lien by ID
+  Future<TaxLien?> getLienById(String id) async {
+    try {
+      // Try to find in current liens first
+      final legacyLien = _myLiens.firstWhere(
+        (lien) => lien.id == id,
+        orElse: () => _availableLiens.firstWhere(
+          (lien) => lien.id == id,
+          orElse: () => LegacyTaxLien(
+            id: '',
+            parcelId: '',
+            owner: '',
+            address: '',
+            county: '',
+            state: '',
+            assessedValue: 0,
+            taxAmount: 0,
+            interestRate: 0,
+            auctionDate: DateTime.now(),
+            redemptionDeadline: DateTime.now(),
+            status: '',
+          ),
+        ),
+      );
+      
+      if (legacyLien.id.isEmpty) return null;
+      
+      // Convert to TaxLien
+      return TaxLien(
+        id: legacyLien.id,
+        propertyAddress: legacyLien.address,
+        county: legacyLien.county,
+        state: legacyLien.state,
+        taxAmount: legacyLien.taxAmount,
+        interestRate: legacyLien.interestRate,
+        auctionDate: legacyLien.auctionDate,
+        status: legacyLien.status,
+        propertyType: 'Unknown',
+        estimatedValue: legacyLien.assessedValue,
+        assessedValue: legacyLien.assessedValue,
+        description: '',
+        images: [],
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        parcelId: legacyLien.parcelId,
+        saleDate: legacyLien.auctionDate,
+        redemptionDeadline: legacyLien.redemptionDeadline,
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Lock a lien (when converting to NFT or using as collateral)
+  Future<bool> lockLien(String lienId, {String? nftId}) async {
+    try {
+      final lien = await getLienById(lienId);
+      if (lien == null) return false;
+      
+      // Update lien to locked state
+      final updatedLien = lien.copyWith(
+        isLocked: true,
+        lockedForNFT: nftId,
+        status: 'locked',
+      );
+      
+      // Save to database if you're using one
+      // await _databaseService.updateTaxLien(updatedLien);
+      
+      // Update local state
+      final index = _myLiens.indexWhere((l) => l.id == lienId);
+      if (index != -1) {
+        _myLiens[index] = _convertToLegacyTaxLien(updatedLien);
+        notifyListeners();
+      }
+      
+      return true;
+    } catch (e) {
+      debugPrint('Error locking lien: $e');
+      return false;
+    }
+  }
+
+  /// Unlock a lien (when burning NFT or releasing collateral)
+  Future<bool> unlockLien(String lienId) async {
+    try {
+      final lien = await getLienById(lienId);
+      if (lien == null) return false;
+      
+      // Update lien to unlocked state
+      final updatedLien = lien.copyWith(
+        isLocked: false,
+        lockedForNFT: null,
+        status: 'active',
+      );
+      
+      // Save to database if you're using one
+      // await _databaseService.updateTaxLien(updatedLien);
+      
+      // Update local state
+      final index = _myLiens.indexWhere((l) => l.id == lienId);
+      if (index != -1) {
+        _myLiens[index] = _convertToLegacyTaxLien(updatedLien);
+        notifyListeners();
+      }
+      
+      return true;
+    } catch (e) {
+      debugPrint('Error unlocking lien: $e');
+      return false;
+    }
+  }
+
   /// Convert new TaxLien model to LegacyTaxLien for backward compatibility
   LegacyTaxLien _convertToLegacyTaxLien(TaxLien taxLien) {
     return LegacyTaxLien(
