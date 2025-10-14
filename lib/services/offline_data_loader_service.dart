@@ -323,6 +323,52 @@ class OfflineDataLoaderService extends ChangeNotifier {
     }
   }
 
+  /// Get all counties data from .rada files
+  Future<Map<String, List<Map<String, dynamic>>>> getCountiesData() async {
+    if (_cachedData == null) {
+      await initialize();
+    }
+
+    if (_cachedData == null) return {};
+
+    try {
+      final countiesData = _cachedData!['counties'] as Map<String, dynamic>?;
+      if (countiesData == null) return {};
+
+      final result = <String, List<Map<String, dynamic>>>{};
+      countiesData.forEach((state, counties) {
+        if (counties is List) {
+          result[state] = counties.cast<Map<String, dynamic>>();
+        }
+      });
+
+      return result;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error getting counties data: $e');
+      }
+      return {};
+    }
+  }
+
+  /// Get counties for a specific state
+  Future<List<Map<String, dynamic>>> getCountiesForState(String stateCode) async {
+    final allCounties = await getCountiesData();
+    return allCounties[stateCode] ?? [];
+  }
+
+  /// Get county by name and state
+  Future<Map<String, dynamic>?> getCountyByName(String stateCode, String countyName) async {
+    final counties = await getCountiesForState(stateCode);
+    try {
+      return counties.firstWhere(
+        (county) => county['name']?.toString().toLowerCase() == countyName.toLowerCase(),
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
   /// Get list of available states
   Future<List<String>> getAvailableStates() async {
     if (_cachedData == null) {
@@ -358,8 +404,8 @@ class OfflineDataLoaderService extends ChangeNotifier {
     }
   }
 
-  /// Get list of counties for a state
-  Future<List<String>> getCountiesForState(String state) async {
+  /// Get list of county names for a state from products or counties data
+  Future<List<String>> getCountyNamesForState(String state) async {
     if (_cachedData == null) {
       await initialize();
     }
@@ -367,6 +413,17 @@ class OfflineDataLoaderService extends ChangeNotifier {
     if (_cachedData == null) return [];
 
     try {
+      // First try to get from counties data structure
+      final countiesData = await getCountiesForState(state);
+      if (countiesData.isNotEmpty) {
+        return countiesData
+            .map((c) => c['name']?.toString() ?? '')
+            .where((name) => name.isNotEmpty)
+            .toList()
+          ..sort();
+      }
+
+      // Fallback: extract from products
       final products = await getProducts(state: state);
       final counties = <String>{};
 

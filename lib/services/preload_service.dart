@@ -1,14 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../data/initial_preload_data.dart';
-import '../data/demo_data.dart';
 import 'offline_data_loader_service.dart';
 import 'scheduled_data_sync_service.dart';
 import '../core/services/hybrid_magento_service.dart';
 
 /// Service for managing initial app preload data
-/// Handles offline data loading, caching, and synchronization with flutter_magento
+/// Handles offline data loading from .rada files, caching, and synchronization with flutter_magento
 class PreloadService {
   static const String _preloadKey = 'app_preload_data';
   static const String _preloadVersionKey = 'preload_version';
@@ -16,7 +14,7 @@ class PreloadService {
   static const String _radaDataLoadedKey = 'rada_data_loaded';
 
   static const String _currentVersion =
-      '2.0.0'; // Updated version for .rada support
+      '3.0.0'; // Updated version for exclusive .rada support
 
   static OfflineDataLoaderService? _offlineLoader;
   static ScheduledDataSyncService? _syncService;
@@ -99,42 +97,55 @@ class PreloadService {
     }
   }
 
-  /// Initialize with demo data as fallback
+  /// Initialize with .rada file data
   static Future<bool> _initializeDemoData() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
+      if (kDebugMode) {
+        print('Loading data from .rada files...');
+      }
 
-      // Generate initial preload data
-      final preloadData = InitialPreloadData.getInitialPreloadData();
-      final preloadJson = json.encode(preloadData);
+      // Initialize offline loader if not already done
+      await _initializeServices();
 
-      // Save to SharedPreferences
-      await prefs.setString(_preloadKey, preloadJson);
-      await prefs.setString(_preloadVersionKey, _currentVersion);
-      await prefs.setString(_lastSyncKey, DateTime.now().toIso8601String());
+      // Load from .rada files
+      final success = await _offlineLoader!.loadFromRadaFile();
+
+      if (success) {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString(_preloadVersionKey, _currentVersion);
+        await prefs.setString(_lastSyncKey, DateTime.now().toIso8601String());
+        await prefs.setBool(_radaDataLoadedKey, true);
+
+        if (kDebugMode) {
+          print('Data from .rada files loaded successfully');
+        }
+        return true;
+      }
 
       if (kDebugMode) {
-        print('Initial demo preload data saved successfully');
+        print('Failed to load .rada files');
       }
-      return true;
+      return false;
     } catch (e) {
       if (kDebugMode) {
-        print('Error initializing demo data: $e');
+        print('Error initializing data from .rada files: $e');
       }
       return false;
     }
   }
 
-  /// Save initial demo data for fallback
+  /// Save metadata for .rada data load
   static Future<void> _saveInitialDemoData() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final preloadData = InitialPreloadData.getInitialPreloadData();
-      final preloadJson = json.encode(preloadData);
-      await prefs.setString(_preloadKey, preloadJson);
+      await prefs.setBool(_radaDataLoadedKey, true);
+      await prefs.setString(_preloadVersionKey, _currentVersion);
+      if (kDebugMode) {
+        print('Saved .rada data load metadata');
+      }
     } catch (e) {
       if (kDebugMode) {
-        print('Error saving demo data: $e');
+        print('Error saving .rada data metadata: $e');
       }
     }
   }
@@ -160,26 +171,54 @@ class PreloadService {
     return data != null;
   }
 
-  /// Get preload data summary
+  /// Get preload data summary from .rada files
   static Future<Map<String, dynamic>?> getPreloadSummary() async {
     try {
-      final data = await getCachedPreloadData();
-      if (data == null) return null;
+      await _initializeServices();
+      if (_offlineLoader == null || !_offlineLoader!.isLoaded) {
+        return null;
+      }
 
-      return InitialPreloadData.getPreloadSummary();
+      final stats = await _offlineLoader!.getDataStats();
+      return {
+        'total_products': stats['total_products'] ?? 0,
+        'total_categories': stats['total_categories'] ?? 0,
+        'states': stats['states'] ?? 0,
+        'state_list': stats['state_list'] ?? [],
+        'last_updated': stats['last_loaded'] ?? DateTime.now().toIso8601String(),
+        'data_source': '.rada files',
+        'features_available': [
+          'Browse tax liens offline',
+          'View county statistics',
+          'Analyze investment opportunities',
+          'Filter by state and county',
+          'Multi-state support'
+        ]
+      };
     } catch (e) {
       print('Error getting preload summary: $e');
       return null;
     }
   }
 
-  /// Get quick access data for app startup
+  /// Get quick access data for app startup from .rada files
   static Future<Map<String, dynamic>?> getQuickAccessData() async {
     try {
-      final data = await getCachedPreloadData();
-      if (data == null) return null;
+      await _initializeServices();
+      if (_offlineLoader == null || !_offlineLoader!.isLoaded) {
+        return null;
+      }
 
-      return InitialPreloadData.getQuickAccessData();
+      final products = await _offlineLoader!.getProducts(limit: 5);
+      final categories = await _offlineLoader!.getCategories();
+
+      return {
+        'featured_products': products,
+        'available_states': await _offlineLoader!.getAvailableStates(),
+        'total_products': (await _offlineLoader!.getProducts()).length,
+        'total_categories': categories.length,
+        'data_source': '.rada files'
+      };
     } catch (e) {
       print('Error getting quick access data: $e');
       return null;
@@ -203,83 +242,49 @@ class PreloadService {
     }
   }
 
-  /// Get combined products (demo + historical + .rada data)
+  /// Get products from .rada files
   static Future<List<Map<String, dynamic>>> getCombinedProducts({
     String? state,
     String? county,
   }) async {
     try {
-      // Try to get from .rada file first
-      if (_offlineLoader != null && _offlineLoader!.isLoaded) {
-        final radaProducts = await _offlineLoader!.getProducts(
-          state: state,
-          county: county,
-        );
-
-        if (radaProducts.isNotEmpty) {
-          return radaProducts;
+      await _initializeServices();
+      
+      if (_offlineLoader == null || !_offlineLoader!.isLoaded) {
+        if (kDebugMode) {
+          print('Offline loader not initialized, loading now...');
         }
+        await _offlineLoader?.initialize();
       }
 
-      // Fallback to cached demo data
-      final data = await getCachedPreloadData();
-      if (data == null) return TaxLienDemoData.demoProducts;
-
-      final combinedProducts = data['combined_products'] as List<dynamic>?;
-      List<Map<String, dynamic>> products =
-          combinedProducts?.cast<Map<String, dynamic>>() ??
-              TaxLienDemoData.demoProducts;
-
-      // Filter by state/county if needed
-      if (state != null) {
-        products = products.where((p) {
-          final customAttrs = p['custom_attributes'] as List<dynamic>?;
-          if (customAttrs == null) return false;
-
-          final stateAttr = customAttrs.firstWhere(
-            (attr) => attr['attribute_code'] == 'state',
-            orElse: () => null,
-          );
-
-          return stateAttr != null && stateAttr['value'] == state;
-        }).toList();
-      }
-
-      if (county != null) {
-        products = products.where((p) {
-          final customAttrs = p['custom_attributes'] as List<dynamic>?;
-          if (customAttrs == null) return false;
-
-          final countyAttr = customAttrs.firstWhere(
-            (attr) => attr['attribute_code'] == 'county',
-            orElse: () => null,
-          );
-
-          return countyAttr != null && countyAttr['value'] == county;
-        }).toList();
-      }
+      final products = await _offlineLoader!.getProducts(
+        state: state,
+        county: county,
+      );
 
       return products;
     } catch (e) {
       if (kDebugMode) {
-        print('Error getting combined products: $e');
+        print('Error getting products from .rada files: $e');
       }
-      return TaxLienDemoData.demoProducts;
+      return [];
     }
   }
 
-  /// Get combined categories
+  /// Get categories from .rada files
   static Future<List<Map<String, dynamic>>> getCombinedCategories() async {
     try {
-      final data = await getCachedPreloadData();
-      if (data == null) return TaxLienDemoData.demoCategories;
+      await _initializeServices();
+      
+      if (_offlineLoader == null || !_offlineLoader!.isLoaded) {
+        await _offlineLoader?.initialize();
+      }
 
-      final combinedCategories = data['combined_categories'] as List<dynamic>?;
-      return combinedCategories?.cast<Map<String, dynamic>>() ??
-          TaxLienDemoData.demoCategories;
+      final categories = await _offlineLoader!.getCategories();
+      return categories;
     } catch (e) {
-      print('Error getting combined categories: $e');
-      return TaxLienDemoData.demoCategories;
+      print('Error getting categories from .rada files: $e');
+      return [];
     }
   }
 

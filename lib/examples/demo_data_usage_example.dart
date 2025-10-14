@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import '../services/simplified_demo_integration.dart';
-import '../data/demo_data.dart';
-import '../data/categories_demo_data.dart';
-import '../data/counties_demo_data.dart';
 
-/// Пример использования демо данных в TaxLien.online
+/// DEPRECATED: This example uses old demo data classes
+/// For production code, use OfflineDataLoaderService to load data from .rada files
+/// 
+/// Example:
+/// ```dart
+/// import '../services/offline_data_loader_service.dart';
+/// 
+/// final loader = OfflineDataLoaderService();
+/// await loader.initialize();
+/// final products = await loader.getProducts();
+/// final counties = await loader.getCountiesForState('FL');
+/// ```
+///
+/// Пример использования демо данных в TaxLien.online (DEPRECATED)
 class DemoDataUsageExample extends StatefulWidget {
   const DemoDataUsageExample({Key? key}) : super(key: key);
 

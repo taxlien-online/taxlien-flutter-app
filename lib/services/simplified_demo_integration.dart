@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
-import '../data/demo_data.dart';
-import '../data/categories_demo_data.dart';
-import '../data/counties_demo_data.dart';
+import 'offline_data_loader_service.dart';
 
-/// Simplified demo data integration service
-/// Provides demo data for TaxLien.online mobile app
+/// DEPRECATED: Simplified demo data integration service
+/// NOW USES .rada FILES via OfflineDataLoaderService
+/// 
+/// This service now loads data from .rada files instead of hardcoded demo data
+/// Provides backward-compatible interface while using OfflineDataLoaderService
 class SimplifiedDemoIntegration extends ChangeNotifier {
+  final OfflineDataLoaderService _offlineLoader = OfflineDataLoaderService();
   bool _isInitialized = false;
   bool _isLoading = false;
   String? _error;
@@ -17,15 +19,22 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
   String? get error => _error;
   bool get useDemoData => _useDemoData;
 
-  /// Initialize the demo integration service
+  /// Initialize the demo integration service (now loads from .rada files)
   Future<void> initialize() async {
     _setLoading(true);
     try {
-      _isInitialized = true;
-      _error = null;
+      // Initialize offline loader with .rada files
+      final success = await _offlineLoader.initialize();
+      
+      if (success) {
+        _isInitialized = true;
+        _error = null;
 
-      if (kDebugMode) {
-        print('SimplifiedDemoIntegration initialized successfully');
+        if (kDebugMode) {
+          print('SimplifiedDemoIntegration initialized successfully from .rada files');
+        }
+      } else {
+        throw Exception('Failed to load .rada files');
       }
     } catch (e) {
       _error = 'Failed to initialize demo integration: $e';
@@ -37,8 +46,8 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
     }
   }
 
-  /// Get products with demo data
-  List<Map<String, dynamic>> getProducts({
+  /// Get products from .rada files
+  Future<List<Map<String, dynamic>>> getProducts({
     int page = 1,
     int pageSize = 20,
     String? searchQuery,
