@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../core/models/unified_asset.dart';
-import '../core/models/tax_lien_models.dart';
+import '../core/models/tax_lien.dart' as core_lien;
 import '../core/models/tax_lien_nft.dart';
 import 'tax_lien_service.dart';
 import 'nft_service.dart';
@@ -24,9 +24,9 @@ class UnifiedPortfolioService extends ChangeNotifier {
     required TaxLienService taxLienService,
     required NFTService nftService,
     required DatabaseService databaseService,
-  }) : _taxLienService = taxLienService,
-       _nftService = nftService,
-       _databaseService = databaseService;
+  })  : _taxLienService = taxLienService,
+        _nftService = nftService,
+        _databaseService = databaseService;
 
   // Getters
   List<AssetItem> get allAssets => _allAssets;
@@ -57,15 +57,20 @@ class UnifiedPortfolioService extends ChangeNotifier {
     try {
       // Load traditional liens
       await _taxLienService.loadMyLiens();
-      final liens = _taxLienService.myLiens;
+      final legacyLiens = _taxLienService.myLiens;
 
       // Load NFTs
       final nfts = await _nftService.getAllNFTs();
 
+      // Convert legacy liens to core TaxLien objects
+      final liens = await Future.wait(
+        legacyLiens.map((legacy) => _taxLienService.getLienById(legacy.id)),
+      );
+      final validLiens = liens.whereType<core_lien.TaxLien>().toList();
+
       // Convert to unified AssetItems
-      final traditionalAssets = liens
-          .map((lien) => AssetItem.fromLien(lien))
-          .toList();
+      final traditionalAssets =
+          validLiens.map((lien) => AssetItem.fromLien(lien)).toList();
       final nftAssets = nfts.map((nft) => AssetItem.fromNFT(nft)).toList();
 
       _allAssets = [...traditionalAssets, ...nftAssets];
@@ -88,7 +93,9 @@ class UnifiedPortfolioService extends ChangeNotifier {
   /// Load locked assets
   Future<void> loadLockedAssets() async {
     try {
-      _lockedAssets = await _databaseService.getLockedAssets();
+      final rawAssets = await _databaseService.getLockedAssetsRaw();
+      _lockedAssets =
+          rawAssets.map((raw) => LockedAsset.fromJson(raw)).toList();
 
       // Populate with actual asset data
       for (var lockedAsset in _lockedAssets) {
@@ -109,7 +116,7 @@ class UnifiedPortfolioService extends ChangeNotifier {
               status: lockedAsset.status,
               purpose: lockedAsset.purpose,
               contractId: lockedAsset.contractId,
-              lien: lien,
+              lien: lien as core_lien.TaxLien?,
               nft: null,
             );
           }
@@ -130,7 +137,7 @@ class UnifiedPortfolioService extends ChangeNotifier {
               purpose: lockedAsset.purpose,
               contractId: lockedAsset.contractId,
               lien: null,
-              nft: nft,
+              nft: nft as TaxLienNFT?,
             );
           }
         }
@@ -143,8 +150,13 @@ class UnifiedPortfolioService extends ChangeNotifier {
   }
 
   /// Get tokenizable liens (not locked, active)
-  List<TaxLien> getTokenizableLiens() {
-    return _taxLienService.myLiens
+  Future<List<core_lien.TaxLien>> getTokenizableLiens() async {
+    final legacyLiens = _taxLienService.myLiens;
+    final liens = await Future.wait(
+      legacyLiens.map((legacy) => _taxLienService.getLienById(legacy.id)),
+    );
+    return liens
+        .whereType<core_lien.TaxLien>()
         .where((lien) => lien.canBeTokenized)
         .toList();
   }
@@ -176,9 +188,9 @@ class UnifiedPortfolioService extends ChangeNotifier {
         );
       }
 
-      // 2. Create NFT
+      // 2. Create NFT - convert TaxLien to expected format
       final nft = await _nftService.createNFTFromTaxLien(
-        lien,
+        lien as dynamic,
         ownerAddress: ownerAddress,
         contractAddress: 'tax-lien-nft-canister-id', // TODO: Get from config
       );
@@ -312,7 +324,7 @@ class UnifiedPortfolioService extends ChangeNotifier {
     final traditionalROI = traditionalAssets.isEmpty
         ? 0.0
         : traditionalAssets.fold<double>(0, (sum, a) => sum + a.roi) /
-              traditionalAssets.length;
+            traditionalAssets.length;
 
     final nftROI = nftAssets.isEmpty
         ? 0.0

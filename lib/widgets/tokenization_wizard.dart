@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../core/models/tax_lien_models.dart';
+import '../core/models/tax_lien.dart';
 import '../core/models/unified_asset.dart';
 import '../services/unified_portfolio_service.dart';
 import '../services/yuku_service.dart';
@@ -145,7 +145,9 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
                   width: 32,
                   height: 32,
                   decoration: BoxDecoration(
-                    color: isCompleted || isCurrent ? Colors.blue : Colors.grey.shade300,
+                    color: isCompleted || isCurrent
+                        ? Colors.blue
+                        : Colors.grey.shade300,
                     shape: BoxShape.circle,
                   ),
                   child: Center(
@@ -154,7 +156,9 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
                         : Text(
                             '${index + 1}',
                             style: TextStyle(
-                              color: isCurrent ? Colors.white : Colors.grey.shade600,
+                              color: isCurrent
+                                  ? Colors.white
+                                  : Colors.grey.shade600,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -169,8 +173,20 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
   }
 
   Widget _buildSelectLienStep() {
-    final liens = widget.portfolioService.getTokenizableLiens();
+    return FutureBuilder(
+      future: widget.portfolioService.getTokenizableLiens(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
+        final liens = snapshot.data!;
+        return _buildSelectLienContent(liens);
+      },
+    );
+  }
+
+  Widget _buildSelectLienContent(List<TaxLien> liens) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -186,13 +202,13 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
             style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
           ),
           const SizedBox(height: 24),
-
           if (liens.isEmpty)
             Center(
               child: Column(
                 children: [
                   const SizedBox(height: 40),
-                  Icon(Icons.inbox_outlined, size: 64, color: Colors.grey.shade400),
+                  Icon(Icons.inbox_outlined,
+                      size: 64, color: Colors.grey.shade400),
                   const SizedBox(height: 16),
                   Text(
                     'Нет доступных залогов для токенизации',
@@ -237,7 +253,8 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
                                     width: 60,
                                     height: 60,
                                     fit: BoxFit.cover,
-                                    errorBuilder: (_, __, ___) => _buildPlaceholderImage(),
+                                    errorBuilder: (_, __, ___) =>
+                                        _buildPlaceholderImage(),
                                   )
                                 : _buildPlaceholderImage(),
                           ),
@@ -313,7 +330,8 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
 
                           // Selection indicator
                           if (isSelected)
-                            const Icon(Icons.check_circle, color: Colors.blue, size: 28)
+                            const Icon(Icons.check_circle,
+                                color: Colors.blue, size: 28)
                           else
                             Icon(Icons.circle_outlined,
                                 color: Colors.grey.shade400, size: 28),
@@ -355,7 +373,8 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
             decoration: InputDecoration(
               labelText: 'Название NFT',
               hintText: 'Tax Lien #${_selectedLien?.id}',
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             ),
             onChanged: (value) => _options.nftName = value,
           ),
@@ -366,7 +385,8 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
             decoration: InputDecoration(
               labelText: 'Описание',
               hintText: 'Опишите этот актив для покупателей',
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             ),
             maxLines: 3,
             onChanged: (value) => _options.description = value,
@@ -404,7 +424,8 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
               decoration: InputDecoration(
                 labelText: 'Количество долей',
                 hintText: 'Например: 10',
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
               ),
               keyboardType: TextInputType.number,
               onChanged: (value) =>
@@ -492,7 +513,6 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
             style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
           ),
           const SizedBox(height: 24),
-
           SwitchListTile(
             title: const Text('Выставить на Yuku сразу после создания'),
             value: _options.listOnYuku,
@@ -505,7 +525,6 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
               });
             },
           ),
-
           if (_options.listOnYuku) ...[
             const SizedBox(height: 24),
 
@@ -544,7 +563,8 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
                       const SizedBox(height: 8),
                       Text(
                         'Диапазон: ${_priceSuggestion!.minimum.toStringAsFixed(2)} - ${_priceSuggestion!.maximum.toStringAsFixed(2)} ICP',
-                        style: TextStyle(fontSize: 13, color: Colors.grey.shade700),
+                        style: TextStyle(
+                            fontSize: 13, color: Colors.grey.shade700),
                       ),
                     ],
                   ),
@@ -561,7 +581,8 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
                 labelText: 'Цена продажи',
                 hintText: 'Введите цену в ICP',
                 suffixText: 'ICP',
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
               ),
               keyboardType: TextInputType.number,
               onChanged: (value) => _options.price = double.tryParse(value),
@@ -604,16 +625,13 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
                         : 'Дробный NFT (${_options.fractionalShares} долей)',
                   ),
                   _buildSummaryRow('Актив', _selectedLien!.propertyAddress),
-                  _buildSummaryRow(
-                      'Стоимость актива',
+                  _buildSummaryRow('Стоимость актива',
                       '\$${_selectedLien!.lienAmount.toStringAsFixed(0)}'),
-
                   if (_options.listOnYuku) ...[
                     const Divider(height: 24),
                     _buildSummaryRow('Продажа на Yuku', 'Да'),
                     _buildSummaryRow('Цена', '${_options.price} ICP'),
                   ],
-
                   const SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -623,7 +641,8 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.info_outline, color: Colors.blue, size: 20),
+                        const Icon(Icons.info_outline,
+                            color: Colors.blue, size: 20),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
@@ -756,7 +775,8 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
     // Mock price suggestion
     setState(() {
       _priceSuggestion = PriceSuggestion(
-        recommended: (_selectedLien!.lienAmount / 100), // Convert to ICP equivalent
+        recommended:
+            (_selectedLien!.lienAmount / 100), // Convert to ICP equivalent
         minimum: (_selectedLien!.lienAmount / 100) * 0.85,
         maximum: (_selectedLien!.lienAmount / 100) * 1.15,
         confidence: 'medium',
@@ -809,4 +829,3 @@ class _TokenizationWizardState extends State<TokenizationWizard> {
     }
   }
 }
-

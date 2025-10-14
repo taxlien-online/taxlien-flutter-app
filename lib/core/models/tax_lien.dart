@@ -20,6 +20,11 @@ class TaxLien {
   final DateTime createdAt;
   final DateTime updatedAt;
 
+  // Unified system fields
+  final bool isLocked;
+  final String? lockedForNFT;
+  final DateTime? saleDate;
+
   const TaxLien({
     required this.id,
     required this.propertyAddress,
@@ -36,6 +41,9 @@ class TaxLien {
     this.metadata,
     required this.createdAt,
     required this.updatedAt,
+    this.isLocked = false,
+    this.lockedForNFT,
+    this.saleDate,
   });
 
   factory TaxLien.fromJson(Map<String, dynamic> json) =>
@@ -58,6 +66,9 @@ class TaxLien {
     Map<String, dynamic>? metadata,
     DateTime? createdAt,
     DateTime? updatedAt,
+    bool? isLocked,
+    String? lockedForNFT,
+    DateTime? saleDate,
   }) {
     return TaxLien(
       id: id ?? this.id,
@@ -75,8 +86,17 @@ class TaxLien {
       metadata: metadata ?? this.metadata,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      isLocked: isLocked ?? this.isLocked,
+      lockedForNFT: lockedForNFT ?? this.lockedForNFT,
+      saleDate: saleDate ?? this.saleDate,
     );
   }
+
+  // Helper getters for unified system
+  double get lienAmount => taxAmount;
+  bool get canBeTokenized => !isLocked && status == 'active';
+  bool get isTokenized => lockedForNFT != null;
+  String get address => propertyAddress;
 
   @override
   bool operator ==(Object other) {

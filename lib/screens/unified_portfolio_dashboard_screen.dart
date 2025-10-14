@@ -5,7 +5,6 @@ import '../services/unified_portfolio_service.dart';
 import '../services/tax_lien_service.dart';
 import '../services/nft_service.dart';
 import '../services/yuku_service.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_dimensions.dart';
 import '../widgets/tokenization_wizard.dart';
 import '../widgets/detokenization_dialog.dart';
@@ -322,10 +321,18 @@ class _UnifiedPortfolioDashboardScreenState
   }
 
   Widget _buildConversionPanel() {
-    final tokenizableCount = widget.portfolioService
-        .getTokenizableLiens()
-        .length;
+    return FutureBuilder<int>(
+      future: widget.portfolioService
+          .getTokenizableLiens()
+          .then((liens) => liens.length),
+      builder: (context, snapshot) {
+        final tokenizableCount = snapshot.data ?? 0;
+        return _buildConversionPanelContent(tokenizableCount);
+      },
+    );
+  }
 
+  Widget _buildConversionPanelContent(int tokenizableCount) {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -450,7 +457,8 @@ class _UnifiedPortfolioDashboardScreenState
               children: [
                 Icon(fromIcon, color: color, size: 32),
                 const SizedBox(width: 8),
-                Icon(Icons.arrow_forward, color: color.withOpacity(0.6), size: 20),
+                Icon(Icons.arrow_forward,
+                    color: color.withOpacity(0.6), size: 20),
                 const SizedBox(width: 8),
                 Icon(toIcon, color: color, size: 32),
               ],
@@ -461,7 +469,7 @@ class _UnifiedPortfolioDashboardScreenState
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: color.shade800,
+                color: color,
               ),
             ),
             const SizedBox(height: 8),
@@ -644,7 +652,8 @@ class _UnifiedPortfolioDashboardScreenState
                                     ? Icons.collections
                                     : Icons.account_balance,
                                 size: 12,
-                                color: asset.isNFT ? Colors.purple : Colors.blue,
+                                color:
+                                    asset.isNFT ? Colors.purple : Colors.blue,
                               ),
                               const SizedBox(width: 4),
                               Text(
@@ -672,13 +681,14 @@ class _UnifiedPortfolioDashboardScreenState
                             ),
                             child: Row(
                               children: [
-                                Icon(Icons.lock, size: 12, color: Colors.orange.shade700),
+                                const Icon(Icons.lock,
+                                    size: 12, color: Colors.orange),
                                 const SizedBox(width: 4),
-                                Text(
+                                const Text(
                                   'Locked',
                                   style: TextStyle(
                                     fontSize: 11,
-                                    color: Colors.orange.shade800,
+                                    color: Colors.orange,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -695,13 +705,14 @@ class _UnifiedPortfolioDashboardScreenState
                             ),
                             child: Row(
                               children: [
-                                Icon(Icons.store, size: 12, color: Colors.green.shade700),
+                                const Icon(Icons.store,
+                                    size: 12, color: Colors.green),
                                 const SizedBox(width: 4),
-                                Text(
+                                const Text(
                                   'На Yuku',
                                   style: TextStyle(
                                     fontSize: 11,
-                                    color: Colors.green.shade800,
+                                    color: Colors.green,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -721,7 +732,8 @@ class _UnifiedPortfolioDashboardScreenState
                     const SizedBox(height: 4),
                     Text(
                       asset.subtitle,
-                      style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
+                      style:
+                          TextStyle(fontSize: 13, color: Colors.grey.shade600),
                     ),
                     const SizedBox(height: 8),
                     Row(
@@ -737,7 +749,8 @@ class _UnifiedPortfolioDashboardScreenState
                           ),
                         ),
                         const SizedBox(width: 16),
-                        const Icon(Icons.trending_up, size: 16, color: Colors.blue),
+                        const Icon(Icons.trending_up,
+                            size: 16, color: Colors.blue),
                         Text(
                           '${asset.roi.toStringAsFixed(1)}%',
                           style: TextStyle(
@@ -900,4 +913,3 @@ class _UnifiedPortfolioDashboardScreenState
     }
   }
 }
-
