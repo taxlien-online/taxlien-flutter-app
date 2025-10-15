@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'services/offline_data_loader_service.dart';
+import 'services/tax_lien_search_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -893,35 +895,633 @@ class _LienCard extends StatelessWidget {
 }
 
 // ============================================================================
-// SEARCH TAB (Placeholder)
+// SEARCH TAB
 // ============================================================================
 
-class SearchTab extends StatelessWidget {
+class SearchTab extends StatefulWidget {
   const SearchTab({super.key});
+
+  @override
+  State<SearchTab> createState() => _SearchTabState();
+}
+
+class _SearchTabState extends State<SearchTab> {
+  final TextEditingController _searchController = TextEditingController();
+  late TaxLienSearchService _searchService;
+  List<TaxLien> _results = [];
+  bool _isLoading = false;
+  bool _isInitialized = false;
+  SearchStatistics? _statistics;
+
+  String? _selectedState;
+  double? _minAmount;
+  double? _maxAmount;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeSearch();
+  }
+
+  Future<void> _initializeSearch() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final dataLoader = OfflineDataLoaderService();
+      await dataLoader.initialize();
+      _searchService = TaxLienSearchService(dataLoader);
+
+      // Load statistics
+      _statistics = await _searchService.getStatistics();
+
+      // Load initial results
+      await _performSearch();
+
+      setState(() {
+        _isInitialized = true;
+      });
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Ошибка загрузки данных: $e')),
+        );
+      }
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  Future<void> _performSearch() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final results = await _searchService.searchLiens(
+        query: _searchController.text.trim().isEmpty
+            ? null
+            : _searchController.text.trim(),
+        state: _selectedState,
+        minAmount: _minAmount,
+        maxAmount: _maxAmount,
+        limit: 50,
+      );
+
+      setState(() {
+        _results = results;
+      });
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Ошибка поиска: $e')),
+        );
+      }
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  void _showFilters() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Фильтры',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // State filter
+                  DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      labelText: 'Штат',
+                      border: OutlineInputBorder(),
+                    ),
+                    value: _selectedState,
+                    items: [
+                      const DropdownMenuItem(
+                          value: null, child: Text('Все штаты')),
+                      const DropdownMenuItem(
+                          value: 'FL', child: Text('Florida')),
+                      const DropdownMenuItem(
+                          value: 'AZ', child: Text('Arizona')),
+                    ],
+                    onChanged: (value) {
+                      setModalState(() {
+                        _selectedState = value;
+                      });
+                    },
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // Amount range
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          decoration: const InputDecoration(
+                            labelText: 'Мин. сумма',
+                            border: OutlineInputBorder(),
+                            prefixText: '\$',
+                          ),
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            _minAmount = double.tryParse(value);
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: TextField(
+                          decoration: const InputDecoration(
+                            labelText: 'Макс. сумма',
+                            border: OutlineInputBorder(),
+                            prefixText: '\$',
+                          ),
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {
+                            _maxAmount = double.tryParse(value);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedState = null;
+                              _minAmount = null;
+                              _maxAmount = null;
+                            });
+                            Navigator.pop(context);
+                            _performSearch();
+                          },
+                          child: const Text('Сбросить'),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        flex: 2,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedState = _selectedState;
+                            });
+                            Navigator.pop(context);
+                            _performSearch();
+                          },
+                          child: const Text('Применить'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Поиск закладных'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.filter_list),
+            onPressed: _showFilters,
+          ),
+        ],
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.search, size: 80, color: Colors.grey),
-            SizedBox(height: 16),
-            Text(
-              'Поиск закладных',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      body: Column(
+        children: [
+          // Search bar
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Поиск по адресу, городу, округу...',
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: _searchController.text.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          _searchController.clear();
+                          _performSearch();
+                        },
+                      )
+                    : null,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onSubmitted: (_) => _performSearch(),
             ),
-            SizedBox(height: 8),
-            Text(
-              'Функция в разработке',
-              style: TextStyle(color: Colors.grey),
+          ),
+
+          // Statistics
+          if (_statistics != null && !_isLoading)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: _StatChip(
+                      label: 'Найдено',
+                      value: '${_results.length}',
+                      icon: Icons.description,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: _StatChip(
+                      label: 'Всего',
+                      value: '${_statistics!.totalCount}',
+                      icon: Icons.folder,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: _StatChip(
+                      label: 'Ср. ставка',
+                      value:
+                          '${_statistics!.avgInterestRate.toStringAsFixed(1)}%',
+                      icon: Icons.percent,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ],
+
+          const SizedBox(height: 16),
+
+          // Results
+          if (_isLoading)
+            const Expanded(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          else if (!_isInitialized)
+            const Expanded(
+              child: Center(
+                child: Text('Инициализация...'),
+              ),
+            )
+          else if (_results.isEmpty)
+            Expanded(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.search_off,
+                      size: 80,
+                      color: Colors.grey.shade400,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Ничего не найдено',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Попробуйте изменить параметры поиска',
+                      style: TextStyle(color: Colors.grey.shade600),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          else
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: _results.length,
+                itemBuilder: (context, index) {
+                  final lien = _results[index];
+                  return _TaxLienCard(lien: lien);
+                },
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+}
+
+class _StatChip extends StatelessWidget {
+  final String label;
+  final String value;
+  final IconData icon;
+
+  const _StatChip({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceVariant,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        children: [
+          Icon(icon, size: 20),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 10,
+              color: Colors.grey.shade600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TaxLienCard extends StatelessWidget {
+  final TaxLien lien;
+
+  const _TaxLienCard({required this.lien});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: InkWell(
+        onTap: () {
+          _showLienDetails(context, lien);
+        },
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Address and status
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      lien.address,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      lien.status.toUpperCase(),
+                      style: const TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 4),
+
+              // Location
+              Text(
+                '${lien.city}, ${lien.county} County, ${lien.state}',
+                style: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontSize: 14,
+                ),
+              ),
+
+              const SizedBox(height: 12),
+
+              // Amount and interest rate
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Сумма',
+                          style: TextStyle(
+                            color: Colors.grey.shade600,
+                            fontSize: 12,
+                          ),
+                        ),
+                        Text(
+                          '\$${lien.amount.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Ставка',
+                          style: TextStyle(
+                            color: Colors.grey.shade600,
+                            fontSize: 12,
+                          ),
+                        ),
+                        Text(
+                          '${lien.interestRate.toStringAsFixed(1)}%',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.green.shade700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              // Parcel ID
+              if (lien.parcelId.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Text(
+                    'Parcel: ${lien.parcelId}',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey.shade500,
+                      fontFamily: 'monospace',
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  void _showLienDetails(BuildContext context, TaxLien lien) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.7,
+          minChildSize: 0.5,
+          maxChildSize: 0.95,
+          expand: false,
+          builder: (context, scrollController) {
+            return Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: ListView(
+                controller: scrollController,
+                children: [
+                  Text(
+                    lien.address,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '${lien.city}, ${lien.county} County, ${lien.state} ${lien.zipCode}',
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  _DetailRow('Parcel ID', lien.parcelId),
+                  _DetailRow('Сумма', '\$${lien.amount.toStringAsFixed(2)}'),
+                  _DetailRow('Процентная ставка',
+                      '${lien.interestRate.toStringAsFixed(2)}%'),
+                  _DetailRow('Статус', lien.status),
+                  if (lien.ownerName != null)
+                    _DetailRow('Владелец', lien.ownerName!),
+                  if (lien.assessedValue != null)
+                    _DetailRow('Оценочная стоимость',
+                        '\$${lien.assessedValue!.toStringAsFixed(2)}'),
+                  const SizedBox(height: 24),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('Добавлено в избранное')),
+                        );
+                      },
+                      icon: const Icon(Icons.favorite_outline),
+                      label: const Text('Добавить в избранное'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class _DetailRow extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _DetailRow(this.label, this.value);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 140,
+            child: Text(
+              label,
+              style: TextStyle(
+                color: Colors.grey.shade600,
+                fontSize: 14,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
