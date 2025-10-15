@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'services/offline_data_loader_service.dart';
 import 'services/tax_lien_search_service.dart';
+import 'screens/marketplace_packages_screen.dart';
+import 'screens/rada_file_selector_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -639,16 +642,30 @@ class DashboardTab extends StatelessWidget {
           onTap: () {},
         ),
         _QuickActionCard(
-          title: 'Портфель',
-          icon: Icons.pie_chart,
+          title: 'Магазин',
+          icon: Icons.shopping_bag,
           color: Colors.green,
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MarketplacePackagesScreen(),
+              ),
+            );
+          },
         ),
         _QuickActionCard(
-          title: 'Карты',
-          icon: Icons.map,
+          title: 'Настройка',
+          icon: Icons.settings,
           color: Colors.orange,
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const RadaFileSelectorScreen(),
+              ),
+            );
+          },
         ),
       ],
     );
@@ -929,16 +946,27 @@ class _SearchTabState extends State<SearchTab> {
     });
 
     try {
-      final dataLoader = OfflineDataLoaderService();
-      await dataLoader.initialize();
+      // Try to initialize with .rada loader
+      OfflineDataLoaderService? dataLoader;
+      try {
+        dataLoader = OfflineDataLoaderService();
+        await dataLoader.initialize();
+      } catch (e) {
+        if (kDebugMode) {
+          print('Could not initialize data loader, will use demo data: $e');
+        }
+        dataLoader = null;
+      }
+      
+      // Create search service (with or without data loader)
       _searchService = TaxLienSearchService(dataLoader);
-
+      
       // Load statistics
       _statistics = await _searchService.getStatistics();
-
+      
       // Load initial results
       await _performSearch();
-
+      
       setState(() {
         _isInitialized = true;
       });
@@ -1653,6 +1681,37 @@ class ProfileTab extends StatelessWidget {
             Card(
               child: Column(
                 children: [
+                  ListTile(
+                    leading: const Icon(Icons.shopping_bag),
+                    title: const Text('Пакеты данных'),
+                    subtitle: const Text('Покупка и управление подписками'),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const MarketplacePackagesScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  const Divider(height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.storage),
+                    title: const Text('Источники данных'),
+                    subtitle: const Text('Выбор загружаемых .rada файлов'),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RadaFileSelectorScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  const Divider(height: 1),
                   ListTile(
                     leading: const Icon(Icons.person_outline),
                     title: const Text('Личные данные'),

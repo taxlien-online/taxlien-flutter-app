@@ -223,18 +223,15 @@ platform :android do
     # Build App Bundle for Google Play Store
     sh("flutter build appbundle --release")
     
-    # Change to Android directory for fastlane
-    Dir.chdir("android") do
-      # Upload to Google Play Store
-      upload_to_play_store(
-        track: "production",
-        aab: "../build/app/outputs/bundle/release/app-release.aab",
-        skip_upload_apk: true,
-        skip_upload_metadata: false,
-        skip_upload_images: false,
-        skip_upload_screenshots: false
-      )
-    end
+    # Upload to Google Play Store
+    upload_to_play_store(
+      track: "production",
+      aab: "build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
   end
 
   desc "Build and upload Android app to Google Play Store Beta"
@@ -264,18 +261,15 @@ platform :android do
     # Build App Bundle for Google Play Store
     sh("flutter build appbundle --release")
     
-    # Change to Android directory for fastlane
-    Dir.chdir("android") do
-      # Upload to Google Play Store Beta track
-      upload_to_play_store(
-        track: "beta",
-        aab: "../build/app/outputs/bundle/release/app-release.aab",
-        skip_upload_apk: true,
-        skip_upload_metadata: false,
-        skip_upload_images: false,
-        skip_upload_screenshots: false
-      )
-    end
+    # Upload to Google Play Store Beta track
+    upload_to_play_store(
+      track: "beta",
+      aab: "build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
   end
 
   desc "Build and upload Android app to Google Play Store Alpha"
@@ -305,18 +299,15 @@ platform :android do
     # Build App Bundle for Google Play Store
     sh("flutter build appbundle --release")
     
-    # Change to Android directory for fastlane
-    Dir.chdir("android") do
-      # Upload to Google Play Store Alpha track
-      upload_to_play_store(
-        track: "alpha",
-        aab: "../build/app/outputs/bundle/release/app-release.aab",
-        skip_upload_apk: true,
-        skip_upload_metadata: false,
-        skip_upload_images: false,
-        skip_upload_screenshots: false
-      )
-    end
+    # Upload to Google Play Store Alpha track
+    upload_to_play_store(
+      track: "alpha",
+      aab: "build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_apk: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
   end
 
   desc "Build Android app for local testing"

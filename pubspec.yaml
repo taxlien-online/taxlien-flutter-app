@@ -93,10 +93,10 @@ dependencies:
   dio: ^5.3.2
   connectivity_plus: ^7.0.0
   
-  # Magento Integration - from pub.dev (nativemind.net)
-  # Temporarily disabled due to compilation errors
-  # flutter_magento: ^3.5.4  # Version compatible with flutter_magento_marketplace
-  # flutter_magento_marketplace: ^1.1.0
+  # Magento Integration - Local development version
+  flutter_magento:
+    path: ../../../libs/libsflutter/flutter_magento
+  # flutter_magento_marketplace: ^1.1.0  # Temporarily disabled
   
   # NFT and Blockchain Integration - from pub.dev (web3.nativemind.net)
   # Temporarily disabled due to dependency conflicts
