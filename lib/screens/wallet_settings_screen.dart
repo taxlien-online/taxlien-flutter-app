@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nft/flutter_nft.dart';
+// import 'package:flutter_nft/flutter_nft.dart';
+import '../core/mocks/nft_mocks.dart';
 
 class WalletSettingsScreen extends StatefulWidget {
   final NFTClient nftClient;

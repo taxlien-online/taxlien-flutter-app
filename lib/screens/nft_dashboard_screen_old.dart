@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nft/flutter_nft.dart';
+// import 'package:flutter_nft/flutter_nft.dart';
+import '../core/mocks/nft_mocks.dart';
 import '../services/tax_lien_service.dart';
 import '../widgets/nft_card.dart';
 import '../widgets/nft_detail_dialog.dart';
@@ -67,7 +68,8 @@ class _NFTDashboardScreenState extends State<NFTDashboardScreen>
               controller: _tabController,
               indicatorColor: Theme.of(context).colorScheme.onPrimary,
               labelColor: Theme.of(context).colorScheme.onPrimary,
-              unselectedLabelColor: Theme.of(context).colorScheme.onPrimary.withOpacity(0.7),
+              unselectedLabelColor:
+                  Theme.of(context).colorScheme.onPrimary.withOpacity(0.7),
               tabs: const [
                 Tab(text: 'My NFTs'),
                 Tab(text: 'Marketplace'),
@@ -373,7 +375,8 @@ class _NFTDashboardScreenState extends State<NFTDashboardScreen>
                 if (success && mounted) {
                   Navigator.of(context).pop();
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('NFT transferred successfully!')),
+                    const SnackBar(
+                        content: Text('NFT transferred successfully!')),
                   );
                 }
               }

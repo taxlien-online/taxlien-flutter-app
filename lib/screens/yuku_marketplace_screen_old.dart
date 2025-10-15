@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nft/flutter_nft.dart';
-import 'package:flutter_icp/flutter_icp.dart';
+// import 'package:flutter_nft/flutter_nft.dart';
+// import 'package:flutter_icp/flutter_icp.dart';
+import '../core/mocks/nft_mocks.dart';
 
 class YukuMarketplaceScreen extends StatefulWidget {
   final NFTClient nftClient;
@@ -48,7 +49,8 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
           controller: _tabController,
           indicatorColor: Theme.of(context).colorScheme.onPrimary,
           labelColor: Theme.of(context).colorScheme.onPrimary,
-          unselectedLabelColor: Theme.of(context).colorScheme.onPrimary.withOpacity(0.7),
+          unselectedLabelColor:
+              Theme.of(context).colorScheme.onPrimary.withOpacity(0.7),
           tabs: const [
             Tab(text: 'Browse'),
             Tab(text: 'My Listings'),
@@ -94,15 +96,15 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
             Text(
               'No active listings',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.grey[600],
-              ),
+                    color: Colors.grey[600],
+                  ),
             ),
             const SizedBox(height: 8),
             Text(
               'Check back later for new NFT listings',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[500],
-              ),
+                    color: Colors.grey[500],
+                  ),
             ),
           ],
         ),
@@ -141,15 +143,15 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
             Text(
               'No listings yet',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.grey[600],
-              ),
+                    color: Colors.grey[600],
+                  ),
             ),
             const SizedBox(height: 8),
             Text(
               'Create your first listing to start selling',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[500],
-              ),
+                    color: Colors.grey[500],
+                  ),
             ),
           ],
         ),
@@ -188,15 +190,15 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
             Text(
               'No offers made',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.grey[600],
-              ),
+                    color: Colors.grey[600],
+                  ),
             ),
             const SizedBox(height: 8),
             Text(
               'Make offers on NFTs you\'re interested in',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[500],
-              ),
+                    color: Colors.grey[500],
+                  ),
             ),
           ],
         ),
@@ -235,15 +237,15 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
             Text(
               'No received offers',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.grey[600],
-              ),
+                    color: Colors.grey[600],
+                  ),
             ),
             const SizedBox(height: 8),
             Text(
               'Offers for your NFTs will appear here',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[500],
-              ),
+                    color: Colors.grey[500],
+                  ),
             ),
           ],
         ),
@@ -277,7 +279,8 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Icon(
@@ -292,23 +295,24 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                     children: [
                       Text(
                         'Tax Lien NFT #${listing.nftId.split('_').last}',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Listed by ${_formatAddress(listing.sellerAddress)}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.grey[600],
-                        ),
+                              color: Colors.grey[600],
+                            ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Listed ${_formatDate(listing.createdAt)}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.grey[600],
-                        ),
+                              color: Colors.grey[600],
+                            ),
                       ),
                     ],
                   ),
@@ -319,17 +323,17 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                     Text(
                       '${listing.price.toStringAsFixed(2)} ${listing.currency}',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                     ),
                     if (listing.expiresAt != null) ...[
                       const SizedBox(height: 4),
                       Text(
                         'Expires ${_formatDate(listing.expiresAt!)}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.orange,
-                        ),
+                              color: Colors.orange,
+                            ),
                       ),
                     ],
                   ],
@@ -374,7 +378,8 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Icon(
@@ -389,23 +394,24 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                     children: [
                       Text(
                         'Tax Lien NFT #${listing.nftId.split('_').last}',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Status: ${listing.status.toUpperCase()}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: _getStatusColor(listing.status),
-                        ),
+                              color: _getStatusColor(listing.status),
+                            ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Listed ${_formatDate(listing.createdAt)}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.grey[600],
-                        ),
+                              color: Colors.grey[600],
+                            ),
                       ),
                     ],
                   ),
@@ -416,17 +422,17 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                     Text(
                       '${listing.price.toStringAsFixed(2)} ${listing.currency}',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                     ),
                     if (listing.expiresAt != null) ...[
                       const SizedBox(height: 4),
                       Text(
                         'Expires ${_formatDate(listing.expiresAt!)}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.orange,
-                        ),
+                              color: Colors.orange,
+                            ),
                       ),
                     ],
                   ],
@@ -476,7 +482,8 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Icon(
@@ -491,25 +498,26 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                     children: [
                       Text(
                         'Tax Lien NFT #${offer.nftId.split('_').last}',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        isMyOffer 
+                        isMyOffer
                             ? 'Your offer'
                             : 'Offer from ${_formatAddress(offer.buyerAddress)}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.grey[600],
-                        ),
+                              color: Colors.grey[600],
+                            ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Status: ${offer.status.toUpperCase()}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: _getStatusColor(offer.status),
-                        ),
+                              color: _getStatusColor(offer.status),
+                            ),
                       ),
                     ],
                   ),
@@ -520,17 +528,17 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                     Text(
                       '${offer.amount.toStringAsFixed(2)} ${offer.currency}',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                     ),
                     if (offer.expiresAt != null) ...[
                       const SizedBox(height: 4),
                       Text(
                         'Expires ${_formatDate(offer.expiresAt!)}',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.orange,
-                        ),
+                              color: Colors.orange,
+                            ),
                       ),
                     ],
                   ],
@@ -651,7 +659,8 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
           ),
           ElevatedButton(
             onPressed: () async {
-              if (nftIdController.text.isNotEmpty && priceController.text.isNotEmpty) {
+              if (nftIdController.text.isNotEmpty &&
+                  priceController.text.isNotEmpty) {
                 Navigator.pop(context);
                 final success = await widget.yukuService.createListing(
                   nftId: nftIdController.text,
@@ -940,10 +949,11 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                 child: ListView.builder(
                   itemCount: 3, // Mock number of offers
                   itemBuilder: (context, index) {
-                    final offerAmount = (listing.price * (0.8 + (index * 0.1))).toStringAsFixed(2);
+                    final offerAmount = (listing.price * (0.8 + (index * 0.1)))
+                        .toStringAsFixed(2);
                     final offerer = 'User${index + 1}';
                     final timeAgo = '${(index + 1) * 2} hours ago';
-                    
+
                     return Card(
                       margin: const EdgeInsets.symmetric(vertical: 4),
                       child: ListTile(
@@ -996,12 +1006,13 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
         backgroundColor: Colors.blue,
       ),
     );
-    
+
     // Simulate accepting offer
     Future.delayed(const Duration(seconds: 2), () {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Offer accepted! ${listing.name} sold to $offerer for $amount ICP'),
+          content: Text(
+              'Offer accepted! ${listing.name} sold to $offerer for $amount ICP'),
           backgroundColor: Colors.green,
         ),
       );
@@ -1025,7 +1036,7 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
   String _formatDate(DateTime date) {
     final now = DateTime.now();
     final difference = now.difference(date);
-    
+
     if (difference.inDays > 0) {
       return '${difference.inDays}d ago';
     } else if (difference.inHours > 0) {

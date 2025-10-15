@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nft/flutter_nft.dart';
-import 'package:flutter_icp/flutter_icp.dart';
+// import 'package:flutter_nft/flutter_nft.dart';
+// import 'package:flutter_icp/flutter_icp.dart';
+import '../core/mocks/nft_mocks.dart';
 
 class PlugWalletScreen extends StatefulWidget {
   final NFTClient nftClient;
@@ -62,7 +63,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
           controller: _tabController,
           indicatorColor: Theme.of(context).colorScheme.onPrimary,
           labelColor: Theme.of(context).colorScheme.onPrimary,
-          unselectedLabelColor: Theme.of(context).colorScheme.onPrimary.withOpacity(0.7),
+          unselectedLabelColor:
+              Theme.of(context).colorScheme.onPrimary.withOpacity(0.7),
           isScrollable: true,
           tabs: const [
             Tab(text: 'Wallet'),
@@ -140,16 +142,16 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             Text(
               'Connect to Plug Wallet',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             Text(
               'Connect your Plug Wallet to manage ICP tokens and interact with Internet Computer dApps',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[600],
-              ),
+                    color: Colors.grey[600],
+                  ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 32),
@@ -191,7 +193,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                   width: 50,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: Icon(
@@ -207,22 +210,24 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                       Text(
                         'Plug Wallet',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
                       const SizedBox(height: 4),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: Colors.green.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           'Connected',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.green,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                         ),
                       ),
                     ],
@@ -236,9 +241,16 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
               ],
             ),
             const SizedBox(height: 20),
-            _buildInfoRow('Principal ID', widget.plugWalletService.formatPrincipal(walletInfo['principal'] ?? '')),
-            _buildInfoRow('Account ID', widget.plugWalletService.formatAccountId(walletInfo['accountId'] ?? '')),
-            _buildInfoRow('Network', widget.plugWalletService.isTestnet ? 'Testnet' : 'Mainnet'),
+            _buildInfoRow(
+                'Principal ID',
+                widget.plugWalletService
+                    .formatPrincipal(walletInfo['principal'] ?? '')),
+            _buildInfoRow(
+                'Account ID',
+                widget.plugWalletService
+                    .formatAccountId(walletInfo['accountId'] ?? '')),
+            _buildInfoRow('Network',
+                widget.plugWalletService.isTestnet ? 'Testnet' : 'Mainnet'),
           ],
         ),
       ),
@@ -255,8 +267,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             Text(
               'Quick Actions',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 16),
             Row(
@@ -317,8 +329,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             Text(
               label,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
           ],
         ),
@@ -343,13 +355,14 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                 Text(
                   'Network Information',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ],
             ),
             const SizedBox(height: 16),
-            _buildInfoRow('Network', widget.plugWalletService.isTestnet ? 'Testnet' : 'Mainnet'),
+            _buildInfoRow('Network',
+                widget.plugWalletService.isTestnet ? 'Testnet' : 'Mainnet'),
             _buildInfoRow('Status', 'Connected'),
             _buildInfoRow('Block Height', '12,345,678'),
           ],
@@ -370,8 +383,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                 Text(
                   'Recent Activity',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 const Spacer(),
                 TextButton(
@@ -394,7 +407,9 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
 
                 final transactions = snapshot.data!.take(3).toList();
                 return Column(
-                  children: transactions.map((tx) => _buildTransactionItem(tx)).toList(),
+                  children: transactions
+                      .map((tx) => _buildTransactionItem(tx))
+                      .toList(),
                 );
               },
             ),
@@ -435,8 +450,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                 Text(
                   snapshot.error.toString(),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
-                  ),
+                        color: Colors.grey[600],
+                      ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -450,7 +465,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
           children: [
             _buildTotalBalanceCard(balances),
             const SizedBox(height: 16),
-            ...balances.entries.map((entry) => _buildBalanceCard(entry.key, entry.value)),
+            ...balances.entries
+                .map((entry) => _buildBalanceCard(entry.key, entry.value)),
           ],
         );
       },
@@ -486,16 +502,16 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             Text(
               'Total Portfolio Value',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.grey[600],
-              ),
+                    color: Colors.grey[600],
+                  ),
             ),
             const SizedBox(height: 8),
             Text(
               '\$${totalValue.toStringAsFixed(2)}',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
             ),
             const SizedBox(height: 16),
             Row(
@@ -518,14 +534,14 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
         Text(
           value,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Colors.grey[600],
-          ),
+                color: Colors.grey[600],
+              ),
         ),
       ],
     );
@@ -558,15 +574,15 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                   Text(
                     currency,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
                   Text(
                     widget.plugWalletService.formatBalance(amount, currency),
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ],
               ),
@@ -613,8 +629,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                 Text(
                   snapshot.error.toString(),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
-                  ),
+                        color: Colors.grey[600],
+                      ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -642,8 +658,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                 Text(
                   'Your transaction history will appear here',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
-                  ),
+                        color: Colors.grey[600],
+                      ),
                 ),
               ],
             ),
@@ -692,8 +708,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                 Text(
                   snapshot.error.toString(),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
-                  ),
+                        color: Colors.grey[600],
+                      ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -721,8 +737,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                 Text(
                   'Import your NFTs to get started',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
-                  ),
+                        color: Colors.grey[600],
+                      ),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton.icon(
@@ -777,8 +793,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                 Text(
                   snapshot.error.toString(),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
-                  ),
+                        color: Colors.grey[600],
+                      ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -811,8 +827,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             Text(
               'Portfolio Overview',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 16),
             Row(
@@ -878,14 +894,14 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
           Text(
             value,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           Text(
             label,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Colors.grey[600],
-            ),
+                  color: Colors.grey[600],
+                ),
           ),
         ],
       ),
@@ -902,8 +918,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             Text(
               'Performance',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 16),
             _buildPerformanceRow('24h', '+2.5%', Colors.green),
@@ -924,16 +940,16 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
           Text(
             period,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
           const Spacer(),
           Text(
             change,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: color,
-              fontWeight: FontWeight.w600,
-            ),
+                  color: color,
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ],
       ),
@@ -950,12 +966,14 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             Text(
               'Recent Activity',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 16),
-            _buildActivityRow('Last Transaction', stats['lastTransaction'] ?? 'Never'),
-            _buildActivityRow('Total Transactions', (stats['totalTransactions'] ?? 0).toString()),
+            _buildActivityRow(
+                'Last Transaction', stats['lastTransaction'] ?? 'Never'),
+            _buildActivityRow('Total Transactions',
+                (stats['totalTransactions'] ?? 0).toString()),
             _buildActivityRow('Network', stats['network'] ?? 'Unknown'),
           ],
         ),
@@ -971,15 +989,15 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
           Text(
             label,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.grey[600],
-            ),
+                  color: Colors.grey[600],
+                ),
           ),
           const Spacer(),
           Text(
             value,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ],
       ),
@@ -1000,7 +1018,9 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: type == 'send' ? Colors.red.withOpacity(0.1) : Colors.green.withOpacity(0.1),
+            color: type == 'send'
+                ? Colors.red.withOpacity(0.1)
+                : Colors.green.withOpacity(0.1),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Icon(
@@ -1011,14 +1031,14 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
         title: Text(
           '${type == 'send' ? 'Sent' : 'Received'} $currency',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+                fontWeight: FontWeight.w600,
+              ),
         ),
         subtitle: Text(
           '${timestamp.day}/${timestamp.month}/${timestamp.year} ${timestamp.hour}:${timestamp.minute.toString().padLeft(2, '0')}',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Colors.grey[600],
-          ),
+                color: Colors.grey[600],
+              ),
         ),
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -1027,22 +1047,25 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             Text(
               '${type == 'send' ? '-' : '+'}${widget.plugWalletService.formatBalance(amount, currency)}',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: type == 'send' ? Colors.red : Colors.green,
-                fontWeight: FontWeight.bold,
-              ),
+                    color: type == 'send' ? Colors.red : Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: status == 'completed' ? Colors.green.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+                color: status == 'completed'
+                    ? Colors.green.withOpacity(0.1)
+                    : Colors.orange.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 status,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: status == 'completed' ? Colors.green : Colors.orange,
-                  fontWeight: FontWeight.w600,
-                ),
+                      color:
+                          status == 'completed' ? Colors.green : Colors.orange,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ),
           ],
@@ -1088,15 +1111,15 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                   Text(
                     nft['name'] ?? 'Unknown NFT',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     nft['description'] ?? 'No description',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.grey[600],
-                    ),
+                          color: Colors.grey[600],
+                        ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -1104,9 +1127,9 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                   Text(
                     'Token ID: ${nft['tokenId']}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.grey[500],
-                      fontFamily: 'monospace',
-                    ),
+                          color: Colors.grey[500],
+                          fontFamily: 'monospace',
+                        ),
                   ),
                 ],
               ),
@@ -1136,7 +1159,9 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: type == 'send' ? Colors.red.withOpacity(0.1) : Colors.green.withOpacity(0.1),
+              color: type == 'send'
+                  ? Colors.red.withOpacity(0.1)
+                  : Colors.green.withOpacity(0.1),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(
@@ -1153,14 +1178,14 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                 Text(
                   '${type == 'send' ? 'Sent' : 'Received'} $currency',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 Text(
                   '${timestamp.day}/${timestamp.month}/${timestamp.year}',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
-                  ),
+                        color: Colors.grey[600],
+                      ),
                 ),
               ],
             ),
@@ -1168,9 +1193,9 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
           Text(
             '${type == 'send' ? '-' : '+'}${widget.plugWalletService.formatBalance(amount, currency)}',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: type == 'send' ? Colors.red : Colors.green,
-              fontWeight: FontWeight.w600,
-            ),
+                  color: type == 'send' ? Colors.red : Colors.green,
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ],
       ),
@@ -1185,15 +1210,15 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
           Text(
             label,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.grey[600],
-            ),
+                  color: Colors.grey[600],
+                ),
           ),
           const Spacer(),
           Text(
             value,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ],
       ),
@@ -1258,7 +1283,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Disconnect Wallet'),
-        content: const Text('Are you sure you want to disconnect from Plug Wallet?'),
+        content:
+            const Text('Are you sure you want to disconnect from Plug Wallet?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -1293,7 +1319,7 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
     final amountController = TextEditingController();
     final addressController = TextEditingController();
     final selectedCurrency = currency ?? 'ICP';
-    
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -1333,9 +1359,11 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
           ),
           ElevatedButton(
             onPressed: () {
-              if (amountController.text.isNotEmpty && addressController.text.isNotEmpty) {
+              if (amountController.text.isNotEmpty &&
+                  addressController.text.isNotEmpty) {
                 Navigator.pop(context);
-                _processSend(selectedCurrency, amountController.text, addressController.text);
+                _processSend(selectedCurrency, amountController.text,
+                    addressController.text);
               }
             },
             child: const Text('Send'),
@@ -1352,7 +1380,7 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
         backgroundColor: Colors.blue,
       ),
     );
-    
+
     // Simulate transaction processing
     Future.delayed(const Duration(seconds: 2), () {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -1366,7 +1394,7 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
 
   void _showReceiveDialog() {
     final walletAddress = 'rdmx6-jaaaa-aaaah-qcaiq-cai'; // Mock wallet address
-    
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -1385,8 +1413,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
               child: SelectableText(
                 walletAddress,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontFamily: 'monospace',
-                ),
+                      fontFamily: 'monospace',
+                    ),
               ),
             ),
             const SizedBox(height: 16),
@@ -1397,7 +1425,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                     onPressed: () {
                       // Copy to clipboard
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Address copied to clipboard')),
+                        const SnackBar(
+                            content: Text('Address copied to clipboard')),
                       );
                     },
                     icon: const Icon(Icons.copy),
@@ -1410,7 +1439,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                     onPressed: () {
                       // Share address
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Share functionality coming soon')),
+                        const SnackBar(
+                            content: Text('Share functionality coming soon')),
                       );
                     },
                     icon: const Icon(Icons.share),
@@ -1434,7 +1464,7 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
   void _showImportNFTDialog() {
     final nftIdController = TextEditingController();
     final collectionController = TextEditingController();
-    
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -1475,7 +1505,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             onPressed: () {
               if (nftIdController.text.isNotEmpty) {
                 Navigator.pop(context);
-                _processImportNFT(nftIdController.text, collectionController.text);
+                _processImportNFT(
+                    nftIdController.text, collectionController.text);
               }
             },
             child: const Text('Import'),
@@ -1492,7 +1523,7 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
         backgroundColor: Colors.blue,
       ),
     );
-    
+
     // Simulate import process
     Future.delayed(const Duration(seconds: 2), () {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -1516,12 +1547,14 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             children: [
               _buildDetailRow('Transaction ID', transaction['id'] ?? 'N/A'),
               _buildDetailRow('Type', transaction['type'] ?? 'N/A'),
-              _buildDetailRow('Amount', '${transaction['amount'] ?? 'N/A'} ${transaction['currency'] ?? ''}'),
+              _buildDetailRow('Amount',
+                  '${transaction['amount'] ?? 'N/A'} ${transaction['currency'] ?? ''}'),
               _buildDetailRow('From', transaction['from'] ?? 'N/A'),
               _buildDetailRow('To', transaction['to'] ?? 'N/A'),
               _buildDetailRow('Status', transaction['status'] ?? 'N/A'),
               _buildDetailRow('Date', transaction['date'] ?? 'N/A'),
-              _buildDetailRow('Fee', '${transaction['fee'] ?? 'N/A'} ${transaction['currency'] ?? ''}'),
+              _buildDetailRow('Fee',
+                  '${transaction['fee'] ?? 'N/A'} ${transaction['currency'] ?? ''}'),
               if (transaction['memo'] != null)
                 _buildDetailRow('Memo', transaction['memo']),
             ],
@@ -1536,7 +1569,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             onPressed: () {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Transaction copied to clipboard')),
+                const SnackBar(
+                    content: Text('Transaction copied to clipboard')),
               );
             },
             icon: const Icon(Icons.copy),
@@ -1616,7 +1650,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
             onPressed: () {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('NFT details copied to clipboard')),
+                const SnackBar(
+                    content: Text('NFT details copied to clipboard')),
               );
             },
             icon: const Icon(Icons.copy),
@@ -1662,7 +1697,8 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Open Plug Wallet'),
-        content: const Text('This would open the Plug Wallet website in your browser.'),
+        content: const Text(
+            'This would open the Plug Wallet website in your browser.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -1677,7 +1713,7 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                   backgroundColor: Colors.blue,
                 ),
               );
-              
+
               // Simulate opening website
               Future.delayed(const Duration(seconds: 1), () {
                 ScaffoldMessenger.of(context).showSnackBar(

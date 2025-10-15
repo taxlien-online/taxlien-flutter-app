@@ -1,0 +1,114 @@
+// Mock classes for flutter_nft and flutter_icp packages
+// These are temporary until the actual packages are available
+
+class NFTClient {
+  NFTProvider? getNFTProvider(dynamic network) => NFTProvider();
+  WalletProvider? getWalletProvider(dynamic network) => WalletProvider();
+  MarketplaceProvider? getMarketplaceProvider(dynamic network) =>
+      MarketplaceProvider();
+}
+
+class NFTProvider {
+  Future<void> mintNFT({
+    required String toAddress,
+    required NFTMetadata metadata,
+    required String contractAddress,
+  }) async {}
+
+  Future<List<NFT>> getNFTs(String address) async => [];
+}
+
+class WalletProvider {
+  bool get isConnected => false;
+  String? get connectedAddress => null;
+  Future<void> connect() async {}
+  Future<void> disconnect() async {}
+}
+
+class MarketplaceProvider {
+  Future<List<NFTListing>> getActiveListings() async => [];
+  Future<List<NFTListing>> getUserListings(String address) async => [];
+  Future<List<NFTOffer>> getUserOffers(String address) async => [];
+  Future<List<NFTOffer>> getActiveOffers() async => [];
+  Future<String> buyNFT({
+    required String listingId,
+    required String buyerAddress,
+  }) async =>
+      '';
+}
+
+class NFT {
+  final String id;
+  final String name;
+  final String description;
+  final String image;
+
+  NFT({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.image,
+  });
+}
+
+class NFTMetadata {
+  final String name;
+  final String description;
+  final String image;
+  final Map<String, dynamic> attributes;
+  final Map<String, dynamic> properties;
+
+  NFTMetadata({
+    required this.name,
+    required this.description,
+    required this.image,
+    required this.attributes,
+    required this.properties,
+  });
+}
+
+class NFTListing {
+  final String id;
+  final String nftId;
+  final double price;
+  final String status;
+
+  NFTListing({
+    required this.id,
+    required this.nftId,
+    required this.price,
+    required this.status,
+  });
+}
+
+class NFTOffer {
+  final String id;
+  final String nftId;
+  final double amount;
+  final String status;
+
+  NFTOffer({
+    required this.id,
+    required this.nftId,
+    required this.amount,
+    required this.status,
+  });
+}
+
+class BlockchainNetwork {
+  static const icp = 'icp';
+}
+
+class ListingStatus {
+  static const active = 'active';
+  static const sold = 'sold';
+  static const cancelled = 'cancelled';
+}
+
+class OfferStatus {
+  static const pending = 'pending';
+  static const accepted = 'accepted';
+  static const rejected = 'rejected';
+  static const expired = 'expired';
+}
+

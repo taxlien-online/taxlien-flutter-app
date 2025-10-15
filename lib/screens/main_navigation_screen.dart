@@ -5,8 +5,8 @@ import '../services/theme_service.dart';
 import '../services/onboarding_service.dart';
 import '../services/tax_lien_service.dart';
 // Replaced with flutter_nft and flutter_icp libraries
-import 'package:flutter_nft/flutter_nft.dart';
-import 'package:flutter_icp/flutter_icp.dart';
+// import 'package:flutter_nft/flutter_nft.dart';
+// import 'package:flutter_icp/flutter_icp.dart';
 import '../core/constants/app_constants.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
@@ -17,6 +17,7 @@ import 'my_investments_screen.dart';
 import 'nft_dashboard_screen.dart';
 import 'profile_screen.dart';
 import 'search_screen.dart';
+import '../core/mocks/nft_mocks.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   final LocalizationService localizationService;
