@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'l10n/app_localizations.dart';
 import 'services/offline_data_loader_service.dart';
 import 'services/tax_lien_search_service.dart';
 import 'screens/marketplace_packages_screen.dart';
@@ -37,6 +39,33 @@ class TaxLienSimpleApp extends StatelessWidget {
     return MaterialApp(
       title: 'TaxLien.online',
       debugShowCheckedModeBanner: false,
+
+      // Localization settings
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''), // English
+        Locale('th', ''), // Thai
+        Locale('ru', ''), // Russian
+        Locale('zh', ''), // Chinese
+        Locale('he', ''), // Hebrew
+        Locale('hi', ''), // Hindi
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        // Check if the current device locale is supported
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale?.languageCode) {
+            return supportedLocale;
+          }
+        }
+        // If the locale of the device is not supported, use English as default
+        return supportedLocales.first;
+      },
+
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF2563EB), // Синий цвет

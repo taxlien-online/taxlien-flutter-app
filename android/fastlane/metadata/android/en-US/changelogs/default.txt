@@ -1,0 +1,7 @@
+• Initial release of TaxLien Marketplace
+• Advanced property search and filtering
+• Interactive map view
+• Multi-state property coverage
+• Property details and analytics
+• Watchlist and favorites
+• Performance improvements and bug fixes

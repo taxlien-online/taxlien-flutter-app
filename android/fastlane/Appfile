@@ -1,8 +1,2 @@
-# The package name of your app
-package_name("com.taxlien.online.marketplace")
-
-# Your Google Play Console service account JSON file path
-json_key_file("../google-play-service-account.json")
-
-# For more information about the Appfile, see:
-#     https://docs.fastlane.tools/advanced/#appfile
+json_key_file("google-play-service-account.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("taxlien.online") # e.g. com.krausefx.app
