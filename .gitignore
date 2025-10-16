@@ -106,6 +106,7 @@ coverage/
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
 *.jks
+android/google-play-service-account.json
 
 # Build outputs
 build/
