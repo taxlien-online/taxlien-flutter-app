@@ -8,6 +8,8 @@ import '../services/tax_lien_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import '../services/user_preferences_service.dart';
+import '../services/offline_data_loader_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import '../theme/app_theme_export.dart'; // Not used
 import 'main_navigation_screen.dart';
 
@@ -42,10 +44,87 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   List<OnboardingPage> _pages = [];
   bool _isLoading = true;
 
+  // File selection state
+  final Map<String, RadaFileInfo> _availableFiles = {
+    'ALL': RadaFileInfo(
+      key: 'ALL',
+      name: 'Все штаты',
+      description: 'Полный набор данных по всем штатам США',
+      file: 'assets/taxlien_data.rada',
+      estimatedRecords: 250000,
+      size: '45 MB',
+      states: ['ALL'],
+      icon: Icons.public,
+      color: Colors.blue,
+    ),
+    'FL': RadaFileInfo(
+      key: 'FL',
+      name: 'Florida',
+      description: 'Налоговые закладные штата Флорида',
+      file: 'assets/taxlien_florida.rada',
+      estimatedRecords: 15000,
+      size: '3.2 MB',
+      states: ['FL'],
+      icon: Icons.beach_access,
+      color: Colors.orange,
+    ),
+    'AZ': RadaFileInfo(
+      key: 'AZ',
+      name: 'Arizona',
+      description: 'Налоговые закладные штата Аризона',
+      file: 'assets/taxlien_arizona.rada',
+      estimatedRecords: 8500,
+      size: '1.8 MB',
+      states: ['AZ'],
+      icon: Icons.landscape,
+      color: Colors.deepOrange,
+    ),
+    'DEMO': RadaFileInfo(
+      key: 'DEMO',
+      name: 'Демо данные',
+      description: 'Демонстрационные данные для тестирования',
+      file: 'assets/taxlien_demo.rada',
+      estimatedRecords: 100,
+      size: '15 KB',
+      states: ['DEMO'],
+      icon: Icons.play_circle_outline,
+      color: Colors.purple,
+    ),
+    'DEFAULT': RadaFileInfo(
+      key: 'DEFAULT',
+      name: 'Базовый набор',
+      description: 'Базовый набор данных',
+      file: 'assets/taxlien.rada',
+      estimatedRecords: 5000,
+      size: '950 KB',
+      states: ['DEFAULT'],
+      icon: Icons.folder,
+      color: Colors.grey,
+    ),
+  };
+
+  Set<String> _selectedFiles = {'DEMO'};
+  bool _isLoadingFiles = false;
+
   @override
   void initState() {
     super.initState();
     _loadOnboardingPages();
+    _loadSavedSelection();
+  }
+
+  Future<void> _loadSavedSelection() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final saved = prefs.getStringList('selected_rada_states');
+      if (saved != null && saved.isNotEmpty) {
+        setState(() {
+          _selectedFiles = saved.toSet();
+        });
+      }
+    } catch (e) {
+      // Use default selection if error
+    }
   }
 
   Future<void> _loadOnboardingPages() async {
@@ -74,6 +153,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             .toList();
       }
 
+      // Add file selection page
+      _pages.add(OnboardingPage(
+        title: 'Выберите данные для загрузки',
+        subtitle: 'Настройте источники данных',
+        description:
+            'Выберите, какие файлы с налоговыми закладными вы хотите загрузить. Вы можете изменить это позже в настройках.',
+        icon: Icons.folder_open,
+        color: Colors.teal,
+        isFileSelection: true,
+      ));
+
       setState(() {
         _isLoading = false;
       });
@@ -81,6 +171,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       // Fallback to default pages on error
       setState(() {
         _pages = _getDefaultPages();
+        // Add file selection page
+        _pages.add(OnboardingPage(
+          title: 'Выберите данные для загрузки',
+          subtitle: 'Настройте источники данных',
+          description:
+              'Выберите, какие файлы с налоговыми закладными вы хотите загрузить. Вы можете изменить это позже в настройках.',
+          icon: Icons.folder_open,
+          color: Colors.teal,
+          isFileSelection: true,
+        ));
         _isLoading = false;
       });
     }
@@ -176,7 +276,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 },
                 itemCount: _pages.length,
                 itemBuilder: (context, index) {
-                  return _buildPage(_pages[index]);
+                  final page = _pages[index];
+                  if (page.isFileSelection) {
+                    return _buildFileSelectionPage();
+                  }
+                  return _buildPage(page);
                 },
               ),
             ),
@@ -236,6 +340,173 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ],
       ),
     );
+  }
+
+  Widget _buildFileSelectionPage() {
+    return _isLoadingFiles
+        ? const Center(child: CircularProgressIndicator())
+        : Column(
+            children: [
+              // Header
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.teal.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      child: const Icon(
+                        Icons.folder_open,
+                        size: 40,
+                        color: Colors.teal,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Выберите данные для загрузки',
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Выбранные файлы будут загружены при первом запуске',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+
+              // Info banner
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      color: Theme.of(context).colorScheme.primary,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        '${_selectedFiles.length} ${_selectedFiles.length == 1 ? "файл" : "файла"} · ≈${(_totalRecords / 1000).toStringAsFixed(1)}K записей',
+                        style: TextStyle(
+                          color:
+                              Theme.of(context).colorScheme.onPrimaryContainer,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              // Files list
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  children: _availableFiles.entries.map((entry) {
+                    final info = entry.value;
+                    final isSelected = _selectedFiles.contains(entry.key);
+
+                    return _RadaFileCard(
+                      info: info,
+                      isSelected: isSelected,
+                      onTap: () => _toggleSelection(entry.key),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ],
+          );
+  }
+
+  void _toggleSelection(String key) {
+    setState(() {
+      if (key == 'ALL') {
+        // If selecting ALL, deselect others
+        if (_selectedFiles.contains('ALL')) {
+          _selectedFiles.remove('ALL');
+        } else {
+          _selectedFiles = {'ALL'};
+        }
+      } else {
+        // If selecting specific state, remove ALL
+        _selectedFiles.remove('ALL');
+        if (_selectedFiles.contains(key)) {
+          _selectedFiles.remove(key);
+        } else {
+          _selectedFiles.add(key);
+        }
+      }
+
+      // Ensure at least one is selected
+      if (_selectedFiles.isEmpty) {
+        _selectedFiles.add('DEMO');
+      }
+    });
+  }
+
+  int get _totalRecords {
+    if (_selectedFiles.contains('ALL')) {
+      return _availableFiles['ALL']!.estimatedRecords;
+    }
+    return _selectedFiles.fold<int>(
+      0,
+      (sum, key) => sum + (_availableFiles[key]?.estimatedRecords ?? 0),
+    );
+  }
+
+  Future<void> _saveFileSelection() async {
+    setState(() {
+      _isLoadingFiles = true;
+    });
+
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setStringList(
+          'selected_rada_states', _selectedFiles.toList());
+
+      // Initialize data loader
+      final dataLoader = OfflineDataLoaderService();
+      await dataLoader.initialize();
+
+      if (mounted) {
+        setState(() {
+          _isLoadingFiles = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoadingFiles = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Ошибка сохранения: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
   Widget _buildBottomSection() {
@@ -307,6 +578,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _completeOnboarding() async {
+    // Save file selection before completing onboarding
+    await _saveFileSelection();
     await widget.onboardingService.completeOnboarding();
 
     if (mounted) {
@@ -339,11 +612,170 @@ class OnboardingPage {
   final String description;
   final IconData icon;
   final Color color;
+  final bool isFileSelection;
 
   OnboardingPage({
     required this.title,
     required this.subtitle,
     required this.description,
+    required this.icon,
+    required this.color,
+    this.isFileSelection = false,
+  });
+}
+
+/// Widget for displaying rada file card
+class _RadaFileCard extends StatelessWidget {
+  final RadaFileInfo info;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _RadaFileCard({
+    required this.info,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            children: [
+              // Icon
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: info.color.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(
+                  info.icon,
+                  color: info.color,
+                  size: 24,
+                ),
+              ),
+
+              const SizedBox(width: 12),
+
+              // Info
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      info.name,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      info.description,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.grey.shade600,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        _InfoChip(
+                          icon: Icons.folder_outlined,
+                          label:
+                              '${(info.estimatedRecords / 1000).toStringAsFixed(1)}K',
+                        ),
+                        const SizedBox(width: 6),
+                        _InfoChip(
+                          icon: Icons.storage,
+                          label: info.size,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              // Checkbox
+              Checkbox(
+                value: isSelected,
+                onChanged: (_) => onTap(),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _InfoChip extends StatelessWidget {
+  final IconData icon;
+  final String label;
+
+  const _InfoChip({
+    required this.icon,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 12, color: Colors.grey.shade600),
+          const SizedBox(width: 3),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 10,
+              color: Colors.grey.shade600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Information about a .rada file
+class RadaFileInfo {
+  final String key;
+  final String name;
+  final String description;
+  final String file;
+  final int estimatedRecords;
+  final String size;
+  final List<String> states;
+  final IconData icon;
+  final Color color;
+
+  RadaFileInfo({
+    required this.key,
+    required this.name,
+    required this.description,
+    required this.file,
+    required this.estimatedRecords,
+    required this.size,
+    required this.states,
     required this.icon,
     required this.color,
   });

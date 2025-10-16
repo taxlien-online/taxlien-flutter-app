@@ -957,16 +957,16 @@ class _SearchTabState extends State<SearchTab> {
         }
         dataLoader = null;
       }
-      
+
       // Create search service (with or without data loader)
       _searchService = TaxLienSearchService(dataLoader);
-      
+
       // Load statistics
       _statistics = await _searchService.getStatistics();
-      
+
       // Load initial results
       await _performSearch();
-      
+
       setState(() {
         _isInitialized = true;
       });

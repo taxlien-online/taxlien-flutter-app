@@ -5,11 +5,11 @@ import 'offline_data_loader_service.dart';
 class TaxLienSearchService {
   final OfflineDataLoaderService? _dataLoader;
   List<TaxLien>? _demoData;
-  
+
   TaxLienSearchService([this._dataLoader]) {
     _initializeDemoData();
   }
-  
+
   /// Initialize demo data as fallback
   void _initializeDemoData() {
     _demoData = [
@@ -103,36 +103,37 @@ class TaxLienSearchService {
     int limit = 50,
     int offset = 0,
   }) async {
-    List<TaxLien> liens = [];
-    
     try {
-      if (_dataLoader != null) {
-        // Try to get products from offline loader
-        final products = await _dataLoader!.getProducts(
-          state: state,
-          county: county,
-          limit: limit * 2, // Get more to filter
-          offset: offset,
-        );
+      List<TaxLien> liens = [];
 
-        // Convert to TaxLien objects
-        liens = products.map((p) => TaxLien.fromMap(p)).toList();
-      }
-      
-      // Fallback to demo data if no results
-      if (liens.isEmpty && _demoData != null) {
-        if (kDebugMode) {
-          print('Using demo data as fallback');
+      try {
+        if (_dataLoader != null) {
+          // Try to get products from offline loader
+          final products = await _dataLoader!.getProducts(
+            state: state,
+            county: county,
+            limit: limit * 2, // Get more to filter
+            offset: offset,
+          );
+
+          // Convert to TaxLien objects
+          liens = products.map((p) => TaxLien.fromMap(p)).toList();
         }
-        liens = List.from(_demoData!);
+
+        // Fallback to demo data if no results
+        if (liens.isEmpty && _demoData != null) {
+          if (kDebugMode) {
+            print('Using demo data as fallback');
+          }
+          liens = List.from(_demoData!);
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print('Error loading from .rada, using demo data: $e');
+        }
+        // Use demo data on error
+        liens = List.from(_demoData ?? []);
       }
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error loading from .rada, using demo data: $e');
-      }
-      // Use demo data on error
-      liens = List.from(_demoData ?? []);
-    }
 
       // Apply filters
       if (query != null && query.isNotEmpty) {
@@ -186,7 +187,7 @@ class TaxLienSearchService {
   Future<SearchStatistics> getStatistics() async {
     try {
       List<TaxLien> liens = [];
-      
+
       if (_dataLoader != null) {
         try {
           final products = await _dataLoader!.getProducts();
@@ -197,7 +198,7 @@ class TaxLienSearchService {
           }
         }
       }
-      
+
       // Fallback to demo data
       if (liens.isEmpty && _demoData != null) {
         liens = _demoData!;

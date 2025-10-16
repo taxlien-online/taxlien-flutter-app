@@ -7,6 +7,7 @@ import '../theme/app_colors.dart';
 import '../core/constants/app_constants.dart';
 import 'onboarding_management_screen.dart';
 import 'onboarding_screen.dart';
+import 'rada_file_selector_screen.dart';
 import '../services/tax_lien_service.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
@@ -67,6 +68,18 @@ class SettingsScreen extends StatelessWidget {
             icon: Icons.view_carousel,
             children: [
               _buildOnboardingSettings(context),
+            ],
+          ),
+
+          const SizedBox(height: 24),
+
+          // Секция Data Management
+          _buildSection(
+            context,
+            title: 'Data Management',
+            icon: Icons.storage,
+            children: [
+              _buildDataManagementSettings(context),
             ],
           ),
 
@@ -839,6 +852,20 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildDataManagementSettings(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          leading: const Icon(Icons.folder_open),
+          title: const Text('Выбор данных для загрузки'),
+          subtitle: const Text('Настройте, какие файлы загружать'),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => _openFileSelector(context),
+        ),
+      ],
+    );
+  }
+
   Future<void> _resetOnboarding(BuildContext context) async {
     final confirmed = await showDialog<bool>(
       context: context,
@@ -882,7 +909,7 @@ class SettingsScreen extends StatelessWidget {
               onboardingService: onboardingService,
               taxLienService: TaxLienService(),
               authService: AuthService(),
-              databaseService: DatabaseService(),
+              databaseService: DatabaseService.instance,
               userPreferencesService: UserPreferencesService(),
             ),
           ),
@@ -895,6 +922,14 @@ class SettingsScreen extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const OnboardingManagementScreen(),
+      ),
+    );
+  }
+
+  void _openFileSelector(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const RadaFileSelectorScreen(),
       ),
     );
   }
