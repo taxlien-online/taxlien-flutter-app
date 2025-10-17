@@ -3,7 +3,8 @@
 
 class FlutterMagentoCloudService {
   // Singleton pattern
-  static final FlutterMagentoCloudService _instance = FlutterMagentoCloudService._internal();
+  static final FlutterMagentoCloudService _instance =
+      FlutterMagentoCloudService._internal();
   factory FlutterMagentoCloudService() => _instance;
   FlutterMagentoCloudService._internal();
 

@@ -15,11 +15,11 @@ class IntegratedServices {
   static IntegratedServices? _instance;
 
   // Services
-  FlutterMagento? _magento;
+  // FlutterMagento? _magento; // Disabled
   late DatabaseService _databaseService;
   late NFTService _nftService;
   late PlugWalletService _walletService;
-  late FlutterMagentoCloudService _magentoService;
+  FlutterMagentoCloudService? _magentoService;
   // NFT/Blockchain clients - temporarily disabled until API documentation is available
   // icp_lib.ICPClient? _icpClient;
   // nft_lib.NFTClient? _nftClient;
@@ -63,6 +63,7 @@ class IntegratedServices {
 
       // Initialize Magento cloud service
       _magentoService = FlutterMagentoCloudService();
+      await _magentoService?.initialize();
       debugPrint('Magento cloud service initialized');
 
       // NFT/Blockchain clients initialization - temporarily disabled
@@ -98,11 +99,11 @@ class IntegratedServices {
   }
 
   // Getters
-  FlutterMagento? get magento => _magento;
+  // FlutterMagento? get magento => _magento; // Disabled
   DatabaseService get database => _databaseService;
   NFTService get nft => _nftService;
   PlugWalletService get wallet => _walletService;
-  FlutterMagentoCloudService get magentoCloud => _magentoService;
+  FlutterMagentoCloudService? get magentoCloud => _magentoService;
   // NFT/Blockchain getters - temporarily disabled
   // icp_lib.ICPClient? get icp => _icpClient;
   // nft_lib.NFTClient? get nftClient => _nftClient;

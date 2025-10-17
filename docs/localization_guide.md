@@ -7,7 +7,12 @@ TaxLien.online supports internationalization with automatic system language dete
 ## Supported Languages
 
 - **English (en)** - default language
-- **Russian (ru)** - additional language
+- **Russian (ru)** - Russian
+- **Thai (th)** - Thai
+- **Chinese (zh)** - Chinese (Simplified)
+- **Hebrew (he)** - Hebrew
+- **Hindi (hi)** - Hindi
+- **Ukrainian (uk)** - Ukrainian
 
 ## File Structure
 

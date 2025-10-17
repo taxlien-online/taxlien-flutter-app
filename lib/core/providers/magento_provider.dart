@@ -135,7 +135,7 @@ class MagentoNotifier extends Notifier<MagentoState> {
         name: '',
         price: 0.0,
       );
-      
+
       // API service addToCart signature may vary
       return true; // Placeholder
     } catch (e) {
@@ -146,4 +146,5 @@ class MagentoNotifier extends Notifier<MagentoState> {
 }
 
 /// Provider для Magento
-final magentoProvider = NotifierProvider<MagentoNotifier, MagentoState>(MagentoNotifier.new);
+final magentoProvider =
+    NotifierProvider<MagentoNotifier, MagentoState>(MagentoNotifier.new);

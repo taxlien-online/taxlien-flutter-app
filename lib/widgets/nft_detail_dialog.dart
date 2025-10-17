@@ -33,7 +33,7 @@ class NFTDetailDialog extends StatelessWidget {
                   end: Alignment.bottomRight,
                   colors: [
                     _getRarityColor(
-                            nft.metadata?['attributes']?['Rarity'] ?? 'Common'),
+                        nft.metadata?['attributes']?['Rarity'] ?? 'Common'),
                     _getRarityColor(
                             nft.metadata.attributes['Rarity'] ?? 'Common')
                         .withOpacity(0.7),
@@ -106,7 +106,7 @@ class NFTDetailDialog extends StatelessWidget {
                   children: [
                     // Title and basic info
                     Text(
-                          nft.metadata?['name'] ?? nft.name,
+                      nft.metadata?['name'] ?? nft.name,
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class NFTDetailDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                          nft.metadata?['description'] ?? nft.description,
+                      nft.metadata?['description'] ?? nft.description,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 16),
@@ -125,10 +125,11 @@ class NFTDetailDialog extends StatelessWidget {
                       'Property Information',
                       [
                         _buildInfoRow('Address', nft.originalLien.address),
-                            _buildInfoRow('Parcel ID', nft.originalLien.parcelId ?? 'N/A'),
+                        _buildInfoRow(
+                            'Parcel ID', nft.originalLien.parcelId ?? 'N/A'),
                         _buildInfoRow('County', nft.originalLien.county),
                         _buildInfoRow('State', nft.originalLien.state),
-                            _buildInfoRow('Owner', nft.originalLien.owner ?? 'N/A'),
+                        _buildInfoRow('Owner', nft.originalLien.owner ?? 'N/A'),
                       ],
                     ),
 
@@ -170,8 +171,11 @@ class NFTDetailDialog extends StatelessWidget {
                             nft.originalLien.redemptionDeadline
                                 .toString()
                                 .split(' ')[0]),
-                        _buildInfoRow('NFT Created',
-                                (nft.createdAt ?? nft.mintedAt).toString().split(' ')[0]),
+                        _buildInfoRow(
+                            'NFT Created',
+                            (nft.createdAt ?? nft.mintedAt)
+                                .toString()
+                                .split(' ')[0]),
                       ],
                     ),
 
@@ -193,13 +197,12 @@ class NFTDetailDialog extends StatelessWidget {
                     const SizedBox(height: 16),
 
                     // Transaction history
-                        if (nft.transactionHistory?.isNotEmpty ?? false)
+                    if (nft.transactionHistory?.isNotEmpty ?? false)
                       _buildSection(
                         context,
                         'Transaction History',
-                            nft.transactionHistory ?? []
-                            .map((tx) => _buildInfoRow('', tx))
-                            .toList(),
+                        nft.transactionHistory ??
+                            [].map((tx) => _buildInfoRow('', tx)).toList(),
                       ),
 
                     const SizedBox(height: 16),
@@ -376,7 +379,7 @@ class NFTDetailDialog extends StatelessWidget {
     // In a real implementation, this would use the share_plus package
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-            content: Text('Sharing ${nft.metadata?['name'] ?? nft.name}...'),
+        content: Text('Sharing ${nft.metadata?['name'] ?? nft.name}...'),
         backgroundColor: Colors.blue,
       ),
     );
@@ -412,7 +415,7 @@ class NFTDetailDialog extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-                  'Scan this QR code to view ${nft.metadata?['name'] ?? nft.name}',
+              'Scan this QR code to view ${nft.metadata?['name'] ?? nft.name}',
               textAlign: TextAlign.center,
             ),
           ],

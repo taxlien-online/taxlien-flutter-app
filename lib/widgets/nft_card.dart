@@ -46,7 +46,7 @@ class NFTCard extends StatelessWidget {
                       _getRarityColor(
                           nft.metadata?.attributes['Rarity'] ?? 'Common'),
                       _getRarityColor(
-                              nft.metadata.attributes['Rarity'] ?? 'Common')
+                              nft.metadata?.attributes['Rarity'] ?? 'Common')
                           .withOpacity(0.7),
                     ],
                   ),
@@ -73,7 +73,7 @@ class NFTCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          nft.metadata.attributes['Rarity'] ?? 'Common',
+                          nft.metadata?.attributes['Rarity'] ?? 'Common',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 10,
@@ -118,7 +118,7 @@ class NFTCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                          nft.metadata?.name ?? nft.name,
+                      nft.metadata?.name ?? nft.name,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -127,7 +127,7 @@ class NFTCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                          nft.originalLien?.address ?? 'Unknown',
+                      nft.originalLien?.address ?? 'Unknown',
                       style: Theme.of(context).textTheme.bodySmall,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -153,7 +153,8 @@ class NFTCard extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             color: _getRiskColor(
-                                nft.metadata.attributes['Risk Level'] ?? 'Low'),
+                                nft.metadata?.attributes['Risk Level'] ??
+                                    'Low'),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
