@@ -49,7 +49,7 @@ class _CalibrationScreenState extends State<CalibrationScreen> {
       await domeService.setZoom(_zoom);
       await domeService.setHorizontalOffset(_horizontalOffset);
       await domeService.setVerticalOffset(_verticalOffset);
-      
+
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -69,7 +69,7 @@ class _CalibrationScreenState extends State<CalibrationScreen> {
       _horizontalOffset = 0.0;
       _verticalOffset = 0.0;
     });
-    
+
     if (widget.domeService is DomeService) {
       final domeService = widget.domeService as DomeService;
       await domeService.reset();
@@ -210,16 +210,16 @@ class _CalibrationScreenState extends State<CalibrationScreen> {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 const Spacer(),
                 Text(
                   value.toStringAsFixed(1),
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ],
             ),

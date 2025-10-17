@@ -87,7 +87,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
         children: [
           // Filter chips
           _buildFilterChips(),
-          
+
           // Media grid
           Expanded(
             child: _isLoading
@@ -119,7 +119,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
         itemBuilder: (context, index) {
           final filter = filters[index];
           final isSelected = _selectedFilter == filter['key'];
-          
+
           return Padding(
             padding: const EdgeInsets.only(right: 8),
             child: FilterChip(
@@ -140,7 +140,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
   Widget _buildEmptyState() {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
-    
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -174,7 +174,9 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
   Widget _buildMediaGrid() {
     final filteredItems = _selectedFilter == 'all'
         ? _mediaItems
-        : _mediaItems.where((item) => item.type.name == _selectedFilter).toList();
+        : _mediaItems
+            .where((item) => item.type.name == _selectedFilter)
+            .toList();
 
     return GridView.builder(
       padding: const EdgeInsets.all(16),
@@ -194,7 +196,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
 
   Widget _buildMediaCard(MediaItem item) {
     final theme = Theme.of(context);
-    
+
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -216,7 +218,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
                 ),
               ),
             ),
-            
+
             // Info
             Expanded(
               flex: 2,
@@ -325,7 +327,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
 
   void _showAddMediaDialog() {
     final l10n = AppLocalizations.of(context);
-    
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -373,7 +375,8 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
     final l10n = AppLocalizations.of(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${_getMediaTypeLabel(type)} ${l10n?.uploadComingSoon ?? 'upload coming soon!'}'),
+        content: Text(
+            '${_getMediaTypeLabel(type)} ${l10n?.uploadComingSoon ?? 'upload coming soon!'}'),
       ),
     );
   }
@@ -382,10 +385,11 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
     setState(() {
       _mediaItems.removeWhere((media) => media.id == item.id);
     });
-    
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${item.title} ${AppLocalizations.of(context)?.deleted ?? 'deleted'}'),
+        content: Text(
+            '${item.title} ${AppLocalizations.of(context)?.deleted ?? 'deleted'}'),
         backgroundColor: Colors.green,
       ),
     );

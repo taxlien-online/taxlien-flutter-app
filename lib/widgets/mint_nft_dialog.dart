@@ -25,7 +25,8 @@ class _MintNFTDialogState extends State<MintNFTDialog> {
   void initState() {
     super.initState();
     _customName = 'Tax Lien NFT #${widget.lien.id}';
-    _customDescription = 'NFT representing a tax lien on property at ${widget.lien.address}. '
+    _customDescription =
+        'NFT representing a tax lien on property at ${widget.lien.address}. '
         'This NFT entitles the holder to collect interest and potentially foreclose on the property.';
   }
 
@@ -60,10 +61,11 @@ class _MintNFTDialogState extends State<MintNFTDialog> {
                   Expanded(
                     child: Text(
                       'Mint NFT from Tax Lien',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
                     ),
                   ),
                 ],
@@ -78,16 +80,16 @@ class _MintNFTDialogState extends State<MintNFTDialog> {
                   // Lien preview
                   _buildLienPreview(),
                   const SizedBox(height: 20),
-                  
+
                   // Customization options
                   Text(
                     'Customize Your NFT',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                   const SizedBox(height: 12),
-                  
+
                   // Name field
                   TextField(
                     decoration: const InputDecoration(
@@ -99,7 +101,7 @@ class _MintNFTDialogState extends State<MintNFTDialog> {
                     onChanged: (value) => _customName = value,
                   ),
                   const SizedBox(height: 12),
-                  
+
                   // Description field
                   TextField(
                     decoration: const InputDecoration(
@@ -112,11 +114,11 @@ class _MintNFTDialogState extends State<MintNFTDialog> {
                     maxLines: 3,
                   ),
                   const SizedBox(height: 20),
-                  
+
                   // NFT preview
                   _buildNFTPreview(),
                   const SizedBox(height: 20),
-                  
+
                   // Benefits
                   _buildBenefits(),
                 ],
@@ -129,7 +131,8 @@ class _MintNFTDialogState extends State<MintNFTDialog> {
                 children: [
                   Expanded(
                     child: OutlinedButton(
-                      onPressed: _isLoading ? null : () => Navigator.of(context).pop(),
+                      onPressed:
+                          _isLoading ? null : () => Navigator.of(context).pop(),
                       child: const Text('Cancel'),
                     ),
                   ),
@@ -171,15 +174,17 @@ class _MintNFTDialogState extends State<MintNFTDialog> {
           Text(
             'Original Tax Lien',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           const SizedBox(height: 8),
           _buildInfoRow('ID', widget.lien.id),
           _buildInfoRow('Address', widget.lien.address),
-          _buildInfoRow('Amount', '\$${widget.lien.taxAmount.toStringAsFixed(0)}'),
+          _buildInfoRow(
+              'Amount', '\$${widget.lien.taxAmount.toStringAsFixed(0)}'),
           _buildInfoRow('Interest', '${widget.lien.interestRate}%'),
-          _buildInfoRow('Value', '\$${widget.lien.assessedValue.toStringAsFixed(0)}'),
+          _buildInfoRow(
+              'Value', '\$${widget.lien.assessedValue.toStringAsFixed(0)}'),
         ],
       ),
     );
@@ -250,8 +255,8 @@ class _MintNFTDialogState extends State<MintNFTDialog> {
           Text(
             'Benefits of NFT Conversion',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+                  fontWeight: FontWeight.bold,
+                ),
           ),
           const SizedBox(height: 8),
           _buildBenefitItem('🎯', 'Tradeable on NFT marketplaces'),
@@ -336,7 +341,7 @@ class _MintNFTDialogState extends State<MintNFTDialog> {
     try {
       // Simulate minting process
       await Future.delayed(const Duration(seconds: 2));
-      
+
       if (mounted) {
         widget.onMint();
       }

@@ -23,7 +23,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  
+
   List<TaxLien> _searchResults = [];
   List<Map<String, dynamic>> _searchHistory = [];
   bool _isLoading = false;
@@ -71,15 +71,15 @@ class _SearchScreenState extends State<SearchScreen> {
 
       // Perform search
       final results = await widget.taxLienService.searchLiens();
-      
+
       // Filter results by search query
       final filteredResults = results.where((lien) {
         final searchTerm = query.toLowerCase();
         return lien.address.toLowerCase().contains(searchTerm) ||
-               lien.owner.toLowerCase().contains(searchTerm) ||
-               lien.parcelId.toLowerCase().contains(searchTerm) ||
-               lien.county.toLowerCase().contains(searchTerm) ||
-               lien.state.toLowerCase().contains(searchTerm);
+            lien.owner.toLowerCase().contains(searchTerm) ||
+            lien.parcelId.toLowerCase().contains(searchTerm) ||
+            lien.county.toLowerCase().contains(searchTerm) ||
+            lien.state.toLowerCase().contains(searchTerm);
       }).toList();
 
       setState(() {
@@ -289,7 +289,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   lien: lien,
                   onTap: () => _showLienDetails(lien),
                   onFavoriteToggle: () async {
-                    final isFavorite = await widget.databaseService.isFavorite(lien.id);
+                    final isFavorite =
+                        await widget.databaseService.isFavorite(lien.id);
                     if (isFavorite) {
                       await widget.databaseService.removeFromFavorites(lien.id);
                     } else {
@@ -363,8 +364,9 @@ class _SearchScreenState extends State<SearchScreen> {
             itemBuilder: (context, index) {
               final historyItem = _searchHistory[index];
               final query = historyItem['query'] as String;
-              final timestamp = DateTime.parse(historyItem['timestamp'] as String);
-              
+              final timestamp =
+                  DateTime.parse(historyItem['timestamp'] as String);
+
               return ListTile(
                 leading: const Icon(Icons.search),
                 title: Text(query),
@@ -524,8 +526,10 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                     _buildDetailRow('Parcel ID', widget.lien.parcelId),
                     _buildDetailRow('County', widget.lien.county),
                     _buildDetailRow('State', widget.lien.state),
-                    _buildDetailRow('Redemption Deadline', _formatDate(widget.lien.redemptionDeadline)),
-                    _buildDetailRow('Status', _getStatusLabel(widget.lien.status)),
+                    _buildDetailRow('Redemption Deadline',
+                        _formatDate(widget.lien.redemptionDeadline)),
+                    _buildDetailRow(
+                        'Status', _getStatusLabel(widget.lien.status)),
                   ],
                 ),
               ),
@@ -534,7 +538,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
             const SizedBox(height: 16),
 
             // Purchase button (if user is authenticated)
-            if (widget.lien.status == 'available' && widget.authService?.isAuthenticated == true)
+            if (widget.lien.status == 'available' &&
+                widget.authService?.isAuthenticated == true)
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
@@ -566,8 +571,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
         Text(
           value,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
       ],
     );
@@ -584,8 +589,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
             child: Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+                    fontWeight: FontWeight.w500,
+                  ),
             ),
           ),
           Expanded(
@@ -621,8 +626,9 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
 
   void _showPurchaseDialog(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final bidController = TextEditingController(text: widget.lien.taxAmount.toString());
-    
+    final bidController =
+        TextEditingController(text: widget.lien.taxAmount.toString());
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -630,7 +636,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(l10n.enterBidAmount('\$${widget.lien.taxAmount.toStringAsFixed(2)}')),
+            Text(l10n.enterBidAmount(
+                '\$${widget.lien.taxAmount.toStringAsFixed(2)}')),
             const SizedBox(height: 16),
             TextField(
               controller: bidController,
@@ -652,7 +659,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
               final bidAmount = double.tryParse(bidController.text);
               if (bidAmount != null && bidAmount >= widget.lien.taxAmount) {
                 Navigator.pop(context);
-                final success = await widget.taxLienService.purchaseLien(widget.lien.id, bidAmount);
+                final success = await widget.taxLienService
+                    .purchaseLien(widget.lien.id, bidAmount);
                 if (success && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(l10n.lienPurchasedSuccessfully)),
@@ -661,7 +669,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                 } else if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(widget.taxLienService.error ?? l10n.purchaseError),
+                      content: Text(
+                          widget.taxLienService.error ?? l10n.purchaseError),
                     ),
                   );
                 }

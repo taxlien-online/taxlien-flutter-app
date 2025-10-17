@@ -65,4 +65,3 @@ class DomeService {
     verticalOffset = settings['verticalOffset'] ?? 0.0;
   }
 }
-

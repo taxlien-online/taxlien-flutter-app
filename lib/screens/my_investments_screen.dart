@@ -62,7 +62,7 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
     try {
       await widget.taxLienService.loadMyLiens();
       _myLiens = widget.taxLienService.myLiens;
-      
+
       // Загрузка избранных закладных
       final favoriteIds = await widget.databaseService.getFavoriteLienIds();
       _favoriteLiens = widget.taxLienService.availableLiens
@@ -194,7 +194,8 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
               lien: lien,
               onTap: () => _showLienDetails(lien),
               onFavoriteToggle: () async {
-                final isFavorite = await widget.databaseService.isFavorite(lien.id);
+                final isFavorite =
+                    await widget.databaseService.isFavorite(lien.id);
                 if (isFavorite) {
                   await widget.databaseService.removeFromFavorites(lien.id);
                 } else {
@@ -277,16 +278,19 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
         } else {
           // Расчет текущей стоимости с учетом процентов
           final daysHeld = DateTime.now().difference(lien.auctionDate).inDays;
-          final interestEarned = (lien.salePrice ?? lien.taxAmount) * 
-              (lien.interestRate / 100) * (daysHeld / 365);
+          final interestEarned = (lien.salePrice ?? lien.taxAmount) *
+              (lien.interestRate / 100) *
+              (daysHeld / 365);
           return sum + (lien.salePrice ?? lien.taxAmount) + interestEarned;
         }
       },
     );
 
     final activeLiens = _myLiens.where((lien) => lien.status == 'sold').length;
-    final redeemedLiens = _myLiens.where((lien) => lien.status == 'redeemed').length;
-    final foreclosedLiens = _myLiens.where((lien) => lien.status == 'foreclosed').length;
+    final redeemedLiens =
+        _myLiens.where((lien) => lien.status == 'redeemed').length;
+    final foreclosedLiens =
+        _myLiens.where((lien) => lien.status == 'foreclosed').length;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
@@ -305,12 +309,20 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 16),
-                  _buildStatRow(l10n.totalInvested, '\$${totalInvested.toStringAsFixed(2)}'),
-                  _buildStatRow(l10n.currentValue, '\$${totalValue.toStringAsFixed(2)}'),
-                  _buildStatRow(l10n.profitLoss, '\$${(totalValue - totalInvested).toStringAsFixed(2)}',
-                      color: totalValue >= totalInvested ? Colors.green : Colors.red),
-                  _buildStatRow(l10n.roi, '${((totalValue - totalInvested) / totalInvested * 100).toStringAsFixed(1)}%',
-                      color: totalValue >= totalInvested ? Colors.green : Colors.red),
+                  _buildStatRow(l10n.totalInvested,
+                      '\$${totalInvested.toStringAsFixed(2)}'),
+                  _buildStatRow(
+                      l10n.currentValue, '\$${totalValue.toStringAsFixed(2)}'),
+                  _buildStatRow(l10n.profitLoss,
+                      '\$${(totalValue - totalInvested).toStringAsFixed(2)}',
+                      color: totalValue >= totalInvested
+                          ? Colors.green
+                          : Colors.red),
+                  _buildStatRow(l10n.roi,
+                      '${((totalValue - totalInvested) / totalInvested * 100).toStringAsFixed(1)}%',
+                      color: totalValue >= totalInvested
+                          ? Colors.green
+                          : Colors.red),
                 ],
               ),
             ),
@@ -332,7 +344,8 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
                   const SizedBox(height: 16),
                   _buildStatRow(l10n.activeLiens, activeLiens.toString()),
                   _buildStatRow(l10n.redeemedLiens, redeemedLiens.toString()),
-                  _buildStatRow(l10n.foreclosedLiens, foreclosedLiens.toString()),
+                  _buildStatRow(
+                      l10n.foreclosedLiens, foreclosedLiens.toString()),
                   _buildStatRow(l10n.totalLiens, _myLiens.length.toString()),
                 ],
               ),
@@ -402,9 +415,9 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
           Text(
             value,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
           ),
         ],
       ),
@@ -432,8 +445,9 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
   Widget _buildTopLienTile(TaxLien lien) {
     final l10n = AppLocalizations.of(context)!;
     final daysHeld = DateTime.now().difference(lien.auctionDate).inDays;
-    final interestEarned = (lien.salePrice ?? lien.taxAmount) * 
-        (lien.interestRate / 100) * (daysHeld / 365);
+    final interestEarned = (lien.salePrice ?? lien.taxAmount) *
+        (lien.interestRate / 100) *
+        (daysHeld / 365);
     final roi = interestEarned / (lien.salePrice ?? lien.taxAmount) * 100;
 
     return ListTile(
@@ -449,9 +463,9 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
       trailing: Text(
         '\$${interestEarned.toStringAsFixed(2)}',
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          fontWeight: FontWeight.bold,
-          color: Colors.green,
-        ),
+              fontWeight: FontWeight.bold,
+              color: Colors.green,
+            ),
       ),
       onTap: () => _showLienDetails(lien),
     );
@@ -546,7 +560,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
             const SizedBox(height: 16),
 
             // Информация об инвестиции
-            if (widget.lien.status == 'sold' || widget.lien.status == 'redeemed')
+            if (widget.lien.status == 'sold' ||
+                widget.lien.status == 'redeemed')
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
@@ -558,16 +573,25 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(height: 16),
-                      _buildDetailRow(l10n.purchaseDate, _formatDate(widget.lien.auctionDate)),
-                      _buildDetailRow(l10n.purchaseAmount, '\$${(widget.lien.salePrice ?? widget.lien.taxAmount).toStringAsFixed(2)}'),
+                      _buildDetailRow(l10n.purchaseDate,
+                          _formatDate(widget.lien.auctionDate)),
+                      _buildDetailRow(l10n.purchaseAmount,
+                          '\$${(widget.lien.salePrice ?? widget.lien.taxAmount).toStringAsFixed(2)}'),
                       if (widget.lien.status == 'sold') ...[
-                        _buildDetailRow(l10n.daysInInvestment, 
-                            DateTime.now().difference(widget.lien.auctionDate).inDays.toString()),
-                        _buildDetailRow(l10n.interestEarned, 
-                            _calculateInterestEarned(widget.lien).toStringAsFixed(2)),
+                        _buildDetailRow(
+                            l10n.daysInInvestment,
+                            DateTime.now()
+                                .difference(widget.lien.auctionDate)
+                                .inDays
+                                .toString()),
+                        _buildDetailRow(
+                            l10n.interestEarned,
+                            _calculateInterestEarned(widget.lien)
+                                .toStringAsFixed(2)),
                       ],
                       if (widget.lien.status == 'redeemed')
-                        _buildDetailRow(l10n.redemptionDate, _formatDate(widget.lien.redemptionDeadline)),
+                        _buildDetailRow(l10n.redemptionDate,
+                            _formatDate(widget.lien.redemptionDeadline)),
                     ],
                   ),
                 ),
@@ -590,8 +614,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
         Text(
           value,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
       ],
     );
@@ -608,8 +632,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
             child: Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+                    fontWeight: FontWeight.w500,
+                  ),
             ),
           ),
           Expanded(
@@ -629,7 +653,8 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
 
   double _calculateInterestEarned(TaxLien lien) {
     final daysHeld = DateTime.now().difference(lien.auctionDate).inDays;
-    return (lien.salePrice ?? lien.taxAmount) * 
-        (lien.interestRate / 100) * (daysHeld / 365);
+    return (lien.salePrice ?? lien.taxAmount) *
+        (lien.interestRate / 100) *
+        (daysHeld / 365);
   }
 }

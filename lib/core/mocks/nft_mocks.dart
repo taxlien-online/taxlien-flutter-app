@@ -16,17 +16,17 @@ class NFTProvider {
   }) async {}
 
   Future<List<NFT>> getNFTs(String address) async => [];
-  
+
   Future<List<NFT>> getNFTsByOwner(String address) async => [];
 }
 
 class WalletProvider {
   bool get isConnected => false;
   String? get connectedAddress => null;
-  
+
   Future<bool> connect() async => false;
   Future<void> disconnect() async {}
-  
+
   Future<Map<String, double>> getBalances(List<String> tokens) async => {};
   Future<List<WalletTransaction>> getTransactionHistory() async => [];
 }
@@ -36,12 +36,13 @@ class MarketplaceProvider {
   Future<List<NFTListing>> getUserListings(String address) async => [];
   Future<List<NFTOffer>> getUserOffers(String address) async => [];
   Future<List<NFTOffer>> getActiveOffers() async => [];
-  
+
   Future<String> buyNFT({
     required String listingId,
     required String buyerAddress,
-  }) async => '';
-  
+  }) async =>
+      '';
+
   Future<bool> cancelListing(String listingId) async => false;
   Future<bool> cancelOffer(String offerId) async => false;
   Future<bool> acceptOffer(String offerId) async => false;
@@ -94,7 +95,7 @@ class NFTListing {
     required this.status,
     this.createdAt,
   });
-  
+
   String get formattedPrice => '\$${price.toStringAsFixed(2)}';
 }
 
@@ -114,7 +115,7 @@ class NFTOffer {
     this.buyerAddress,
     this.createdAt,
   });
-  
+
   String get formattedAmount => '\$${amount.toStringAsFixed(2)}';
 }
 
@@ -152,4 +153,3 @@ class OfferStatus {
   static const rejected = 'rejected';
   static const expired = 'expired';
 }
-

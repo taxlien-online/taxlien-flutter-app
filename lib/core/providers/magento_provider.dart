@@ -133,7 +133,7 @@ class MagentoNotifier extends StateNotifier<MagentoState> {
         qty: quantity,
         quoteId: cartId,
       );
-      
+
       final success = await _apiService.addToCart(cartId, item);
       return success != null;
     } catch (e) {
@@ -144,7 +144,7 @@ class MagentoNotifier extends StateNotifier<MagentoState> {
 }
 
 /// Provider для Magento
-final magentoProvider = StateNotifierProvider<MagentoNotifier, MagentoState>((ref) {
+final magentoProvider =
+    StateNotifierProvider<MagentoNotifier, MagentoState>((ref) {
   return MagentoNotifier(MagentoApiService());
 });
-

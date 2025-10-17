@@ -36,35 +36,52 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
       'FL',
       'Florida',
       [
-        CountyData('fl_dixie', 'Dixie County', 'FL', 'High interest rates, rural properties'),
-        CountyData('fl_columbia', 'Columbia County', 'FL', 'Mixed urban/rural, good returns'),
-        CountyData('fl_lafayette', 'Lafayette County', 'FL', 'Agricultural land, stable values'),
-        CountyData('fl_bradford', 'Bradford County', 'FL', 'Small county, high competition'),
-        CountyData('fl_okeechobee', 'Okeechobee County', 'FL', 'Lake area, tourism potential'),
-        CountyData('fl_suwannee', 'Suwannee County', 'FL', 'River properties, natural beauty'),
-        CountyData('fl_union', 'Union County', 'FL', 'Forest land, hunting properties'),
-        CountyData('fl_clay', 'Clay County', 'FL', 'Suburban growth, family homes'),
-        CountyData('fl_alachua', 'Alachua County', 'FL', 'University town, student housing'),
-        CountyData('fl_polk', 'Polk County', 'FL', 'Central location, diverse properties'),
+        CountyData('fl_dixie', 'Dixie County', 'FL',
+            'High interest rates, rural properties'),
+        CountyData('fl_columbia', 'Columbia County', 'FL',
+            'Mixed urban/rural, good returns'),
+        CountyData('fl_lafayette', 'Lafayette County', 'FL',
+            'Agricultural land, stable values'),
+        CountyData('fl_bradford', 'Bradford County', 'FL',
+            'Small county, high competition'),
+        CountyData('fl_okeechobee', 'Okeechobee County', 'FL',
+            'Lake area, tourism potential'),
+        CountyData('fl_suwannee', 'Suwannee County', 'FL',
+            'River properties, natural beauty'),
+        CountyData('fl_union', 'Union County', 'FL',
+            'Forest land, hunting properties'),
+        CountyData(
+            'fl_clay', 'Clay County', 'FL', 'Suburban growth, family homes'),
+        CountyData('fl_alachua', 'Alachua County', 'FL',
+            'University town, student housing'),
+        CountyData('fl_polk', 'Polk County', 'FL',
+            'Central location, diverse properties'),
       ],
     ),
     StateData(
       'TX',
       'Texas',
       [
-        CountyData('tx_harris', 'Harris County', 'TX', 'Houston metro area, diverse opportunities'),
-        CountyData('tx_dallas', 'Dallas County', 'TX', 'Dallas metro area, commercial properties'),
-        CountyData('tx_travis', 'Travis County', 'TX', 'Austin area, tech boom properties'),
-        CountyData('tx_bexar', 'Bexar County', 'TX', 'San Antonio area, historic properties'),
+        CountyData('tx_harris', 'Harris County', 'TX',
+            'Houston metro area, diverse opportunities'),
+        CountyData('tx_dallas', 'Dallas County', 'TX',
+            'Dallas metro area, commercial properties'),
+        CountyData('tx_travis', 'Travis County', 'TX',
+            'Austin area, tech boom properties'),
+        CountyData('tx_bexar', 'Bexar County', 'TX',
+            'San Antonio area, historic properties'),
       ],
     ),
     StateData(
       'CA',
       'California',
       [
-        CountyData('ca_los_angeles', 'Los Angeles County', 'CA', 'LA metro area, high-value properties'),
-        CountyData('ca_san_diego', 'San Diego County', 'CA', 'Coastal properties, tourism potential'),
-        CountyData('ca_orange', 'Orange County', 'CA', 'Suburban growth, family homes'),
+        CountyData('ca_los_angeles', 'Los Angeles County', 'CA',
+            'LA metro area, high-value properties'),
+        CountyData('ca_san_diego', 'San Diego County', 'CA',
+            'Coastal properties, tourism potential'),
+        CountyData('ca_orange', 'Orange County', 'CA',
+            'Suburban growth, family homes'),
       ],
     ),
   ];
@@ -79,7 +96,11 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
     final preferences = widget.preferencesService.preferences;
     if (preferences != null) {
       setState(() {
-        _selectedInvestmentTypes = preferences.investmentType?.split(',').where((type) => type.isNotEmpty).toList() ?? [];
+        _selectedInvestmentTypes = preferences.investmentType
+                ?.split(',')
+                .where((type) => type.isNotEmpty)
+                .toList() ??
+            [];
         _selectedProfitType = preferences.profitType;
         _selectedCounties = List.from(preferences.selectedCounties);
         _selectedStates = List.from(preferences.selectedStates);
@@ -140,7 +161,8 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
           _buildOptionCard(
             title: 'Tax Liens',
             subtitle: 'Earn guaranteed interest rates',
-            description: 'Invest in unpaid property taxes and earn high interest rates (up to 18%) with government backing.',
+            description:
+                'Invest in unpaid property taxes and earn high interest rates (up to 18%) with government backing.',
             icon: Icons.receipt_long,
             isSelected: _selectedInvestmentTypes.contains('lien'),
             onTap: () {
@@ -157,7 +179,8 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
           _buildOptionCard(
             title: 'Tax Deeds',
             subtitle: 'Own the property',
-            description: 'Purchase properties at auction for pennies on the dollar when owners don\'t redeem their liens.',
+            description:
+                'Purchase properties at auction for pennies on the dollar when owners don\'t redeem their liens.',
             icon: Icons.home,
             isSelected: _selectedInvestmentTypes.contains('deed'),
             onTap: () {
@@ -175,7 +198,10 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+                color: Theme.of(context)
+                    .colorScheme
+                    .primaryContainer
+                    .withOpacity(0.3),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Row(
@@ -190,8 +216,8 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
                     child: Text(
                       'You can select both investment types to diversify your portfolio',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                     ),
                   ),
                 ],
@@ -212,7 +238,8 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
           _buildOptionCard(
             title: 'Guaranteed Profit',
             subtitle: 'Steady income from interest',
-            description: 'Focus on tax liens with high interest rates for predictable returns.',
+            description:
+                'Focus on tax liens with high interest rates for predictable returns.',
             icon: Icons.security,
             isSelected: _selectedProfitType == 'guaranteed',
             onTap: () => setState(() => _selectedProfitType = 'guaranteed'),
@@ -221,7 +248,8 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
           _buildOptionCard(
             title: 'Collateral Property',
             subtitle: 'Potential for property ownership',
-            description: 'Invest in liens where property owners are likely to default, giving you ownership.',
+            description:
+                'Invest in liens where property owners are likely to default, giving you ownership.',
             icon: Icons.key,
             isSelected: _selectedProfitType == 'collateral',
             onTap: () => setState(() => _selectedProfitType = 'collateral'),
@@ -245,10 +273,11 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
               final state = _availableStates[stateIndex];
               final isStateSelected = _selectedStates.contains(state.code);
               final selectedCountiesInState = _selectedCounties
-                  .where((countyId) => countyId.startsWith(state.code.toLowerCase()))
+                  .where((countyId) =>
+                      countyId.startsWith(state.code.toLowerCase()))
                   .length;
               final totalCountiesInState = state.counties.length;
-              
+
               return Card(
                 margin: const EdgeInsets.only(bottom: 12),
                 child: ExpansionTile(
@@ -262,8 +291,9 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
                               // Select entire state
                               _selectedStates.add(state.code);
                               // Remove individual counties from this state
-                              _selectedCounties.removeWhere((countyId) => 
-                                  countyId.startsWith(state.code.toLowerCase()));
+                              _selectedCounties.removeWhere((countyId) =>
+                                  countyId
+                                      .startsWith(state.code.toLowerCase()));
                             } else {
                               // Deselect entire state
                               _selectedStates.remove(state.code);
@@ -278,23 +308,34 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
                           children: [
                             Text(
                               '${state.name} (${state.code})',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
                             if (isStateSelected)
                               Text(
                                 'All ${totalCountiesInState} counties selected',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
                               )
                             else if (selectedCountiesInState > 0)
                               Text(
                                 '$selectedCountiesInState of $totalCountiesInState counties selected',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
                               ),
                           ],
                         ),
@@ -308,8 +349,9 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Column(
                           children: state.counties.map((county) {
-                            final isCountySelected = _selectedCounties.contains(county.id);
-                            
+                            final isCountySelected =
+                                _selectedCounties.contains(county.id);
+
                             return CheckboxListTile(
                               title: Text(county.name),
                               subtitle: Text(county.description),
@@ -340,7 +382,10 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+                color: Theme.of(context)
+                    .colorScheme
+                    .primaryContainer
+                    .withOpacity(0.3),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Column(
@@ -349,9 +394,9 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
                   Text(
                     'Selected Locations:',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                   ),
                   const SizedBox(height: 4),
                   if (_selectedStates.isNotEmpty) ...[
@@ -385,9 +430,9 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
           Text(
             '\$${_investmentAmount.toInt()}',
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
           ),
           const SizedBox(height: 16),
           Slider(
@@ -423,7 +468,8 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
           _buildExperienceCard(
             title: 'Beginner',
             subtitle: 'New to tax lien investing',
-            description: 'We\'ll provide detailed explanations and conservative recommendations.',
+            description:
+                'We\'ll provide detailed explanations and conservative recommendations.',
             icon: Icons.school,
             isSelected: _experienceLevel == 'beginner',
             onTap: () => setState(() => _experienceLevel = 'beginner'),
@@ -432,7 +478,8 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
           _buildExperienceCard(
             title: 'Intermediate',
             subtitle: 'Some experience with liens',
-            description: 'Balanced approach with moderate risk and detailed analytics.',
+            description:
+                'Balanced approach with moderate risk and detailed analytics.',
             icon: Icons.trending_up,
             isSelected: _experienceLevel == 'intermediate',
             onTap: () => setState(() => _experienceLevel = 'intermediate'),
@@ -441,7 +488,8 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
           _buildExperienceCard(
             title: 'Expert',
             subtitle: 'Experienced investor',
-            description: 'Advanced tools and high-risk, high-reward opportunities.',
+            description:
+                'Advanced tools and high-risk, high-reward opportunities.',
             icon: Icons.psychology,
             isSelected: _experienceLevel == 'expert',
             onTap: () => setState(() => _experienceLevel = 'expert'),
@@ -459,7 +507,8 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
         children: [
           SwitchListTile(
             title: const Text('Push Notifications'),
-            subtitle: const Text('Get alerts for new auctions and important updates'),
+            subtitle:
+                const Text('Get alerts for new auctions and important updates'),
             value: _wantsNotifications,
             onChanged: (value) => setState(() => _wantsNotifications = value),
             secondary: const Icon(Icons.notifications),
@@ -467,7 +516,8 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
           const Divider(),
           SwitchListTile(
             title: const Text('Auto-Bidding'),
-            subtitle: const Text('Automatically place bids up to your maximum amount'),
+            subtitle: const Text(
+                'Automatically place bids up to your maximum amount'),
             value: _wantsAutoBidding,
             onChanged: (value) => setState(() => _wantsAutoBidding = value),
             secondary: const Icon(Icons.auto_awesome),
@@ -497,15 +547,15 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
         Text(
           title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 4),
         Text(
           subtitle,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
         ),
         const SizedBox(height: 16),
         child,
@@ -535,14 +585,14 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: isSelected 
+                  color: isSelected
                       ? Theme.of(context).colorScheme.primary
                       : Theme.of(context).colorScheme.surfaceVariant,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Icon(
                   icon,
-                  color: isSelected 
+                  color: isSelected
                       ? Theme.of(context).colorScheme.onPrimary
                       : Theme.of(context).colorScheme.onSurfaceVariant,
                   size: 20,
@@ -556,30 +606,38 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
                     Text(
                       title,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : null,
-                      ),
+                            fontWeight: FontWeight.w600,
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : null,
+                          ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       subtitle,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.w500,
-                      ),
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.w500,
+                          ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       description,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
+                          ),
                     ),
                   ],
                 ),
@@ -618,14 +676,14 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: isSelected 
+                  color: isSelected
                       ? Theme.of(context).colorScheme.primary
                       : Theme.of(context).colorScheme.surfaceVariant,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Icon(
                   icon,
-                  color: isSelected 
+                  color: isSelected
                       ? Theme.of(context).colorScheme.onPrimary
                       : Theme.of(context).colorScheme.onSurfaceVariant,
                   size: 20,
@@ -639,30 +697,38 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
                     Text(
                       title,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : null,
-                      ),
+                            fontWeight: FontWeight.w600,
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : null,
+                          ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       subtitle,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.w500,
-                      ),
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.w500,
+                          ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       description,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: isSelected 
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                            color: isSelected
+                                ? Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer
+                                : Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
+                          ),
                     ),
                   ],
                 ),
@@ -684,7 +750,8 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Reset Preferences'),
-        content: const Text('Are you sure you want to reset all your preferences to default values?'),
+        content: const Text(
+            'Are you sure you want to reset all your preferences to default values?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
@@ -729,12 +796,21 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
         experienceLevel: _experienceLevel,
         notifications: _wantsNotifications,
         autoBidding: _wantsAutoBidding,
-        wantsNFTTokenization: widget.preferencesService.preferences?.wantsNFTTokenization ?? false,
-        wantsICPNFT: widget.preferencesService.preferences?.wantsICPNFT ?? false,
-        wantsTraditionalNFT: widget.preferencesService.preferences?.wantsTraditionalNFT ?? false,
-        wantsFractionalOwnership: widget.preferencesService.preferences?.wantsFractionalOwnership ?? false,
-        wantsLiquidityPool: widget.preferencesService.preferences?.wantsLiquidityPool ?? false,
-        nftInvestmentPercentage: widget.preferencesService.preferences?.nftInvestmentPercentage ?? 25.0,
+        wantsNFTTokenization:
+            widget.preferencesService.preferences?.wantsNFTTokenization ??
+                false,
+        wantsICPNFT:
+            widget.preferencesService.preferences?.wantsICPNFT ?? false,
+        wantsTraditionalNFT:
+            widget.preferencesService.preferences?.wantsTraditionalNFT ?? false,
+        wantsFractionalOwnership:
+            widget.preferencesService.preferences?.wantsFractionalOwnership ??
+                false,
+        wantsLiquidityPool:
+            widget.preferencesService.preferences?.wantsLiquidityPool ?? false,
+        nftInvestmentPercentage:
+            widget.preferencesService.preferences?.nftInvestmentPercentage ??
+                25.0,
         createdAt: DateTime.now(),
       );
 

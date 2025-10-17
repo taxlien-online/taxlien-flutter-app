@@ -21,8 +21,10 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    _serverUrlController = TextEditingController(text: widget.serverService.serverUrl);
-    _portController = TextEditingController(text: widget.serverService.port.toString());
+    _serverUrlController =
+        TextEditingController(text: widget.serverService.serverUrl);
+    _portController =
+        TextEditingController(text: widget.serverService.port.toString());
   }
 
   @override
@@ -55,7 +57,8 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(connected ? 'Connection successful!' : 'Connection failed'),
+          content:
+              Text(connected ? 'Connection successful!' : 'Connection failed'),
           backgroundColor: connected ? Colors.green : Colors.red,
         ),
       );
@@ -134,7 +137,8 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
             // Auto-connect
             SwitchListTile(
               title: const Text('Auto-connect on startup'),
-              subtitle: const Text('Automatically connect to server when app starts'),
+              subtitle:
+                  const Text('Automatically connect to server when app starts'),
               value: _autoConnect,
               onChanged: (value) {
                 setState(() {
@@ -178,4 +182,3 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
     );
   }
 }
-

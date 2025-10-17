@@ -7,6 +7,7 @@ import '../services/theme_service.dart';
 import '../services/onboarding_service.dart';
 import '../services/server_connection_service.dart';
 import '../theme/app_colors.dart';
+import '../core/services/dome_service.dart';
 import 'connection_status_screen.dart';
 import 'language_settings_screen.dart';
 import 'settings_screen.dart';
@@ -543,7 +544,9 @@ class _MainMenuScreenState extends State<MainMenuScreen>
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const CalibrationScreen(),
+        builder: (context) => CalibrationScreen(
+          domeService: DomeService(),
+        ),
       ),
     );
   }
@@ -826,7 +829,7 @@ class _DomeControlScreenState extends State<DomeControlScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => CalibrationScreen(
-                    domeService: widget.domeService,
+                    domeService: DomeService(),
                   ),
                 ),
               );
