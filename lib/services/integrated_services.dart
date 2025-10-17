@@ -3,9 +3,9 @@ import 'package:flutter_magento/flutter_magento.dart';
 import 'package:flutter_icp/flutter_icp.dart' as icp_lib;
 import 'package:flutter_nft/flutter_nft.dart' as nft_lib;
 import 'package:flutter_yuku/flutter_yuku.dart' as yuku_lib;
-import 'package:flutter_magento_marketplace/flutter_magento_marketplace.dart';
-import 'package:flutter_magento_notifications/flutter_magento_notifications.dart';
-import 'package:flutter_magento_messenger/flutter_magento_messenger.dart';
+// import 'package:flutter_magento_marketplace/flutter_magento_marketplace.dart';
+// import 'package:flutter_magento_notifications/flutter_magento_notifications.dart';
+// import 'package:flutter_magento_messenger/flutter_magento_messenger.dart';
 import 'database_service.dart';
 import 'nft_service.dart';
 import 'plug_wallet_service.dart';
@@ -23,9 +23,9 @@ class IntegratedServices {
   icp_lib.ICPClient? _icpClient;
   nft_lib.NFTClient? _nftClient;
   yuku_lib.YukuClient? _yukuClient;
-  MarketplaceProductService? _marketplaceService;
-  NotificationManager? _notificationManager;
-  MessageManager? _messageManager;
+  // MarketplaceProductService? _marketplaceService;  // Package not available
+  // NotificationManager? _notificationManager;  // Package not available
+  // MessageManager? _messageManager;  // Package not available
 
   // State
   bool _isInitialized = false;
@@ -96,9 +96,9 @@ class IntegratedServices {
         'wallet': _walletService.isConnected,
         'icp': _icpClient != null,
         'yuku': _yukuClient != null,
-        'marketplace': _marketplaceService != null,
-        'notifications': _notificationManager != null,
-        'messenger': _messageManager != null,
+        // 'marketplace': _marketplaceService != null,
+        // 'notifications': _notificationManager != null,
+        // 'messenger': _messageManager != null,
       };
 
       _isInitialized = true;
@@ -119,9 +119,9 @@ class IntegratedServices {
   icp_lib.ICPClient? get icp => _icpClient;
   nft_lib.NFTClient? get nftClient => _nftClient;
   yuku_lib.YukuClient? get yuku => _yukuClient;
-  MarketplaceProductService? get marketplace => _marketplaceService;
-  NotificationManager? get notifications => _notificationManager;
-  MessageManager? get messenger => _messageManager;
+  // MarketplaceProductService? get marketplace => _marketplaceService;  // Package not available
+  // NotificationManager? get notifications => _notificationManager;  // Package not available
+  // MessageManager? get messenger => _messageManager;  // Package not available
 
   bool get isInitialized => _isInitialized;
   Map<String, bool> get serviceStatus => _serviceStatus;

@@ -152,7 +152,7 @@ Future<void> _initializeNFTServices() async {
 
     // Store services globally for access throughout the app
     AppConstants.integratedServices = integratedServices;
-    // AppConstants.nftClient = integratedServices.nftClient;  // Temporarily disabled
+    AppConstants.nftClient = integratedServices.nftClient; // Now enabled
 
     if (kDebugMode) {
       print('Integrated services initialized successfully');

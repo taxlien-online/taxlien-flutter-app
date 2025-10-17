@@ -321,6 +321,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.28.2"
+  eip1559:
+    dependency: transitive
+    description:
+      name: eip1559
+      sha256: c2b81ac85f3e0e71aaf558201dd9a4600f051ece7ebacd0c5d70065c9b458004
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.2"
+  eip55:
+    dependency: transitive
+    description:
+      name: eip55
+      sha256: a81d6afe386ec965e584541fe8f19719bed8a7ae23a5f5061112e96c50e6521b
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   equatable:
     dependency: transitive
     description:
@@ -534,6 +550,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.21.3+1"
+  flutter_icp:
+    dependency: "direct main"
+    description:
+      name: flutter_icp
+      sha256: "887ab7e4a692d115af78b052a9a95dde5a386adf21863c3561afa8e26be62bac"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0+4"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -585,7 +609,15 @@ packages:
       path: "../../../libs/libsflutter/flutter_magento"
       relative: true
     source: path
-    version: "4.2.0"
+    version: "4.2.1"
+  flutter_nft:
+    dependency: "direct main"
+    description:
+      name: flutter_nft
+      sha256: "0d2211a97d06b057756e76a2713398361c9bb855609916bfbc0d12e4da987e91"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -684,6 +716,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_yuku:
+    dependency: transitive
+    description:
+      name: flutter_yuku
+      sha256: "4b77629a85ccc05630c87f1c3d3e16d0db1c72e08b9c33cc982730ab418bb681"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   form_builder_validators:
     dependency: "direct main"
     description:
@@ -948,6 +988,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.9.0"
+  json_rpc_2:
+    dependency: transitive
+    description:
+      name: json_rpc_2
+      sha256: "3c46c2633aec07810c3d6a2eb08d575b5b4072980db08f1344e66aeb53d6e4a7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -1380,6 +1428,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
+  sec:
+    dependency: transitive
+    description:
+      name: sec
+      sha256: "52a93800943642e0b5225408d0973a1837e2452b9aa8a501fdfbc8e76b6ac135"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   share_plus:
     dependency: "direct main"
     description:
@@ -1817,6 +1873,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "15.0.2"
+  wallet:
+    dependency: transitive
+    description:
+      name: wallet
+      sha256: "20b6d8440039726841bd23b2bac64f888ec1ce1509edcc3ed2ad1753f613521e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.18"
   watcher:
     dependency: transitive
     description:
@@ -1833,6 +1897,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  web3dart:
+    dependency: transitive
+    description:
+      name: web3dart
+      sha256: bde2c92aac6f086988b6a1935c9d884f42a6acb772c93e1e2810f64af0db5600
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   web_socket:
     dependency: transitive
     description:
