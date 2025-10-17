@@ -27,6 +27,17 @@ import '../../screens/tax_lien_content_manager_screen.dart';
 import '../../screens/wallet_settings_screen.dart';
 import '../../screens/yuku_integration_demo_screen.dart';
 import '../../screens/yuku_marketplace_screen.dart';
+import '../../screens/advanced_search_screen.dart';
+import '../../screens/auction_screen.dart';
+import '../../screens/enhanced_portfolio_dashboard.dart';
+import '../../screens/interactive_onboarding_screen.dart';
+import '../../screens/projection_settings_screen.dart';
+import '../../screens/sync_management_screen.dart';
+import '../../screens/unified_analytics_screen.dart';
+import '../../screens/unified_portfolio_dashboard_screen.dart';
+import '../../screens/wallet_connection_screen.dart';
+import '../../screens/product_detail_screen.dart';
+import '../../screens/nft_onboarding_screen.dart';
 import '../../services/localization_service.dart';
 import '../../services/theme_service.dart';
 import '../../services/onboarding_service.dart';
@@ -37,8 +48,17 @@ import '../../services/user_preferences_service.dart';
 import '../../services/server_connection_service.dart';
 import '../../services/ai_investment_advisor_service.dart';
 import '../../services/tax_lien_magento_service.dart';
+import '../../services/wallet_service.dart';
+import '../../services/nft_service.dart';
+import '../../services/yuku_service.dart';
+import '../../services/plug_wallet_service.dart';
+import '../../services/portfolio_service.dart';
+import '../../services/unified_portfolio_service.dart';
+import '../../services/realtime_bidding_service.dart';
+import '../../services/magento_service.dart';
 import '../mocks/nft_mocks.dart';
 import '../services/dome_service.dart';
+import '../services/magento_api_service.dart';
 
 /// Централизованный роутер для всех экранов приложения
 class AppRouter {
@@ -82,6 +102,8 @@ class AppRouter {
   static const String yukuMarketplace = '/yuku-marketplace';
   static const String yukuDemo = '/yuku-demo';
   static const String unifiedAnalytics = '/unified-analytics';
+  static const String productDetail = '/product-detail';
+  static const String nftOnboarding = '/nft-onboarding';
 
   /// Генерация маршрутов для приложения
   static Route<dynamic> generateRoute(
@@ -155,12 +177,10 @@ class AppRouter {
         );
 
       case advancedSearch:
-        // Requires MagentoApiService parameter
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(
-              child: Text('Advanced Search - Configure parameters'),
-            ),
+          builder: (_) => AdvancedSearchScreen(
+            taxLienService: dependencies.taxLienService,
+            magentoApiService: MagentoApiService(),
           ),
         );
 
@@ -187,22 +207,22 @@ class AppRouter {
         );
 
       case enhancedPortfolio:
-        // Requires specific parameters
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(
-              child: Text('Enhanced Portfolio Dashboard'),
-            ),
+          builder: (_) => EnhancedPortfolioDashboard(
+            portfolioService: PortfolioService(),
           ),
         );
 
       case unifiedPortfolio:
-        // Requires specific parameters
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(
-              child: Text('Unified Portfolio Dashboard'),
+          builder: (_) => UnifiedPortfolioDashboardScreen(
+            portfolioService: UnifiedPortfolioService(
+              taxLienService: dependencies.taxLienService,
+              nftService: NFTService.instance,
+              databaseService: dependencies.databaseService,
             ),
+            taxLienService: dependencies.taxLienService,
+            nftService: NFTService.instance,
           ),
         );
 
@@ -243,12 +263,21 @@ class AppRouter {
         );
 
       case auction:
-        // Requires AuctionService
-        return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(
-              child: Text('Auction Screen'),
+        final args = settings.arguments as Map<String, dynamic>?;
+        if (args == null || !args.containsKey('auction')) {
+          return MaterialPageRoute(
+            builder: (_) => Scaffold(
+              appBar: AppBar(title: const Text('Error')),
+              body: const Center(
+                child: Text('Auction data not provided'),
+              ),
             ),
+          );
+        }
+        return MaterialPageRoute(
+          builder: (_) => AuctionScreen(
+            biddingService: RealtimeBiddingService(),
+            auction: args['auction'],
           ),
         );
 
@@ -309,13 +338,8 @@ class AppRouter {
         );
 
       case syncManagement:
-        // Requires SyncService
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(
-              child: Text('Sync Management Screen'),
-            ),
-          ),
+          builder: (_) => const SyncManagementScreen(),
         );
 
       case onboardingManagement:
@@ -324,12 +348,19 @@ class AppRouter {
         );
 
       case interactiveOnboarding:
-        // Requires OnboardingController
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(
-              child: Text('Interactive Onboarding Screen'),
-            ),
+          builder: (_) => InteractiveOnboardingScreen(
+            localizationService: dependencies.localizationService,
+            themeService: dependencies.themeService,
+            onboardingService: dependencies.onboardingService,
+            taxLienService: dependencies.taxLienService,
+            nftService: NFTService.instance,
+            walletService: WalletService(),
+            yukuService: YukuService(),
+            plugWalletService: PlugWalletService.instance,
+            authService: dependencies.authService,
+            databaseService: dependencies.databaseService,
+            userPreferencesService: dependencies.userPreferencesService,
           ),
         );
 
@@ -349,12 +380,9 @@ class AppRouter {
         );
 
       case projectionSettings:
-        // Requires ProjectionService
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(
-              child: Text('Projection Settings Screen'),
-            ),
+          builder: (_) => ProjectionSettingsScreen(
+            serverConnectionService: dependencies.serverConnectionService,
           ),
         );
 
@@ -367,10 +395,11 @@ class AppRouter {
 
       case walletConnection:
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(
-              child: Text('Wallet Connection Screen - Configure WalletService'),
-            ),
+          builder: (_) => WalletConnectionScreen(
+            walletService: WalletService(),
+            onWalletConnected: () {
+              Navigator.of(_).pop();
+            },
           ),
         );
 
@@ -396,12 +425,45 @@ class AppRouter {
         );
 
       case unifiedAnalytics:
-        // Requires AnalyticsService
         return MaterialPageRoute(
-          builder: (_) => const Scaffold(
-            body: Center(
-              child: Text('Unified Analytics Screen'),
+          builder: (_) => UnifiedAnalyticsScreen(
+            portfolioService: UnifiedPortfolioService(
+              taxLienService: dependencies.taxLienService,
+              nftService: NFTService.instance,
+              databaseService: dependencies.databaseService,
             ),
+          ),
+        );
+
+      case productDetail:
+        final args = settings.arguments as Map<String, dynamic>?;
+        if (args == null || !args.containsKey('product')) {
+          return MaterialPageRoute(
+            builder: (_) => Scaffold(
+              appBar: AppBar(title: const Text('Error')),
+              body: const Center(
+                child: Text('Product data not provided'),
+              ),
+            ),
+          );
+        }
+        return MaterialPageRoute(
+          builder: (_) => ProductDetailScreen(
+            product: args['product'],
+            authService: dependencies.authService,
+            databaseService: dependencies.databaseService,
+            magentoService: MagentoService(),
+          ),
+        );
+
+      case nftOnboarding:
+        return MaterialPageRoute(
+          builder: (_) => NFTOnboardingScreen(
+            preferencesService: dependencies.userPreferencesService,
+            taxLienService: dependencies.taxLienService,
+            onComplete: () {
+              Navigator.of(_).pop();
+            },
           ),
         );
 
