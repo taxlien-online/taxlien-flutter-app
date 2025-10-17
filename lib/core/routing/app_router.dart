@@ -38,6 +38,7 @@ import '../../services/server_connection_service.dart';
 import '../../services/ai_investment_advisor_service.dart';
 import '../../services/tax_lien_magento_service.dart';
 import '../mocks/nft_mocks.dart';
+import '../services/dome_service.dart';
 
 /// Централизованный роутер для всех экранов приложения
 class AppRouter {
