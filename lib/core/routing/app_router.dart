@@ -277,7 +277,7 @@ class AppRouter {
       case calibration:
         return MaterialPageRoute(
           builder: (_) => CalibrationScreen(
-            domeService: dependencies.serverConnectionService,
+            domeService: DomeService(),
           ),
         );
 
