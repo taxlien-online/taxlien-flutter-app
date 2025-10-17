@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_nft/flutter_nft.dart';
-// import 'package:flutter_icp/flutter_icp.dart'; // Not needed here
-import '../core/mocks/nft_mocks.dart';
+// import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
+// import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
+import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
 
 class YukuMarketplaceScreen extends StatefulWidget {
   final NFTClient nftClient;

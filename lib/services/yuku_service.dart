@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_icp/flutter_icp.dart';
+import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
 import 'nft_service.dart';
 
 class YukuListing {

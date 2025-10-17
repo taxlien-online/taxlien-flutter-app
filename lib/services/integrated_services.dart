@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_magento/flutter_magento.dart';
-import 'package:flutter_icp/flutter_icp.dart' as icp_lib;
-import 'package:flutter_nft/flutter_nft.dart' as nft_lib;
-import 'package:flutter_yuku/flutter_yuku.dart' as yuku_lib;
+import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
+import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
+import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
 // import 'package:flutter_magento_marketplace/flutter_magento_marketplace.dart';
 // import 'package:flutter_magento_notifications/flutter_magento_notifications.dart';
 // import 'package:flutter_magento_messenger/flutter_magento_messenger.dart';

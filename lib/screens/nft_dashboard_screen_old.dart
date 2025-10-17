@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_nft/flutter_nft.dart';
-import '../core/mocks/nft_mocks.dart';
+// import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
+import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
 import '../services/tax_lien_service.dart';
 import '../widgets/nft_card.dart';
 import '../widgets/nft_detail_dialog.dart';

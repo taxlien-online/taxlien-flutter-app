@@ -385,7 +385,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
     
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('${item.title} ${AppLocalizations.of(context)?.deleted ?? 'deleted'}`),
+        content: Text('${item.title} ${AppLocalizations.of(context)?.deleted ?? 'deleted'}'),
         backgroundColor: Colors.green,
       ),
     );

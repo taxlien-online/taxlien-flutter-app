@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nft/flutter_nft.dart';
+import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
 
 class NFTCard extends StatelessWidget {
   final NFT nft;

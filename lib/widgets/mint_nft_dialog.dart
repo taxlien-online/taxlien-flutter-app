@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../services/tax_lien_service.dart';
+import '../core/models/tax_lien_models.dart';
 
 class MintNFTDialog extends StatefulWidget {
-  final TaxLien lien;
+  final dynamic lien;
   final VoidCallback onMint;
 
   const MintNFTDialog({

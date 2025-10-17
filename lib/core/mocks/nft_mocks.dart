@@ -16,13 +16,19 @@ class NFTProvider {
   }) async {}
 
   Future<List<NFT>> getNFTs(String address) async => [];
+  
+  Future<List<NFT>> getNFTsByOwner(String address) async => [];
 }
 
 class WalletProvider {
   bool get isConnected => false;
   String? get connectedAddress => null;
-  Future<void> connect() async {}
+  
+  Future<bool> connect() async => false;
   Future<void> disconnect() async {}
+  
+  Future<Map<String, double>> getBalances(List<String> tokens) async => {};
+  Future<List<WalletTransaction>> getTransactionHistory() async => [];
 }
 
 class MarketplaceProvider {
@@ -30,11 +36,16 @@ class MarketplaceProvider {
   Future<List<NFTListing>> getUserListings(String address) async => [];
   Future<List<NFTOffer>> getUserOffers(String address) async => [];
   Future<List<NFTOffer>> getActiveOffers() async => [];
+  
   Future<String> buyNFT({
     required String listingId,
     required String buyerAddress,
-  }) async =>
-      '';
+  }) async => '';
+  
+  Future<bool> cancelListing(String listingId) async => false;
+  Future<bool> cancelOffer(String offerId) async => false;
+  Future<bool> acceptOffer(String offerId) async => false;
+  Future<bool> rejectOffer(String offerId) async => false;
 }
 
 class NFT {
@@ -42,12 +53,14 @@ class NFT {
   final String name;
   final String description;
   final String image;
+  final NFTMetadata? metadata;
 
   NFT({
     required this.id,
     required this.name,
     required this.description,
     required this.image,
+    this.metadata,
   });
 }
 
@@ -72,13 +85,17 @@ class NFTListing {
   final String nftId;
   final double price;
   final String status;
+  final DateTime? createdAt;
 
   NFTListing({
     required this.id,
     required this.nftId,
     required this.price,
     required this.status,
+    this.createdAt,
   });
+  
+  String get formattedPrice => '\$${price.toStringAsFixed(2)}';
 }
 
 class NFTOffer {
@@ -86,17 +103,41 @@ class NFTOffer {
   final String nftId;
   final double amount;
   final String status;
+  final String? buyerAddress;
+  final DateTime? createdAt;
 
   NFTOffer({
     required this.id,
     required this.nftId,
     required this.amount,
     required this.status,
+    this.buyerAddress,
+    this.createdAt,
+  });
+  
+  String get formattedAmount => '\$${amount.toStringAsFixed(2)}';
+}
+
+class WalletTransaction {
+  final String id;
+  final String type;
+  final double amount;
+  final String status;
+  final DateTime timestamp;
+
+  WalletTransaction({
+    required this.id,
+    required this.type,
+    required this.amount,
+    required this.status,
+    required this.timestamp,
   });
 }
 
 class BlockchainNetwork {
   static const icp = 'icp';
+  static const ethereum = 'ethereum';
+  static const polygon = 'polygon';
 }
 
 class ListingStatus {

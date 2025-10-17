@@ -704,7 +704,7 @@ class _PreferencesScreenState extends State<PreferencesScreen> {
 
   void _resetPreferences() {
     setState(() {
-      _selectedInvestmentType = null;
+      _selectedInvestmentTypes = [];
       _selectedProfitType = null;
       _selectedCounties = [];
       _investmentAmount = 1000.0;

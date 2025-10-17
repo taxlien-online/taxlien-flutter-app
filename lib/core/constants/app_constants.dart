@@ -1,4 +1,4 @@
-// import 'package:flutter_nft/flutter_nft.dart';  // Temporarily disabled - API not documented
+// import '../core/mocks/nft_mocks.dart';
 import '../../services/integrated_services.dart';
 
 /// Application constants for TaxLien.online

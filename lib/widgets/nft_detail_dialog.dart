@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/nft_service.dart';
+import '../core/models/tax_lien_models.dart';
 
 class NFTDetailDialog extends StatelessWidget {
   final TaxLienNFT nft;
