@@ -20,9 +20,10 @@ class IntegratedServices {
   late NFTService _nftService;
   late PlugWalletService _walletService;
   late FlutterMagentoCloudService _magentoService;
-  icp_lib.ICPClient? _icpClient;
-  nft_lib.NFTClient? _nftClient;
-  yuku_lib.YukuClient? _yukuClient;
+  // NFT/Blockchain clients - temporarily disabled until API documentation is available
+  // icp_lib.ICPClient? _icpClient;
+  // nft_lib.NFTClient? _nftClient;
+  // yuku_lib.YukuClient? _yukuClient;
   // MarketplaceProductService? _marketplaceService;  // Package not available
   // NotificationManager? _notificationManager;  // Package not available
   // MessageManager? _messageManager;  // Package not available
@@ -64,29 +65,14 @@ class IntegratedServices {
       _magentoService = FlutterMagentoCloudService();
       debugPrint('Magento cloud service initialized');
 
-      // Initialize ICP client
-      try {
-        _icpClient = icp_lib.ICPClient();
-        debugPrint('ICP client initialized');
-      } catch (e) {
-        debugPrint('ICP client initialization failed: $e');
-      }
+      // NFT/Blockchain clients initialization - temporarily disabled
+      // TODO: Implement proper initialization when API documentation is available
+      // See: https://pub.dev/packages/flutter_nft
+      // See: https://pub.dev/packages/flutter_icp
+      // See: https://pub.dev/packages/flutter_yuku
 
-      // Initialize NFT client
-      try {
-        _nftClient = nft_lib.NFTClient();
-        debugPrint('NFT client initialized');
-      } catch (e) {
-        debugPrint('NFT client initialization failed: $e');
-      }
-
-      // Initialize Yuku client
-      try {
-        _yukuClient = yuku_lib.YukuClient();
-        debugPrint('Yuku client initialized');
-      } catch (e) {
-        debugPrint('Yuku client initialization failed: $e');
-      }
+      debugPrint(
+          'NFT/Blockchain clients initialization skipped - awaiting API documentation');
 
       // Update service status
       _serviceStatus = {
@@ -94,8 +80,9 @@ class IntegratedServices {
         'database': true,
         'nft': _nftService.isInitialized,
         'wallet': _walletService.isConnected,
-        'icp': _icpClient != null,
-        'yuku': _yukuClient != null,
+        // NFT/Blockchain status temporarily disabled
+        // 'icp': _icpClient != null,
+        // 'yuku': _yukuClient != null,
         // 'marketplace': _marketplaceService != null,
         // 'notifications': _notificationManager != null,
         // 'messenger': _messageManager != null,
@@ -116,9 +103,10 @@ class IntegratedServices {
   NFTService get nft => _nftService;
   PlugWalletService get wallet => _walletService;
   FlutterMagentoCloudService get magentoCloud => _magentoService;
-  icp_lib.ICPClient? get icp => _icpClient;
-  nft_lib.NFTClient? get nftClient => _nftClient;
-  yuku_lib.YukuClient? get yuku => _yukuClient;
+  // NFT/Blockchain getters - temporarily disabled
+  // icp_lib.ICPClient? get icp => _icpClient;
+  // nft_lib.NFTClient? get nftClient => _nftClient;
+  // yuku_lib.YukuClient? get yuku => _yukuClient;
   // MarketplaceProductService? get marketplace => _marketplaceService;  // Package not available
   // NotificationManager? get notifications => _notificationManager;  // Package not available
   // MessageManager? get messenger => _messageManager;  // Package not available

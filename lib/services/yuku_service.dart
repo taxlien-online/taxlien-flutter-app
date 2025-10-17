@@ -173,20 +173,17 @@ class YukuService extends ChangeNotifier {
 
   Future<void> initialize() async {
     try {
-      // Initialize Flutter ICP client
-      _icpClient = ICPClient();
-      _yukuProvider = YukuMarketplaceProvider();
-
-      // Register Yuku marketplace provider
-      _icpClient.registerMarketplaceProvider(_yukuProvider);
-
-      // Initialize ICP client
-      await _icpClient.initialize();
+      // NFT/ICP initialization temporarily disabled - API not documented
+      // TODO: Implement proper initialization when documentation is available
+      // _icpClient = ICPClient();
+      // _yukuProvider = YukuMarketplaceProvider();
+      // _icpClient.registerMarketplaceProvider(_yukuProvider);
+      // await _icpClient.initialize();
 
       _isInitialized = true;
 
-      // Load marketplace data
-      await loadActiveListings();
+      // Load marketplace data (using mock data for now)
+      // await loadActiveListings();
       await loadMyListings();
       await loadMyOffers();
       await loadReceivedOffers();

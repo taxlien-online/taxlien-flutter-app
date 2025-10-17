@@ -1,4 +1,4 @@
-import 'package:flutter_nft/flutter_nft.dart';
+// import 'package:flutter_nft/flutter_nft.dart';  // Temporarily disabled - API not documented
 import '../../services/integrated_services.dart';
 
 /// Application constants for TaxLien.online
@@ -117,8 +117,8 @@ class AppConstants {
   static const String playStoreUrl =
       'https://play.google.com/store/apps/details?id=com.taxlien.online';
 
-  // NFT Client - Global instance for the app
-  static NFTClient? nftClient;
+  // NFT Client - Global instance for the app (temporarily disabled)
+  // static NFTClient? nftClient;
 
   // Integrated Services - Global instance for the app
   static IntegratedServices? integratedServices;

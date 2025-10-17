@@ -113,7 +113,7 @@ dependencies:
   
   # Image handling
   image_picker: ^1.0.4
-  image_cropper: ^9.1.0
+  image_cropper: ^11.0.0
   
   # QR Code
   qr_flutter: ^4.1.0
@@ -123,14 +123,14 @@ dependencies:
   flutter_local_notifications: ^19.4.0
   
   # Biometrics
-  local_auth: ^2.1.6
+  local_auth: ^3.0.0
   
   # File handling
   file_picker: ^10.3.3
   permission_handler: ^12.0.1
   
   # Social sharing
-  share_plus: ^11.1.0
+  share_plus: ^12.0.0
   
   # Deep linking
   app_links: ^6.4.1

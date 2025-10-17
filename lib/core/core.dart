@@ -15,21 +15,21 @@ export 'models/magento_models.dart';
 // Services
 export 'services/magento_api_service.dart';
 export 'services/theme_service.dart';
-export 'services/auth_service.dart';
+// export 'services/auth_service.dart';  // Moved to lib/services/
 export 'services/localization_service.dart';
 export 'services/analytics_service.dart';
 export 'services/notification_service.dart';
 export 'services/secure_storage_service.dart';
 
 // Navigation
-export 'navigation/app_router.dart';
+// export 'navigation/app_router.dart';  // File doesn't exist
 
 // Widgets
-export 'widgets/error_boundary.dart';
+// export 'widgets/error_boundary.dart';  // File doesn't exist
 export 'widgets/loading_screen.dart';
-export 'widgets/common_widgets.dart';
+// export 'widgets/common_widgets.dart';  // File doesn't exist
 
 // Utils
-export 'utils/validators.dart';
-export 'utils/formatters.dart';
-export 'utils/extensions.dart';
+// export 'utils/validators.dart';  // File doesn't exist
+// export 'utils/formatters.dart';  // File doesn't exist
+// export 'utils/extensions.dart';  // File doesn't exist
