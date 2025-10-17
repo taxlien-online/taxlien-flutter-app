@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../services/flutter_magento_cloud_service.dart';
+// import '../services/flutter_magento_cloud_service.dart';
 
 /// Виджет для отображения статуса облачных функций
 class CloudFunctionsStatusWidget extends StatelessWidget {

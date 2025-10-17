@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_magento/flutter_magento.dart';
+// import 'package:flutter_magento/flutter_magento.dart';
 import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
 import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
 import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
-// import 'package:flutter_magento_marketplace/flutter_magento_marketplace.dart';
-// import 'package:flutter_magento_notifications/flutter_magento_notifications.dart';
-// import 'package:flutter_magento_messenger/flutter_magento_messenger.dart';
+// // import 'package:flutter_magento_marketplace/flutter_magento_marketplace.dart';
+// // import 'package:flutter_magento_notifications/flutter_magento_notifications.dart';
+// // import 'package:flutter_magento_messenger/flutter_magento_messenger.dart';
 import 'database_service.dart';
 import 'nft_service.dart';
 import 'plug_wallet_service.dart';
-import 'flutter_magento_cloud_service.dart';
+// import 'flutter_magento_cloud_service.dart';
 
 class IntegratedServices {
   static IntegratedServices? _instance;

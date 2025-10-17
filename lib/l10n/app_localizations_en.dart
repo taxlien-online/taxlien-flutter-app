@@ -174,8 +174,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchHistoryEmpty => 'Search history is empty';
 
   @override
-  String get searchQueriesWillAppearHere =>
-      'Your search queries will appear here';
+  String get searchQueriesWillAppearHere => 'Your search queries will appear here';
 
   @override
   String foundLiensCount(int count) {

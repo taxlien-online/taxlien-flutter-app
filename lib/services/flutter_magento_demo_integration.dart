@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_magento/flutter_magento.dart';
+// import 'package:flutter_magento/flutter_magento.dart';
 import 'demo_data_service.dart';
 
 /// Integration service for flutter_magento with demo data

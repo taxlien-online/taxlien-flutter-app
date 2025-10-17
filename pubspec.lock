@@ -313,14 +313,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  drift:
-    dependency: transitive
-    description:
-      name: drift
-      sha256: "540cf382a3bfa99b76e51514db5b0ebcd81ce3679b7c1c9cb9478ff3735e47a1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.28.2"
   equatable:
     dependency: transitive
     description:
@@ -579,22 +571,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_magento:
-    dependency: "direct main"
-    description:
-      name: flutter_magento
-      sha256: "519b6b2e0da91929d39a4c1064bf37db65467ea433d5cd1bf1d2b38610016bb5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.6.2"
-  flutter_magento_marketplace:
-    dependency: "direct main"
-    description:
-      name: flutter_magento_marketplace
-      sha256: "88ee588d9557f51d31208aecc5b63d11c0ec7f2e69ef17c831ca6b9d61fd6dea"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -701,14 +677,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "11.2.0"
-  freezed_annotation:
-    dependency: transitive
-    description:
-      name: freezed_annotation
-      sha256: "7294967ff0a6d98638e7acb774aac3af2550777accd8149c90af5b014e6d44d8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -765,22 +733,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
-  hive:
-    dependency: transitive
-    description:
-      name: hive
-      sha256: "8dcf6db979d7933da8217edcec84e9df1bdb4e4edc7fc77dbd5aa74356d6d941"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.3"
-  hive_flutter:
-    dependency: transitive
-    description:
-      name: hive_flutter
-      sha256: dca1da446b1d808a51689fb5d0c6c9510c0a2ba01e22805d492c73b68e33eecc
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   hooks_riverpod:
     dependency: "direct main"
     description:
@@ -1594,22 +1546,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
-  sqlite3:
-    dependency: transitive
-    description:
-      name: sqlite3
-      sha256: f18fd9a72d7a1ad2920db61368f2a69368f1cc9b56b8233e9d83b47b0a8435aa
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.9.3"
-  sqlite3_flutter_libs:
-    dependency: transitive
-    description:
-      name: sqlite3_flutter_libs
-      sha256: "69c80d812ef2500202ebd22002cbfc1b6565e9ff56b2f971e757fac5d42294df"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.5.40"
   stack_trace:
     dependency: transitive
     description:
