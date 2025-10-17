@@ -128,7 +128,7 @@ class NFTDetailDialog extends StatelessWidget {
                             _buildInfoRow('Parcel ID', nft.originalLien.parcelId ?? 'N/A'),
                         _buildInfoRow('County', nft.originalLien.county),
                         _buildInfoRow('State', nft.originalLien.state),
-                        _buildInfoRow('Owner', nft.originalLien.owner),
+                            _buildInfoRow('Owner', nft.originalLien.owner ?? 'N/A'),
                       ],
                     ),
 
@@ -171,7 +171,7 @@ class NFTDetailDialog extends StatelessWidget {
                                 .toString()
                                 .split(' ')[0]),
                         _buildInfoRow('NFT Created',
-                            nft.createdAt.toString().split(' ')[0]),
+                                (nft.createdAt ?? nft.mintedAt).toString().split(' ')[0]),
                       ],
                     ),
 
@@ -193,11 +193,11 @@ class NFTDetailDialog extends StatelessWidget {
                     const SizedBox(height: 16),
 
                     // Transaction history
-                    if (nft.transactionHistory.isNotEmpty)
+                        if (nft.transactionHistory?.isNotEmpty ?? false)
                       _buildSection(
                         context,
                         'Transaction History',
-                        nft.transactionHistory
+                            nft.transactionHistory ?? []
                             .map((tx) => _buildInfoRow('', tx))
                             .toList(),
                       ),
@@ -225,7 +225,7 @@ class NFTDetailDialog extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pop();
-                          _shareNFT(nft);
+                          _shareNFT(nft, context);
                         },
                         child: const Text('Share'),
                       ),
@@ -311,9 +311,9 @@ class NFTDetailDialog extends StatelessWidget {
     }
   }
 
-  void _shareNFT(TaxLienNFT nft) {
+  void _shareNFT(TaxLienNFT nft, BuildContext parentContext) {
     showDialog(
-      context: widget.context,
+      context: parentContext,
       builder: (context) => AlertDialog(
         title: const Text('Share NFT'),
         content: Column(
@@ -326,8 +326,9 @@ class NFTDetailDialog extends StatelessWidget {
               title: const Text('Copy Link'),
               subtitle: const Text('Copy NFT link to clipboard'),
               onTap: () {
+                final ctx = context;
                 Navigator.pop(context);
-                _copyNFTLink(nft);
+                _copyNFTLink(nft, ctx);
               },
             ),
             ListTile(
@@ -375,7 +376,7 @@ class NFTDetailDialog extends StatelessWidget {
     // In a real implementation, this would use the share_plus package
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Sharing ${nft.metadata.name}...'),
+            content: Text('Sharing ${nft.metadata?['name'] ?? nft.name}...'),
         backgroundColor: Colors.blue,
       ),
     );
@@ -411,7 +412,7 @@ class NFTDetailDialog extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'Scan this QR code to view ${nft.metadata.name}',
+                  'Scan this QR code to view ${nft.metadata?['name'] ?? nft.name}',
               textAlign: TextAlign.center,
             ),
           ],
@@ -424,7 +425,7 @@ class NFTDetailDialog extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
-              ScaffoldMessenger.of(widget.context).showSnackBar(
+              ScaffoldMessenger.of(parentContext).showSnackBar(
                 const SnackBar(
                   content: Text('QR code saved to gallery'),
                   backgroundColor: Colors.green,

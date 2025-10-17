@@ -132,6 +132,7 @@ class _TaxLienAppState extends State<TaxLienApp> {
         Locale('zh', ''), // Chinese
         Locale('he', ''), // Hebrew
         Locale('hi', ''), // Hindi
+        Locale('uk', ''), // Ukrainian
       ],
       localeResolutionCallback: (locale, supportedLocales) {
         // Check if the current device locale is supported
