@@ -27,19 +27,19 @@ class _AuctionScreenState extends State<AuctionScreen>
   late AnimationController _slideController;
   late Animation<double> _pulseAnimation;
   late Animation<Offset> _slideAnimation;
-  
+
   final MagentoApiService _magentoApiService = MagentoApiService();
-  
+
   final TextEditingController _bidController = TextEditingController();
   final FocusNode _bidFocusNode = FocusNode();
-  
+
   bool _isPlacingBid = false;
   String? _bidError;
 
   @override
   void initState() {
     super.initState();
-    
+
     _pulseController = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
@@ -51,7 +51,7 @@ class _AuctionScreenState extends State<AuctionScreen>
       parent: _pulseController,
       curve: Curves.easeInOut,
     ));
-    
+
     _slideController = AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
@@ -63,15 +63,15 @@ class _AuctionScreenState extends State<AuctionScreen>
       parent: _slideController,
       curve: Curves.easeOut,
     ));
-    
+
     _slideController.forward();
-    
+
     // Join the auction
     widget.biddingService.joinAuction(widget.auction.id);
-    
+
     // Listen to bid updates
     widget.biddingService.addListener(_onBiddingServiceChanged);
-    
+
     // Set initial bid amount
     _updateBidAmount();
   }
@@ -91,7 +91,7 @@ class _AuctionScreenState extends State<AuctionScreen>
       setState(() {
         _updateBidAmount();
       });
-      
+
       // Pulse animation when new bid is placed
       if (widget.biddingService.bids.isNotEmpty) {
         _pulseController.forward().then((_) {
@@ -105,7 +105,7 @@ class _AuctionScreenState extends State<AuctionScreen>
     final currentHighestBid = widget.biddingService.bids.isNotEmpty
         ? widget.biddingService.bids.first.amount
         : widget.auction.startingBid;
-    
+
     final nextBidAmount = currentHighestBid + 100; // Minimum increment
     _bidController.text = nextBidAmount.toStringAsFixed(0);
   }
@@ -135,7 +135,9 @@ class _AuctionScreenState extends State<AuctionScreen>
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  widget.biddingService.isConnected ? 'Connected' : 'Disconnected',
+                  widget.biddingService.isConnected
+                      ? 'Connected'
+                      : 'Disconnected',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],
@@ -149,18 +151,18 @@ class _AuctionScreenState extends State<AuctionScreen>
           children: [
             // Auction header
             _buildAuctionHeader(),
-            
+
             // Property details
             _buildPropertyDetails(),
-            
+
             // Current bid and timer
             _buildCurrentBidSection(),
-            
+
             // Bid history
             Expanded(
               child: _buildBidHistory(),
             ),
-            
+
             // Bid input section
             _buildBidInputSection(),
           ],
@@ -192,9 +194,9 @@ class _AuctionScreenState extends State<AuctionScreen>
               Text(
                 'Live Auction',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                ),
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const Spacer(),
               AuctionTimer(
@@ -228,17 +230,22 @@ class _AuctionScreenState extends State<AuctionScreen>
               Text(
                 'Property Details',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
               const SizedBox(height: 12),
               _buildDetailRow('County', widget.auction.lien.county),
               _buildDetailRow('State', widget.auction.lien.state),
-              _buildDetailRow('Parcel ID', widget.auction.lien.parcelId ?? 'N/A'),
-              _buildDetailRow('Tax Amount', '\$${widget.auction.lien.taxAmount.toStringAsFixed(2)}'),
-              _buildDetailRow('Interest Rate', '${widget.auction.lien.interestRate}%'),
-              _buildDetailRow('Starting Bid', '\$${widget.auction.startingBid.toStringAsFixed(2)}'),
-              _buildDetailRow('Reserve Price', '\$${widget.auction.reservePrice.toStringAsFixed(2)}'),
+              _buildDetailRow(
+                  'Parcel ID', widget.auction.lien.parcelId ?? 'N/A'),
+              _buildDetailRow('Tax Amount',
+                  '\$${widget.auction.lien.taxAmount.toStringAsFixed(2)}'),
+              _buildDetailRow(
+                  'Interest Rate', '${widget.auction.lien.interestRate}%'),
+              _buildDetailRow('Starting Bid',
+                  '\$${widget.auction.startingBid.toStringAsFixed(2)}'),
+              _buildDetailRow('Reserve Price',
+                  '\$${widget.auction.reservePrice.toStringAsFixed(2)}'),
             ],
           ),
         ),
@@ -257,9 +264,9 @@ class _AuctionScreenState extends State<AuctionScreen>
             child: Text(
               '$label:',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
             ),
           ),
           Expanded(
@@ -277,7 +284,7 @@ class _AuctionScreenState extends State<AuctionScreen>
     final currentHighestBid = widget.biddingService.bids.isNotEmpty
         ? widget.biddingService.bids.first.amount
         : widget.auction.startingBid;
-    
+
     return FutureBuilder(
       future: _magentoApiService.getCurrentCustomer(),
       builder: (context, snapshot) {
@@ -285,7 +292,7 @@ class _AuctionScreenState extends State<AuctionScreen>
         final isMyBid = widget.biddingService.bids.isNotEmpty &&
             customer != null &&
             widget.biddingService.bids.first.bidderId == customer.id.toString();
-    
+
         return Container(
           padding: const EdgeInsets.all(16),
           child: AnimatedBuilder(
@@ -303,47 +310,67 @@ class _AuctionScreenState extends State<AuctionScreen>
                       children: [
                         Text(
                           'Current Highest Bid',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: isMyBid
-                                ? Theme.of(context).colorScheme.onPrimaryContainer
-                                : Theme.of(context).colorScheme.onSurface,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                                color: isMyBid
+                                    ? Theme.of(context)
+                                        .colorScheme
+                                        .onPrimaryContainer
+                                    : Theme.of(context).colorScheme.onSurface,
+                              ),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           '\$${currentHighestBid.toStringAsFixed(2)}',
-                          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                            color: isMyBid
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(
+                                color: isMyBid
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                         if (widget.biddingService.bids.isNotEmpty) ...[
                           const SizedBox(height: 4),
                           Text(
                             'by ${widget.biddingService.bids.first.bidderName}',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: isMyBid
-                                  ? Theme.of(context).colorScheme.onPrimaryContainer
-                                  : Theme.of(context).colorScheme.onSurfaceVariant,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  color: isMyBid
+                                      ? Theme.of(context)
+                                          .colorScheme
+                                          .onPrimaryContainer
+                                      : Theme.of(context)
+                                          .colorScheme
+                                          .onSurfaceVariant,
+                                ),
                           ),
                         ],
                         if (isMyBid) ...[
                           const SizedBox(height: 8),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 4),
                             decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.primary,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
                               'YOUR BID',
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
                           ),
                         ],
@@ -368,8 +395,8 @@ class _AuctionScreenState extends State<AuctionScreen>
           child: Text(
             'Bid History',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ),
         const SizedBox(height: 8),
@@ -421,15 +448,15 @@ class _AuctionScreenState extends State<AuctionScreen>
                     child: Text(
                       _bidError!,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onErrorContainer,
-                      ),
+                            color:
+                                Theme.of(context).colorScheme.onErrorContainer,
+                          ),
                     ),
                   ),
                 ],
               ),
             ),
           ],
-          
           BidInputWidget(
             controller: _bidController,
             focusNode: _bidFocusNode,
@@ -447,15 +474,15 @@ class _AuctionScreenState extends State<AuctionScreen>
 
   Future<void> _placeBid(double amount) async {
     if (_isPlacingBid) return;
-    
+
     setState(() {
       _isPlacingBid = true;
       _bidError = null;
     });
-    
+
     try {
       final success = await widget.biddingService.placeBid(amount);
-      
+
       if (!success && mounted) {
         setState(() {
           _bidError = widget.biddingService.error ?? 'Failed to place bid';

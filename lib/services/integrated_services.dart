@@ -77,7 +77,7 @@ class IntegratedServices {
 
       // Update service status
       _serviceStatus = {
-        'magento': _magento != null,
+        'magento': _magentoService != null,
         'database': true,
         'nft': _nftService.isInitialized,
         'wallet': _walletService.isConnected,
