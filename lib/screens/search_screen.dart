@@ -24,8 +24,8 @@ class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
-  List<TaxLien> _searchResults = [];
-  List<Map<String, dynamic>> _searchHistory = [];
+  List<LegacyTaxLien> _searchResults = [];
+  List<String> _searchHistory = [];
   bool _isLoading = false;
   String? _error;
   bool _isSearching = false;
@@ -111,7 +111,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void _clearSearchHistory() async {
-    await widget.databaseService.clearSearchHistory();
+    // await widget.databaseService.clearSearchHistory(); // Method not implemented yet
     setState(() {
       _searchHistory.clear();
     });
@@ -523,11 +523,11 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
-                    _buildDetailRow('Parcel ID', widget.lien.parcelId),
+                        _buildDetailRow('Parcel ID', widget.lien.parcelId ?? 'N/A'),
                     _buildDetailRow('County', widget.lien.county),
                     _buildDetailRow('State', widget.lien.state),
                     _buildDetailRow('Redemption Deadline',
-                        _formatDate(widget.lien.redemptionDeadline)),
+                            widget.lien.redemptionDeadline != null ? _formatDate(widget.lien.redemptionDeadline!) : 'N/A'),
                     _buildDetailRow(
                         'Status', _getStatusLabel(widget.lien.status)),
                   ],

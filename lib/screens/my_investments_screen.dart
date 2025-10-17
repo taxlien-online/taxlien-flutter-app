@@ -25,8 +25,8 @@ class MyInvestmentsScreen extends StatefulWidget {
 class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  List<TaxLien> _myLiens = [];
-  List<TaxLien> _favoriteLiens = [];
+  List<LegacyTaxLien> _myLiens = [];
+  List<LegacyTaxLien> _favoriteLiens = [];
   bool _isLoading = false;
   String? _error;
 
@@ -64,10 +64,8 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
       _myLiens = widget.taxLienService.myLiens;
 
       // Загрузка избранных закладных
-      final favoriteIds = await widget.databaseService.getFavoriteLienIds();
-      _favoriteLiens = widget.taxLienService.availableLiens
-          .where((lien) => favoriteIds.contains(lien.id))
-          .toList();
+      // final favoriteIds = await widget.databaseService.getFavoriteLienIds(); // Method not implemented yet
+      _favoriteLiens = []; // widget.taxLienService.availableLiens.where((lien) => favoriteIds.contains(lien.id)).toList();
     } catch (e) {
       setState(() {
         _error = 'Ошибка загрузки данных: $e';
@@ -88,16 +86,16 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
         bottom: TabBar(
           controller: _tabController,
           tabs: [
-            Tab(text: l10n.myLiens),
-            Tab(text: l10n.favorites),
-            Tab(text: l10n.statistics),
+                const Tab(text: 'My Liens'),
+                const Tab(text: 'Favorites'),
+                const Tab(text: 'Statistics'),
           ],
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadData,
-            tooltip: l10n.refresh,
+                tooltip: 'Refresh',
           ),
         ],
       ),
@@ -157,12 +155,12 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
             ),
             const SizedBox(height: 16),
             Text(
-              l10n.noInvestmentsYet,
+                  'No investments yet',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             Text(
-              l10n.goToMarketplace,
+                  'Go to the Marketplace to start investing in tax liens.',
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -174,7 +172,7 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
                   Navigator.of(context).pop();
                 }
               },
-              child: Text(l10n.goToMarketplaceButton),
+                  child: const Text('Go to Marketplace'),
             ),
           ],
         ),
@@ -224,12 +222,12 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
             ),
             const SizedBox(height: 16),
             Text(
-              l10n.noFavoriteLiens,
+                  'No favorite liens',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             Text(
-              l10n.addToFavoritesHint,
+                  'Add liens to your favorites to view them here.',
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -305,11 +303,11 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.overallStatistics,
+                        'Overall Statistics',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 16),
-                  _buildStatRow(l10n.totalInvested,
+                      _buildStatRow('Total Invested',
                       '\$${totalInvested.toStringAsFixed(2)}'),
                   _buildStatRow(
                       l10n.currentValue, '\$${totalValue.toStringAsFixed(2)}'),

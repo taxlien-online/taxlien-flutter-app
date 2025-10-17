@@ -336,14 +336,8 @@ class HybridMagentoService extends ChangeNotifier {
         AppConstants.preferCloudWhenAvailable) {
       final flutterProducts = await _flutterMagentoService!.getProducts(
         page: page,
-        // pageSize: pageSize,  // Temporarily disabled
-        searchQuery: searchQuery,
-        // categoryId: categoryId,  // Temporarily disabled
-        // sortBy: sortBy,  // Temporarily disabled
-        // sortOrder: sortOrder,  // Temporarily disabled
+        pageSize: pageSize,
         filters: filters,
-        // minPrice: minPrice,  // Temporarily disabled
-        // maxPrice: maxPrice,  // Temporarily disabled
       );
 
       if (flutterProducts != null) {
@@ -446,8 +440,8 @@ class HybridMagentoService extends ChangeNotifier {
         _flutterMagentoService != null &&
         AppConstants.preferCloudWhenAvailable) {
       final flutterCart = await _flutterMagentoService!.createCart();
-      if (flutterCart != null) {
-        cartId = flutterCart['id']?.toString();
+      if (flutterCart != null && flutterCart['id'] != null) {
+        cartId = flutterCart['id'].toString();
       }
     }
 
@@ -476,7 +470,7 @@ class HybridMagentoService extends ChangeNotifier {
         _flutterMagentoService != null &&
         AppConstants.preferCloudWhenAvailable) {
       success = await _flutterMagentoService!.addToCart(
-        productId: sku,
+        sku: sku,
         quantity: quantity,
       );
     }
