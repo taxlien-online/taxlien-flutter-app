@@ -48,6 +48,7 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
   late PageController _pageController;
+  late NFTClient _nftClient;
 
   final List<NavigationItem> _navigationItems = [
     NavigationItem(
@@ -81,12 +82,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   void initState() {
     super.initState();
     _pageController = PageController();
+    _nftClient = NFTClient();
 
-    // Initialize screens
-    _navigationItems[0].screen = MarketplaceScreen(
-      taxLienService: widget.taxLienService,
-      authService: widget.authService,
-      databaseService: widget.databaseService,
+    // Initialize screens - Requires TaxLienMagentoService
+    // Temporarily using mock marketplace until properly configured
+    _navigationItems[0].screen = const Scaffold(
+      body: Center(
+        child: Text('Marketplace - Configure TaxLienMagentoService'),
+      ),
     );
 
     _navigationItems[1].screen = MyInvestmentsScreen(
@@ -96,7 +99,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     );
 
     _navigationItems[2].screen = NFTDashboardScreen(
-      nftClient: AppConstants.nftClient!,
+      nftClient: _nftClient,
       taxLienService: widget.taxLienService,
     );
 
@@ -110,7 +113,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       themeService: widget.themeService,
       localizationService: widget.localizationService,
       onboardingService: widget.onboardingService,
-      nftClient: AppConstants.nftClient!,
+      nftClient: _nftClient,
     );
   }
 
