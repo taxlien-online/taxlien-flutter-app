@@ -1,8 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_magento/flutter_magento.dart';
-import '../data/demo_data.dart';
-import '../data/categories_demo_data.dart';
-import '../data/counties_demo_data.dart';
 import 'demo_data_service.dart';
 
 /// Integration service for flutter_magento with demo data
@@ -38,12 +35,6 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     try {
       // Initialize Flutter Magento
       _magento = FlutterMagento();
-      await _magento.initialize(
-        baseUrl: baseUrl,
-        connectionTimeout: connectionTimeout,
-        receiveTimeout: receiveTimeout,
-        headers: headers,
-      );
 
       // Initialize demo data service
       _demoDataService = DemoDataService();
@@ -81,7 +72,7 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (!_isInitialized) return [];
 
     if (_useDemoData) {
-      return _getDemoProducts(
+      return await _getDemoProducts(
         page: page,
         pageSize: pageSize,
         searchQuery: searchQuery,
@@ -93,16 +84,9 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
         maxPrice: maxPrice,
       );
     } else {
-      return await _magento.getProducts(
-        page: page,
-        pageSize: pageSize,
-        searchQuery: searchQuery,
-        categoryId: categoryId,
-        sortBy: sortBy,
-        sortOrder: sortOrder,
-        filters: filters,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
       );
     }
   }
@@ -116,16 +100,15 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (!_isInitialized) return [];
 
     if (_useDemoData) {
-      return _getDemoCategories(
+      return await _getDemoCategories(
         parentId: parentId,
         level: level,
         searchQuery: searchQuery,
       );
     } else {
-      return await _magento.getCategories(
-        parentId: parentId,
-        level: level,
-        searchQuery: searchQuery,
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
       );
     }
   }
@@ -145,10 +128,9 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
         searchQuery: searchQuery,
       );
     } else {
-      return await _magento.getCustomers(
-        page: page,
-        pageSize: pageSize,
-        searchQuery: searchQuery,
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
       );
     }
   }
@@ -172,12 +154,9 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
         dateTo: dateTo,
       );
     } else {
-      return await _magento.getOrders(
-        page: page,
-        pageSize: pageSize,
-        status: status,
-        dateFrom: dateFrom,
-        dateTo: dateTo,
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
       );
     }
   }
@@ -189,7 +168,10 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (_useDemoData) {
       return _getDemoCart(cartId: cartId);
     } else {
-      return await _magento.getCart(cartId: cartId);
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
+      );
     }
   }
 
@@ -210,11 +192,9 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
         productOptions: productOptions,
       );
     } else {
-      return await _magento.addToCart(
-        cartId: cartId,
-        sku: sku,
-        qty: qty,
-        productOptions: productOptions,
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
       );
     }
   }
@@ -224,9 +204,12 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (!_isInitialized) return null;
 
     if (_useDemoData) {
-      return _getDemoProductBySku(sku);
+      return await _getDemoProductBySku(sku);
     } else {
-      return await _magento.getProductBySku(sku);
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
+      );
     }
   }
 
@@ -235,9 +218,12 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (!_isInitialized) return null;
 
     if (_useDemoData) {
-      return _getDemoCategoryById(categoryId);
+      return await _getDemoCategoryById(categoryId);
     } else {
-      return await _magento.getCategoryById(categoryId);
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
+      );
     }
   }
 
@@ -248,7 +234,10 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (_useDemoData) {
       return _getDemoCustomerById(customerId);
     } else {
-      return await _magento.getCustomerById(customerId);
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
+      );
     }
   }
 
@@ -259,7 +248,10 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (_useDemoData) {
       return _getDemoOrderById(orderId);
     } else {
-      return await _magento.getOrderById(orderId);
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
+      );
     }
   }
 
@@ -268,9 +260,12 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (!_isInitialized) return [];
 
     if (_useDemoData) {
-      return _demoDataService.searchProducts(query);
+      return await _demoDataService.searchProducts(query);
     } else {
-      return await _magento.searchProducts(query);
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
+      );
     }
   }
 
@@ -279,11 +274,11 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (!_isInitialized) return [];
 
     if (_useDemoData) {
-      return _demoDataService.getTaxLienProductsByState(state);
+      return await _demoDataService.getTaxLienProductsByState(state);
     } else {
-      // In real implementation, this would query Magento for tax lien products
-      return await _magento.getProducts(
-        filters: {'state': state, 'type_id': 'tax_lien'},
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
       );
     }
   }
@@ -293,11 +288,11 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (!_isInitialized) return [];
 
     if (_useDemoData) {
-      return _demoDataService.getTaxLienProductsByCounty(county);
+      return await _demoDataService.getTaxLienProductsByCounty(county);
     } else {
-      // In real implementation, this would query Magento for tax lien products
-      return await _magento.getProducts(
-        filters: {'county': county, 'type_id': 'tax_lien'},
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
       );
     }
   }
@@ -307,10 +302,11 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (!_isInitialized) return [];
 
     if (_useDemoData) {
-      return _demoDataService.getAvailableTaxLiens();
+      return await _demoDataService.getAvailableTaxLiens();
     } else {
-      return await _magento.getProducts(
-        filters: {'lien_status': 'available', 'type_id': 'tax_lien'},
+      // Real Magento data - requires proper Magento API configuration
+      throw UnimplementedError(
+        'Real Magento data access not implemented. Please configure Magento API properly or use demo mode.',
       );
     }
   }
@@ -321,7 +317,7 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     if (!_isInitialized) return [];
 
     if (_useDemoData) {
-      return _demoDataService.getCountiesByState(stateCode);
+      return await _demoDataService.getCountiesByState(stateCode);
     } else {
       // In real implementation, this would query a counties API or database
       return [];
@@ -340,7 +336,7 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
 
   /// Private methods for demo data handling
 
-  List<Map<String, dynamic>> _getDemoProducts({
+  Future<List<Map<String, dynamic>>> _getDemoProducts({
     int page = 1,
     int pageSize = 20,
     String? searchQuery,
@@ -350,22 +346,23 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     Map<String, dynamic>? filters,
     double? minPrice,
     double? maxPrice,
-  }) {
-    var products = _demoDataService.getDemoProducts();
+  }) async {
+    var products = await _demoDataService.getDemoProducts();
 
     // Apply search query
     if (searchQuery != null && searchQuery.isNotEmpty) {
-      products = _demoDataService.searchProducts(searchQuery);
+      products = await _demoDataService.searchProducts(searchQuery);
     }
 
     // Apply category filter
     if (categoryId != null) {
-      products = _demoDataService.getProductsByCategory(int.parse(categoryId));
+      products =
+          await _demoDataService.getProductsByCategory(int.parse(categoryId));
     }
 
     // Apply price filters
     if (minPrice != null || maxPrice != null) {
-      products = _demoDataService.getTaxLiensByPriceRange(
+      products = await _demoDataService.getTaxLiensByPriceRange(
         minPrice ?? 0.0,
         maxPrice ?? double.infinity,
       );
@@ -393,12 +390,12 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     );
   }
 
-  List<Map<String, dynamic>> _getDemoCategories({
+  Future<List<Map<String, dynamic>>> _getDemoCategories({
     int? parentId,
     int? level,
     String? searchQuery,
-  }) {
-    var categories = _demoDataService.getDemoCategories();
+  }) async {
+    var categories = await _demoDataService.getDemoCategories();
 
     if (parentId != null) {
       categories =
@@ -518,8 +515,8 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     };
   }
 
-  Map<String, dynamic>? _getDemoProductBySku(String sku) {
-    final products = _demoDataService.getDemoProducts();
+  Future<Map<String, dynamic>?> _getDemoProductBySku(String sku) async {
+    final products = await _demoDataService.getDemoProducts();
     try {
       return products.firstWhere((product) => product['sku'] == sku);
     } catch (e) {
@@ -527,8 +524,8 @@ class FlutterMagentoDemoIntegration extends ChangeNotifier {
     }
   }
 
-  Map<String, dynamic>? _getDemoCategoryById(int categoryId) {
-    final categories = _demoDataService.getDemoCategories();
+  Future<Map<String, dynamic>?> _getDemoCategoryById(int categoryId) async {
+    final categories = await _demoDataService.getDemoCategories();
     try {
       return categories.firstWhere((category) => category['id'] == categoryId);
     } catch (e) {

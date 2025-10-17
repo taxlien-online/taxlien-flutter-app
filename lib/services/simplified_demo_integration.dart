@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'offline_data_loader_service.dart';
 
-/// DEPRECATED: Simplified demo data integration service
+/// Simplified demo data integration service
 /// NOW USES .rada FILES via OfflineDataLoaderService
 ///
-/// This service now loads data from .rada files instead of hardcoded demo data
-/// Provides backward-compatible interface while using OfflineDataLoaderService
+/// This service provides a backward-compatible interface while using OfflineDataLoaderService
+/// to load data from .rada files instead of hardcoded demo data
 class SimplifiedDemoIntegration extends ChangeNotifier {
   final OfflineDataLoaderService _offlineLoader = OfflineDataLoaderService();
   bool _isInitialized = false;
@@ -59,10 +59,10 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
     Map<String, dynamic>? filters,
     double? minPrice,
     double? maxPrice,
-  }) {
+  }) async {
     if (!_isInitialized) return [];
 
-    var products = TaxLienDemoData.demoProducts;
+    var products = await _offlineLoader.getProducts();
 
     // Apply search query
     if (searchQuery != null && searchQuery.isNotEmpty) {
@@ -93,20 +93,19 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
     return _applyPagination(products, page, pageSize);
   }
 
-  /// Get categories with demo data
-  List<Map<String, dynamic>> getCategories({
+  /// Get categories from .rada files
+  Future<List<Map<String, dynamic>>> getCategories({
     int? parentId,
     int? level,
     String? searchQuery,
-  }) {
+  }) async {
     if (!_isInitialized) return [];
 
-    var categories = TaxLienCategoriesDemoData.allCategories;
+    var categories = await _offlineLoader.getCategories();
 
     if (parentId != null) {
-      categories = categories
-          .where((cat) => cat['parent_id'] == parentId)
-          .toList();
+      categories =
+          categories.where((cat) => cat['parent_id'] == parentId).toList();
     }
 
     if (level != null) {
@@ -123,30 +122,19 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
     return categories;
   }
 
-  /// Get customers with demo data
+  /// Get customers (not available in .rada files)
   List<Map<String, dynamic>> getCustomers({
     int page = 1,
     int pageSize = 20,
     String? searchQuery,
   }) {
-    if (!_isInitialized) return [];
-
-    var customers = TaxLienDemoData.demoCustomers;
-
-    if (searchQuery != null && searchQuery.isNotEmpty) {
-      customers = customers.where((customer) {
-        final name = '${customer['firstname']} ${customer['lastname']}'
-            .toLowerCase();
-        final email = customer['email']?.toString().toLowerCase() ?? '';
-        return name.contains(searchQuery.toLowerCase()) ||
-            email.contains(searchQuery.toLowerCase());
-      }).toList();
+    if (kDebugMode) {
+      print('Customer data not available in .rada files');
     }
-
-    return _applyPagination(customers, page, pageSize);
+    return [];
   }
 
-  /// Get orders with demo data
+  /// Get orders (not available in .rada files)
   List<Map<String, dynamic>> getOrders({
     int page = 1,
     int pageSize = 20,
@@ -154,52 +142,28 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
     String? dateFrom,
     String? dateTo,
   }) {
-    if (!_isInitialized) return [];
-
-    var orders = TaxLienDemoData.demoOrders;
-
-    if (status != null) {
-      orders = orders.where((order) => order['status'] == status).toList();
+    if (kDebugMode) {
+      print('Order data not available in .rada files');
     }
-
-    if (dateFrom != null) {
-      final fromDate = DateTime.tryParse(dateFrom);
-      if (fromDate != null) {
-        orders = orders.where((order) {
-          final orderDate = DateTime.tryParse(
-            order['created_at']?.toString() ?? '',
-          );
-          return orderDate != null && orderDate.isAfter(fromDate);
-        }).toList();
-      }
-    }
-
-    if (dateTo != null) {
-      final toDate = DateTime.tryParse(dateTo);
-      if (toDate != null) {
-        orders = orders.where((order) {
-          final orderDate = DateTime.tryParse(
-            order['created_at']?.toString() ?? '',
-          );
-          return orderDate != null && orderDate.isBefore(toDate);
-        }).toList();
-      }
-    }
-
-    return _applyPagination(orders, page, pageSize);
+    return [];
   }
 
-  /// Get cart with demo data
+  /// Get cart (minimal cart structure)
   Map<String, dynamic>? getCart({String? cartId}) {
     if (!_isInitialized) return null;
-    return TaxLienDemoData.demoCart;
+    return {
+      'id': cartId ?? '1',
+      'items': [],
+      'is_active': false,
+      'created_at': DateTime.now().toIso8601String(),
+    };
   }
 
   /// Get product by SKU
-  Map<String, dynamic>? getProductBySku(String sku) {
+  Future<Map<String, dynamic>?> getProductBySku(String sku) async {
     if (!_isInitialized) return null;
 
-    final products = TaxLienDemoData.demoProducts;
+    final products = await _offlineLoader.getProducts();
     try {
       return products.firstWhere((product) => product['sku'] == sku);
     } catch (e) {
@@ -208,10 +172,10 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
   }
 
   /// Get category by ID
-  Map<String, dynamic>? getCategoryById(int categoryId) {
+  Future<Map<String, dynamic>?> getCategoryById(int categoryId) async {
     if (!_isInitialized) return null;
 
-    final categories = TaxLienCategoriesDemoData.allCategories;
+    final categories = await _offlineLoader.getCategories();
     try {
       return categories.firstWhere((category) => category['id'] == categoryId);
     } catch (e) {
@@ -219,154 +183,232 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
     }
   }
 
-  /// Get customer by ID
+  /// Get customer by ID (not available in .rada files)
   Map<String, dynamic>? getCustomerById(int customerId) {
-    if (!_isInitialized) return null;
-
-    final customers = TaxLienDemoData.demoCustomers;
-    try {
-      return customers.firstWhere((customer) => customer['id'] == customerId);
-    } catch (e) {
-      return null;
+    if (kDebugMode) {
+      print('Customer data not available in .rada files');
     }
+    return null;
   }
 
-  /// Get order by ID
+  /// Get order by ID (not available in .rada files)
   Map<String, dynamic>? getOrderById(int orderId) {
-    if (!_isInitialized) return null;
-
-    final orders = TaxLienDemoData.demoOrders;
-    try {
-      return orders.firstWhere((order) => order['entity_id'] == orderId);
-    } catch (e) {
-      return null;
+    if (kDebugMode) {
+      print('Order data not available in .rada files');
     }
+    return null;
   }
 
   /// Search products
-  List<Map<String, dynamic>> searchProducts(String query) {
+  Future<List<Map<String, dynamic>>> searchProducts(String query) async {
     if (!_isInitialized) return [];
-    return _searchProducts(TaxLienDemoData.demoProducts, query);
+    final products = await _offlineLoader.getProducts();
+    return _searchProducts(products, query);
   }
 
   /// Get tax lien specific data
-  List<Map<String, dynamic>> getTaxLiensByState(String state) {
+  Future<List<Map<String, dynamic>>> getTaxLiensByState(String state) async {
     if (!_isInitialized) return [];
-    return TaxLienDemoData.getTaxLienProductsByState(state);
+    return await _offlineLoader.getProducts(state: state);
   }
 
   /// Get tax liens by county
-  List<Map<String, dynamic>> getTaxLiensByCounty(String county) {
+  Future<List<Map<String, dynamic>>> getTaxLiensByCounty(String county) async {
     if (!_isInitialized) return [];
-    return TaxLienDemoData.getTaxLienProductsByCounty(county);
+    return await _offlineLoader.getProducts(county: county);
   }
 
   /// Get available tax liens
-  List<Map<String, dynamic>> getAvailableTaxLiens() {
+  Future<List<Map<String, dynamic>>> getAvailableTaxLiens() async {
     if (!_isInitialized) return [];
-    return TaxLienDemoData.getAvailableTaxLiens();
+    final products = await _offlineLoader.getProducts();
+
+    // Filter by status if available in custom attributes
+    return products.where((product) {
+      final attributes = product['custom_attributes'] as List<dynamic>?;
+      if (attributes == null) return true;
+
+      final statusAttr = attributes.firstWhere(
+        (attr) => attr['attribute_code'] == 'lien_status',
+        orElse: () => null,
+      );
+
+      return statusAttr == null || statusAttr['value'] == 'available';
+    }).toList();
   }
 
   /// Get counties by state
-  List<Map<String, dynamic>> getCountiesByState(String stateCode) {
+  Future<List<Map<String, dynamic>>> getCountiesByState(
+    String stateCode,
+  ) async {
     if (!_isInitialized) return [];
-    return TaxLienCountiesDemoData.getCountiesByState(stateCode);
+    return await _offlineLoader.getCountiesForState(stateCode);
   }
 
   /// Get county by name and state
-  Map<String, dynamic>? getCountyByName(String stateCode, String countyName) {
+  Future<Map<String, dynamic>?> getCountyByName(
+    String stateCode,
+    String countyName,
+  ) async {
     if (!_isInitialized) return null;
-    return TaxLienCountiesDemoData.getCountyByName(stateCode, countyName);
+    return await _offlineLoader.getCountyByName(stateCode, countyName);
   }
 
   /// Get county by code and state
-  Map<String, dynamic>? getCountyByCode(String stateCode, String countyCode) {
+  Future<Map<String, dynamic>?> getCountyByCode(
+    String stateCode,
+    String countyCode,
+  ) async {
     if (!_isInitialized) return null;
-    return TaxLienCountiesDemoData.getCountyByCode(stateCode, countyCode);
+    final counties = await _offlineLoader.getCountiesForState(stateCode);
+
+    try {
+      return counties.firstWhere(
+        (county) =>
+            county['code']?.toString().toLowerCase() ==
+            countyCode.toLowerCase(),
+      );
+    } catch (e) {
+      return null;
+    }
   }
 
   /// Get all US states with tax lien programs
-  List<String> getStatesWithTaxLiens() {
+  Future<List<String>> getStatesWithTaxLiens() async {
     if (!_isInitialized) return [];
-    return TaxLienCategoriesDemoData.statesWithTaxLiens;
+    return await _offlineLoader.getAvailableStates();
   }
 
   /// Get state name by code
   String getStateNameByCode(String stateCode) {
-    if (!_isInitialized) return stateCode;
-    return TaxLienCategoriesDemoData.getStateNameByCode(stateCode);
+    const stateNames = {
+      'FL': 'Florida',
+      'TX': 'Texas',
+      'CA': 'California',
+      'NY': 'New York',
+      'AZ': 'Arizona',
+      'GA': 'Georgia',
+      'CO': 'Colorado',
+      'NV': 'Nevada',
+      'UT': 'Utah',
+      'IA': 'Iowa',
+      'IL': 'Illinois',
+      'IN': 'Indiana',
+      'KY': 'Kentucky',
+      'MD': 'Maryland',
+      'MI': 'Michigan',
+      'MN': 'Minnesota',
+      'MO': 'Missouri',
+      'MT': 'Montana',
+      'NE': 'Nebraska',
+      'NJ': 'New Jersey',
+      'NC': 'North Carolina',
+      'OH': 'Ohio',
+      'OR': 'Oregon',
+      'PA': 'Pennsylvania',
+      'SC': 'South Carolina',
+      'TN': 'Tennessee',
+      'VA': 'Virginia',
+      'WA': 'Washington',
+      'WI': 'Wisconsin',
+      'WY': 'Wyoming',
+    };
+    return stateNames[stateCode] ?? stateCode;
   }
 
   /// Get largest counties by population
-  List<Map<String, dynamic>> getLargestCountiesByPopulation(
+  Future<List<Map<String, dynamic>>> getLargestCountiesByPopulation(
     String stateCode,
     int limit,
-  ) {
+  ) async {
     if (!_isInitialized) return [];
-    return TaxLienCountiesDemoData.getLargestCountiesByPopulation(
-      stateCode,
-      limit,
+    final counties = await _offlineLoader.getCountiesForState(stateCode);
+
+    counties.sort(
+      (a, b) => (b['population'] as int? ?? 0).compareTo(
+        a['population'] as int? ?? 0,
+      ),
     );
+
+    return counties.take(limit).toList();
   }
 
   /// Get smallest counties by population
-  List<Map<String, dynamic>> getSmallestCountiesByPopulation(
+  Future<List<Map<String, dynamic>>> getSmallestCountiesByPopulation(
     String stateCode,
     int limit,
-  ) {
+  ) async {
     if (!_isInitialized) return [];
-    return TaxLienCountiesDemoData.getSmallestCountiesByPopulation(
-      stateCode,
-      limit,
+    final counties = await _offlineLoader.getCountiesForState(stateCode);
+
+    counties.sort(
+      (a, b) => (a['population'] as int? ?? 0).compareTo(
+        b['population'] as int? ?? 0,
+      ),
     );
+
+    return counties.take(limit).toList();
   }
 
   /// Get counties by population range
-  List<Map<String, dynamic>> getCountiesByPopulationRange(
+  Future<List<Map<String, dynamic>>> getCountiesByPopulationRange(
     String stateCode,
     int minPopulation,
     int maxPopulation,
-  ) {
+  ) async {
     if (!_isInitialized) return [];
-    return TaxLienCountiesDemoData.getCountiesByPopulationRange(
-      stateCode,
-      minPopulation,
-      maxPopulation,
-    );
+    final counties = await _offlineLoader.getCountiesForState(stateCode);
+
+    return counties.where((county) {
+      final population = county['population'] as int? ?? 0;
+      return population >= minPopulation && population <= maxPopulation;
+    }).toList();
   }
 
   /// Get counties by area range
-  List<Map<String, dynamic>> getCountiesByAreaRange(
+  Future<List<Map<String, dynamic>>> getCountiesByAreaRange(
     String stateCode,
     double minArea,
     double maxArea,
-  ) {
+  ) async {
     if (!_isInitialized) return [];
-    return TaxLienCountiesDemoData.getCountiesByAreaRange(
-      stateCode,
-      minArea,
-      maxArea,
-    );
+    final counties = await _offlineLoader.getCountiesForState(stateCode);
+
+    return counties.where((county) {
+      final area = (county['area'] as num?)?.toDouble() ?? 0.0;
+      return area >= minArea && area <= maxArea;
+    }).toList();
   }
 
   /// Get total population for a state
-  int getTotalPopulationForState(String stateCode) {
+  Future<int> getTotalPopulationForState(String stateCode) async {
     if (!_isInitialized) return 0;
-    return TaxLienCountiesDemoData.getTotalPopulationForState(stateCode);
+    final counties = await _offlineLoader.getCountiesForState(stateCode);
+
+    return counties.fold<int>(
+      0,
+      (sum, county) => sum + (county['population'] as int? ?? 0),
+    );
   }
 
   /// Get total area for a state
-  double getTotalAreaForState(String stateCode) {
+  Future<double> getTotalAreaForState(String stateCode) async {
     if (!_isInitialized) return 0.0;
-    return TaxLienCountiesDemoData.getTotalAreaForState(stateCode);
+    final counties = await _offlineLoader.getCountiesForState(stateCode);
+
+    return counties.fold<double>(
+      0.0,
+      (sum, county) => sum + ((county['area'] as num?)?.toDouble() ?? 0.0),
+    );
   }
 
   /// Get average population density for a state
-  double getAveragePopulationDensityForState(String stateCode) {
+  Future<double> getAveragePopulationDensityForState(String stateCode) async {
     if (!_isInitialized) return 0.0;
-    return TaxLienCountiesDemoData.getAveragePopulationDensityForState(
-      stateCode,
-    );
+    final totalPopulation = await getTotalPopulationForState(stateCode);
+    final totalArea = await getTotalAreaForState(stateCode);
+
+    return totalArea > 0 ? totalPopulation / totalArea : 0.0;
   }
 
   /// Toggle between demo and real data
@@ -413,9 +455,10 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
     List<Map<String, dynamic>> products,
     String categoryId,
   ) {
-    // In a real implementation, this would filter by category
-    // For demo purposes, we'll return all products
-    return products;
+    return products.where((product) {
+      final categoryIds = product['category_ids'] as List<dynamic>?;
+      return categoryIds?.contains(int.parse(categoryId)) ?? false;
+    }).toList();
   }
 
   List<Map<String, dynamic>> _filterByPrice(
@@ -424,7 +467,7 @@ class SimplifiedDemoIntegration extends ChangeNotifier {
     double? maxPrice,
   ) {
     return products.where((product) {
-      final price = (product['price'] as num).toDouble();
+      final price = (product['price'] as num?)?.toDouble() ?? 0.0;
       if (minPrice != null && price < minPrice) return false;
       if (maxPrice != null && price > maxPrice) return false;
       return true;

@@ -96,13 +96,13 @@ dependencies:
   # Magento Integration - Local development version
   flutter_magento:
     path: ../../../libs/libsflutter/flutter_magento
-  # flutter_magento_marketplace: ^1.1.0  # Temporarily disabled
+  # flutter_magento_marketplace: ^1.1.0  # Not available on pub.dev
   
   # NFT and Blockchain Integration - from pub.dev (web3.nativemind.net)
-  # Temporarily disabled due to dependency conflicts
+  # Not available on pub.dev - kept commented out
   # flutter_nft: ^1.3.0
   # flutter_icp: ^1.3.0
-  # flutter_yuku: ^1.0.0  # Downgraded for flutter_nft compatibility
+  # flutter_yuku: ^1.0.0
   
   # Not available on pub.dev - kept commented out
   # flutter_magento_messenger: # Not found
