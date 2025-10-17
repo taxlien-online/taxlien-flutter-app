@@ -5,27 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'app_localizations_ar.dart';
-import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
-import 'app_localizations_es.dart';
-import 'app_localizations_et.dart';
-import 'app_localizations_fi.dart';
-import 'app_localizations_fr.dart';
-import 'app_localizations_he.dart';
-import 'app_localizations_hi.dart';
-import 'app_localizations_it.dart';
-import 'app_localizations_ja.dart';
-import 'app_localizations_km.dart';
-import 'app_localizations_ko.dart';
-import 'app_localizations_lo.dart';
-import 'app_localizations_my.dart';
-import 'app_localizations_pl.dart';
-import 'app_localizations_pt.dart';
 import 'app_localizations_ru.dart';
-import 'app_localizations_th.dart';
-import 'app_localizations_uk.dart';
-import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
 
@@ -113,27 +94,8 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
-    Locale('ar'),
-    Locale('de'),
     Locale('en'),
-    Locale('es'),
-    Locale('et'),
-    Locale('fi'),
-    Locale('fr'),
-    Locale('he'),
-    Locale('hi'),
-    Locale('it'),
-    Locale('ja'),
-    Locale('km'),
-    Locale('ko'),
-    Locale('lo'),
-    Locale('my'),
-    Locale('pl'),
-    Locale('pt'),
-    Locale('ru'),
-    Locale('th'),
-    Locale('uk'),
-    Locale('zh')
+    Locale('ru')
   ];
 
   /// Application title
@@ -142,1235 +104,701 @@ abstract class AppLocalizations {
   /// **'TaxLien.online'**
   String get appTitle;
 
-  /// System status section header
+  /// No description provided for @welcome.
   ///
   /// In en, this message translates to:
-  /// **'System Status'**
-  String get systemStatus;
+  /// **'Welcome'**
+  String get welcome;
 
-  /// Playback status
-  ///
-  /// In en, this message translates to:
-  /// **'Playback'**
-  String get playback;
-
-  /// Stopped status
-  ///
-  /// In en, this message translates to:
-  /// **'Stopped'**
-  String get stopped;
-
-  /// File label
-  ///
-  /// In en, this message translates to:
-  /// **'File'**
-  String get file;
-
-  /// Playback position label
-  ///
-  /// In en, this message translates to:
-  /// **'Position'**
-  String get position;
-
-  /// Seconds abbreviation
-  ///
-  /// In en, this message translates to:
-  /// **'sec'**
-  String get seconds;
-
-  /// Playback controls section header
-  ///
-  /// In en, this message translates to:
-  /// **'Playback Controls'**
-  String get playbackControls;
-
-  /// Play button
-  ///
-  /// In en, this message translates to:
-  /// **'Play'**
-  String get play;
-
-  /// Pause button
-  ///
-  /// In en, this message translates to:
-  /// **'Pause'**
-  String get pause;
-
-  /// Stop button
-  ///
-  /// In en, this message translates to:
-  /// **'Stop'**
-  String get stop;
-
-  /// Volume label
-  ///
-  /// In en, this message translates to:
-  /// **'Volume'**
-  String get volume;
-
-  /// Projection settings section header
-  ///
-  /// In en, this message translates to:
-  /// **'Projection Settings'**
-  String get projectionSettings;
-
-  /// Brightness label
-  ///
-  /// In en, this message translates to:
-  /// **'Brightness'**
-  String get brightness;
-
-  /// Rotation label
-  ///
-  /// In en, this message translates to:
-  /// **'Rotation'**
-  String get rotation;
-
-  /// Media files section header
-  ///
-  /// In en, this message translates to:
-  /// **'Media Files'**
-  String get mediaFiles;
-
-  /// File type - image
-  ///
-  /// In en, this message translates to:
-  /// **'Image'**
-  String get image;
-
-  /// Calibration button
-  ///
-  /// In en, this message translates to:
-  /// **'Calibration'**
-  String get calibration;
-
-  /// Calibration screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Projection Calibration'**
-  String get calibrationTitle;
-
-  /// Preview section header
-  ///
-  /// In en, this message translates to:
-  /// **'Preview'**
-  String get preview;
-
-  /// Offset section header
-  ///
-  /// In en, this message translates to:
-  /// **'Offset'**
-  String get offset;
-
-  /// X offset label
-  ///
-  /// In en, this message translates to:
-  /// **'X Offset'**
-  String get xOffset;
-
-  /// Y offset label
-  ///
-  /// In en, this message translates to:
-  /// **'Y Offset'**
-  String get yOffset;
-
-  /// Scale and rotation section header
-  ///
-  /// In en, this message translates to:
-  /// **'Scale and Rotation'**
-  String get scaleRotation;
-
-  /// Scale label
-  ///
-  /// In en, this message translates to:
-  /// **'Scale'**
-  String get scale;
-
-  /// Apply button
-  ///
-  /// In en, this message translates to:
-  /// **'Apply'**
-  String get apply;
-
-  /// Reset button
-  ///
-  /// In en, this message translates to:
-  /// **'Reset'**
-  String get reset;
-
-  /// Calibration applied successfully message
-  ///
-  /// In en, this message translates to:
-  /// **'Calibration applied'**
-  String get calibrationApplied;
-
-  /// Connection status - online
-  ///
-  /// In en, this message translates to:
-  /// **'ONLINE'**
-  String get online;
-
-  /// Connection status - offline
-  ///
-  /// In en, this message translates to:
-  /// **'OFFLINE'**
-  String get offline;
-
-  /// Language settings screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Language Settings'**
-  String get languageSettings;
-
-  /// Language change notification
-  ///
-  /// In en, this message translates to:
-  /// **'Language changed'**
-  String get languageChanged;
-
-  /// Onboarding welcome screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome to TaxLien.online'**
-  String get onboardingWelcomeTitle;
-
-  /// Onboarding welcome screen description
-  ///
-  /// In en, this message translates to:
-  /// **'Your gateway to digital freedom and spiritual connection'**
-  String get onboardingWelcomeDescription;
-
-  /// Onboarding connection screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Connect to FreeDome'**
-  String get onboardingConnectionTitle;
-
-  /// Onboarding connection screen description
-  ///
-  /// In en, this message translates to:
-  /// **'Establish a secure connection to your FreeDome network'**
-  String get onboardingConnectionDescription;
-
-  /// Onboarding dome control screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Dome Control'**
-  String get onboardingDomeControlTitle;
-
-  /// Onboarding dome control screen description
-  ///
-  /// In en, this message translates to:
-  /// **'Control your dome settings and configurations'**
-  String get onboardingDomeControlDescription;
-
-  /// Onboarding calibration screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Calibration'**
-  String get onboardingCalibrationTitle;
-
-  /// Onboarding calibration screen description
-  ///
-  /// In en, this message translates to:
-  /// **'Calibrate your dome for optimal performance'**
-  String get onboardingCalibrationDescription;
-
-  /// Onboarding media management screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Media Management'**
-  String get onboardingMediaTitle;
-
-  /// Onboarding media management screen description
-  ///
-  /// In en, this message translates to:
-  /// **'Upload and manage your media files'**
-  String get onboardingMediaDescription;
-
-  /// Onboarding ready screen title
-  ///
-  /// In en, this message translates to:
-  /// **'You\'re Ready!'**
-  String get onboardingReadyTitle;
-
-  /// Onboarding ready screen description
-  ///
-  /// In en, this message translates to:
-  /// **'Start your journey to digital freedom'**
-  String get onboardingReadyDescription;
-
-  /// Next button in onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Next'**
-  String get next;
-
-  /// Back button in onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Back'**
-  String get back;
-
-  /// Skip button in onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Skip'**
-  String get skip;
-
-  /// Get started button in onboarding
-  ///
-  /// In en, this message translates to:
-  /// **'Get Started'**
-  String get getStarted;
-
-  /// Skip onboarding confirmation dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Skip Onboarding?'**
-  String get skipConfirmationTitle;
-
-  /// Skip onboarding confirmation dialog message
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to skip the onboarding? You can always access the tutorial later from settings.'**
-  String get skipConfirmationMessage;
-
-  /// Cancel button
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get cancel;
-
-  /// Connection status message
-  ///
-  /// In en, this message translates to:
-  /// **'Connecting to FreeDome...'**
-  String get connectingToFreedome;
-
-  /// Dome status message
-  ///
-  /// In en, this message translates to:
-  /// **'Dome Status: Active'**
-  String get domeStatusActive;
-
-  /// Open button
-  ///
-  /// In en, this message translates to:
-  /// **'Open'**
-  String get open;
-
-  /// Close button
-  ///
-  /// In en, this message translates to:
-  /// **'Close'**
-  String get close;
-
-  /// Calibration progress message
-  ///
-  /// In en, this message translates to:
-  /// **'Calibration Progress'**
-  String get calibrationProgress;
-
-  /// Media files count message
-  ///
-  /// In en, this message translates to:
-  /// **'Media Files: {count} items'**
-  String mediaFilesCount(int count);
-
-  /// Upload button
-  ///
-  /// In en, this message translates to:
-  /// **'Upload'**
-  String get upload;
-
-  /// Manage button
-  ///
-  /// In en, this message translates to:
-  /// **'Manage'**
-  String get manage;
-
-  /// Server settings screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Server Settings'**
-  String get serverSettings;
-
-  /// Connection status screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Connection Status'**
-  String get connectionStatus;
-
-  /// Russian language name
-  ///
-  /// In en, this message translates to:
-  /// **'Russian'**
-  String get russian;
-
-  /// Ukrainian language name
-  ///
-  /// In en, this message translates to:
-  /// **'Ukrainian'**
-  String get ukrainian;
-
-  /// English language name
-  ///
-  /// In en, this message translates to:
-  /// **'English'**
-  String get english;
-
-  /// Chinese language name
-  ///
-  /// In en, this message translates to:
-  /// **'Chinese'**
-  String get chinese;
-
-  /// Hindi language name
-  ///
-  /// In en, this message translates to:
-  /// **'Hindi'**
-  String get hindi;
-
-  /// Thai language name
-  ///
-  /// In en, this message translates to:
-  /// **'Thai'**
-  String get thai;
-
-  /// Data loading error message
-  ///
-  /// In en, this message translates to:
-  /// **'Data loading error: {error}'**
-  String dataLoadError(String error);
-
-  /// Tax lien marketplace screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Tax Lien Marketplace'**
-  String get taxLienMarketplace;
-
-  /// Filters button tooltip
-  ///
-  /// In en, this message translates to:
-  /// **'Filters'**
-  String get filters;
-
-  /// Refresh button tooltip
-  ///
-  /// In en, this message translates to:
-  /// **'Refresh'**
-  String get refresh;
-
-  /// Search field hint text
-  ///
-  /// In en, this message translates to:
-  /// **'Search by address, owner or parcel ID...'**
-  String get searchHint;
-
-  /// Clear button
-  ///
-  /// In en, this message translates to:
-  /// **'Clear'**
-  String get clear;
-
-  /// Found liens count message
-  ///
-  /// In en, this message translates to:
-  /// **'Found: {count} liens'**
-  String foundLiens(int count);
-
-  /// Sort by label
-  ///
-  /// In en, this message translates to:
-  /// **'Sort by: {sortLabel}'**
-  String sortBy(String sortLabel);
-
-  /// Retry button
-  ///
-  /// In en, this message translates to:
-  /// **'Retry'**
-  String get retry;
-
-  /// No liens found message
-  ///
-  /// In en, this message translates to:
-  /// **'No tax liens found'**
-  String get noLiensFound;
-
-  /// Suggestion to change search parameters
-  ///
-  /// In en, this message translates to:
-  /// **'Try changing search parameters or filters'**
-  String get tryChangingSearch;
-
-  /// State filter label
-  ///
-  /// In en, this message translates to:
-  /// **'State: {state}'**
-  String stateFilter(String state);
-
-  /// County filter label
-  ///
-  /// In en, this message translates to:
-  /// **'County: {county}'**
-  String countyFilter(String county);
-
-  /// Minimum amount filter
-  ///
-  /// In en, this message translates to:
-  /// **'From: {amount}'**
-  String amountFrom(String amount);
-
-  /// Maximum amount filter
-  ///
-  /// In en, this message translates to:
-  /// **'To: {amount}'**
-  String amountTo(String amount);
-
-  /// Minimum interest rate filter
-  ///
-  /// In en, this message translates to:
-  /// **'Rate from: {rate}%'**
-  String interestRateFrom(String rate);
-
-  /// Auction date sort label
-  ///
-  /// In en, this message translates to:
-  /// **'Auction Date {direction}'**
-  String auctionDateSort(String direction);
-
-  /// Tax amount sort label
-  ///
-  /// In en, this message translates to:
-  /// **'Tax Amount {direction}'**
-  String taxAmountSort(String direction);
-
-  /// Interest rate sort label
-  ///
-  /// In en, this message translates to:
-  /// **'Interest Rate {direction}'**
-  String interestRateSort(String direction);
-
-  /// Assessed value sort label
-  ///
-  /// In en, this message translates to:
-  /// **'Assessed Value {direction}'**
-  String assessedValueSort(String direction);
-
-  /// Redemption deadline sort label
-  ///
-  /// In en, this message translates to:
-  /// **'Redemption Deadline {direction}'**
-  String redemptionDeadlineSort(String direction);
-
-  /// Lien number with parcel ID
-  ///
-  /// In en, this message translates to:
-  /// **'Lien #{parcelId}'**
-  String lienNumber(String parcelId);
-
-  /// Owner information
-  ///
-  /// In en, this message translates to:
-  /// **'Owner: {owner}'**
-  String owner(String owner);
-
-  /// Tax amount label
-  ///
-  /// In en, this message translates to:
-  /// **'Tax Amount'**
-  String get taxAmount;
-
-  /// Interest rate label
-  ///
-  /// In en, this message translates to:
-  /// **'Interest Rate'**
-  String get interestRate;
-
-  /// Assessed value label
-  ///
-  /// In en, this message translates to:
-  /// **'Assessed Value'**
-  String get assessedValue;
-
-  /// Auction date label
-  ///
-  /// In en, this message translates to:
-  /// **'Auction Date'**
-  String get auctionDate;
-
-  /// Additional information section header
-  ///
-  /// In en, this message translates to:
-  /// **'Additional Information'**
-  String get additionalInfo;
-
-  /// County label
-  ///
-  /// In en, this message translates to:
-  /// **'County'**
-  String get county;
-
-  /// State label
-  ///
-  /// In en, this message translates to:
-  /// **'State'**
-  String get state;
-
-  /// Redemption deadline label
-  ///
-  /// In en, this message translates to:
-  /// **'Redemption Deadline'**
-  String get redemptionDeadline;
-
-  /// Status label
-  ///
-  /// In en, this message translates to:
-  /// **'Status'**
-  String get status;
-
-  /// Buy lien button
-  ///
-  /// In en, this message translates to:
-  /// **'Buy Lien'**
-  String get buyLien;
-
-  /// Available for purchase status
-  ///
-  /// In en, this message translates to:
-  /// **'Available for purchase'**
-  String get availableForPurchase;
-
-  /// Sold status
-  ///
-  /// In en, this message translates to:
-  /// **'Sold'**
-  String get sold;
-
-  /// Redeemed status
-  ///
-  /// In en, this message translates to:
-  /// **'Redeemed'**
-  String get redeemed;
-
-  /// Foreclosed status
-  ///
-  /// In en, this message translates to:
-  /// **'Foreclosed'**
-  String get foreclosed;
-
-  /// Purchase lien dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Purchase Lien'**
-  String get purchaseLien;
-
-  /// Enter bid amount prompt
-  ///
-  /// In en, this message translates to:
-  /// **'Enter bid amount (minimum {amount}):'**
-  String enterBidAmount(String amount);
-
-  /// Bid amount field label
-  ///
-  /// In en, this message translates to:
-  /// **'Bid Amount'**
-  String get bidAmount;
-
-  /// Lien purchased success message
-  ///
-  /// In en, this message translates to:
-  /// **'Lien purchased successfully!'**
-  String get lienPurchasedSuccessfully;
-
-  /// Purchase error message
-  ///
-  /// In en, this message translates to:
-  /// **'Purchase error'**
-  String get purchaseError;
-
-  /// Invalid bid amount message
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid bid amount'**
-  String get invalidBidAmount;
-
-  /// Buy button
-  ///
-  /// In en, this message translates to:
-  /// **'Buy'**
-  String get buy;
-
-  /// Profile screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Profile'**
-  String get profile;
-
-  /// Settings button label
+  /// No description provided for @settings.
   ///
   /// In en, this message translates to:
   /// **'Settings'**
   String get settings;
 
-  /// Not authorized message
+  /// No description provided for @profile.
   ///
   /// In en, this message translates to:
-  /// **'Not authorized'**
-  String get notAuthorized;
+  /// **'Profile'**
+  String get profile;
 
-  /// Login prompt message
+  /// No description provided for @search.
   ///
   /// In en, this message translates to:
-  /// **'Log in to access features'**
-  String get loginForAccess;
+  /// **'Search'**
+  String get search;
 
-  /// Login button
+  /// No description provided for @marketplace.
   ///
   /// In en, this message translates to:
-  /// **'Login'**
-  String get login;
+  /// **'Marketplace'**
+  String get marketplace;
 
-  /// Register button
+  /// No description provided for @portfolio.
   ///
   /// In en, this message translates to:
-  /// **'Register'**
-  String get register;
+  /// **'Portfolio'**
+  String get portfolio;
 
-  /// Edit button
-  ///
-  /// In en, this message translates to:
-  /// **'Edit'**
-  String get edit;
-
-  /// Logout button
-  ///
-  /// In en, this message translates to:
-  /// **'Logout'**
-  String get logout;
-
-  /// Balance label
-  ///
-  /// In en, this message translates to:
-  /// **'Balance'**
-  String get balance;
-
-  /// Available balance label
-  ///
-  /// In en, this message translates to:
-  /// **'Available'**
-  String get available;
-
-  /// Top up button
-  ///
-  /// In en, this message translates to:
-  /// **'Top Up'**
-  String get topUp;
-
-  /// Quick actions section header
-  ///
-  /// In en, this message translates to:
-  /// **'Quick Actions'**
-  String get quickActions;
-
-  /// Transaction history menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Transaction History'**
-  String get transactionHistory;
-
-  /// Transaction history subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'View all transactions'**
-  String get viewAllTransactions;
-
-  /// Favorite liens menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Favorite Liens'**
-  String get favoriteLiens;
-
-  /// Favorite liens subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Your saved liens'**
-  String get savedLiens;
-
-  /// Notifications menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Notifications'**
-  String get notifications;
-
-  /// Notifications subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Notification settings'**
-  String get notificationSettings;
-
-  /// Help menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Help'**
-  String get help;
-
-  /// App settings section header
-  ///
-  /// In en, this message translates to:
-  /// **'App Settings'**
-  String get appSettings;
-
-  /// Language menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Language'**
-  String get language;
-
-  /// Theme menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Theme'**
-  String get theme;
-
-  /// Dark theme label
-  ///
-  /// In en, this message translates to:
-  /// **'Dark'**
-  String get dark;
-
-  /// Light theme label
-  ///
-  /// In en, this message translates to:
-  /// **'Light'**
-  String get light;
-
-  /// Security menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Security'**
-  String get security;
-
-  /// Security subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Security settings'**
-  String get securitySettings;
-
-  /// Privacy menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Privacy'**
-  String get privacy;
-
-  /// Privacy subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Privacy settings'**
-  String get privacySettings;
-
-  /// About app section header
-  ///
-  /// In en, this message translates to:
-  /// **'About App'**
-  String get aboutApp;
-
-  /// Version menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Version'**
-  String get version;
-
-  /// License menu item
-  ///
-  /// In en, this message translates to:
-  /// **'License'**
-  String get license;
-
-  /// Terms of service menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Terms of Service'**
-  String get termsOfService;
-
-  /// Terms of service subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'User Agreement'**
-  String get userAgreement;
-
-  /// Privacy policy menu item
-  ///
-  /// In en, this message translates to:
-  /// **'Privacy Policy'**
-  String get privacyPolicy;
-
-  /// Privacy policy subtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Personal data processing'**
-  String get dataProcessing;
-
-  /// Login dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Login to Account'**
-  String get loginToAccount;
-
-  /// Password field label
-  ///
-  /// In en, this message translates to:
-  /// **'Password'**
-  String get password;
-
-  /// Login success message
-  ///
-  /// In en, this message translates to:
-  /// **'Login successful!'**
-  String get loginSuccessful;
-
-  /// Login error message
-  ///
-  /// In en, this message translates to:
-  /// **'Login error'**
-  String get loginError;
-
-  /// Registration dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Registration'**
-  String get registration;
-
-  /// First name field label
-  ///
-  /// In en, this message translates to:
-  /// **'First Name'**
-  String get firstName;
-
-  /// Last name field label
-  ///
-  /// In en, this message translates to:
-  /// **'Last Name'**
-  String get lastName;
-
-  /// Registration success message
-  ///
-  /// In en, this message translates to:
-  /// **'Registration successful!'**
-  String get registrationSuccessful;
-
-  /// Registration error message
-  ///
-  /// In en, this message translates to:
-  /// **'Registration error'**
-  String get registrationError;
-
-  /// Register button in registration dialog
-  ///
-  /// In en, this message translates to:
-  /// **'Register'**
-  String get registerAccount;
-
-  /// Logout confirmation dialog title
-  ///
-  /// In en, this message translates to:
-  /// **'Logout Confirmation'**
-  String get logoutConfirmation;
-
-  /// Logout confirmation message
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to logout?'**
-  String get logoutConfirmationMessage;
-
-  /// My investments screen title
+  /// No description provided for @myInvestments.
   ///
   /// In en, this message translates to:
   /// **'My Investments'**
   String get myInvestments;
 
-  /// My liens tab title
+  /// No description provided for @aiAdvisor.
   ///
   /// In en, this message translates to:
-  /// **'My Liens'**
-  String get myLiens;
+  /// **'AI Advisor'**
+  String get aiAdvisor;
 
-  /// Favorites tab title
+  /// No description provided for @login.
   ///
   /// In en, this message translates to:
-  /// **'Favorites'**
-  String get favorites;
+  /// **'Login'**
+  String get login;
 
-  /// Statistics tab title
+  /// No description provided for @logout.
   ///
   /// In en, this message translates to:
-  /// **'Statistics'**
-  String get statistics;
+  /// **'Logout'**
+  String get logout;
 
-  /// No investments message
+  /// No description provided for @register.
   ///
   /// In en, this message translates to:
-  /// **'You don\'t have any investments yet'**
-  String get noInvestmentsYet;
+  /// **'Register'**
+  String get register;
 
-  /// Suggestion to go to marketplace
+  /// No description provided for @cancel.
   ///
   /// In en, this message translates to:
-  /// **'Go to marketplace to buy tax liens'**
-  String get goToMarketplace;
+  /// **'Cancel'**
+  String get cancel;
 
-  /// Go to marketplace button
+  /// No description provided for @save.
   ///
   /// In en, this message translates to:
-  /// **'Go to Marketplace'**
-  String get goToMarketplaceButton;
+  /// **'Save'**
+  String get save;
 
-  /// No favorite liens message
+  /// No description provided for @apply.
   ///
   /// In en, this message translates to:
-  /// **'No favorite liens'**
-  String get noFavoriteLiens;
+  /// **'Apply'**
+  String get apply;
 
-  /// Hint to add liens to favorites
+  /// No description provided for @reset.
   ///
   /// In en, this message translates to:
-  /// **'Add liens to favorites for quick access'**
-  String get addToFavoritesHint;
+  /// **'Reset'**
+  String get reset;
 
-  /// Overall statistics section title
+  /// No description provided for @delete.
   ///
   /// In en, this message translates to:
-  /// **'Overall Statistics'**
-  String get overallStatistics;
+  /// **'Delete'**
+  String get delete;
 
-  /// Total invested amount label
+  /// No description provided for @edit.
   ///
   /// In en, this message translates to:
-  /// **'Total Invested'**
-  String get totalInvested;
+  /// **'Edit'**
+  String get edit;
 
-  /// Current value label
+  /// No description provided for @back.
   ///
   /// In en, this message translates to:
-  /// **'Current Value'**
-  String get currentValue;
+  /// **'Back'**
+  String get back;
 
-  /// Profit/loss label
+  /// No description provided for @next.
   ///
   /// In en, this message translates to:
-  /// **'Profit/Loss'**
-  String get profitLoss;
+  /// **'Next'**
+  String get next;
 
-  /// ROI label
+  /// No description provided for @finish.
   ///
   /// In en, this message translates to:
-  /// **'ROI'**
-  String get roi;
+  /// **'Finish'**
+  String get finish;
 
-  /// Status statistics section title
+  /// No description provided for @skip.
   ///
   /// In en, this message translates to:
-  /// **'Status Statistics'**
-  String get statusStatistics;
+  /// **'Skip'**
+  String get skip;
 
-  /// Active liens label
+  /// No description provided for @retry.
   ///
   /// In en, this message translates to:
-  /// **'Active Liens'**
-  String get activeLiens;
+  /// **'Retry'**
+  String get retry;
 
-  /// Redeemed liens label
+  /// No description provided for @loading.
   ///
   /// In en, this message translates to:
-  /// **'Redeemed Liens'**
-  String get redeemedLiens;
+  /// **'Loading...'**
+  String get loading;
 
-  /// Foreclosed liens label
+  /// No description provided for @error.
   ///
   /// In en, this message translates to:
-  /// **'Foreclosed Liens'**
-  String get foreclosedLiens;
+  /// **'Error'**
+  String get error;
 
-  /// Total liens label
+  /// No description provided for @success.
   ///
   /// In en, this message translates to:
-  /// **'Total Liens'**
-  String get totalLiens;
+  /// **'Success'**
+  String get success;
 
-  /// Monthly returns chart title
+  /// No description provided for @confirm.
   ///
   /// In en, this message translates to:
-  /// **'Monthly Returns'**
-  String get monthlyReturns;
+  /// **'Confirm'**
+  String get confirm;
 
-  /// Profit chart development message
+  /// No description provided for @yes.
   ///
   /// In en, this message translates to:
-  /// **'Profit Chart\n(in development)'**
-  String get profitChartInDevelopment;
+  /// **'Yes'**
+  String get yes;
 
-  /// Top performing liens section title
+  /// No description provided for @no.
   ///
   /// In en, this message translates to:
-  /// **'Top Performing Liens'**
-  String get topPerformingLiens;
+  /// **'No'**
+  String get no;
 
-  /// Investment information section title
+  /// No description provided for @ok.
   ///
   /// In en, this message translates to:
-  /// **'Investment Information'**
-  String get investmentInfo;
+  /// **'OK'**
+  String get ok;
 
-  /// Purchase date label
+  /// No description provided for @online.
   ///
   /// In en, this message translates to:
-  /// **'Purchase Date'**
-  String get purchaseDate;
+  /// **'Online'**
+  String get online;
 
-  /// Purchase amount label
+  /// No description provided for @offline.
   ///
   /// In en, this message translates to:
-  /// **'Purchase Amount'**
-  String get purchaseAmount;
+  /// **'Offline'**
+  String get offline;
 
-  /// Days in investment label
+  /// No description provided for @connected.
   ///
   /// In en, this message translates to:
-  /// **'Days in Investment'**
-  String get daysInInvestment;
+  /// **'Connected'**
+  String get connected;
 
-  /// Interest earned label
+  /// No description provided for @disconnected.
   ///
   /// In en, this message translates to:
-  /// **'Interest Earned'**
-  String get interestEarned;
+  /// **'Disconnected'**
+  String get disconnected;
 
-  /// Redemption date label
+  /// No description provided for @calibration.
   ///
   /// In en, this message translates to:
-  /// **'Redemption Date'**
-  String get redemptionDate;
+  /// **'Calibration'**
+  String get calibration;
 
-  /// App subtitle
+  /// No description provided for @brightness.
   ///
   /// In en, this message translates to:
-  /// **'Digital Freedom Gateway'**
-  String get digitalFreedomGateway;
+  /// **'Brightness'**
+  String get brightness;
 
-  /// Connection button label
+  /// No description provided for @rotation.
   ///
   /// In en, this message translates to:
-  /// **'Connection'**
-  String get connection;
+  /// **'Rotation'**
+  String get rotation;
 
-  /// Calibration screen coming soon message
+  /// No description provided for @volume.
   ///
   /// In en, this message translates to:
-  /// **'Calibration screen coming soon'**
-  String get calibrationScreenComingSoon;
+  /// **'Volume'**
+  String get volume;
 
-  /// Media management coming soon message
+  /// No description provided for @position.
   ///
   /// In en, this message translates to:
-  /// **'Media management coming soon'**
-  String get mediaManagementComingSoon;
+  /// **'Position'**
+  String get position;
 
-  /// Lien search screen title
+  /// No description provided for @playback.
   ///
   /// In en, this message translates to:
-  /// **'Lien Search'**
+  /// **'Playback'**
+  String get playback;
+
+  /// No description provided for @play.
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get play;
+
+  /// No description provided for @pause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get pause;
+
+  /// No description provided for @stop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get stop;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @languageSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Language Settings'**
+  String get languageSettings;
+
+  /// No description provided for @theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get theme;
+
+  /// No description provided for @light.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get light;
+
+  /// No description provided for @dark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get dark;
+
+  /// No description provided for @system.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get system;
+
+  /// No description provided for @lienSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Tax Lien Search'**
   String get lienSearch;
 
-  /// Searching message
+  /// No description provided for @searching.
   ///
   /// In en, this message translates to:
   /// **'Searching...'**
   String get searching;
 
-  /// No search history message
-  ///
-  /// In en, this message translates to:
-  /// **'No search history'**
-  String get noSearchHistory;
-
-  /// Clear search history message
-  ///
-  /// In en, this message translates to:
-  /// **'Clear search history'**
-  String get clearSearchHistory;
-
-  /// Search history section title
-  ///
-  /// In en, this message translates to:
-  /// **'Search History'**
-  String get searchHistory;
-
-  /// Recent searches section title
-  ///
-  /// In en, this message translates to:
-  /// **'Recent Searches'**
-  String get recentSearches;
-
-  /// Purchase button
-  ///
-  /// In en, this message translates to:
-  /// **'Purchase'**
-  String get purchase;
-
-  /// Search history empty message
-  ///
-  /// In en, this message translates to:
-  /// **'Search history is empty'**
-  String get searchHistoryEmpty;
-
-  /// Search queries will appear here message
-  ///
-  /// In en, this message translates to:
-  /// **'Your search queries will appear here'**
-  String get searchQueriesWillAppearHere;
-
-  /// Nothing found message
+  /// No description provided for @nothingFound.
   ///
   /// In en, this message translates to:
   /// **'Nothing found'**
   String get nothingFound;
 
-  /// Try changing search query message
+  /// No description provided for @tryChangingSearchQuery.
   ///
   /// In en, this message translates to:
-  /// **'Try changing your search query'**
+  /// **'Try changing search query'**
   String get tryChangingSearchQuery;
 
-  /// Found liens count message
+  /// No description provided for @searchHistory.
   ///
   /// In en, this message translates to:
-  /// **'Found: {count} liens'**
+  /// **'Search History'**
+  String get searchHistory;
+
+  /// No description provided for @searchHistoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Search history is empty'**
+  String get searchHistoryEmpty;
+
+  /// No description provided for @searchQueriesWillAppearHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Your search queries will appear here'**
+  String get searchQueriesWillAppearHere;
+
+  /// No description provided for @foundLiensCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} liens found'**
   String foundLiensCount(int count);
 
-  /// Days ago format
+  /// No description provided for @availableForPurchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Available for purchase'**
+  String get availableForPurchase;
+
+  /// No description provided for @sold.
+  ///
+  /// In en, this message translates to:
+  /// **'Sold'**
+  String get sold;
+
+  /// No description provided for @redeemed.
+  ///
+  /// In en, this message translates to:
+  /// **'Redeemed'**
+  String get redeemed;
+
+  /// No description provided for @foreclosed.
+  ///
+  /// In en, this message translates to:
+  /// **'Foreclosed'**
+  String get foreclosed;
+
+  /// No description provided for @purchaseLien.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase Lien'**
+  String get purchaseLien;
+
+  /// No description provided for @enterBidAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter bid amount (minimum {amount})'**
+  String enterBidAmount(String amount);
+
+  /// No description provided for @lienPurchasedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Lien purchased successfully!'**
+  String get lienPurchasedSuccessfully;
+
+  /// No description provided for @purchaseError.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase error'**
+  String get purchaseError;
+
+  /// No description provided for @invalidBidAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid bid amount'**
+  String get invalidBidAmount;
+
+  /// No description provided for @purchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase'**
+  String get purchase;
+
+  /// No description provided for @daysAgo.
   ///
   /// In en, this message translates to:
   /// **'{days} days ago'**
   String daysAgo(int days);
 
-  /// Hours ago format
+  /// No description provided for @hoursAgo.
   ///
   /// In en, this message translates to:
   /// **'{hours} hours ago'**
   String hoursAgo(int hours);
 
-  /// Minutes ago format
+  /// No description provided for @minutesAgo.
   ///
   /// In en, this message translates to:
   /// **'{minutes} minutes ago'**
   String minutesAgo(int minutes);
 
-  /// Just now format
+  /// No description provided for @justNow.
   ///
   /// In en, this message translates to:
   /// **'Just now'**
   String get justNow;
+
+  /// No description provided for @notAuthorized.
+  ///
+  /// In en, this message translates to:
+  /// **'Not authorized'**
+  String get notAuthorized;
+
+  /// No description provided for @loginForAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Please login to access features'**
+  String get loginForAccess;
+
+  /// No description provided for @loginToAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Login to Account'**
+  String get loginToAccount;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @loginSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Login successful!'**
+  String get loginSuccessful;
+
+  /// No description provided for @loginError.
+  ///
+  /// In en, this message translates to:
+  /// **'Login error'**
+  String get loginError;
+
+  /// No description provided for @registration.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration'**
+  String get registration;
+
+  /// No description provided for @firstName.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get firstName;
+
+  /// No description provided for @lastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get lastName;
+
+  /// No description provided for @registerAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Register Account'**
+  String get registerAccount;
+
+  /// No description provided for @registrationSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration successful!'**
+  String get registrationSuccessful;
+
+  /// No description provided for @registrationError.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration error'**
+  String get registrationError;
+
+  /// No description provided for @logoutConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout Confirmation'**
+  String get logoutConfirmation;
+
+  /// No description provided for @logoutConfirmationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout?'**
+  String get logoutConfirmationMessage;
+
+  /// No description provided for @balance.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get balance;
+
+  /// No description provided for @available.
+  ///
+  /// In en, this message translates to:
+  /// **'Available'**
+  String get available;
+
+  /// No description provided for @topUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Up'**
+  String get topUp;
+
+  /// No description provided for @quickActions.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Actions'**
+  String get quickActions;
+
+  /// No description provided for @transactionHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction History'**
+  String get transactionHistory;
+
+  /// No description provided for @viewAllTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'View all transactions'**
+  String get viewAllTransactions;
+
+  /// No description provided for @favoriteLiens.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Liens'**
+  String get favoriteLiens;
+
+  /// No description provided for @savedLiens.
+  ///
+  /// In en, this message translates to:
+  /// **'Your saved liens'**
+  String get savedLiens;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @notificationSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification settings'**
+  String get notificationSettings;
+
+  /// No description provided for @help.
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get help;
+
+  /// No description provided for @appSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'App Settings'**
+  String get appSettings;
+
+  /// No description provided for @russian.
+  ///
+  /// In en, this message translates to:
+  /// **'Russian'**
+  String get russian;
+
+  /// No description provided for @security.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get security;
+
+  /// No description provided for @securitySettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Security settings'**
+  String get securitySettings;
+
+  /// No description provided for @privacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get privacy;
+
+  /// No description provided for @privacySettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy settings'**
+  String get privacySettings;
+
+  /// No description provided for @aboutApp.
+  ///
+  /// In en, this message translates to:
+  /// **'About App'**
+  String get aboutApp;
+
+  /// No description provided for @version.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get version;
+
+  /// No description provided for @license.
+  ///
+  /// In en, this message translates to:
+  /// **'License'**
+  String get license;
+
+  /// No description provided for @termsOfService.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get termsOfService;
+
+  /// No description provided for @userAgreement.
+  ///
+  /// In en, this message translates to:
+  /// **'User Agreement'**
+  String get userAgreement;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @dataProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal data processing'**
+  String get dataProcessing;
+
+  /// No description provided for @digitalFreedomGateway.
+  ///
+  /// In en, this message translates to:
+  /// **'Digital Freedom Gateway'**
+  String get digitalFreedomGateway;
+
+  /// No description provided for @systemStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'System Status'**
+  String get systemStatus;
+
+  /// No description provided for @stopped.
+  ///
+  /// In en, this message translates to:
+  /// **'Stopped'**
+  String get stopped;
+
+  /// No description provided for @file.
+  ///
+  /// In en, this message translates to:
+  /// **'File'**
+  String get file;
+
+  /// No description provided for @seconds.
+  ///
+  /// In en, this message translates to:
+  /// **'Seconds'**
+  String get seconds;
+
+  /// No description provided for @playbackControls.
+  ///
+  /// In en, this message translates to:
+  /// **'Playback Controls'**
+  String get playbackControls;
+
+  /// No description provided for @projectionSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Projection Settings'**
+  String get projectionSettings;
+
+  /// No description provided for @connection.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection'**
+  String get connection;
 }
 
 class _AppLocalizationsDelegate
@@ -1383,29 +811,8 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) => <String>[
-        'ar',
-        'de',
-        'en',
-        'es',
-        'et',
-        'fi',
-        'fr',
-        'he',
-        'hi',
-        'it',
-        'ja',
-        'km',
-        'ko',
-        'lo',
-        'my',
-        'pl',
-        'pt',
-        'ru',
-        'th',
-        'uk',
-        'zh'
-      ].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'ru'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -1414,48 +821,10 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar':
-      return AppLocalizationsAr();
-    case 'de':
-      return AppLocalizationsDe();
     case 'en':
       return AppLocalizationsEn();
-    case 'es':
-      return AppLocalizationsEs();
-    case 'et':
-      return AppLocalizationsEt();
-    case 'fi':
-      return AppLocalizationsFi();
-    case 'fr':
-      return AppLocalizationsFr();
-    case 'he':
-      return AppLocalizationsHe();
-    case 'hi':
-      return AppLocalizationsHi();
-    case 'it':
-      return AppLocalizationsIt();
-    case 'ja':
-      return AppLocalizationsJa();
-    case 'km':
-      return AppLocalizationsKm();
-    case 'ko':
-      return AppLocalizationsKo();
-    case 'lo':
-      return AppLocalizationsLo();
-    case 'my':
-      return AppLocalizationsMy();
-    case 'pl':
-      return AppLocalizationsPl();
-    case 'pt':
-      return AppLocalizationsPt();
     case 'ru':
       return AppLocalizationsRu();
-    case 'th':
-      return AppLocalizationsTh();
-    case 'uk':
-      return AppLocalizationsUk();
-    case 'zh':
-      return AppLocalizationsZh();
   }
 
   throw FlutterError(

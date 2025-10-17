@@ -1,983 +1,121 @@
 {
   "@@locale": "ru",
   "appTitle": "TaxLien.online",
-  "@appTitle": {
-    "description": "Название приложения"
-  },
-  "systemStatus": "Статус системы",
-  "@systemStatus": {
-    "description": "Заголовок секции статуса системы"
-  },
-  "playback": "Воспроизведение",
-  "@playback": {
-    "description": "Статус воспроизведения"
-  },
-  "stopped": "Остановлено",
-  "@stopped": {
-    "description": "Статус остановлено"
-  },
-  "file": "Файл",
-  "@file": {
-    "description": "Метка файла"
-  },
-  "position": "Позиция",
-  "@position": {
-    "description": "Метка позиции воспроизведения"
-  },
-  "seconds": "сек",
-  "@seconds": {
-    "description": "Сокращение секунд"
-  },
-  "playbackControls": "Управление воспроизведением",
-  "@playbackControls": {
-    "description": "Заголовок секции управления воспроизведением"
-  },
-  "play": "Воспроизвести",
-  "@play": {
-    "description": "Кнопка воспроизведения"
-  },
-  "pause": "Пауза",
-  "@pause": {
-    "description": "Кнопка паузы"
-  },
-  "stop": "Стоп",
-  "@stop": {
-    "description": "Кнопка остановки"
-  },
-  "volume": "Громкость",
-  "@volume": {
-    "description": "Метка громкости"
-  },
-  "projectionSettings": "Настройки проекции",
-  "@projectionSettings": {
-    "description": "Заголовок секции настроек проекции"
-  },
-  "brightness": "Яркость",
-  "@brightness": {
-    "description": "Метка яркости"
-  },
-  "rotation": "Поворот",
-  "@rotation": {
-    "description": "Метка поворота"
-  },
-  "mediaFiles": "Медиафайлы",
-  "@mediaFiles": {
-    "description": "Заголовок секции медиафайлов"
-  },
-  "image": "Изображение",
-  "@image": {
-    "description": "Тип файла - изображение"
-  },
-  "calibration": "Калибровка",
-  "@calibration": {
-    "description": "Кнопка калибровки"
-  },
-  "calibrationTitle": "Калибровка проекции",
-  "@calibrationTitle": {
-    "description": "Заголовок экрана калибровки"
-  },
-  "preview": "Предварительный просмотр",
-  "@preview": {
-    "description": "Заголовок секции предварительного просмотра"
-  },
-  "offset": "Смещение",
-  "@offset": {
-    "description": "Заголовок секции смещения"
-  },
-  "xOffset": "Смещение по X",
-  "@xOffset": {
-    "description": "Метка смещения по X"
-  },
-  "yOffset": "Смещение по Y",
-  "@yOffset": {
-    "description": "Метка смещения по Y"
-  },
-  "scaleRotation": "Масштаб и поворот",
-  "@scaleRotation": {
-    "description": "Заголовок секции масштаба и поворота"
-  },
-  "scale": "Масштаб",
-  "@scale": {
-    "description": "Метка масштаба"
-  },
-  "apply": "Применить",
-  "@apply": {
-    "description": "Кнопка применения"
-  },
-  "reset": "Сброс",
-  "@reset": {
-    "description": "Кнопка сброса"
-  },
-  "calibrationApplied": "Калибровка применена",
-  "@calibrationApplied": {
-    "description": "Сообщение об успешном применении калибровки"
-  },
-  "online": "ПОДКЛЮЧЕНО",
-  "@online": {
-    "description": "Статус подключения - онлайн"
-  },
-  "offline": "ОТКЛЮЧЕНО",
-  "@offline": {
-    "description": "Статус подключения - офлайн"
-  },
-  "languageSettings": "Настройки языка",
-  "@languageSettings": {
-    "description": "Заголовок экрана настроек языка"
-  },
-  "languageChanged": "Язык изменен",
-  "@languageChanged": {
-    "description": "Уведомление об изменении языка"
-  },
-  "onboardingWelcomeTitle": "Добро пожаловать в TaxLien.online",
-  "@onboardingWelcomeTitle": {
-    "description": "Заголовок экрана приветствия онбординга"
-  },
-  "onboardingWelcomeDescription": "Ваш путь к цифровой свободе и духовной связи",
-  "@onboardingWelcomeDescription": {
-    "description": "Описание экрана приветствия онбординга"
-  },
-  "onboardingConnectionTitle": "Подключение к FreeDome",
-  "@onboardingConnectionTitle": {
-    "description": "Заголовок экрана подключения онбординга"
-  },
-  "onboardingConnectionDescription": "Установите безопасное подключение к вашей сети FreeDome",
-  "@onboardingConnectionDescription": {
-    "description": "Описание экрана подключения онбординга"
-  },
-  "onboardingDomeControlTitle": "Управление куполом",
-  "@onboardingDomeControlTitle": {
-    "description": "Заголовок экрана управления куполом онбординга"
-  },
-  "onboardingDomeControlDescription": "Управляйте настройками и конфигурациями вашего купола",
-  "@onboardingDomeControlDescription": {
-    "description": "Описание экрана управления куполом онбординга"
-  },
-  "onboardingCalibrationTitle": "Калибровка",
-  "@onboardingCalibrationTitle": {
-    "description": "Заголовок экрана калибровки онбординга"
-  },
-  "onboardingCalibrationDescription": "Откалибруйте ваш купол для оптимальной производительности",
-  "@onboardingCalibrationDescription": {
-    "description": "Описание экрана калибровки онбординга"
-  },
-  "onboardingMediaTitle": "Управление медиа",
-  "@onboardingMediaTitle": {
-    "description": "Заголовок экрана управления медиа онбординга"
-  },
-  "onboardingMediaDescription": "Загружайте и управляйте вашими медиафайлами",
-  "@onboardingMediaDescription": {
-    "description": "Описание экрана управления медиа онбординга"
-  },
-  "onboardingReadyTitle": "Вы готовы!",
-  "@onboardingReadyTitle": {
-    "description": "Заголовок экрана готовности онбординга"
-  },
-  "onboardingReadyDescription": "Начните ваш путь к цифровой свободе",
-  "@onboardingReadyDescription": {
-    "description": "Описание экрана готовности онбординга"
-  },
-  "next": "Далее",
-  "@next": {
-    "description": "Кнопка далее в онбординге"
-  },
-  "back": "Назад",
-  "@back": {
-    "description": "Кнопка назад в онбординге"
-  },
-  "skip": "Пропустить",
-  "@skip": {
-    "description": "Кнопка пропуска в онбординге"
-  },
-  "getStarted": "Начать",
-  "@getStarted": {
-    "description": "Кнопка начала в онбординге"
-  },
-  "skipConfirmationTitle": "Пропустить онбординг?",
-  "@skipConfirmationTitle": {
-    "description": "Заголовок диалога подтверждения пропуска онбординга"
-  },
-  "skipConfirmationMessage": "Вы уверены, что хотите пропустить онбординг? Вы всегда можете получить доступ к руководству позже из настроек.",
-  "@skipConfirmationMessage": {
-    "description": "Сообщение диалога подтверждения пропуска онбординга"
-  },
-  "cancel": "Отмена",
-  "@cancel": {
-    "description": "Кнопка отмены"
-  },
-  "connectingToFreedome": "Подключение к FreeDome...",
-  "@connectingToFreedome": {
-    "description": "Сообщение статуса подключения"
-  },
-  "domeStatusActive": "Статус купола: Активен",
-  "@domeStatusActive": {
-    "description": "Сообщение статуса купола"
-  },
-  "open": "Открыть",
-  "@open": {
-    "description": "Кнопка открытия"
-  },
-  "close": "Закрыть",
-  "@close": {
-    "description": "Кнопка закрытия"
-  },
-  "calibrationProgress": "Прогресс калибровки",
-  "@calibrationProgress": {
-    "description": "Сообщение прогресса калибровки"
-  },
-  "mediaFilesCount": "Медиафайлы: {count} элементов",
-  "@mediaFilesCount": {
-    "description": "Сообщение количества медиафайлов",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "12"
-      }
-    }
-  },
-  "upload": "Загрузить",
-  "@upload": {
-    "description": "Кнопка загрузки"
-  },
-  "manage": "Управлять",
-  "@manage": {
-    "description": "Кнопка управления"
-  },
-  "serverSettings": "Настройки сервера",
-  "@serverSettings": {
-    "description": "Заголовок экрана настроек сервера"
-  },
-  "connectionStatus": "Статус подключения",
-  "@connectionStatus": {
-    "description": "Заголовок экрана статуса подключения"
-  },
-  "russian": "Русский",
-  "@russian": {
-    "description": "Название русского языка"
-  },
-  "ukrainian": "Українська",
-  "@ukrainian": {
-    "description": "Название украинского языка"
-  },
-  "english": "English",
-  "@english": {
-    "description": "Название английского языка"
-  },
-  "chinese": "中文",
-  "@chinese": {
-    "description": "Название китайского языка"
-  },
-  "hindi": "हिन्दी",
-  "@hindi": {
-    "description": "Название языка хинди"
-  },
-  "thai": "ไทย",
-  "@thai": {
-    "description": "Название тайского языка"
-  },
-  "dataLoadError": "Ошибка загрузки данных: {error}",
-  "@dataLoadError": {
-    "description": "Сообщение об ошибке загрузки данных",
-    "placeholders": {
-      "error": {
-        "type": "String",
-        "example": "Ошибка сети"
-      }
-    }
-  },
-  "taxLienMarketplace": "Рынок налоговых закладных",
-  "@taxLienMarketplace": {
-    "description": "Заголовок экрана рынка налоговых закладных"
-  },
-  "filters": "Фильтры",
-  "@filters": {
-    "description": "Подсказка кнопки фильтров"
-  },
-  "refresh": "Обновить",
-  "@refresh": {
-    "description": "Подсказка кнопки обновления"
-  },
-  "searchHint": "Поиск по адресу, владельцу или ID участка...",
-  "@searchHint": {
-    "description": "Подсказка поля поиска"
-  },
-  "clear": "Очистить",
-  "@clear": {
-    "description": "Кнопка очистки"
-  },
-  "foundLiens": "Найдено: {count} закладных",
-  "@foundLiens": {
-    "description": "Сообщение о количестве найденных закладных",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "25"
-      }
-    }
-  },
-  "sortBy": "Сортировка: {sortLabel}",
-  "@sortBy": {
-    "description": "Метка сортировки",
-    "placeholders": {
-      "sortLabel": {
-        "type": "String",
-        "example": "Дата аукциона ↑"
-      }
-    }
-  },
-  "retry": "Повторить",
-  "@retry": {
-    "description": "Кнопка повтора"
-  },
-  "noLiensFound": "Налоговые закладные не найдены",
-  "@noLiensFound": {
-    "description": "Сообщение о том, что закладные не найдены"
-  },
-  "tryChangingSearch": "Попробуйте изменить параметры поиска или фильтры",
-  "@tryChangingSearch": {
-    "description": "Предложение изменить параметры поиска"
-  },
-  "stateFilter": "Штат: {state}",
-  "@stateFilter": {
-    "description": "Метка фильтра по штату",
-    "placeholders": {
-      "state": {
-        "type": "String",
-        "example": "Калифорния"
-      }
-    }
-  },
-  "countyFilter": "Округ: {county}",
-  "@countyFilter": {
-    "description": "Метка фильтра по округу",
-    "placeholders": {
-      "county": {
-        "type": "String",
-        "example": "Лос-Анджелес"
-      }
-    }
-  },
-  "amountFrom": "От: {amount}",
-  "@amountFrom": {
-    "description": "Фильтр минимальной суммы",
-    "placeholders": {
-      "amount": {
-        "type": "String",
-        "example": "1000.00"
-      }
-    }
-  },
-  "amountTo": "До: {amount}",
-  "@amountTo": {
-    "description": "Фильтр максимальной суммы",
-    "placeholders": {
-      "amount": {
-        "type": "String",
-        "example": "5000.00"
-      }
-    }
-  },
-  "interestRateFrom": "Ставка от: {rate}%",
-  "@interestRateFrom": {
-    "description": "Фильтр минимальной процентной ставки",
-    "placeholders": {
-      "rate": {
-        "type": "String",
-        "example": "12.0"
-      }
-    }
-  },
-  "auctionDateSort": "Дата аукциона {direction}",
-  "@auctionDateSort": {
-    "description": "Метка сортировки по дате аукциона",
-    "placeholders": {
-      "direction": {
-        "type": "String",
-        "example": "↑"
-      }
-    }
-  },
-  "taxAmountSort": "Сумма налога {direction}",
-  "@taxAmountSort": {
-    "description": "Метка сортировки по сумме налога",
-    "placeholders": {
-      "direction": {
-        "type": "String",
-        "example": "↓"
-      }
-    }
-  },
-  "interestRateSort": "Процентная ставка {direction}",
-  "@interestRateSort": {
-    "description": "Метка сортировки по процентной ставке",
-    "placeholders": {
-      "direction": {
-        "type": "String",
-        "example": "↑"
-      }
-    }
-  },
-  "assessedValueSort": "Оценочная стоимость {direction}",
-  "@assessedValueSort": {
-    "description": "Метка сортировки по оценочной стоимости",
-    "placeholders": {
-      "direction": {
-        "type": "String",
-        "example": "↓"
-      }
-    }
-  },
-  "redemptionDeadlineSort": "Срок погашения {direction}",
-  "@redemptionDeadlineSort": {
-    "description": "Метка сортировки по сроку погашения",
-    "placeholders": {
-      "direction": {
-        "type": "String",
-        "example": "↑"
-      }
-    }
-  },
-  "lienNumber": "Закладная #{parcelId}",
-  "@lienNumber": {
-    "description": "Номер закладной с ID участка",
-    "placeholders": {
-      "parcelId": {
-        "type": "String",
-        "example": "12345"
-      }
-    }
-  },
-  "owner": "Владелец: {owner}",
-  "@owner": {
-    "description": "Информация о владельце",
-    "placeholders": {
-      "owner": {
-        "type": "String",
-        "example": "Иван Иванов"
-      }
-    }
-  },
-  "taxAmount": "Сумма налога",
-  "@taxAmount": {
-    "description": "Метка суммы налога"
-  },
-  "interestRate": "Процентная ставка",
-  "@interestRate": {
-    "description": "Метка процентной ставки"
-  },
-  "assessedValue": "Оценочная стоимость",
-  "@assessedValue": {
-    "description": "Метка оценочной стоимости"
-  },
-  "auctionDate": "Дата аукциона",
-  "@auctionDate": {
-    "description": "Метка даты аукциона"
-  },
-  "additionalInfo": "Дополнительная информация",
-  "@additionalInfo": {
-    "description": "Заголовок секции дополнительной информации"
-  },
-  "county": "Округ",
-  "@county": {
-    "description": "Метка округа"
-  },
-  "state": "Штат",
-  "@state": {
-    "description": "Метка штата"
-  },
-  "redemptionDeadline": "Срок погашения",
-  "@redemptionDeadline": {
-    "description": "Метка срока погашения"
-  },
-  "status": "Статус",
-  "@status": {
-    "description": "Метка статуса"
-  },
-  "buyLien": "Купить закладную",
-  "@buyLien": {
-    "description": "Кнопка покупки закладной"
-  },
-  "availableForPurchase": "Доступна для покупки",
-  "@availableForPurchase": {
-    "description": "Статус доступности для покупки"
-  },
-  "sold": "Продана",
-  "@sold": {
-    "description": "Статус продана"
-  },
-  "redeemed": "Погашена",
-  "@redeemed": {
-    "description": "Статус погашена"
-  },
-  "foreclosed": "Обращена в собственность",
-  "@foreclosed": {
-    "description": "Статус обращена в собственность"
-  },
-  "purchaseLien": "Покупка закладной",
-  "@purchaseLien": {
-    "description": "Заголовок диалога покупки закладной"
-  },
-  "enterBidAmount": "Введите сумму ставки (минимум {amount}):",
-  "@enterBidAmount": {
-    "description": "Запрос ввода суммы ставки",
-    "placeholders": {
-      "amount": {
-        "type": "String",
-        "example": "1000.00"
-      }
-    }
-  },
-  "bidAmount": "Сумма ставки",
-  "@bidAmount": {
-    "description": "Метка поля суммы ставки"
-  },
-  "lienPurchasedSuccessfully": "Закладная успешно куплена!",
-  "@lienPurchasedSuccessfully": {
-    "description": "Сообщение об успешной покупке закладной"
-  },
-  "purchaseError": "Ошибка при покупке",
-  "@purchaseError": {
-    "description": "Сообщение об ошибке покупки"
-  },
-  "invalidBidAmount": "Неверная сумма ставки",
-  "@invalidBidAmount": {
-    "description": "Сообщение о неверной сумме ставки"
-  },
-  "buy": "Купить",
-  "@buy": {
-    "description": "Кнопка покупки"
-  },
+  "welcome": "Добро пожаловать",
+  "settings": "Настройки",
   "profile": "Профиль",
-  "@profile": {
-    "description": "Заголовок экрана профиля"
-  },
-  "settings": "Настройки",
-  "@settings": {
-    "description": "Подсказка кнопки настроек"
-  },
-  "notAuthorized": "Не авторизован",
-  "@notAuthorized": {
-    "description": "Сообщение о неавторизованном пользователе"
-  },
-  "loginForAccess": "Войдите в аккаунт для доступа к функциям",
-  "@loginForAccess": {
-    "description": "Сообщение с предложением войти"
-  },
-  "login": "Войти",
-  "@login": {
-    "description": "Кнопка входа"
-  },
-  "register": "Регистрация",
-  "@register": {
-    "description": "Кнопка регистрации"
-  },
-  "edit": "Редактировать",
-  "@edit": {
-    "description": "Кнопка редактирования"
-  },
-  "logout": "Выйти",
-  "@logout": {
-    "description": "Кнопка выхода"
-  },
-  "balance": "Баланс",
-  "@balance": {
-    "description": "Метка баланса"
-  },
-  "available": "Доступно",
-  "@available": {
-    "description": "Метка доступного баланса"
-  },
-  "topUp": "Пополнить",
-  "@topUp": {
-    "description": "Кнопка пополнения"
-  },
-  "quickActions": "Быстрые действия",
-  "@quickActions": {
-    "description": "Заголовок секции быстрых действий"
-  },
-  "transactionHistory": "История транзакций",
-  "@transactionHistory": {
-    "description": "Пункт меню истории транзакций"
-  },
-  "viewAllTransactions": "Просмотр всех операций",
-  "@viewAllTransactions": {
-    "description": "Подзаголовок истории транзакций"
-  },
-  "favoriteLiens": "Избранные закладные",
-  "@favoriteLiens": {
-    "description": "Пункт меню избранных закладных"
-  },
-  "savedLiens": "Ваши сохраненные закладные",
-  "@savedLiens": {
-    "description": "Подзаголовок избранных закладных"
-  },
-  "notifications": "Уведомления",
-  "@notifications": {
-    "description": "Пункт меню уведомлений"
-  },
-  "notificationSettings": "Настройка уведомлений",
-  "@notificationSettings": {
-    "description": "Подзаголовок уведомлений"
-  },
-  "help": "Помощь",
-  "@help": {
-    "description": "Пункт меню помощи"
-  },
-  "appSettings": "Настройки приложения",
-  "@appSettings": {
-    "description": "Заголовок секции настроек приложения"
-  },
-  "language": "Язык",
-  "@language": {
-    "description": "Пункт меню языка"
-  },
-  "theme": "Тема",
-  "@theme": {
-    "description": "Пункт меню темы"
-  },
-  "dark": "Темная",
-  "@dark": {
-    "description": "Метка темной темы"
-  },
-  "light": "Светлая",
-  "@light": {
-    "description": "Метка светлой темы"
-  },
-  "security": "Безопасность",
-  "@security": {
-    "description": "Пункт меню безопасности"
-  },
-  "securitySettings": "Настройки безопасности",
-  "@securitySettings": {
-    "description": "Подзаголовок безопасности"
-  },
-  "privacy": "Конфиденциальность",
-  "@privacy": {
-    "description": "Пункт меню конфиденциальности"
-  },
-  "privacySettings": "Настройки приватности",
-  "@privacySettings": {
-    "description": "Подзаголовок конфиденциальности"
-  },
-  "aboutApp": "О приложении",
-  "@aboutApp": {
-    "description": "Заголовок секции о приложении"
-  },
-  "version": "Версия",
-  "@version": {
-    "description": "Пункт меню версии"
-  },
-  "license": "Лицензия",
-  "@license": {
-    "description": "Пункт меню лицензии"
-  },
-  "termsOfService": "Условия использования",
-  "@termsOfService": {
-    "description": "Пункт меню условий использования"
-  },
-  "userAgreement": "Пользовательское соглашение",
-  "@userAgreement": {
-    "description": "Подзаголовок условий использования"
-  },
-  "privacyPolicy": "Политика конфиденциальности",
-  "@privacyPolicy": {
-    "description": "Пункт меню политики конфиденциальности"
-  },
-  "dataProcessing": "Обработка персональных данных",
-  "@dataProcessing": {
-    "description": "Подзаголовок политики конфиденциальности"
-  },
-  "loginToAccount": "Вход в аккаунт",
-  "@loginToAccount": {
-    "description": "Заголовок диалога входа"
-  },
-  "password": "Пароль",
-  "@password": {
-    "description": "Метка поля пароля"
-  },
-  "loginSuccessful": "Успешный вход!",
-  "@loginSuccessful": {
-    "description": "Сообщение об успешном входе"
-  },
-  "loginError": "Ошибка входа",
-  "@loginError": {
-    "description": "Сообщение об ошибке входа"
-  },
-  "registration": "Регистрация",
-  "@registration": {
-    "description": "Заголовок диалога регистрации"
-  },
-  "firstName": "Имя",
-  "@firstName": {
-    "description": "Метка поля имени"
-  },
-  "lastName": "Фамилия",
-  "@lastName": {
-    "description": "Метка поля фамилии"
-  },
-  "registrationSuccessful": "Регистрация успешна!",
-  "@registrationSuccessful": {
-    "description": "Сообщение об успешной регистрации"
-  },
-  "registrationError": "Ошибка регистрации",
-  "@registrationError": {
-    "description": "Сообщение об ошибке регистрации"
-  },
-  "registerAccount": "Зарегистрироваться",
-  "@registerAccount": {
-    "description": "Кнопка регистрации в диалоге регистрации"
-  },
-  "logoutConfirmation": "Выход из аккаунта",
-  "@logoutConfirmation": {
-    "description": "Заголовок диалога подтверждения выхода"
-  },
-  "logoutConfirmationMessage": "Вы уверены, что хотите выйти из аккаунта?",
-  "@logoutConfirmationMessage": {
-    "description": "Сообщение подтверждения выхода"
-  },
+  "search": "Поиск",
+  "marketplace": "Магазин",
+  "portfolio": "Портфель",
   "myInvestments": "Мои инвестиции",
-  "@myInvestments": {
-    "description": "Заголовок экрана моих инвестиций"
-  },
-  "myLiens": "Мои закладные",
-  "@myLiens": {
-    "description": "Заголовок вкладки моих закладных"
-  },
-  "favorites": "Избранное",
-  "@favorites": {
-    "description": "Заголовок вкладки избранного"
-  },
-  "statistics": "Статистика",
-  "@statistics": {
-    "description": "Заголовок вкладки статистики"
-  },
-  "noInvestmentsYet": "У вас пока нет инвестиций",
-  "@noInvestmentsYet": {
-    "description": "Сообщение об отсутствии инвестиций"
-  },
-  "goToMarketplace": "Перейдите на рынок, чтобы купить налоговые закладные",
-  "@goToMarketplace": {
-    "description": "Предложение перейти на рынок"
-  },
-  "goToMarketplaceButton": "Перейти на рынок",
-  "@goToMarketplaceButton": {
-    "description": "Кнопка перехода на рынок"
-  },
-  "noFavoriteLiens": "Нет избранных закладных",
-  "@noFavoriteLiens": {
-    "description": "Сообщение об отсутствии избранных закладных"
-  },
-  "addToFavoritesHint": "Добавляйте закладные в избранное для быстрого доступа",
-  "@addToFavoritesHint": {
-    "description": "Подсказка о добавлении закладных в избранное"
-  },
-  "overallStatistics": "Общая статистика",
-  "@overallStatistics": {
-    "description": "Заголовок секции общей статистики"
-  },
-  "totalInvested": "Всего инвестировано",
-  "@totalInvested": {
-    "description": "Метка общей суммы инвестиций"
-  },
-  "currentValue": "Текущая стоимость",
-  "@currentValue": {
-    "description": "Метка текущей стоимости"
-  },
-  "profitLoss": "Прибыль/убыток",
-  "@profitLoss": {
-    "description": "Метка прибыли/убытка"
-  },
-  "roi": "ROI",
-  "@roi": {
-    "description": "Метка ROI"
-  },
-  "statusStatistics": "Статистика по статусам",
-  "@statusStatistics": {
-    "description": "Заголовок секции статистики по статусам"
-  },
-  "activeLiens": "Активные закладные",
-  "@activeLiens": {
-    "description": "Метка активных закладных"
-  },
-  "redeemedLiens": "Погашенные закладные",
-  "@redeemedLiens": {
-    "description": "Метка погашенных закладных"
-  },
-  "foreclosedLiens": "Обращенные в собственность",
-  "@foreclosedLiens": {
-    "description": "Метка обращенных в собственность закладных"
-  },
-  "totalLiens": "Всего закладных",
-  "@totalLiens": {
-    "description": "Метка общего количества закладных"
-  },
-  "monthlyReturns": "Доходность по месяцам",
-  "@monthlyReturns": {
-    "description": "Заголовок графика месячной доходности"
-  },
-  "profitChartInDevelopment": "График доходности\n(в разработке)",
-  "@profitChartInDevelopment": {
-    "description": "Сообщение о разработке графика доходности"
-  },
-  "topPerformingLiens": "Топ закладных по доходности",
-  "@topPerformingLiens": {
-    "description": "Заголовок секции топ закладных по доходности"
-  },
-  "investmentInfo": "Информация об инвестиции",
-  "@investmentInfo": {
-    "description": "Заголовок секции информации об инвестиции"
-  },
-  "purchaseDate": "Дата покупки",
-  "@purchaseDate": {
-    "description": "Метка даты покупки"
-  },
-  "purchaseAmount": "Сумма покупки",
-  "@purchaseAmount": {
-    "description": "Метка суммы покупки"
-  },
-  "daysInInvestment": "Дней в инвестиции",
-  "@daysInInvestment": {
-    "description": "Метка дней в инвестиции"
-  },
-  "interestEarned": "Заработанные проценты",
-  "@interestEarned": {
-    "description": "Метка заработанных процентов"
-  },
-  "redemptionDate": "Дата погашения",
-  "@redemptionDate": {
-    "description": "Метка даты погашения"
-  },
-  "digitalFreedomGateway": "Врата к цифровой свободе",
-  "@digitalFreedomGateway": {
-    "description": "Подзаголовок приложения"
-  },
-  "settings": "Настройки",
-  "@settings": {
-    "description": "Метка кнопки настроек"
-  },
-  "connection": "Подключение",
-  "@connection": {
-    "description": "Метка кнопки подключения"
-  },
-  "calibrationScreenComingSoon": "Экран калибровки скоро появится",
-  "@calibrationScreenComingSoon": {
-    "description": "Сообщение о скором появлении экрана калибровки"
-  },
-  "mediaManagementComingSoon": "Управление медиа скоро появится",
-  "@mediaManagementComingSoon": {
-    "description": "Сообщение о скором появлении управления медиа"
-  },
+  "aiAdvisor": "AI Советник",
+  "login": "Войти",
+  "logout": "Выйти",
+  "register": "Регистрация",
+  "cancel": "Отмена",
+  "save": "Сохранить",
+  "apply": "Применить",
+  "reset": "Сбросить",
+  "delete": "Удалить",
+  "edit": "Редактировать",
+  "back": "Назад",
+  "next": "Далее",
+  "finish": "Завершить",
+  "skip": "Пропустить",
+  "retry": "Повторить",
+  "loading": "Загрузка...",
+  "error": "Ошибка",
+  "success": "Успешно",
+  "confirm": "Подтвердить",
+  "yes": "Да",
+  "no": "Нет",
+  "ok": "ОК",
+  "online": "Онлайн",
+  "offline": "Оффлайн",
+  "connected": "Подключено",
+  "disconnected": "Отключено",
+  "calibration": "Калибровка",
+  "brightness": "Яркость",
+  "rotation": "Поворот",
+  "volume": "Громкость",
+  "position": "Позиция",
+  "playback": "Воспроизведение",
+  "play": "Играть",
+  "pause": "Пауза",
+  "stop": "Стоп",
+  "language": "Язык",
+  "languageSettings": "Настройки языка",
+  "theme": "Тема",
+  "light": "Светлая",
+  "dark": "Темная",
+  "system": "Системная",
   "lienSearch": "Поиск закладных",
-  "@lienSearch": {
-    "description": "Заголовок экрана поиска закладных"
-  },
   "searching": "Поиск...",
-  "@searching": {
-    "description": "Сообщение о поиске"
-  },
-  "noSearchHistory": "Нет истории поиска",
-  "@noSearchHistory": {
-    "description": "Сообщение об отсутствии истории поиска"
-  },
-  "clearSearchHistory": "Очистить историю поиска",
-  "@clearSearchHistory": {
-    "description": "Сообщение об очистке истории поиска"
-  },
-  "searchHistory": "История поиска",
-  "@searchHistory": {
-    "description": "Заголовок секции истории поиска"
-  },
-  "recentSearches": "Недавние поиски",
-  "@recentSearches": {
-    "description": "Заголовок секции недавних поисков"
-  },
-  "purchaseLien": "Покупка закладной",
-  "@purchaseLien": {
-    "description": "Заголовок диалога покупки закладной"
-  },
-  "enterBidAmount": "Введите сумму ставки (минимум {amount}):",
-  "@enterBidAmount": {
-    "description": "Запрос ввода суммы ставки",
-    "placeholders": {
-      "amount": {
-        "type": "String",
-        "example": "$1000.00"
-      }
-    }
-  },
-  "purchase": "Покупка",
-  "@purchase": {
-    "description": "Кнопка покупки"
-  },
-  "lienPurchasedSuccessfully": "Закладная успешно куплена!",
-  "@lienPurchasedSuccessfully": {
-    "description": "Сообщение об успешной покупке закладной"
-  },
-  "purchaseError": "Ошибка покупки",
-  "@purchaseError": {
-    "description": "Сообщение об ошибке покупки"
-  },
-  "invalidBidAmount": "Неверная сумма ставки",
-  "@invalidBidAmount": {
-    "description": "Сообщение о неверной сумме ставки"
-  },
-  "searchHistoryEmpty": "История поиска пуста",
-  "@searchHistoryEmpty": {
-    "description": "Сообщение о пустой истории поиска"
-  },
-  "searchQueriesWillAppearHere": "Ваши поисковые запросы появятся здесь",
-  "@searchQueriesWillAppearHere": {
-    "description": "Сообщение о том, что поисковые запросы появятся здесь"
-  },
   "nothingFound": "Ничего не найдено",
-  "@nothingFound": {
-    "description": "Сообщение о том, что ничего не найдено"
-  },
-  "tryChangingSearchQuery": "Попробуйте изменить поисковый запрос",
-  "@tryChangingSearchQuery": {
-    "description": "Сообщение с предложением изменить поисковый запрос"
-  },
-  "foundLiensCount": "Найдено: {count} закладных",
-  "@foundLiensCount": {
-    "description": "Сообщение о количестве найденных закладных",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "25"
-      }
-    }
-  },
+  "tryChangingSearchQuery": "Попробуйте изменить параметры поиска",
+  "searchHistory": "История поиска",
+  "searchHistoryEmpty": "История поиска пуста",
+  "searchQueriesWillAppearHere": "Ваши запросы будут отображаться здесь",
+  "foundLiensCount": "Найдено закладных: {count}",
+  "availableForPurchase": "Доступна для покупки",
+  "sold": "Продано",
+  "redeemed": "Выкуплено",
+  "foreclosed": "Конфисковано",
+  "purchaseLien": "Купить закладную",
+  "enterBidAmount": "Введите сумму ставки (минимум {amount})",
+  "lienPurchasedSuccessfully": "Закладная успешно куплена!",
+  "purchaseError": "Ошибка покупки",
+  "invalidBidAmount": "Неверная сумма ставки",
+  "purchase": "Купить",
   "daysAgo": "{days} дней назад",
-  "@daysAgo": {
-    "description": "Формат дней назад",
-    "placeholders": {
-      "days": {
-        "type": "int",
-        "example": "5"
-      }
-    }
-  },
   "hoursAgo": "{hours} часов назад",
-  "@hoursAgo": {
-    "description": "Формат часов назад",
-    "placeholders": {
-      "hours": {
-        "type": "int",
-        "example": "2"
-      }
-    }
-  },
   "minutesAgo": "{minutes} минут назад",
-  "@minutesAgo": {
-    "description": "Формат минут назад",
-    "placeholders": {
-      "minutes": {
-        "type": "int",
-        "example": "30"
-      }
-    }
-  },
   "justNow": "Только что",
-  "@justNow": {
-    "description": "Формат только что"
-  }
-} 
+  "notAuthorized": "Не авторизован",
+  "loginForAccess": "Войдите для доступа к функциям",
+  "loginToAccount": "Вход в аккаунт",
+  "password": "Пароль",
+  "loginSuccessful": "Успешный вход!",
+  "loginError": "Ошибка входа",
+  "registration": "Регистрация",
+  "firstName": "Имя",
+  "lastName": "Фамилия",
+  "registerAccount": "Зарегистрироваться",
+  "registrationSuccessful": "Регистрация успешна!",
+  "registrationError": "Ошибка регистрации",
+  "logoutConfirmation": "Подтверждение выхода",
+  "logoutConfirmationMessage": "Вы уверены, что хотите выйти?",
+  "balance": "Баланс",
+  "available": "Доступно",
+  "topUp": "Пополнить",
+  "quickActions": "Быстрые действия",
+  "transactionHistory": "История транзакций",
+  "viewAllTransactions": "Просмотреть все транзакции",
+  "favoriteLiens": "Избранные закладные",
+  "savedLiens": "Сохраненные закладные",
+  "notifications": "Уведомления",
+  "notificationSettings": "Настройки уведомлений",
+  "help": "Помощь",
+  "appSettings": "Настройки приложения",
+  "russian": "Русский",
+  "security": "Безопасность",
+  "securitySettings": "Настройки безопасности",
+  "privacy": "Приватность",
+  "privacySettings": "Настройки приватности",
+  "aboutApp": "О приложении",
+  "version": "Версия",
+  "license": "Лицензия",
+  "termsOfService": "Условия использования",
+  "userAgreement": "Пользовательское соглашение",
+  "privacyPolicy": "Политика конфиденциальности",
+  "dataProcessing": "Обработка персональных данных",
+  "digitalFreedomGateway": "Цифровой шлюз свободы",
+  "systemStatus": "Статус системы",
+  "stopped": "Остановлено",
+  "file": "Файл",
+  "seconds": "Секунды",
+  "playbackControls": "Управление воспроизведением",
+  "projectionSettings": "Настройки проекции",
+  "connection": "Соединение"
+}
+

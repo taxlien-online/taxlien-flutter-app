@@ -12,25 +12,121 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'TaxLien.online';
 
   @override
-  String get systemStatus => 'System Status';
+  String get welcome => 'Welcome';
 
   @override
-  String get playback => 'Playback';
+  String get settings => 'Settings';
 
   @override
-  String get stopped => 'Stopped';
+  String get profile => 'Profile';
 
   @override
-  String get file => 'File';
+  String get search => 'Search';
+
+  @override
+  String get marketplace => 'Marketplace';
+
+  @override
+  String get portfolio => 'Portfolio';
+
+  @override
+  String get myInvestments => 'My Investments';
+
+  @override
+  String get aiAdvisor => 'AI Advisor';
+
+  @override
+  String get login => 'Login';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get register => 'Register';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get apply => 'Apply';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get finish => 'Finish';
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get success => 'Success';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get online => 'Online';
+
+  @override
+  String get offline => 'Offline';
+
+  @override
+  String get connected => 'Connected';
+
+  @override
+  String get disconnected => 'Disconnected';
+
+  @override
+  String get calibration => 'Calibration';
+
+  @override
+  String get brightness => 'Brightness';
+
+  @override
+  String get rotation => 'Rotation';
+
+  @override
+  String get volume => 'Volume';
 
   @override
   String get position => 'Position';
 
   @override
-  String get seconds => 'sec';
-
-  @override
-  String get playbackControls => 'Playback Controls';
+  String get playback => 'Playback';
 
   @override
   String get play => 'Play';
@@ -42,309 +138,49 @@ class AppLocalizationsEn extends AppLocalizations {
   String get stop => 'Stop';
 
   @override
-  String get volume => 'Volume';
-
-  @override
-  String get projectionSettings => 'Projection Settings';
-
-  @override
-  String get brightness => 'Brightness';
-
-  @override
-  String get rotation => 'Rotation';
-
-  @override
-  String get mediaFiles => 'Media Files';
-
-  @override
-  String get image => 'Image';
-
-  @override
-  String get calibration => 'Calibration';
-
-  @override
-  String get calibrationTitle => 'Projection Calibration';
-
-  @override
-  String get preview => 'Preview';
-
-  @override
-  String get offset => 'Offset';
-
-  @override
-  String get xOffset => 'X Offset';
-
-  @override
-  String get yOffset => 'Y Offset';
-
-  @override
-  String get scaleRotation => 'Scale and Rotation';
-
-  @override
-  String get scale => 'Scale';
-
-  @override
-  String get apply => 'Apply';
-
-  @override
-  String get reset => 'Reset';
-
-  @override
-  String get calibrationApplied => 'Calibration applied';
-
-  @override
-  String get online => 'ONLINE';
-
-  @override
-  String get offline => 'OFFLINE';
+  String get language => 'Language';
 
   @override
   String get languageSettings => 'Language Settings';
 
   @override
-  String get languageChanged => 'Language changed';
+  String get theme => 'Theme';
 
   @override
-  String get onboardingWelcomeTitle => 'Welcome to TaxLien.online';
+  String get light => 'Light';
 
   @override
-  String get onboardingWelcomeDescription =>
-      'Your gateway to digital freedom and spiritual connection';
+  String get dark => 'Dark';
 
   @override
-  String get onboardingConnectionTitle => 'Connect to FreeDome';
+  String get system => 'System';
 
   @override
-  String get onboardingConnectionDescription =>
-      'Establish a secure connection to your FreeDome network';
+  String get lienSearch => 'Tax Lien Search';
 
   @override
-  String get onboardingDomeControlTitle => 'Dome Control';
+  String get searching => 'Searching...';
 
   @override
-  String get onboardingDomeControlDescription =>
-      'Control your dome settings and configurations';
+  String get nothingFound => 'Nothing found';
 
   @override
-  String get onboardingCalibrationTitle => 'Calibration';
+  String get tryChangingSearchQuery => 'Try changing search query';
 
   @override
-  String get onboardingCalibrationDescription =>
-      'Calibrate your dome for optimal performance';
+  String get searchHistory => 'Search History';
 
   @override
-  String get onboardingMediaTitle => 'Media Management';
+  String get searchHistoryEmpty => 'Search history is empty';
 
   @override
-  String get onboardingMediaDescription => 'Upload and manage your media files';
+  String get searchQueriesWillAppearHere =>
+      'Your search queries will appear here';
 
   @override
-  String get onboardingReadyTitle => 'You\'re Ready!';
-
-  @override
-  String get onboardingReadyDescription =>
-      'Start your journey to digital freedom';
-
-  @override
-  String get next => 'Next';
-
-  @override
-  String get back => 'Back';
-
-  @override
-  String get skip => 'Skip';
-
-  @override
-  String get getStarted => 'Get Started';
-
-  @override
-  String get skipConfirmationTitle => 'Skip Onboarding?';
-
-  @override
-  String get skipConfirmationMessage =>
-      'Are you sure you want to skip the onboarding? You can always access the tutorial later from settings.';
-
-  @override
-  String get cancel => 'Cancel';
-
-  @override
-  String get connectingToFreedome => 'Connecting to FreeDome...';
-
-  @override
-  String get domeStatusActive => 'Dome Status: Active';
-
-  @override
-  String get open => 'Open';
-
-  @override
-  String get close => 'Close';
-
-  @override
-  String get calibrationProgress => 'Calibration Progress';
-
-  @override
-  String mediaFilesCount(int count) {
-    return 'Media Files: $count items';
+  String foundLiensCount(int count) {
+    return '$count liens found';
   }
-
-  @override
-  String get upload => 'Upload';
-
-  @override
-  String get manage => 'Manage';
-
-  @override
-  String get serverSettings => 'Server Settings';
-
-  @override
-  String get connectionStatus => 'Connection Status';
-
-  @override
-  String get russian => 'Russian';
-
-  @override
-  String get ukrainian => 'Ukrainian';
-
-  @override
-  String get english => 'English';
-
-  @override
-  String get chinese => 'Chinese';
-
-  @override
-  String get hindi => 'Hindi';
-
-  @override
-  String get thai => 'Thai';
-
-  @override
-  String dataLoadError(String error) {
-    return 'Data loading error: $error';
-  }
-
-  @override
-  String get taxLienMarketplace => 'Tax Lien Marketplace';
-
-  @override
-  String get filters => 'Filters';
-
-  @override
-  String get refresh => 'Refresh';
-
-  @override
-  String get searchHint => 'Search by address, owner or parcel ID...';
-
-  @override
-  String get clear => 'Clear';
-
-  @override
-  String foundLiens(int count) {
-    return 'Found: $count liens';
-  }
-
-  @override
-  String sortBy(String sortLabel) {
-    return 'Sort by: $sortLabel';
-  }
-
-  @override
-  String get retry => 'Retry';
-
-  @override
-  String get noLiensFound => 'No tax liens found';
-
-  @override
-  String get tryChangingSearch => 'Try changing search parameters or filters';
-
-  @override
-  String stateFilter(String state) {
-    return 'State: $state';
-  }
-
-  @override
-  String countyFilter(String county) {
-    return 'County: $county';
-  }
-
-  @override
-  String amountFrom(String amount) {
-    return 'From: $amount';
-  }
-
-  @override
-  String amountTo(String amount) {
-    return 'To: $amount';
-  }
-
-  @override
-  String interestRateFrom(String rate) {
-    return 'Rate from: $rate%';
-  }
-
-  @override
-  String auctionDateSort(String direction) {
-    return 'Auction Date $direction';
-  }
-
-  @override
-  String taxAmountSort(String direction) {
-    return 'Tax Amount $direction';
-  }
-
-  @override
-  String interestRateSort(String direction) {
-    return 'Interest Rate $direction';
-  }
-
-  @override
-  String assessedValueSort(String direction) {
-    return 'Assessed Value $direction';
-  }
-
-  @override
-  String redemptionDeadlineSort(String direction) {
-    return 'Redemption Deadline $direction';
-  }
-
-  @override
-  String lienNumber(String parcelId) {
-    return 'Lien #$parcelId';
-  }
-
-  @override
-  String owner(String owner) {
-    return 'Owner: $owner';
-  }
-
-  @override
-  String get taxAmount => 'Tax Amount';
-
-  @override
-  String get interestRate => 'Interest Rate';
-
-  @override
-  String get assessedValue => 'Assessed Value';
-
-  @override
-  String get auctionDate => 'Auction Date';
-
-  @override
-  String get additionalInfo => 'Additional Information';
-
-  @override
-  String get county => 'County';
-
-  @override
-  String get state => 'State';
-
-  @override
-  String get redemptionDeadline => 'Redemption Deadline';
-
-  @override
-  String get status => 'Status';
-
-  @override
-  String get buyLien => 'Buy Lien';
 
   @override
   String get availableForPurchase => 'Available for purchase';
@@ -363,11 +199,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String enterBidAmount(String amount) {
-    return 'Enter bid amount (minimum $amount):';
+    return 'Enter bid amount (minimum $amount)';
   }
-
-  @override
-  String get bidAmount => 'Bid Amount';
 
   @override
   String get lienPurchasedSuccessfully => 'Lien purchased successfully!';
@@ -379,31 +212,67 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invalidBidAmount => 'Invalid bid amount';
 
   @override
-  String get buy => 'Buy';
+  String get purchase => 'Purchase';
 
   @override
-  String get profile => 'Profile';
+  String daysAgo(int days) {
+    return '$days days ago';
+  }
 
   @override
-  String get settings => 'Settings';
+  String hoursAgo(int hours) {
+    return '$hours hours ago';
+  }
+
+  @override
+  String minutesAgo(int minutes) {
+    return '$minutes minutes ago';
+  }
+
+  @override
+  String get justNow => 'Just now';
 
   @override
   String get notAuthorized => 'Not authorized';
 
   @override
-  String get loginForAccess => 'Log in to access features';
+  String get loginForAccess => 'Please login to access features';
 
   @override
-  String get login => 'Login';
+  String get loginToAccount => 'Login to Account';
 
   @override
-  String get register => 'Register';
+  String get password => 'Password';
 
   @override
-  String get edit => 'Edit';
+  String get loginSuccessful => 'Login successful!';
 
   @override
-  String get logout => 'Logout';
+  String get loginError => 'Login error';
+
+  @override
+  String get registration => 'Registration';
+
+  @override
+  String get firstName => 'First Name';
+
+  @override
+  String get lastName => 'Last Name';
+
+  @override
+  String get registerAccount => 'Register Account';
+
+  @override
+  String get registrationSuccessful => 'Registration successful!';
+
+  @override
+  String get registrationError => 'Registration error';
+
+  @override
+  String get logoutConfirmation => 'Logout Confirmation';
+
+  @override
+  String get logoutConfirmationMessage => 'Are you sure you want to logout?';
 
   @override
   String get balance => 'Balance';
@@ -442,16 +311,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appSettings => 'App Settings';
 
   @override
-  String get language => 'Language';
-
-  @override
-  String get theme => 'Theme';
-
-  @override
-  String get dark => 'Dark';
-
-  @override
-  String get light => 'Light';
+  String get russian => 'Russian';
 
   @override
   String get security => 'Security';
@@ -487,191 +347,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dataProcessing => 'Personal data processing';
 
   @override
-  String get loginToAccount => 'Login to Account';
-
-  @override
-  String get password => 'Password';
-
-  @override
-  String get loginSuccessful => 'Login successful!';
-
-  @override
-  String get loginError => 'Login error';
-
-  @override
-  String get registration => 'Registration';
-
-  @override
-  String get firstName => 'First Name';
-
-  @override
-  String get lastName => 'Last Name';
-
-  @override
-  String get registrationSuccessful => 'Registration successful!';
-
-  @override
-  String get registrationError => 'Registration error';
-
-  @override
-  String get registerAccount => 'Register';
-
-  @override
-  String get logoutConfirmation => 'Logout Confirmation';
-
-  @override
-  String get logoutConfirmationMessage => 'Are you sure you want to logout?';
-
-  @override
-  String get myInvestments => 'My Investments';
-
-  @override
-  String get myLiens => 'My Liens';
-
-  @override
-  String get favorites => 'Favorites';
-
-  @override
-  String get statistics => 'Statistics';
-
-  @override
-  String get noInvestmentsYet => 'You don\'t have any investments yet';
-
-  @override
-  String get goToMarketplace => 'Go to marketplace to buy tax liens';
-
-  @override
-  String get goToMarketplaceButton => 'Go to Marketplace';
-
-  @override
-  String get noFavoriteLiens => 'No favorite liens';
-
-  @override
-  String get addToFavoritesHint => 'Add liens to favorites for quick access';
-
-  @override
-  String get overallStatistics => 'Overall Statistics';
-
-  @override
-  String get totalInvested => 'Total Invested';
-
-  @override
-  String get currentValue => 'Current Value';
-
-  @override
-  String get profitLoss => 'Profit/Loss';
-
-  @override
-  String get roi => 'ROI';
-
-  @override
-  String get statusStatistics => 'Status Statistics';
-
-  @override
-  String get activeLiens => 'Active Liens';
-
-  @override
-  String get redeemedLiens => 'Redeemed Liens';
-
-  @override
-  String get foreclosedLiens => 'Foreclosed Liens';
-
-  @override
-  String get totalLiens => 'Total Liens';
-
-  @override
-  String get monthlyReturns => 'Monthly Returns';
-
-  @override
-  String get profitChartInDevelopment => 'Profit Chart\n(in development)';
-
-  @override
-  String get topPerformingLiens => 'Top Performing Liens';
-
-  @override
-  String get investmentInfo => 'Investment Information';
-
-  @override
-  String get purchaseDate => 'Purchase Date';
-
-  @override
-  String get purchaseAmount => 'Purchase Amount';
-
-  @override
-  String get daysInInvestment => 'Days in Investment';
-
-  @override
-  String get interestEarned => 'Interest Earned';
-
-  @override
-  String get redemptionDate => 'Redemption Date';
-
-  @override
   String get digitalFreedomGateway => 'Digital Freedom Gateway';
 
   @override
+  String get systemStatus => 'System Status';
+
+  @override
+  String get stopped => 'Stopped';
+
+  @override
+  String get file => 'File';
+
+  @override
+  String get seconds => 'Seconds';
+
+  @override
+  String get playbackControls => 'Playback Controls';
+
+  @override
+  String get projectionSettings => 'Projection Settings';
+
+  @override
   String get connection => 'Connection';
-
-  @override
-  String get calibrationScreenComingSoon => 'Calibration screen coming soon';
-
-  @override
-  String get mediaManagementComingSoon => 'Media management coming soon';
-
-  @override
-  String get lienSearch => 'Lien Search';
-
-  @override
-  String get searching => 'Searching...';
-
-  @override
-  String get noSearchHistory => 'No search history';
-
-  @override
-  String get clearSearchHistory => 'Clear search history';
-
-  @override
-  String get searchHistory => 'Search History';
-
-  @override
-  String get recentSearches => 'Recent Searches';
-
-  @override
-  String get purchase => 'Purchase';
-
-  @override
-  String get searchHistoryEmpty => 'Search history is empty';
-
-  @override
-  String get searchQueriesWillAppearHere =>
-      'Your search queries will appear here';
-
-  @override
-  String get nothingFound => 'Nothing found';
-
-  @override
-  String get tryChangingSearchQuery => 'Try changing your search query';
-
-  @override
-  String foundLiensCount(int count) {
-    return 'Found: $count liens';
-  }
-
-  @override
-  String daysAgo(int days) {
-    return '$days days ago';
-  }
-
-  @override
-  String hoursAgo(int hours) {
-    return '$hours hours ago';
-  }
-
-  @override
-  String minutesAgo(int minutes) {
-    return '$minutes minutes ago';
-  }
-
-  @override
-  String get justNow => 'Just now';
 }

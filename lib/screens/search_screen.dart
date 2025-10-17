@@ -4,6 +4,7 @@ import '../services/tax_lien_service.dart';
 import '../services/database_service.dart';
 import '../services/auth_service.dart';
 import '../widgets/tax_lien_card.dart';
+import '../core/models/tax_lien_models.dart';
 
 class SearchScreen extends StatefulWidget {
   final TaxLienService taxLienService;

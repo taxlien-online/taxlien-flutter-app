@@ -4,980 +4,146 @@
   "@appTitle": {
     "description": "Application title"
   },
-  "systemStatus": "System Status",
-  "@systemStatus": {
-    "description": "System status section header"
-  },
-  "playback": "Playback",
-  "@playback": {
-    "description": "Playback status"
-  },
-  "stopped": "Stopped",
-  "@stopped": {
-    "description": "Stopped status"
-  },
-  "file": "File",
-  "@file": {
-    "description": "File label"
-  },
-  "position": "Position",
-  "@position": {
-    "description": "Playback position label"
-  },
-  "seconds": "sec",
-  "@seconds": {
-    "description": "Seconds abbreviation"
-  },
-  "playbackControls": "Playback Controls",
-  "@playbackControls": {
-    "description": "Playback controls section header"
-  },
-  "play": "Play",
-  "@play": {
-    "description": "Play button"
-  },
-  "pause": "Pause",
-  "@pause": {
-    "description": "Pause button"
-  },
-  "stop": "Stop",
-  "@stop": {
-    "description": "Stop button"
-  },
-  "volume": "Volume",
-  "@volume": {
-    "description": "Volume label"
-  },
-  "projectionSettings": "Projection Settings",
-  "@projectionSettings": {
-    "description": "Projection settings section header"
-  },
-  "brightness": "Brightness",
-  "@brightness": {
-    "description": "Brightness label"
-  },
-  "rotation": "Rotation",
-  "@rotation": {
-    "description": "Rotation label"
-  },
-  "mediaFiles": "Media Files",
-  "@mediaFiles": {
-    "description": "Media files section header"
-  },
-  "image": "Image",
-  "@image": {
-    "description": "File type - image"
-  },
-  "calibration": "Calibration",
-  "@calibration": {
-    "description": "Calibration button"
-  },
-  "calibrationTitle": "Projection Calibration",
-  "@calibrationTitle": {
-    "description": "Calibration screen title"
-  },
-  "preview": "Preview",
-  "@preview": {
-    "description": "Preview section header"
-  },
-  "offset": "Offset",
-  "@offset": {
-    "description": "Offset section header"
-  },
-  "xOffset": "X Offset",
-  "@xOffset": {
-    "description": "X offset label"
-  },
-  "yOffset": "Y Offset",
-  "@yOffset": {
-    "description": "Y offset label"
-  },
-  "scaleRotation": "Scale and Rotation",
-  "@scaleRotation": {
-    "description": "Scale and rotation section header"
-  },
-  "scale": "Scale",
-  "@scale": {
-    "description": "Scale label"
-  },
-  "apply": "Apply",
-  "@apply": {
-    "description": "Apply button"
-  },
-  "reset": "Reset",
-  "@reset": {
-    "description": "Reset button"
-  },
-  "calibrationApplied": "Calibration applied",
-  "@calibrationApplied": {
-    "description": "Calibration applied successfully message"
-  },
-  "online": "ONLINE",
-  "@online": {
-    "description": "Connection status - online"
-  },
-  "offline": "OFFLINE",
-  "@offline": {
-    "description": "Connection status - offline"
-  },
-  "languageSettings": "Language Settings",
-  "@languageSettings": {
-    "description": "Language settings screen title"
-  },
-  "languageChanged": "Language changed",
-  "@languageChanged": {
-    "description": "Language change notification"
-  },
-  "onboardingWelcomeTitle": "Welcome to TaxLien.online",
-  "@onboardingWelcomeTitle": {
-    "description": "Onboarding welcome screen title"
-  },
-  "onboardingWelcomeDescription": "Your gateway to digital freedom and spiritual connection",
-  "@onboardingWelcomeDescription": {
-    "description": "Onboarding welcome screen description"
-  },
-  "onboardingConnectionTitle": "Connect to FreeDome",
-  "@onboardingConnectionTitle": {
-    "description": "Onboarding connection screen title"
-  },
-  "onboardingConnectionDescription": "Establish a secure connection to your FreeDome network",
-  "@onboardingConnectionDescription": {
-    "description": "Onboarding connection screen description"
-  },
-  "onboardingDomeControlTitle": "Dome Control",
-  "@onboardingDomeControlTitle": {
-    "description": "Onboarding dome control screen title"
-  },
-  "onboardingDomeControlDescription": "Control your dome settings and configurations",
-  "@onboardingDomeControlDescription": {
-    "description": "Onboarding dome control screen description"
-  },
-  "onboardingCalibrationTitle": "Calibration",
-  "@onboardingCalibrationTitle": {
-    "description": "Onboarding calibration screen title"
-  },
-  "onboardingCalibrationDescription": "Calibrate your dome for optimal performance",
-  "@onboardingCalibrationDescription": {
-    "description": "Onboarding calibration screen description"
-  },
-  "onboardingMediaTitle": "Media Management",
-  "@onboardingMediaTitle": {
-    "description": "Onboarding media management screen title"
-  },
-  "onboardingMediaDescription": "Upload and manage your media files",
-  "@onboardingMediaDescription": {
-    "description": "Onboarding media management screen description"
-  },
-  "onboardingReadyTitle": "You're Ready!",
-  "@onboardingReadyTitle": {
-    "description": "Onboarding ready screen title"
-  },
-  "onboardingReadyDescription": "Start your journey to digital freedom",
-  "@onboardingReadyDescription": {
-    "description": "Onboarding ready screen description"
-  },
-  "next": "Next",
-  "@next": {
-    "description": "Next button in onboarding"
-  },
-  "back": "Back",
-  "@back": {
-    "description": "Back button in onboarding"
-  },
-  "skip": "Skip",
-  "@skip": {
-    "description": "Skip button in onboarding"
-  },
-  "getStarted": "Get Started",
-  "@getStarted": {
-    "description": "Get started button in onboarding"
-  },
-  "skipConfirmationTitle": "Skip Onboarding?",
-  "@skipConfirmationTitle": {
-    "description": "Skip onboarding confirmation dialog title"
-  },
-  "skipConfirmationMessage": "Are you sure you want to skip the onboarding? You can always access the tutorial later from settings.",
-  "@skipConfirmationMessage": {
-    "description": "Skip onboarding confirmation dialog message"
-  },
+  "welcome": "Welcome",
+  "settings": "Settings",
+  "profile": "Profile",
+  "search": "Search",
+  "marketplace": "Marketplace",
+  "portfolio": "Portfolio",
+  "myInvestments": "My Investments",
+  "aiAdvisor": "AI Advisor",
+  "login": "Login",
+  "logout": "Logout",
+  "register": "Register",
   "cancel": "Cancel",
-  "@cancel": {
-    "description": "Cancel button"
-  },
-  "connectingToFreedome": "Connecting to FreeDome...",
-  "@connectingToFreedome": {
-    "description": "Connection status message"
-  },
-  "domeStatusActive": "Dome Status: Active",
-  "@domeStatusActive": {
-    "description": "Dome status message"
-  },
-  "open": "Open",
-  "@open": {
-    "description": "Open button"
-  },
-  "close": "Close",
-  "@close": {
-    "description": "Close button"
-  },
-  "calibrationProgress": "Calibration Progress",
-  "@calibrationProgress": {
-    "description": "Calibration progress message"
-  },
-  "mediaFilesCount": "Media Files: {count} items",
-  "@mediaFilesCount": {
-    "description": "Media files count message",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "12"
-      }
-    }
-  },
-  "upload": "Upload",
-  "@upload": {
-    "description": "Upload button"
-  },
-  "manage": "Manage",
-  "@manage": {
-    "description": "Manage button"
-  },
-  "serverSettings": "Server Settings",
-  "@serverSettings": {
-    "description": "Server settings screen title"
-  },
-  "connectionStatus": "Connection Status",
-  "@connectionStatus": {
-    "description": "Connection status screen title"
-  },
-  "russian": "Russian",
-  "@russian": {
-    "description": "Russian language name"
-  },
-  "ukrainian": "Ukrainian",
-  "@ukrainian": {
-    "description": "Ukrainian language name"
-  },
-  "english": "English",
-  "@english": {
-    "description": "English language name"
-  },
-  "chinese": "Chinese",
-  "@chinese": {
-    "description": "Chinese language name"
-  },
-  "hindi": "Hindi",
-  "@hindi": {
-    "description": "Hindi language name"
-  },
-  "thai": "Thai",
-  "@thai": {
-    "description": "Thai language name"
-  },
-  "dataLoadError": "Data loading error: {error}",
-  "@dataLoadError": {
-    "description": "Data loading error message",
-    "placeholders": {
-      "error": {
-        "type": "String",
-        "example": "Network error"
-      }
-    }
-  },
-  "taxLienMarketplace": "Tax Lien Marketplace",
-  "@taxLienMarketplace": {
-    "description": "Tax lien marketplace screen title"
-  },
-  "filters": "Filters",
-  "@filters": {
-    "description": "Filters button tooltip"
-  },
-  "refresh": "Refresh",
-  "@refresh": {
-    "description": "Refresh button tooltip"
-  },
-  "searchHint": "Search by address, owner or parcel ID...",
-  "@searchHint": {
-    "description": "Search field hint text"
-  },
-  "clear": "Clear",
-  "@clear": {
-    "description": "Clear button"
-  },
-  "foundLiens": "Found: {count} liens",
-  "@foundLiens": {
-    "description": "Found liens count message",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "25"
-      }
-    }
-  },
-  "sortBy": "Sort by: {sortLabel}",
-  "@sortBy": {
-    "description": "Sort by label",
-    "placeholders": {
-      "sortLabel": {
-        "type": "String",
-        "example": "Auction Date ↑"
-      }
-    }
-  },
+  "save": "Save",
+  "apply": "Apply",
+  "reset": "Reset",
+  "delete": "Delete",
+  "edit": "Edit",
+  "back": "Back",
+  "next": "Next",
+  "finish": "Finish",
+  "skip": "Skip",
   "retry": "Retry",
-  "@retry": {
-    "description": "Retry button"
-  },
-  "noLiensFound": "No tax liens found",
-  "@noLiensFound": {
-    "description": "No liens found message"
-  },
-  "tryChangingSearch": "Try changing search parameters or filters",
-  "@tryChangingSearch": {
-    "description": "Suggestion to change search parameters"
-  },
-  "stateFilter": "State: {state}",
-  "@stateFilter": {
-    "description": "State filter label",
+  "loading": "Loading...",
+  "error": "Error",
+  "success": "Success",
+  "confirm": "Confirm",
+  "yes": "Yes",
+  "no": "No",
+  "ok": "OK",
+  "online": "Online",
+  "offline": "Offline",
+  "connected": "Connected",
+  "disconnected": "Disconnected",
+  "calibration": "Calibration",
+  "brightness": "Brightness",
+  "rotation": "Rotation",
+  "volume": "Volume",
+  "position": "Position",
+  "playback": "Playback",
+  "play": "Play",
+  "pause": "Pause",
+  "stop": "Stop",
+  "language": "Language",
+  "languageSettings": "Language Settings",
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "lienSearch": "Tax Lien Search",
+  "searching": "Searching...",
+  "nothingFound": "Nothing found",
+  "tryChangingSearchQuery": "Try changing search query",
+  "searchHistory": "Search History",
+  "searchHistoryEmpty": "Search history is empty",
+  "searchQueriesWillAppearHere": "Your search queries will appear here",
+  "foundLiensCount": "{count} liens found",
+  "@foundLiensCount": {
     "placeholders": {
-      "state": {
-        "type": "String",
-        "example": "California"
-      }
+      "count": {"type": "int"}
     }
-  },
-  "countyFilter": "County: {county}",
-  "@countyFilter": {
-    "description": "County filter label",
-    "placeholders": {
-      "county": {
-        "type": "String",
-        "example": "Los Angeles"
-      }
-    }
-  },
-  "amountFrom": "From: {amount}",
-  "@amountFrom": {
-    "description": "Minimum amount filter",
-    "placeholders": {
-      "amount": {
-        "type": "String",
-        "example": "1000.00"
-      }
-    }
-  },
-  "amountTo": "To: {amount}",
-  "@amountTo": {
-    "description": "Maximum amount filter",
-    "placeholders": {
-      "amount": {
-        "type": "String",
-        "example": "5000.00"
-      }
-    }
-  },
-  "interestRateFrom": "Rate from: {rate}%",
-  "@interestRateFrom": {
-    "description": "Minimum interest rate filter",
-    "placeholders": {
-      "rate": {
-        "type": "String",
-        "example": "12.0"
-      }
-    }
-  },
-  "auctionDateSort": "Auction Date {direction}",
-  "@auctionDateSort": {
-    "description": "Auction date sort label",
-    "placeholders": {
-      "direction": {
-        "type": "String",
-        "example": "↑"
-      }
-    }
-  },
-  "taxAmountSort": "Tax Amount {direction}",
-  "@taxAmountSort": {
-    "description": "Tax amount sort label",
-    "placeholders": {
-      "direction": {
-        "type": "String",
-        "example": "↓"
-      }
-    }
-  },
-  "interestRateSort": "Interest Rate {direction}",
-  "@interestRateSort": {
-    "description": "Interest rate sort label",
-    "placeholders": {
-      "direction": {
-        "type": "String",
-        "example": "↑"
-      }
-    }
-  },
-  "assessedValueSort": "Assessed Value {direction}",
-  "@assessedValueSort": {
-    "description": "Assessed value sort label",
-    "placeholders": {
-      "direction": {
-        "type": "String",
-        "example": "↓"
-      }
-    }
-  },
-  "redemptionDeadlineSort": "Redemption Deadline {direction}",
-  "@redemptionDeadlineSort": {
-    "description": "Redemption deadline sort label",
-    "placeholders": {
-      "direction": {
-        "type": "String",
-        "example": "↑"
-      }
-    }
-  },
-  "lienNumber": "Lien #{parcelId}",
-  "@lienNumber": {
-    "description": "Lien number with parcel ID",
-    "placeholders": {
-      "parcelId": {
-        "type": "String",
-        "example": "12345"
-      }
-    }
-  },
-  "owner": "Owner: {owner}",
-  "@owner": {
-    "description": "Owner information",
-    "placeholders": {
-      "owner": {
-        "type": "String",
-        "example": "John Doe"
-      }
-    }
-  },
-  "taxAmount": "Tax Amount",
-  "@taxAmount": {
-    "description": "Tax amount label"
-  },
-  "interestRate": "Interest Rate",
-  "@interestRate": {
-    "description": "Interest rate label"
-  },
-  "assessedValue": "Assessed Value",
-  "@assessedValue": {
-    "description": "Assessed value label"
-  },
-  "auctionDate": "Auction Date",
-  "@auctionDate": {
-    "description": "Auction date label"
-  },
-  "additionalInfo": "Additional Information",
-  "@additionalInfo": {
-    "description": "Additional information section header"
-  },
-  "county": "County",
-  "@county": {
-    "description": "County label"
-  },
-  "state": "State",
-  "@state": {
-    "description": "State label"
-  },
-  "redemptionDeadline": "Redemption Deadline",
-  "@redemptionDeadline": {
-    "description": "Redemption deadline label"
-  },
-  "status": "Status",
-  "@status": {
-    "description": "Status label"
-  },
-  "buyLien": "Buy Lien",
-  "@buyLien": {
-    "description": "Buy lien button"
   },
   "availableForPurchase": "Available for purchase",
-  "@availableForPurchase": {
-    "description": "Available for purchase status"
-  },
   "sold": "Sold",
-  "@sold": {
-    "description": "Sold status"
-  },
   "redeemed": "Redeemed",
-  "@redeemed": {
-    "description": "Redeemed status"
-  },
   "foreclosed": "Foreclosed",
-  "@foreclosed": {
-    "description": "Foreclosed status"
-  },
   "purchaseLien": "Purchase Lien",
-  "@purchaseLien": {
-    "description": "Purchase lien dialog title"
-  },
-  "enterBidAmount": "Enter bid amount (minimum {amount}):",
+  "enterBidAmount": "Enter bid amount (minimum {amount})",
   "@enterBidAmount": {
-    "description": "Enter bid amount prompt",
     "placeholders": {
-      "amount": {
-        "type": "String",
-        "example": "1000.00"
-      }
+      "amount": {"type": "String"}
     }
-  },
-  "bidAmount": "Bid Amount",
-  "@bidAmount": {
-    "description": "Bid amount field label"
   },
   "lienPurchasedSuccessfully": "Lien purchased successfully!",
-  "@lienPurchasedSuccessfully": {
-    "description": "Lien purchased success message"
-  },
   "purchaseError": "Purchase error",
-  "@purchaseError": {
-    "description": "Purchase error message"
-  },
   "invalidBidAmount": "Invalid bid amount",
-  "@invalidBidAmount": {
-    "description": "Invalid bid amount message"
-  },
-  "buy": "Buy",
-  "@buy": {
-    "description": "Buy button"
-  },
-  "profile": "Profile",
-  "@profile": {
-    "description": "Profile screen title"
-  },
-  "settings": "Settings",
-  "@settings": {
-    "description": "Settings button tooltip"
-  },
-  "notAuthorized": "Not authorized",
-  "@notAuthorized": {
-    "description": "Not authorized message"
-  },
-  "loginForAccess": "Log in to access features",
-  "@loginForAccess": {
-    "description": "Login prompt message"
-  },
-  "login": "Login",
-  "@login": {
-    "description": "Login button"
-  },
-  "register": "Register",
-  "@register": {
-    "description": "Register button"
-  },
-  "edit": "Edit",
-  "@edit": {
-    "description": "Edit button"
-  },
-  "logout": "Logout",
-  "@logout": {
-    "description": "Logout button"
-  },
-  "balance": "Balance",
-  "@balance": {
-    "description": "Balance label"
-  },
-  "available": "Available",
-  "@available": {
-    "description": "Available balance label"
-  },
-  "topUp": "Top Up",
-  "@topUp": {
-    "description": "Top up button"
-  },
-  "quickActions": "Quick Actions",
-  "@quickActions": {
-    "description": "Quick actions section header"
-  },
-  "transactionHistory": "Transaction History",
-  "@transactionHistory": {
-    "description": "Transaction history menu item"
-  },
-  "viewAllTransactions": "View all transactions",
-  "@viewAllTransactions": {
-    "description": "Transaction history subtitle"
-  },
-  "favoriteLiens": "Favorite Liens",
-  "@favoriteLiens": {
-    "description": "Favorite liens menu item"
-  },
-  "savedLiens": "Your saved liens",
-  "@savedLiens": {
-    "description": "Favorite liens subtitle"
-  },
-  "notifications": "Notifications",
-  "@notifications": {
-    "description": "Notifications menu item"
-  },
-  "notificationSettings": "Notification settings",
-  "@notificationSettings": {
-    "description": "Notifications subtitle"
-  },
-  "help": "Help",
-  "@help": {
-    "description": "Help menu item"
-  },
-  "appSettings": "App Settings",
-  "@appSettings": {
-    "description": "App settings section header"
-  },
-  "language": "Language",
-  "@language": {
-    "description": "Language menu item"
-  },
-  "theme": "Theme",
-  "@theme": {
-    "description": "Theme menu item"
-  },
-  "dark": "Dark",
-  "@dark": {
-    "description": "Dark theme label"
-  },
-  "light": "Light",
-  "@light": {
-    "description": "Light theme label"
-  },
-  "security": "Security",
-  "@security": {
-    "description": "Security menu item"
-  },
-  "securitySettings": "Security settings",
-  "@securitySettings": {
-    "description": "Security subtitle"
-  },
-  "privacy": "Privacy",
-  "@privacy": {
-    "description": "Privacy menu item"
-  },
-  "privacySettings": "Privacy settings",
-  "@privacySettings": {
-    "description": "Privacy subtitle"
-  },
-  "aboutApp": "About App",
-  "@aboutApp": {
-    "description": "About app section header"
-  },
-  "version": "Version",
-  "@version": {
-    "description": "Version menu item"
-  },
-  "license": "License",
-  "@license": {
-    "description": "License menu item"
-  },
-  "termsOfService": "Terms of Service",
-  "@termsOfService": {
-    "description": "Terms of service menu item"
-  },
-  "userAgreement": "User Agreement",
-  "@userAgreement": {
-    "description": "Terms of service subtitle"
-  },
-  "privacyPolicy": "Privacy Policy",
-  "@privacyPolicy": {
-    "description": "Privacy policy menu item"
-  },
-  "dataProcessing": "Personal data processing",
-  "@dataProcessing": {
-    "description": "Privacy policy subtitle"
-  },
-  "loginToAccount": "Login to Account",
-  "@loginToAccount": {
-    "description": "Login dialog title"
-  },
-  "password": "Password",
-  "@password": {
-    "description": "Password field label"
-  },
-  "loginSuccessful": "Login successful!",
-  "@loginSuccessful": {
-    "description": "Login success message"
-  },
-  "loginError": "Login error",
-  "@loginError": {
-    "description": "Login error message"
-  },
-  "registration": "Registration",
-  "@registration": {
-    "description": "Registration dialog title"
-  },
-  "firstName": "First Name",
-  "@firstName": {
-    "description": "First name field label"
-  },
-  "lastName": "Last Name",
-  "@lastName": {
-    "description": "Last name field label"
-  },
-  "registrationSuccessful": "Registration successful!",
-  "@registrationSuccessful": {
-    "description": "Registration success message"
-  },
-  "registrationError": "Registration error",
-  "@registrationError": {
-    "description": "Registration error message"
-  },
-  "registerAccount": "Register",
-  "@registerAccount": {
-    "description": "Register button in registration dialog"
-  },
-  "logoutConfirmation": "Logout Confirmation",
-  "@logoutConfirmation": {
-    "description": "Logout confirmation dialog title"
-  },
-  "logoutConfirmationMessage": "Are you sure you want to logout?",
-  "@logoutConfirmationMessage": {
-    "description": "Logout confirmation message"
-  },
-  "myInvestments": "My Investments",
-  "@myInvestments": {
-    "description": "My investments screen title"
-  },
-  "myLiens": "My Liens",
-  "@myLiens": {
-    "description": "My liens tab title"
-  },
-  "favorites": "Favorites",
-  "@favorites": {
-    "description": "Favorites tab title"
-  },
-  "statistics": "Statistics",
-  "@statistics": {
-    "description": "Statistics tab title"
-  },
-  "noInvestmentsYet": "You don't have any investments yet",
-  "@noInvestmentsYet": {
-    "description": "No investments message"
-  },
-  "goToMarketplace": "Go to marketplace to buy tax liens",
-  "@goToMarketplace": {
-    "description": "Suggestion to go to marketplace"
-  },
-  "goToMarketplaceButton": "Go to Marketplace",
-  "@goToMarketplaceButton": {
-    "description": "Go to marketplace button"
-  },
-  "noFavoriteLiens": "No favorite liens",
-  "@noFavoriteLiens": {
-    "description": "No favorite liens message"
-  },
-  "addToFavoritesHint": "Add liens to favorites for quick access",
-  "@addToFavoritesHint": {
-    "description": "Hint to add liens to favorites"
-  },
-  "overallStatistics": "Overall Statistics",
-  "@overallStatistics": {
-    "description": "Overall statistics section title"
-  },
-  "totalInvested": "Total Invested",
-  "@totalInvested": {
-    "description": "Total invested amount label"
-  },
-  "currentValue": "Current Value",
-  "@currentValue": {
-    "description": "Current value label"
-  },
-  "profitLoss": "Profit/Loss",
-  "@profitLoss": {
-    "description": "Profit/loss label"
-  },
-  "roi": "ROI",
-  "@roi": {
-    "description": "ROI label"
-  },
-  "statusStatistics": "Status Statistics",
-  "@statusStatistics": {
-    "description": "Status statistics section title"
-  },
-  "activeLiens": "Active Liens",
-  "@activeLiens": {
-    "description": "Active liens label"
-  },
-  "redeemedLiens": "Redeemed Liens",
-  "@redeemedLiens": {
-    "description": "Redeemed liens label"
-  },
-  "foreclosedLiens": "Foreclosed Liens",
-  "@foreclosedLiens": {
-    "description": "Foreclosed liens label"
-  },
-  "totalLiens": "Total Liens",
-  "@totalLiens": {
-    "description": "Total liens label"
-  },
-  "monthlyReturns": "Monthly Returns",
-  "@monthlyReturns": {
-    "description": "Monthly returns chart title"
-  },
-  "profitChartInDevelopment": "Profit Chart\n(in development)",
-  "@profitChartInDevelopment": {
-    "description": "Profit chart development message"
-  },
-  "topPerformingLiens": "Top Performing Liens",
-  "@topPerformingLiens": {
-    "description": "Top performing liens section title"
-  },
-  "investmentInfo": "Investment Information",
-  "@investmentInfo": {
-    "description": "Investment information section title"
-  },
-  "purchaseDate": "Purchase Date",
-  "@purchaseDate": {
-    "description": "Purchase date label"
-  },
-  "purchaseAmount": "Purchase Amount",
-  "@purchaseAmount": {
-    "description": "Purchase amount label"
-  },
-  "daysInInvestment": "Days in Investment",
-  "@daysInInvestment": {
-    "description": "Days in investment label"
-  },
-  "interestEarned": "Interest Earned",
-  "@interestEarned": {
-    "description": "Interest earned label"
-  },
-  "redemptionDate": "Redemption Date",
-  "@redemptionDate": {
-    "description": "Redemption date label"
-  },
-  "digitalFreedomGateway": "Digital Freedom Gateway",
-  "@digitalFreedomGateway": {
-    "description": "App subtitle"
-  },
-  "settings": "Settings",
-  "@settings": {
-    "description": "Settings button label"
-  },
-  "connection": "Connection",
-  "@connection": {
-    "description": "Connection button label"
-  },
-  "calibrationScreenComingSoon": "Calibration screen coming soon",
-  "@calibrationScreenComingSoon": {
-    "description": "Calibration screen coming soon message"
-  },
-  "mediaManagementComingSoon": "Media management coming soon",
-  "@mediaManagementComingSoon": {
-    "description": "Media management coming soon message"
-  },
-  "lienSearch": "Lien Search",
-  "@lienSearch": {
-    "description": "Lien search screen title"
-  },
-  "searching": "Searching...",
-  "@searching": {
-    "description": "Searching message"
-  },
-  "noSearchHistory": "No search history",
-  "@noSearchHistory": {
-    "description": "No search history message"
-  },
-  "clearSearchHistory": "Clear search history",
-  "@clearSearchHistory": {
-    "description": "Clear search history message"
-  },
-  "searchHistory": "Search History",
-  "@searchHistory": {
-    "description": "Search history section title"
-  },
-  "recentSearches": "Recent Searches",
-  "@recentSearches": {
-    "description": "Recent searches section title"
-  },
-  "purchaseLien": "Purchase Lien",
-  "@purchaseLien": {
-    "description": "Purchase lien dialog title"
-  },
-  "enterBidAmount": "Enter bid amount (minimum {amount}):",
-  "@enterBidAmount": {
-    "description": "Enter bid amount prompt",
-    "placeholders": {
-      "amount": {
-        "type": "String",
-        "example": "$1000.00"
-      }
-    }
-  },
   "purchase": "Purchase",
-  "@purchase": {
-    "description": "Purchase button"
-  },
-  "lienPurchasedSuccessfully": "Lien purchased successfully!",
-  "@lienPurchasedSuccessfully": {
-    "description": "Lien purchased success message"
-  },
-  "purchaseError": "Purchase error",
-  "@purchaseError": {
-    "description": "Purchase error message"
-  },
-  "invalidBidAmount": "Invalid bid amount",
-  "@invalidBidAmount": {
-    "description": "Invalid bid amount message"
-  },
-  "searchHistoryEmpty": "Search history is empty",
-  "@searchHistoryEmpty": {
-    "description": "Search history empty message"
-  },
-  "searchQueriesWillAppearHere": "Your search queries will appear here",
-  "@searchQueriesWillAppearHere": {
-    "description": "Search queries will appear here message"
-  },
-  "nothingFound": "Nothing found",
-  "@nothingFound": {
-    "description": "Nothing found message"
-  },
-  "tryChangingSearchQuery": "Try changing your search query",
-  "@tryChangingSearchQuery": {
-    "description": "Try changing search query message"
-  },
-  "foundLiensCount": "Found: {count} liens",
-  "@foundLiensCount": {
-    "description": "Found liens count message",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "25"
-      }
-    }
-  },
   "daysAgo": "{days} days ago",
   "@daysAgo": {
-    "description": "Days ago format",
     "placeholders": {
-      "days": {
-        "type": "int",
-        "example": "5"
-      }
+      "days": {"type": "int"}
     }
   },
   "hoursAgo": "{hours} hours ago",
   "@hoursAgo": {
-    "description": "Hours ago format",
     "placeholders": {
-      "hours": {
-        "type": "int",
-        "example": "2"
-      }
+      "hours": {"type": "int"}
     }
   },
   "minutesAgo": "{minutes} minutes ago",
   "@minutesAgo": {
-    "description": "Minutes ago format",
     "placeholders": {
-      "minutes": {
-        "type": "int",
-        "example": "30"
-      }
+      "minutes": {"type": "int"}
     }
   },
   "justNow": "Just now",
-  "@justNow": {
-    "description": "Just now format"
-  }
-} 
+  "notAuthorized": "Not authorized",
+  "loginForAccess": "Please login to access features",
+  "loginToAccount": "Login to Account",
+  "password": "Password",
+  "loginSuccessful": "Login successful!",
+  "loginError": "Login error",
+  "registration": "Registration",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "registerAccount": "Register Account",
+  "registrationSuccessful": "Registration successful!",
+  "registrationError": "Registration error",
+  "logoutConfirmation": "Logout Confirmation",
+  "logoutConfirmationMessage": "Are you sure you want to logout?",
+  "balance": "Balance",
+  "available": "Available",
+  "topUp": "Top Up",
+  "quickActions": "Quick Actions",
+  "transactionHistory": "Transaction History",
+  "viewAllTransactions": "View all transactions",
+  "favoriteLiens": "Favorite Liens",
+  "savedLiens": "Your saved liens",
+  "notifications": "Notifications",
+  "notificationSettings": "Notification settings",
+  "help": "Help",
+  "appSettings": "App Settings",
+  "russian": "Russian",
+  "security": "Security",
+  "securitySettings": "Security settings",
+  "privacy": "Privacy",
+  "privacySettings": "Privacy settings",
+  "aboutApp": "About App",
+  "version": "Version",
+  "license": "License",
+  "termsOfService": "Terms of Service",
+  "userAgreement": "User Agreement",
+  "privacyPolicy": "Privacy Policy",
+  "dataProcessing": "Personal data processing",
+  "digitalFreedomGateway": "Digital Freedom Gateway",
+  "systemStatus": "System Status",
+  "stopped": "Stopped",
+  "file": "File",
+  "seconds": "Seconds",
+  "playbackControls": "Playback Controls",
+  "projectionSettings": "Projection Settings",
+  "connection": "Connection"
+}
+

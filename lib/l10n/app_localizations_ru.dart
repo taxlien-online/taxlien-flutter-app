@@ -12,40 +12,106 @@ class AppLocalizationsRu extends AppLocalizations {
   String get appTitle => 'TaxLien.online';
 
   @override
-  String get systemStatus => 'Статус системы';
+  String get welcome => 'Добро пожаловать';
 
   @override
-  String get playback => 'Воспроизведение';
+  String get settings => 'Настройки';
 
   @override
-  String get stopped => 'Остановлено';
+  String get profile => 'Профиль';
 
   @override
-  String get file => 'Файл';
+  String get search => 'Поиск';
 
   @override
-  String get position => 'Позиция';
+  String get marketplace => 'Магазин';
 
   @override
-  String get seconds => 'сек';
+  String get portfolio => 'Портфель';
 
   @override
-  String get playbackControls => 'Управление воспроизведением';
+  String get myInvestments => 'Мои инвестиции';
 
   @override
-  String get play => 'Воспроизвести';
+  String get aiAdvisor => 'AI Советник';
 
   @override
-  String get pause => 'Пауза';
+  String get login => 'Войти';
 
   @override
-  String get stop => 'Стоп';
+  String get logout => 'Выйти';
 
   @override
-  String get volume => 'Громкость';
+  String get register => 'Регистрация';
 
   @override
-  String get projectionSettings => 'Настройки проекции';
+  String get cancel => 'Отмена';
+
+  @override
+  String get save => 'Сохранить';
+
+  @override
+  String get apply => 'Применить';
+
+  @override
+  String get reset => 'Сбросить';
+
+  @override
+  String get delete => 'Удалить';
+
+  @override
+  String get edit => 'Редактировать';
+
+  @override
+  String get back => 'Назад';
+
+  @override
+  String get next => 'Далее';
+
+  @override
+  String get finish => 'Завершить';
+
+  @override
+  String get skip => 'Пропустить';
+
+  @override
+  String get retry => 'Повторить';
+
+  @override
+  String get loading => 'Загрузка...';
+
+  @override
+  String get error => 'Ошибка';
+
+  @override
+  String get success => 'Успешно';
+
+  @override
+  String get confirm => 'Подтвердить';
+
+  @override
+  String get yes => 'Да';
+
+  @override
+  String get no => 'Нет';
+
+  @override
+  String get ok => 'ОК';
+
+  @override
+  String get online => 'Онлайн';
+
+  @override
+  String get offline => 'Оффлайн';
+
+  @override
+  String get connected => 'Подключено';
+
+  @override
+  String get disconnected => 'Отключено';
+
+  @override
+  String get calibration => 'Калибровка';
 
   @override
   String get brightness => 'Яркость';
@@ -54,322 +120,87 @@ class AppLocalizationsRu extends AppLocalizations {
   String get rotation => 'Поворот';
 
   @override
-  String get mediaFiles => 'Медиафайлы';
+  String get volume => 'Громкость';
 
   @override
-  String get image => 'Изображение';
+  String get position => 'Позиция';
 
   @override
-  String get calibration => 'Калибровка';
+  String get playback => 'Воспроизведение';
 
   @override
-  String get calibrationTitle => 'Калибровка проекции';
+  String get play => 'Играть';
 
   @override
-  String get preview => 'Предварительный просмотр';
+  String get pause => 'Пауза';
 
   @override
-  String get offset => 'Смещение';
+  String get stop => 'Стоп';
 
   @override
-  String get xOffset => 'Смещение по X';
-
-  @override
-  String get yOffset => 'Смещение по Y';
-
-  @override
-  String get scaleRotation => 'Масштаб и поворот';
-
-  @override
-  String get scale => 'Масштаб';
-
-  @override
-  String get apply => 'Применить';
-
-  @override
-  String get reset => 'Сброс';
-
-  @override
-  String get calibrationApplied => 'Калибровка применена';
-
-  @override
-  String get online => 'ПОДКЛЮЧЕНО';
-
-  @override
-  String get offline => 'ОТКЛЮЧЕНО';
+  String get language => 'Язык';
 
   @override
   String get languageSettings => 'Настройки языка';
 
   @override
-  String get languageChanged => 'Язык изменен';
+  String get theme => 'Тема';
 
   @override
-  String get onboardingWelcomeTitle => 'Добро пожаловать в TaxLien.online';
+  String get light => 'Светлая';
 
   @override
-  String get onboardingWelcomeDescription =>
-      'Ваш путь к цифровой свободе и духовной связи';
+  String get dark => 'Темная';
 
   @override
-  String get onboardingConnectionTitle => 'Подключение к FreeDome';
+  String get system => 'Системная';
 
   @override
-  String get onboardingConnectionDescription =>
-      'Установите безопасное подключение к вашей сети FreeDome';
+  String get lienSearch => 'Поиск закладных';
 
   @override
-  String get onboardingDomeControlTitle => 'Управление куполом';
+  String get searching => 'Поиск...';
 
   @override
-  String get onboardingDomeControlDescription =>
-      'Управляйте настройками и конфигурациями вашего купола';
+  String get nothingFound => 'Ничего не найдено';
 
   @override
-  String get onboardingCalibrationTitle => 'Калибровка';
+  String get tryChangingSearchQuery => 'Попробуйте изменить параметры поиска';
 
   @override
-  String get onboardingCalibrationDescription =>
-      'Откалибруйте ваш купол для оптимальной производительности';
+  String get searchHistory => 'История поиска';
 
   @override
-  String get onboardingMediaTitle => 'Управление медиа';
+  String get searchHistoryEmpty => 'История поиска пуста';
 
   @override
-  String get onboardingMediaDescription =>
-      'Загружайте и управляйте вашими медиафайлами';
+  String get searchQueriesWillAppearHere =>
+      'Ваши запросы будут отображаться здесь';
 
   @override
-  String get onboardingReadyTitle => 'Вы готовы!';
-
-  @override
-  String get onboardingReadyDescription =>
-      'Начните ваш путь к цифровой свободе';
-
-  @override
-  String get next => 'Далее';
-
-  @override
-  String get back => 'Назад';
-
-  @override
-  String get skip => 'Пропустить';
-
-  @override
-  String get getStarted => 'Начать';
-
-  @override
-  String get skipConfirmationTitle => 'Пропустить онбординг?';
-
-  @override
-  String get skipConfirmationMessage =>
-      'Вы уверены, что хотите пропустить онбординг? Вы всегда можете получить доступ к руководству позже из настроек.';
-
-  @override
-  String get cancel => 'Отмена';
-
-  @override
-  String get connectingToFreedome => 'Подключение к FreeDome...';
-
-  @override
-  String get domeStatusActive => 'Статус купола: Активен';
-
-  @override
-  String get open => 'Открыть';
-
-  @override
-  String get close => 'Закрыть';
-
-  @override
-  String get calibrationProgress => 'Прогресс калибровки';
-
-  @override
-  String mediaFilesCount(int count) {
-    return 'Медиафайлы: $count элементов';
+  String foundLiensCount(int count) {
+    return 'Найдено закладных: $count';
   }
-
-  @override
-  String get upload => 'Загрузить';
-
-  @override
-  String get manage => 'Управлять';
-
-  @override
-  String get serverSettings => 'Настройки сервера';
-
-  @override
-  String get connectionStatus => 'Статус подключения';
-
-  @override
-  String get russian => 'Русский';
-
-  @override
-  String get ukrainian => 'Українська';
-
-  @override
-  String get english => 'English';
-
-  @override
-  String get chinese => '中文';
-
-  @override
-  String get hindi => 'हिन्दी';
-
-  @override
-  String get thai => 'ไทย';
-
-  @override
-  String dataLoadError(String error) {
-    return 'Ошибка загрузки данных: $error';
-  }
-
-  @override
-  String get taxLienMarketplace => 'Рынок налоговых закладных';
-
-  @override
-  String get filters => 'Фильтры';
-
-  @override
-  String get refresh => 'Обновить';
-
-  @override
-  String get searchHint => 'Поиск по адресу, владельцу или ID участка...';
-
-  @override
-  String get clear => 'Очистить';
-
-  @override
-  String foundLiens(int count) {
-    return 'Найдено: $count закладных';
-  }
-
-  @override
-  String sortBy(String sortLabel) {
-    return 'Сортировка: $sortLabel';
-  }
-
-  @override
-  String get retry => 'Повторить';
-
-  @override
-  String get noLiensFound => 'Налоговые закладные не найдены';
-
-  @override
-  String get tryChangingSearch =>
-      'Попробуйте изменить параметры поиска или фильтры';
-
-  @override
-  String stateFilter(String state) {
-    return 'Штат: $state';
-  }
-
-  @override
-  String countyFilter(String county) {
-    return 'Округ: $county';
-  }
-
-  @override
-  String amountFrom(String amount) {
-    return 'От: $amount';
-  }
-
-  @override
-  String amountTo(String amount) {
-    return 'До: $amount';
-  }
-
-  @override
-  String interestRateFrom(String rate) {
-    return 'Ставка от: $rate%';
-  }
-
-  @override
-  String auctionDateSort(String direction) {
-    return 'Дата аукциона $direction';
-  }
-
-  @override
-  String taxAmountSort(String direction) {
-    return 'Сумма налога $direction';
-  }
-
-  @override
-  String interestRateSort(String direction) {
-    return 'Процентная ставка $direction';
-  }
-
-  @override
-  String assessedValueSort(String direction) {
-    return 'Оценочная стоимость $direction';
-  }
-
-  @override
-  String redemptionDeadlineSort(String direction) {
-    return 'Срок погашения $direction';
-  }
-
-  @override
-  String lienNumber(String parcelId) {
-    return 'Закладная #$parcelId';
-  }
-
-  @override
-  String owner(String owner) {
-    return 'Владелец: $owner';
-  }
-
-  @override
-  String get taxAmount => 'Сумма налога';
-
-  @override
-  String get interestRate => 'Процентная ставка';
-
-  @override
-  String get assessedValue => 'Оценочная стоимость';
-
-  @override
-  String get auctionDate => 'Дата аукциона';
-
-  @override
-  String get additionalInfo => 'Дополнительная информация';
-
-  @override
-  String get county => 'Округ';
-
-  @override
-  String get state => 'Штат';
-
-  @override
-  String get redemptionDeadline => 'Срок погашения';
-
-  @override
-  String get status => 'Статус';
-
-  @override
-  String get buyLien => 'Купить закладную';
 
   @override
   String get availableForPurchase => 'Доступна для покупки';
 
   @override
-  String get sold => 'Продана';
+  String get sold => 'Продано';
 
   @override
-  String get redeemed => 'Погашена';
+  String get redeemed => 'Выкуплено';
 
   @override
-  String get foreclosed => 'Обращена в собственность';
+  String get foreclosed => 'Конфисковано';
 
   @override
-  String get purchaseLien => 'Покупка закладной';
+  String get purchaseLien => 'Купить закладную';
 
   @override
   String enterBidAmount(String amount) {
-    return 'Введите сумму ставки (минимум $amount):';
+    return 'Введите сумму ставки (минимум $amount)';
   }
-
-  @override
-  String get bidAmount => 'Сумма ставки';
 
   @override
   String get lienPurchasedSuccessfully => 'Закладная успешно куплена!';
@@ -381,31 +212,67 @@ class AppLocalizationsRu extends AppLocalizations {
   String get invalidBidAmount => 'Неверная сумма ставки';
 
   @override
-  String get buy => 'Купить';
+  String get purchase => 'Купить';
 
   @override
-  String get profile => 'Профиль';
+  String daysAgo(int days) {
+    return '$days дней назад';
+  }
 
   @override
-  String get settings => 'Настройки';
+  String hoursAgo(int hours) {
+    return '$hours часов назад';
+  }
+
+  @override
+  String minutesAgo(int minutes) {
+    return '$minutes минут назад';
+  }
+
+  @override
+  String get justNow => 'Только что';
 
   @override
   String get notAuthorized => 'Не авторизован';
 
   @override
-  String get loginForAccess => 'Войдите в аккаунт для доступа к функциям';
+  String get loginForAccess => 'Войдите для доступа к функциям';
 
   @override
-  String get login => 'Войти';
+  String get loginToAccount => 'Вход в аккаунт';
 
   @override
-  String get register => 'Регистрация';
+  String get password => 'Пароль';
 
   @override
-  String get edit => 'Редактировать';
+  String get loginSuccessful => 'Успешный вход!';
 
   @override
-  String get logout => 'Выйти';
+  String get loginError => 'Ошибка входа';
+
+  @override
+  String get registration => 'Регистрация';
+
+  @override
+  String get firstName => 'Имя';
+
+  @override
+  String get lastName => 'Фамилия';
+
+  @override
+  String get registerAccount => 'Зарегистрироваться';
+
+  @override
+  String get registrationSuccessful => 'Регистрация успешна!';
+
+  @override
+  String get registrationError => 'Ошибка регистрации';
+
+  @override
+  String get logoutConfirmation => 'Подтверждение выхода';
+
+  @override
+  String get logoutConfirmationMessage => 'Вы уверены, что хотите выйти?';
 
   @override
   String get balance => 'Баланс';
@@ -423,19 +290,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get transactionHistory => 'История транзакций';
 
   @override
-  String get viewAllTransactions => 'Просмотр всех операций';
+  String get viewAllTransactions => 'Просмотреть все транзакции';
 
   @override
   String get favoriteLiens => 'Избранные закладные';
 
   @override
-  String get savedLiens => 'Ваши сохраненные закладные';
+  String get savedLiens => 'Сохраненные закладные';
 
   @override
   String get notifications => 'Уведомления';
 
   @override
-  String get notificationSettings => 'Настройка уведомлений';
+  String get notificationSettings => 'Настройки уведомлений';
 
   @override
   String get help => 'Помощь';
@@ -444,16 +311,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get appSettings => 'Настройки приложения';
 
   @override
-  String get language => 'Язык';
-
-  @override
-  String get theme => 'Тема';
-
-  @override
-  String get dark => 'Темная';
-
-  @override
-  String get light => 'Светлая';
+  String get russian => 'Русский';
 
   @override
   String get security => 'Безопасность';
@@ -462,7 +320,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get securitySettings => 'Настройки безопасности';
 
   @override
-  String get privacy => 'Конфиденциальность';
+  String get privacy => 'Приватность';
 
   @override
   String get privacySettings => 'Настройки приватности';
@@ -489,194 +347,26 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dataProcessing => 'Обработка персональных данных';
 
   @override
-  String get loginToAccount => 'Вход в аккаунт';
+  String get digitalFreedomGateway => 'Цифровой шлюз свободы';
 
   @override
-  String get password => 'Пароль';
+  String get systemStatus => 'Статус системы';
 
   @override
-  String get loginSuccessful => 'Успешный вход!';
+  String get stopped => 'Остановлено';
 
   @override
-  String get loginError => 'Ошибка входа';
+  String get file => 'Файл';
 
   @override
-  String get registration => 'Регистрация';
+  String get seconds => 'Секунды';
 
   @override
-  String get firstName => 'Имя';
+  String get playbackControls => 'Управление воспроизведением';
 
   @override
-  String get lastName => 'Фамилия';
+  String get projectionSettings => 'Настройки проекции';
 
   @override
-  String get registrationSuccessful => 'Регистрация успешна!';
-
-  @override
-  String get registrationError => 'Ошибка регистрации';
-
-  @override
-  String get registerAccount => 'Зарегистрироваться';
-
-  @override
-  String get logoutConfirmation => 'Выход из аккаунта';
-
-  @override
-  String get logoutConfirmationMessage =>
-      'Вы уверены, что хотите выйти из аккаунта?';
-
-  @override
-  String get myInvestments => 'Мои инвестиции';
-
-  @override
-  String get myLiens => 'Мои закладные';
-
-  @override
-  String get favorites => 'Избранное';
-
-  @override
-  String get statistics => 'Статистика';
-
-  @override
-  String get noInvestmentsYet => 'У вас пока нет инвестиций';
-
-  @override
-  String get goToMarketplace =>
-      'Перейдите на рынок, чтобы купить налоговые закладные';
-
-  @override
-  String get goToMarketplaceButton => 'Перейти на рынок';
-
-  @override
-  String get noFavoriteLiens => 'Нет избранных закладных';
-
-  @override
-  String get addToFavoritesHint =>
-      'Добавляйте закладные в избранное для быстрого доступа';
-
-  @override
-  String get overallStatistics => 'Общая статистика';
-
-  @override
-  String get totalInvested => 'Всего инвестировано';
-
-  @override
-  String get currentValue => 'Текущая стоимость';
-
-  @override
-  String get profitLoss => 'Прибыль/убыток';
-
-  @override
-  String get roi => 'ROI';
-
-  @override
-  String get statusStatistics => 'Статистика по статусам';
-
-  @override
-  String get activeLiens => 'Активные закладные';
-
-  @override
-  String get redeemedLiens => 'Погашенные закладные';
-
-  @override
-  String get foreclosedLiens => 'Обращенные в собственность';
-
-  @override
-  String get totalLiens => 'Всего закладных';
-
-  @override
-  String get monthlyReturns => 'Доходность по месяцам';
-
-  @override
-  String get profitChartInDevelopment => 'График доходности\n(в разработке)';
-
-  @override
-  String get topPerformingLiens => 'Топ закладных по доходности';
-
-  @override
-  String get investmentInfo => 'Информация об инвестиции';
-
-  @override
-  String get purchaseDate => 'Дата покупки';
-
-  @override
-  String get purchaseAmount => 'Сумма покупки';
-
-  @override
-  String get daysInInvestment => 'Дней в инвестиции';
-
-  @override
-  String get interestEarned => 'Заработанные проценты';
-
-  @override
-  String get redemptionDate => 'Дата погашения';
-
-  @override
-  String get digitalFreedomGateway => 'Врата к цифровой свободе';
-
-  @override
-  String get connection => 'Подключение';
-
-  @override
-  String get calibrationScreenComingSoon => 'Экран калибровки скоро появится';
-
-  @override
-  String get mediaManagementComingSoon => 'Управление медиа скоро появится';
-
-  @override
-  String get lienSearch => 'Поиск закладных';
-
-  @override
-  String get searching => 'Поиск...';
-
-  @override
-  String get noSearchHistory => 'Нет истории поиска';
-
-  @override
-  String get clearSearchHistory => 'Очистить историю поиска';
-
-  @override
-  String get searchHistory => 'История поиска';
-
-  @override
-  String get recentSearches => 'Недавние поиски';
-
-  @override
-  String get purchase => 'Покупка';
-
-  @override
-  String get searchHistoryEmpty => 'История поиска пуста';
-
-  @override
-  String get searchQueriesWillAppearHere =>
-      'Ваши поисковые запросы появятся здесь';
-
-  @override
-  String get nothingFound => 'Ничего не найдено';
-
-  @override
-  String get tryChangingSearchQuery => 'Попробуйте изменить поисковый запрос';
-
-  @override
-  String foundLiensCount(int count) {
-    return 'Найдено: $count закладных';
-  }
-
-  @override
-  String daysAgo(int days) {
-    return '$days дней назад';
-  }
-
-  @override
-  String hoursAgo(int hours) {
-    return '$hours часов назад';
-  }
-
-  @override
-  String minutesAgo(int minutes) {
-    return '$minutes минут назад';
-  }
-
-  @override
-  String get justNow => 'Только что';
+  String get connection => 'Соединение';
 }

@@ -66,7 +66,7 @@ class _AppRouterScreenState extends State<AppRouterScreen> {
         onboardingService: OnboardingService(),
         taxLienService: TaxLienService(),
         authService: AuthService(),
-        databaseService: DatabaseService(),
+        databaseService: DatabaseService.instance,
         userPreferencesService: UserPreferencesService(),
       );
     }
