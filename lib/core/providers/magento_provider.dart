@@ -129,8 +129,11 @@ class MagentoNotifier extends Notifier<MagentoState> {
   }) async {
     try {
       final item = MagentoCartItem(
+        itemId: 0,
         sku: sku,
         qty: quantity,
+        name: '',
+        price: 0.0,
       );
       
       // API service addToCart signature may vary

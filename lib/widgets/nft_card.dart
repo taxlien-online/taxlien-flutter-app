@@ -44,7 +44,7 @@ class NFTCard extends StatelessWidget {
                     end: Alignment.bottomRight,
                     colors: [
                       _getRarityColor(
-                          nft.metadata.attributes['Rarity'] ?? 'Common'),
+                          nft.metadata?.attributes['Rarity'] ?? 'Common'),
                       _getRarityColor(
                               nft.metadata.attributes['Rarity'] ?? 'Common')
                           .withOpacity(0.7),
@@ -118,7 +118,7 @@ class NFTCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      nft.metadata.name,
+                          nft.metadata?.name ?? nft.name,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -127,7 +127,7 @@ class NFTCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      nft.originalLien.address,
+                          nft.originalLien?.address ?? 'Unknown',
                       style: Theme.of(context).textTheme.bodySmall,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

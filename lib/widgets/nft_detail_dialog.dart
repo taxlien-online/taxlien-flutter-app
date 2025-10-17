@@ -33,7 +33,7 @@ class NFTDetailDialog extends StatelessWidget {
                   end: Alignment.bottomRight,
                   colors: [
                     _getRarityColor(
-                        nft.metadata.attributes['Rarity'] ?? 'Common'),
+                            nft.metadata?['attributes']?['Rarity'] ?? 'Common'),
                     _getRarityColor(
                             nft.metadata.attributes['Rarity'] ?? 'Common')
                         .withOpacity(0.7),
@@ -106,7 +106,7 @@ class NFTDetailDialog extends StatelessWidget {
                   children: [
                     // Title and basic info
                     Text(
-                      nft.metadata.name,
+                          nft.metadata?['name'] ?? nft.name,
                       style:
                           Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class NFTDetailDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      nft.metadata.description,
+                          nft.metadata?['description'] ?? nft.description,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 16),
@@ -125,7 +125,7 @@ class NFTDetailDialog extends StatelessWidget {
                       'Property Information',
                       [
                         _buildInfoRow('Address', nft.originalLien.address),
-                        _buildInfoRow('Parcel ID', nft.originalLien.parcelId),
+                            _buildInfoRow('Parcel ID', nft.originalLien.parcelId ?? 'N/A'),
                         _buildInfoRow('County', nft.originalLien.county),
                         _buildInfoRow('State', nft.originalLien.state),
                         _buildInfoRow('Owner', nft.originalLien.owner),

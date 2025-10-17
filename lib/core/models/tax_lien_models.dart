@@ -169,10 +169,13 @@ class TaxLienNFT {
   final String description;
   final List<String> attributes;
   final DateTime mintedAt;
+  final DateTime? createdAt;
   final DateTime? soldAt;
   final double? salePrice;
   final String status;
   final Map<String, dynamic>? metadata;
+  final double? currentValue;
+  final List<Map<String, dynamic>>? transactionHistory;
 
   const TaxLienNFT({
     required this.id,
@@ -186,11 +189,14 @@ class TaxLienNFT {
     required this.description,
     required this.attributes,
     required this.mintedAt,
+    DateTime? createdAt,
     this.soldAt,
     this.salePrice,
     required this.status,
     this.metadata,
-  });
+    this.currentValue,
+    this.transactionHistory,
+  }) : createdAt = createdAt ?? mintedAt;
 
   factory TaxLienNFT.fromJson(Map<String, dynamic> json) =>
       _$TaxLienNFTFromJson(json);
@@ -202,6 +208,9 @@ class TaxLienNFT {
     String? contractAddress,
     String? ownerAddress,
     TaxLien? originalLien,
+    DateTime? createdAt,
+    double? currentValue,
+    List<Map<String, dynamic>>? transactionHistory,
     String? nftMetadata,
     String? imageUrl,
     String? name,

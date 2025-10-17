@@ -55,6 +55,9 @@ class NFT {
   final String description;
   final String image;
   final NFTMetadata? metadata;
+  final String status;
+  final double? currentValue;
+  final TaxLien? originalLien;
 
   NFT({
     required this.id,
@@ -62,6 +65,28 @@ class NFT {
     required this.description,
     required this.image,
     this.metadata,
+    this.status = 'active',
+    this.currentValue,
+    this.originalLien,
+  });
+}
+
+// Temporary import to avoid circular dependency
+class TaxLien {
+  final String id;
+  final String address;
+  final String? parcelId;
+  final String? owner;
+  final double taxAmount;
+  final double interestRate;
+
+  TaxLien({
+    required this.id,
+    required this.address,
+    this.parcelId,
+    this.owner,
+    required this.taxAmount,
+    required this.interestRate,
   });
 }
 

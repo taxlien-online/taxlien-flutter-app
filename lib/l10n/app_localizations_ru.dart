@@ -174,7 +174,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get searchHistoryEmpty => 'История поиска пуста';
 
   @override
-  String get searchQueriesWillAppearHere => 'Ваши запросы будут отображаться здесь';
+  String get searchQueriesWillAppearHere =>
+      'Ваши запросы будут отображаться здесь';
 
   @override
   String foundLiensCount(int count) {
