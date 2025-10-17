@@ -6,14 +6,14 @@ import '../constants/app_constants.dart';
 import '../models/magento_models.dart';
 import 'magento_api_service.dart';
 import 'secure_storage_service.dart';
-// import '../../services/flutter_magento_cloud_service.dart';
+import 'flutter_magento_cloud_service.dart';
 import '../../services/preload_service.dart';
 
 /// Hybrid Magento service that combines REST API, Flutter Magento, and offline capabilities
 /// Automatically switches between cloud and offline mode based on connectivity
 class HybridMagentoService extends ChangeNotifier {
   final MagentoApiService _restService;
-  // FlutterMagentoCloudService? _flutterMagentoService; // Disabled
+  FlutterMagentoCloudService? _flutterMagentoService;
 
   bool _isOnline = false;
   bool _preferFlutterMagento = true; // Приоритет для Flutter Magento
@@ -43,7 +43,7 @@ class HybridMagentoService extends ChangeNotifier {
 
   HybridMagentoService({
     MagentoApiService? restService,
-    // FlutterMagentoCloudService? flutterMagentoService, // Disabled
+    FlutterMagentoCloudService? flutterMagentoService,
   })  : _restService = restService ?? MagentoApiService(),
         _flutterMagentoService = flutterMagentoService {
     _initialize();

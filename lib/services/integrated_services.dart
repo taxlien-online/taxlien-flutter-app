@@ -9,7 +9,7 @@ import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
 import 'database_service.dart';
 import 'nft_service.dart';
 import 'plug_wallet_service.dart';
-// import 'flutter_magento_cloud_service.dart';
+import '../core/services/flutter_magento_cloud_service.dart';
 
 class IntegratedServices {
   static IntegratedServices? _instance;

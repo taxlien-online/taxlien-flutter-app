@@ -234,7 +234,7 @@ class _AuctionScreenState extends State<AuctionScreen>
               const SizedBox(height: 12),
               _buildDetailRow('County', widget.auction.lien.county),
               _buildDetailRow('State', widget.auction.lien.state),
-              _buildDetailRow('Parcel ID', widget.auction.lien.parcelId),
+              _buildDetailRow('Parcel ID', widget.auction.lien.parcelId ?? 'N/A'),
               _buildDetailRow('Tax Amount', '\$${widget.auction.lien.taxAmount.toStringAsFixed(2)}'),
               _buildDetailRow('Interest Rate', '${widget.auction.lien.interestRate}%'),
               _buildDetailRow('Starting Bid', '\$${widget.auction.startingBid.toStringAsFixed(2)}'),
@@ -286,74 +286,76 @@ class _AuctionScreenState extends State<AuctionScreen>
             customer != null &&
             widget.biddingService.bids.first.bidderId == customer.id.toString();
     
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: AnimatedBuilder(
-        animation: _pulseAnimation,
-        builder: (context, child) {
-          return Transform.scale(
-            scale: _pulseAnimation.value,
-            child: Card(
-              color: isMyBid
-                  ? Theme.of(context).colorScheme.primaryContainer
-                  : Theme.of(context).colorScheme.surface,
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    Text(
-                      'Current Highest Bid',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: isMyBid
-                            ? Theme.of(context).colorScheme.onPrimaryContainer
-                            : Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '\$${currentHighestBid.toStringAsFixed(2)}',
-                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                        color: isMyBid
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    if (widget.biddingService.bids.isNotEmpty) ...[
-                      const SizedBox(height: 4),
-                      Text(
-                        'by ${widget.biddingService.bids.first.bidderName}',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: isMyBid
-                              ? Theme.of(context).colorScheme.onPrimaryContainer
-                              : Theme.of(context).colorScheme.onSurfaceVariant,
+        return Container(
+          padding: const EdgeInsets.all(16),
+          child: AnimatedBuilder(
+            animation: _pulseAnimation,
+            builder: (context, child) {
+              return Transform.scale(
+                scale: _pulseAnimation.value,
+                child: Card(
+                  color: isMyBid
+                      ? Theme.of(context).colorScheme.primaryContainer
+                      : Theme.of(context).colorScheme.surface,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Current Highest Bid',
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: isMyBid
+                                ? Theme.of(context).colorScheme.onPrimaryContainer
+                                : Theme.of(context).colorScheme.onSurface,
+                          ),
                         ),
-                      ),
-                    ],
-                    if (isMyBid) ...[
-                      const SizedBox(height: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          'YOUR BID',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
+                        const SizedBox(height: 8),
+                        Text(
+                          '\$${currentHighestBid.toStringAsFixed(2)}',
+                          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                            color: isMyBid
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                    ],
-                  ],
+                        if (widget.biddingService.bids.isNotEmpty) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            'by ${widget.biddingService.bids.first.bidderName}',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: isMyBid
+                                  ? Theme.of(context).colorScheme.onPrimaryContainer
+                                  : Theme.of(context).colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ],
+                        if (isMyBid) ...[
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primary,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              'YOUR BID',
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          );
-        },
-      ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 

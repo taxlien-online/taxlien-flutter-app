@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
 import 'nft_service.dart';
+import '../core/providers/icp_client.dart';
+import '../core/providers/yuku_marketplace_provider.dart';
 
 class YukuListing {
   final String id;
