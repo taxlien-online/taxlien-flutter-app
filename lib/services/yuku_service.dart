@@ -123,10 +123,13 @@ class YukuService extends ChangeNotifier {
   bool _isLoading = false;
   String? _error;
 
-  // Flutter ICP client
+  // Flutter ICP client and Yuku provider
   late ICPClient _icpClient;
   late YukuMarketplaceProvider _yukuProvider;
   bool _isInitialized = false;
+
+  // Current user principal ID
+  String? _currentUserPrincipal;
 
   List<YukuListing> get activeListings => _activeListings;
   List<YukuListing> get myListings => _myListings;
@@ -134,61 +137,39 @@ class YukuService extends ChangeNotifier {
   List<YukuOffer> get receivedOffers => _receivedOffers;
   bool get isLoading => _isLoading;
   String? get error => _error;
+  bool get isInitialized => _isInitialized;
 
-  // Mock data for prototype
-  final List<Map<String, dynamic>> _mockListings = [
-    {
-      'id': 'listing_001',
-      'nftId': 'nft_TL001',
-      'price': 1500.0,
-      'currency': 'ICP',
-      'sellerAddress': 'user456',
-      'createdAt': DateTime.now().subtract(Duration(days: 2)).toIso8601String(),
-      'expiresAt': DateTime.now().add(Duration(days: 28)).toIso8601String(),
-      'status': 'active',
-    },
-    {
-      'id': 'listing_002',
-      'nftId': 'nft_TL002',
-      'price': 2200.0,
-      'currency': 'ICP',
-      'sellerAddress': 'user789',
-      'createdAt': DateTime.now().subtract(Duration(days: 1)).toIso8601String(),
-      'expiresAt': DateTime.now().add(Duration(days: 29)).toIso8601String(),
-      'status': 'active',
-    },
-  ];
-
-  final List<Map<String, dynamic>> _mockOffers = [
-    {
-      'id': 'offer_001',
-      'nftId': 'nft_TL001',
-      'amount': 1400.0,
-      'currency': 'ICP',
-      'buyerAddress': 'user123',
-      'createdAt':
-          DateTime.now().subtract(Duration(hours: 6)).toIso8601String(),
-      'expiresAt': DateTime.now().add(Duration(days: 7)).toIso8601String(),
-      'status': 'pending',
-    },
-  ];
-
+  /// Initialize Yuku Service with real ICP and Marketplace providers
   Future<void> initialize() async {
     try {
-      // NFT/ICP initialization temporarily disabled - API not documented
-      // TODO: Implement proper initialization when documentation is available
-      // _icpClient = ICPClient();
-      // _yukuProvider = YukuMarketplaceProvider();
-      // _icpClient.registerMarketplaceProvider(_yukuProvider);
-      // await _icpClient.initialize();
+      if (_isInitialized) {
+        if (kDebugMode) {
+          print('Yuku Service already initialized');
+        }
+        return;
+      }
+
+      if (kDebugMode) {
+        print('Initializing Yuku Service with real providers...');
+      }
+
+      // Initialize ICP Client
+      _icpClient = ICPClient();
+      await _icpClient.initialize();
+
+      // Initialize Yuku Marketplace Provider
+      _yukuProvider = YukuMarketplaceProvider(icpClient: _icpClient);
+      await _yukuProvider.initialize();
 
       _isInitialized = true;
+      _error = null;
 
-      // Load marketplace data (using mock data for now)
-      // await loadActiveListings();
-      await loadMyListings();
-      await loadMyOffers();
-      await loadReceivedOffers();
+      if (kDebugMode) {
+        print('Yuku Service initialized successfully');
+      }
+
+      // Load marketplace data
+      await loadActiveListings();
     } catch (e) {
       _error = 'Failed to initialize Yuku service: $e';
       if (kDebugMode) {
@@ -197,70 +178,103 @@ class YukuService extends ChangeNotifier {
     }
   }
 
+  /// Set current user principal (after wallet connection)
+  void setCurrentUser(String principalId) {
+    _currentUserPrincipal = principalId;
+    if (kDebugMode) {
+      print('Current user set: $principalId');
+    }
+  }
+
+  /// Load active listings from Yuku Marketplace
   Future<void> loadActiveListings() async {
     _setLoading(true);
     try {
-      final response = await http.get(
-        Uri.parse('$_yukuApiUrl/listings/active'),
-        headers: {'Content-Type': 'application/json'},
-      );
+      if (!_isInitialized) {
+        await initialize();
+      }
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        _activeListings = (data['listings'] as List)
-            .map((json) => YukuListing.fromJson(json))
+      if (kDebugMode) {
+        print('Loading active listings from Yuku Marketplace...');
+      }
+
+      // Get listings from Yuku provider
+      final listings = await _yukuProvider.getListings(limit: 100);
+
+      if (listings.isNotEmpty) {
+        _activeListings = listings
+            .map((listing) => YukuListing.fromJson(listing))
+            .where((listing) => listing.status == 'active')
             .toList();
         _error = null;
+
+        if (kDebugMode) {
+          print('Loaded ${_activeListings.length} active listings');
+        }
       } else {
-        _error = 'Failed to load listings: ${response.statusCode}';
-        // Fallback to mock data for development
-        _activeListings = _mockListings
-            .where((listing) => listing['status'] == 'active')
-            .map((json) => YukuListing.fromJson(json))
-            .toList();
+        _activeListings = [];
+        if (kDebugMode) {
+          print('No active listings found');
+        }
       }
     } catch (e) {
       _error = 'Failed to load active listings: $e';
-      // Fallback to mock data for development
-      _activeListings = _mockListings
-          .where((listing) => listing['status'] == 'active')
-          .map((json) => YukuListing.fromJson(json))
-          .toList();
+      if (kDebugMode) {
+        print('Error loading active listings: $e');
+      }
     } finally {
       _setLoading(false);
     }
   }
 
+  /// Load user's listings from Yuku Marketplace
   Future<void> loadMyListings() async {
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(milliseconds: 600));
+      if (!_isInitialized) {
+        await initialize();
+      }
 
-      _myListings = _mockListings
-          .where((listing) => listing['sellerAddress'] == 'user123')
-          .map((json) => YukuListing.fromJson(json))
-          .toList();
+      if (_currentUserPrincipal == null) {
+        if (kDebugMode) {
+          print('No user principal set, cannot load user listings');
+        }
+        _myListings = [];
+        return;
+      }
 
+      if (kDebugMode) {
+        print('Loading user listings for: $_currentUserPrincipal');
+      }
+
+      // Get user's listings from Yuku provider
+      final listings =
+          await _yukuProvider.getUserListings(_currentUserPrincipal!);
+
+      _myListings =
+          listings.map((listing) => YukuListing.fromJson(listing)).toList();
       _error = null;
+
+      if (kDebugMode) {
+        print('Loaded ${_myListings.length} user listings');
+      }
     } catch (e) {
       _error = 'Failed to load my listings: $e';
+      if (kDebugMode) {
+        print('Error loading user listings: $e');
+      }
     } finally {
       _setLoading(false);
     }
   }
 
+  /// Load user's offers
   Future<void> loadMyOffers() async {
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(milliseconds: 500));
-
-      _myOffers = _mockOffers
-          .where((offer) => offer['buyerAddress'] == 'user123')
-          .map((json) => YukuOffer.fromJson(json))
-          .toList();
-
+      // TODO: Implement offers loading from blockchain
+      // For now, keep empty until offers API is available
+      _myOffers = [];
       _error = null;
     } catch (e) {
       _error = 'Failed to load my offers: $e';
@@ -269,17 +283,13 @@ class YukuService extends ChangeNotifier {
     }
   }
 
+  /// Load received offers
   Future<void> loadReceivedOffers() async {
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(milliseconds: 500));
-
-      _receivedOffers = _mockOffers
-          .where((offer) => offer['buyerAddress'] != 'user123')
-          .map((json) => YukuOffer.fromJson(json))
-          .toList();
-
+      // TODO: Implement received offers loading from blockchain
+      // For now, keep empty until offers API is available
+      _receivedOffers = [];
       _error = null;
     } catch (e) {
       _error = 'Failed to load received offers: $e';
@@ -288,6 +298,7 @@ class YukuService extends ChangeNotifier {
     }
   }
 
+  /// Create a new listing on Yuku Marketplace
   Future<bool> createListing({
     required String nftId,
     required double price,
@@ -296,136 +307,157 @@ class YukuService extends ChangeNotifier {
   }) async {
     _setLoading(true);
     try {
-      final response = await http.post(
-        Uri.parse('$_yukuApiUrl/listings'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'nftId': nftId,
-          'price': price,
-          'currency': currency,
-          'expirationDays': expirationDays,
-        }),
+      if (!_isInitialized) {
+        await initialize();
+      }
+
+      if (!_icpClient.isConnected) {
+        _error = 'Wallet not connected. Please connect your wallet first.';
+        return false;
+      }
+
+      if (kDebugMode) {
+        print('Creating listing: NFT=$nftId, Price=$price $currency');
+      }
+
+      // Create listing via Yuku provider
+      final listingId = await _yukuProvider.createListing(
+        nftId: nftId,
+        price: price,
+        currency: currency,
+        expirationDays: expirationDays,
       );
 
-      if (response.statusCode == 201) {
-        final data = jsonDecode(response.body);
-        final listing = YukuListing.fromJson(data['listing']);
-
-        _myListings.add(listing);
-        _activeListings.add(listing);
+      if (listingId != null) {
+        // Reload listings to get the new one
+        await loadMyListings();
+        await loadActiveListings();
 
         _error = null;
         notifyListeners();
+
+        if (kDebugMode) {
+          print('Listing created successfully: $listingId');
+        }
+
         return true;
       } else {
-        _error = 'Failed to create listing: ${response.statusCode}';
+        _error = _yukuProvider.error ?? 'Failed to create listing';
         return false;
       }
     } catch (e) {
       _error = 'Failed to create listing: $e';
-      // Fallback to mock data for development
-      final listing = YukuListing(
-        id: 'listing_${DateTime.now().millisecondsSinceEpoch}',
-        nftId: nftId,
-        price: price,
-        currency: currency,
-        sellerAddress: 'user123',
-        createdAt: DateTime.now(),
-        expiresAt: expirationDays != null
-            ? DateTime.now().add(Duration(days: expirationDays))
-            : null,
-        status: 'active',
-      );
-
-      _myListings.add(listing);
-      _activeListings.add(listing);
-      notifyListeners();
-      return true;
+      if (kDebugMode) {
+        print('Error creating listing: $e');
+      }
+      return false;
     } finally {
       _setLoading(false);
     }
   }
 
+  /// Cancel a listing on Yuku Marketplace
   Future<bool> cancelListing(String listingId) async {
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(seconds: 1));
+      if (!_isInitialized) {
+        await initialize();
+      }
 
-      final listingIndex =
-          _myListings.indexWhere((listing) => listing.id == listingId);
-      if (listingIndex != -1) {
-        final listing = _myListings[listingIndex];
-        final updatedListing = YukuListing(
-          id: listing.id,
-          nftId: listing.nftId,
-          price: listing.price,
-          currency: listing.currency,
-          sellerAddress: listing.sellerAddress,
-          createdAt: listing.createdAt,
-          expiresAt: listing.expiresAt,
-          status: 'cancelled',
-        );
+      if (!_icpClient.isConnected) {
+        _error = 'Wallet not connected';
+        return false;
+      }
 
-        _myListings[listingIndex] = updatedListing;
+      if (kDebugMode) {
+        print('Cancelling listing: $listingId');
+      }
 
-        // Remove from active listings
-        _activeListings.removeWhere((listing) => listing.id == listingId);
+      // Cancel listing via Yuku provider
+      final success = await _yukuProvider.cancelListing(listingId);
+
+      if (success) {
+        // Reload listings
+        await loadMyListings();
+        await loadActiveListings();
 
         _error = null;
         notifyListeners();
+
+        if (kDebugMode) {
+          print('Listing cancelled successfully');
+        }
+
         return true;
+      } else {
+        _error = _yukuProvider.error ?? 'Failed to cancel listing';
+        return false;
       }
-      return false;
     } catch (e) {
       _error = 'Failed to cancel listing: $e';
+      if (kDebugMode) {
+        print('Error cancelling listing: $e');
+      }
       return false;
     } finally {
       _setLoading(false);
     }
   }
 
+  /// Buy an NFT from Yuku Marketplace
   Future<bool> buyNFT(String listingId) async {
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(seconds: 3));
+      if (!_isInitialized) {
+        await initialize();
+      }
 
-      final listingIndex =
-          _activeListings.indexWhere((listing) => listing.id == listingId);
-      if (listingIndex != -1) {
-        final listing = _activeListings[listingIndex];
-        final updatedListing = YukuListing(
-          id: listing.id,
-          nftId: listing.nftId,
-          price: listing.price,
-          currency: listing.currency,
-          sellerAddress: listing.sellerAddress,
-          createdAt: listing.createdAt,
-          expiresAt: listing.expiresAt,
-          status: 'sold',
-          buyerAddress: 'user123',
-          soldAt: DateTime.now(),
-        );
+      if (!_icpClient.isConnected) {
+        _error = 'Wallet not connected';
+        return false;
+      }
 
-        _activeListings[listingIndex] = updatedListing;
+      // Find the listing to get price
+      final listing = _activeListings.firstWhere(
+        (l) => l.id == listingId,
+        orElse: () => throw Exception('Listing not found'),
+      );
 
-        // Remove from active listings
-        _activeListings.removeWhere((listing) => listing.id == listingId);
+      if (kDebugMode) {
+        print('Buying NFT: Listing=$listingId, Price=${listing.price}');
+      }
+
+      // Buy NFT via Yuku provider
+      final success = await _yukuProvider.buyNFT(listingId, listing.price);
+
+      if (success) {
+        // Reload listings
+        await loadActiveListings();
 
         _error = null;
         notifyListeners();
+
+        if (kDebugMode) {
+          print('NFT purchased successfully');
+        }
+
         return true;
+      } else {
+        _error = _yukuProvider.error ?? 'Failed to buy NFT';
+        return false;
       }
-      return false;
     } catch (e) {
       _error = 'Failed to buy NFT: $e';
+      if (kDebugMode) {
+        print('Error buying NFT: $e');
+      }
       return false;
     } finally {
       _setLoading(false);
     }
   }
 
+  /// Make an offer on an NFT
   Future<bool> makeOffer({
     required String nftId,
     required double amount,
@@ -434,63 +466,78 @@ class YukuService extends ChangeNotifier {
   }) async {
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(seconds: 2));
+      if (!_isInitialized) {
+        await initialize();
+      }
 
-      final offer = YukuOffer(
-        id: 'offer_${DateTime.now().millisecondsSinceEpoch}',
+      if (!_icpClient.isConnected) {
+        _error = 'Wallet not connected';
+        return false;
+      }
+
+      if (kDebugMode) {
+        print('Making offer: NFT=$nftId, Amount=$amount $currency');
+      }
+
+      // Make offer via Yuku provider
+      final offerId = await _yukuProvider.makeOffer(
         nftId: nftId,
         amount: amount,
         currency: currency,
-        buyerAddress: 'user123',
-        createdAt: DateTime.now(),
-        expiresAt: expirationDays != null
-            ? DateTime.now().add(Duration(days: expirationDays))
-            : null,
-        status: 'pending',
+        expirationDays: expirationDays,
       );
 
-      _myOffers.add(offer);
+      if (offerId != null) {
+        // Reload offers
+        await loadMyOffers();
 
-      _error = null;
-      notifyListeners();
-      return true;
+        _error = null;
+        notifyListeners();
+
+        if (kDebugMode) {
+          print('Offer created successfully: $offerId');
+        }
+
+        return true;
+      } else {
+        _error = _yukuProvider.error ?? 'Failed to make offer';
+        return false;
+      }
     } catch (e) {
       _error = 'Failed to make offer: $e';
+      if (kDebugMode) {
+        print('Error making offer: $e');
+      }
       return false;
     } finally {
       _setLoading(false);
     }
   }
 
+  /// Accept an offer
   Future<bool> acceptOffer(String offerId) async {
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(seconds: 2));
+      if (!_isInitialized) {
+        await initialize();
+      }
 
-      final offerIndex =
-          _receivedOffers.indexWhere((offer) => offer.id == offerId);
-      if (offerIndex != -1) {
-        final offer = _receivedOffers[offerIndex];
-        final updatedOffer = YukuOffer(
-          id: offer.id,
-          nftId: offer.nftId,
-          amount: offer.amount,
-          currency: offer.currency,
-          buyerAddress: offer.buyerAddress,
-          createdAt: offer.createdAt,
-          expiresAt: offer.expiresAt,
-          status: 'accepted',
-        );
+      if (!_icpClient.isConnected) {
+        _error = 'Wallet not connected';
+        return false;
+      }
 
-        _receivedOffers[offerIndex] = updatedOffer;
+      final success = await _yukuProvider.acceptOffer(offerId);
 
+      if (success) {
+        await loadReceivedOffers();
         _error = null;
         notifyListeners();
         return true;
+      } else {
+        _error = _yukuProvider.error ?? 'Failed to accept offer';
+        return false;
       }
-      return false;
     } catch (e) {
       _error = 'Failed to accept offer: $e';
       return false;
@@ -499,34 +546,30 @@ class YukuService extends ChangeNotifier {
     }
   }
 
+  /// Reject an offer
   Future<bool> rejectOffer(String offerId) async {
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(seconds: 1));
+      if (!_isInitialized) {
+        await initialize();
+      }
 
-      final offerIndex =
-          _receivedOffers.indexWhere((offer) => offer.id == offerId);
-      if (offerIndex != -1) {
-        final offer = _receivedOffers[offerIndex];
-        final updatedOffer = YukuOffer(
-          id: offer.id,
-          nftId: offer.nftId,
-          amount: offer.amount,
-          currency: offer.currency,
-          buyerAddress: offer.buyerAddress,
-          createdAt: offer.createdAt,
-          expiresAt: offer.expiresAt,
-          status: 'rejected',
-        );
+      if (!_icpClient.isConnected) {
+        _error = 'Wallet not connected';
+        return false;
+      }
 
-        _receivedOffers[offerIndex] = updatedOffer;
+      final success = await _yukuProvider.rejectOffer(offerId);
 
+      if (success) {
+        await loadReceivedOffers();
         _error = null;
         notifyListeners();
         return true;
+      } else {
+        _error = _yukuProvider.error ?? 'Failed to reject offer';
+        return false;
       }
-      return false;
     } catch (e) {
       _error = 'Failed to reject offer: $e';
       return false;
@@ -535,33 +578,32 @@ class YukuService extends ChangeNotifier {
     }
   }
 
+  /// Cancel an offer
   Future<bool> cancelOffer(String offerId) async {
     _setLoading(true);
     try {
-      // Simulate API call
-      await Future.delayed(Duration(seconds: 1));
+      if (!_isInitialized) {
+        await initialize();
+      }
 
-      final offerIndex = _myOffers.indexWhere((offer) => offer.id == offerId);
-      if (offerIndex != -1) {
-        final offer = _myOffers[offerIndex];
-        final updatedOffer = YukuOffer(
-          id: offer.id,
-          nftId: offer.nftId,
-          amount: offer.amount,
-          currency: offer.currency,
-          buyerAddress: offer.buyerAddress,
-          createdAt: offer.createdAt,
-          expiresAt: offer.expiresAt,
-          status: 'cancelled',
-        );
+      if (!_icpClient.isConnected) {
+        _error = 'Wallet not connected';
+        return false;
+      }
 
-        _myOffers[offerIndex] = updatedOffer;
+      // Note: Cancel offer method needs to be implemented in YukuMarketplaceProvider
+      // For now, treat it similar to reject
+      final success = await _yukuProvider.rejectOffer(offerId);
 
+      if (success) {
+        await loadMyOffers();
         _error = null;
         notifyListeners();
         return true;
+      } else {
+        _error = _yukuProvider.error ?? 'Failed to cancel offer';
+        return false;
       }
-      return false;
     } catch (e) {
       _error = 'Failed to cancel offer: $e';
       return false;
@@ -570,26 +612,36 @@ class YukuService extends ChangeNotifier {
     }
   }
 
+  /// Search listings
   Future<List<YukuListing>> searchListings({
-    String? nftId,
+    String? query,
     double? minPrice,
     double? maxPrice,
-    String? currency,
-    String? sellerAddress,
+    String? collection,
   }) async {
     try {
-      await Future.delayed(Duration(milliseconds: 300));
+      if (!_isInitialized) {
+        await initialize();
+      }
 
-      return _activeListings.where((listing) {
-        if (nftId != null && listing.nftId != nftId) return false;
-        if (minPrice != null && listing.price < minPrice) return false;
-        if (maxPrice != null && listing.price > maxPrice) return false;
-        if (currency != null && listing.currency != currency) return false;
-        if (sellerAddress != null && listing.sellerAddress != sellerAddress)
-          return false;
-        return true;
-      }).toList();
+      if (kDebugMode) {
+        print(
+            'Searching listings: query=$query, minPrice=$minPrice, maxPrice=$maxPrice');
+      }
+
+      // Search via Yuku provider
+      final results = await _yukuProvider.searchListings(
+        query: query,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        collection: collection,
+      );
+
+      return results.map((listing) => YukuListing.fromJson(listing)).toList();
     } catch (e) {
+      if (kDebugMode) {
+        print('Search error: $e');
+      }
       throw Exception('Search error: $e');
     }
   }
