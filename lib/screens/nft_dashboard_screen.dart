@@ -24,7 +24,6 @@ class NFTDashboardScreen extends StatefulWidget {
 class _NFTDashboardScreenState extends State<NFTDashboardScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int _selectedIndex = 0;
 
   // NFT providers
   late NFTProvider _nftProvider;
@@ -42,11 +41,6 @@ class _NFTDashboardScreenState extends State<NFTDashboardScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    _tabController.addListener(() {
-      setState(() {
-        _selectedIndex = _tabController.index;
-      });
-    });
 
     // Get providers - handle null safety
     _nftProvider = widget.nftClient.getNFTProvider(BlockchainNetwork.icp)!;

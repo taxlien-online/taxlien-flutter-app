@@ -18,12 +18,10 @@ class YukuMarketplaceScreen extends StatefulWidget {
 class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int _currentIndex = 0;
 
   // Providers
   late MarketplaceProvider _marketplaceProvider;
   late WalletProvider _walletProvider;
-  late NFTProvider _nftProvider;
 
   // State
   bool _isLoading = false;
@@ -37,18 +35,12 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
-    _tabController.addListener(() {
-      setState(() {
-        _currentIndex = _tabController.index;
-      });
-    });
 
     // Get providers - handle null safety
     _marketplaceProvider =
         widget.nftClient.getMarketplaceProvider(BlockchainNetwork.icp)!;
     _walletProvider =
         widget.nftClient.getWalletProvider(BlockchainNetwork.icp)!;
-    _nftProvider = widget.nftClient.getNFTProvider(BlockchainNetwork.icp)!;
 
     // Load initial data
     _loadData();
@@ -322,7 +314,7 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                 children: [
                   Text(listing.formattedPrice),
                   Text(
-                    'Status: ${listing.status.name}',
+                    'Status: ${listing.status.toString().split('.').last}',
                     style: TextStyle(
                       color: listing.status == ListingStatus.active
                           ? Colors.green
@@ -408,7 +400,7 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                 children: [
                   Text(offer.formattedAmount),
                   Text(
-                    'Status: ${offer.status.name}',
+                    'Status: ${offer.status.toString().split('.').last}',
                     style: TextStyle(
                       color: offer.status == OfferStatus.pending
                           ? Colors.orange
@@ -495,7 +487,8 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Offer: ${offer.formattedAmount}'),
-                  Text('From: ${offer.buyerAddress.substring(0, 10)}...'),
+                  Text(
+                      'From: ${offer.buyerAddress?.substring(0, 10) ?? 'Unknown'}...'),
                 ],
               ),
               trailing: PopupMenuButton(
@@ -705,7 +698,7 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
           children: [
             Text('NFT ID: ${listing.nftId}'),
             Text('Price: ${listing.formattedPrice}'),
-            Text('Status: ${listing.status.name}'),
+            Text('Status: ${listing.status.toString().split('.').last}'),
             Text('Created: ${listing.createdAt.toString()}'),
           ],
         ),
@@ -730,7 +723,7 @@ class _YukuMarketplaceScreenState extends State<YukuMarketplaceScreen>
           children: [
             Text('NFT ID: ${offer.nftId}'),
             Text('Amount: ${offer.formattedAmount}'),
-            Text('Status: ${offer.status.name}'),
+            Text('Status: ${offer.status.toString().split('.').last}'),
             Text('Created: ${offer.createdAt.toString()}'),
           ],
         ),

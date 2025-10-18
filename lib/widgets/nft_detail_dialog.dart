@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../services/nft_service.dart';
 import '../core/models/tax_lien_models.dart';
+import '../core/mocks/nft_mocks.dart';
 
 class NFTDetailDialog extends StatelessWidget {
-  final TaxLienNFT nft;
+  final dynamic nft; // Can accept both TaxLienNFT and NFT
 
   const NFTDetailDialog({
     super.key,
@@ -364,8 +365,9 @@ class NFTDetailDialog extends StatelessWidget {
     );
   }
 
-  void _copyNFTLink(TaxLienNFT nft) {
-    final nftLink = 'https://taxlien.online/nft/${nft.id}';
+  void _copyNFTLink(dynamic nft, BuildContext context) {
+    final nftId = nft is TaxLienNFT ? nft.id : (nft.id ?? 'unknown');
+    final nftLink = 'https://taxlien.online/nft/$nftId';
     // In a real implementation, this would copy to clipboard
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -375,19 +377,25 @@ class NFTDetailDialog extends StatelessWidget {
     );
   }
 
-  void _shareViaSystem(BuildContext context, TaxLienNFT nft) {
+  void _shareViaSystem(BuildContext context, dynamic nft) {
     // In a real implementation, this would use the share_plus package
+    final name = nft is TaxLienNFT
+        ? (nft.metadata?['name'] ?? nft.name)
+        : (nft.metadata?.name ?? 'NFT');
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Sharing ${nft.metadata?['name'] ?? nft.name}...'),
+        content: Text('Sharing $name...'),
         backgroundColor: Colors.blue,
       ),
     );
   }
 
-  void _generateQRCode(BuildContext context, TaxLienNFT nft) {
+  void _generateQRCode(BuildContext parentContext, dynamic nft) {
+    final name = nft is TaxLienNFT
+        ? (nft.metadata?['name'] ?? nft.name)
+        : (nft.metadata?.name ?? 'NFT');
     showDialog(
-      context: context,
+      context: parentContext,
       builder: (context) => AlertDialog(
         title: const Text('NFT QR Code'),
         content: Column(
@@ -415,7 +423,7 @@ class NFTDetailDialog extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'Scan this QR code to view ${nft.metadata?['name'] ?? nft.name}',
+              'Scan this QR code to view $name',
               textAlign: TextAlign.center,
             ),
           ],

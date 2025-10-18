@@ -158,7 +158,7 @@ class NFTCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            nft.metadata.attributes['Risk Level'] ?? 'Low',
+                            nft.metadata?.attributes?['Risk Level'] ?? 'Low',
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 10,

@@ -18,12 +18,10 @@ class PlugWalletScreen extends StatefulWidget {
 class _PlugWalletScreenState extends State<PlugWalletScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int _currentIndex = 0;
 
   // Providers
   late WalletProvider _walletProvider;
   late NFTProvider _nftProvider;
-  late MarketplaceProvider _marketplaceProvider;
 
   // State
   bool _isLoading = false;
@@ -37,18 +35,11 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 5, vsync: this);
-    _tabController.addListener(() {
-      setState(() {
-        _currentIndex = _tabController.index;
-      });
-    });
 
     // Get providers - handle null safety
     _walletProvider =
         widget.nftClient.getWalletProvider(BlockchainNetwork.icp)!;
     _nftProvider = widget.nftClient.getNFTProvider(BlockchainNetwork.icp)!;
-    _marketplaceProvider =
-        widget.nftClient.getMarketplaceProvider(BlockchainNetwork.icp)!;
 
     // Load initial data
     _loadData();

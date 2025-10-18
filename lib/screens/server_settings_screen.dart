@@ -21,10 +21,9 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
   @override
   void initState() {
     super.initState();
-    _serverUrlController =
-        TextEditingController(text: widget.serverService.serverUrl);
-    _portController =
-        TextEditingController(text: widget.serverService.port.toString());
+    _serverUrlController = TextEditingController(
+        text: widget.serverService.serverAddress ?? 'http://localhost');
+    _portController = TextEditingController(text: '3000');
   }
 
   @override
@@ -35,11 +34,6 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
   }
 
   Future<void> _saveSettings() async {
-    final url = _serverUrlController.text.trim();
-    final port = int.tryParse(_portController.text) ?? 3000;
-
-    await widget.serverService.updateServerSettings(url, port);
-
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -52,7 +46,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
   }
 
   Future<void> _testConnection() async {
-    final connected = await widget.serverService.connect();
+    final connected = await widget.serverService.healthCheck();
 
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -100,7 +94,7 @@ class _ServerSettingsScreenState extends State<ServerSettingsScreen> {
                       : 'Disconnected',
                 ),
                 subtitle: Text(
-                  '${widget.serverService.serverUrl}:${widget.serverService.port}',
+                  widget.serverService.serverAddress ?? 'Not configured',
                 ),
               ),
             ),

@@ -4,27 +4,26 @@ import '../l10n/app_localizations.dart';
 import '../services/server_connection_service.dart';
 import '../services/tax_lien_content_service.dart';
 import '../theme/app_colors.dart';
-import '../theme/app_theme.dart';
 
 class TaxLienContentManagerScreen extends StatefulWidget {
   final ServerConnectionService serverConnectionService;
-  
+
   const TaxLienContentManagerScreen({
-    super.key, 
+    super.key,
     required this.serverConnectionService,
   });
 
   @override
-  State<TaxLienContentManagerScreen> createState() => _TaxLienContentManagerScreenState();
+  State<TaxLienContentManagerScreen> createState() =>
+      _TaxLienContentManagerScreenState();
 }
 
-class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScreen> 
-    with TickerProviderStateMixin {
+class _TaxLienContentManagerScreenState
+    extends State<TaxLienContentManagerScreen> with TickerProviderStateMixin {
   late TaxLienContentService _contentService;
   bool _isLoading = false;
   String? _errorMessage;
-  int _currentTabIndex = 0;
-  
+
   late TabController _tabController;
   final TextEditingController _searchController = TextEditingController();
 
@@ -66,7 +65,7 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
         _loadMarketIntelligence(),
         _loadLegalResources(),
       ]);
-      
+
       setState(() {
         _isLoading = false;
       });
@@ -126,7 +125,7 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)?.contentManager ?? 'Content Manager'),
+        title: const Text('Content Manager'),
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         elevation: 0,
@@ -151,31 +150,31 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
               indicatorColor: Colors.white,
               labelColor: Colors.white,
               unselectedLabelColor: Colors.white70,
-              tabs: [
+              tabs: const [
                 Tab(
-                  icon: const Icon(Icons.folder),
-                  text: AppLocalizations.of(context)?.documents ?? 'Documents',
+                  icon: Icon(Icons.folder),
+                  text: 'Documents',
                 ),
                 Tab(
-                  icon: const Icon(Icons.photo_library),
-                  text: AppLocalizations.of(context)?.propertyMedia ?? 'Property Media',
+                  icon: Icon(Icons.photo_library),
+                  text: 'Property Media',
                 ),
                 Tab(
-                  icon: const Icon(Icons.school),
-                  text: AppLocalizations.of(context)?.educational ?? 'Educational',
+                  icon: Icon(Icons.school),
+                  text: 'Educational',
                 ),
                 Tab(
-                  icon: const Icon(Icons.analytics),
-                  text: AppLocalizations.of(context)?.marketIntelligence ?? 'Market Intel',
+                  icon: Icon(Icons.analytics),
+                  text: 'Market Intel',
                 ),
                 Tab(
-                  icon: const Icon(Icons.gavel),
-                  text: AppLocalizations.of(context)?.legalResources ?? 'Legal',
+                  icon: Icon(Icons.gavel),
+                  text: 'Legal',
                 ),
               ],
             ),
           ),
-          
+
           // Content Area
           Expanded(
             child: _isLoading
@@ -341,15 +340,15 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
             Text(
               title,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             const SizedBox(height: 8),
             Text(
               subtitle,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
@@ -360,7 +359,8 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               ),
             ),
           ],
@@ -492,7 +492,8 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                 Chip(
                   label: Text(content.difficulty),
                   backgroundColor: _getDifficultyColor(content.difficulty),
-                  labelStyle: const TextStyle(color: Colors.white, fontSize: 12),
+                  labelStyle:
+                      const TextStyle(color: Colors.white, fontSize: 12),
                 ),
                 const SizedBox(width: 8),
                 Text(content.formattedDuration),
@@ -515,7 +516,8 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
               value: 'delete',
             ),
           ],
-          onSelected: (value) => _handleEducationalContentAction(content, value),
+          onSelected: (value) =>
+              _handleEducationalContentAction(content, value),
         ),
       ),
     );
@@ -575,7 +577,8 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
               value: 'delete',
             ),
           ],
-          onSelected: (value) => _handleMarketIntelligenceAction(intelligence, value),
+          onSelected: (value) =>
+              _handleMarketIntelligenceAction(intelligence, value),
         ),
       ),
     );
@@ -645,110 +648,164 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
   // Helper methods for icons and colors
   Color _getDocumentTypeColor(String type) {
     switch (type) {
-      case 'pdf': return Colors.red;
-      case 'image': return Colors.green;
-      case 'audio': return Colors.blue;
-      case 'video': return Colors.purple;
-      default: return Colors.grey;
+      case 'pdf':
+        return Colors.red;
+      case 'image':
+        return Colors.green;
+      case 'audio':
+        return Colors.blue;
+      case 'video':
+        return Colors.purple;
+      default:
+        return Colors.grey;
     }
   }
 
   IconData _getDocumentTypeIcon(String type) {
     switch (type) {
-      case 'pdf': return Icons.picture_as_pdf;
-      case 'image': return Icons.image;
-      case 'audio': return Icons.audiotrack;
-      case 'video': return Icons.video_library;
-      default: return Icons.insert_drive_file;
+      case 'pdf':
+        return Icons.picture_as_pdf;
+      case 'image':
+        return Icons.image;
+      case 'audio':
+        return Icons.audiotrack;
+      case 'video':
+        return Icons.video_library;
+      default:
+        return Icons.insert_drive_file;
     }
   }
 
   Color _getMediaTypeColor(String type) {
     switch (type) {
-      case 'photo': return Colors.green;
-      case 'video': return Colors.purple;
-      case '360_tour': return Colors.orange;
-      case 'drone': return Colors.blue;
-      default: return Colors.grey;
+      case 'photo':
+        return Colors.green;
+      case 'video':
+        return Colors.purple;
+      case '360_tour':
+        return Colors.orange;
+      case 'drone':
+        return Colors.blue;
+      default:
+        return Colors.grey;
     }
   }
 
   IconData _getMediaTypeIcon(String type) {
     switch (type) {
-      case 'photo': return Icons.photo;
-      case 'video': return Icons.videocam;
-      case '360_tour': return Icons.view_in_ar;
-      case 'drone': return Icons.flight;
-      default: return Icons.photo_library;
+      case 'photo':
+        return Icons.photo;
+      case 'video':
+        return Icons.videocam;
+      case '360_tour':
+        return Icons.view_in_ar;
+      case 'drone':
+        return Icons.flight;
+      default:
+        return Icons.photo_library;
     }
   }
 
   Color _getContentTypeColor(String type) {
     switch (type) {
-      case 'video': return Colors.red;
-      case 'article': return Colors.green;
-      case 'webinar': return Colors.orange;
-      case 'course': return Colors.blue;
-      default: return Colors.grey;
+      case 'video':
+        return Colors.red;
+      case 'article':
+        return Colors.green;
+      case 'webinar':
+        return Colors.orange;
+      case 'course':
+        return Colors.blue;
+      default:
+        return Colors.grey;
     }
   }
 
   IconData _getContentTypeIcon(String type) {
     switch (type) {
-      case 'video': return Icons.video_library;
-      case 'article': return Icons.article;
-      case 'webinar': return Icons.cast;
-      case 'course': return Icons.school;
-      default: return Icons.menu_book;
+      case 'video':
+        return Icons.video_library;
+      case 'article':
+        return Icons.article;
+      case 'webinar':
+        return Icons.cast;
+      case 'course':
+        return Icons.school;
+      default:
+        return Icons.menu_book;
     }
   }
 
   Color _getIntelligenceTypeColor(String type) {
     switch (type) {
-      case 'report': return Colors.blue;
-      case 'analysis': return Colors.green;
-      case 'forecast': return Colors.orange;
-      case 'news': return Colors.red;
-      default: return Colors.grey;
+      case 'report':
+        return Colors.blue;
+      case 'analysis':
+        return Colors.green;
+      case 'forecast':
+        return Colors.orange;
+      case 'news':
+        return Colors.red;
+      default:
+        return Colors.grey;
     }
   }
 
   IconData _getIntelligenceTypeIcon(String type) {
     switch (type) {
-      case 'report': return Icons.assessment;
-      case 'analysis': return Icons.analytics;
-      case 'forecast': return Icons.trending_up;
-      case 'news': return Icons.newspaper;
-      default: return Icons.insights;
+      case 'report':
+        return Icons.assessment;
+      case 'analysis':
+        return Icons.analytics;
+      case 'forecast':
+        return Icons.trending_up;
+      case 'news':
+        return Icons.newspaper;
+      default:
+        return Icons.insights;
     }
   }
 
   Color _getLegalTypeColor(String type) {
     switch (type) {
-      case 'law': return Colors.red;
-      case 'regulation': return Colors.orange;
-      case 'case_study': return Colors.blue;
-      case 'template': return Colors.green;
-      default: return Colors.grey;
+      case 'law':
+        return Colors.red;
+      case 'regulation':
+        return Colors.orange;
+      case 'case_study':
+        return Colors.blue;
+      case 'template':
+        return Colors.green;
+      default:
+        return Colors.grey;
     }
   }
 
   IconData _getLegalTypeIcon(String type) {
     switch (type) {
-      case 'law': return Icons.gavel;
-      case 'regulation': return Icons.rule;
-      case 'case_study': return Icons.cases;
-      case 'template': return Icons.description;
-      default: return Icons.library_books;
+      case 'law':
+        return Icons.gavel;
+      case 'regulation':
+        return Icons.rule;
+      case 'case_study':
+        return Icons.cases;
+      case 'template':
+        return Icons.description;
+      default:
+        return Icons.library_books;
     }
   }
 
   Color _getDifficultyColor(String difficulty) {
     switch (difficulty) {
-      case 'beginner': return Colors.green;
-      case 'intermediate': return Colors.orange;
-      case 'advanced': return Colors.red;
-      default: return Colors.grey;
+      case 'beginner':
+        return Colors.green;
+      case 'intermediate':
+        return Colors.orange;
+      case 'advanced':
+        return Colors.red;
+      default:
+        return Colors.grey;
     }
   }
 
@@ -811,7 +868,8 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
     }
   }
 
-  void _handleEducationalContentAction(EducationalContent content, String action) {
+  void _handleEducationalContentAction(
+      EducationalContent content, String action) {
     switch (action) {
       case 'view':
         ScaffoldMessenger.of(context).showSnackBar(
@@ -838,27 +896,32 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
     }
   }
 
-  void _handleMarketIntelligenceAction(MarketIntelligence intelligence, String action) {
+  void _handleMarketIntelligenceAction(
+      MarketIntelligence intelligence, String action) {
     switch (action) {
       case 'view':
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Viewing intelligence: ${intelligence.title}')),
+          SnackBar(
+              content: Text('Viewing intelligence: ${intelligence.title}')),
         );
         break;
       case 'export':
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Exporting intelligence: ${intelligence.title}')),
+          SnackBar(
+              content: Text('Exporting intelligence: ${intelligence.title}')),
         );
         break;
       case 'edit':
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Editing intelligence: ${intelligence.title}')),
+          SnackBar(
+              content: Text('Editing intelligence: ${intelligence.title}')),
         );
         break;
       case 'delete':
         _showDeleteConfirmation('intelligence', intelligence.title, () {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Intelligence deleted: ${intelligence.title}')),
+            SnackBar(
+                content: Text('Intelligence deleted: ${intelligence.title}')),
           );
         });
         break;
@@ -892,7 +955,8 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
     }
   }
 
-  void _showDeleteConfirmation(String type, String title, VoidCallback onConfirm) {
+  void _showDeleteConfirmation(
+      String type, String title, VoidCallback onConfirm) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -948,9 +1012,12 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                 DropdownMenuItem(value: 'all', child: Text('All Content')),
                 DropdownMenuItem(value: 'documents', child: Text('Documents')),
                 DropdownMenuItem(value: 'media', child: Text('Property Media')),
-                DropdownMenuItem(value: 'educational', child: Text('Educational Content')),
-                DropdownMenuItem(value: 'intelligence', child: Text('Market Intelligence')),
-                DropdownMenuItem(value: 'legal', child: Text('Legal Resources')),
+                DropdownMenuItem(
+                    value: 'educational', child: Text('Educational Content')),
+                DropdownMenuItem(
+                    value: 'intelligence', child: Text('Market Intelligence')),
+                DropdownMenuItem(
+                    value: 'legal', child: Text('Legal Resources')),
               ],
               onChanged: (value) {
                 // Handle content type selection
@@ -968,7 +1035,8 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
               // Perform search
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Search functionality coming soon!')),
+                const SnackBar(
+                    content: Text('Search functionality coming soon!')),
               );
             },
             child: const Text('Search'),
@@ -989,7 +1057,8 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
             ListTile(
               leading: const Icon(Icons.description),
               title: const Text('Upload Document'),
-              subtitle: const Text('Add property documents, certificates, etc.'),
+              subtitle:
+                  const Text('Add property documents, certificates, etc.'),
               onTap: () {
                 Navigator.pop(context);
                 _showUploadDocumentDialog();
@@ -1047,7 +1116,7 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
     final titleController = TextEditingController();
     final descriptionController = TextEditingController();
     String selectedCategory = 'property_document';
-    
+
     showDialog(
       context: context,
       builder: (context) => StatefulBuilder(
@@ -1081,10 +1150,16 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                     border: OutlineInputBorder(),
                   ),
                   items: const [
-                    DropdownMenuItem(value: 'property_document', child: Text('Property Document')),
-                    DropdownMenuItem(value: 'certificate', child: Text('Certificate')),
-                    DropdownMenuItem(value: 'legal_document', child: Text('Legal Document')),
-                    DropdownMenuItem(value: 'financial_document', child: Text('Financial Document')),
+                    DropdownMenuItem(
+                        value: 'property_document',
+                        child: Text('Property Document')),
+                    DropdownMenuItem(
+                        value: 'certificate', child: Text('Certificate')),
+                    DropdownMenuItem(
+                        value: 'legal_document', child: Text('Legal Document')),
+                    DropdownMenuItem(
+                        value: 'financial_document',
+                        child: Text('Financial Document')),
                     DropdownMenuItem(value: 'other', child: Text('Other')),
                   ],
                   onChanged: (value) {
@@ -1098,7 +1173,8 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                   onPressed: () {
                     // Handle file selection
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('File selection coming soon!')),
+                      const SnackBar(
+                          content: Text('File selection coming soon!')),
                     );
                   },
                   icon: const Icon(Icons.upload_file),
@@ -1117,7 +1193,9 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                 if (titleController.text.isNotEmpty) {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Document upload functionality coming soon!')),
+                    const SnackBar(
+                        content:
+                            Text('Document upload functionality coming soon!')),
                   );
                 }
               },
@@ -1133,7 +1211,7 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
     final titleController = TextEditingController();
     final descriptionController = TextEditingController();
     String selectedType = 'photo';
-    
+
     showDialog(
       context: context,
       builder: (context) => StatefulBuilder(
@@ -1169,8 +1247,10 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                   items: const [
                     DropdownMenuItem(value: 'photo', child: Text('Photo')),
                     DropdownMenuItem(value: 'video', child: Text('Video')),
-                    DropdownMenuItem(value: 'virtual_tour', child: Text('Virtual Tour')),
-                    DropdownMenuItem(value: 'drone_footage', child: Text('Drone Footage')),
+                    DropdownMenuItem(
+                        value: 'virtual_tour', child: Text('Virtual Tour')),
+                    DropdownMenuItem(
+                        value: 'drone_footage', child: Text('Drone Footage')),
                   ],
                   onChanged: (value) {
                     setState(() {
@@ -1182,7 +1262,8 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                 ElevatedButton.icon(
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Media selection coming soon!')),
+                      const SnackBar(
+                          content: Text('Media selection coming soon!')),
                     );
                   },
                   icon: const Icon(Icons.photo_library),
@@ -1201,7 +1282,9 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                 if (titleController.text.isNotEmpty) {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Property media functionality coming soon!')),
+                    const SnackBar(
+                        content:
+                            Text('Property media functionality coming soon!')),
                   );
                 }
               },
@@ -1217,7 +1300,7 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
     final titleController = TextEditingController();
     final contentController = TextEditingController();
     String selectedCategory = 'guide';
-    
+
     showDialog(
       context: context,
       builder: (context) => StatefulBuilder(
@@ -1243,9 +1326,11 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                   ),
                   items: const [
                     DropdownMenuItem(value: 'guide', child: Text('Guide')),
-                    DropdownMenuItem(value: 'tutorial', child: Text('Tutorial')),
+                    DropdownMenuItem(
+                        value: 'tutorial', child: Text('Tutorial')),
                     DropdownMenuItem(value: 'faq', child: Text('FAQ')),
-                    DropdownMenuItem(value: 'resource', child: Text('Resource')),
+                    DropdownMenuItem(
+                        value: 'resource', child: Text('Resource')),
                   ],
                   onChanged: (value) {
                     setState(() {
@@ -1272,10 +1357,13 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
             ),
             ElevatedButton(
               onPressed: () {
-                if (titleController.text.isNotEmpty && contentController.text.isNotEmpty) {
+                if (titleController.text.isNotEmpty &&
+                    contentController.text.isNotEmpty) {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Educational content functionality coming soon!')),
+                    const SnackBar(
+                        content: Text(
+                            'Educational content functionality coming soon!')),
                   );
                 }
               },
@@ -1291,7 +1379,7 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
     final titleController = TextEditingController();
     final reportController = TextEditingController();
     String selectedType = 'market_report';
-    
+
     showDialog(
       context: context,
       builder: (context) => StatefulBuilder(
@@ -1316,10 +1404,14 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                     border: OutlineInputBorder(),
                   ),
                   items: const [
-                    DropdownMenuItem(value: 'market_report', child: Text('Market Report')),
-                    DropdownMenuItem(value: 'trend_analysis', child: Text('Trend Analysis')),
-                    DropdownMenuItem(value: 'forecast', child: Text('Forecast')),
-                    DropdownMenuItem(value: 'comparison', child: Text('Market Comparison')),
+                    DropdownMenuItem(
+                        value: 'market_report', child: Text('Market Report')),
+                    DropdownMenuItem(
+                        value: 'trend_analysis', child: Text('Trend Analysis')),
+                    DropdownMenuItem(
+                        value: 'forecast', child: Text('Forecast')),
+                    DropdownMenuItem(
+                        value: 'comparison', child: Text('Market Comparison')),
                   ],
                   onChanged: (value) {
                     setState(() {
@@ -1346,10 +1438,13 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
             ),
             ElevatedButton(
               onPressed: () {
-                if (titleController.text.isNotEmpty && reportController.text.isNotEmpty) {
+                if (titleController.text.isNotEmpty &&
+                    reportController.text.isNotEmpty) {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Market intelligence functionality coming soon!')),
+                    const SnackBar(
+                        content: Text(
+                            'Market intelligence functionality coming soon!')),
                   );
                 }
               },
@@ -1365,7 +1460,7 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
     final titleController = TextEditingController();
     final descriptionController = TextEditingController();
     String selectedType = 'legal_document';
-    
+
     showDialog(
       context: context,
       builder: (context) => StatefulBuilder(
@@ -1390,10 +1485,13 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                     border: OutlineInputBorder(),
                   ),
                   items: const [
-                    DropdownMenuItem(value: 'legal_document', child: Text('Legal Document')),
+                    DropdownMenuItem(
+                        value: 'legal_document', child: Text('Legal Document')),
                     DropdownMenuItem(value: 'form', child: Text('Form')),
-                    DropdownMenuItem(value: 'template', child: Text('Template')),
-                    DropdownMenuItem(value: 'regulation', child: Text('Regulation')),
+                    DropdownMenuItem(
+                        value: 'template', child: Text('Template')),
+                    DropdownMenuItem(
+                        value: 'regulation', child: Text('Regulation')),
                   ],
                   onChanged: (value) {
                     setState(() {
@@ -1414,7 +1512,8 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                 ElevatedButton.icon(
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('File selection coming soon!')),
+                      const SnackBar(
+                          content: Text('File selection coming soon!')),
                     );
                   },
                   icon: const Icon(Icons.upload_file),
@@ -1433,7 +1532,9 @@ class _TaxLienContentManagerScreenState extends State<TaxLienContentManagerScree
                 if (titleController.text.isNotEmpty) {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Legal resource functionality coming soon!')),
+                    const SnackBar(
+                        content:
+                            Text('Legal resource functionality coming soon!')),
                   );
                 }
               },

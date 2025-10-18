@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../l10n/app_localizations.dart';
 
 class MediaManagementScreen extends StatefulWidget {
   const MediaManagementScreen({super.key});
@@ -69,17 +68,16 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n?.mediaManagement ?? 'Media Management'),
+        title: const Text('Media Management'),
         backgroundColor: theme.colorScheme.surface,
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: _showAddMediaDialog,
-            tooltip: l10n?.addMedia ?? 'Add Media',
+            tooltip: 'Add Media',
           ),
         ],
       ),
@@ -102,12 +100,11 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
   }
 
   Widget _buildFilterChips() {
-    final l10n = AppLocalizations.of(context);
     final filters = [
-      {'key': 'all', 'label': l10n?.all ?? 'All'},
-      {'key': 'photo', 'label': l10n?.photos ?? 'Photos'},
-      {'key': 'video', 'label': l10n?.videos ?? 'Videos'},
-      {'key': 'document', 'label': l10n?.documents ?? 'Documents'},
+      {'key': 'all', 'label': 'All'},
+      {'key': 'photo', 'label': 'Photos'},
+      {'key': 'video', 'label': 'Videos'},
+      {'key': 'document', 'label': 'Documents'},
     ];
 
     return Container(
@@ -139,7 +136,6 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
 
   Widget _buildEmptyState() {
     final theme = Theme.of(context);
-    final l10n = AppLocalizations.of(context);
 
     return Center(
       child: Column(
@@ -152,19 +148,19 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
           ),
           const SizedBox(height: 16),
           Text(
-            l10n?.noMediaFound ?? 'No media found',
+            'No media found',
             style: theme.textTheme.headlineSmall,
           ),
           const SizedBox(height: 8),
           Text(
-            l10n?.addMediaToGetStarted ?? 'Add media to get started',
+            'Add media to get started',
             style: theme.textTheme.bodyMedium,
           ),
           const SizedBox(height: 24),
           ElevatedButton.icon(
             onPressed: _showAddMediaDialog,
             icon: const Icon(Icons.add),
-            label: Text(l10n?.addMedia ?? 'Add Media'),
+            label: const Text('Add Media'),
           ),
         ],
       ),
@@ -279,14 +275,13 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
   }
 
   String _getMediaTypeLabel(MediaType type) {
-    final l10n = AppLocalizations.of(context);
     switch (type) {
       case MediaType.photo:
-        return l10n?.photo ?? 'Photo';
+        return 'Photo';
       case MediaType.video:
-        return l10n?.video ?? 'Video';
+        return 'Video';
       case MediaType.document:
-        return l10n?.document ?? 'Document';
+        return 'Document';
     }
   }
 
@@ -307,7 +302,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(AppLocalizations.of(context)?.close ?? 'Close'),
+            child: const Text('Close'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -318,7 +313,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
             ),
-            child: Text(AppLocalizations.of(context)?.delete ?? 'Delete'),
+            child: const Text('Delete'),
           ),
         ],
       ),
@@ -326,18 +321,16 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
   }
 
   void _showAddMediaDialog() {
-    final l10n = AppLocalizations.of(context);
-
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n?.addMedia ?? 'Add Media'),
+        title: const Text('Add Media'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
               leading: const Icon(Icons.photo),
-              title: Text(l10n?.addPhoto ?? 'Add Photo'),
+              title: const Text('Add Photo'),
               onTap: () {
                 Navigator.pop(context);
                 _addMedia(MediaType.photo);
@@ -345,7 +338,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.videocam),
-              title: Text(l10n?.addVideo ?? 'Add Video'),
+              title: const Text('Add Video'),
               onTap: () {
                 Navigator.pop(context);
                 _addMedia(MediaType.video);
@@ -353,7 +346,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.description),
-              title: Text(l10n?.addDocument ?? 'Add Document'),
+              title: const Text('Add Document'),
               onTap: () {
                 Navigator.pop(context);
                 _addMedia(MediaType.document);
@@ -364,7 +357,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(l10n?.cancel ?? 'Cancel'),
+            child: const Text('Cancel'),
           ),
         ],
       ),
@@ -372,11 +365,9 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
   }
 
   void _addMedia(MediaType type) {
-    final l10n = AppLocalizations.of(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-            '${_getMediaTypeLabel(type)} ${l10n?.uploadComingSoon ?? 'upload coming soon!'}'),
+        content: Text('${_getMediaTypeLabel(type)} upload coming soon!'),
       ),
     );
   }
@@ -388,8 +379,7 @@ class _MediaManagementScreenState extends State<MediaManagementScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-            '${item.title} ${AppLocalizations.of(context)?.deleted ?? 'deleted'}'),
+        content: Text('${item.title} deleted'),
         backgroundColor: Colors.green,
       ),
     );
