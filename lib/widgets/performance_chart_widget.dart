@@ -46,7 +46,7 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
   Widget _buildHeader() {
     final totalReturn = _calculateTotalReturn();
     final isPositive = totalReturn >= 0;
-    
+
     return Row(
       children: [
         Icon(
@@ -57,14 +57,16 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
         Text(
           'Performance Chart',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+                fontWeight: FontWeight.w600,
+              ),
         ),
         const Spacer(),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           decoration: BoxDecoration(
-            color: isPositive ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
+            color: isPositive
+                ? Colors.green.withOpacity(0.1)
+                : Colors.red.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: isPositive ? Colors.green : Colors.red,
@@ -122,7 +124,7 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
                 reservedSize: 30,
                 interval: _calculateXAxisInterval(),
                 getTitlesWidget: (value, meta) {
-                  return _buildBottomTitle(value);
+                  return _buildBottomTitle(value, meta);
                 },
               ),
             ),
@@ -132,7 +134,7 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
                 interval: _calculateInterval(),
                 reservedSize: 40,
                 getTitlesWidget: (value, meta) {
-                  return _buildLeftTitle(value);
+                  return _buildLeftTitle(value, meta);
                 },
               ),
             ),
@@ -229,14 +231,15 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
         Text(
           '${widget.data.length} data points',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
         ),
       ],
     );
   }
 
-  Widget _buildControlButton(String label, bool isActive, IconData icon, VoidCallback onTap) {
+  Widget _buildControlButton(
+      String label, bool isActive, IconData icon, VoidCallback onTap) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
@@ -267,11 +270,11 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
             Text(
               label,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: isActive
-                    ? Theme.of(context).colorScheme.primary
-                    : Theme.of(context).colorScheme.onSurfaceVariant,
-                fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
-              ),
+                    color: isActive
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
+                    fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
+                  ),
             ),
           ],
         ),
@@ -294,15 +297,15 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
             Text(
               'No Performance Data',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
             ),
             const SizedBox(height: 8),
             Text(
               'Start investing to see your performance chart',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -311,27 +314,29 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
     );
   }
 
-  Widget _buildBottomTitle(double value) {
+  Widget _buildBottomTitle(double value, TitleMeta meta) {
     if (value.toInt() >= widget.data.length) return const SizedBox.shrink();
-    
+
     final dataPoint = widget.data[value.toInt()];
     return SideTitleWidget(
+      meta: meta,
       child: Text(
         _formatDateShort(dataPoint.date),
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: Theme.of(context).colorScheme.onSurfaceVariant,
-        ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
       ),
     );
   }
 
-  Widget _buildLeftTitle(double value) {
+  Widget _buildLeftTitle(double value, TitleMeta meta) {
     return SideTitleWidget(
+      meta: meta,
       child: Text(
         '\$${(value / 1000).toStringAsFixed(0)}k',
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: Theme.of(context).colorScheme.onSurfaceVariant,
-        ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
       ),
     );
   }
@@ -344,24 +349,26 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
 
   double _calculateTotalReturn() {
     if (widget.data.length < 2) return 0;
-    
+
     final firstValue = widget.data.first.value;
     final lastValue = widget.data.last.value;
-    
+
     return ((lastValue - firstValue) / firstValue) * 100;
   }
 
   double _calculateMinY() {
     if (widget.data.isEmpty) return 0;
-    
-    final minValue = widget.data.map((d) => d.value).reduce((a, b) => a < b ? a : b);
+
+    final minValue =
+        widget.data.map((d) => d.value).reduce((a, b) => a < b ? a : b);
     return minValue * 0.95; // 5% margin
   }
 
   double _calculateMaxY() {
     if (widget.data.isEmpty) return 100;
-    
-    final maxValue = widget.data.map((d) => d.value).reduce((a, b) => a > b ? a : b);
+
+    final maxValue =
+        widget.data.map((d) => d.value).reduce((a, b) => a > b ? a : b);
     return maxValue * 1.05; // 5% margin
   }
 
@@ -369,7 +376,7 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
     final minY = _calculateMinY();
     final maxY = _calculateMaxY();
     final range = maxY - minY;
-    
+
     if (range < 1000) return 100;
     if (range < 10000) return 1000;
     if (range < 100000) return 10000;
@@ -412,8 +419,8 @@ class PerformanceMetricsCard extends StatelessWidget {
             Text(
               'Performance Metrics',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
             const SizedBox(height: 16),
             Row(
@@ -481,15 +488,15 @@ class PerformanceMetricsCard extends StatelessWidget {
         Text(
           value,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: color,
-          ),
+                fontWeight: FontWeight.bold,
+                color: color,
+              ),
         ),
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
         ),
       ],
     );

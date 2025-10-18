@@ -14,6 +14,7 @@ class MagentoApiService extends ChangeNotifier {
   String? _error;
 
   // Getters
+  Dio get dio => _dio;
   bool get isLoading => _isLoading;
   String? get error => _error;
   bool get isAuthenticated => _customerToken != null;
@@ -766,5 +767,4 @@ class MagentoApiService extends ChangeNotifier {
       _setLoading(false);
     }
   }
-
 }

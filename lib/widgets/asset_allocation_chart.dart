@@ -38,15 +38,15 @@ class _AssetAllocationChartState extends State<AssetAllocationChart> {
                 Text(
                   'Asset Allocation',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 const Spacer(),
                 Text(
                   'Total: 100%',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                 ),
               ],
             ),
@@ -60,7 +60,8 @@ class _AssetAllocationChartState extends State<AssetAllocationChart> {
                     child: PieChart(
                       PieChartData(
                         pieTouchData: PieTouchData(
-                          touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                          touchCallback:
+                              (FlTouchEvent event, pieTouchResponse) {
                             setState(() {
                               if (!event.isInterestedForInteractions ||
                                   pieTouchResponse == null ||
@@ -68,7 +69,8 @@ class _AssetAllocationChartState extends State<AssetAllocationChart> {
                                 _touchedIndex = -1;
                                 return;
                               }
-                              _touchedIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
+                              _touchedIndex = pieTouchResponse
+                                  .touchedSection!.touchedSectionIndex;
                             });
                           },
                         ),
@@ -108,15 +110,15 @@ class _AssetAllocationChartState extends State<AssetAllocationChart> {
             Text(
               'No Assets',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
             ),
             const SizedBox(height: 8),
             Text(
               'Start investing to see your asset allocation',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -172,8 +174,8 @@ class _AssetAllocationChartState extends State<AssetAllocationChart> {
       child: Text(
         assetName,
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          fontWeight: FontWeight.w600,
-        ),
+              fontWeight: FontWeight.w600,
+            ),
       ),
     );
   }
@@ -188,9 +190,10 @@ class _AssetAllocationChartState extends State<AssetAllocationChart> {
       Colors.teal,
     ];
 
+    final entriesList = widget.allocation.entries.toList();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: widget.allocation.entries.asMap().entries.map((entry) {
+      children: entriesList.asMap().entries.map((entry) {
         final index = entry.key;
         final assetEntry = entry.value;
         final color = colors[index % colors.length];
@@ -200,14 +203,10 @@ class _AssetAllocationChartState extends State<AssetAllocationChart> {
           margin: const EdgeInsets.only(bottom: 8),
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: isTouched
-                ? color.withOpacity(0.1)
-                : Colors.transparent,
+            color: isTouched ? color.withOpacity(0.1) : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: isTouched
-                  ? color
-                  : Colors.transparent,
+              color: isTouched ? color : Colors.transparent,
             ),
           ),
           child: Row(
@@ -228,14 +227,15 @@ class _AssetAllocationChartState extends State<AssetAllocationChart> {
                     Text(
                       assetEntry.key,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
+                            fontWeight: FontWeight.w500,
+                          ),
                     ),
                     Text(
                       '${assetEntry.value.toStringAsFixed(1)}%',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                            color:
+                                Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
                     ),
                   ],
                 ),
@@ -269,20 +269,22 @@ class AllocationDetailsCard extends StatelessWidget {
             Text(
               'Allocation Details',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
             const SizedBox(height: 16),
-            ...allocation.entries.map((entry) => _buildAllocationItem(context, entry)),
+            ...allocation.entries
+                .map((entry) => _buildAllocationItem(context, entry)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildAllocationItem(BuildContext context, MapEntry<String, double> entry) {
+  Widget _buildAllocationItem(
+      BuildContext context, MapEntry<String, double> entry) {
     final value = (entry.value / 100) * totalValue;
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
@@ -292,8 +294,8 @@ class AllocationDetailsCard extends StatelessWidget {
             child: Text(
               entry.key,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+                    fontWeight: FontWeight.w500,
+                  ),
             ),
           ),
           Expanded(
@@ -313,14 +315,14 @@ class AllocationDetailsCard extends StatelessWidget {
               Text(
                 '\$${value.toStringAsFixed(2)}',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
               Text(
                 '${entry.value.toStringAsFixed(1)}%',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
               ),
             ],
           ),

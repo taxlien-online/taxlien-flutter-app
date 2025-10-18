@@ -29,7 +29,7 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
   bool _isLoading = false;
   String? _error;
   Map<String, double> _balances = {};
-  List<Map<String, dynamic>> _transactions = [];
+  List<WalletTransaction> _transactions = [];
   List<NFT> _nfts = [];
   String? _connectedAddress;
 
@@ -378,14 +378,14 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                nft.metadata.name,
+                                nft.metadata?.name ?? 'Unnamed NFT',
                                 style: Theme.of(context).textTheme.titleMedium,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                nft.metadata.description,
+                                nft.metadata?.description ?? 'No description',
                                 style: Theme.of(context).textTheme.bodySmall,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -450,37 +450,36 @@ class _PlugWalletScreenState extends State<PlugWalletScreen>
                     margin: const EdgeInsets.only(bottom: 8),
                     child: ListTile(
                       leading: CircleAvatar(
-                        backgroundColor: transaction['type'] == 'send'
+                        backgroundColor: transaction.type == 'send'
                             ? Colors.red.shade100
                             : Colors.green.shade100,
                         child: Icon(
-                          transaction['type'] == 'send'
+                          transaction.type == 'send'
                               ? Icons.send
                               : Icons.download,
-                          color: transaction['type'] == 'send'
+                          color: transaction.type == 'send'
                               ? Colors.red
                               : Colors.green,
                         ),
                       ),
                       title: Text(
-                        transaction['type'] == 'send' ? 'Sent' : 'Received',
+                        transaction.type == 'send' ? 'Sent' : 'Received',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text('${transaction.amount} ICP'),
                           Text(
-                              '${transaction['amount']} ${transaction['currency']}'),
-                          Text(
-                            transaction['timestamp'] ?? '',
+                            transaction.timestamp.toString(),
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
                       ),
                       trailing: Text(
-                        transaction['status'] ?? '',
+                        transaction.status,
                         style: TextStyle(
-                          color: transaction['status'] == 'completed'
+                          color: transaction.status == 'completed'
                               ? Colors.green
                               : Colors.orange,
                           fontWeight: FontWeight.bold,
