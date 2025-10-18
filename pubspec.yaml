@@ -93,17 +93,20 @@ dependencies:
   dio: ^5.3.2
   connectivity_plus: ^7.0.0
   
-  # Magento Integration - Updated to latest version
-  flutter_magento: ^4.3.1  # https://pub.dev/packages/flutter_magento
+  # Magento Integration - Updated to latest version with blockchain support
+  flutter_magento:
+    path: ../flutter_magento  # Local development version 4.4.0
+    # For production use: flutter_magento: ^4.4.0
   flutter_dotenv: ^5.1.0  # For environment configuration
   freezed_annotation: ^3.1.0  # Required by flutter_magento
   json_serializable: ^6.7.1  # For JSON serialization
   
-  # NFT and Blockchain Integration - temporarily disabled due to conflicts
-  # flutter_nft: ^1.3.0
-  # flutter_icp: ^1.2.0+4
-  # flutter_yuku: ^2.0.3  # Will be pulled by flutter_nft dependency
-  # Using mock classes instead (lib/core/mocks/nft_mocks.dart)
+  # NFT and Blockchain Integration - now available through flutter_magento 4.4.0
+  # flutter_magento now includes:
+  # - flutter_icp: ICP blockchain support
+  # - flutter_nft: Multi-chain NFT support
+  # - flutter_yuku: Universal blockchain interface
+  # Access via IntegratedServices.instance.icp, .nftBlockchain, .yuku
   
   # Not available on pub.dev - kept commented out
   # flutter_magento_messenger: # Not found
@@ -173,6 +176,9 @@ dependency_overrides:
   pointycastle: ^3.9.1
   web: ^1.0.0
   socket_io_client: ^3.1.2  # Force version for flutter_magento compatibility
+  # Force local flutter_yuku for blockchain packages
+  flutter_yuku:
+    path: ../flutter_yuku
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

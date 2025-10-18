@@ -1,11 +1,5 @@
 import 'package:flutter/foundation.dart';
-// import 'package:flutter_magento/flutter_magento.dart';
-import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
-import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
-import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
-// // import 'package:flutter_magento_marketplace/flutter_magento_marketplace.dart';
-// // import 'package:flutter_magento_notifications/flutter_magento_notifications.dart';
-// // import 'package:flutter_magento_messenger/flutter_magento_messenger.dart';
+import 'package:flutter_magento/flutter_magento.dart';
 import 'database_service.dart';
 import 'nft_service.dart';
 import 'plug_wallet_service.dart';
@@ -15,18 +9,15 @@ class IntegratedServices {
   static IntegratedServices? _instance;
 
   // Services
-  // FlutterMagento? _magento; // Disabled
   late DatabaseService _databaseService;
   late NFTService _nftService;
   late PlugWalletService _walletService;
   FlutterMagentoCloudService? _magentoService;
-  // NFT/Blockchain clients - temporarily disabled until API documentation is available
-  // icp_lib.ICPClient? _icpClient;
-  // nft_lib.NFTClient? _nftClient;
-  // yuku_lib.YukuClient? _yukuClient;
-  // MarketplaceProductService? _marketplaceService;  // Package not available
-  // NotificationManager? _notificationManager;  // Package not available
-  // MessageManager? _messageManager;  // Package not available
+
+  // Blockchain services from flutter_magento
+  FlutterMagentoICPService? _icpService;
+  FlutterMagentoNFTService? _nftBlockchainService;
+  FlutterMagentoYukuService? _yukuService;
 
   // State
   bool _isInitialized = false;
@@ -66,14 +57,30 @@ class IntegratedServices {
       await _magentoService?.initialize();
       debugPrint('Magento cloud service initialized');
 
-      // NFT/Blockchain clients initialization - temporarily disabled
-      // TODO: Implement proper initialization when API documentation is available
-      // See: https://pub.dev/packages/flutter_nft
-      // See: https://pub.dev/packages/flutter_icp
-      // See: https://pub.dev/packages/flutter_yuku
+      // Initialize blockchain services from flutter_magento
+      _icpService = FlutterMagentoICPService.instance;
+      await _icpService?.initialize(
+        enabled: true,
+        network: 'testnet',
+        enableDebug: true,
+      );
+      debugPrint('ICP service initialized');
 
-      debugPrint(
-          'NFT/Blockchain clients initialization skipped - awaiting API documentation');
+      _nftBlockchainService = FlutterMagentoNFTService.instance;
+      await _nftBlockchainService?.initialize(
+        enabled: true,
+        defaultNetwork: 'polygon',
+        enableDebug: true,
+      );
+      debugPrint('NFT blockchain service initialized');
+
+      _yukuService = FlutterMagentoYukuService.instance;
+      await _yukuService?.initialize(
+        enabled: true,
+        defaultNetwork: 'icp',
+        enableDebug: true,
+      );
+      debugPrint('Yuku service initialized');
 
       // Update service status
       _serviceStatus = {
@@ -81,12 +88,9 @@ class IntegratedServices {
         'database': true,
         'nft': _nftService.isInitialized,
         'wallet': _walletService.isConnected,
-        // NFT/Blockchain status temporarily disabled
-        // 'icp': _icpClient != null,
-        // 'yuku': _yukuClient != null,
-        // 'marketplace': _marketplaceService != null,
-        // 'notifications': _notificationManager != null,
-        // 'messenger': _messageManager != null,
+        'icp': _icpService?.isInitialized ?? false,
+        'nft_blockchain': _nftBlockchainService?.isInitialized ?? false,
+        'yuku': _yukuService?.isInitialized ?? false,
       };
 
       _isInitialized = true;
@@ -99,18 +103,15 @@ class IntegratedServices {
   }
 
   // Getters
-  // FlutterMagento? get magento => _magento; // Disabled
   DatabaseService get database => _databaseService;
   NFTService get nft => _nftService;
   PlugWalletService get wallet => _walletService;
   FlutterMagentoCloudService? get magentoCloud => _magentoService;
-  // NFT/Blockchain getters - temporarily disabled
-  // icp_lib.ICPClient? get icp => _icpClient;
-  // nft_lib.NFTClient? get nftClient => _nftClient;
-  // yuku_lib.YukuClient? get yuku => _yukuClient;
-  // MarketplaceProductService? get marketplace => _marketplaceService;  // Package not available
-  // NotificationManager? get notifications => _notificationManager;  // Package not available
-  // MessageManager? get messenger => _messageManager;  // Package not available
+
+  // Blockchain service getters from flutter_magento
+  FlutterMagentoICPService? get icp => _icpService;
+  FlutterMagentoNFTService? get nftBlockchain => _nftBlockchainService;
+  FlutterMagentoYukuService? get yuku => _yukuService;
 
   bool get isInitialized => _isInitialized;
   Map<String, bool> get serviceStatus => _serviceStatus;
