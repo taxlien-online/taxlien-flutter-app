@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart';
 import 'l10n/app_localizations.dart';
 import 'core/routing/app_router.dart';
 import 'services/localization_service.dart';
@@ -15,8 +16,10 @@ import 'services/user_preferences_service.dart';
 import 'services/server_connection_service.dart';
 import 'services/ai_investment_advisor_service.dart';
 import 'services/tax_lien_magento_service.dart';
+import 'services/magento_marketplace_service.dart';
 import 'core/services/hybrid_magento_service.dart';
 import 'core/services/magento_api_service.dart';
+import 'core/providers/magento_marketplace_provider.dart';
 import 'core/mocks/nft_mocks.dart';
 
 void main() async {
@@ -41,7 +44,36 @@ void main() async {
   // Initialize services
   await _initializeServices();
 
-  runApp(const ProviderScope(child: TaxLienApp()));
+  // Create Magento providers
+  final magentoProvider = MagentoMarketplaceProvider();
+  final magentoService = MagentoMarketplaceService(magentoProvider);
+
+  // Initialize Magento (use demo store for now)
+  try {
+    await magentoProvider.initialize(
+      baseUrl: 'https://luma-demo.scandipwa.com/',
+      connectionTimeout: 30000,
+      receiveTimeout: 30000,
+      supportedLanguages: ['en', 'ru', 'th', 'zh'],
+    );
+    if (kDebugMode) {
+      print('✅ Magento marketplace initialized');
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print('⚠️ Magento initialization failed: $e');
+    }
+  }
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: magentoProvider),
+        Provider.value(value: magentoService),
+      ],
+      child: const ProviderScope(child: TaxLienApp()),
+    ),
+  );
 }
 
 Future<void> _initializeServices() async {
@@ -114,6 +146,9 @@ class _TaxLienAppState extends State<TaxLienApp> {
 
   @override
   Widget build(BuildContext context) {
+    // Listen to Magento provider for updates
+    final magentoProvider = context.watch<MagentoMarketplaceProvider>();
+
     return MaterialApp(
       title: 'TaxLien.online',
       debugShowCheckedModeBanner: false,

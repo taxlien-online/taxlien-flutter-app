@@ -4,6 +4,7 @@ import '../../screens/onboarding_screen.dart';
 import '../../screens/settings_screen.dart';
 import '../../screens/search_screen.dart';
 import '../../screens/marketplace_screen.dart';
+import '../../screens/magento_marketplace_screen.dart';
 import '../../screens/portfolio_dashboard_screen.dart';
 import '../../screens/ai_advisor_screen.dart';
 import '../../screens/profile_screen.dart';
@@ -71,6 +72,7 @@ class AppRouter {
   static const String search = '/search';
   static const String advancedSearch = '/advanced-search';
   static const String marketplace = '/marketplace';
+  static const String magentoMarketplace = '/magento-marketplace';
   static const String marketplacePackages = '/marketplace-packages';
   static const String portfolio = '/portfolio';
   static const String enhancedPortfolio = '/enhanced-portfolio';
@@ -191,6 +193,11 @@ class AppRouter {
             authService: dependencies.authService,
             taxLienMagentoService: dependencies.taxLienMagentoService,
           ),
+        );
+
+      case magentoMarketplace:
+        return MaterialPageRoute(
+          builder: (_) => const MagentoMarketplaceScreen(),
         );
 
       case marketplacePackages:
