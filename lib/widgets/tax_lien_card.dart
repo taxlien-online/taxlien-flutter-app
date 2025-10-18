@@ -4,7 +4,7 @@ import '../services/database_service.dart';
 import '../core/models/tax_lien_models.dart';
 
 class TaxLienCard extends StatefulWidget {
-  final TaxLien lien;
+  final dynamic lien; // Support both TaxLien and LegacyTaxLien
   final VoidCallback onTap;
   final VoidCallback onFavoriteToggle;
 

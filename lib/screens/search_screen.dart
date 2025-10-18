@@ -104,9 +104,8 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
-  void _onHistoryItemTap(Map<String, dynamic> historyItem) {
-    final query = historyItem['query'] as String;
-    _searchController.text = query;
+  void _onHistoryItemTap(String historyItem) {
+    _searchController.text = historyItem;
     _performSearch();
   }
 
@@ -363,14 +362,10 @@ class _SearchScreenState extends State<SearchScreen> {
             itemCount: _searchHistory.length,
             itemBuilder: (context, index) {
               final historyItem = _searchHistory[index];
-              final query = historyItem['query'] as String;
-              final timestamp =
-                  DateTime.parse(historyItem['timestamp'] as String);
 
               return ListTile(
                 leading: const Icon(Icons.search),
-                title: Text(query),
-                subtitle: Text(_formatTimestamp(timestamp)),
+                title: Text(historyItem),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () => _onHistoryItemTap(historyItem),
               );
@@ -397,7 +392,7 @@ class _SearchScreenState extends State<SearchScreen> {
     }
   }
 
-  void _showLienDetails(TaxLien lien) {
+  void _showLienDetails(LegacyTaxLien lien) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -413,7 +408,7 @@ class _SearchScreenState extends State<SearchScreen> {
 }
 
 class TaxLienDetailScreen extends StatefulWidget {
-  final TaxLien lien;
+  final dynamic lien; // Support both TaxLien and LegacyTaxLien
   final TaxLienService taxLienService;
   final AuthService? authService;
   final DatabaseService databaseService;
@@ -523,11 +518,14 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
-                        _buildDetailRow('Parcel ID', widget.lien.parcelId ?? 'N/A'),
+                    _buildDetailRow('Parcel ID', widget.lien.parcelId ?? 'N/A'),
                     _buildDetailRow('County', widget.lien.county),
                     _buildDetailRow('State', widget.lien.state),
-                    _buildDetailRow('Redemption Deadline',
-                            widget.lien.redemptionDeadline != null ? _formatDate(widget.lien.redemptionDeadline!) : 'N/A'),
+                    _buildDetailRow(
+                        'Redemption Deadline',
+                        widget.lien.redemptionDeadline != null
+                            ? _formatDate(widget.lien.redemptionDeadline!)
+                            : 'N/A'),
                     _buildDetailRow(
                         'Status', _getStatusLabel(widget.lien.status)),
                   ],

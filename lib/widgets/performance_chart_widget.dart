@@ -186,11 +186,6 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
           lineTouchData: LineTouchData(
             enabled: true,
             touchTooltipData: LineTouchTooltipData(
-              tooltipBgColor: Theme.of(context).colorScheme.surface,
-              tooltipBorder: BorderSide(
-                color: Theme.of(context).colorScheme.outline,
-                width: 1,
-              ),
               getTooltipItems: (touchedSpots) {
                 return touchedSpots.map((touchedSpot) {
                   final dataPoint = widget.data[touchedSpot.x.toInt()];
@@ -321,7 +316,6 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
     
     final dataPoint = widget.data[value.toInt()];
     return SideTitleWidget(
-      axisSide: AxisSide.bottom,
       child: Text(
         _formatDateShort(dataPoint.date),
         style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -333,7 +327,6 @@ class _PerformanceChartWidgetState extends State<PerformanceChartWidget> {
 
   Widget _buildLeftTitle(double value) {
     return SideTitleWidget(
-      axisSide: AxisSide.left,
       child: Text(
         '\$${(value / 1000).toStringAsFixed(0)}k',
         style: Theme.of(context).textTheme.bodySmall?.copyWith(

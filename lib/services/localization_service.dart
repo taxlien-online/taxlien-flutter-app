@@ -101,7 +101,7 @@ class LocalizationService extends ChangeNotifier {
       case 'ru':
         return AppLocalizations.of(_navigatorKey.currentContext!)?.russian ?? 'Russian';
       case 'uk':
-        return AppLocalizations.of(_navigatorKey.currentContext!)?.ukrainian ?? 'Ukrainian';
+            return 'Ukrainian';
       case 'en':
         return 'English';
       case 'my':

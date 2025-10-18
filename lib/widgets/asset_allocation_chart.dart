@@ -135,7 +135,8 @@ class _AssetAllocationChartState extends State<AssetAllocationChart> {
       Colors.teal,
     ];
 
-    return widget.allocation.entries.asMap().entries.map((entry) {
+    final entriesList = widget.allocation.entries.toList();
+    return entriesList.asMap().entries.map((entry) {
       final index = entry.key;
       final assetEntry = entry.value;
       final isTouched = index == _touchedIndex;

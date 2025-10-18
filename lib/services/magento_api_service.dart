@@ -1,15 +1,25 @@
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
+import 'package:dio/dio.dart';
 
 class MagentoApiService {
   static MagentoApiService? _instance;
+  late final Dio _dio;
 
-  MagentoApiService._internal();
+  MagentoApiService._internal() {
+    _dio = Dio(BaseOptions(
+      baseUrl: 'https://api.example.com',
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
+    ));
+  }
 
   static MagentoApiService get instance {
     _instance ??= MagentoApiService._internal();
     return _instance!;
   }
+
+  Dio get dio => _dio;
 
   // Mock API methods for search
   Future<List<Map<String, dynamic>>> searchProducts({

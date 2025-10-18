@@ -121,7 +121,7 @@ class _ConnectionStatusScreenState extends State<ConnectionStatusScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.connectionStatus ?? 'Connection Status'),
+            title: const Text('Connection Status'),
         actions: [
           IconButton(
             onPressed: _isLoading ? null : _loadSystemStatus,

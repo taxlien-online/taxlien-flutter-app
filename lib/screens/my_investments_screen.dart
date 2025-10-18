@@ -65,7 +65,8 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
 
       // Загрузка избранных закладных
       // final favoriteIds = await widget.databaseService.getFavoriteLienIds(); // Method not implemented yet
-      _favoriteLiens = []; // widget.taxLienService.availableLiens.where((lien) => favoriteIds.contains(lien.id)).toList();
+      _favoriteLiens =
+          []; // widget.taxLienService.availableLiens.where((lien) => favoriteIds.contains(lien.id)).toList();
     } catch (e) {
       setState(() {
         _error = 'Ошибка загрузки данных: $e';
@@ -86,16 +87,16 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
         bottom: TabBar(
           controller: _tabController,
           tabs: [
-                const Tab(text: 'My Liens'),
-                const Tab(text: 'Favorites'),
-                const Tab(text: 'Statistics'),
+            const Tab(text: 'My Liens'),
+            const Tab(text: 'Favorites'),
+            const Tab(text: 'Statistics'),
           ],
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadData,
-                tooltip: 'Refresh',
+            tooltip: 'Refresh',
           ),
         ],
       ),
@@ -155,12 +156,12 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
             ),
             const SizedBox(height: 16),
             Text(
-                  'No investments yet',
+              'No investments yet',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             Text(
-                  'Go to the Marketplace to start investing in tax liens.',
+              'Go to the Marketplace to start investing in tax liens.',
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -172,7 +173,7 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
                   Navigator.of(context).pop();
                 }
               },
-                  child: const Text('Go to Marketplace'),
+              child: const Text('Go to Marketplace'),
             ),
           ],
         ),
@@ -222,12 +223,12 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
             ),
             const SizedBox(height: 16),
             Text(
-                  'No favorite liens',
+              'No favorite liens',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
             Text(
-                  'Add liens to your favorites to view them here.',
+              'Add liens to your favorites to view them here.',
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -303,20 +304,20 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                        'Overall Statistics',
+                    'Overall Statistics',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 16),
-                      _buildStatRow('Total Invested',
+                  _buildStatRow('Total Invested',
                       '\$${totalInvested.toStringAsFixed(2)}'),
                   _buildStatRow(
-                      l10n.currentValue, '\$${totalValue.toStringAsFixed(2)}'),
-                  _buildStatRow(l10n.profitLoss,
+                      'Current Value', '\$${totalValue.toStringAsFixed(2)}'),
+                  _buildStatRow('Profit/Loss',
                       '\$${(totalValue - totalInvested).toStringAsFixed(2)}',
                       color: totalValue >= totalInvested
                           ? Colors.green
                           : Colors.red),
-                  _buildStatRow(l10n.roi,
+                  _buildStatRow('ROI',
                       '${((totalValue - totalInvested) / totalInvested * 100).toStringAsFixed(1)}%',
                       color: totalValue >= totalInvested
                           ? Colors.green
@@ -336,15 +337,14 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.statusStatistics,
+                    'Status Statistics',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 16),
-                  _buildStatRow(l10n.activeLiens, activeLiens.toString()),
-                  _buildStatRow(l10n.redeemedLiens, redeemedLiens.toString()),
-                  _buildStatRow(
-                      l10n.foreclosedLiens, foreclosedLiens.toString()),
-                  _buildStatRow(l10n.totalLiens, _myLiens.length.toString()),
+                  _buildStatRow('Active Liens', activeLiens.toString()),
+                  _buildStatRow('Redeemed Liens', redeemedLiens.toString()),
+                  _buildStatRow('Foreclosed Liens', foreclosedLiens.toString()),
+                  _buildStatRow('Total Liens', _myLiens.length.toString()),
                 ],
               ),
             ),
@@ -360,7 +360,7 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.monthlyReturns,
+                    'Monthly Returns',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 16),
@@ -383,7 +383,7 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    l10n.topPerformingLiens,
+                    'Top Performing Liens',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 16),
@@ -432,7 +432,7 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
       ),
       child: Center(
         child: Text(
-          l10n.profitChartInDevelopment,
+          'Profit chart in development',
           textAlign: TextAlign.center,
           style: const TextStyle(color: Colors.grey),
         ),
@@ -440,7 +440,7 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
     );
   }
 
-  Widget _buildTopLienTile(TaxLien lien) {
+  Widget _buildTopLienTile(LegacyTaxLien lien) {
     final l10n = AppLocalizations.of(context)!;
     final daysHeld = DateTime.now().difference(lien.auctionDate).inDays;
     final interestEarned = (lien.salePrice ?? lien.taxAmount) *
@@ -457,7 +457,7 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
         ),
       ),
       title: Text(lien.address),
-      subtitle: Text('${l10n.roi}: ${roi.toStringAsFixed(1)}%'),
+      subtitle: Text('ROI: ${roi.toStringAsFixed(1)}%'),
       trailing: Text(
         '\$${interestEarned.toStringAsFixed(2)}',
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -469,7 +469,7 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
     );
   }
 
-  void _showLienDetails(TaxLien lien) {
+  void _showLienDetails(LegacyTaxLien lien) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -485,7 +485,7 @@ class _MyInvestmentsScreenState extends State<MyInvestmentsScreen>
 }
 
 class TaxLienDetailScreen extends StatefulWidget {
-  final TaxLien lien;
+  final dynamic lien; // Support both TaxLien and LegacyTaxLien
   final TaxLienService taxLienService;
   final AuthService authService;
   final DatabaseService databaseService;
@@ -508,7 +508,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.lienNumber(widget.lien.parcelId)),
+        title: Text('Lien #${widget.lien.parcelId ?? 'N/A'}'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -528,7 +528,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      l10n.owner(widget.lien.owner),
+                      'Owner: ${widget.lien.owner}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const SizedBox(height: 16),
@@ -536,14 +536,14 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                       children: [
                         Expanded(
                           child: _buildInfoItem(
-                            l10n.taxAmount,
+                            'Tax Amount',
                             '\$${widget.lien.taxAmount.toStringAsFixed(2)}',
                             Icons.attach_money,
                           ),
                         ),
                         Expanded(
                           child: _buildInfoItem(
-                            l10n.interestRate,
+                            'Interest Rate',
                             '${widget.lien.interestRate.toStringAsFixed(1)}%',
                             Icons.percent,
                           ),
@@ -567,29 +567,32 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        l10n.investmentInfo,
+                        'Investment Information',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(height: 16),
-                      _buildDetailRow(l10n.purchaseDate,
+                      _buildDetailRow('Purchase Date',
                           _formatDate(widget.lien.auctionDate)),
-                      _buildDetailRow(l10n.purchaseAmount,
+                      _buildDetailRow('Purchase Amount',
                           '\$${(widget.lien.salePrice ?? widget.lien.taxAmount).toStringAsFixed(2)}'),
                       if (widget.lien.status == 'sold') ...[
                         _buildDetailRow(
-                            l10n.daysInInvestment,
+                            'Days in Investment',
                             DateTime.now()
                                 .difference(widget.lien.auctionDate)
                                 .inDays
                                 .toString()),
                         _buildDetailRow(
-                            l10n.interestEarned,
+                            'Interest Earned',
                             _calculateInterestEarned(widget.lien)
                                 .toStringAsFixed(2)),
                       ],
                       if (widget.lien.status == 'redeemed')
-                        _buildDetailRow(l10n.redemptionDate,
-                            _formatDate(widget.lien.redemptionDeadline)),
+                        _buildDetailRow(
+                            'Redemption Date',
+                            widget.lien.redemptionDeadline != null
+                                ? _formatDate(widget.lien.redemptionDeadline!)
+                                : 'N/A'),
                     ],
                   ),
                 ),
@@ -649,7 +652,7 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
     return '${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}';
   }
 
-  double _calculateInterestEarned(TaxLien lien) {
+  double _calculateInterestEarned(LegacyTaxLien lien) {
     final daysHeld = DateTime.now().difference(lien.auctionDate).inDays;
     return (lien.salePrice ?? lien.taxAmount) *
         (lien.interestRate / 100) *

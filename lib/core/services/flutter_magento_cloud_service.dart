@@ -40,7 +40,7 @@ class FlutterMagentoCloudService {
   Future<Map<String, dynamic>?> createCart() async {
     return null;
   }
-  
+
   Future<bool> addToCart({
     String? productId,
     required String sku,
@@ -53,11 +53,11 @@ class FlutterMagentoCloudService {
   Future<Map<String, dynamic>?> getCartTotals([String? cartId]) async {
     return null;
   }
-  
+
   Future<Map<String, dynamic>?> getCart([String? cartId]) async {
     return null;
   }
-  
+
   Future<void> logout() async {
     // TODO: Implement logout
   }

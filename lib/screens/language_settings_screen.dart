@@ -52,7 +52,7 @@ class LanguageSettingsScreen extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          '${l10n.languageChanged} to ${language['name']}',
+                              'Language changed to ${language['name']}',
                         ),
                         duration: const Duration(seconds: 2),
                       ),

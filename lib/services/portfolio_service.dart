@@ -337,7 +337,7 @@ class PortfolioService extends ChangeNotifier {
       totalInvestment: totalInvestment + totalProductsValue,
       currentValue: currentValue + totalProductsValue,
       totalReturn: totalReturn,
-      roiPercentage: roiPercentage,
+          roiPercentage: roiPercentage.toDouble(),
       activeInvestments: _myLiens.length + _myProducts.length,
       monthlyIncome: _calculateMonthlyIncome(),
       diversificationScore: _calculateDiversificationScore(),
@@ -520,12 +520,11 @@ class PortfolioService extends ChangeNotifier {
   List<MagentoProduct> _generateMockProducts() {
     return [
       MagentoProduct(
-        id: 1,
         sku: 'TL-001',
         name: 'Premium Tax Lien Certificate',
         price: 2500.0,
         typeId: 'tax_lien',
-        status: 'active',
+        status: 1,
       ),
     ];
   }
@@ -613,7 +612,7 @@ class PortfolioService extends ChangeNotifier {
     for (int i = 30; i >= 0; i--) {
       final date = now.subtract(Duration(days: i));
       final value = 10000 + (i * 50) + (i % 7 * 100); // Mock growth
-      data.add(PerformanceDataPoint(date: date, value: value));
+          data.add(PerformanceDataPoint(date: date, value: value.toDouble()));
     }
 
     return data;
