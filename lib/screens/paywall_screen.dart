@@ -346,7 +346,6 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
 
   Widget _buildPackageCard(ThemeData theme, ProductDetails product) {
     final isYearly = product.id.contains('yearly');
-    final isEnterprise = product.id.contains('enterprise');
 
     return Card(
       elevation: isYearly ? 4 : 2,

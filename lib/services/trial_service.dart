@@ -55,7 +55,7 @@ class TrialService extends ChangeNotifier {
 
   // In-App Purchase configuration
   final InAppPurchase _iap = InAppPurchase.instance;
-  late StreamSubscription<List<PurchaseDetails>> _subscription;
+  StreamSubscription<List<PurchaseDetails>>? _subscription;
 
   // State
   TrialStatus _trialStatus = const TrialStatus(
@@ -347,7 +347,7 @@ class TrialService extends ChangeNotifier {
 
   @override
   void dispose() {
-    _subscription.cancel();
+    _subscription?.cancel();
     super.dispose();
   }
 }

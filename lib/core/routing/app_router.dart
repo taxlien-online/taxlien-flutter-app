@@ -28,6 +28,7 @@ import '../../screens/tax_lien_content_manager_screen.dart';
 import '../../screens/wallet_settings_screen.dart';
 import '../../screens/yuku_integration_demo_screen.dart';
 import '../../screens/yuku_marketplace_screen.dart';
+import '../../screens/paywall_screen.dart';
 import '../../screens/advanced_search_screen.dart';
 import '../../screens/auction_screen.dart';
 import '../../screens/enhanced_portfolio_dashboard.dart';
@@ -105,6 +106,7 @@ class AppRouter {
   static const String yukuMarketplace = '/yuku-marketplace';
   static const String yukuDemo = '/yuku-demo';
   static const String unifiedAnalytics = '/unified-analytics';
+  static const String paywall = '/paywall';
   static const String productDetail = '/product-detail';
   static const String nftOnboarding = '/nft-onboarding';
 
@@ -429,6 +431,14 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => YukuIntegrationDemoScreen(
             nftClient: dependencies.nftClient,
+          ),
+        );
+
+      case paywall:
+        final canDismiss = settings.arguments as bool? ?? true;
+        return MaterialPageRoute(
+          builder: (_) => PaywallScreen(
+            canDismiss: canDismiss,
           ),
         );
 
