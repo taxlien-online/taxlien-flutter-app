@@ -57,6 +57,7 @@ import '../../services/portfolio_service.dart';
 import '../../services/unified_portfolio_service.dart';
 import '../../services/realtime_bidding_service.dart';
 import '../../services/magento_service.dart';
+import '../../services/trial_service.dart';
 import '../mocks/nft_mocks.dart';
 import '../services/dome_service.dart';
 import '../services/magento_api_service.dart';
@@ -554,6 +555,7 @@ class AppRouterDependencies {
   final AIInvestmentAdvisorService aiInvestmentAdvisorService;
   final TaxLienMagentoService taxLienMagentoService;
   final NFTClient nftClient;
+  final TrialService? trialService;
 
   AppRouterDependencies({
     required this.localizationService,
@@ -567,5 +569,6 @@ class AppRouterDependencies {
     required this.aiInvestmentAdvisorService,
     required this.taxLienMagentoService,
     required this.nftClient,
+    this.trialService,
   });
 }

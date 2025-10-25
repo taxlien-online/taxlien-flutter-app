@@ -144,6 +144,55 @@
   "seconds": "Seconds",
   "playbackControls": "Playback Controls",
   "projectionSettings": "Projection Settings",
-  "connection": "Connection"
+  "connection": "Connection",
+  "trial": "Trial",
+  "trialActive": "Trial Active",
+  "trialExpired": "Trial Expired",
+  "daysRemaining": "{days} days remaining",
+  "@daysRemaining": {
+    "placeholders": {
+      "days": {"type": "int"}
+    }
+  },
+  "startFreeTrial": "Start Free Trial",
+  "startTrial": "Start Trial",
+  "trialStarted": "Trial Started",
+  "trialWelcome": "Welcome! Your 365-day trial has started",
+  "trialAlreadyUsed": "Trial already used",
+  "subscription": "Subscription",
+  "subscriptions": "Subscriptions",
+  "subscribe": "Subscribe",
+  "subscribed": "Subscribed",
+  "premium": "Premium",
+  "premiumFeatures": "Premium Features",
+  "unlockPremium": "Unlock Premium Features",
+  "choosePlan": "Choose Your Plan",
+  "freePlan": "Free Plan",
+  "trialPlan": "Trial Plan",
+  "premiumPlan": "Premium Plan",
+  "enterprisePlan": "Enterprise Plan",
+  "monthly": "Monthly",
+  "yearly": "Yearly",
+  "perMonth": "per month",
+  "perYear": "per year",
+  "bestValue": "Best Value",
+  "savePercent": "Save {percent}%",
+  "@savePercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "restorePurchases": "Restore Purchases",
+  "purchaseSuccessful": "Purchase Successful",
+  "subscriptionActive": "Subscription Active",
+  "subscriptionExpired": "Subscription Expired",
+  "upgradeToAccessFeature": "Upgrade to access this feature",
+  "featuresIncluded": "Features Included",
+  "noPaymentRequired": "No payment required",
+  "cancelAnytime": "Cancel anytime",
+  "autoRenews": "Automatically renews",
+  "termsAndConditions": "Terms and Conditions",
+  "bySubscribing": "By subscribing, you agree to our Terms of Service and Privacy Policy",
+  "subscriptionInfo": "Subscriptions automatically renew unless auto-renew is turned off at least 24 hours before the end of the current period"
 }
 

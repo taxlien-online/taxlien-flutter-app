@@ -17,6 +17,7 @@ import 'services/server_connection_service.dart';
 import 'services/ai_investment_advisor_service.dart';
 import 'services/tax_lien_magento_service.dart';
 import 'services/magento_marketplace_service.dart';
+import 'services/trial_service.dart';
 import 'core/services/hybrid_magento_service.dart';
 import 'core/services/magento_api_service.dart';
 import 'core/providers/magento_marketplace_provider.dart';
@@ -120,6 +121,10 @@ class _TaxLienAppState extends State<TaxLienApp> {
     final serverConnectionService = ServerConnectionService();
     final aiInvestmentAdvisorService = AIInvestmentAdvisorService();
 
+    // Initialize Trial Service with maximum trial period (365 days)
+    final trialService = TrialService();
+    trialService.initialize();
+
     // Initialize Magento services
     final hybridMagentoService = HybridMagentoService(
       restService: MagentoApiService(),
@@ -141,6 +146,7 @@ class _TaxLienAppState extends State<TaxLienApp> {
       aiInvestmentAdvisorService: aiInvestmentAdvisorService,
       taxLienMagentoService: taxLienMagentoService,
       nftClient: nftClient,
+      trialService: trialService,
     );
   }
 
