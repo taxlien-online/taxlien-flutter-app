@@ -809,6 +809,240 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connection'**
   String get connection;
+
+  /// No description provided for @trial.
+  ///
+  /// In en, this message translates to:
+  /// **'Trial'**
+  String get trial;
+
+  /// No description provided for @trialActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Trial Active'**
+  String get trialActive;
+
+  /// No description provided for @trialExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Trial Expired'**
+  String get trialExpired;
+
+  /// No description provided for @daysRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days remaining'**
+  String daysRemaining(int days);
+
+  /// No description provided for @startFreeTrial.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Free Trial'**
+  String get startFreeTrial;
+
+  /// No description provided for @startTrial.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Trial'**
+  String get startTrial;
+
+  /// No description provided for @trialStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Trial Started'**
+  String get trialStarted;
+
+  /// No description provided for @trialWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome! Your 365-day trial has started'**
+  String get trialWelcome;
+
+  /// No description provided for @trialAlreadyUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Trial already used'**
+  String get trialAlreadyUsed;
+
+  /// No description provided for @subscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription'**
+  String get subscription;
+
+  /// No description provided for @subscriptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscriptions'**
+  String get subscriptions;
+
+  /// No description provided for @subscribe.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe'**
+  String get subscribe;
+
+  /// No description provided for @subscribed.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribed'**
+  String get subscribed;
+
+  /// No description provided for @premium.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium'**
+  String get premium;
+
+  /// No description provided for @premiumFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium Features'**
+  String get premiumFeatures;
+
+  /// No description provided for @unlockPremium.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock Premium Features'**
+  String get unlockPremium;
+
+  /// No description provided for @choosePlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Your Plan'**
+  String get choosePlan;
+
+  /// No description provided for @freePlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Free Plan'**
+  String get freePlan;
+
+  /// No description provided for @trialPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Trial Plan'**
+  String get trialPlan;
+
+  /// No description provided for @premiumPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium Plan'**
+  String get premiumPlan;
+
+  /// No description provided for @enterprisePlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Enterprise Plan'**
+  String get enterprisePlan;
+
+  /// No description provided for @monthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get monthly;
+
+  /// No description provided for @yearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get yearly;
+
+  /// No description provided for @perMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'per month'**
+  String get perMonth;
+
+  /// No description provided for @perYear.
+  ///
+  /// In en, this message translates to:
+  /// **'per year'**
+  String get perYear;
+
+  /// No description provided for @bestValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Value'**
+  String get bestValue;
+
+  /// No description provided for @savePercent.
+  ///
+  /// In en, this message translates to:
+  /// **'Save {percent}%'**
+  String savePercent(int percent);
+
+  /// No description provided for @restorePurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore Purchases'**
+  String get restorePurchases;
+
+  /// No description provided for @purchaseSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase Successful'**
+  String get purchaseSuccessful;
+
+  /// No description provided for @subscriptionActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Active'**
+  String get subscriptionActive;
+
+  /// No description provided for @subscriptionExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription Expired'**
+  String get subscriptionExpired;
+
+  /// No description provided for @upgradeToAccessFeature.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to access this feature'**
+  String get upgradeToAccessFeature;
+
+  /// No description provided for @featuresIncluded.
+  ///
+  /// In en, this message translates to:
+  /// **'Features Included'**
+  String get featuresIncluded;
+
+  /// No description provided for @noPaymentRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'No payment required'**
+  String get noPaymentRequired;
+
+  /// No description provided for @cancelAnytime.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel anytime'**
+  String get cancelAnytime;
+
+  /// No description provided for @autoRenews.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatically renews'**
+  String get autoRenews;
+
+  /// No description provided for @termsAndConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Conditions'**
+  String get termsAndConditions;
+
+  /// No description provided for @bySubscribing.
+  ///
+  /// In en, this message translates to:
+  /// **'By subscribing, you agree to our Terms of Service and Privacy Policy'**
+  String get bySubscribing;
+
+  /// No description provided for @subscriptionInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscriptions automatically renew unless auto-renew is turned off at least 24 hours before the end of the current period'**
+  String get subscriptionInfo;
 }
 
 class _AppLocalizationsDelegate

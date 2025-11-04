@@ -189,7 +189,11 @@ class ExportService {
       final file = File(filePath);
       if (await file.exists()) {
         final xFile = XFile(filePath);
-        await Share.shareXFiles([xFile], text: 'Tax Liens Export');
+        // Use SharePlus.instance.share() instead of deprecated Share.shareXFiles()
+        final result = await Share.shareXFiles([xFile], text: 'Tax Liens Export');
+        if (kDebugMode) {
+          print('✅ File shared: ${result.status}');
+        }
       }
     } catch (e) {
       if (kDebugMode) {

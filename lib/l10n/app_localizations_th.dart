@@ -370,4 +370,127 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get connection => 'การเชื่อมต่อ';
+
+  @override
+  String get trial => 'Trial';
+
+  @override
+  String get trialActive => 'Trial Active';
+
+  @override
+  String get trialExpired => 'Trial Expired';
+
+  @override
+  String daysRemaining(int days) {
+    return '$days days remaining';
+  }
+
+  @override
+  String get startFreeTrial => 'Start Free Trial';
+
+  @override
+  String get startTrial => 'Start Trial';
+
+  @override
+  String get trialStarted => 'Trial Started';
+
+  @override
+  String get trialWelcome => 'Welcome! Your 365-day trial has started';
+
+  @override
+  String get trialAlreadyUsed => 'Trial already used';
+
+  @override
+  String get subscription => 'Subscription';
+
+  @override
+  String get subscriptions => 'Subscriptions';
+
+  @override
+  String get subscribe => 'Subscribe';
+
+  @override
+  String get subscribed => 'Subscribed';
+
+  @override
+  String get premium => 'Premium';
+
+  @override
+  String get premiumFeatures => 'Premium Features';
+
+  @override
+  String get unlockPremium => 'Unlock Premium Features';
+
+  @override
+  String get choosePlan => 'Choose Your Plan';
+
+  @override
+  String get freePlan => 'Free Plan';
+
+  @override
+  String get trialPlan => 'Trial Plan';
+
+  @override
+  String get premiumPlan => 'Premium Plan';
+
+  @override
+  String get enterprisePlan => 'Enterprise Plan';
+
+  @override
+  String get monthly => 'Monthly';
+
+  @override
+  String get yearly => 'Yearly';
+
+  @override
+  String get perMonth => 'per month';
+
+  @override
+  String get perYear => 'per year';
+
+  @override
+  String get bestValue => 'Best Value';
+
+  @override
+  String savePercent(int percent) {
+    return 'Save $percent%';
+  }
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
+
+  @override
+  String get purchaseSuccessful => 'Purchase Successful';
+
+  @override
+  String get subscriptionActive => 'Subscription Active';
+
+  @override
+  String get subscriptionExpired => 'Subscription Expired';
+
+  @override
+  String get upgradeToAccessFeature => 'Upgrade to access this feature';
+
+  @override
+  String get featuresIncluded => 'Features Included';
+
+  @override
+  String get noPaymentRequired => 'No payment required';
+
+  @override
+  String get cancelAnytime => 'Cancel anytime';
+
+  @override
+  String get autoRenews => 'Automatically renews';
+
+  @override
+  String get termsAndConditions => 'Terms and Conditions';
+
+  @override
+  String get bySubscribing =>
+      'By subscribing, you agree to our Terms of Service and Privacy Policy';
+
+  @override
+  String get subscriptionInfo =>
+      'Subscriptions automatically renew unless auto-renew is turned off at least 24 hours before the end of the current period';
 }

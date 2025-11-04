@@ -369,4 +369,129 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get connection => 'Соединение';
+
+  @override
+  String get trial => 'Пробная версия';
+
+  @override
+  String get trialActive => 'Пробная версия активна';
+
+  @override
+  String get trialExpired => 'Пробная версия истекла';
+
+  @override
+  String daysRemaining(int days) {
+    return 'Осталось дней: $days';
+  }
+
+  @override
+  String get startFreeTrial => 'Начать бесплатную пробную версию';
+
+  @override
+  String get startTrial => 'Начать пробный период';
+
+  @override
+  String get trialStarted => 'Пробный период начат';
+
+  @override
+  String get trialWelcome =>
+      'Добро пожаловать! Ваш 365-дневный пробный период начался';
+
+  @override
+  String get trialAlreadyUsed => 'Пробная версия уже использована';
+
+  @override
+  String get subscription => 'Подписка';
+
+  @override
+  String get subscriptions => 'Подписки';
+
+  @override
+  String get subscribe => 'Подписаться';
+
+  @override
+  String get subscribed => 'Подписан';
+
+  @override
+  String get premium => 'Премиум';
+
+  @override
+  String get premiumFeatures => 'Премиум функции';
+
+  @override
+  String get unlockPremium => 'Разблокировать премиум функции';
+
+  @override
+  String get choosePlan => 'Выберите ваш план';
+
+  @override
+  String get freePlan => 'Бесплатный план';
+
+  @override
+  String get trialPlan => 'Пробный план';
+
+  @override
+  String get premiumPlan => 'Премиум план';
+
+  @override
+  String get enterprisePlan => 'Корпоративный план';
+
+  @override
+  String get monthly => 'Ежемесячно';
+
+  @override
+  String get yearly => 'Ежегодно';
+
+  @override
+  String get perMonth => 'в месяц';
+
+  @override
+  String get perYear => 'в год';
+
+  @override
+  String get bestValue => 'Лучшее предложение';
+
+  @override
+  String savePercent(int percent) {
+    return 'Сэкономьте $percent%';
+  }
+
+  @override
+  String get restorePurchases => 'Восстановить покупки';
+
+  @override
+  String get purchaseSuccessful => 'Покупка успешна';
+
+  @override
+  String get subscriptionActive => 'Подписка активна';
+
+  @override
+  String get subscriptionExpired => 'Подписка истекла';
+
+  @override
+  String get upgradeToAccessFeature =>
+      'Обновите подписку для доступа к этой функции';
+
+  @override
+  String get featuresIncluded => 'Включенные функции';
+
+  @override
+  String get noPaymentRequired => 'Оплата не требуется';
+
+  @override
+  String get cancelAnytime => 'Отмена в любое время';
+
+  @override
+  String get autoRenews => 'Автоматическое продление';
+
+  @override
+  String get termsAndConditions => 'Условия и положения';
+
+  @override
+  String get bySubscribing =>
+      'Подписываясь, вы соглашаетесь с нашими Условиями использования и Политикой конфиденциальности';
+
+  @override
+  String get subscriptionInfo =>
+      'Подписки автоматически продлеваются, если автопродление не отключено как минимум за 24 часа до окончания текущего периода';
 }

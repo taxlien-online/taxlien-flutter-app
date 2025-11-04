@@ -95,7 +95,9 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
                 _showSeanFilters = !_showSeanFilters;
               });
             },
-            icon: Icon(_showSeanFilters ? Icons.filter_alt : Icons.filter_alt_outlined),
+            icon: Icon(_showSeanFilters
+                ? Icons.filter_alt
+                : Icons.filter_alt_outlined),
             tooltip: 'Sean\'s Criteria',
           ),
           IconButton(
@@ -744,7 +746,7 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
           const SizedBox(height: 8),
           // Lien type
           DropdownButtonFormField<String>(
-            value: _lienType,
+            initialValue: _lienType,
             decoration: const InputDecoration(
               labelText: 'Lien Type',
               border: OutlineInputBorder(),
