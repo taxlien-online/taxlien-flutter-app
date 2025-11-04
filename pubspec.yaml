@@ -101,11 +101,9 @@ dependencies:
   freezed_annotation: ^3.1.0  # Required by flutter_magento
   json_serializable: ^6.7.1  # For JSON serialization
   
-  # NFT and Blockchain Integration - now available through flutter_magento 4.4.0
-  # flutter_magento now includes:
-  # - flutter_icp: ICP blockchain support
-  # - flutter_nft: Multi-chain NFT support
-  # - flutter_yuku: Universal blockchain interface
+  # NFT and Blockchain Integration
+  # flutter_nft includes flutter_yuku as dependency
+  flutter_nft: ^1.3.0
   # Access via IntegratedServices.instance.icp, .nftBlockchain, .yuku
   
   # Not available on pub.dev - kept commented out
@@ -133,6 +131,10 @@ dependencies:
   # File handling
   file_picker: ^10.3.3  # Required by flutter_magento 4.3.1
   permission_handler: ^12.0.1
+  path_provider: ^2.1.0
+  
+  # CSV export
+  csv: ^6.0.0
   
   # Social sharing
   share_plus: ^12.0.0
@@ -176,9 +178,9 @@ dependency_overrides:
   pointycastle: ^3.9.1
   web: ^1.0.0
   socket_io_client: ^3.1.2  # Force version for flutter_magento compatibility
-  # Force local flutter_yuku for blockchain packages
-  flutter_yuku:
-    path: ../flutter_yuku
+  # flutter_yuku is now included in flutter_nft
+  # flutter_yuku:
+  #   path: ../flutter_yuku
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

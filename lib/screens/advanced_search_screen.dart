@@ -6,6 +6,7 @@ import '../services/tax_lien_service.dart';
 import '../core/services/magento_api_service.dart';
 import '../widgets/advanced_search_filters.dart';
 import '../widgets/search_results_list.dart';
+import '../services/export_service.dart';
 
 class AdvancedSearchScreen extends ConsumerStatefulWidget {
   final TaxLienService taxLienService;
@@ -40,6 +41,14 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
   // Advanced filters
   AdvancedSearchFilters _filters = AdvancedSearchFilters();
 
+  // Sean's filters
+  double _minTaxAmount = 200.0;
+  double _maxTaxAmount = 2000.0;
+  bool _preferCoastal = true;
+  bool _preferFlorida = true;
+  String? _lienType; // 'otp' or 'auction'
+  bool _showSeanFilters = false;
+
   // Pagination
   int _currentPage = 1;
   final int _pageSize = 20;
@@ -72,6 +81,23 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
           ],
         ),
         actions: [
+          // Export button
+          if (_taxLienResults.isNotEmpty || _magentoResults.isNotEmpty)
+            IconButton(
+              onPressed: _exportResults,
+              icon: const Icon(Icons.download),
+              tooltip: 'Export to CSV',
+            ),
+          // Sean's filters toggle
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _showSeanFilters = !_showSeanFilters;
+              });
+            },
+            icon: Icon(_showSeanFilters ? Icons.filter_alt : Icons.filter_alt_outlined),
+            tooltip: 'Sean\'s Criteria',
+          ),
           IconButton(
             onPressed: _clearAllFilters,
             icon: const Icon(Icons.clear_all),
@@ -86,6 +112,9 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
 
           // Advanced filters
           _buildAdvancedFilters(),
+
+          // Sean's filters
+          if (_showSeanFilters) _buildSeanFilters(),
 
           // Results
           Expanded(
@@ -627,5 +656,260 @@ class _AdvancedSearchScreenState extends ConsumerState<AdvancedSearchScreen>
         ],
       ),
     );
+  }
+
+  /// Build Sean's criteria filters
+  Widget _buildSeanFilters() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+        border: Border(
+          bottom: BorderSide(
+            color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+          ),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.account_circle,
+                size: 20,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Sean\'s Criteria',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          // Budget range
+          Text(
+            'Budget Range: \$${_minTaxAmount.toStringAsFixed(0)} - \$${_maxTaxAmount.toStringAsFixed(0)}',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          RangeSlider(
+            values: RangeValues(_minTaxAmount, _maxTaxAmount),
+            min: 0,
+            max: 5000,
+            divisions: 100,
+            labels: RangeLabels(
+              '\$${_minTaxAmount.toStringAsFixed(0)}',
+              '\$${_maxTaxAmount.toStringAsFixed(0)}',
+            ),
+            onChanged: (values) {
+              setState(() {
+                _minTaxAmount = values.start;
+                _maxTaxAmount = values.end;
+              });
+              _performSearch();
+            },
+          ),
+          const SizedBox(height: 12),
+          // Preferences
+          Row(
+            children: [
+              Expanded(
+                child: CheckboxListTile(
+                  title: const Text('Prefer Coastal Counties'),
+                  value: _preferCoastal,
+                  onChanged: (value) {
+                    setState(() => _preferCoastal = value ?? false);
+                    _performSearch();
+                  },
+                  dense: true,
+                ),
+              ),
+              Expanded(
+                child: CheckboxListTile(
+                  title: const Text('Prefer Florida'),
+                  value: _preferFlorida,
+                  onChanged: (value) {
+                    setState(() => _preferFlorida = value ?? false);
+                    _performSearch();
+                  },
+                  dense: true,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          // Lien type
+          DropdownButtonFormField<String>(
+            value: _lienType,
+            decoration: const InputDecoration(
+              labelText: 'Lien Type',
+              border: OutlineInputBorder(),
+              isDense: true,
+            ),
+            hint: const Text('All Types'),
+            items: const [
+              DropdownMenuItem(value: null, child: Text('All Types')),
+              DropdownMenuItem(
+                value: 'otp',
+                child: Text('OTP (Available Now)'),
+              ),
+              DropdownMenuItem(
+                value: 'auction',
+                child: Text('Auction (Scheduled)'),
+              ),
+            ],
+            onChanged: (value) {
+              setState(() => _lienType = value);
+              _performSearch();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Export results to CSV
+  Future<void> _exportResults() async {
+    try {
+      // Collect all legacy tax liens
+      final legacyLiens = _taxLienResults;
+
+      // Filter by Sean's criteria
+      final filtered = legacyLiens.where((lien) {
+        // Budget
+        if (lien.taxAmount < _minTaxAmount || lien.taxAmount > _maxTaxAmount) {
+          return false;
+        }
+
+        // Florida
+        if (_preferFlorida && lien.state.toUpperCase() != 'FL') {
+          return false;
+        }
+
+        // Type
+        if (_lienType != null) {
+          final isOTP = lien.auctionDate.isBefore(DateTime.now());
+          if (_lienType == 'otp' && !isOTP) return false;
+          if (_lienType == 'auction' && isOTP) return false;
+        }
+
+        return true;
+      }).toList();
+
+      // Sort by priority (coastal first, then by interest rate)
+      filtered.sort((a, b) {
+        final aCoastal = ExportService.getLocationType(a.county) == 'Coastal';
+        final bCoastal = ExportService.getLocationType(b.county) == 'Coastal';
+
+        if (aCoastal && !bCoastal) return -1;
+        if (!aCoastal && bCoastal) return 1;
+
+        // Then by interest rate
+        return b.interestRate.compareTo(a.interestRate);
+      });
+
+      // Take top 108
+      final top108 = filtered.take(108).toList();
+
+      if (top108.isEmpty) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('No liens match Sean\'s criteria'),
+            ),
+          );
+        }
+        return;
+      }
+
+      // Convert to TaxLien for export (simplified conversion)
+      final taxLiens = top108.map((legacy) {
+        return models.TaxLien(
+          id: legacy.id,
+          propertyAddress: legacy.address,
+          county: legacy.county,
+          state: legacy.state,
+          taxAmount: legacy.taxAmount,
+          interestRate: legacy.interestRate,
+          auctionDate: legacy.auctionDate,
+          status: legacy.status,
+          propertyType: 'Unknown',
+          estimatedValue: legacy.assessedValue,
+          assessedValue: legacy.assessedValue,
+          description: '',
+          images: [],
+          owner: legacy.owner,
+          parcelId: legacy.parcelId,
+          redemptionDeadline: legacy.redemptionDeadline,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
+      }).toList();
+
+      // Generate filename
+      final timestamp = DateTime.now().toIso8601String().split('T').first;
+      final lienTypeLabel = _lienType ?? 'all';
+      final filename = 'sean_${lienTypeLabel}_list_$timestamp.csv';
+
+      // Export
+      final filePath = await ExportService.exportToCSV(
+        liens: taxLiens,
+        filename: filename,
+      );
+
+      if (filePath != null && mounted) {
+        // Show success dialog
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Export Successful'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Exported ${top108.length} liens'),
+                const SizedBox(height: 8),
+                Text(
+                  'File: $filename',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'),
+              ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pop(context);
+                  ExportService.shareFile(filePath);
+                },
+                icon: const Icon(Icons.share),
+                label: const Text('Share'),
+              ),
+            ],
+          ),
+        );
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Export failed'),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Export failed: $e')),
+        );
+      }
+    }
   }
 }
