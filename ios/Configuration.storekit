@@ -1,0 +1,180 @@
+{
+  "identifier" : "B8E7C6D4",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6504197357",
+    "_developerTeamID" : "YOUR_TEAM_ID",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 751651200.0,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21510338",
+      "localizations" : [
+
+      ],
+      "name" : "TaxLien Premium",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "29.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6504197358",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Unlimited access to all premium features for tax lien investing",
+              "displayName" : "TaxLien Premium Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "taxlien_premium_monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Premium Monthly",
+          "subscriptionGroupID" : "21510338",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "299.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6504197359",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Annual subscription with 17% savings - unlimited access to all premium features",
+              "displayName" : "TaxLien Premium Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "taxlien_premium_yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Premium Yearly",
+          "subscriptionGroupID" : "21510338",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "99.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6504197360",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Advanced features for power users and institutional investors",
+              "displayName" : "TaxLien Enterprise Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "taxlien_enterprise_monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Enterprise Monthly",
+          "subscriptionGroupID" : "21510338",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "999.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6504197361",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Annual enterprise subscription with all advanced features and priority support",
+              "displayName" : "TaxLien Enterprise Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "taxlien_enterprise_yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Enterprise Yearly",
+          "subscriptionGroupID" : "21510338",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
+

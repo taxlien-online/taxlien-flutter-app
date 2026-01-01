@@ -40,6 +40,10 @@ import '../../screens/unified_portfolio_dashboard_screen.dart';
 import '../../screens/wallet_connection_screen.dart';
 import '../../screens/product_detail_screen.dart';
 import '../../screens/nft_onboarding_screen.dart';
+import '../../features/portfolio_simulator/screens/simulator_dashboard_screen.dart';
+import '../../features/portfolio_simulator/screens/property_browse_screen.dart';
+import '../../features/portfolio_simulator/screens/leaderboard_screen.dart';
+import '../../features/portfolio_simulator/models/simulated_portfolio.dart';
 import '../../services/localization_service.dart';
 import '../../services/theme_service.dart';
 import '../../services/onboarding_service.dart';
@@ -109,6 +113,9 @@ class AppRouter {
   static const String paywall = '/paywall';
   static const String productDetail = '/product-detail';
   static const String nftOnboarding = '/nft-onboarding';
+  static const String portfolioSimulator = '/portfolio-simulator';
+  static const String simulatorPropertyBrowse = '/simulator-property-browse';
+  static const String simulatorLeaderboard = '/simulator-leaderboard';
 
   /// Генерация маршрутов для приложения
   static Route<dynamic> generateRoute(
@@ -483,6 +490,23 @@ class AppRouter {
               Navigator.of(_).pop();
             },
           ),
+        );
+
+      case portfolioSimulator:
+        return MaterialPageRoute(
+          builder: (_) => const SimulatorDashboardScreen(),
+        );
+
+      case simulatorPropertyBrowse:
+        final portfolio = settings.arguments as SimulatedPortfolio;
+        return MaterialPageRoute(
+          builder: (_) => PropertyBrowseScreen(portfolio: portfolio),
+        );
+
+      case simulatorLeaderboard:
+        final userId = settings.arguments as String?;
+        return MaterialPageRoute(
+          builder: (_) => LeaderboardScreen(userId: userId),
         );
 
       default:

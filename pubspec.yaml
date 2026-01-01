@@ -93,10 +93,8 @@ dependencies:
   dio: ^5.3.2
   connectivity_plus: ^7.0.0
   
-  # Magento Integration - Updated to latest version with blockchain support
-  flutter_magento:
-    path: ../flutter_magento  # Local development version 4.4.0
-    # For production use: flutter_magento: ^4.4.0
+  # Magento Integration - from pub.dev
+  flutter_magento: ^4.3.1
   flutter_dotenv: ^5.1.0  # For environment configuration
   freezed_annotation: ^3.1.0  # Required by flutter_magento
   json_serializable: ^6.7.1  # For JSON serialization
