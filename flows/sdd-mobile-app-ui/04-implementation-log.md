@@ -1191,3 +1191,180 @@ None yet
 - ✅ Rich UI with cards, chips, badges
 
 **Next:** Testing & Polish OR Backend Integration
+
+---
+
+## 🚀 Additional Features: ROI Calculator Live, Risk Radar, Journey Map (2026-01-02)
+
+### Tasks Completed ✅
+
+**ROI Calculator Live** ✅ DONE
+- Created `lib/features/roi_calculator/` directory structure
+  - `/models` - CalculationResult
+  - `/screens` - ROI calculator screen
+  - `/constants` - Calculator-specific constants
+- Created `calculator_constants.dart` with calculation parameters
+  - Redemption rates (65-90% by scenario)
+  - Cost assumptions (legal 5%, holding 1%/month, selling 6%)
+  - Slider ranges (tax, interest, holding period, value multiplier)
+  - Scenario types (redemption, foreclosure, partial, loss)
+- `CalculationResult` model
+  - Stores all inputs and outputs
+  - Total investment, return, profit, ROI%, annualized ROI
+  - Cost breakdown (interest, legal, holding, selling, repairs)
+  - Helper methods: isProfitable, profitLossText, roiDisplayText
+- `ROICalculatorScreen` with interactive UI
+  - 4 sliders: Tax amount ($1K-$100K), Interest (0-25%), Holding (1-36 months), Value multiplier (1x-10x)
+  - Scenario toggle (Redemption vs Foreclosure)
+  - Real-time calculation on slider change
+  - Results card with large ROI% and net profit display
+  - Breakdown card with itemized costs
+  - Comparison bar chart using fl_chart package
+  - Color-coded profit (green) vs loss (red)
+
+**Files Created:**
+- [lib/features/roi_calculator/constants/calculator_constants.dart](lib/features/roi_calculator/constants/calculator_constants.dart)
+- [lib/features/roi_calculator/models/calculation_result.dart](lib/features/roi_calculator/models/calculation_result.dart)
+- [lib/features/roi_calculator/screens/roi_calculator_screen.dart](lib/features/roi_calculator/screens/roi_calculator_screen.dart)
+
+---
+
+**Risk Radar** ✅ DONE
+- Created `lib/features/risk_radar/` directory structure
+  - `/models` - RiskAssessment
+  - `/screens` - Risk radar screen
+  - `/widgets` - Radar chart widget
+  - `/services` - Risk assessment service
+  - `/constants` - Risk-specific constants
+- Created `risk_constants.dart` with risk configuration
+  - 6 risk factors: legal, market, location, condition, financial, competition
+  - Risk weights: legal 25%, market 20%, location 15%, condition 20%, financial 15%, competition 5%
+  - Risk levels: low (<30), medium (30-60), high (>60)
+  - Color coding for each level
+- `RiskAssessment` model
+  - Risk scores map (6 factors, 0-100 each)
+  - Overall risk score (weighted)
+  - Risk level (low/medium/high)
+  - Warnings list (factors > 60)
+  - Strengths list (factors < 30)
+  - Helper methods for factor queries
+- `RiskAssessmentService` singleton
+  - Calculate 6 risk factors for any property
+  - Legal risk (based on tax amount)
+  - Market risk (based on property value ratio)
+  - Location risk (state-based with random variance)
+  - Condition risk (age/type based)
+  - Financial risk (inverse ROI calculation)
+  - Competition risk (market-based)
+  - Weighted overall score calculation
+  - Warning and strength generation
+- `RiskRadarScreen` with visual display
+  - Overall risk score card (large number, color-coded)
+  - Radar chart visualization (6-axis)
+  - Factors breakdown with progress bars
+  - Warnings section (red cards)
+  - Strengths section (green cards)
+  - Property context header
+- `RadarChartWidget` with custom painter
+  - CustomPaint implementation
+  - Concentric circle grid (5 levels)
+  - 6 axes for factors
+  - Filled polygon area for scores
+  - Data points with circles
+  - Labels around perimeter
+  - Responsive sizing
+
+**Files Created:**
+- [lib/features/risk_radar/constants/risk_constants.dart](lib/features/risk_radar/constants/risk_constants.dart)
+- [lib/features/risk_radar/models/risk_assessment.dart](lib/features/risk_radar/models/risk_assessment.dart)
+- [lib/features/risk_radar/screens/risk_radar_screen.dart](lib/features/risk_radar/screens/risk_radar_screen.dart)
+- [lib/features/risk_radar/services/risk_assessment_service.dart](lib/features/risk_radar/services/risk_assessment_service.dart)
+- [lib/features/risk_radar/widgets/radar_chart_widget.dart](lib/features/risk_radar/widgets/radar_chart_widget.dart)
+
+---
+
+**Journey Map** ✅ DONE
+- Created `lib/features/journey_map/` directory structure
+  - `/models` - UserProgress
+  - `/screens` - Journey map screen
+  - `/widgets` - Level progress bar, milestone node
+  - `/services` - Progress service
+  - `/constants` - Journey-specific constants
+- Created `journey_constants.dart` with gamification config
+  - 5 stages: novice, learner, intermediate, advanced, expert
+  - 6 milestones: onboarding, first_view, first_alert, first_sim, 10_swipes, first_investment
+  - XP values for activities (view property: 10, create alert: 50, etc.)
+  - Level requirements (100, 250, 500, 1000, 2000...)
+  - Badge types: bronze, silver, gold, platinum
+- `UserProgress` model
+  - Current level and total XP
+  - Current stage (novice → expert)
+  - Completed milestones list
+  - Earned badges list
+  - Activity counts map
+  - Helper methods: xpToNextLevel, progressToNextLevel (%), hasMilestone(), hasBadge()
+  - Factory method for initial progress
+  - JSON serialization
+- `ProgressService` singleton with SharedPreferences
+  - Get/save user progress
+  - Add XP with automatic level-up detection
+  - Complete milestone (idempotent)
+  - Record activity (increment counters)
+  - Last activity timestamp tracking
+  - Level calculation algorithm (1000 * (level + 1))
+- `JourneyMapScreen` with visual progress
+  - Level card with gradient and large level number
+  - Total XP and current stage display
+  - Level progress bar to next level
+  - Milestone nodes (completed with checkmark, locked with lock icon)
+  - Badges section (grid of earned badges)
+  - Activity stats (views, simulations, swipes, alerts created)
+  - Pull-to-refresh
+- `LevelProgressBar` widget
+  - Linear progress indicator
+  - XP needed and percentage display
+  - Purple gradient styling
+- `MilestoneNode` widget
+  - ListTile with icon and title
+  - Green background when completed
+  - Color-coded completion state
+
+**Files Created:**
+- [lib/features/journey_map/constants/journey_constants.dart](lib/features/journey_map/constants/journey_constants.dart)
+- [lib/features/journey_map/models/user_progress.dart](lib/features/journey_map/models/user_progress.dart)
+- [lib/features/journey_map/screens/journey_map_screen.dart](lib/features/journey_map/screens/journey_map_screen.dart)
+- [lib/features/journey_map/services/progress_service.dart](lib/features/journey_map/services/progress_service.dart)
+- [lib/features/journey_map/widgets/level_progress_bar.dart](lib/features/journey_map/widgets/level_progress_bar.dart)
+- [lib/features/journey_map/widgets/milestone_node.dart](lib/features/journey_map/widgets/milestone_node.dart)
+
+---
+
+### 📊 Additional Features Summary
+
+**Status:** ✅ COMPLETE
+**Completed:** 2026-01-02
+**Features:** 3/3 (100%)
+**Files Created:** 15 files
+
+**Deliverables:**
+- ✅ ROI Calculator Live with real-time calculations and chart (4 files)
+  - Interactive sliders for all parameters
+  - Redemption vs Foreclosure scenarios
+  - Itemized cost breakdown
+  - Bar chart comparison
+- ✅ Risk Radar with 6-factor analysis (5 files)
+  - Custom radar chart visualization
+  - Weighted risk scoring algorithm
+  - Warnings and strengths generation
+  - Color-coded risk levels
+- ✅ Journey Map with gamification (6 files)
+  - XP and level progression system
+  - Milestones and badges
+  - Activity tracking
+  - Visual progress indicators
+
+**Package Dependencies:**
+- fl_chart: Bar chart in ROI Calculator
+- shared_preferences: Progress tracking in Journey Map
+
+**Next:** Remaining innovative screens (County Heatmap, Auction Timer, Exit Strategy Planner, Leaderboard expansion) OR Testing & Backend Integration
