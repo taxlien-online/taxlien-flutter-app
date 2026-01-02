@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 import '../../../core/models/tax_lien_models.dart';
 import '../../../services/tax_lien_service.dart';
 import '../widgets/swipeable_property_card.dart';
 import '../widgets/action_buttons.dart';
+import '../widgets/match_notification_modal.dart';
+import '../widgets/share_property_sheet.dart';
+import '../widgets/detective_tutorial.dart';
+import '../screens/detective_preferences_screen.dart';
 import '../constants/detective_constants.dart';
+import '../services/match_service.dart';
+import '../services/daily_limit_service.dart';
+import '../models/user_preferences.dart';
 
 /// Deal Detective Screen
 ///
@@ -29,11 +37,29 @@ class _DealDetectiveScreenState extends State<DealDetectiveScreen> {
   int _swipeCount = 0;
   bool _isLoading = true;
   String? _error;
+  UserPreferences _preferences = UserPreferences.defaults;
 
   @override
   void initState() {
     super.initState();
+    _loadPreferences();
     _loadProperties();
+    _showTutorialIfNeeded();
+  }
+
+  Future<void> _loadPreferences() async {
+    // Load user preferences from storage
+    // For now, using defaults
+    setState(() {
+      _preferences = UserPreferences.defaults;
+    });
+  }
+
+  Future<void> _showTutorialIfNeeded() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    if (mounted) {
+      await DetectiveTutorial.showIfNeeded(context);
+    }
   }
 
   Future<void> _loadProperties() async {
@@ -81,8 +107,39 @@ class _DealDetectiveScreenState extends State<DealDetectiveScreen> {
     _moveToNextCard();
   }
 
-  void _handleSwipeRight() {
+  void _handleSwipeRight() async {
     _recordSwipe(DetectiveConstants.swipeRight);
+
+    // Check for match
+    final property = _cardStack[_currentIndex];
+    final matchService = MatchService.instance;
+    final isMatch = matchService.isMatch(
+      property: property,
+      preferences: _preferences,
+    );
+
+    if (isMatch && widget.userId != null) {
+      final match = matchService.createMatch(
+        userId: widget.userId!,
+        property: property,
+        preferences: _preferences,
+      );
+
+      // Show match notification after card animates away
+      Future.delayed(const Duration(milliseconds: 300), () {
+        if (mounted) {
+          MatchNotificationModal.show(
+            context: context,
+            match: match,
+            onViewProperty: () {
+              // TODO: Navigate to property detail
+              debugPrint('View property: ${property.id}');
+            },
+          );
+        }
+      });
+    }
+
     _moveToNextCard();
   }
 
@@ -97,12 +154,18 @@ class _DealDetectiveScreenState extends State<DealDetectiveScreen> {
     _moveToNextCard();
   }
 
-  void _recordSwipe(String direction) {
+  void _recordSwipe(String direction) async {
+    // Increment daily limit counter
+    await DailyLimitService.instance.incrementSwipeCount();
+
     _swipeCount++;
 
     // Check daily limit for free users
-    if (!widget.isPremium &&
-        _swipeCount >= DetectiveConstants.freeDailySwipeLimit) {
+    final canSwipe = await DailyLimitService.instance.canSwipe(
+      isPremium: widget.isPremium,
+    );
+
+    if (!canSwipe) {
       _showLimitReachedDialog();
       return;
     }
@@ -114,6 +177,20 @@ class _DealDetectiveScreenState extends State<DealDetectiveScreen> {
 
     // TODO: Send to backend
     // _swipeService.recordSwipe(propertyId, direction);
+
+    // Check if approaching limit and show warning
+    final warning = await DailyLimitService.instance.getLimitWarning(
+      isPremium: widget.isPremium,
+    );
+    if (warning != null && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(warning),
+          duration: const Duration(seconds: 2),
+          backgroundColor: Colors.orange,
+        ),
+      );
+    }
   }
 
   void _moveToNextCard() {
@@ -132,15 +209,22 @@ class _DealDetectiveScreenState extends State<DealDetectiveScreen> {
     }
   }
 
-  void _handleUndo() {
+  void _handleUndo() async {
     if (_swipeHistory.isEmpty) return;
 
     // Check undo limit for free users
-    final undoCount = _swipeHistory.length;
-    if (!widget.isPremium && undoCount >= DetectiveConstants.freeUndoLimit) {
+    final canUndo = await DailyLimitService.instance.canUndo(
+      isPremium: widget.isPremium,
+    );
+
+    if (!canUndo) {
       _showUpgradeDialog('Undo limit reached');
       return;
     }
+
+    // Increment undo counter
+    await DailyLimitService.instance.incrementUndoCount();
+    await DailyLimitService.instance.decrementSwipeCount();
 
     setState(() {
       _currentIndex--;
@@ -148,12 +232,14 @@ class _DealDetectiveScreenState extends State<DealDetectiveScreen> {
       _swipeCount--;
     });
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text(DetectiveConstants.successUndo),
-        duration: Duration(seconds: 1),
-      ),
-    );
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(DetectiveConstants.successUndo),
+          duration: Duration(seconds: 1),
+        ),
+      );
+    }
   }
 
   void _showWatchlistConfirmation() {
@@ -166,12 +252,18 @@ class _DealDetectiveScreenState extends State<DealDetectiveScreen> {
     );
   }
 
-  void _showLimitReachedDialog() {
+  void _showLimitReachedDialog() async {
+    final timeUntilReset = await DailyLimitService.instance.getTimeUntilResetFormatted();
+
+    if (!mounted) return;
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Daily Limit Reached'),
-        content: const Text(DetectiveConstants.errorDailyLimitReached),
+        content: Text(
+          '${DetectiveConstants.errorDailyLimitReached}\n\nResets in: $timeUntilReset',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -236,12 +328,55 @@ class _DealDetectiveScreenState extends State<DealDetectiveScreen> {
     );
   }
 
+  void _openPreferences() async {
+    final result = await Navigator.push<UserPreferences>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetectivePreferencesScreen(
+          initialPreferences: _preferences,
+          onSave: (prefs) {
+            setState(() {
+              _preferences = prefs;
+            });
+          },
+        ),
+      ),
+    );
+
+    if (result != null) {
+      setState(() {
+        _preferences = result;
+      });
+    }
+  }
+
+  void _shareCurrentProperty() {
+    if (_currentIndex < _cardStack.length) {
+      final property = _cardStack[_currentIndex];
+      SharePropertySheet.show(
+        context: context,
+        property: property,
+        referralCode: widget.userId,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Deal Detective'),
         actions: [
+          // Share button
+          IconButton(
+            icon: const Icon(Icons.share),
+            onPressed: _shareCurrentProperty,
+          ),
+          // Preferences button
+          IconButton(
+            icon: const Icon(Icons.tune),
+            onPressed: _openPreferences,
+          ),
           // Swipe counter
           Center(
             child: Padding(
