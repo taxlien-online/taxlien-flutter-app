@@ -59,6 +59,9 @@ class TrialConfig {
 
 /// Subscription tier features
 class SubscriptionFeatures {
+  // Trial tier (NEW)
+  static const List<String> trial = premium;
+
   // Free tier
   static const List<String> free = [
     'Browse tax liens',

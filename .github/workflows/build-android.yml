@@ -1,0 +1,61 @@
+name: Build - Android
+
+on:
+  push:
+    tags: [ 'v*-android' ]
+  workflow_dispatch:
+
+env:
+  FLUTTER_VERSION: '3.24.0'
+  JAVA_VERSION: '17'
+  WORKING_DIRECTORY: 'taxlien-flutter-app'
+
+jobs:
+  build:
+    name: Build Android APK & AAB
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+    - uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: ${{ env.JAVA_VERSION }}
+        
+    - name: Get dependencies
+      run: |
+        flutter pub get
+        flutter gen-l10n
+        
+    - name: Setup Keystore
+      run: |
+        echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > android/taxlien-release-key.keystore
+        echo "storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}" > android/keystore.properties
+        echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/keystore.properties
+        echo "keyAlias=taxlien-key-alias" >> android/keystore.properties
+        echo "storeFile=../taxlien-release-key.keystore" >> android/keystore.properties
+        
+    - name: Build APK
+      run: flutter build apk --release
+      
+    - name: Build App Bundle
+      run: flutter build appbundle --release
+      
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-apk
+        path: ${{ env.WORKING_DIRECTORY }}/build/app/outputs/flutter-apk/app-release.apk
+        
+    - name: Upload AAB
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-aab
+        path: ${{ env.WORKING_DIRECTORY }}/build/app/outputs/bundle/release/app-release.aab

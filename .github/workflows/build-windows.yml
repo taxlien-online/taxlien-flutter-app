@@ -1,0 +1,42 @@
+name: Build - Windows
+
+on:
+  push:
+    tags: [ 'v*-windows' ]
+  workflow_dispatch:
+
+env:
+  FLUTTER_VERSION: '3.24.0'
+  WORKING_DIRECTORY: 'taxlien-flutter-app'
+
+jobs:
+  build:
+    name: Build Windows Desktop
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        
+    - name: Get dependencies
+      run: |
+        flutter pub get
+        flutter gen-l10n
+        
+    - name: Enable Windows Desktop
+      run: flutter config --enable-windows-desktop
+      
+    - name: Build Windows
+      run: flutter build windows --release
+      
+    - name: Upload Windows Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-release
+        path: ${{ env.WORKING_DIRECTORY }}/build/windows/x64/runner/Release/

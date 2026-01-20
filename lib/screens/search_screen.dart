@@ -3,17 +3,22 @@ import '../l10n/app_localizations.dart';
 import '../services/tax_lien_service.dart';
 import '../services/database_service.dart';
 import '../services/auth_service.dart';
+import '../services/paywall_trigger_service.dart';
+import '../services/analytics_service.dart';
 import '../widgets/tax_lien_card.dart';
 import '../core/models/tax_lien_models.dart';
+import '../core/utils/fee_calculator.dart';
 
 class SearchScreen extends StatefulWidget {
   final TaxLienService taxLienService;
   final DatabaseService databaseService;
+  final PaywallTriggerService? paywallTriggerService;
 
   const SearchScreen({
     super.key,
     required this.taxLienService,
     required this.databaseService,
+    this.paywallTriggerService,
   });
 
   @override
@@ -58,6 +63,20 @@ class _SearchScreenState extends State<SearchScreen> {
     final query = _searchController.text.trim();
     if (query.isEmpty) return;
 
+    // Check paywall trigger
+    if (widget.paywallTriggerService != null) {
+      final reason = await widget.paywallTriggerService!.checkTrigger('search');
+      if (reason != null && mounted) {
+        AnalyticsService().logPaywallView(reason.name);
+        // Redirect to paywall
+        Navigator.pushNamed(context, '/paywall', arguments: {
+          'canDismiss': true,
+          'reason': reason,
+        });
+        return;
+      }
+    }
+
     setState(() {
       _isSearching = true;
       _isLoading = true;
@@ -81,6 +100,14 @@ class _SearchScreenState extends State<SearchScreen> {
             lien.county.toLowerCase().contains(searchTerm) ||
             lien.state.toLowerCase().contains(searchTerm);
       }).toList();
+
+      // Record successful search
+      if (widget.paywallTriggerService != null) {
+        await widget.paywallTriggerService!.recordSearch();
+        AnalyticsService().logEvent(
+            name: 'search_performed',
+            parameters: {'query_length': query.length});
+      }
 
       setState(() {
         _searchResults = filteredResults;
@@ -376,23 +403,9 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  String _formatTimestamp(DateTime timestamp) {
-    final l10n = AppLocalizations.of(context)!;
-    final now = DateTime.now();
-    final difference = now.difference(timestamp);
-
-    if (difference.inDays > 0) {
-      return l10n.daysAgo(difference.inDays);
-    } else if (difference.inHours > 0) {
-      return l10n.hoursAgo(difference.inHours);
-    } else if (difference.inMinutes > 0) {
-      return l10n.minutesAgo(difference.inMinutes);
-    } else {
-      return l10n.justNow;
-    }
-  }
-
   void _showLienDetails(LegacyTaxLien lien) {
+    AnalyticsService().logEvent(
+        name: 'view_property_detail', parameters: {'parcel_id': lien.parcelId});
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -401,6 +414,7 @@ class _SearchScreenState extends State<SearchScreen> {
           taxLienService: widget.taxLienService,
           authService: null, // Not needed for search
           databaseService: widget.databaseService,
+          paywallTriggerService: widget.paywallTriggerService,
         ),
       ),
     );
@@ -412,6 +426,7 @@ class TaxLienDetailScreen extends StatefulWidget {
   final TaxLienService taxLienService;
   final AuthService? authService;
   final DatabaseService databaseService;
+  final PaywallTriggerService? paywallTriggerService;
 
   const TaxLienDetailScreen({
     super.key,
@@ -419,6 +434,7 @@ class TaxLienDetailScreen extends StatefulWidget {
     required this.taxLienService,
     this.authService,
     required this.databaseService,
+    this.paywallTriggerService,
   });
 
   @override
@@ -426,6 +442,28 @@ class TaxLienDetailScreen extends StatefulWidget {
 }
 
 class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _checkAccess();
+  }
+
+  Future<void> _checkAccess() async {
+    if (widget.paywallTriggerService != null) {
+      final reason = await widget.paywallTriggerService!.checkTrigger(
+        'access_county',
+        context: {'county': widget.lien.county},
+      );
+      if (reason != null && mounted) {
+        // Redirect back or to paywall
+        Navigator.pushReplacementNamed(context, '/paywall', arguments: {
+          'canDismiss': true,
+          'reason': reason,
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -629,57 +667,98 @@ class _TaxLienDetailScreenState extends State<TaxLienDetailScreen> {
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.purchaseLien),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(l10n.enterBidAmount(
-                '\$${widget.lien.taxAmount.toStringAsFixed(2)}')),
-            const SizedBox(height: 16),
-            TextField(
-              controller: bidController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Bid Amount',
-                prefixText: '\$',
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: Text(l10n.purchaseLien),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(l10n.enterBidAmount(
+                  '\$${widget.lien.taxAmount.toStringAsFixed(2)}')),
+              const SizedBox(height: 16),
+              TextField(
+                controller: bidController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Bid Amount',
+                  prefixText: '\$',
+                ),
+                onChanged: (value) => setDialogState(() {}),
               ),
+              const SizedBox(height: 16),
+              const Divider(),
+              _buildFeeRow(
+                  'Bid Amount', double.tryParse(bidController.text) ?? 0.0),
+              _buildFeeRow(
+                  'Service Fee (2.5%)',
+                  FeeCalculator.calculateFee(
+                      double.tryParse(bidController.text) ?? 0.0,
+                      FeeType.purchase)),
+              const Divider(),
+              _buildFeeRow(
+                  'Total',
+                  FeeCalculator.calculateTotal(
+                      double.tryParse(bidController.text) ?? 0.0,
+                      FeeType.purchase),
+                  isTotal: true),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(l10n.cancel),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final bidAmount = double.tryParse(bidController.text);
+                if (bidAmount != null && bidAmount >= widget.lien.taxAmount) {
+                  Navigator.pop(context);
+                  final success = await widget.taxLienService
+                      .purchaseLien(widget.lien.id, bidAmount);
+                  if (success && context.mounted) {
+                    AnalyticsService().logFeeCollected(
+                        'purchase',
+                        FeeCalculator.calculateFee(
+                            bidAmount, FeeType.purchase));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(l10n.lienPurchasedSuccessfully)),
+                    );
+                    Navigator.pop(context);
+                  } else if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                            widget.taxLienService.error ?? l10n.purchaseError),
+                      ),
+                    );
+                  }
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(l10n.invalidBidAmount)),
+                  );
+                }
+              },
+              child: Text(l10n.purchase),
             ),
           ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.cancel),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              final bidAmount = double.tryParse(bidController.text);
-              if (bidAmount != null && bidAmount >= widget.lien.taxAmount) {
-                Navigator.pop(context);
-                final success = await widget.taxLienService
-                    .purchaseLien(widget.lien.id, bidAmount);
-                if (success && context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(l10n.lienPurchasedSuccessfully)),
-                  );
-                  Navigator.pop(context);
-                } else if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                          widget.taxLienService.error ?? l10n.purchaseError),
-                    ),
-                  );
-                }
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(l10n.invalidBidAmount)),
-                );
-              }
-            },
-            child: Text(l10n.purchase),
-          ),
+      ),
+    );
+  }
+
+  Widget _buildFeeRow(String label, double amount, {bool isTotal = false}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label,
+              style: TextStyle(
+                  fontWeight: isTotal ? FontWeight.bold : FontWeight.normal)),
+          Text('\$${amount.toStringAsFixed(2)}',
+              style: TextStyle(
+                  fontWeight: isTotal ? FontWeight.bold : FontWeight.normal)),
         ],
       ),
     );

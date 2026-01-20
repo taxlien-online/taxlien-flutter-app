@@ -40,6 +40,9 @@ import '../../screens/unified_portfolio_dashboard_screen.dart';
 import '../../screens/wallet_connection_screen.dart';
 import '../../screens/product_detail_screen.dart';
 import '../../screens/nft_onboarding_screen.dart';
+import '../../screens/education_dashboard_screen.dart';
+import '../../screens/lesson_player_screen.dart';
+import '../../screens/quiz_screen.dart';
 import '../../features/portfolio_simulator/screens/simulator_dashboard_screen.dart';
 import '../../features/portfolio_simulator/screens/property_browse_screen.dart';
 import '../../features/portfolio_simulator/screens/leaderboard_screen.dart';
@@ -63,6 +66,9 @@ import '../../services/unified_portfolio_service.dart';
 import '../../services/realtime_bidding_service.dart';
 import '../../services/magento_service.dart';
 import '../../services/trial_service.dart';
+import '../../services/paywall_trigger_service.dart';
+import '../../services/education_service.dart';
+import '../../services/referral_service.dart';
 import '../mocks/nft_mocks.dart';
 import '../services/dome_service.dart';
 import '../services/magento_api_service.dart';
@@ -113,6 +119,9 @@ class AppRouter {
   static const String paywall = '/paywall';
   static const String productDetail = '/product-detail';
   static const String nftOnboarding = '/nft-onboarding';
+  static const String educationDashboard = '/education';
+  static const String lessonPlayer = '/lesson-player';
+  static const String quiz = '/quiz';
   static const String portfolioSimulator = '/portfolio-simulator';
   static const String simulatorPropertyBrowse = '/simulator-property-browse';
   static const String simulatorLeaderboard = '/simulator-leaderboard';
@@ -150,6 +159,7 @@ class AppRouter {
         );
 
       case mainNavigation:
+        final initialIndex = settings.arguments as int? ?? 0;
         return MaterialPageRoute(
           builder: (_) => MainNavigationScreen(
             localizationService: dependencies.localizationService,
@@ -159,6 +169,10 @@ class AppRouter {
             authService: dependencies.authService,
             databaseService: dependencies.databaseService,
             userPreferencesService: dependencies.userPreferencesService,
+            educationService: dependencies.educationService,
+            paywallTriggerService: dependencies.paywallTriggerService,
+            referralService: dependencies.referralService,
+            initialIndex: initialIndex,
           ),
         );
 
@@ -185,6 +199,7 @@ class AppRouter {
           builder: (_) => SearchScreen(
             taxLienService: dependencies.taxLienService,
             databaseService: dependencies.databaseService,
+            paywallTriggerService: dependencies.paywallTriggerService,
           ),
         );
 
@@ -248,6 +263,7 @@ class AppRouter {
           builder: (_) => AIAdvisorScreen(
             taxLienService: dependencies.taxLienService,
             aiService: dependencies.aiInvestmentAdvisorService,
+            paywallTriggerService: dependencies.paywallTriggerService,
           ),
         );
 
@@ -258,6 +274,7 @@ class AppRouter {
             themeService: dependencies.themeService,
             localizationService: dependencies.localizationService,
             onboardingService: dependencies.onboardingService,
+            referralService: dependencies.referralService,
             nftClient: dependencies.nftClient,
           ),
         );
@@ -442,10 +459,23 @@ class AppRouter {
         );
 
       case paywall:
-        final canDismiss = settings.arguments as bool? ?? true;
+        bool canDismiss = true;
+        PaywallReason? reason;
+
+        if (settings.arguments is bool) {
+          canDismiss = settings.arguments as bool;
+        } else if (settings.arguments is Map<String, dynamic>) {
+          final args = settings.arguments as Map<String, dynamic>;
+          canDismiss = args['canDismiss'] ?? true;
+          reason = args['reason'];
+        } else if (settings.arguments is PaywallReason) {
+          reason = settings.arguments as PaywallReason;
+        }
+
         return MaterialPageRoute(
           builder: (_) => PaywallScreen(
             canDismiss: canDismiss,
+            reason: reason,
           ),
         );
 
@@ -492,6 +522,47 @@ class AppRouter {
           ),
         );
 
+      case educationDashboard:
+        return MaterialPageRoute(
+          builder: (_) => EducationDashboardScreen(
+            eduService: dependencies.educationService,
+          ),
+        );
+
+      case lessonPlayer:
+        final args = settings.arguments as Map<String, dynamic>?;
+        if (args == null || !args.containsKey('lesson')) {
+          return MaterialPageRoute(
+            builder: (_) => Scaffold(
+              appBar: AppBar(title: const Text('Error')),
+              body: const Center(child: Text('Lesson data not provided')),
+            ),
+          );
+        }
+        return MaterialPageRoute(
+          builder: (_) => LessonPlayerScreen(
+            lesson: args['lesson'],
+            eduService: dependencies.educationService,
+          ),
+        );
+
+      case quiz:
+        final args = settings.arguments as Map<String, dynamic>?;
+        if (args == null || !args.containsKey('lesson')) {
+          return MaterialPageRoute(
+            builder: (_) => Scaffold(
+              appBar: AppBar(title: const Text('Error')),
+              body: const Center(child: Text('Quiz data not provided')),
+            ),
+          );
+        }
+        return MaterialPageRoute(
+          builder: (_) => QuizScreen(
+            lesson: args['lesson'],
+            eduService: dependencies.educationService,
+          ),
+        );
+
       case portfolioSimulator:
         return MaterialPageRoute(
           builder: (_) => const SimulatorDashboardScreen(),
@@ -525,44 +596,20 @@ class AppRouter {
 
   /// Навигация к именованному маршруту
   static Future<T?> navigateTo<T extends Object?>(
-    BuildContext context,
-    String routeName, {
-    Object? arguments,
-  }) {
-    return Navigator.pushNamed<T>(
-      context,
-      routeName,
-      arguments: arguments,
-    );
+    BuildContext context, String routeName, {Object? arguments}) {
+    return Navigator.pushNamed<T>(context, routeName, arguments: arguments);
   }
 
   /// Замена текущего маршрута
   static Future<T?> replaceTo<T extends Object?, TO extends Object?>(
-    BuildContext context,
-    String routeName, {
-    TO? result,
-    Object? arguments,
-  }) {
-    return Navigator.pushReplacementNamed<T, TO>(
-      context,
-      routeName,
-      result: result,
-      arguments: arguments,
-    );
+    BuildContext context, String routeName, {TO? result, Object? arguments}) {
+    return Navigator.pushReplacementNamed<T, TO>(context, routeName, result: result, arguments: arguments);
   }
 
   /// Удаление всех маршрутов и навигация к новому
   static Future<T?> pushAndRemoveUntil<T extends Object?>(
-    BuildContext context,
-    String routeName, {
-    Object? arguments,
-  }) {
-    return Navigator.pushNamedAndRemoveUntil<T>(
-      context,
-      routeName,
-      (route) => false,
-      arguments: arguments,
-    );
+    BuildContext context, String routeName, {Object? arguments}) {
+    return Navigator.pushNamedAndRemoveUntil<T>(context, routeName, (route) => false, arguments: arguments);
   }
 
   /// Возврат назад
@@ -590,6 +637,9 @@ class AppRouterDependencies {
   final TaxLienMagentoService taxLienMagentoService;
   final NFTClient nftClient;
   final TrialService? trialService;
+  final PaywallTriggerService? paywallTriggerService;
+  final EducationService educationService;
+  final ReferralService? referralService;
 
   AppRouterDependencies({
     required this.localizationService,
@@ -603,6 +653,9 @@ class AppRouterDependencies {
     required this.aiInvestmentAdvisorService,
     required this.taxLienMagentoService,
     required this.nftClient,
+    required this.educationService,
     this.trialService,
+    this.paywallTriggerService,
+    this.referralService,
   });
 }

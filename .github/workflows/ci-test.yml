@@ -1,0 +1,36 @@
+name: CI - Test & Quality
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    paths:
+      - 'taxlien-flutter-app/**'
+      - '.github/workflows/ci-test.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'taxlien-flutter-app/**'
+
+env:
+  FLUTTER_VERSION: '3.24.0'
+  WORKING_DIRECTORY: 'taxlien-flutter-app'
+
+jobs:
+  test:
+    name: Lint & Unit Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+    - run: flutter pub get
+    - run: flutter gen-l10n
+    - run: flutter analyze
+    - run: flutter test
+    - run: dart format --output=none --set-exit-if-changed .

@@ -6,15 +6,18 @@ import '../widgets/tax_lien_card.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_dimensions.dart';
 import '../core/models/tax_lien_models.dart';
+import '../services/paywall_trigger_service.dart';
 
 class AIAdvisorScreen extends StatefulWidget {
   final TaxLienService taxLienService;
   final AIInvestmentAdvisorService aiService;
+  final PaywallTriggerService? paywallTriggerService;
 
   const AIAdvisorScreen({
     super.key,
     required this.taxLienService,
     required this.aiService,
+    this.paywallTriggerService,
   });
 
   @override
@@ -73,6 +76,20 @@ class _AIAdvisorScreenState extends State<AIAdvisorScreen>
   }
 
   Future<void> _analyzeLien(TaxLien lien) async {
+    // Check paywall trigger
+    if (widget.paywallTriggerService != null) {
+      final reason =
+          await widget.paywallTriggerService!.checkTrigger('ai_analysis');
+      if (reason != null && mounted) {
+        // Redirect to paywall
+        Navigator.pushNamed(context, '/paywall', arguments: {
+          'canDismiss': true,
+          'reason': reason,
+        });
+        return;
+      }
+    }
+
     setState(() {
       _isAnalyzing = true;
       _selectedLien = lien;
@@ -81,6 +98,12 @@ class _AIAdvisorScreenState extends State<AIAdvisorScreen>
 
     try {
       final analysis = await widget.aiService.analyzeTaxLien(lien);
+      
+      // Record successful AI analysis
+      if (widget.paywallTriggerService != null) {
+        await widget.paywallTriggerService!.recordAIAnalysis();
+      }
+
       setState(() {
         _currentAnalysis = analysis;
         _isAnalyzing = false;

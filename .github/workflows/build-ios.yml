@@ -1,0 +1,40 @@
+name: Build - iOS
+
+on:
+  push:
+    tags: [ 'v*-ios' ]
+  workflow_dispatch:
+
+env:
+  FLUTTER_VERSION: '3.24.0'
+  WORKING_DIRECTORY: 'taxlien-flutter-app'
+
+jobs:
+  build:
+    name: Build iOS IPA
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        
+    - name: Install dependencies
+      run: |
+        flutter pub get
+        flutter gen-l10n
+        cd ios && pod install --repo-update
+        
+    - name: Build iOS (no codesign)
+      run: flutter build ios --release --no-codesign
+      
+    - name: Build IPA (Requires Signing Setup)
+      run: |
+        echo "🚀 Ready for production build and archive..."
+        # Actual IPA creation requires full p12 and provisioning profile setup
+        # as described in STORES.md

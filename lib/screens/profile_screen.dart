@@ -4,6 +4,7 @@ import '../services/auth_service.dart';
 import '../services/theme_service.dart';
 import '../services/localization_service.dart';
 import '../services/onboarding_service.dart';
+import '../services/referral_service.dart';
 // Services replaced with flutter_nft and flutter_icp libraries
 import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
 // import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
@@ -18,6 +19,7 @@ class ProfileScreen extends StatefulWidget {
   final ThemeService themeService;
   final LocalizationService localizationService;
   final OnboardingService onboardingService;
+  final ReferralService? referralService;
   // Services replaced with NFT client
   final NFTClient nftClient;
 
@@ -27,6 +29,7 @@ class ProfileScreen extends StatefulWidget {
     required this.themeService,
     required this.localizationService,
     required this.onboardingService,
+    this.referralService,
     required this.nftClient,
   });
 
@@ -59,6 +62,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             // Баланс и финансы
             _buildBalanceCard(),
+
+            const SizedBox(height: 16),
+
+            // Реферальная программа
+            if (widget.authService.currentUser != null) _buildReferralCard(),
 
             const SizedBox(height: 16),
 
@@ -253,6 +261,82 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildReferralCard() {
+    return ListenableBuilder(
+      listenable: widget.referralService ?? ChangeNotifier(),
+      builder: (context, _) {
+        final referralData = widget.referralService?.currentData;
+        
+        return Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.people_outline, color: Colors.blue),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Referral Program',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                const Text('Invite friends and earn \$20 for each referral!'),
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.grey.withOpacity(0.3)),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        referralData?.code ?? '......',
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, letterSpacing: 2),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.copy),
+                        onPressed: () {
+                          // Copy to clipboard logic
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Code copied to clipboard')),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildStatMini('Invites', '${referralData?.referralCount ?? 0}'),
+                    _buildStatMini('Earned', '\$${(referralData?.totalEarned ?? 0).toStringAsFixed(0)}'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildStatMini(String label, String value) {
+    return Column(
+      children: [
+        Text(value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(label, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+      ],
     );
   }
 

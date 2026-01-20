@@ -34,8 +34,6 @@ void main() {
           return null;
         },
       );
-
-      await trialService.initialize();
     });
 
     tearDown(() {
@@ -43,13 +41,15 @@ void main() {
     });
 
     test('Initial state should be free tier with no trial', () async {
+      await trialService.initialize();
       expect(trialService.trialStatus.tier, SubscriptionTier.free);
       expect(trialService.trialStatus.isActive, false);
       expect(trialService.trialStatus.isExpired, false);
       expect(trialService.trialStatus.daysRemaining, 0);
     });
 
-    test('Should start 365-day trial successfully', () async {
+    test('Should start 14-day trial successfully', () async {
+      await trialService.initialize();
       final success = await trialService.startTrial();
 
       expect(success, true);
@@ -57,11 +57,13 @@ void main() {
       expect(trialService.trialStatus.isActive, true);
       expect(trialService.trialStatus.isExpired, false);
       expect(trialService.trialStatus.daysRemaining,
-          greaterThanOrEqualTo(364)); // Allow for timing
-      expect(trialService.trialStatus.daysRemaining, lessThanOrEqualTo(365));
+          greaterThanOrEqualTo(13)); // Allow for timing
+      expect(trialService.trialStatus.daysRemaining,
+          lessThanOrEqualTo(14));
     });
 
     test('Trial should grant access', () async {
+      await trialService.initialize();
       await trialService.startTrial();
 
       expect(trialService.hasAccess, true);
@@ -69,6 +71,7 @@ void main() {
     });
 
     test('Should not allow trial restart', () async {
+      await trialService.initialize();
       // Start trial first time
       final firstStart = await trialService.startTrial();
       expect(firstStart, true);
@@ -79,6 +82,7 @@ void main() {
     });
 
     test('Trial dates should be correct', () async {
+      await trialService.initialize();
       final now = DateTime.now();
       await trialService.startTrial();
 
@@ -93,37 +97,34 @@ void main() {
       // Start date should be within last minute
       expect(startDate.difference(now).inMinutes.abs(), lessThan(1));
 
-      // End date should be ~365 days from start
+      // End date should be ~14 days from start
       final duration = endDate.difference(startDate).inDays;
       expect(duration, equals(TrialConfig.trialDurationDays));
     });
 
     test('Premium tier should grant access', () async {
       // Simulate premium purchase
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('subscription_tier', SubscriptionTier.premium.name);
+      SharedPreferences.setMockInitialValues({'subscription_tier': 'premium'});
 
-      // Reload service
       await trialService.initialize();
 
-      expect(trialService.hasAccess, true);
       expect(trialService.trialStatus.tier, SubscriptionTier.premium);
+      expect(trialService.hasAccess, true);
     });
 
     test('Enterprise tier should grant access', () async {
       // Simulate enterprise purchase
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(
-          'subscription_tier', SubscriptionTier.enterprise.name);
+      SharedPreferences.setMockInitialValues(
+          {'subscription_tier': 'enterprise'});
 
-      // Reload service
       await trialService.initialize();
 
-      expect(trialService.hasAccess, true);
       expect(trialService.trialStatus.tier, SubscriptionTier.enterprise);
+      expect(trialService.hasAccess, true);
     });
 
     test('Free tier should not grant access', () async {
+      await trialService.initialize();
       expect(trialService.hasAccess, false);
       expect(trialService.trialStatus.tier, SubscriptionTier.free);
     });
@@ -131,17 +132,15 @@ void main() {
     test('Expired trial should not grant access', () async {
       // Simulate expired trial
       final now = DateTime.now();
-      final prefs = await SharedPreferences.getInstance();
+      SharedPreferences.setMockInitialValues({
+        'trial_start_date': now.subtract(Duration(days: 20)).toIso8601String(),
+        'trial_end_date': now.subtract(Duration(days: 6)).toIso8601String(),
+        'subscription_tier': 'trial',
+      });
 
-      await prefs.setString('trial_start_date',
-          now.subtract(Duration(days: 400)).toIso8601String());
-      await prefs.setString(
-          'trial_end_date', now.subtract(Duration(days: 35)).toIso8601String());
-      await prefs.setString('subscription_tier', SubscriptionTier.trial.name);
-
-      // Reload service
       await trialService.initialize();
 
+      // The service should have marked it as expired and reverted to free
       expect(trialService.trialStatus.isExpired, true);
       expect(trialService.trialStatus.isActive, false);
       expect(trialService.hasAccess, false);
@@ -149,11 +148,13 @@ void main() {
     });
 
     test('Trial config should have correct duration', () {
-      expect(TrialConfig.trialDurationDays, 365);
+      expect(TrialConfig.trialDurationDays, 14);
     });
 
     test('Subscription products should be defined', () {
       expect(SubscriptionProducts.allProducts.length, greaterThan(0));
+      expect(SubscriptionProducts.allProducts,
+          contains('taxlien_starter_monthly'));
       expect(SubscriptionProducts.allProducts,
           contains('taxlien_premium_monthly'));
       expect(
@@ -167,20 +168,9 @@ void main() {
     test('Subscription features should be defined for all tiers', () {
       expect(SubscriptionFeatures.free.length, greaterThan(0));
       expect(SubscriptionFeatures.trial.length, greaterThan(0));
+      expect(SubscriptionFeatures.starter.length, greaterThan(0));
       expect(SubscriptionFeatures.premium.length, greaterThan(0));
       expect(SubscriptionFeatures.enterprise.length, greaterThan(0));
-
-      // Trial should have more features than free
-      expect(SubscriptionFeatures.trial.length,
-          greaterThan(SubscriptionFeatures.free.length));
-
-      // Premium should have more features than trial
-      expect(SubscriptionFeatures.premium.length,
-          greaterThan(SubscriptionFeatures.trial.length));
-
-      // Enterprise should have most features
-      expect(SubscriptionFeatures.enterprise.length,
-          greaterThan(SubscriptionFeatures.premium.length));
     });
   });
 

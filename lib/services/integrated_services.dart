@@ -3,6 +3,7 @@ import 'package:flutter_magento/flutter_magento.dart';
 import 'database_service.dart';
 import 'nft_service.dart';
 import 'plug_wallet_service.dart';
+import '../core/config/api_config.dart';
 import '../core/services/flutter_magento_cloud_service.dart';
 
 class IntegratedServices {
@@ -61,26 +62,26 @@ class IntegratedServices {
       _icpService = FlutterMagentoICPService.instance;
       await _icpService?.initialize(
         enabled: true,
-        network: 'testnet',
-        enableDebug: true,
+        network: ApiConfig.icpNetwork,
+        enableDebug: kDebugMode,
       );
-      debugPrint('ICP service initialized');
+      debugPrint('ICP service initialized on ${ApiConfig.icpNetwork}');
 
       _nftBlockchainService = FlutterMagentoNFTService.instance;
       await _nftBlockchainService?.initialize(
         enabled: true,
-        defaultNetwork: 'polygon',
-        enableDebug: true,
+        defaultNetwork: ApiConfig.nftNetwork,
+        enableDebug: kDebugMode,
       );
-      debugPrint('NFT blockchain service initialized');
+      debugPrint('NFT blockchain service initialized on ${ApiConfig.nftNetwork}');
 
       _yukuService = FlutterMagentoYukuService.instance;
       await _yukuService?.initialize(
         enabled: true,
-        defaultNetwork: 'icp',
-        enableDebug: true,
+        defaultNetwork: ApiConfig.yukuNetwork,
+        enableDebug: kDebugMode,
       );
-      debugPrint('Yuku service initialized');
+      debugPrint('Yuku service initialized on ${ApiConfig.yukuNetwork}');
 
       // Update service status
       _serviceStatus = {

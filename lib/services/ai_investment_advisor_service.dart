@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
 import '../core/models/tax_lien_models.dart';
+import '../core/config/api_config.dart';
 import 'tax_lien_service.dart';
+import 'auth_service.dart';
 
 enum InvestmentRiskLevel { low, medium, high }
 
@@ -17,6 +20,7 @@ class AIAnalysisResult {
   final InvestmentRiskLevel riskLevel;
   final double expectedROI;
   final int paybackMonths;
+  final String? mlModelVersion;
 
   AIAnalysisResult({
     required this.riskScore,
@@ -27,16 +31,74 @@ class AIAnalysisResult {
     required this.riskLevel,
     required this.expectedROI,
     required this.paybackMonths,
+    this.mlModelVersion,
   });
 }
 
 class AIInvestmentAdvisorService extends ChangeNotifier {
   final Random _random = Random();
+  final String _gatewayUrl = "${ApiConfig.gatewayBaseUrl}/${ApiConfig.apiVersion}";
+  final AuthService? _authService;
 
-  // Симуляция AI анализа налоговых закладных
+  AIInvestmentAdvisorService({AuthService? authService}) : _authService = authService;
+
+  // AI анализ налоговых закладных через Gateway -> ML Service
   Future<AIAnalysisResult> analyzeTaxLien(TaxLien lien) async {
+    try {
+      final token = _authService?.token;
+      
+      final response = await http.post(
+        Uri.parse('$_gatewayUrl/predictions/batch'),
+        headers: {
+          'Content-Type': 'application/json',
+          if (token != null) 'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({
+          'parcel_ids': [lien.parcelId],
+          'models': ['redemption', 'risk', 'roi'],
+        }),
+      ).timeout(const Duration(seconds: 10));
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final prediction = data['predictions'][0];
+        
+        double riskScore = (prediction['risk_score'] as num).toDouble();
+        double redemptionProb = (prediction['redemption_probability'] as num).toDouble();
+        double expectedROI = (prediction['expected_roi'] as num).toDouble();
+        String version = prediction['ml_model_version'] ?? 'v1.0';
+        
+        // Преобразуем вероятность погашения в потенциал прибыли (для совместимости с UI)
+        double profitPotential = redemptionProb * 100;
+        
+        return AIAnalysisResult(
+          riskScore: riskScore,
+          profitPotential: profitPotential,
+          recommendation: _generateRecommendation(lien, riskScore, profitPotential),
+          pros: prediction['top_contributors'] != null 
+              ? (prediction['top_contributors'] as Map<String, dynamic>).keys.take(3).toList()
+              : _generatePros(lien, profitPotential),
+          cons: prediction['top_detractors'] != null
+              ? (prediction['top_detractors'] as Map<String, dynamic>).keys.take(3).toList()
+              : _generateCons(lien, riskScore),
+          riskLevel: _determineRiskLevel(riskScore),
+          expectedROI: expectedROI,
+          paybackMonths: prediction['payback_months'] ?? _calculatePaybackMonths(lien),
+          mlModelVersion: version,
+        );
+      } else {
+        debugPrint("Gateway returned error: ${response.statusCode} - ${response.body}");
+        return _mockAnalyzeTaxLien(lien);
+      }
+    } catch (e) {
+      debugPrint("Error calling Gateway for ML predictions: $e");
+      return _mockAnalyzeTaxLien(lien);
+    }
+  }
+
+  Future<AIAnalysisResult> _mockAnalyzeTaxLien(TaxLien lien) async {
     // Имитация времени обработки AI
-    await Future.delayed(const Duration(milliseconds: 1500));
+    await Future.delayed(const Duration(milliseconds: 500));
 
     // Расчет риска на основе различных факторов
     double riskScore = _calculateRiskScore(lien);

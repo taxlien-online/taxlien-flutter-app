@@ -4,8 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'l10n/app_localizations.dart';
 import 'core/routing/app_router.dart';
+import 'core/config/api_config.dart';
 import 'services/localization_service.dart';
 import 'services/theme_service.dart';
 import 'services/onboarding_service.dart';
@@ -18,6 +20,10 @@ import 'services/ai_investment_advisor_service.dart';
 import 'services/tax_lien_magento_service.dart';
 import 'services/magento_marketplace_service.dart';
 import 'services/trial_service.dart';
+import 'services/paywall_trigger_service.dart';
+import 'services/education_service.dart';
+import 'services/referral_service.dart';
+import 'services/analytics_service.dart';
 import 'core/services/hybrid_magento_service.dart';
 import 'core/services/magento_api_service.dart';
 import 'core/providers/magento_marketplace_provider.dart';
@@ -25,6 +31,15 @@ import 'core/mocks/nft_mocks.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Load environment variables
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    if (kDebugMode) {
+      print('⚠️ .env file not found, using defaults: $e');
+    }
+  }
 
   // Set preferred orientations
   await SystemChrome.setPreferredOrientations([
@@ -49,16 +64,16 @@ void main() async {
   final magentoProvider = MagentoMarketplaceProvider();
   final magentoService = MagentoMarketplaceService(magentoProvider);
 
-  // Initialize Magento (use demo store for now)
+  // Initialize Magento
   try {
     await magentoProvider.initialize(
-      baseUrl: 'https://luma-demo.scandipwa.com/',
+      baseUrl: ApiConfig.magentoBaseUrl,
       connectionTimeout: 30000,
       receiveTimeout: 30000,
       supportedLanguages: ['en', 'ru', 'th', 'zh'],
     );
     if (kDebugMode) {
-      print('✅ Magento marketplace initialized');
+      print('✅ Magento marketplace initialized with ${ApiConfig.magentoBaseUrl}');
     }
   } catch (e) {
     if (kDebugMode) {
@@ -121,9 +136,26 @@ class _TaxLienAppState extends State<TaxLienApp> {
     final serverConnectionService = ServerConnectionService();
     final aiInvestmentAdvisorService = AIInvestmentAdvisorService();
 
-    // Initialize Trial Service with maximum trial period (365 days)
+    final analyticsService = AnalyticsService();
+
+    // Initialize Trial Service with standard trial period (14 days)
     final trialService = TrialService();
     trialService.initialize();
+    
+    // Setup analytics listener for tier changes
+    trialService.addListener(() {
+      analyticsService.setUserProperties(
+          tier: trialService.trialStatus.tier.name);
+    });
+
+    final educationService = EducationService(authService);
+    educationService.initialize();
+
+    final paywallTriggerService =
+        PaywallTriggerService(trialService, educationService);
+
+    final referralService = ReferralService(authService);
+    referralService.initialize();
 
     // Initialize Magento services
     final hybridMagentoService = HybridMagentoService(
@@ -147,6 +179,9 @@ class _TaxLienAppState extends State<TaxLienApp> {
       taxLienMagentoService: taxLienMagentoService,
       nftClient: nftClient,
       trialService: trialService,
+      paywallTriggerService: paywallTriggerService,
+      educationService: educationService,
+      referralService: referralService,
     );
   }
 

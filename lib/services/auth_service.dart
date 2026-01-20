@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../core/config/api_config.dart';
 
 class User {
   final String id;
@@ -70,7 +71,7 @@ class User {
 }
 
 class AuthService extends ChangeNotifier {
-  static const String _baseUrl = 'https://api.taxlien.online';
+  static final String _baseUrl = ApiConfig.gatewayBaseUrl;
   static const String _tokenKey = 'auth_token';
   static const String _userKey = 'user_data';
 

@@ -1,0 +1,47 @@
+name: Build - Linux
+
+on:
+  push:
+    tags: [ 'v*-linux' ]
+  workflow_dispatch:
+
+env:
+  FLUTTER_VERSION: '3.24.0'
+  WORKING_DIRECTORY: 'taxlien-flutter-app'
+
+jobs:
+  build:
+    name: Build Linux Desktop
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+        
+    - name: Install Linux dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtk-3-dev libblkid-dev liblzma-dev libgcrypt20-dev pkg-config cmake ninja-build
+        
+    - name: Get dependencies
+      run: |
+        flutter pub get
+        flutter gen-l10n
+        
+    - name: Enable Linux Desktop
+      run: flutter config --enable-linux-desktop
+      
+    - name: Build Linux
+      run: flutter build linux --release
+      
+    - name: Upload Linux Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux-release
+        path: ${{ env.WORKING_DIRECTORY }}/build/linux/x64/release/bundle/

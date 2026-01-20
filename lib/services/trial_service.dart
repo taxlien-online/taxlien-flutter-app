@@ -11,10 +11,13 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
+import '../core/constants/subscription_constants.dart';
+
 /// Subscription tier enum
 enum SubscriptionTier {
   free,
   trial,
+  starter,
   premium,
   enterprise,
 }
@@ -39,6 +42,7 @@ class TrialStatus {
 
   bool get hasAccess =>
       isActive ||
+      tier == SubscriptionTier.starter ||
       tier == SubscriptionTier.premium ||
       tier == SubscriptionTier.enterprise;
 }
@@ -50,8 +54,8 @@ class TrialService extends ChangeNotifier {
   static const String _subscriptionTierKey = 'subscription_tier';
   static const String _hasCompletedTrialKey = 'has_completed_trial';
 
-  // МАКСИМАЛЬНО ДОЛГИЙ TRIAL ПЕРИОД - 365 дней (1 год)
-  static const int trialDurationDays = 365;
+  // Industry standard trial period
+  static const int trialDurationDays = TrialConfig.trialDurationDays;
 
   // In-App Purchase configuration
   final InAppPurchase _iap = InAppPurchase.instance;
@@ -130,6 +134,13 @@ class TrialService extends ChangeNotifier {
         return false;
       }
 
+      // Check if trial is already active
+      final currentTier = prefs.getString(_subscriptionTierKey);
+      if (currentTier == SubscriptionTier.trial.name) {
+        debugPrint('TrialService: Trial already active');
+        return false;
+      }
+
       // Start new trial
       final now = DateTime.now();
       final endDate = now.add(Duration(days: trialDurationDays));
@@ -159,7 +170,7 @@ class TrialService extends ChangeNotifier {
       final tierName = prefs.getString(_subscriptionTierKey);
       final tier = tierName != null
           ? SubscriptionTier.values.firstWhere(
-              (t) => t.name == tierName,
+              (t) => t.name == tierName || t.toString().split('.').last == tierName,
               orElse: () => SubscriptionTier.free,
             )
           : SubscriptionTier.free;
@@ -242,12 +253,7 @@ class TrialService extends ChangeNotifier {
   /// Load available products
   Future<void> _loadProducts() async {
     try {
-      const Set<String> productIds = {
-        'taxlien_premium_monthly',
-        'taxlien_premium_yearly',
-        'taxlien_enterprise_monthly',
-        'taxlien_enterprise_yearly',
-      };
+      final Set<String> productIds = SubscriptionProducts.allProducts;
 
       final ProductDetailsResponse response =
           await _iap.queryProductDetails(productIds);
@@ -321,6 +327,8 @@ class TrialService extends ChangeNotifier {
       SubscriptionTier tier = SubscriptionTier.premium;
       if (purchaseDetails.productID.contains('enterprise')) {
         tier = SubscriptionTier.enterprise;
+      } else if (purchaseDetails.productID.contains('starter')) {
+        tier = SubscriptionTier.starter;
       }
 
       // Update subscription tier

@@ -11,23 +11,25 @@ import '../core/constants/app_constants.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import '../services/user_preferences_service.dart';
+import '../services/education_service.dart';
+import '../services/paywall_trigger_service.dart';
+import '../services/referral_service.dart';
 import '../theme/app_theme_export.dart';
-import 'marketplace_screen.dart';
-import 'my_investments_screen.dart';
-import 'nft_dashboard_screen.dart';
-import 'profile_screen.dart';
-import 'search_screen.dart';
-import 'package:TaxLien.online/core/mocks/nft_mocks.dart';
+
+// ... (keep imports)
 
 class MainNavigationScreen extends StatefulWidget {
   final LocalizationService localizationService;
   final ThemeService themeService;
   final OnboardingService onboardingService;
   final TaxLienService taxLienService;
-  // Services replaced with NFT client from libraries
   final AuthService authService;
   final DatabaseService databaseService;
   final UserPreferencesService userPreferencesService;
+  final EducationService educationService;
+  final PaywallTriggerService? paywallTriggerService;
+  final ReferralService? referralService;
+  final int initialIndex;
 
   const MainNavigationScreen({
     super.key,
@@ -35,10 +37,13 @@ class MainNavigationScreen extends StatefulWidget {
     required this.themeService,
     required this.onboardingService,
     required this.taxLienService,
-    // NFT services now handled by global NFT client
     required this.authService,
     required this.databaseService,
     required this.userPreferencesService,
+    required this.educationService,
+    this.paywallTriggerService,
+    this.referralService,
+    this.initialIndex = 0,
   });
 
   @override
@@ -46,7 +51,7 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _currentIndex = 0;
+  late int _currentIndex;
   late PageController _pageController;
   late NFTClient _nftClient;
 
@@ -67,6 +72,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       screen: null, // Will be set in initState
     ),
     NavigationItem(
+      title: 'Education',
+      icon: Icons.school,
+      screen: null, // Will be set in initState
+    ),
+    NavigationItem(
       title: 'Search',
       icon: Icons.search,
       screen: null, // Will be set in initState
@@ -81,7 +91,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
+    _currentIndex = widget.initialIndex;
+    _pageController = PageController(initialPage: _currentIndex);
     _nftClient = NFTClient();
 
     // Initialize screens - Requires TaxLienMagentoService
@@ -103,16 +114,22 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       taxLienService: widget.taxLienService,
     );
 
-    _navigationItems[3].screen = SearchScreen(
-      taxLienService: widget.taxLienService,
-      databaseService: widget.databaseService,
+    _navigationItems[3].screen = EducationDashboardScreen(
+      eduService: widget.educationService,
     );
 
-    _navigationItems[4].screen = ProfileScreen(
+    _navigationItems[4].screen = SearchScreen(
+      taxLienService: widget.taxLienService,
+      databaseService: widget.databaseService,
+      paywallTriggerService: widget.paywallTriggerService,
+    );
+
+    _navigationItems[5].screen = ProfileScreen(
       authService: widget.authService,
       themeService: widget.themeService,
       localizationService: widget.localizationService,
       onboardingService: widget.onboardingService,
+      referralService: widget.referralService,
       nftClient: _nftClient,
     );
   }

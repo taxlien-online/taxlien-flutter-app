@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import '../config/api_config.dart';
 import '../constants/app_constants.dart';
 import '../models/magento_models.dart';
 
@@ -26,7 +27,7 @@ class MagentoApiService extends ChangeNotifier {
 
   void _initializeDio() {
     _dio = Dio(BaseOptions(
-      baseUrl: AppConstants.magentoRestEndpoint,
+      baseUrl: '${ApiConfig.magentoBaseUrl}/rest/V1',
       connectTimeout: AppConstants.connectionTimeout,
       receiveTimeout: AppConstants.receiveTimeout,
       headers: {

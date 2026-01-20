@@ -9,15 +9,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import '../services/trial_service.dart';
+import '../services/paywall_trigger_service.dart';
 import '../core/constants/subscription_constants.dart';
+import '../core/routing/app_router.dart';
 
 /// Paywall Screen
 class PaywallScreen extends ConsumerStatefulWidget {
   final bool canDismiss;
+  final PaywallReason? reason;
 
   const PaywallScreen({
     super.key,
     this.canDismiss = true,
+    this.reason,
   });
 
   @override
@@ -101,16 +105,56 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
   }
 
   Widget _buildHeader(ThemeData theme, TrialStatus? trialStatus) {
+    String title = 'Unlock Premium Features';
+    String subtitle = trialStatus?.tier == SubscriptionTier.free
+        ? 'Start your ${TrialConfig.trialDurationDays}-day free trial today'
+        : 'Choose the plan that works for you';
+    IconData icon = Icons.stars_rounded;
+    Widget? actionWidget;
+
+    if (widget.reason != null) {
+      switch (widget.reason!) {
+        case PaywallReason.searchLockedByEdu:
+          title = 'Complete Module 1';
+          subtitle = 'Complete "Tax Lien Basics" to unlock property search.';
+          icon = Icons.school;
+          actionWidget = _buildEduAction(theme, 'Go to Education');
+          break;
+        case PaywallReason.aiLockedByEdu:
+          title = 'Complete Module 3';
+          subtitle = 'Complete "Sweet Spot Strategy" to unlock AI predictions.';
+          icon = Icons.psychology;
+          actionWidget = _buildEduAction(theme, 'Go to Education');
+          break;
+        case PaywallReason.countyLockedByEdu:
+          title = 'Complete Module 2';
+          subtitle = 'Complete "Property Research" to unlock all counties.';
+          icon = Icons.map;
+          actionWidget = _buildEduAction(theme, 'Go to Education');
+          break;
+        case PaywallReason.searchLimitReached:
+          title = 'Daily Limit Reached';
+          subtitle = 'You\'ve used all free searches for today. Upgrade for unlimited access.';
+          break;
+        case PaywallReason.aiLimitReached:
+          title = 'AI Analysis Limit';
+          subtitle = 'Upgrade to unlock more AI property analyses.';
+          break;
+        default:
+          break;
+      }
+    }
+
     return Column(
       children: [
         Icon(
-          Icons.stars_rounded,
+          icon,
           size: 80,
           color: theme.colorScheme.primary,
         ),
         const SizedBox(height: 20),
         Text(
-          'Unlock Premium Features',
+          title,
           style: theme.textTheme.headlineMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -118,15 +162,31 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
         ),
         const SizedBox(height: 10),
         Text(
-          trialStatus?.tier == SubscriptionTier.free
-              ? 'Start your 365-day free trial today'
-              : 'Choose the plan that works for you',
+          subtitle,
           style: theme.textTheme.bodyLarge?.copyWith(
             color: theme.colorScheme.onSurfaceVariant,
           ),
           textAlign: TextAlign.center,
         ),
+        if (actionWidget != null) ...[
+          const SizedBox(height: 20),
+          actionWidget,
+        ],
       ],
+    );
+  }
+
+  Widget _buildEduAction(ThemeData theme, String text) {
+    return ElevatedButton.icon(
+      onPressed: () {
+        Navigator.of(context).pushReplacementNamed(AppRouter.mainNavigation,
+            arguments: 3); // Switch to Education tab (index 3)
+      },
+      icon: const Icon(Icons.arrow_forward),
+      label: Text(text),
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      ),
     );
   }
 
@@ -168,7 +228,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              '365 Days Free Trial',
+              '${TrialConfig.trialDurationDays} Days Free Trial',
               style: theme.textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -185,7 +245,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
             const SizedBox(height: 20),
 
             // Features list
-            ...SubscriptionFeatures.trial.map((feature) => Padding(
+            ...SubscriptionFeatures.premium.take(5).map((feature) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6),
                   child: Row(
                     children: [
@@ -305,6 +365,14 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
             ),
           ),
           const SizedBox(height: 20),
+          _buildMockPackageCard(
+            theme,
+            'Starter Monthly',
+            SubscriptionPricing.starterMonthlyPrice,
+            'per month',
+            SubscriptionFeatures.starter,
+          ),
+          const SizedBox(height: 16),
           _buildMockPackageCard(
             theme,
             'Premium Monthly',
@@ -594,9 +662,9 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
         if (!mounted) return;
 
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Welcome! Your 365-day trial has started 🎉'),
-            duration: Duration(seconds: 3),
+          SnackBar(
+            content: Text('Welcome! Your ${TrialConfig.trialDurationDays}-day trial has started 🎉'),
+            duration: const Duration(seconds: 3),
           ),
         );
 
