@@ -3,9 +3,6 @@ name: CI - Test & Quality
 on:
   push:
     branches: [ main, master, develop ]
-    paths:
-      - '**'
-      - '.github/workflows/ci-test.yml'
   pull_request:
     branches: [ main, master ]
     paths:
